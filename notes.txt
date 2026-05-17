@@ -1,0 +1,32 @@
+1. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 01 Makanan, Minuman dan Tembakau, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2223/th/126/key/WebAPI_KEY
+
+2. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 02 Pakaian dan Alas Kaki, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2224/th/126/key/WebAPI_KEY
+
+3. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 03 Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2225/th/126/key/WebAPI_KEY
+
+4. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 04 Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2226/th/126/key/WebAPI_KEY
+
+5. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 05 Kesehatan, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2227/th/126/key/WebAPI_KEY
+
+6. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 06 Transportasi, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2229/th/126/key/WebAPI_KEY
+
+7. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 07 Informasi, Komunikasi dan Jasa Keuangan, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2228/th/126/key/WebAPI_KEY
+
+8. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 08 Rekreasi, Olahraga dan Budaya, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2230/th/126/key/WebAPI_KEY
+
+9. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 09 Pendidikan, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2231/th/126/key/WebAPI_KEY
+
+10. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 10 Penyediaan Makanan dan Minuman / Restoran, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2232/th/126/key/WebAPI_KEY
+
+11. Inflasi Bulanan (M-to-M) (2022=100) Menurut Kelompok dan Sub Kelompok 11 Perawatan Pribadi dan Jasa Lainnya, 2026
+https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2233/th/126/key/WebAPI_KEY

@@ -102,15 +102,13 @@ router.post("/kelompok", async (req, res) => {
       }
     ];
 
-    const BATCH_SIZE = 3;
-
     const hasil = [];
 
     const fetchKelompok = async (item) => {
 
       let response = null;
 
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 3; i++) {
 
         try {
 
@@ -121,7 +119,7 @@ router.post("/kelompok", async (req, res) => {
           response = await axios.get(
             `https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/${item.var}/th/126/key/${API_KEY}/`,
             {
-              timeout: 5000,
+              timeout: 4000,
 
               headers: {
                 "User-Agent": "Mozilla/5.0"
@@ -139,11 +137,13 @@ router.post("/kelompok", async (req, res) => {
 
           console.log(
             `FAILED ${item.nama}`,
+            err.response?.status,
+            err.code,
             err.message
           );
 
           await new Promise(resolve =>
-            setTimeout(resolve, 1000)
+            setTimeout(resolve, 500)
           );
 
         }
@@ -151,13 +151,39 @@ router.post("/kelompok", async (req, res) => {
       }
 
       if (!response) {
+
+        console.log(
+          `SKIP ${item.nama}`
+        );
+
         return null;
+
       }
 
       const json = response.data;
 
+      if (!json?.datacontent) {
+
+        console.log(
+          `DATACONTENT KOSONG ${item.nama}`
+        );
+
+        return null;
+
+      }
+
       const dataContent =
         Object.values(json.datacontent);
+
+      if (dataContent.length === 0) {
+
+        console.log(
+          `ARRAY KOSONG ${item.nama}`
+        );
+
+        return null;
+
+      }
 
       const latest =
         dataContent.at(-1);
@@ -169,36 +195,16 @@ router.post("/kelompok", async (req, res) => {
 
     };
 
-    for (
-      let i = 0;
-      i < kelompok.length;
-      i += BATCH_SIZE
-    ) {
-
-      const batch =
-        kelompok.slice(
-          i,
-          i + BATCH_SIZE
-        );
-
-      console.log(
-        `BATCH ${i / BATCH_SIZE + 1}`
+    const result =
+      await Promise.all(
+        kelompok.map(fetchKelompok)
       );
 
-      const batchResult =
-        await Promise.all(
-          batch.map(fetchKelompok)
-        );
+    hasil.push(
+      ...result.filter(Boolean)
+    );
 
-      hasil.push(
-        ...batchResult.filter(Boolean)
-      );
-
-      await new Promise(resolve =>
-        setTimeout(resolve, 1000)
-      );
-
-    }
+    console.log("HASIL AKHIR", hasil);
 
     if (hasil.length === 0) {
 
@@ -218,6 +224,8 @@ router.post("/kelompok", async (req, res) => {
     res.json(terbesar);
 
   } catch (err) {
+
+    console.log(err);
 
     res.status(500).json({
       error:

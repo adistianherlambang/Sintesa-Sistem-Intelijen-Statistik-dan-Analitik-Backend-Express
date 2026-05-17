@@ -13,7 +13,7 @@ router.post("/inflasi", async (req, res) => {
         "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/1/vervar/1872/th/126/key/6140cf4d3d3cc537fe36176ad6ad09d2/"
       )
       if(!response.ok) {
-        await Promise(r => setTimeout(r, 300))
+        await new Promise(r => setTimeout(r, 300))
         continue
       } else break
     }
@@ -35,7 +35,7 @@ router.post("/ihk", async (req, res) => {
         "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2245/vervar/34/th/126/key/6140cf4d3d3cc537fe36176ad6ad09d2/"
       )
       if(!response.ok) {
-        await Promise(r => setTimeout(r, 300))
+        await new Promise(r => setTimeout(r, 300))
         continue
       } else break
     }
@@ -102,9 +102,11 @@ router.post("/kelompok", async (req, res) => {
       }
     ];
 
+    const BATCH_SIZE = 3;
+
     const hasil = [];
 
-    for (const item of kelompok) {
+    const fetchKelompok = async (item) => {
 
       let response = null;
 
@@ -140,8 +142,8 @@ router.post("/kelompok", async (req, res) => {
             err.message
           );
 
-          await new Promise(r =>
-            setTimeout(r, 1000)
+          await new Promise(resolve =>
+            setTimeout(resolve, 1000)
           );
 
         }
@@ -149,13 +151,7 @@ router.post("/kelompok", async (req, res) => {
       }
 
       if (!response) {
-
-        console.log(
-          `SKIP ${item.nama}`
-        );
-
-        continue;
-
+        return null;
       }
 
       const json = response.data;
@@ -166,13 +162,40 @@ router.post("/kelompok", async (req, res) => {
       const latest =
         dataContent.at(-1);
 
-      hasil.push({
+      return {
         kelompok: item.nama,
         latest
-      });
+      };
 
-      await new Promise(r =>
-        setTimeout(r, 500)
+    };
+
+    for (
+      let i = 0;
+      i < kelompok.length;
+      i += BATCH_SIZE
+    ) {
+
+      const batch =
+        kelompok.slice(
+          i,
+          i + BATCH_SIZE
+        );
+
+      console.log(
+        `BATCH ${i / BATCH_SIZE + 1}`
+      );
+
+      const batchResult =
+        await Promise.all(
+          batch.map(fetchKelompok)
+        );
+
+      hasil.push(
+        ...batchResult.filter(Boolean)
+      );
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 1000)
       );
 
     }

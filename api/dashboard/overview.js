@@ -7,6 +7,9 @@ dotenv.config();
 //utils
 import batchProcessor from "../../utils/batchProcessor.js";
 
+//cache
+import { KelCache } from "../../cache/overviewCache.js";
+
 const router = e.Router();
 const time = 5;
 
@@ -104,6 +107,7 @@ router.post("/kelompok", async (req, res) => {
         var: 2233,
       },
     ];
+
     const fetchKelompok = async (item) => {
       let response = null;
       for (let i = 0; i < 3; i++) {
@@ -112,7 +116,7 @@ router.post("/kelompok", async (req, res) => {
           response = await axios.get(
             `https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/${item.var}/th/126/key/${API_KEY}/`,
             {
-              timeout: 4000,
+              timeout: 2000,
               headers: {
                 "User-Agent": "Mozilla/5.0",
               },
@@ -150,11 +154,8 @@ router.post("/kelompok", async (req, res) => {
 
     const hasil = await batchProcessor({
       data: kelompok,
-
       batchSize: 3,
-
       delay: 300,
-
       callback: fetchKelompok,
     });
 
@@ -185,3 +186,11 @@ router.post("/kelompok", async (req, res) => {
 });
 
 export default router;
+
+
+// "34224501262": 108.8,
+// "34224501263": 108.99,
+// "34224501261": 108.28,
+// "34224501264": 109.18,
+// "122224501262": 109.7,
+// "123224501261": 110.14,

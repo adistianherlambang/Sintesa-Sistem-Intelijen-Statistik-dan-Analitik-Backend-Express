@@ -195,4 +195,4 @@ export default router;
 // "122224501262": 109.7,
 // "123224501261": 110.14,
 
-// "(kode wilayah)(var)0(th)(bulan)"
+// "(kode wilayah)(var)(turvar biasanya 0)(th)(bulan)"

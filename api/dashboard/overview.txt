@@ -196,3 +196,5 @@ export default router;
 // "123224501261": 110.14,
 
 // "(kode wilayah)(var)(turvar biasanya 0)(th)(bulan)"
+// var inflasi = 1
+// th 2026 = 126

@@ -16,7 +16,7 @@ const APIDataBPSSchema = new mongoose.Schema(
 
     datacontent: Object,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("APIDataBPS", APIDataBPSSchema);

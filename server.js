@@ -2,25 +2,26 @@ import express, { response } from "express";
 import cors from "cors";
 import axios from "axios";
 import mongoose from "mongoose";
-import dotenv from "dotenv"
-import https from "https"
+import dotenv from "dotenv";
+import https from "https";
 
 //api
 import api from "./api/api.js";
 
-dotenv.config()
+dotenv.config();
 
 //konek MONGODB
-await mongoose.connect(process.env.MONGO_URL)
-console.log("Mongodb Connected")
+await mongoose.connect(process.env.MONGO_URL);
+console.log("Mongodb Connected");
 
 const app = express();
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 
 app.use("/api", api);
 
-const url = "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2245/th/126/key/6140cf4d3d3cc537fe36176ad6ad09d2/"
+const url =
+  "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/2245/th/126/key/6140cf4d3d3cc537fe36176ad6ad09d2/";
 
 app.post("/test", async (req, res) => {
   try {
@@ -66,8 +67,7 @@ app.post("/test", async (req, res) => {
   }
 });
 
-
-const port = process.env.PORT
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log("App jalan di ", port);
 });

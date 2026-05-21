@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import e from "express";
 
 //models
 import APIDataBPS from "../../db/models/APIDataBPS.js";
 
 //json
-import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: 'json' }
+import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" };
 
-
-const router = e.Router()
+const router = e.Router();
 
 router.post("/inflasi", async (req, res) => {
   try {
@@ -35,14 +34,10 @@ router.post("/inflasi", async (req, res) => {
     }
 
     // ambil info var inflasi
-    const inflasiVar = doc.var.find(
-      (item) => item.val === 1
-    );
+    const inflasiVar = doc.var.find((item) => item.val === 1);
 
     // cari kota
-    const region = doc.vervar.find(
-      (item) => item.label === kota
-    );
+    const region = doc.vervar.find((item) => item.label === kota);
 
     if (!region) {
       return res.status(404).json({
@@ -61,10 +56,7 @@ router.post("/inflasi", async (req, res) => {
 
       if (
         key.startsWith(regionVal) &&
-        key.slice(
-          regionVal.length,
-          regionVal.length + 1
-        ) === "1"
+        key.slice(regionVal.length, regionVal.length + 1) === "1"
       ) {
         result.push({
           key,
@@ -73,10 +65,10 @@ router.post("/inflasi", async (req, res) => {
       }
     }
 
-    const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key))
-    const now = sorted[sorted.length - 1].value
-    const then = sorted[sorted.length - 2].value
-    const compare = now - then
+    const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key));
+    const now = sorted[sorted.length - 1].value;
+    const then = sorted[sorted.length - 2].value;
+    const compare = now - then;
 
     res.json({
       kota,
@@ -86,8 +78,8 @@ router.post("/inflasi", async (req, res) => {
       data: sorted,
       dashboard: {
         now: now,
-        compare: Number(compare.toFixed(2))
-      }
+        compare: Number(compare.toFixed(2)),
+      },
     });
   } catch (err) {
     res.status(500).json({
@@ -99,18 +91,18 @@ router.post("/inflasi", async (req, res) => {
 router.get("/inflasi", async (req, res) => {
   try {
     const doc = await APIDataBPS.findOne({
-      "var.val": 1
-    })
+      "var.val": 1,
+    });
 
     res.json({
-      doc
-    })
-  } catch(err) {
+      doc,
+    });
+  } catch (err) {
     res.status(500).json({
-      error: err.message
-    })
+      error: err.message,
+    });
   }
-})
+});
 
 router.post("/ihk", async (req, res) => {
   try {
@@ -136,14 +128,10 @@ router.post("/ihk", async (req, res) => {
     }
 
     // ambil info var inflasi
-    const inflasiVar = doc.var.find(
-      (item) => item.val === 2245
-    );
+    const inflasiVar = doc.var.find((item) => item.val === 2245);
 
     // cari kota
-    const region = doc.vervar.find(
-      (item) => item.label === kota
-    );
+    const region = doc.vervar.find((item) => item.label === kota);
 
     if (!region) {
       return res.status(404).json({
@@ -162,10 +150,7 @@ router.post("/ihk", async (req, res) => {
 
       if (
         key.startsWith(regionVal) &&
-        key.slice(
-          regionVal.length,
-          regionVal.length + 1
-        ) === "2"
+        key.slice(regionVal.length, regionVal.length + 1) === "2"
       ) {
         result.push({
           key,
@@ -174,10 +159,10 @@ router.post("/ihk", async (req, res) => {
       }
     }
 
-    const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key))
-    const now = sorted[sorted.length - 1].value
-    const then = sorted[sorted.length - 2].value
-    const compare = now - then
+    const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key));
+    const now = sorted[sorted.length - 1].value;
+    const then = sorted[sorted.length - 2].value;
+    const compare = now - then;
 
     res.json({
       kota,
@@ -187,8 +172,8 @@ router.post("/ihk", async (req, res) => {
       data: sorted,
       dashboard: {
         now: now,
-        compare: Number(compare.toFixed(2))
-      }
+        compare: Number(compare.toFixed(2)),
+      },
     });
   } catch (err) {
     res.status(500).json({
@@ -200,56 +185,56 @@ router.post("/ihk", async (req, res) => {
 router.get("/ihk", async (req, res) => {
   try {
     const doc = await APIDataBPS.findOne({
-      "var.val": 2245
-    }).lean()
+      "var.val": 2245,
+    }).lean();
 
     res.json({
-      doc
-    })
-  } catch(err) {
+      doc,
+    });
+  } catch (err) {
     res.status(500).json({
-      error: err.message
-    })
+      error: err.message,
+    });
   }
-})
+});
 
 router.post("/testapi", async (req, res) => {
   try {
-    const response = await fetch("https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/1/th/126/key/6140cf4d3d3cc537fe36176ad6ad09d2/")
-    if(!response.ok) {
+    const response = await fetch(
+      "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/1/th/126/key/6140cf4d3d3cc537fe36176ad6ad09d2/",
+    );
+    if (!response.ok) {
       return res.status(response.status).json({
-        message: "gagal"
-      })
+        message: "gagal",
+      });
     }
-    const data = await response.json()
+    const data = await response.json();
 
-    return res.json(data)
-    
-  } catch(err) {
+    return res.json(data);
+  } catch (err) {
     res.status(500).json({
-      message: "server error"
-    })
+      message: "server error",
+    });
   }
-})
+});
 
 router.get("/komoditas", async (req, res) => {
   try {
     const doc = await APIDataBPS.findOne({
-      "var.val": 2233
-    })
+      "var.val": 2233,
+    });
 
-    res.json(doc)
-  } catch(err) {
+    res.json(doc);
+  } catch (err) {
     res.status(500).json({
-      message: err.message
-    })
+      message: err.message,
+    });
   }
-})
+});
 
 router.post("/komoditas", async (req, res) => {
   try {
-
-    const { kota } = req.body
+    const { kota } = req.body;
 
     if (!kota) {
       return res.status(400).json({
@@ -257,23 +242,22 @@ router.post("/komoditas", async (req, res) => {
       });
     }
 
-    let precentage = []
-    
-    let totalKomoditas = 0
-    let biggest = 0
+    let precentage = [];
 
-    let val
+    let totalKomoditas = 0;
+    let biggest = 0;
 
-    for(const i in varKelompokIHK) {
+    let val;
 
+    for (const i in varKelompokIHK) {
       const doc = await APIDataBPS.findOne({
         "var.val": varKelompokIHK[i].var,
-        "turvar.val": varKelompokIHK[i].turvar
-      }).select("var vervar datacontent").lean()
+        "turvar.val": varKelompokIHK[i].turvar,
+      })
+        .select("var vervar datacontent")
+        .lean();
 
-      const region = doc.vervar.find(
-        (item) => item.label === kota
-      )
+      const region = doc.vervar.find((item) => item.label === kota);
 
       const regionVal = region.val.toString();
 
@@ -286,75 +270,68 @@ router.post("/komoditas", async (req, res) => {
 
         if (
           key.startsWith(regionVal) &&
-          key.slice(
-            regionVal.length,
-            regionVal.length + 1
-          ) === "2"
+          key.slice(regionVal.length, regionVal.length + 1) === "2"
         ) {
-          val = doc.datacontent[key]
+          val = doc.datacontent[key];
 
           result.push({
             key,
-            value: val
+            value: val,
           });
         }
       }
 
-      const sort = [...result].sort((a, b) => Number(a.key) - Number(b.key))
+      const sort = [...result].sort((a, b) => Number(a.key) - Number(b.key));
 
       precentage.push({
         nama: varKelompokIHK[i].nama,
-        value: sort[0].value
-      })
+        value: sort[0].value,
+      });
 
-      biggest = [...precentage].sort((a, b) => Number(a) - Number(b))[precentage.length - 1]
-
+      biggest = [...precentage].sort((a, b) => Number(a) - Number(b))[
+        precentage.length - 1
+      ];
     }
 
     res.json({
       precentage,
       totalKomoditas: varKelompokIHK.length,
-      biggest
-    })
-
-  } catch(err) {
+      biggest,
+    });
+  } catch (err) {
     res.status(500).json({
-      err: err.message
-    })
+      err: err.message,
+    });
   }
-})
+});
 
 router.post("/komoditas/post", async (req, res) => {
   try {
-
-    const { vvv } = req.body
+    const { vvv } = req.body;
 
     const doc = await APIDataBPS.findOne({
-      "var.val": vvv
-    })
+      "var.val": vvv,
+    });
 
-    res.json(doc)
-  } catch(err) {
+    res.json(doc);
+  } catch (err) {
     res.status(500).json({
-      message: err.message
-    })
+      message: err.message,
+    });
   }
-})
+});
 
 router.get("/", async (req, res) => {
   try {
-    const doc = await APIDataBPS.find().select(
-      "var"
-    )
-    res.json({doc})
+    const doc = await APIDataBPS.find().select("var");
+    res.json({ doc });
   } catch (err) {
     res.status(500).json({
-      error: err.message
-    })
+      error: err.message,
+    });
   }
-})
+});
 
-export default router
-
+export default router;
 
 //"34 2233 1601 126 2"

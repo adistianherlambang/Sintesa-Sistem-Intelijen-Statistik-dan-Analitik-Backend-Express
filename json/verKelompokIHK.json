@@ -1,46 +1,57 @@
 [
   {
     "nama": "Makanan, Minuman dan Tembakau",
-    "var": 2223
+    "var": 2223,
+    "turvar" : 1551
   },
   {
     "nama": "Pakaian dan Alas Kaki",
-    "var": 2224
+    "var": 2224,
+    "turvar" : 1555
   },
   {
     "nama": "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga",
-    "var": 2225
+    "var": 2225,
+    "turvar" : 1558
   },
   {
     "nama": "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",
-    "var": 2226
+    "var": 2226,
+    "turvar" : 1563
   },
   {
     "nama": "Kesehatan",
-    "var": 2227
+    "var": 2227,
+    "turvar" : 1570
   },
   {
     "nama": "Informasi, Komunikasi dan Jasa Keuangan",
-    "var": 2228
+    "var": 2228,
+    "turvar" : 1580
   },
   {
     "nama": "Transportasi",
-    "var": 2229
+    "var": 2229,
+    "turvar" : 1575
   },
   {
     "nama": "Rekreasi, Olahraga dan Budaya",
-    "var": 2230
+    "var": 2230,
+    "turvar" : 1585
   },
   {
     "nama": "Pendidikan",
-    "var": 2231
+    "var": 2231,
+    "turvar" : 1592
   },
   {
     "nama": "Penyediaan Makanan dan Minuman / Restoran",
-    "var": 2232
+    "var": 2232,
+    "turvar" : 1597
   },
   {
     "nama": "Perawatan Pribadi dan Jasa Lainnya",
-    "var": 2233
+    "var": 2233,
+    "turvar" : 1599
   }
 ]

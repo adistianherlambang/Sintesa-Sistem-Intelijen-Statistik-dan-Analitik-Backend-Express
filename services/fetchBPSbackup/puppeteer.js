@@ -8,7 +8,7 @@ import puppeteer from "puppeteer-core";
 import { fileURLToPath } from "url";
 
 // models
-import APIDataBPS from "../db/models/APIDataBPS.js";
+import APIDataBPS from "../../db/models/APIDataBPS.js";
 
 dotenv.config({
   path: path.resolve("../.env"),

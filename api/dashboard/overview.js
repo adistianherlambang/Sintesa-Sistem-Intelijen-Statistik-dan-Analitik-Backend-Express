@@ -334,4 +334,6 @@ router.get("/", async (req, res) => {
 
 export default router;
 
+
+// struktur api bps
 //"34 2233 1601 126 2"

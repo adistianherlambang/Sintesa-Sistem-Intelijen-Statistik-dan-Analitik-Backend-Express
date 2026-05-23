@@ -220,9 +220,7 @@ router.post("/testapi", async (req, res) => {
 
 router.get("/komoditas", async (req, res) => {
   try {
-    const doc = await APIDataBPS.findOne({
-      "var.val": 2233,
-    });
+    const doc = await APIDataBPS.find()
 
     res.json(doc);
   } catch (err) {
@@ -307,7 +305,9 @@ router.post("/komoditas", async (req, res) => {
 
 router.post("/test", async (req, res) => {
   try {
-    const doc = await APIDataBPS.findOne({});
+    const doc = await APIDataBPS.findOne({
+
+    });
   } catch (err) {
     res.status(500).json({
       message: err.message,

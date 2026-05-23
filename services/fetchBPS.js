@@ -11,9 +11,6 @@ dotenv.config({
   path: path.resolve("../.env"),
 });
 
-const MONGO_URL = process.env.MONGO_URL;
-await mongoose.connect(MONGO_URL);
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -160,5 +157,3 @@ export const fetchBPS = async () => {
     console.error("\nFatal error:", err.message);
   }
 };
-
-fetchBPS();

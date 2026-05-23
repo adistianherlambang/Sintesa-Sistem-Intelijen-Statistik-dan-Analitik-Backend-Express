@@ -11,9 +11,6 @@ dotenv.config({
   path: path.resolve("../.env"),
 });
 
-const MONGO_URL = process.env.MONGO_URL;
-await mongoose.connect(MONGO_URL);
-
 export const AISummary = async () => {
   try {
     const res = await axios.post(
@@ -42,5 +39,3 @@ export const AISummary = async () => {
     console.error(err.message);
   }
 };
-
-AISummary();

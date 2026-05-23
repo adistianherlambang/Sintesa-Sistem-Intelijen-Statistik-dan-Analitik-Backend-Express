@@ -13,3 +13,4 @@ dotenv.config({
 
 const MONGO_URL = process.env.MONGO_URL;
 await mongoose.connect(MONGO_URL);
+console.log(process.env.MONGO_URL)

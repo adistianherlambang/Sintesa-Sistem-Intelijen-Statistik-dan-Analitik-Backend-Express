@@ -14,7 +14,7 @@ dotenv.config({
 const MONGO_URL = process.env.MONGO_URL;
 await mongoose.connect(MONGO_URL);
 
-export const AISum = async () => {
+export const AISummary = async () => {
   try {
     const res = await axios.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
       {
@@ -44,4 +44,4 @@ export const AISum = async () => {
   }
 }
 
-AISum()
+AISummary()

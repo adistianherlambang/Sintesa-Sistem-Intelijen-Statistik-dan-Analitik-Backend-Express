@@ -305,21 +305,19 @@ router.post("/komoditas", async (req, res) => {
   }
 });
 
-router.post("/komoditas/post", async (req, res) => {
+router.post("/test", async (req, res) => {
   try {
-    const { vvv } = req.body;
 
     const doc = await APIDataBPS.findOne({
-      "var.val": vvv,
-    });
+      
+    })
 
-    res.json(doc);
   } catch (err) {
     res.status(500).json({
-      message: err.message,
-    });
+      message: err.message
+    })
   }
-});
+})
 
 router.get("/", async (req, res) => {
   try {

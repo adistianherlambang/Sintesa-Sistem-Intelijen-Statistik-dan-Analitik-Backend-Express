@@ -8,6 +8,9 @@ import https from "https";
 //api
 import api from "./api/api.js";
 
+//cron
+import { startBPSCron } from "./cronjob/cronBPSAPI.js";
+
 dotenv.config();
 
 //konek MONGODB
@@ -19,6 +22,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", api);
+
+startBPSCron()
 
 const port = process.env.PORT;
 app.listen(port, () => {

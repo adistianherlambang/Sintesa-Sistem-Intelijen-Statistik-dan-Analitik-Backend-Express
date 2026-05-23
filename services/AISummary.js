@@ -20,7 +20,7 @@ export const AISummary = async () => {
           {
             parts: [
               {
-                text: "Explain how AI works in 8000 token in bahasa indonesia, with \\n for break, and each paragraph ",
+                text: "",
               },
             ],
           },

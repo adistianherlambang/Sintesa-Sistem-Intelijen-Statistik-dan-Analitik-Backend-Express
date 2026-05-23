@@ -23,7 +23,7 @@ app.use(express.json());
 
 app.use("/api", api);
 
-startBPSCron()
+startBPSCron();
 
 const port = process.env.PORT;
 app.listen(port, () => {

@@ -4,12 +4,9 @@ import { fetchBPS } from "./fetchBPS.js";
 import { AISum } from "../services/AISummary.js";
 
 export const startBPSCron = () => {
-
   // setiap tanggal 1-8 jam 07:00
   cron.schedule("0 7 1-8 * *", async () => {
-
     try {
-
       console.log("Running Cron BPS");
 
       const now = new Date();
@@ -17,18 +14,16 @@ export const startBPSCron = () => {
       const month = now.getMonth();
       const year = now.getFullYear();
 
-      const latest = await APIDataBPS
-        .findOne()
+      const latest = await APIDataBPS.findOne()
         .sort({ lastUpdate: -1 })
         .select("lastUpdate")
         .lean();
 
       // jika belum ada data sama sekali
       if (!latest) {
-
         console.log("No data found, fetching...");
         await fetchBPS();
-        await AISum()
+        await AISum();
 
         return;
       }
@@ -39,23 +34,16 @@ export const startBPSCron = () => {
       const lastYear = lastUpdate.getFullYear();
 
       // jika bulan & tahun sama -> skip
-      if (
-        lastMonth === month &&
-        lastYear === year
-      ) {
-
+      if (lastMonth === month && lastYear === year) {
         console.log("Data bulan ini sudah tersedia");
         return;
       }
 
       console.log("Fetching new BPS data...");
       await fetchBPS();
-      await AISum()
-
+      await AISum();
     } catch (err) {
-
       console.error(err.message);
-
     }
   });
 };

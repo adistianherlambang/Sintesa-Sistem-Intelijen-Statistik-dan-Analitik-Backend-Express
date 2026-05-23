@@ -307,17 +307,13 @@ router.post("/komoditas", async (req, res) => {
 
 router.post("/test", async (req, res) => {
   try {
-
-    const doc = await APIDataBPS.findOne({
-      
-    })
-
+    const doc = await APIDataBPS.findOne({});
   } catch (err) {
     res.status(500).json({
-      message: err.message
-    })
+      message: err.message,
+    });
   }
-})
+});
 
 router.get("/", async (req, res) => {
   try {
@@ -331,7 +327,6 @@ router.get("/", async (req, res) => {
 });
 
 export default router;
-
 
 // struktur api bps
 //"34 2233 1601 126 2"

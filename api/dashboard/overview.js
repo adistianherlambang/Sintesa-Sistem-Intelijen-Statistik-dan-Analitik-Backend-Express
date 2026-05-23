@@ -220,8 +220,9 @@ router.post("/testapi", async (req, res) => {
 
 router.get("/komoditas", async (req, res) => {
   try {
-    const doc = await APIDataBPS.find()
-
+    const doc = await APIDataBPS.findOne({
+      "var.val": 2223
+    })
     res.json(doc);
   } catch (err) {
     res.status(500).json({
@@ -240,7 +241,7 @@ router.post("/komoditas", async (req, res) => {
       });
     }
 
-    let precentage = [];
+    let hierarki = [];
 
     let totalKomoditas = 0;
     let biggest = 0;
@@ -256,7 +257,6 @@ router.post("/komoditas", async (req, res) => {
         .lean();
 
       const region = doc.vervar.find((item) => item.label === kota);
-
       const regionVal = region.val.toString();
 
       // filter datacontent
@@ -279,20 +279,48 @@ router.post("/komoditas", async (req, res) => {
         }
       }
 
+      const sub = [];
+      let subData
+
+      for (const kelompok of varKelompokIHK) {
+
+        for (const item of kelompok.sub) {
+
+          if (
+            item.startsWith(regionVal) &&
+            item.slice(
+              regionVal.length + 4,
+              regionVal.length + 8
+            ) === "1601"
+          ) {
+            subData = doc.datacontent(item)
+          }
+
+          sub.push({
+            label: item.label,
+            data: subData
+          });
+
+        }
+      }
+
+      // for (const i in doc.datacontent)
+
       const sort = [...result].sort((a, b) => Number(a.key) - Number(b.key));
 
-      precentage.push({
+      hierarki.push({
         nama: varKelompokIHK[i].nama,
         value: sort[0].value,
+        sub: sub
       });
 
-      biggest = [...precentage].sort((a, b) => Number(a) - Number(b))[
-        precentage.length - 1
+      biggest = [...hierarki].sort((a, b) => Number(a) - Number(b))[
+        hierarki.length - 1
       ];
     }
 
     res.json({
-      precentage,
+      hierarki,
       totalKomoditas: varKelompokIHK.length,
       biggest,
     });
@@ -306,8 +334,13 @@ router.post("/komoditas", async (req, res) => {
 router.post("/test", async (req, res) => {
   try {
     const doc = await APIDataBPS.findOne({
-
+      "var.val": 2223
     });
+
+    for (let i in varKelompokIHK) {
+
+    }
+
   } catch (err) {
     res.status(500).json({
       message: err.message,
@@ -330,3 +363,27 @@ export default router;
 
 // struktur api bps
 //"34 2233 1601 126 2"
+
+
+// target json :
+
+// {
+//   hierarki: {
+//     umum: {
+
+//       for dari sini ambil dari var json di sub
+
+//       kel1: {
+//         data: 0.5,
+//         label: "nama label",
+//         sub: {
+//           sub1: {
+//             data: 5,
+//             label: "nama label"
+//           }
+//         }
+//       }
+      
+//     }
+//   }
+// }

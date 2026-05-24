@@ -337,10 +337,9 @@ router.post("/komoditas", async (req, res) => {
               if (!subData[item.val]) {
                 subData[item.val] = {};
               }
-
               subData[item.val][key] = doc.datacontent[key];
             }
-            
+
             if (key.startsWith(regionVal) && 
             turvar === String(item.val) &&
             keyYear === String(year) &&
@@ -351,7 +350,7 @@ router.post("/komoditas", async (req, res) => {
                 label: item.label,
                 value: doc.datacontent[key],
                 bulan: Number(keyMonth),
-                data: (subData)[item.val]
+                data: sort(subData)[item.val]
               };
             }
           }
@@ -369,6 +368,25 @@ router.post("/komoditas", async (req, res) => {
       biggest = [...hierarki].sort((a, b) => Number(a) - Number(b))[
         hierarki.length - 1
       ];
+    }
+
+    for (const key in hierarki) {
+      hierarki[key].sub = Object.fromEntries(
+        Object.entries(hierarki[key].sub)
+          .sort((a, b) => Number(a[0]) - Number(b[0]))
+          .map(([k, v]) => {
+            return [
+              k,
+              {
+                ...v,
+                data: Object.fromEntries(
+                  Object.entries(v.data)
+                    .sort((x, y) => Number(x[0]) - Number(y[0]))
+                )
+              }
+            ];
+          })
+      );
     }
 
     res.json({

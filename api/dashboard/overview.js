@@ -12,6 +12,7 @@ const router = e.Router();
 
 const date = new Date
 const month = date.getMonth()
+const year = "1" + String(date.getFullYear()).slice(2, 4)
 
 router.post("/inflasi", async (req, res) => {
   try {
@@ -268,51 +269,61 @@ router.post("/komoditas", async (req, res) => {
 
       for (const key in doc.datacontent) {
 
-        // data utama
-        if (
-          key.startsWith(regionVal) &&
-          key.slice(regionVal.length, regionVal.length + 1) === "2"
-        ) {
-
-          result.push({
-            key,
-            value: doc.datacontent[key],
-          });
-        }
-
         // ambil turvar
         const turvar = key.slice(
           regionVal.length + 4,
           regionVal.length + 8
         );
 
+        const keyYear = key.slice(
+          regionVal.length + 8,
+          regionVal.length + 11
+        );
+
+        const keyMonth = key.slice(
+          regionVal.length + 11
+        );
+
+        // data utama
+        if (
+          key.startsWith(regionVal) &&
+          key.slice(regionVal.length, regionVal.length + 1) === "2" &&
+          keyMonth === String(month) && 
+          keyYear === String(year)
+        ) {
+
+          result.push({
+            key,
+            value: doc.datacontent[key],
+            bulan: keyMonth
+          });
+        }
+        
         for (const kelompok of varKelompokIHK) {
 
           for (const item of kelompok.sub) {
 
-            if (turvar === String(item.val)) {
+            if (turvar === String(item.val)  && keyYear === String(year) && keyMonth === String(month)) {
 
               // const data = doc.datacontent[key].sort((a, b) => Number(a.key) - Number(b.key))
 
               // overwrite data lama
               sub[item.val] = {
                 label: item.label,
-                value: doc.datacontent[key]
+                value: doc.datacontent[key],
+                bulan: Number(keyMonth)
               };
-
             }
           }
         }
       }
-
-      // ubah object jadi array
-      const subResult = Object.values(sub);
 
       const sort = [...result].sort((a, b) => Number(a.key) - Number(b.key));
 
       hierarki.push({
         label: varKelompokIHK[i].nama,
         value: sort[0].value,
+        bulan: Number(sort[0].bulan),
         sub: sub
       });
 

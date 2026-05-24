@@ -286,7 +286,7 @@ router.post("/komoditas", async (req, res) => {
       const sub = {};
       const data = {};
       const subData = {};
-      let dataYoy = 0
+      let dataYoy
 
       for (const key in doc.datacontent) {
 
@@ -305,27 +305,29 @@ router.post("/komoditas", async (req, res) => {
           regionVal.length + 11
         );
 
-        if (
-          key.startsWith(regionVal) &&
-          key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-          keyMonth === String(month) && 
-          keyYear === String(yoy)
-        ) {
-          dataYoy = doc.datacontent[key]
-        }
-
         // data utama
         if (
           key.startsWith(regionVal) &&
           key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-          keyMonth === String(month) && 
+          keyMonth === String(month) &&
           keyYear === String(year)
         ) {
-
           result.push({
             key,
             value: doc.datacontent[key],
             bulan: keyMonth
+          });
+        }
+
+        if (
+          key.startsWith(regionVal) &&
+          key.slice(regionVal.length, regionVal.length + 1) === "2" &&
+          keyMonth === String(month) &&
+          keyYear === String(yoy)
+        ) {
+          result.push({
+            key,
+            yoy: doc.datacontent[key]
           });
         }
         
@@ -372,7 +374,7 @@ router.post("/komoditas", async (req, res) => {
         label: varKelompokIHK[i].nama,
         value: sort(result)[0].value,
         bulan: Number(sort(result)[0].bulan),
-        yoy: dataYoy,
+        yoy: sort(result)[0].yoy,
         data: sort(data),
         sub: sub
       });

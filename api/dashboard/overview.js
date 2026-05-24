@@ -13,6 +13,7 @@ const router = e.Router();
 const date = new Date
 const month = date.getMonth()
 const year = "1" + String(date.getFullYear()).slice(2, 4)
+const yoy = year - 1
 
 const sort = (itemSorted) => {
 
@@ -285,6 +286,7 @@ router.post("/komoditas", async (req, res) => {
       const sub = {};
       const data = {};
       const subData = {};
+      let dataYoy = 0
 
       for (const key in doc.datacontent) {
 
@@ -302,6 +304,15 @@ router.post("/komoditas", async (req, res) => {
         const keyMonth = key.slice(
           regionVal.length + 11
         );
+
+        if (
+          key.startsWith(regionVal) &&
+          key.slice(regionVal.length, regionVal.length + 1) === "2" &&
+          keyMonth === String(month) && 
+          keyYear === String(yoy)
+        ) {
+          dataYoy = doc.datacontent[key]
+        }
 
         // data utama
         if (
@@ -361,6 +372,7 @@ router.post("/komoditas", async (req, res) => {
         label: varKelompokIHK[i].nama,
         value: sort(result)[0].value,
         bulan: Number(sort(result)[0].bulan),
+        yoy: dataYoy,
         data: sort(data),
         sub: sub
       });

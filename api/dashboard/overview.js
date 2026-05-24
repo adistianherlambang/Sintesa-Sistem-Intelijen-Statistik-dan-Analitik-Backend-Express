@@ -318,12 +318,12 @@ router.post("/komoditas", async (req, res) => {
         }
       }
 
-      const sort = [...result].sort((a, b) => Number(a.key) - Number(b.key));
+      // const sort = [...result].sort((a, b) => Number(a.key) - Number(b.key));
 
       hierarki.push({
         label: varKelompokIHK[i].nama,
-        value: sort[0].value,
-        bulan: Number(sort[0].bulan),
+        value: result.value,
+        bulan: Number(result.bulan),
         sub: sub
       });
 

@@ -14,6 +14,23 @@ const date = new Date
 const month = date.getMonth()
 const year = "1" + String(date.getFullYear()).slice(2, 4)
 
+const sort = (itemSorted) => {
+
+  // jika array
+  if (Array.isArray(itemSorted)) {
+    return [...itemSorted].sort(
+      (a, b) => Number(a.key) - Number(b.key)
+    );
+  }
+
+  // jika object
+  return Object.fromEntries(
+    Object.entries(itemSorted).sort(
+      (a, b) => Number(a[0]) - Number(b[0])
+    )
+  );
+};
+
 router.post("/inflasi", async (req, res) => {
   try {
     const { kota } = req.body;
@@ -266,6 +283,8 @@ router.post("/komoditas", async (req, res) => {
       // filter datacontent
       const result = [];
       const sub = {};
+      const data = {};
+      const subData = {};
 
       for (const key in doc.datacontent) {
 
@@ -301,29 +320,49 @@ router.post("/komoditas", async (req, res) => {
         
         for (const kelompok of varKelompokIHK) {
 
+          if (key.startsWith(regionVal) &&
+          turvar === String(kelompok.turvar) &&
+          keyYear === String(year)) {
+
+            data[key] = doc.datacontent[key];
+            
+          }
+
           for (const item of kelompok.sub) {
 
-            if (turvar === String(item.val)  && keyYear === String(year) && keyMonth === String(month)) {
+            if (key.startsWith(regionVal) &&
+            turvar === String(item.val) &&
+            keyYear === String(year)) {
 
-              // const data = doc.datacontent[key].sort((a, b) => Number(a.key) - Number(b.key))
+              if (!subData[item.val]) {
+                subData[item.val] = {};
+              }
 
+              subData[item.val][key] = doc.datacontent[key];
+            }
+            
+            if (key.startsWith(regionVal) && 
+            turvar === String(item.val) &&
+            keyYear === String(year) &&
+            keyMonth === String(month)) {
+              
               // overwrite data lama
               sub[item.val] = {
                 label: item.label,
                 value: doc.datacontent[key],
-                bulan: Number(keyMonth)
+                bulan: Number(keyMonth),
+                data: (subData)[item.val]
               };
             }
           }
         }
       }
 
-      // const sort = [...result].sort((a, b) => Number(a.key) - Number(b.key));
-
       hierarki.push({
         label: varKelompokIHK[i].nama,
-        value: result.value,
-        bulan: Number(result.bulan),
+        value: sort(result)[0].value,
+        bulan: Number(sort(result)[0].bulan),
+        data: sort(data),
         sub: sub
       });
 

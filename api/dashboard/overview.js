@@ -10,6 +10,9 @@ import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" 
 
 const router = e.Router();
 
+const date = new Date
+const month = date.getMonth()
+
 router.post("/inflasi", async (req, res) => {
   try {
     const { kota } = req.body;
@@ -261,55 +264,54 @@ router.post("/komoditas", async (req, res) => {
 
       // filter datacontent
       const result = [];
+      const sub = {};
 
       for (const key in doc.datacontent) {
-        // struktur:
-        // (kode wilayah)(var)(turvar)(tahun)(bulan)
 
+        // data utama
         if (
           key.startsWith(regionVal) &&
           key.slice(regionVal.length, regionVal.length + 1) === "2"
         ) {
-          val = doc.datacontent[key];
 
           result.push({
             key,
-            value: val,
+            value: doc.datacontent[key],
           });
         }
-      }
 
-      const sub = [];
-      let subData
+        // ambil turvar
+        const turvar = key.slice(
+          regionVal.length + 4,
+          regionVal.length + 8
+        );
 
-      for (const kelompok of varKelompokIHK) {
+        for (const kelompok of varKelompokIHK) {
 
-        for (const item of kelompok.sub) {
+          for (const item of kelompok.sub) {
 
-          if (
-            item.startsWith(regionVal) &&
-            item.slice(
-              regionVal.length + 4,
-              regionVal.length + 8
-            ) === "1601"
-          ) {
-            subData = doc.datacontent(item)
+            if (turvar === String(item.val)) {
+
+              // const data = doc.datacontent[key].sort((a, b) => Number(a.key) - Number(b.key))
+
+              // overwrite data lama
+              sub[item.val] = {
+                label: item.label,
+                value: doc.datacontent[key]
+              };
+
+            }
           }
-
-          sub.push({
-            label: item.label,
-            data: subData
-          });
-
         }
       }
 
-      // for (const i in doc.datacontent)
+      // ubah object jadi array
+      const subResult = Object.values(sub);
 
       const sort = [...result].sort((a, b) => Number(a.key) - Number(b.key));
 
       hierarki.push({
-        nama: varKelompokIHK[i].nama,
+        label: varKelompokIHK[i].nama,
         value: sort[0].value,
         sub: sub
       });
@@ -320,8 +322,8 @@ router.post("/komoditas", async (req, res) => {
     }
 
     res.json({
-      hierarki,
       totalKomoditas: varKelompokIHK.length,
+      hierarki,
       biggest,
     });
   } catch (err) {

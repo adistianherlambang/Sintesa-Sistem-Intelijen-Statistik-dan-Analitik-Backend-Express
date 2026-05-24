@@ -1,16 +1,6 @@
-import axios from "axios";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import path from "path";
+const date = new Date
 
-dotenv.config();
+const month = date.getMonth()
+const year = date.getFullYear()
 
-import APIDataBPS from "../db/models/APIDataBPS.js";
-
-dotenv.config({
-  path: path.resolve("../.env"),
-});
-
-const MONGO_URL = process.env.MONGO_URL;
-await mongoose.connect(MONGO_URL);
-console.log(process.env.MONGO_URL)
+console.log(year)

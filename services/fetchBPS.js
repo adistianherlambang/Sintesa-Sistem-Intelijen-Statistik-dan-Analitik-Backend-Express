@@ -6,7 +6,6 @@ import cloudscraper from "cloudscraper";
 import { fileURLToPath } from "url";
 
 import APIDataBPS from "../db/models/APIDataBPS.js";
-import { fetchBPSYoY } from "./fetchBPSYoY.js";
 
 dotenv.config({
   path: path.resolve("../.env"),
@@ -111,11 +110,8 @@ export const fetchBPS = async () => {
 
     console.log(`\n✔ Total success fetch: ${results.length}\n`);
 
-    const yoYResults = await fetchBPSYoY();
-
     for (let index = 0; index < results.length; index++) {
       const data = results[index];
-      const yoYData = yoYResults[index]?.datacontent ?? {};
 
       if (!data) {
         console.log(`Skip empty data index ${index}`);
@@ -138,7 +134,6 @@ export const fetchBPS = async () => {
           {
             ...rest,
             lastUpdate: new Date(last_update),
-            yoy: yoYData,
           },
           {
             upsert: true,

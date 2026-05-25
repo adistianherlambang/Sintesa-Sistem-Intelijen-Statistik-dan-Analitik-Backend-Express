@@ -57,4 +57,74 @@ export const startBPSCron = () => {
       timezone: "Asia/Jakarta",
     },
   );
+
+  cron.schedule("0 0 1-10 1 *", async () => {
+
+  try {
+
+    const now = new Date();
+
+    const month = now.getMonth();
+
+    const year = now.getFullYear();
+
+    const latest = await APIDataBPS.findOne()
+
+      .sort({ lastUpdate: -1 })
+
+      .select("lastUpdate")
+
+      .lean();
+
+    if (!latest?.lastUpdate) {
+
+      console.log("⚠ lastUpdate tidak ditemukan");
+
+      return;
+
+    }
+
+    const lastUpdate = new Date(latest.lastUpdate);
+
+    const lastMonth = lastUpdate.getMonth();
+
+    const lastYear = lastUpdate.getFullYear();
+
+    console.log({
+
+      nowMonth: month,
+
+      nowYear: year,
+
+      lastMonth,
+
+      lastYear,
+
+    });
+
+    // Januari = 0
+
+    // Jalankan jika data terakhir bukan tahun sekarang
+
+    if (month === 0 && lastYear !== year) {
+
+      console.log("✔ Jalankan fungsi fetch");
+
+      await fetchBPSYoY();
+
+    } else {
+
+      console.log("⚠ Tidak perlu update");
+
+    }
+
+  } catch (err) {
+
+    console.log("✖ Cron error:", err.message);
+
+  }
+
+});
+
+
 };

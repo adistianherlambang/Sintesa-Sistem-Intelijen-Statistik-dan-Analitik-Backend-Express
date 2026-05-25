@@ -434,7 +434,7 @@ router.post("/test", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const doc = await APIDataBPS.find().select("var");
+    const doc = await APIDataBPS.find()
     res.json({ doc });
   } catch (err) {
     res.status(500).json({

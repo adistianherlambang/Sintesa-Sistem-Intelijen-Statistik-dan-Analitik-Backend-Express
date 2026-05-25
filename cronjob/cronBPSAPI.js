@@ -59,72 +59,45 @@ export const startBPSCron = () => {
   );
 
   cron.schedule("0 0 1-10 1 *", async () => {
+    try {
+      const now = new Date();
+      const month = now.getMonth();
+      const year = now.getFullYear();
 
-  try {
+      const latest = await APIDataBPS.findOne()
+        .sort({ lastUpdate: -1 })
+        .select("lastUpdate")
+        .lean();
 
-    const now = new Date();
+      if (!latest?.lastUpdate) {
+        console.log("⚠ lastUpdate tidak ditemukan");
+        return;
+      }
 
-    const month = now.getMonth();
+      const lastUpdate = new Date(latest.lastUpdate);
+      const lastMonth = lastUpdate.getMonth();
+      const lastYear = lastUpdate.getFullYear();
 
-    const year = now.getFullYear();
+      console.log({
+        nowMonth: month,
+        nowYear: year,
+        lastMonth,
+        lastYear,
+      });
 
-    const latest = await APIDataBPS.findOne()
+      // Januari = 0
 
-      .sort({ lastUpdate: -1 })
+      // Jalankan jika data terakhir bukan tahun sekarang
 
-      .select("lastUpdate")
+      if (month === 0 && lastYear !== year) {
+        console.log("✔ Jalankan fungsi fetch");
 
-      .lean();
-
-    if (!latest?.lastUpdate) {
-
-      console.log("⚠ lastUpdate tidak ditemukan");
-
-      return;
-
+        await fetchBPSYoY();
+      } else {
+        console.log("⚠ Tidak perlu update");
+      }
+    } catch (err) {
+      console.log("✖ Cron error:", err.message);
     }
-
-    const lastUpdate = new Date(latest.lastUpdate);
-
-    const lastMonth = lastUpdate.getMonth();
-
-    const lastYear = lastUpdate.getFullYear();
-
-    console.log({
-
-      nowMonth: month,
-
-      nowYear: year,
-
-      lastMonth,
-
-      lastYear,
-
-    });
-
-    // Januari = 0
-
-    // Jalankan jika data terakhir bukan tahun sekarang
-
-    if (month === 0 && lastYear !== year) {
-
-      console.log("✔ Jalankan fungsi fetch");
-
-      await fetchBPSYoY();
-
-    } else {
-
-      console.log("⚠ Tidak perlu update");
-
-    }
-
-  } catch (err) {
-
-    console.log("✖ Cron error:", err.message);
-
-  }
-
-});
-
-
+  });
 };

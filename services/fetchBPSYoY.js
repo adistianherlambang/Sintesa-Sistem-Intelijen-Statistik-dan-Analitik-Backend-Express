@@ -33,7 +33,8 @@ const stopLoading = (text = "Done") => {
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const buildYoYUrl = (url, yearYoY) => url.replace(/\/th\/[0-9]+(?=\/|$)/, `/th/1${yearYoY}`);
+const buildYoYUrl = (url, yearYoY) =>
+  url.replace(/\/th\/[0-9]+(?=\/|$)/, `/th/1${yearYoY}`);
 
 const getYearYoY = () => {
   const currentYear = new Date().getFullYear();
@@ -52,7 +53,8 @@ const fetchSingleUrl = async (url, index, total) => {
 
       const responseText = await cloudscraper.get(url, {
         headers: {
-          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
           Accept: "application/json, text/plain, */*",
           "Accept-Language": "id-ID,id;q=0.9,en-US;q=0.8",
           Referer: "https://bps.go.id/",
@@ -76,13 +78,15 @@ const fetchSingleUrl = async (url, index, total) => {
       }
 
       // Log ke konsol menggunakan pemisah \n
-      console.log(`\nLINK : ${url}\nRESPONSE STATUS : ${data?.status || "-"}\nAVAILABILITY : ${data?.["data-availability"] || "-"}\nVAR : ${data?.var?.[0]?.val || "-"}\n`);
+      console.log(
+        `\nLINK : ${url}\nRESPONSE STATUS : ${data?.status || "-"}\nAVAILABILITY : ${data?.["data-availability"] || "-"}\nVAR : ${data?.var?.[0]?.val || "-"}\n`,
+      );
 
       // Validasi ketersediaan data
       if (data["data-availability"] === "list-not-available") {
         stopLoading(`No YoY data ${index}/${total}`);
         console.log("⚠ BPS data not available");
-        return true; 
+        return true;
       }
 
       const varVal = data.var?.[0]?.val;
@@ -96,7 +100,7 @@ const fetchSingleUrl = async (url, index, total) => {
       const updated = await APIDataBPS.findOneAndUpdate(
         { "var.val": varVal },
         { $set: { yoy: data.datacontent || [] } },
-        { new: true }
+        { new: true },
       );
 
       stopLoading(`Success YoY ${index}/${total}`);
@@ -107,13 +111,14 @@ const fetchSingleUrl = async (url, index, total) => {
       }
 
       return true;
-
     } catch (err) {
       clearInterval(spinner);
       // Mencatat log error ke result.txt menggunakan pemisah \n
       await writeLog(`\nERROR ON LINK: ${url}\nMESSAGE: ${err.message}\n\n`);
-      console.log(`\n✖ Failed YoY ${index}/${total} | Retry ${retry}/5 | ${err.message}`);
-      
+      console.log(
+        `\n✖ Failed YoY ${index}/${total} | Retry ${retry}/5 | ${err.message}`,
+      );
+
       if (retry < 5) await delay(2000);
     }
   }
@@ -143,7 +148,7 @@ export const fetchBPSYoY = async () => {
       const humanIndex = index + 1;
 
       const isSuccess = await fetchSingleUrl(url, humanIndex, yoYUrls.length);
-      
+
       if (!isSuccess) {
         console.log(`⚠ Skip YoY URL ${humanIndex}/${yoYUrls.length}`);
       }

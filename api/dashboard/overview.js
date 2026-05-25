@@ -10,25 +10,20 @@ import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" 
 
 const router = e.Router();
 
-const date = new Date
-const month = date.getMonth()
-const year = "1" + String(date.getFullYear()).slice(2, 4)
-const yoy = year - 1
+const date = new Date();
+const month = date.getMonth();
+const year = "1" + String(date.getFullYear()).slice(2, 4);
+const yoy = year - 1;
 
 const sort = (itemSorted) => {
-
   // jika array
   if (Array.isArray(itemSorted)) {
-    return [...itemSorted].sort(
-      (a, b) => Number(a.key) - Number(b.key)
-    );
+    return [...itemSorted].sort((a, b) => Number(a.key) - Number(b.key));
   }
 
   // jika object
   return Object.fromEntries(
-    Object.entries(itemSorted).sort(
-      (a, b) => Number(a[0]) - Number(b[0])
-    )
+    Object.entries(itemSorted).sort((a, b) => Number(a[0]) - Number(b[0])),
   );
 };
 
@@ -243,8 +238,8 @@ router.post("/testapi", async (req, res) => {
 router.get("/komoditas", async (req, res) => {
   try {
     const doc = await APIDataBPS.findOne({
-      "var.val": 2223
-    })
+      "var.val": 2223,
+    });
     res.json(doc);
   } catch (err) {
     res.status(500).json({
@@ -286,24 +281,15 @@ router.post("/komoditas", async (req, res) => {
       const sub = {};
       const data = {};
       const subData = {};
-      let dataYoy
+      let dataYoy;
 
       for (const key in doc.datacontent) {
-
         // ambil turvar
-        const turvar = key.slice(
-          regionVal.length + 4,
-          regionVal.length + 8
-        );
+        const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
 
-        const keyYear = key.slice(
-          regionVal.length + 8,
-          regionVal.length + 11
-        );
+        const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
 
-        const keyMonth = key.slice(
-          regionVal.length + 11
-        );
+        const keyMonth = key.slice(regionVal.length + 11);
 
         // data utama
         if (
@@ -315,7 +301,7 @@ router.post("/komoditas", async (req, res) => {
           result.push({
             key,
             value: doc.datacontent[key],
-            bulan: keyMonth
+            bulan: keyMonth,
           });
         }
 
@@ -327,43 +313,43 @@ router.post("/komoditas", async (req, res) => {
         ) {
           result.push({
             key,
-            yoy: doc.datacontent[key]
+            yoy: doc.datacontent[key],
           });
         }
-        
+
         for (const kelompok of varKelompokIHK) {
-
-          if (key.startsWith(regionVal) &&
-          turvar === String(kelompok.turvar) &&
-          keyYear === String(year)) {
-
+          if (
+            key.startsWith(regionVal) &&
+            turvar === String(kelompok.turvar) &&
+            keyYear === String(year)
+          ) {
             data[key] = doc.datacontent[key];
-            
           }
 
           for (const item of kelompok.sub) {
-
-            if (key.startsWith(regionVal) &&
-            turvar === String(item.val) &&
-            keyYear === String(year)) {
-
+            if (
+              key.startsWith(regionVal) &&
+              turvar === String(item.val) &&
+              keyYear === String(year)
+            ) {
               if (!subData[item.val]) {
                 subData[item.val] = {};
               }
               subData[item.val][key] = doc.datacontent[key];
             }
 
-            if (key.startsWith(regionVal) && 
-            turvar === String(item.val) &&
-            keyYear === String(year) &&
-            keyMonth === String(month)) {
-              
+            if (
+              key.startsWith(regionVal) &&
+              turvar === String(item.val) &&
+              keyYear === String(year) &&
+              keyMonth === String(month)
+            ) {
               // overwrite data lama
               sub[item.val] = {
                 label: item.label,
                 value: doc.datacontent[key],
                 bulan: Number(keyMonth),
-                data: sort(subData)[item.val]
+                data: sort(subData)[item.val],
               };
             }
           }
@@ -376,7 +362,7 @@ router.post("/komoditas", async (req, res) => {
         bulan: Number(sort(result)[0].bulan),
         yoy: sort(result)[0].yoy,
         data: sort(data),
-        sub: sub
+        sub: sub,
       });
 
       biggest = [...hierarki].sort((a, b) => Number(a) - Number(b))[
@@ -394,12 +380,13 @@ router.post("/komoditas", async (req, res) => {
               {
                 ...v,
                 data: Object.fromEntries(
-                  Object.entries(v.data)
-                    .sort((x, y) => Number(x[0]) - Number(y[0]))
-                )
-              }
+                  Object.entries(v.data).sort(
+                    (x, y) => Number(x[0]) - Number(y[0]),
+                  ),
+                ),
+              },
             ];
-          })
+          }),
       );
     }
 
@@ -418,13 +405,11 @@ router.post("/komoditas", async (req, res) => {
 router.post("/test", async (req, res) => {
   try {
     const doc = await APIDataBPS.findOne({
-      "var.val": 2223
+      "var.val": 2223,
     });
 
     for (let i in varKelompokIHK) {
-
     }
-
   } catch (err) {
     res.status(500).json({
       message: err.message,
@@ -434,7 +419,7 @@ router.post("/test", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const doc = await APIDataBPS.find()
+    const doc = await APIDataBPS.find();
     res.json({ doc });
   } catch (err) {
     res.status(500).json({
@@ -447,7 +432,6 @@ export default router;
 
 // struktur api bps
 //"34 2233 1601 126 2"
-
 
 // target json :
 
@@ -467,7 +451,7 @@ export default router;
 //           }
 //         }
 //       }
-      
+
 //     }
 //   }
 // }

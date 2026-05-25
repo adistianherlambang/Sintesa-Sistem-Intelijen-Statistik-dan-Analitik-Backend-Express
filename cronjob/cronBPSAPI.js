@@ -4,16 +4,13 @@ import { fetchBPS } from "../services/fetchBPS.js";
 import { AISummary } from "../services/AISummary.js";
 
 export const startBPSCron = () => {
-
   console.log("Cron Registered", new Date());
 
   // setiap tanggal 1-8 jam 07:00 WIB
   cron.schedule(
     "0 7 1-8 * *",
     async () => {
-
       try {
-
         console.log("Cron Executed", new Date());
         console.log("Running Cron BPS");
 
@@ -29,7 +26,6 @@ export const startBPSCron = () => {
 
         // jika belum ada data sama sekali
         if (!latest) {
-
           console.log("No data found, fetching...");
 
           await fetchBPS();
@@ -44,11 +40,7 @@ export const startBPSCron = () => {
         const lastYear = lastUpdate.getFullYear();
 
         // jika bulan & tahun sama -> skip
-        if (
-          lastMonth === month &&
-          lastYear === year
-        ) {
-
+        if (lastMonth === month && lastYear === year) {
           console.log("Data bulan ini sudah tersedia");
           return;
         }
@@ -57,15 +49,12 @@ export const startBPSCron = () => {
 
         await fetchBPS();
         await AISummary();
-
       } catch (err) {
-
         console.error(err.message);
-
       }
     },
     {
-      timezone: "Asia/Jakarta"
-    }
+      timezone: "Asia/Jakarta",
+    },
   );
 };

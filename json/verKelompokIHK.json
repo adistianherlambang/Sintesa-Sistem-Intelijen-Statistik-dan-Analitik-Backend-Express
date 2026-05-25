@@ -4,22 +4,22 @@
     "var": 2223,
     "turvar": 1551,
     "sub": [
-        {
-            "val": 1552,
-            "label": "Makanan"
-        },
-        {
-            "val": 1553,
-            "label": "Minuman yang Tidak Beralkohol"
-        },
-        {
-            "val": 1554,
-            "label": "Minuman Beralkohol"
-        },
-        {
-            "val": 1666,
-            "label": "Rokok dan Tembakau"
-        }
+      {
+        "val": 1552,
+        "label": "Makanan"
+      },
+      {
+        "val": 1553,
+        "label": "Minuman yang Tidak Beralkohol"
+      },
+      {
+        "val": 1554,
+        "label": "Minuman Beralkohol"
+      },
+      {
+        "val": 1666,
+        "label": "Rokok dan Tembakau"
+      }
     ]
   },
   {
@@ -27,14 +27,14 @@
     "var": 2224,
     "turvar": 1555,
     "sub": [
-        {
-            "val": 1556,
-            "label": "Pakaian"
-        },
-        {
-            "val": 1557,
-            "label": "Alas Kaki"
-        }
+      {
+        "val": 1556,
+        "label": "Pakaian"
+      },
+      {
+        "val": 1557,
+        "label": "Alas Kaki"
+      }
     ]
   },
   {
@@ -42,22 +42,22 @@
     "var": 2225,
     "turvar": 1558,
     "sub": [
-        {
-            "val": 1559,
-            "label": "Sewa dan Kontrak Rumah"
-        },
-        {
-            "val": 1560,
-            "label": "Pemeliharaan, Perbaikan dan Keamanan"
-        },
-        {
-            "val": 1561,
-            "label": "Penyediaan Air dan Layanan Perumahan Lainnya"
-        },
-        {
-            "val": 1562,
-            "label": "Listrik dan Bahan Bakar Rumah Tangga"
-        }
+      {
+        "val": 1559,
+        "label": "Sewa dan Kontrak Rumah"
+      },
+      {
+        "val": 1560,
+        "label": "Pemeliharaan, Perbaikan dan Keamanan"
+      },
+      {
+        "val": 1561,
+        "label": "Penyediaan Air dan Layanan Perumahan Lainnya"
+      },
+      {
+        "val": 1562,
+        "label": "Listrik dan Bahan Bakar Rumah Tangga"
+      }
     ]
   },
   {
@@ -65,30 +65,30 @@
     "var": 2226,
     "turvar": 1563,
     "sub": [
-        {
-            "val": 1564,
-            "label": "Furnitur, Perlengkapan dan Karpet"
-        },
-        {
-            "val": 1565,
-            "label": "Tekstil Rumah Tangga"
-        },
-        {
-            "val": 1566,
-            "label": "Peralatan Rumah Tangga"
-        },
-        {
-            "val": 1567,
-            "label": "Barang Pecah Belah dan Peralatan Makan Minum"
-        },
-        {
-            "val": 1568,
-            "label": "Peralatan dan Perlengkapan Perumahan dan Kebun"
-        },
-        {
-            "val": 1569,
-            "label": "Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin"
-        }
+      {
+        "val": 1564,
+        "label": "Furnitur, Perlengkapan dan Karpet"
+      },
+      {
+        "val": 1565,
+        "label": "Tekstil Rumah Tangga"
+      },
+      {
+        "val": 1566,
+        "label": "Peralatan Rumah Tangga"
+      },
+      {
+        "val": 1567,
+        "label": "Barang Pecah Belah dan Peralatan Makan Minum"
+      },
+      {
+        "val": 1568,
+        "label": "Peralatan dan Perlengkapan Perumahan dan Kebun"
+      },
+      {
+        "val": 1569,
+        "label": "Barang dan Layanan untuk Pemeliharaan Rumah Tangga Rutin"
+      }
     ]
   },
   {
@@ -96,22 +96,22 @@
     "var": 2227,
     "turvar": 1570,
     "sub": [
-        {
-            "val": 1571,
-            "label": "Obat-obatan dan Produk Kesehatan"
-        },
-        {
-            "val": 1572,
-            "label": "Jasa Rawat Jalan"
-        },
-        {
-            "val": 1573,
-            "label": "Jasa Rawat Inap"
-        },
-        {
-            "val": 1574,
-            "label": "Jasa Kesehatan Lainnya"
-        }
+      {
+        "val": 1571,
+        "label": "Obat-obatan dan Produk Kesehatan"
+      },
+      {
+        "val": 1572,
+        "label": "Jasa Rawat Jalan"
+      },
+      {
+        "val": 1573,
+        "label": "Jasa Rawat Inap"
+      },
+      {
+        "val": 1574,
+        "label": "Jasa Kesehatan Lainnya"
+      }
     ]
   },
   {
@@ -119,22 +119,22 @@
     "var": 2228,
     "turvar": 1580,
     "sub": [
-        {
-            "val": 1581,
-            "label": "Peralatan Informasi dan Komunikasi"
-        },
-        {
-            "val": 1582,
-            "label": "Layanan Informasi dan Komunikasi"
-        },
-        {
-            "val": 1583,
-            "label": "Asuransi"
-        },
-        {
-            "val": 1584,
-            "label": "Jasa Keuangan"
-        }
+      {
+        "val": 1581,
+        "label": "Peralatan Informasi dan Komunikasi"
+      },
+      {
+        "val": 1582,
+        "label": "Layanan Informasi dan Komunikasi"
+      },
+      {
+        "val": 1583,
+        "label": "Asuransi"
+      },
+      {
+        "val": 1584,
+        "label": "Jasa Keuangan"
+      }
     ]
   },
   {
@@ -142,26 +142,26 @@
     "var": 2229,
     "turvar": 1575,
     "sub": [
-        {
-            "val": 1575,
-            "label": "Transportasi"
-        },
-        {
-            "val": 1576,
-            "label": "Pembelian Kendaraan"
-        },
-        {
-            "val": 1577,
-            "label": "Pengoperasian Peralatan Transportasi Pribadi"
-        },
-        {
-            "val": 1578,
-            "label": "Jasa Angkutan Penumpang"
-        },
-        {
-            "val": 1579,
-            "label": "Jasa Pengiriman Barang"
-        }
+      {
+        "val": 1575,
+        "label": "Transportasi"
+      },
+      {
+        "val": 1576,
+        "label": "Pembelian Kendaraan"
+      },
+      {
+        "val": 1577,
+        "label": "Pengoperasian Peralatan Transportasi Pribadi"
+      },
+      {
+        "val": 1578,
+        "label": "Jasa Angkutan Penumpang"
+      },
+      {
+        "val": 1579,
+        "label": "Jasa Pengiriman Barang"
+      }
     ]
   },
   {
@@ -169,30 +169,30 @@
     "var": 2230,
     "turvar": 1585,
     "sub": [
-        {
-            "val": 1586,
-            "label": "Barang Rekreasi Tahan Lama"
-        },
-        {
-            "val": 1587,
-            "label": "Barang Rekreasi Lainnya dan Olahraga"
-        },
-        {
-            "val": 1588,
-            "label": "Layanan Rekreasi dan Olahraga"
-        },
-        {
-            "val": 1589,
-            "label": "Perlengkapan Kebudayaan"
-        },
-        {
-            "val": 1590,
-            "label": "Layanan Kebudayaan"
-        },
-        {
-            "val": 1591,
-            "label": "Koran, Buku dan Perlengkapan Sekolah"
-        }
+      {
+        "val": 1586,
+        "label": "Barang Rekreasi Tahan Lama"
+      },
+      {
+        "val": 1587,
+        "label": "Barang Rekreasi Lainnya dan Olahraga"
+      },
+      {
+        "val": 1588,
+        "label": "Layanan Rekreasi dan Olahraga"
+      },
+      {
+        "val": 1589,
+        "label": "Perlengkapan Kebudayaan"
+      },
+      {
+        "val": 1590,
+        "label": "Layanan Kebudayaan"
+      },
+      {
+        "val": 1591,
+        "label": "Koran, Buku dan Perlengkapan Sekolah"
+      }
     ]
   },
   {
@@ -200,26 +200,26 @@
     "var": 2231,
     "turvar": 1592,
     "sub": [
-        {
-            "val": 1592,
-            "label": "Pendidikan"
-        },
-        {
-            "val": 1593,
-            "label": "Pendidikan Dasar dan Anak Usia Dini"
-        },
-        {
-            "val": 1594,
-            "label": "Pendidikan Menengah"
-        },
-        {
-            "val": 1595,
-            "label": "Pendidikan Tinggi"
-        },
-        {
-            "val": 1596,
-            "label": "Pendidikan Lainnya"
-        }
+      {
+        "val": 1592,
+        "label": "Pendidikan"
+      },
+      {
+        "val": 1593,
+        "label": "Pendidikan Dasar dan Anak Usia Dini"
+      },
+      {
+        "val": 1594,
+        "label": "Pendidikan Menengah"
+      },
+      {
+        "val": 1595,
+        "label": "Pendidikan Tinggi"
+      },
+      {
+        "val": 1596,
+        "label": "Pendidikan Lainnya"
+      }
     ]
   },
   {
@@ -227,10 +227,10 @@
     "var": 2232,
     "turvar": 1597,
     "sub": [
-        {
-            "val": 1598,
-            "label": "Jasa Pelayanan Makanan dan Minuman"
-        }
+      {
+        "val": 1598,
+        "label": "Jasa Pelayanan Makanan dan Minuman"
+      }
     ]
   },
   {
@@ -238,22 +238,22 @@
     "var": 2233,
     "turvar": 1599,
     "sub": [
-        {
-            "val": 1600,
-            "label": "Perawatan Pribadi"
-        },
-        {
-            "val": 1601,
-            "label": "Perawatan Pribadi Lainnya"
-        },
-        {
-            "val": 1602,
-            "label": "Perlindungan Sosial"
-        },
-        {
-            "val": 1603,
-            "label": "Jasa Lainnya"
-        }
+      {
+        "val": 1600,
+        "label": "Perawatan Pribadi"
+      },
+      {
+        "val": 1601,
+        "label": "Perawatan Pribadi Lainnya"
+      },
+      {
+        "val": 1602,
+        "label": "Perlindungan Sosial"
+      },
+      {
+        "val": 1603,
+        "label": "Jasa Lainnya"
+      }
     ]
   }
 ]

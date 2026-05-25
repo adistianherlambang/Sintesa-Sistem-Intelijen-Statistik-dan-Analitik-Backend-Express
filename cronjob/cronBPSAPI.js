@@ -1,21 +1,21 @@
 import cron from "node-cron";
 import APIDataBPS from "../db/models/APIDataBPS.js";
 import { fetchBPS } from "../services/fetchBPS.js";
+import { fetchBPSYoY } from "../services/fetchBPSYoY.js"; // Ditambahkan agar tidak error
 import { AISummary } from "../services/AISummary.js";
 
 export const startBPSCron = () => {
-  console.log("Cron Registered", new Date());
+  console.log("✔ Cron Registered", new Date());
 
-  // setiap tanggal 1-8 jam 07:00 WIB
+  // Setiap tanggal 1-8 jam 07:00 WIB
   cron.schedule(
     "0 7 1-8 * *",
     async () => {
       try {
-        console.log("Cron Executed", new Date());
-        console.log("Running Cron BPS");
+        console.log("✔ Cron Executed", new Date());
+        console.log("Running Cron BPS...");
 
         const now = new Date();
-
         const month = now.getMonth();
         const year = now.getFullYear();
 
@@ -24,33 +24,27 @@ export const startBPSCron = () => {
           .select("lastUpdate")
           .lean();
 
-        // jika belum ada data sama sekali
-        if (!latest) {
-          console.log("No data found, fetching...");
-
+        // Jika belum ada data sama sekali
+        if (!latest?.lastUpdate) {
+          console.log("⚠ No data found, fetching...");
           await fetchBPS();
           await AISummary();
-
           return;
         }
 
         const lastUpdate = new Date(latest.lastUpdate);
 
-        const lastMonth = lastUpdate.getMonth();
-        const lastYear = lastUpdate.getFullYear();
-
-        // jika bulan & tahun sama -> skip
-        if (lastMonth === month && lastYear === year) {
-          console.log("Data bulan ini sudah tersedia");
+        // Jika bulan & tahun sama -> skip
+        if (lastUpdate.getMonth() === month && lastUpdate.getFullYear() === year) {
+          console.log("⚠ Data bulan ini sudah tersedia, skip fetch.");
           return;
         }
 
-        console.log("Fetching new BPS data...");
-
+        console.log("✔ Fetching new BPS data...");
         await fetchBPS();
         await AISummary();
       } catch (err) {
-        console.error(err.message);
+        console.error("✖ Cron BPS Error:", err.message);
       }
     },
     {
@@ -58,46 +52,45 @@ export const startBPSCron = () => {
     },
   );
 
-  cron.schedule("0 0 1-10 1 *", async () => {
-    try {
-      const now = new Date();
-      const month = now.getMonth();
-      const year = now.getFullYear();
+  // Setiap tanggal 1-10 Januari jam 00:00 WIB (Untuk YoY)
+  cron.schedule(
+    "0 0 1-10 1 *",
+    async () => {
+      try {
+        console.log("✔ Cron YoY Executed", new Date());
 
-      const latest = await APIDataBPS.findOne()
-        .sort({ lastUpdate: -1 })
-        .select("lastUpdate")
-        .lean();
+        const now = new Date();
+        const month = now.getMonth(); // Januari = 0
+        const year = now.getFullYear();
 
-      if (!latest?.lastUpdate) {
-        console.log("⚠ lastUpdate tidak ditemukan");
-        return;
+        const latest = await APIDataBPS.findOne()
+          .sort({ lastUpdate: -1 })
+          .select("lastUpdate")
+          .lean();
+
+        if (!latest?.lastUpdate) {
+          console.log("⚠ lastUpdate tidak ditemukan, skip YoY.");
+          return;
+        }
+
+        const lastUpdate = new Date(latest.lastUpdate);
+        const lastYear = lastUpdate.getFullYear();
+
+        console.log(`Now Month: ${month} | Now Year: ${year} | Last Data Year: ${lastYear}`);
+
+        // Jalankan jika data terakhir di DB belum diperbarui ke tahun yang sekarang
+        if (month === 0 && lastYear !== year) {
+          console.log("✔ Jalankan fungsi fetch YoY...");
+          await fetchBPSYoY();
+        } else {
+          console.log("⚠ Tidak perlu update YoY");
+        }
+      } catch (err) {
+        console.log("✖ Cron YoY Error:", err.message);
       }
-
-      const lastUpdate = new Date(latest.lastUpdate);
-      const lastMonth = lastUpdate.getMonth();
-      const lastYear = lastUpdate.getFullYear();
-
-      console.log({
-        nowMonth: month,
-        nowYear: year,
-        lastMonth,
-        lastYear,
-      });
-
-      // Januari = 0
-
-      // Jalankan jika data terakhir bukan tahun sekarang
-
-      if (month === 0 && lastYear !== year) {
-        console.log("✔ Jalankan fungsi fetch");
-
-        await fetchBPSYoY();
-      } else {
-        console.log("⚠ Tidak perlu update");
-      }
-    } catch (err) {
-      console.log("✖ Cron error:", err.message);
-    }
-  });
+    },
+    {
+      timezone: "Asia/Jakarta",
+    },
+  );
 };

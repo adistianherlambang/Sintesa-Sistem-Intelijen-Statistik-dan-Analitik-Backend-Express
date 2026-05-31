@@ -286,9 +286,7 @@ router.post("/komoditas", async (req, res) => {
       for (const key in doc.datacontent) {
         // ambil turvar
         const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
-
         const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
-
         const keyMonth = key.slice(regionVal.length + 11);
 
         // data utama
@@ -371,23 +369,20 @@ router.post("/komoditas", async (req, res) => {
     }
 
     for (const key in hierarki) {
-      hierarki[key].sub = Object.fromEntries(
-        Object.entries(hierarki[key].sub)
-          .sort((a, b) => Number(a[0]) - Number(b[0]))
-          .map(([k, v]) => {
-            return [
-              k,
-              {
-                ...v,
-                data: Object.fromEntries(
-                  Object.entries(v.data).sort(
-                    (x, y) => Number(x[0]) - Number(y[0]),
-                  ),
-                ),
-              },
-            ];
-          }),
-      );
+      // convert sub object keyed by kode into an array of sub-items (drop kode)
+      const subsObj = hierarki[key].sub || {};
+      hierarki[key].sub = Object.entries(subsObj)
+        .sort((a, b) => Number(a[0]) - Number(b[0]))
+        .map(([k, v]) => {
+          return {
+            label: v.label,
+            value: v.value,
+            bulan: v.bulan,
+            data: Object.fromEntries(
+              Object.entries(v.data || {}).sort((x, y) => Number(x[0]) - Number(y[0])),
+            ),
+          };
+        });
     }
 
     res.json({

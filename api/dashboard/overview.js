@@ -11,7 +11,7 @@ import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" 
 const router = e.Router();
 
 const date = new Date();
-const month = date.getMonth();
+const month = String(date.getMonth() - 1)
 const year = "1" + String(date.getFullYear()).slice(2, 4);
 const yoy = year - 1;
 
@@ -252,6 +252,7 @@ router.post("/komoditas", async (req, res) => {
   try {
     const { kota } = req.body;
 
+    // Validasi input body
     if (!kota) {
       return res.status(400).json({
         message: "kota wajib diisi",
@@ -259,42 +260,45 @@ router.post("/komoditas", async (req, res) => {
     }
 
     let hierarki = [];
+    let yoyList = []; // Array baru untuk menampung hierarki data YoY di root level
+    let biggest = null;
 
-    let totalKomoditas = 0;
-    let biggest = 0;
-
-    let val;
-
+    // Loop data berdasarkan kelompok IHK
     for (const i in varKelompokIHK) {
       const doc = await APIDataBPS.findOne({
         "var.val": varKelompokIHK[i].var,
         "turvar.val": varKelompokIHK[i].turvar,
       })
-        .select("var vervar datacontent")
+        .select("var vervar datacontent yoy")
         .lean();
 
+      // PROTEKSI 1: Lewati jika dokumen dari BPS tidak ditemukan
+      if (!doc || !doc.vervar) continue;
+
+      // PROTEKSI 2: Cari region/kota, lewati kelompok ini jika tidak ditemukan
       const region = doc.vervar.find((item) => item.label === kota);
+      if (!region) continue;
+
       const regionVal = region.val.toString();
 
-      // filter datacontent
+      // ==========================================
+      // A. PROSES DATA UTAMA (HIERARKI / DATACONTENT)
+      // ==========================================
       const result = [];
       const sub = {};
       const data = {};
       const subData = {};
-      let dataYoy;
 
       for (const key in doc.datacontent) {
-        // ambil turvar
         const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
         const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
         const keyMonth = key.slice(regionVal.length + 11);
 
-        // data utama
         if (
           key.startsWith(regionVal) &&
           key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-          keyMonth === String(month) &&
-          keyYear === String(year)
+          Number(keyMonth) === Number(month) &&
+          Number(keyYear) === Number(year)
         ) {
           result.push({
             key,
@@ -303,46 +307,18 @@ router.post("/komoditas", async (req, res) => {
           });
         }
 
-        if (
-          key.startsWith(regionVal) &&
-          key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-          keyMonth === String(month) &&
-          keyYear === String(yoy)
-        ) {
-          result.push({
-            key,
-            yoy: doc.datacontent[key],
-          });
-        }
-
         for (const kelompok of varKelompokIHK) {
-          if (
-            key.startsWith(regionVal) &&
-            turvar === String(kelompok.turvar) &&
-            keyYear === String(year)
-          ) {
+          if (key.startsWith(regionVal) && turvar === String(kelompok.turvar) && Number(keyYear) === Number(year)) {
             data[key] = doc.datacontent[key];
           }
 
           for (const item of kelompok.sub) {
-            if (
-              key.startsWith(regionVal) &&
-              turvar === String(item.val) &&
-              keyYear === String(year)
-            ) {
-              if (!subData[item.val]) {
-                subData[item.val] = {};
-              }
+            if (key.startsWith(regionVal) && turvar === String(item.val) && Number(keyYear) === Number(year)) {
+              if (!subData[item.val]) subData[item.val] = {};
               subData[item.val][key] = doc.datacontent[key];
             }
 
-            if (
-              key.startsWith(regionVal) &&
-              turvar === String(item.val) &&
-              keyYear === String(year) &&
-              keyMonth === String(month)
-            ) {
-              // overwrite data lama
+            if (key.startsWith(regionVal) && turvar === String(item.val) && Number(keyYear) === Number(year) && Number(keyMonth) === Number(month)) {
               sub[item.val] = {
                 label: item.label,
                 value: doc.datacontent[key],
@@ -354,22 +330,82 @@ router.post("/komoditas", async (req, res) => {
         }
       }
 
+      const sortedResult = sort(result);
+      const mainData = sortedResult && sortedResult.length > 0 ? sortedResult[0] : null;
+
       hierarki.push({
         label: varKelompokIHK[i].nama,
-        value: sort(result)[0].value,
-        bulan: Number(sort(result)[0].bulan),
-        yoy: sort(result)[0].yoy,
+        value: mainData ? mainData.value : 0,
+        bulan: mainData ? Number(mainData.bulan) : Number(month),
         data: sort(data),
         sub: sub,
       });
 
-      biggest = [...hierarki].sort((a, b) => Number(a) - Number(b))[
-        hierarki.length - 1
-      ];
+      // ==========================================
+      // B. PROSES DATA YOY (SAMA PERSIS LOGIKANYA)
+      // ==========================================
+      if (doc.yoy) {
+        const resultYoy = [];
+        const subYoy = {};
+        const dataYoy = {};
+        const subDataYoy = {};
+
+        for (const key in doc.yoy) {
+          const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
+          const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
+          const keyMonth = key.slice(regionVal.length + 11);
+
+          if (
+            key.startsWith(regionVal) &&
+            key.slice(regionVal.length, regionVal.length + 1) === "2" &&
+            Number(keyMonth) === Number(month) &&
+            Number(keyYear) === Number(yoy) // Menggunakan tahun YoY (-1)
+          ) {
+            resultYoy.push({
+              key,
+              value: doc.yoy[key],
+              bulan: keyMonth,
+            });
+          }
+
+          for (const kelompok of varKelompokIHK) {
+            if (key.startsWith(regionVal) && turvar === String(kelompok.turvar) && Number(keyYear) === Number(yoy)) {
+              dataYoy[key] = doc.yoy[key];
+            }
+
+            for (const item of kelompok.sub) {
+              if (key.startsWith(regionVal) && turvar === String(item.val) && Number(keyYear) === Number(yoy)) {
+                if (!subDataYoy[item.val]) subDataYoy[item.val] = {};
+                subDataYoy[item.val][key] = doc.yoy[key];
+              }
+
+              if (key.startsWith(regionVal) && turvar === String(item.val) && Number(keyYear) === Number(yoy) && Number(keyMonth) === Number(month)) {
+                subYoy[item.val] = {
+                  label: item.label,
+                  value: doc.yoy[key],
+                  bulan: Number(keyMonth),
+                  data: sort(subDataYoy)[item.val],
+                };
+              }
+            }
+          }
+        }
+
+        const sortedResultYoy = sort(resultYoy);
+        const mainDataYoy = sortedResultYoy && sortedResultYoy.length > 0 ? sortedResultYoy[0] : null;
+
+        yoyList.push({
+          label: varKelompokIHK[i].nama,
+          value: mainDataYoy ? mainDataYoy.value : 0,
+          bulan: mainDataYoy ? Number(mainDataYoy.bulan) : Number(month),
+          data: sort(dataYoy),
+          sub: subYoy,
+        });
+      }
     }
 
+    // Transformasi struktur 'sub' menjadi Array untuk HIERARKI
     for (const key in hierarki) {
-      // convert sub object keyed by kode into an array of sub-items (drop kode)
       const subsObj = hierarki[key].sub || {};
       hierarki[key].sub = Object.entries(subsObj)
         .sort((a, b) => Number(a[0]) - Number(b[0]))
@@ -379,17 +415,46 @@ router.post("/komoditas", async (req, res) => {
             value: v.value,
             bulan: v.bulan,
             data: Object.fromEntries(
-              Object.entries(v.data || {}).sort((x, y) => Number(x[0]) - Number(y[0])),
+              Object.entries(v.data || {}).sort((x, y) => Number(x[0]) - Number(y[0]))
             ),
           };
         });
     }
 
+    // Transformasi struktur 'sub' menjadi Array untuk YOY
+    for (const key in yoyList) {
+      const subsObjYoy = yoyList[key].sub || {};
+      yoyList[key].sub = Object.entries(subsObjYoy)
+        .sort((a, b) => Number(a[0]) - Number(b[0]))
+        .map(([k, v]) => {
+          return {
+            label: v.label,
+            value: v.value,
+            bulan: v.bulan,
+            data: Object.fromEntries(
+              Object.entries(v.data || {}).sort((x, y) => Number(x[0]) - Number(y[0]))
+            ),
+          };
+        });
+    }
+
+    // Mencari kelompok IHK dengan nilai tertinggi (biggest) dari data hierarki utama
+    if (hierarki.length > 0) {
+      biggest = hierarki.reduce((max, item) => {
+        const currentVal = parseFloat(item.value) || 0;
+        const maxVal = parseFloat(max.value) || 0;
+        return currentVal > maxVal ? item : max;
+      }, hierarki[0]);
+    }
+
+    // Kirim response akhir ke Postman
     res.json({
-      totalKomoditas: varKelompokIHK.length,
+      totalKomoditas: hierarki.length,
       hierarki,
+      yoy: yoyList, // Isinya sekarang berupa array berstruktur sama persis dengan hierarki
       biggest,
     });
+
   } catch (err) {
     res.status(500).json({
       err: err.message,
@@ -424,29 +489,3 @@ router.get("/", async (req, res) => {
 });
 
 export default router;
-
-// struktur api bps
-//"34 2233 1601 126 2"
-
-// target json :
-
-// {
-//   hierarki: {
-//     umum: {
-
-//       for dari sini ambil dari var json di sub
-
-//       kel1: {
-//         data: 0.5,
-//         label: "nama label",
-//         sub: {
-//           sub1: {
-//             data: 5,
-//             label: "nama label"
-//           }
-//         }
-//       }
-
-//     }
-//   }
-// }

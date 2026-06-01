@@ -1,0 +1,26 @@
+struktur api bps
+"34 2233 1601 126 2"
+"kota var turvar tahun bulan"
+
+target json :
+
+{
+  hierarki: {
+    umum: {
+
+      for dari sini ambil dari var json di sub
+
+      kel1: {
+        data: 0.5,
+        label: "nama label",
+        sub: {
+          sub1: {
+            data: 5,
+            label: "nama label"
+          }
+        }
+      }
+
+    }
+  }
+}

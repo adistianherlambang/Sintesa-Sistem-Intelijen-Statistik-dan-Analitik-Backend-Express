@@ -35,7 +35,10 @@ export const startBPSCron = () => {
         const lastUpdate = new Date(latest.lastUpdate);
 
         // Jika bulan & tahun sama -> skip
-        if (lastUpdate.getMonth() === month && lastUpdate.getFullYear() === year) {
+        if (
+          lastUpdate.getMonth() === month &&
+          lastUpdate.getFullYear() === year
+        ) {
           console.log("⚠ Data bulan ini sudah tersedia, skip fetch.");
           return;
         }
@@ -76,7 +79,9 @@ export const startBPSCron = () => {
         const lastUpdate = new Date(latest.lastUpdate);
         const lastYear = lastUpdate.getFullYear();
 
-        console.log(`Now Month: ${month} | Now Year: ${year} | Last Data Year: ${lastYear}`);
+        console.log(
+          `Now Month: ${month} | Now Year: ${year} | Last Data Year: ${lastYear}`,
+        );
 
         // Jalankan jika data terakhir di DB belum diperbarui ke tahun yang sekarang
         if (month === 0 && lastYear !== year) {

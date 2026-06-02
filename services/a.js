@@ -160,23 +160,24 @@ const Get = async () => {
             value: v.value,
             bulan: v.bulan,
             data: Object.fromEntries(
-              Object.entries(v.data || {}).sort((x, y) => Number(x[0]) - Number(y[0])),
+              Object.entries(v.data || {}).sort(
+                (x, y) => Number(x[0]) - Number(y[0]),
+              ),
             ),
           };
         });
     }
 
-    const log = ({
+    const log = {
       totalKomoditas: varKelompokIHK.length,
       hierarki,
       biggest,
-    })
+    };
 
-    console.log(JSON.stringify(log, null, 2))
-
+    console.log(JSON.stringify(log, null, 2));
   } catch (err) {
-    console.error(err.message)
+    console.error(err.message);
   }
 };
 
-Get()
+Get();

@@ -38,12 +38,19 @@ const getLastTwoValues = (sorted) => {
 };
 
 // Helper: bangun array {key, value} berdasarkan region, prefix, dan filter opsional
-const buildFilteredKeyValue = (documentSection, regionVal, prefix, yearFilter = null, monthFilter = null) => {
+const buildFilteredKeyValue = (
+  documentSection,
+  regionVal,
+  prefix,
+  yearFilter = null,
+  monthFilter = null,
+) => {
   const result = [];
 
   for (const key in documentSection) {
     const startsWithRegion = key.startsWith(regionVal);
-    const hasPrefix = key.slice(regionVal.length, regionVal.length + 1) === String(prefix);
+    const hasPrefix =
+      key.slice(regionVal.length, regionVal.length + 1) === String(prefix);
 
     if (!startsWithRegion || !hasPrefix) continue;
 
@@ -51,8 +58,10 @@ const buildFilteredKeyValue = (documentSection, regionVal, prefix, yearFilter = 
       const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
       const keyMonth = key.slice(regionVal.length + 11);
 
-      if (yearFilter !== null && Number(keyYear) !== Number(yearFilter)) continue;
-      if (monthFilter !== null && Number(keyMonth) !== Number(monthFilter)) continue;
+      if (yearFilter !== null && Number(keyYear) !== Number(yearFilter))
+        continue;
+      if (monthFilter !== null && Number(keyMonth) !== Number(monthFilter))
+        continue;
     }
 
     result.push({
@@ -65,7 +74,13 @@ const buildFilteredKeyValue = (documentSection, regionVal, prefix, yearFilter = 
 };
 
 // Helper: bangun response JSON untuk inflasi / ihk dengan dashboard
-const buildResponseWithDashboard = (kota, inflasiVar, regionVal, result, sortedYoy) => {
+const buildResponseWithDashboard = (
+  kota,
+  inflasiVar,
+  regionVal,
+  result,
+  sortedYoy,
+) => {
   const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key));
   const { now, compare } = getLastTwoValues(sorted);
 
@@ -119,9 +134,19 @@ router.post("/inflasi", async (req, res) => {
 
     const result = buildFilteredKeyValue(doc.datacontent, regionVal, 1);
     const resultYoy = buildFilteredKeyValue(doc.yoy || {}, regionVal, 1);
-    const sortedYoy = [...resultYoy].sort((a, b) => Number(a.key) - Number(b.key));
+    const sortedYoy = [...resultYoy].sort(
+      (a, b) => Number(a.key) - Number(b.key),
+    );
 
-    res.json(buildResponseWithDashboard(kota, inflasiVar, regionVal, result, sortedYoy));
+    res.json(
+      buildResponseWithDashboard(
+        kota,
+        inflasiVar,
+        regionVal,
+        result,
+        sortedYoy,
+      ),
+    );
   } catch (err) {
     res.status(500).json({
       error: err.message,
@@ -179,9 +204,19 @@ router.post("/ihk", async (req, res) => {
     const regionVal = region.val.toString();
     const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
     const resultYoy = buildFilteredKeyValue(doc.yoy || {}, regionVal, 2);
-    const sortedYoy = [...resultYoy].sort((a, b) => Number(a.key) - Number(b.key));
+    const sortedYoy = [...resultYoy].sort(
+      (a, b) => Number(a.key) - Number(b.key),
+    );
 
-    res.json(buildResponseWithDashboard(kota, inflasiVar, regionVal, result, sortedYoy));
+    res.json(
+      buildResponseWithDashboard(
+        kota,
+        inflasiVar,
+        regionVal,
+        result,
+        sortedYoy,
+      ),
+    );
   } catch (err) {
     res.status(500).json({
       error: err.message,
@@ -290,12 +325,20 @@ router.post("/komoditas", async (req, res) => {
         }
 
         for (const kelompok of varKelompokIHK) {
-          if (key.startsWith(regionVal) && turvar === String(kelompok.turvar) && Number(keyYear) === Number(year)) {
+          if (
+            key.startsWith(regionVal) &&
+            turvar === String(kelompok.turvar) &&
+            Number(keyYear) === Number(year)
+          ) {
             data[key] = doc.datacontent[key];
           }
 
           for (const item of kelompok.sub) {
-            if (key.startsWith(regionVal) && turvar === String(item.val) && Number(keyYear) === Number(year)) {
+            if (
+              key.startsWith(regionVal) &&
+              turvar === String(item.val) &&
+              Number(keyYear) === Number(year)
+            ) {
               if (!subData[item.val]) subData[item.val] = {};
               subData[item.val][key] = doc.datacontent[key];
             }
@@ -318,7 +361,8 @@ router.post("/komoditas", async (req, res) => {
       }
 
       const sortedResult = sort(result);
-      const mainData = sortedResult && sortedResult.length > 0 ? sortedResult[0] : null;
+      const mainData =
+        sortedResult && sortedResult.length > 0 ? sortedResult[0] : null;
 
       hierarki.push({
         label: varKelompokIHK[i].nama,
@@ -336,7 +380,10 @@ router.post("/komoditas", async (req, res) => {
 
         for (const key in doc.yoy) {
           const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
-          const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
+          const keyYear = key.slice(
+            regionVal.length + 8,
+            regionVal.length + 11,
+          );
           const keyMonth = key.slice(regionVal.length + 11);
 
           if (
@@ -353,12 +400,20 @@ router.post("/komoditas", async (req, res) => {
           }
 
           for (const kelompok of varKelompokIHK) {
-            if (key.startsWith(regionVal) && turvar === String(kelompok.turvar) && Number(keyYear) === Number(yoy)) {
+            if (
+              key.startsWith(regionVal) &&
+              turvar === String(kelompok.turvar) &&
+              Number(keyYear) === Number(yoy)
+            ) {
               dataYoy[key] = doc.yoy[key];
             }
 
             for (const item of kelompok.sub) {
-              if (key.startsWith(regionVal) && turvar === String(item.val) && Number(keyYear) === Number(yoy)) {
+              if (
+                key.startsWith(regionVal) &&
+                turvar === String(item.val) &&
+                Number(keyYear) === Number(yoy)
+              ) {
                 if (!subDataYoy[item.val]) subDataYoy[item.val] = {};
                 subDataYoy[item.val][key] = doc.yoy[key];
               }
@@ -381,7 +436,10 @@ router.post("/komoditas", async (req, res) => {
         }
 
         const sortedResultYoy = sort(resultYoy);
-        const mainDataYoy = sortedResultYoy && sortedResultYoy.length > 0 ? sortedResultYoy[0] : null;
+        const mainDataYoy =
+          sortedResultYoy && sortedResultYoy.length > 0
+            ? sortedResultYoy[0]
+            : null;
 
         yoyList.push({
           label: varKelompokIHK[i].nama,
@@ -402,7 +460,9 @@ router.post("/komoditas", async (req, res) => {
           value: v.value,
           bulan: v.bulan,
           data: Object.fromEntries(
-            Object.entries(v.data || {}).sort((x, y) => Number(x[0]) - Number(y[0])),
+            Object.entries(v.data || {}).sort(
+              (x, y) => Number(x[0]) - Number(y[0]),
+            ),
           ),
         }));
     }
@@ -416,7 +476,9 @@ router.post("/komoditas", async (req, res) => {
           value: v.value,
           bulan: v.bulan,
           data: Object.fromEntries(
-            Object.entries(v.data || {}).sort((x, y) => Number(x[0]) - Number(y[0])),
+            Object.entries(v.data || {}).sort(
+              (x, y) => Number(x[0]) - Number(y[0]),
+            ),
           ),
         }));
     }

@@ -131,11 +131,11 @@ router.post("/ihk", async (req, res) => {
       });
     }
 
-    // query hanya document yang punya var.val = 2245
+    // Query document dengan var.val = 2245, pastikan select field 'yoy' juga
     const doc = await APIDataBPS.findOne({
       "var.val": 2245,
     })
-      .select("var vervar datacontent")
+      .select("var vervar datacontent yoy")
       .lean();
 
     if (!doc) {
@@ -144,10 +144,10 @@ router.post("/ihk", async (req, res) => {
       });
     }
 
-    // ambil info var inflasi
+    // Ambil info var inflasi
     const inflasiVar = doc.var.find((item) => item.val === 2245);
 
-    // cari kota
+    // Cari kota
     const region = doc.vervar.find((item) => item.label === kota);
 
     if (!region) {
@@ -158,13 +158,12 @@ router.post("/ihk", async (req, res) => {
 
     const regionVal = region.val.toString();
 
-    // filter datacontent
+    // ==========================================
+    // A. FILTER DATACONTENT (UNTUK DATA & DASHBOARD)
+    // ==========================================
     const result = [];
 
     for (const key in doc.datacontent) {
-      // struktur:
-      // (kode wilayah)(var)(turvar)(tahun)(bulan)
-
       if (
         key.startsWith(regionVal) &&
         key.slice(regionVal.length, regionVal.length + 1) === "2"
@@ -177,10 +176,35 @@ router.post("/ihk", async (req, res) => {
     }
 
     const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key));
-    const now = sorted[sorted.length - 1].value;
-    const then = sorted[sorted.length - 2].value;
+    
+    // Ambil nilai untuk dashboard secara aman
+    const now = sorted.length > 0 ? sorted[sorted.length - 1].value : 0;
+    const then = sorted.length > 1 ? sorted[sorted.length - 2].value : 0;
     const compare = now - then;
 
+    // ==========================================
+    // B. FILTER DOC.YOY (UNTUK RESPONSE YOY)
+    // ==========================================
+    const resultYoy = [];
+
+    if (doc.yoy) {
+      for (const key in doc.yoy) {
+        if (
+          key.startsWith(regionVal) &&
+          key.slice(regionVal.length, regionVal.length + 1) === "2"
+        ) {
+          resultYoy.push({
+            key,
+            value: doc.yoy[key],
+          });
+        }
+      }
+    }
+
+    // Urutkan data YoY sama persis logikanya dengan data reguler
+    const sortedYoy = [...resultYoy].sort((a, b) => Number(a.key) - Number(b.key));
+
+    // Kirim response dengan susunan yang kamu minta
     res.json({
       kota,
       var: inflasiVar,
@@ -191,7 +215,9 @@ router.post("/ihk", async (req, res) => {
         now: now,
         compare: Number(compare.toFixed(2)),
       },
+      yoy: sortedYoy, // Menampilkan array data YoY tepat di bawah dashboard
     });
+
   } catch (err) {
     res.status(500).json({
       error: err.message,

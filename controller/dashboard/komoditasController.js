@@ -2,8 +2,6 @@ import APIDataBPS from "../../db/models/APIDataBPS.js";
 import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" };
 import { sort, getDateInfo } from "./helpers.js";
 
-const { month, year, yoy } = getDateInfo();
-
 /**
  * Helper: Process komoditas data untuk satu item
  */
@@ -184,110 +182,102 @@ const processKomoditasItem = async (
 };
 
 /**
- * POST /dashboard/komoditas
- * Dapatkan data komoditas untuk kota tertentu dengan breakdown per sub-komoditas
+ * Pure function: Dapatkan data komoditas untuk kota tertentu dengan breakdown per sub-komoditas
+ * @param {String} kota - Nama kota
+ * @returns {Object} Data komoditas dengan hierarki dan YoY
+ * @throws Error jika kota tidak diisi
  */
-export const getKomoditasByKota = async (req, res) => {
-  try {
-    const { kota } = req.body;
+export const getKomoditasByKota = async (kota) => {
+  if (!kota) {
+    throw new Error("kota wajib diisi");
+  }
 
-    if (!kota) {
-      return res.status(400).json({
-        message: "kota wajib diisi",
-      });
-    }
+  const { month, year, yoy } = getDateInfo();
+  let hierarki = [];
+  let yoyList = [];
+  let biggest = null;
 
-    let hierarki = [];
-    let yoyList = [];
-    let biggest = null;
+  // Process setiap komoditas
+  for (const i in varKelompokIHK) {
+    const result = await processKomoditasItem(
+      varKelompokIHK[i],
+      kota,
+      month,
+      year,
+      yoy,
+    );
 
-    // Process setiap komoditas
-    for (const i in varKelompokIHK) {
-      const result = await processKomoditasItem(
-        varKelompokIHK[i],
-        kota,
-        month,
-        year,
-        yoy,
-      );
-
-      if (result) {
-        hierarki.push(result.hierarki);
-        if (result.yoyItem) {
-          yoyList.push(result.yoyItem);
-        }
+    if (result) {
+      hierarki.push(result.hierarki);
+      if (result.yoyItem) {
+        yoyList.push(result.yoyItem);
       }
     }
-
-    // Format sub-komoditas untuk hierarki
-    for (const key in hierarki) {
-      const subsObj = hierarki[key].sub || {};
-      hierarki[key].sub = Object.entries(subsObj)
-        .sort((a, b) => Number(a[0]) - Number(b[0]))
-        .map(([k, v]) => ({
-          label: v.label,
-          value: v.value,
-          bulan: v.bulan,
-          data: Object.fromEntries(
-            Object.entries(v.data || {}).sort(
-              (x, y) => Number(x[0]) - Number(y[0]),
-            ),
-          ),
-        }));
-    }
-
-    // Format sub-komoditas untuk YoY
-    for (const key in yoyList) {
-      const subsObjYoy = yoyList[key].sub || {};
-      yoyList[key].sub = Object.entries(subsObjYoy)
-        .sort((a, b) => Number(a[0]) - Number(b[0]))
-        .map(([k, v]) => ({
-          label: v.label,
-          value: v.value,
-          bulan: v.bulan,
-          data: Object.fromEntries(
-            Object.entries(v.data || {}).sort(
-              (x, y) => Number(x[0]) - Number(y[0]),
-            ),
-          ),
-        }));
-    }
-
-    // Cari komoditas dengan nilai terbesar
-    if (hierarki.length > 0) {
-      biggest = hierarki.reduce((max, item) => {
-        const currentVal = parseFloat(item.value) || 0;
-        const maxVal = parseFloat(max.value) || 0;
-        return currentVal > maxVal ? item : max;
-      }, hierarki[0]);
-    }
-
-    res.json({
-      totalKomoditas: hierarki.length,
-      hierarki,
-      yoy: yoyList,
-      biggest,
-    });
-  } catch (err) {
-    res.status(500).json({
-      err: err.message,
-    });
   }
+
+  // Format sub-komoditas untuk hierarki
+  for (const key in hierarki) {
+    const subsObj = hierarki[key].sub || {};
+    hierarki[key].sub = Object.entries(subsObj)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  // Format sub-komoditas untuk YoY
+  for (const key in yoyList) {
+    const subsObjYoy = yoyList[key].sub || {};
+    yoyList[key].sub = Object.entries(subsObjYoy)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  // Cari komoditas dengan nilai terbesar
+  if (hierarki.length > 0) {
+    biggest = hierarki.reduce((max, item) => {
+      const currentVal = parseFloat(item.value) || 0;
+      const maxVal = parseFloat(max.value) || 0;
+      return currentVal > maxVal ? item : max;
+    }, hierarki[0]);
+  }
+
+  return {
+    totalKomoditas: hierarki.length,
+    hierarki,
+    yoy: yoyList,
+    biggest,
+  };
 };
 
 /**
- * GET /dashboard/komoditas
- * Dapatkan dokumen komoditas lengkap
+ * Pure function: Dapatkan dokumen komoditas lengkap
+ * @returns {Object} Dokumen komoditas
+ * @throws Error jika data tidak ditemukan
  */
-export const getAllKomoditas = async (req, res) => {
-  try {
-    const doc = await APIDataBPS.findOne({
-      "var.val": 2223,
-    });
-    res.json(doc);
-  } catch (err) {
-    res.status(500).json({
-      message: err.message,
-    });
+export const getAllKomoditas = async () => {
+  const doc = await APIDataBPS.findOne({
+    "var.val": 2223,
+  });
+
+  if (!doc) {
+    throw new Error("data komoditas tidak ditemukan");
   }
-};
+
+  return doc;

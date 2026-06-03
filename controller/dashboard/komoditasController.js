@@ -281,3 +281,4 @@ export const getAllKomoditas = async () => {
   }
 
   return doc;
+};

@@ -161,3 +161,5 @@ export const fetchBPSYoY = async () => {
     console.error("\nFatal YoY error:", err.message);
   }
 };
+
+fetchBPSYoY()

@@ -6,12 +6,11 @@ import cloudscraper from "cloudscraper";
 import { fileURLToPath } from "url";
 
 import APIDataBPS from "../db/models/APIDataBPS.js";
-import { connectDB } from "../db/mongo.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Kunci jalur .env secara absolut ke folder root (satu tingkat di atas folder services)
+// Kunci jalur .env secara absolut ke folder root
 const rootEnvPath = path.join(__dirname, "..", ".env");
 dotenv.config({
   path: rootEnvPath,
@@ -68,14 +67,15 @@ const saveDebugJSON = (data, index) => {
 export const fetchBPS = async () => {
   try {
     // 1. Validasi Environment dan Koneksi MongoDB
-    // Terima baik `MONGO_URL` maupun `MONGO_URI` agar kompatibel dengan .env lama/baru
-    const mongoURI = process.env.MONGO_URL || process.env.MONGO_URI;
+    const mongoURI = process.env.MONGO_URL; 
     if (!mongoURI) {
       throw new Error(`MONGO_URL tidak ditemukan! Pastikan file .env ada di: ${rootEnvPath}`);
     }
-
+    
     console.log("⏳ Connecting to MongoDB...");
-    await connectDB();
+    await mongoose.connect(mongoURI, {
+      serverSelectionTimeoutMS: 5000 
+    });
     console.log("🚀 Connected to MongoDB successfully\n");
 
     // 2. Load Configuration URLs
@@ -134,7 +134,6 @@ export const fetchBPS = async () => {
 
           stopLoading(`Success ${index + 1}/${urls.length}`);
 
-          // Simpan log file JSON lokal untuk debugging
           saveDebugJSON(data, index);
           results.push(data);
 
@@ -156,7 +155,7 @@ export const fetchBPS = async () => {
 
     console.log(`\n✔ Total success fetch: ${results.length}\n`);
 
-    // 4. Proses Simpan / Update ke MongoDB
+    // 4. Proses Simpan / Update ke MongoDB (Hanya createdAt dan datacontent)
     for (let index = 0; index < results.length; index++) {
       const data = results[index];
 
@@ -178,23 +177,28 @@ export const fetchBPS = async () => {
         continue;
       }
 
-      const { last_update, ...rest } = data;
+      // Ambil hanya createdAt dan datacontent dari data response
+      // Jika di response BPS field waktu bernama 'last_update', sesuaikan nilainya ke 'createdAt'
+      const datacontent = data.datacontent;
+      const createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
 
       try {
         startLoading(`Saving ${index + 1}/${results.length} (ID Var: ${varVal})`);
 
-        // Cari dokumen lama berdasarkan kesamaan 'var.val'
+        // Hanya meng-update createdAt dan datacontent
         await APIDataBPS.findOneAndUpdate(
           {
             "var.val": varVal 
           },
           {
-            ...rest,
-            lastUpdate: new Date(last_update),
+            $set: {
+              datacontent: datacontent,
+              createdAt: createdAt
+            }
           },
           {
-            upsert: true,            // Buat data baru jika var.val belum ada di DB
-            returnDocument: 'after', // Menghilangkan Mongoose warning
+            upsert: true,            // Tetap buat baru jika data var.val belum ada di DB sama sekali
+            returnDocument: 'after', 
           }
         );
 
@@ -211,7 +215,6 @@ export const fetchBPS = async () => {
     clearInterval(spinner);
     console.error("\nFatal error:", err.message);
   } finally {
-    // 5. Tutup koneksi database setelah perulangan selesai
     if (mongoose.connection.readyState !== 0) {
       await mongoose.disconnect();
       console.log("🔌 Database connection closed safely.");
@@ -220,4 +223,4 @@ export const fetchBPS = async () => {
 };
 
 // Eksekusi otomatis
-fetchBPS();
+// fetchBPS();

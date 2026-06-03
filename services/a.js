@@ -1,183 +1,59 @@
+import fs from "fs";
+import path from "path";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import e from "express";
+import { fileURLToPath } from "url";
 
-//models
 import APIDataBPS from "../db/models/APIDataBPS.js";
 
-//json
-import varKelompokIHK from "../json/verKelompokIHK.json" with { type: "json" };
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const router = e.Router();
+// Memastikan mengarah tepat ke root folder c_be/.env
+const envPath = path.resolve(__dirname, "../.env");
+dotenv.config({ path: envPath });
 
-const date = new Date();
-const month = date.getMonth();
-const year = "1" + String(date.getFullYear()).slice(2, 4);
-const yoy = year - 1;
-
-const sort = (itemSorted) => {
-  // jika array
-  if (Array.isArray(itemSorted)) {
-    return [...itemSorted].sort((a, b) => Number(a.key) - Number(b.key));
-  }
-
-  // jika object
-  return Object.fromEntries(
-    Object.entries(itemSorted).sort((a, b) => Number(a[0]) - Number(b[0])),
-  );
-};
-
-const Get = async () => {
+const exportToJson = async () => {
   try {
-    const { kota } = {
-      kota: "KOTA METRO",
-    };
+    console.log("Env Path:", envPath);
+    console.log("Mongo URL:", process.env.MONGO_URL);
 
-    if (!kota) {
-      return console.log({
-        message: "kota wajib diisi",
-      });
+    if (!process.env.MONGO_URL) {
+      throw new Error("MONGO_URL tidak ditemukan di .env");
     }
 
-    let hierarki = [];
+    await mongoose.connect(process.env.MONGO_URL);
 
-    let totalKomoditas = 0;
-    let biggest = 0;
+    console.log("✔ Connected to MongoDB");
 
-    let val;
+    const total = await APIDataBPS.countDocuments();
 
-    for (const i in varKelompokIHK) {
-      const doc = await APIDataBPS.findOne({
-        "var.val": varKelompokIHK[i].var,
-        "turvar.val": varKelompokIHK[i].turvar,
-      })
-        .select("var vervar datacontent")
-        .lean();
+    console.log(`✔ Total documents: ${total}`);
 
-      const region = doc.vervar.find((item) => item.label === kota);
-      const regionVal = region.val.toString();
+    const data = await APIDataBPS.find({}).lean();
 
-      // filter datacontent
-      const result = [];
-      const sub = {};
-      const data = {};
-      const subData = {};
-      let dataYoy;
+    const exportDir = path.join(__dirname, "../export");
 
-      for (const key in doc.datacontent) {
-        // ambil turvar
-        const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
-        const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
-        const keyMonth = key.slice(regionVal.length + 11);
-
-        // data utama
-        if (
-          key.startsWith(regionVal) &&
-          key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-          keyMonth === String(month) &&
-          keyYear === String(year)
-        ) {
-          result.push({
-            key,
-            value: doc.datacontent[key],
-            bulan: keyMonth,
-          });
-        }
-
-        if (
-          key.startsWith(regionVal) &&
-          key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-          keyMonth === String(month) &&
-          keyYear === String(yoy)
-        ) {
-          result.push({
-            key,
-            yoy: doc.datacontent[key],
-          });
-        }
-
-        for (const kelompok of varKelompokIHK) {
-          if (
-            key.startsWith(regionVal) &&
-            turvar === String(kelompok.turvar) &&
-            keyYear === String(year)
-          ) {
-            data[key] = doc.datacontent[key];
-          }
-
-          for (const item of kelompok.sub) {
-            if (
-              key.startsWith(regionVal) &&
-              turvar === String(item.val) &&
-              keyYear === String(year)
-            ) {
-              if (!subData[item.val]) {
-                subData[item.val] = {};
-              }
-              subData[item.val][key] = doc.datacontent[key];
-            }
-
-            if (
-              key.startsWith(regionVal) &&
-              turvar === String(item.val) &&
-              keyYear === String(year) &&
-              keyMonth === String(month)
-            ) {
-              // overwrite data lama
-              sub[item.val] = {
-                label: item.label,
-                value: doc.datacontent[key],
-                bulan: Number(keyMonth),
-                data: sort(subData)[item.val],
-              };
-            }
-          }
-        }
-      }
-
-      hierarki.push({
-        label: varKelompokIHK[i].nama,
-        value: sort(result)[0].value,
-        bulan: Number(sort(result)[0].bulan),
-        yoy: sort(result)[0].yoy,
-        data: sort(data),
-        sub: sub,
-      });
-
-      biggest = [...hierarki].sort((a, b) => Number(a) - Number(b))[
-        hierarki.length - 1
-      ];
+    if (!fs.existsSync(exportDir)) {
+      fs.mkdirSync(exportDir, { recursive: true });
     }
 
-    for (const key in hierarki) {
-      // convert sub object keyed by kode into an array of sub-items (drop kode)
-      const subsObj = hierarki[key].sub || {};
-      hierarki[key].sub = Object.entries(subsObj)
-        .sort((a, b) => Number(a[0]) - Number(b[0]))
-        .map(([k, v]) => {
-          return {
-            label: v.label,
-            value: v.value,
-            bulan: v.bulan,
-            data: Object.fromEntries(
-              Object.entries(v.data || {}).sort(
-                (x, y) => Number(x[0]) - Number(y[0]),
-              ),
-            ),
-          };
-        });
-    }
+    const exportFile = path.join(exportDir, "APIDataBPS.json");
 
-    const log = {
-      totalKomoditas: varKelompokIHK.length,
-      hierarki,
-      biggest,
-    };
+    fs.writeFileSync(
+      exportFile,
+      JSON.stringify(data, null, 2),
+      "utf8",
+    );
 
-    console.log(JSON.stringify(log, null, 2));
-  } catch (err) {
-    console.error(err.message);
+    console.log(`✔ Export completed`);
+    console.log(`📂 File saved: ${exportFile}`);
+  } catch (error) {
+    console.error("✖ Error:", error.message);
+  } finally {
+    await mongoose.disconnect();
+    console.log("✔ MongoDB disconnected");
   }
 };
 
-Get();
+exportToJson();

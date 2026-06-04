@@ -1,6 +1,6 @@
 import APIDataBPS from "../../db/models/APIDataBPS.js";
 import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" };
-import { sort, getDateInfo } from "./helpers.js";
+import { sort, getDateInfo, findRegion } from "./helpers.js";
 
 /**
  * Helper: Process komoditas data untuk satu item
@@ -192,6 +192,25 @@ export const getKomoditasByKota = async (kota) => {
     throw new Error("kota wajib diisi");
   }
 
+  // Get a sample document to resolve/validate the region name
+  const sampleDoc = await APIDataBPS.findOne({
+    "var.val": varKelompokIHK[0].var,
+    "turvar.val": varKelompokIHK[0].turvar,
+  })
+    .select("vervar")
+    .lean();
+
+  if (!sampleDoc) {
+    throw new Error("data komoditas tidak ditemukan");
+  }
+
+  const region = findRegion(sampleDoc.vervar, kota);
+  if (!region) {
+    throw new Error("kota tidak ditemukan");
+  }
+
+  const resolvedKota = region.label;
+
   const { month, year, yoy } = getDateInfo();
   let hierarki = [];
   let yoyList = [];
@@ -201,7 +220,7 @@ export const getKomoditasByKota = async (kota) => {
   for (const i in varKelompokIHK) {
     const result = await processKomoditasItem(
       varKelompokIHK[i],
-      kota,
+      resolvedKota,
       month,
       year,
       yoy,

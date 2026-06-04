@@ -118,3 +118,51 @@ export const getDateInfo = () => {
   
   return { month, year, yoy };
 };
+
+/**
+ * Helper: Find region by name with fallbacks (Kota, Kabupaten, Kab)
+ * @param {Array} vervar - List of regions
+ * @param {String} kota - City name
+ * @returns {Object|null} Matching region or null
+ */
+export const findRegion = (vervar, kota) => {
+  if (!kota || !vervar) return null;
+  
+  // Standardize search term (uppercase and trimmed)
+  const searchUpper = kota.toUpperCase().trim();
+
+  // Helper to extract base name by removing prefix if present
+  const stripPrefix = (str) => {
+    if (str.startsWith("KOTA ")) {
+      return str.slice(5).trim();
+    }
+    if (str.startsWith("KABUPATEN ")) {
+      return str.slice(10).trim();
+    }
+    if (str.startsWith("KAB ")) {
+      return str.slice(4).trim();
+    }
+    return str;
+  };
+
+  const strippedSearch = stripPrefix(searchUpper);
+
+  // Generate candidate search terms in order of preference:
+  const candidates = [
+    searchUpper,                       // 1. Direct match (e.g. "KOTA MEULABOH" or "MEULABOH")
+    strippedSearch,                    // 2. Stripped prefix (e.g. "MEULABOH" if input was "KOTA MEULABOH")
+    "KOTA " + strippedSearch,          // 3. Prepend "KOTA " to base name
+    "KABUPATEN " + strippedSearch,     // 4. Prepend "KABUPATEN " to base name
+    "KAB " + strippedSearch            // 5. Prepend "KAB " to base name
+  ];
+
+  // Try each candidate in order of preference
+  for (const candidate of candidates) {
+    const found = vervar.find((item) => item.label.toUpperCase().trim() === candidate);
+    if (found) {
+      return found;
+    }
+  }
+
+  return null;
+};

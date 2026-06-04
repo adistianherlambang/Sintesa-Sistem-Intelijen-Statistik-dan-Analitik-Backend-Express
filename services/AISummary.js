@@ -109,7 +109,7 @@ export const AISummary = async () => {
 
       // Memasukkan data ke array penampung hanya dengan properti kota dan summary
       allResults.push({
-        kota: key,
+        kota: namaKota,
         summary: aiText.trim()
       });
 

@@ -28,7 +28,7 @@ export const getLastTwoValues = (sorted) => {
   const now = sorted.length > 0 ? sorted[sorted.length - 1].value : 0;
   const then = sorted.length > 1 ? sorted[sorted.length - 2].value : 0;
   const compare = now - then;
-  return { now, compare };
+  return { now, compare, then };
 };
 
 /**
@@ -92,7 +92,7 @@ export const buildResponseWithDashboard = (
   sortedYoy,
 ) => {
   const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key));
-  const { now, compare } = getLastTwoValues(sorted);
+  const { now, compare, then } = getLastTwoValues(sorted);
 
   return {
     kota,
@@ -102,6 +102,7 @@ export const buildResponseWithDashboard = (
     data: sorted,
     dashboard: {
       now,
+      then,
       compare: Number(compare.toFixed(2)),
     },
     yoy: sortedYoy,
@@ -117,7 +118,7 @@ export const getDateInfo = () => {
   const month = String(date.getMonth() - 1);
   const year = "1" + String(date.getFullYear()).slice(2, 4);
   const yoy = year - 1;
-  
+
   return { month, year, yoy };
 };
 

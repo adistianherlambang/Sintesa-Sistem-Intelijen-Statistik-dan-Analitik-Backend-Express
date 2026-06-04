@@ -1,4 +1,5 @@
 import AISummary from "../../db/models/AISummary.js";
+import { findUnifiedCity } from "./helpers.js";
 
 /**
  * Pure function: Dapatkan data IHK untuk kota tertentu
@@ -12,7 +13,13 @@ export const getAISummaryByKota = async (kota) => {
     throw new Error("kota wajib diisi");
   }
 
-  const doc = await AISummary.findOne({ kota: kota }).lean();
+  const unified = findUnifiedCity(kota);
+
+  if (!unified) {
+    throw new Error("Kota tidak ditemukan");
+  }
+
+  const doc = await AISummary.findOne({ kota: unified.name }).lean();
 
   if (!doc) {
     throw new Error("Data tidak ditemukan");

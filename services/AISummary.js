@@ -22,6 +22,7 @@ import { getKomoditasByKota } from "../controller/dashboard/komoditasController.
 import kotaConfig from "../json/kota.json" with {type: "json"}
 
 import APIDataBPS from "../db/models/APIDataBPS.js";
+import AISummaryModel from "../db/models/AISummary.js";
 import { type } from "os";
 import { connectDB } from "../db/mongo.js";
 
@@ -30,6 +31,16 @@ export const AISummary = async () => {
     if (mongoose.connection.readyState === 0) {
       await connectDB();
     }
+
+    // Ambil data BPS terbaru untuk menentukan lastUpdate
+    const latestDoc = await APIDataBPS.findOne()
+      .sort({ lastUpdate: -1 })
+      .select("lastUpdate")
+      .lean();
+    
+    const lastUpdate = latestDoc && latestDoc.lastUpdate
+      ? new Date(latestDoc.lastUpdate).toISOString()
+      : new Date().toISOString();
 
     const date = new Date();
     const month = Number(date.getMonth()) - 1;
@@ -170,6 +181,21 @@ Output HARUS berupa JSON array valid dengan format:
 
     const aiText = res.data.candidates[0].content.parts[0].text;
     const allResults = JSON.parse(aiText);
+
+    // Simpan/Upsert ke database MongoDB
+    console.log("Menyimpan summary ke database MongoDB...");
+    for (const result of allResults) {
+      await AISummaryModel.findOneAndUpdate(
+        { kota: result.kota },
+        {
+          kota: result.kota,
+          summary: result.summary,
+          lastUpdate: lastUpdate,
+        },
+        { upsert: true, returnDocument: "after" }
+      );
+    }
+    console.log("Berhasil menyimpan summary ke database.");
 
     // Menulis file airesult.json selevel dengan file ini setelah loop selesai
     const outputPath = path.join(__dirname, "airesult.json");

@@ -122,78 +122,70 @@ export const getDateInfo = () => {
 };
 
 /**
- * Helper: Find the index of a region based on its label in either list.
- * @param {String} searchName - The input name (e.g. "meulaboh", "MUARA BUNGO")
- * @returns {Number} Index in the arrays, or -1 if not found.
+ * Helper: Find the city object in the unified kota.json by slug ID, display name, or BPS label.
+ * @param {String} searchName - User input city name or slug
+ * @returns {Object|null} Unified city object
  */
-export const findRegionIndex = (searchName) => {
-  if (!searchName) return -1;
+export const findUnifiedCity = (searchName) => {
+  if (!searchName) return null;
 
   const clean = (str) => str.toUpperCase().replace(/[^A-Z0-9]/g, "");
   const searchClean = clean(searchName);
 
-  // 1. Try exact clean match on either list
-  for (let i = 0; i < kotaConfig.inflasi.length; i++) {
-    if (
-      clean(kotaConfig.inflasi[i].label) === searchClean ||
-      clean(kotaConfig.ihk_komoditas[i].label) === searchClean
-    ) {
-      return i;
-    }
-  }
+  // 1. Match by slug (id)
+  const slugMatch = kotaConfig.find((c) => clean(c.id) === searchClean);
+  if (slugMatch) return slugMatch;
 
-  // 2. Try prefix-stripped clean match
+  // 2. Match by standardized display name
+  const nameMatch = kotaConfig.find((c) => clean(c.name) === searchClean);
+  if (nameMatch) return nameMatch;
+
+  // 3. Match by database labels (inflasi and ihk_komoditas)
+  const labelMatch = kotaConfig.find((c) => {
+    const inflasiLabel = c.inflasi ? clean(c.inflasi.label) : "";
+    const ihkLabel = c.ihk_komoditas ? clean(c.ihk_komoditas.label) : "";
+    return inflasiLabel === searchClean || ihkLabel === searchClean;
+  });
+  if (labelMatch) return labelMatch;
+
+  // 4. Fallback search (e.g. prefix-stripped match or includes Bungo)
   const strip = (str) => str.replace(/^(KOTA|KABUPATEN|KAB)/g, "");
   const searchStripped = strip(searchClean);
 
-  for (let i = 0; i < kotaConfig.inflasi.length; i++) {
-    const inflasiClean = clean(kotaConfig.inflasi[i].label);
-    const ihkClean = clean(kotaConfig.ihk_komoditas[i].label);
+  const strippedMatch = kotaConfig.find((c) => {
+    const inflasiLabel = c.inflasi ? strip(clean(c.inflasi.label)) : "";
+    const ihkLabel = c.ihk_komoditas ? strip(clean(c.ihk_komoditas.label)) : "";
+    return inflasiLabel === searchStripped || ihkLabel === searchStripped;
+  });
+  if (strippedMatch) return strippedMatch;
 
-    if (
-      strip(inflasiClean) === searchStripped ||
-      strip(ihkClean) === searchStripped
-    ) {
-      return i;
-    }
+  // Specific fallback for Bungo
+  if (searchClean.includes("BUNGO")) {
+    const bungoMatch = kotaConfig.find((c) => c.id.includes("bungo"));
+    if (bungoMatch) return bungoMatch;
   }
 
-  // 3. Fallback for specific names like BUNGO vs MUARA BUNGO
-  const searchUpper = searchName.toUpperCase().trim();
-  if (searchUpper.includes("BUNGO")) {
-    for (let i = 0; i < kotaConfig.inflasi.length; i++) {
-      if (
-        kotaConfig.inflasi[i].label.includes("BUNGO") ||
-        kotaConfig.ihk_komoditas[i].label.includes("BUNGO")
-      ) {
-        return i;
-      }
-    }
-  }
-
-  return -1;
+  return null;
 };
 
 /**
- * Helper: Find region object in the database's vervar list using the structured kota.json mapping.
+ * Helper: Find region object in the database's vervar list using the unified city config.
  * @param {Array} vervar - vervar array from database document
  * @param {String} searchName - User input city name
  * @param {String} datasetType - "inflasi" or "ihk_komoditas"
- * @returns {Object|null} Matching region or null
+ * @returns {Object|null} Matching database region object or null
  */
 export const findRegionByDataset = (vervar, searchName, datasetType) => {
   if (!searchName || !vervar) return null;
 
-  const index = findRegionIndex(searchName);
-  if (index === -1) return null;
+  const city = findUnifiedCity(searchName);
+  if (!city) return null;
 
-  // Get the target canonical label based on dataset type
-  const targetLabel =
-    datasetType === "inflasi"
-      ? kotaConfig.inflasi[index].label
-      : kotaConfig.ihk_komoditas[index].label;
+  // Get the target dataset details
+  const targetData = datasetType === "inflasi" ? city.inflasi : city.ihk_komoditas;
+  if (!targetData) return null; // e.g. Dili in ihk_komoditas
 
   // Find exact match in vervar list (case-insensitive)
-  const targetUpper = targetLabel.toUpperCase().trim();
+  const targetUpper = targetData.label.toUpperCase().trim();
   return vervar.find((item) => item.label.toUpperCase().trim() === targetUpper) || null;
 };

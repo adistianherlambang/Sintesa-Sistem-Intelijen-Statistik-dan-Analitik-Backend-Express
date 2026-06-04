@@ -1,309 +1,1823 @@
-{
-  "inflasi": [
-    { "val": 1106, "label": "KAB ACEH TENGAH" },
-    { "val": 1107, "label": "KOTA MEULABOH" },
-    { "val": 1114, "label": "KAB ACEH TAMIANG" },
-    { "val": 1171, "label": "KOTA BANDA ACEH" },
-    { "val": 1174, "label": "KOTA LHOKSEUMAWE" },
-    { "val": 1207, "label": "KAB LABUHANBATU" },
-    { "val": 1211, "label": "KAB KARO" },
-    { "val": 1212, "label": "KAB DELI SERDANG" },
-    { "val": 1271, "label": "KOTA SIBOLGA" },
-    { "val": 1273, "label": "KOTA PEMATANG SIANTAR" },
-    { "val": 1275, "label": "KOTA MEDAN" },
-    { "val": 1277, "label": "KOTA PADANGSIDIMPUAN" },
-    { "val": 1278, "label": "KOTA GUNUNGSITOLI" },
-    { "val": 1311, "label": "KAB DHARMASRAYA" },
-    { "val": 1312, "label": "KAB PASAMAN BARAT" },
-    { "val": 1371, "label": "KOTA PADANG" },
-    { "val": 1375, "label": "KOTA BUKITTINGGI" },
-    { "val": 1403, "label": "TEMBILAHAN" },
-    { "val": 1406, "label": "KAB KAMPAR" },
-    { "val": 1471, "label": "KOTA PEKANBARU" },
-    { "val": 1473, "label": "KOTA DUMAI" },
-    { "val": 1501, "label": "KAB KERINCI" },
-    { "val": 1509, "label": "BUNGO" },
-    { "val": 1571, "label": "KOTA JAMBI" },
-    { "val": 1602, "label": "KAB OGAN KOMERING ILIR" },
-    { "val": 1603, "label": "KAB MUARA ENIM" },
-    { "val": 1671, "label": "KOTA PALEMBANG" },
-    { "val": 1674, "label": "KOTA LUBUKLINGGAU" },
-    { "val": 1706, "label": "KAB MUKO MUKO" },
-    { "val": 1771, "label": "KOTA BENGKULU" },
-    { "val": 1804, "label": "KAB LAMPUNG TIMUR" },
-    { "val": 1811, "label": "KAB MESUJI" },
-    { "val": 1871, "label": "KOTA BANDAR LAMPUNG" },
-    { "val": 1872, "label": "KOTA METRO" },
-    { "val": 1902, "label": "TANJUNG PANDAN" },
-    { "val": 1903, "label": "KAB BANGKA BARAT" },
-    { "val": 1906, "label": "KAB BELITUNG TIMUR" },
-    { "val": 1971, "label": "KOTA PANGKAL PINANG" },
-    { "val": 2101, "label": "KAB KARIMUN" },
-    { "val": 2171, "label": "KOTA BATAM" },
-    { "val": 2172, "label": "KOTA TANJUNG PINANG" },
-    { "val": 3100, "label": "DKI JAKARTA" },
-    { "val": 3204, "label": "KAB BANDUNG" },
-    { "val": 3210, "label": "KAB MAJALENGKA" },
-    { "val": 3213, "label": "KAB SUBANG" },
-    { "val": 3271, "label": "KOTA BOGOR" },
-    { "val": 3272, "label": "KOTA SUKABUMI" },
-    { "val": 3273, "label": "KOTA BANDUNG" },
-    { "val": 3274, "label": "KOTA CIREBON" },
-    { "val": 3275, "label": "KOTA BEKASI" },
-    { "val": 3276, "label": "KOTA DEPOK" },
-    { "val": 3278, "label": "KOTA TASIKMALAYA" },
-    { "val": 3301, "label": "CILACAP" },
-    { "val": 3302, "label": "PURWOKERTO" },
-    { "val": 3307, "label": "KAB WONOSOBO" },
-    { "val": 3312, "label": "KAB WONOGIRI" },
-    { "val": 3317, "label": "KAB REMBANG" },
-    { "val": 3319, "label": "KUDUS" },
-    { "val": 3372, "label": "KOTA SURAKARTA" },
-    { "val": 3374, "label": "KOTA SEMARANG" },
-    { "val": 3376, "label": "KOTA TEGAL" },
-    { "val": 3403, "label": "KAB GUNUNGKIDUL" },
-    { "val": 3471, "label": "KOTA YOGYAKARTA" },
-    { "val": 3504, "label": "KAB TULUNGAGUNG" },
-    { "val": 3509, "label": "JEMBER" },
-    { "val": 3510, "label": "BANYUWANGI" },
-    { "val": 3522, "label": "KAB BOJONEGORO" },
-    { "val": 3525, "label": "KAB GRESIK" },
-    { "val": 3529, "label": "SUMENEP" },
-    { "val": 3571, "label": "KOTA KEDIRI" },
-    { "val": 3573, "label": "KOTA MALANG" },
-    { "val": 3574, "label": "KOTA PROBOLINGGO" },
-    { "val": 3577, "label": "KOTA MADIUN" },
-    { "val": 3578, "label": "KOTA SURABAYA" },
-    { "val": 3601, "label": "KAB PANDEGLANG" },
-    { "val": 3602, "label": "KAB LEBAK" },
-    { "val": 3671, "label": "KOTA TANGERANG" },
-    { "val": 3672, "label": "KOTA CILEGON" },
-    { "val": 3673, "label": "KOTA SERANG" },
-    { "val": 5102, "label": "KAB TABANAN" },
-    { "val": 5103, "label": "KAB BADUNG" },
-    { "val": 5108, "label": "SINGARAJA" },
-    { "val": 5171, "label": "KOTA DENPASAR" },
-    { "val": 5204, "label": "KAB SUMBAWA" },
-    { "val": 5271, "label": "KOTA MATARAM" },
-    { "val": 5272, "label": "KOTA BIMA" },
-    { "val": 5302, "label": "WAINGAPU" },
-    { "val": 5304, "label": "KAB TIMOR TENGAH SELATAN" },
-    { "val": 5310, "label": "MAUMERE" },
-    { "val": 5312, "label": "KAB NGADA" },
-    { "val": 5371, "label": "KOTA KUPANG" },
-    { "val": 5400, "label": "DILI" },
-    { "val": 6106, "label": "KAB KETAPANG" },
-    { "val": 6107, "label": "SINTANG" },
-    { "val": 6111, "label": "KAB KAYONG UTARA" },
-    { "val": 6171, "label": "KOTA PONTIANAK" },
-    { "val": 6172, "label": "KOTA SINGKAWANG" },
-    { "val": 6202, "label": "SAMPIT" },
-    { "val": 6203, "label": "KAB KAPUAS" },
-    { "val": 6206, "label": "KAB SUKAMARA" },
-    { "val": 6271, "label": "KOTA PALANGKA RAYA" },
-    { "val": 6301, "label": "KAB TANAH LAUT" },
-    { "val": 6302, "label": "KOTABARU" },
-    { "val": 6307, "label": "KAB HULU SUNGAI TENGAH" },
-    { "val": 6309, "label": "TANJUNG" },
-    { "val": 6371, "label": "KOTA BANJARMASIN" },
-    { "val": 6405, "label": "KAB BERAU" },
-    { "val": 6409, "label": "KAB PENAJAM PASER UTARA" },
-    { "val": 6471, "label": "KOTA BALIKPAPAN" },
-    { "val": 6472, "label": "KOTA SAMARINDA" },
-    { "val": 6502, "label": "TANJUNG SELOR" },
-    { "val": 6504, "label": "KAB NUNUKAN" },
-    { "val": 6571, "label": "KOTA TARAKAN" },
-    { "val": 7105, "label": "KAB MINAHASA SELATAN" },
-    { "val": 7106, "label": "KAB MINAHASA UTARA" },
-    { "val": 7171, "label": "KOTA MANADO" },
-    { "val": 7174, "label": "KOTA KOTAMOBAGU" },
-    { "val": 7202, "label": "LUWUK" },
-    { "val": 7203, "label": "KAB MOROWALI" },
-    { "val": 7206, "label": "KAB TOLI TOLI" },
-    { "val": 7271, "label": "KOTA PALU" },
-    { "val": 7302, "label": "BULUKUMBA" },
-    { "val": 7311, "label": "WATAMPONE" },
-    { "val": 7313, "label": "KAB WAJO" },
-    { "val": 7314, "label": "KAB SIDENRENG RAPPANG" },
-    { "val": 7325, "label": "KAB LUWU TIMUR" },
-    { "val": 7371, "label": "KOTA MAKASSAR" },
-    { "val": 7372, "label": "KOTA PARE-PARE" },
-    { "val": 7373, "label": "KOTA PALOPO" },
-    { "val": 7403, "label": "KAB KONAWE" },
-    { "val": 7404, "label": "KAB KOLAKA" },
-    { "val": 7471, "label": "KOTA KENDARI" },
-    { "val": 7472, "label": "KOTA BAU-BAU" },
-    { "val": 7502, "label": "KAB GORONTALO" },
-    { "val": 7571, "label": "KOTA GORONTALO" },
-    { "val": 7601, "label": "KAB MAJENE" },
-    { "val": 7604, "label": "MAMUJU" },
-    { "val": 8103, "label": "KAB MALUKU TENGAH" },
-    { "val": 8171, "label": "KOTA AMBON" },
-    { "val": 8172, "label": "KOTA TUAL" },
-    { "val": 8202, "label": "KAB HALMAHERA TENGAH" },
-    { "val": 8271, "label": "KOTA TERNATE" },
-    { "val": 9105, "label": "MANOKWARI" },
-    { "val": 9202, "label": "KAB SORONG" },
-    { "val": 9203, "label": "KAB SORONG SELATAN" },
-    { "val": 9271, "label": "KOTA SORONG" },
-    { "val": 9471, "label": "KOTA JAYAPURA" },
-    { "val": 9501, "label": "MERAUKE" },
-    { "val": 9601, "label": "TIMIKA" },
-    { "val": 9604, "label": "KAB NABIRE" },
-    { "val": 9702, "label": "KAB JAYAWIJAYA" },
-    { "val": 9999, "label": "INDONESIA" }
-  ],
-  "ihk_komoditas": [
-    { "val": 1, "label": "KAB ACEH TENGAH" },
-    { "val": 2, "label": "MEULABOH" },
-    { "val": 3, "label": "KAB ACEH TAMIANG" },
-    { "val": 4, "label": "KOTA BANDA ACEH" },
-    { "val": 5, "label": "KOTA LHOKSEUMAWE" },
-    { "val": 6, "label": "KAB LABUHANBATU" },
-    { "val": 7, "label": "KAB KARO" },
-    { "val": 8, "label": "KAB DELI SERDANG" },
-    { "val": 9, "label": "KOTA SIBOLGA" },
-    { "val": 10, "label": "KOTA PEMATANGSIANTAR" },
-    { "val": 11, "label": "KOTA MEDAN" },
-    { "val": 12, "label": "KOTA PADANGSIDIMPUAN" },
-    { "val": 13, "label": "KOTA GUNUNGSITOLI" },
-    { "val": 14, "label": "KAB DHARMASRAYA" },
-    { "val": 15, "label": "KAB PASAMAN BARAT" },
-    { "val": 16, "label": "KOTA PADANG" },
-    { "val": 17, "label": "KOTA BUKITTINGGI" },
-    { "val": 18, "label": "TEMBILAHAN" },
-    { "val": 19, "label": "KAB KAMPAR" },
-    { "val": 20, "label": "KOTA PEKANBARU" },
-    { "val": 21, "label": "KOTA DUMAI" },
-    { "val": 22, "label": "KAB KERINCI" },
-    { "val": 23, "label": "MUARA BUNGO" },
-    { "val": 24, "label": "KOTA JAMBI" },
-    { "val": 25, "label": "KAB OGAN KOMERING ILIR" },
-    { "val": 26, "label": "KAB MUARA ENIM" },
-    { "val": 27, "label": "KOTA PALEMBANG" },
-    { "val": 28, "label": "KOTA LUBUK LINGGAU" },
-    { "val": 29, "label": "KAB MUKO MUKO" },
-    { "val": 30, "label": "KOTA BENGKULU" },
-    { "val": 31, "label": "KAB LAMPUNG TIMUR" },
-    { "val": 32, "label": "KAB MESUJI" },
-    { "val": 33, "label": "KOTA BANDAR LAMPUNG" },
-    { "val": 34, "label": "KOTA METRO" },
-    { "val": 35, "label": "TANJUNG PANDAN" },
-    { "val": 36, "label": "KAB BANGKA BARAT" },
-    { "val": 37, "label": "KAB BELITUNG TIMUR" },
-    { "val": 38, "label": "KOTA PANGKAL PINANG" },
-    { "val": 39, "label": "KAB KARIMUN" },
-    { "val": 40, "label": "KOTA BATAM" },
-    { "val": 41, "label": "KOTA TANJUNG PINANG" },
-    { "val": 42, "label": "KOTA JAKARTA" },
-    { "val": 43, "label": "KAB BANDUNG" },
-    { "val": 44, "label": "KAB MAJALENGKA" },
-    { "val": 45, "label": "KAB SUBANG" },
-    { "val": 46, "label": "KOTA BOGOR" },
-    { "val": 47, "label": "KOTA SUKABUMI" },
-    { "val": 48, "label": "KOTA BANDUNG" },
-    { "val": 49, "label": "KOTA CIREBON" },
-    { "val": 50, "label": "KOTA BEKASI" },
-    { "val": 51, "label": "KOTA DEPOK" },
-    { "val": 52, "label": "KOTA TASIKMALAYA" },
-    { "val": 53, "label": "CILACAP" },
-    { "val": 54, "label": "PURWOKERTO" },
-    { "val": 55, "label": "KAB WONOSOBO" },
-    { "val": 56, "label": "KAB WONOGIRI" },
-    { "val": 57, "label": "KAB REMBANG" },
-    { "val": 58, "label": "KUDUS" },
-    { "val": 59, "label": "KOTA SURAKARTA" },
-    { "val": 60, "label": "KOTA SEMARANG" },
-    { "val": 61, "label": "KOTA TEGAL" },
-    { "val": 62, "label": "KAB GUNUNGKIDUL" },
-    { "val": 63, "label": "KOTA YOGYAKARTA" },
-    { "val": 64, "label": "KAB TULUNGAGUNG" },
-    { "val": 65, "label": "JEMBER" },
-    { "val": 66, "label": "BANYUWANGI" },
-    { "val": 67, "label": "KAB BOJONEGORO" },
-    { "val": 68, "label": "KAB GRESIK" },
-    { "val": 69, "label": "SUMENEP" },
-    { "val": 70, "label": "KOTA KEDIRI" },
-    { "val": 71, "label": "KOTA MALANG" },
-    { "val": 72, "label": "KOTA PROBOLINGGO" },
-    { "val": 73, "label": "KOTA MADIUN" },
-    { "val": 74, "label": "KOTA SURABAYA" },
-    { "val": 75, "label": "KAB PANDEGLANG" },
-    { "val": 76, "label": "KAB LEBAK" },
-    { "val": 77, "label": "KOTA TANGERANG" },
-    { "val": 78, "label": "KOTA CILEGON" },
-    { "val": 79, "label": "KOTA SERANG" },
-    { "val": 80, "label": "KAB TABANAN" },
-    { "val": 81, "label": "KAB BADUNG" },
-    { "val": 82, "label": "SINGARAJA" },
-    { "val": 83, "label": "KOTA DENPASAR" },
-    { "val": 84, "label": "KAB SUMBAWA" },
-    { "val": 85, "label": "KOTA MATARAM" },
-    { "val": 86, "label": "KOTA BIMA" },
-    { "val": 87, "label": "WAINGAPU" },
-    { "val": 88, "label": "KAB TIMOR TENGAH SELATAN" },
-    { "val": 89, "label": "MAUMERE" },
-    { "val": 90, "label": "KAB NGADA" },
-    { "val": 91, "label": "KOTA KUPANG" },
-    { "val": 92, "label": "KAB KETAPANG" },
-    { "val": 93, "label": "SINTANG" },
-    { "val": 94, "label": "KAB KAYONG UTARA" },
-    { "val": 95, "label": "KOTA PONTIANAK" },
-    { "val": 96, "label": "KOTA SINGKAWANG" },
-    { "val": 97, "label": "SAMPIT" },
-    { "val": 98, "label": "KAB KAPUAS" },
-    { "val": 99, "label": "KAB SUKAMARA" },
-    { "val": 100, "label": "KOTA PALANGKARAYA" },
-    { "val": 101, "label": "KAB TANAH LAUT" },
-    { "val": 102, "label": "KOTABARU" },
-    { "val": 103, "label": "KAB HULU SUNGAI TENGAH" },
-    { "val": 104, "label": "TANJUNG" },
-    { "val": 105, "label": "KOTA BANJARMASIN" },
-    { "val": 106, "label": "KAB BERAU" },
-    { "val": 107, "label": "KAB PENAJAM PASER UTARA" },
-    { "val": 108, "label": "KOTA BALIKPAPAN" },
-    { "val": 109, "label": "KOTA SAMARINDA" },
-    { "val": 110, "label": "TANJUNG SELOR" },
-    { "val": 111, "label": "KAB NUNUKAN" },
-    { "val": 112, "label": "KOTA TARAKAN" },
-    { "val": 113, "label": "KAB MINAHASA SELATAN" },
-    { "val": 114, "label": "KAB MINAHASA UTARA" },
-    { "val": 115, "label": "KOTA MANADO" },
-    { "val": 116, "label": "KOTA KOTAMOBAGU" },
-    { "val": 117, "label": "LUWUK" },
-    { "val": 118, "label": "KAB MOROWALI" },
-    { "val": 119, "label": "KAB TOLI TOLI" },
-    { "val": 120, "label": "KOTA PALU" },
-    { "val": 121, "label": "BULUKUMBA" },
-    { "val": 122, "label": "WATAMPONE" },
-    { "val": 123, "label": "KAB WAJO" },
-    { "val": 124, "label": "KAB SIDENRENG RAPPANG" },
-    { "val": 125, "label": "KAB LUWU TIMUR" },
-    { "val": 126, "label": "KOTA MAKASSAR" },
-    { "val": 127, "label": "KOTA PARE PARE" },
-    { "val": 128, "label": "KOTA PALOPO" },
-    { "val": 129, "label": "KAB KONAWE" },
-    { "val": 130, "label": "KAB KOLAKA" },
-    { "val": 131, "label": "KOTA KENDARI" },
-    { "val": 132, "label": "KOTA BAU BAU" },
-    { "val": 133, "label": "KAB GORONTALO" },
-    { "val": 134, "label": "KOTA GORONTALO" },
-    { "val": 135, "label": "KAB MAJENE" },
-    { "val": 136, "label": "MAMUJU" },
-    { "val": 137, "label": "KAB MALUKU TENGAH" },
-    { "val": 138, "label": "KOTA AMBON" },
-    { "val": 139, "label": "KOTA TUAL" },
-    { "val": 140, "label": "KAB HALMAHERA TENGAH" },
-    { "val": 141, "label": "KOTA TERNATE" },
-    { "val": 142, "label": "MANOKWARI" },
-    { "val": 143, "label": "KAB SORONG" },
-    { "val": 144, "label": "KAB SORONG SELATAN" },
-    { "val": 145, "label": "KOTA SORONG" },
-    { "val": 146, "label": "KOTA JAYAPURA" },
-    { "val": 147, "label": "MERAUKE" },
-    { "val": 148, "label": "TIMIKA" },
-    { "val": 149, "label": "KAB NABIRE" },
-    { "val": 150, "label": "KAB JAYAWIJAYA" },
-    { "val": 151, "label": "INDONESIA" }
-  ]
-}
+[
+  {
+    "id": "aceh-tengah",
+    "name": "Kab. Aceh Tengah",
+    "inflasi": {
+      "val": 1106,
+      "label": "KAB ACEH TENGAH"
+    },
+    "ihk_komoditas": {
+      "val": 1,
+      "label": "KAB ACEH TENGAH"
+    }
+  },
+  {
+    "id": "meulaboh",
+    "name": "Kota Meulaboh",
+    "inflasi": {
+      "val": 1107,
+      "label": "KOTA MEULABOH"
+    },
+    "ihk_komoditas": {
+      "val": 2,
+      "label": "MEULABOH"
+    }
+  },
+  {
+    "id": "aceh-tamiang",
+    "name": "Kab. Aceh Tamiang",
+    "inflasi": {
+      "val": 1114,
+      "label": "KAB ACEH TAMIANG"
+    },
+    "ihk_komoditas": {
+      "val": 3,
+      "label": "KAB ACEH TAMIANG"
+    }
+  },
+  {
+    "id": "banda-aceh",
+    "name": "Kota Banda Aceh",
+    "inflasi": {
+      "val": 1171,
+      "label": "KOTA BANDA ACEH"
+    },
+    "ihk_komoditas": {
+      "val": 4,
+      "label": "KOTA BANDA ACEH"
+    }
+  },
+  {
+    "id": "lhokseumawe",
+    "name": "Kota Lhokseumawe",
+    "inflasi": {
+      "val": 1174,
+      "label": "KOTA LHOKSEUMAWE"
+    },
+    "ihk_komoditas": {
+      "val": 5,
+      "label": "KOTA LHOKSEUMAWE"
+    }
+  },
+  {
+    "id": "labuhanbatu",
+    "name": "Kab. Labuhanbatu",
+    "inflasi": {
+      "val": 1207,
+      "label": "KAB LABUHANBATU"
+    },
+    "ihk_komoditas": {
+      "val": 6,
+      "label": "KAB LABUHANBATU"
+    }
+  },
+  {
+    "id": "karo",
+    "name": "Kab. Karo",
+    "inflasi": {
+      "val": 1211,
+      "label": "KAB KARO"
+    },
+    "ihk_komoditas": {
+      "val": 7,
+      "label": "KAB KARO"
+    }
+  },
+  {
+    "id": "deli-serdang",
+    "name": "Kab. Deli Serdang",
+    "inflasi": {
+      "val": 1212,
+      "label": "KAB DELI SERDANG"
+    },
+    "ihk_komoditas": {
+      "val": 8,
+      "label": "KAB DELI SERDANG"
+    }
+  },
+  {
+    "id": "sibolga",
+    "name": "Kota Sibolga",
+    "inflasi": {
+      "val": 1271,
+      "label": "KOTA SIBOLGA"
+    },
+    "ihk_komoditas": {
+      "val": 9,
+      "label": "KOTA SIBOLGA"
+    }
+  },
+  {
+    "id": "pematang-siantar",
+    "name": "Kota Pematang Siantar",
+    "inflasi": {
+      "val": 1273,
+      "label": "KOTA PEMATANG SIANTAR"
+    },
+    "ihk_komoditas": {
+      "val": 10,
+      "label": "KOTA PEMATANGSIANTAR"
+    }
+  },
+  {
+    "id": "medan",
+    "name": "Kota Medan",
+    "inflasi": {
+      "val": 1275,
+      "label": "KOTA MEDAN"
+    },
+    "ihk_komoditas": {
+      "val": 11,
+      "label": "KOTA MEDAN"
+    }
+  },
+  {
+    "id": "padangsidimpuan",
+    "name": "Kota Padangsidimpuan",
+    "inflasi": {
+      "val": 1277,
+      "label": "KOTA PADANGSIDIMPUAN"
+    },
+    "ihk_komoditas": {
+      "val": 12,
+      "label": "KOTA PADANGSIDIMPUAN"
+    }
+  },
+  {
+    "id": "gunungsitoli",
+    "name": "Kota Gunungsitoli",
+    "inflasi": {
+      "val": 1278,
+      "label": "KOTA GUNUNGSITOLI"
+    },
+    "ihk_komoditas": {
+      "val": 13,
+      "label": "KOTA GUNUNGSITOLI"
+    }
+  },
+  {
+    "id": "dharmasraya",
+    "name": "Kab. Dharmasraya",
+    "inflasi": {
+      "val": 1311,
+      "label": "KAB DHARMASRAYA"
+    },
+    "ihk_komoditas": {
+      "val": 14,
+      "label": "KAB DHARMASRAYA"
+    }
+  },
+  {
+    "id": "pasaman-barat",
+    "name": "Kab. Pasaman Barat",
+    "inflasi": {
+      "val": 1312,
+      "label": "KAB PASAMAN BARAT"
+    },
+    "ihk_komoditas": {
+      "val": 15,
+      "label": "KAB PASAMAN BARAT"
+    }
+  },
+  {
+    "id": "padang",
+    "name": "Kota Padang",
+    "inflasi": {
+      "val": 1371,
+      "label": "KOTA PADANG"
+    },
+    "ihk_komoditas": {
+      "val": 16,
+      "label": "KOTA PADANG"
+    }
+  },
+  {
+    "id": "bukittinggi",
+    "name": "Kota Bukittinggi",
+    "inflasi": {
+      "val": 1375,
+      "label": "KOTA BUKITTINGGI"
+    },
+    "ihk_komoditas": {
+      "val": 17,
+      "label": "KOTA BUKITTINGGI"
+    }
+  },
+  {
+    "id": "tembilahan",
+    "name": "Tembilahan",
+    "inflasi": {
+      "val": 1403,
+      "label": "TEMBILAHAN"
+    },
+    "ihk_komoditas": {
+      "val": 18,
+      "label": "TEMBILAHAN"
+    }
+  },
+  {
+    "id": "kampar",
+    "name": "Kab. Kampar",
+    "inflasi": {
+      "val": 1406,
+      "label": "KAB KAMPAR"
+    },
+    "ihk_komoditas": {
+      "val": 19,
+      "label": "KAB KAMPAR"
+    }
+  },
+  {
+    "id": "pekanbaru",
+    "name": "Kota Pekanbaru",
+    "inflasi": {
+      "val": 1471,
+      "label": "KOTA PEKANBARU"
+    },
+    "ihk_komoditas": {
+      "val": 20,
+      "label": "KOTA PEKANBARU"
+    }
+  },
+  {
+    "id": "dumai",
+    "name": "Kota Dumai",
+    "inflasi": {
+      "val": 1473,
+      "label": "KOTA DUMAI"
+    },
+    "ihk_komoditas": {
+      "val": 21,
+      "label": "KOTA DUMAI"
+    }
+  },
+  {
+    "id": "kerinci",
+    "name": "Kab. Kerinci",
+    "inflasi": {
+      "val": 1501,
+      "label": "KAB KERINCI"
+    },
+    "ihk_komoditas": {
+      "val": 22,
+      "label": "KAB KERINCI"
+    }
+  },
+  {
+    "id": "bungo",
+    "name": "Bungo",
+    "inflasi": {
+      "val": 1509,
+      "label": "BUNGO"
+    },
+    "ihk_komoditas": {
+      "val": 23,
+      "label": "MUARA BUNGO"
+    }
+  },
+  {
+    "id": "jambi",
+    "name": "Kota Jambi",
+    "inflasi": {
+      "val": 1571,
+      "label": "KOTA JAMBI"
+    },
+    "ihk_komoditas": {
+      "val": 24,
+      "label": "KOTA JAMBI"
+    }
+  },
+  {
+    "id": "ogan-komering-ilir",
+    "name": "Kab. Ogan Komering Ilir",
+    "inflasi": {
+      "val": 1602,
+      "label": "KAB OGAN KOMERING ILIR"
+    },
+    "ihk_komoditas": {
+      "val": 25,
+      "label": "KAB OGAN KOMERING ILIR"
+    }
+  },
+  {
+    "id": "muara-enim",
+    "name": "Kab. Muara Enim",
+    "inflasi": {
+      "val": 1603,
+      "label": "KAB MUARA ENIM"
+    },
+    "ihk_komoditas": {
+      "val": 26,
+      "label": "KAB MUARA ENIM"
+    }
+  },
+  {
+    "id": "palembang",
+    "name": "Kota Palembang",
+    "inflasi": {
+      "val": 1671,
+      "label": "KOTA PALEMBANG"
+    },
+    "ihk_komoditas": {
+      "val": 27,
+      "label": "KOTA PALEMBANG"
+    }
+  },
+  {
+    "id": "lubuklinggau",
+    "name": "Kota Lubuklinggau",
+    "inflasi": {
+      "val": 1674,
+      "label": "KOTA LUBUKLINGGAU"
+    },
+    "ihk_komoditas": {
+      "val": 28,
+      "label": "KOTA LUBUK LINGGAU"
+    }
+  },
+  {
+    "id": "muko-muko",
+    "name": "Kab. Muko Muko",
+    "inflasi": {
+      "val": 1706,
+      "label": "KAB MUKO MUKO"
+    },
+    "ihk_komoditas": {
+      "val": 29,
+      "label": "KAB MUKO MUKO"
+    }
+  },
+  {
+    "id": "bengkulu",
+    "name": "Kota Bengkulu",
+    "inflasi": {
+      "val": 1771,
+      "label": "KOTA BENGKULU"
+    },
+    "ihk_komoditas": {
+      "val": 30,
+      "label": "KOTA BENGKULU"
+    }
+  },
+  {
+    "id": "lampung-timur",
+    "name": "Kab. Lampung Timur",
+    "inflasi": {
+      "val": 1804,
+      "label": "KAB LAMPUNG TIMUR"
+    },
+    "ihk_komoditas": {
+      "val": 31,
+      "label": "KAB LAMPUNG TIMUR"
+    }
+  },
+  {
+    "id": "mesuji",
+    "name": "Kab. Mesuji",
+    "inflasi": {
+      "val": 1811,
+      "label": "KAB MESUJI"
+    },
+    "ihk_komoditas": {
+      "val": 32,
+      "label": "KAB MESUJI"
+    }
+  },
+  {
+    "id": "bandar-lampung",
+    "name": "Kota Bandar Lampung",
+    "inflasi": {
+      "val": 1871,
+      "label": "KOTA BANDAR LAMPUNG"
+    },
+    "ihk_komoditas": {
+      "val": 33,
+      "label": "KOTA BANDAR LAMPUNG"
+    }
+  },
+  {
+    "id": "metro",
+    "name": "Kota Metro",
+    "inflasi": {
+      "val": 1872,
+      "label": "KOTA METRO"
+    },
+    "ihk_komoditas": {
+      "val": 34,
+      "label": "KOTA METRO"
+    }
+  },
+  {
+    "id": "tanjung-pandan",
+    "name": "Tanjung Pandan",
+    "inflasi": {
+      "val": 1902,
+      "label": "TANJUNG PANDAN"
+    },
+    "ihk_komoditas": {
+      "val": 35,
+      "label": "TANJUNG PANDAN"
+    }
+  },
+  {
+    "id": "bangka-barat",
+    "name": "Kab. Bangka Barat",
+    "inflasi": {
+      "val": 1903,
+      "label": "KAB BANGKA BARAT"
+    },
+    "ihk_komoditas": {
+      "val": 36,
+      "label": "KAB BANGKA BARAT"
+    }
+  },
+  {
+    "id": "belitung-timur",
+    "name": "Kab. Belitung Timur",
+    "inflasi": {
+      "val": 1906,
+      "label": "KAB BELITUNG TIMUR"
+    },
+    "ihk_komoditas": {
+      "val": 37,
+      "label": "KAB BELITUNG TIMUR"
+    }
+  },
+  {
+    "id": "pangkal-pinang",
+    "name": "Kota Pangkal Pinang",
+    "inflasi": {
+      "val": 1971,
+      "label": "KOTA PANGKAL PINANG"
+    },
+    "ihk_komoditas": {
+      "val": 38,
+      "label": "KOTA PANGKAL PINANG"
+    }
+  },
+  {
+    "id": "karimun",
+    "name": "Kab. Karimun",
+    "inflasi": {
+      "val": 2101,
+      "label": "KAB KARIMUN"
+    },
+    "ihk_komoditas": {
+      "val": 39,
+      "label": "KAB KARIMUN"
+    }
+  },
+  {
+    "id": "batam",
+    "name": "Kota Batam",
+    "inflasi": {
+      "val": 2171,
+      "label": "KOTA BATAM"
+    },
+    "ihk_komoditas": {
+      "val": 40,
+      "label": "KOTA BATAM"
+    }
+  },
+  {
+    "id": "tanjung-pinang",
+    "name": "Kota Tanjung Pinang",
+    "inflasi": {
+      "val": 2172,
+      "label": "KOTA TANJUNG PINANG"
+    },
+    "ihk_komoditas": {
+      "val": 41,
+      "label": "KOTA TANJUNG PINANG"
+    }
+  },
+  {
+    "id": "dki-jakarta",
+    "name": "Dki Jakarta",
+    "inflasi": {
+      "val": 3100,
+      "label": "DKI JAKARTA"
+    },
+    "ihk_komoditas": {
+      "val": 42,
+      "label": "KOTA JAKARTA"
+    }
+  },
+  {
+    "id": "bandung",
+    "name": "Kab. Bandung",
+    "inflasi": {
+      "val": 3204,
+      "label": "KAB BANDUNG"
+    },
+    "ihk_komoditas": {
+      "val": 43,
+      "label": "KAB BANDUNG"
+    }
+  },
+  {
+    "id": "majalengka",
+    "name": "Kab. Majalengka",
+    "inflasi": {
+      "val": 3210,
+      "label": "KAB MAJALENGKA"
+    },
+    "ihk_komoditas": {
+      "val": 44,
+      "label": "KAB MAJALENGKA"
+    }
+  },
+  {
+    "id": "subang",
+    "name": "Kab. Subang",
+    "inflasi": {
+      "val": 3213,
+      "label": "KAB SUBANG"
+    },
+    "ihk_komoditas": {
+      "val": 45,
+      "label": "KAB SUBANG"
+    }
+  },
+  {
+    "id": "bogor",
+    "name": "Kota Bogor",
+    "inflasi": {
+      "val": 3271,
+      "label": "KOTA BOGOR"
+    },
+    "ihk_komoditas": {
+      "val": 46,
+      "label": "KOTA BOGOR"
+    }
+  },
+  {
+    "id": "sukabumi",
+    "name": "Kota Sukabumi",
+    "inflasi": {
+      "val": 3272,
+      "label": "KOTA SUKABUMI"
+    },
+    "ihk_komoditas": {
+      "val": 47,
+      "label": "KOTA SUKABUMI"
+    }
+  },
+  {
+    "id": "bandung",
+    "name": "Kota Bandung",
+    "inflasi": {
+      "val": 3273,
+      "label": "KOTA BANDUNG"
+    },
+    "ihk_komoditas": {
+      "val": 48,
+      "label": "KOTA BANDUNG"
+    }
+  },
+  {
+    "id": "cirebon",
+    "name": "Kota Cirebon",
+    "inflasi": {
+      "val": 3274,
+      "label": "KOTA CIREBON"
+    },
+    "ihk_komoditas": {
+      "val": 49,
+      "label": "KOTA CIREBON"
+    }
+  },
+  {
+    "id": "bekasi",
+    "name": "Kota Bekasi",
+    "inflasi": {
+      "val": 3275,
+      "label": "KOTA BEKASI"
+    },
+    "ihk_komoditas": {
+      "val": 50,
+      "label": "KOTA BEKASI"
+    }
+  },
+  {
+    "id": "depok",
+    "name": "Kota Depok",
+    "inflasi": {
+      "val": 3276,
+      "label": "KOTA DEPOK"
+    },
+    "ihk_komoditas": {
+      "val": 51,
+      "label": "KOTA DEPOK"
+    }
+  },
+  {
+    "id": "tasikmalaya",
+    "name": "Kota Tasikmalaya",
+    "inflasi": {
+      "val": 3278,
+      "label": "KOTA TASIKMALAYA"
+    },
+    "ihk_komoditas": {
+      "val": 52,
+      "label": "KOTA TASIKMALAYA"
+    }
+  },
+  {
+    "id": "cilacap",
+    "name": "Cilacap",
+    "inflasi": {
+      "val": 3301,
+      "label": "CILACAP"
+    },
+    "ihk_komoditas": {
+      "val": 53,
+      "label": "CILACAP"
+    }
+  },
+  {
+    "id": "purwokerto",
+    "name": "Purwokerto",
+    "inflasi": {
+      "val": 3302,
+      "label": "PURWOKERTO"
+    },
+    "ihk_komoditas": {
+      "val": 54,
+      "label": "PURWOKERTO"
+    }
+  },
+  {
+    "id": "wonosobo",
+    "name": "Kab. Wonosobo",
+    "inflasi": {
+      "val": 3307,
+      "label": "KAB WONOSOBO"
+    },
+    "ihk_komoditas": {
+      "val": 55,
+      "label": "KAB WONOSOBO"
+    }
+  },
+  {
+    "id": "wonogiri",
+    "name": "Kab. Wonogiri",
+    "inflasi": {
+      "val": 3312,
+      "label": "KAB WONOGIRI"
+    },
+    "ihk_komoditas": {
+      "val": 56,
+      "label": "KAB WONOGIRI"
+    }
+  },
+  {
+    "id": "rembang",
+    "name": "Kab. Rembang",
+    "inflasi": {
+      "val": 3317,
+      "label": "KAB REMBANG"
+    },
+    "ihk_komoditas": {
+      "val": 57,
+      "label": "KAB REMBANG"
+    }
+  },
+  {
+    "id": "kudus",
+    "name": "Kudus",
+    "inflasi": {
+      "val": 3319,
+      "label": "KUDUS"
+    },
+    "ihk_komoditas": {
+      "val": 58,
+      "label": "KUDUS"
+    }
+  },
+  {
+    "id": "surakarta",
+    "name": "Kota Surakarta",
+    "inflasi": {
+      "val": 3372,
+      "label": "KOTA SURAKARTA"
+    },
+    "ihk_komoditas": {
+      "val": 59,
+      "label": "KOTA SURAKARTA"
+    }
+  },
+  {
+    "id": "semarang",
+    "name": "Kota Semarang",
+    "inflasi": {
+      "val": 3374,
+      "label": "KOTA SEMARANG"
+    },
+    "ihk_komoditas": {
+      "val": 60,
+      "label": "KOTA SEMARANG"
+    }
+  },
+  {
+    "id": "tegal",
+    "name": "Kota Tegal",
+    "inflasi": {
+      "val": 3376,
+      "label": "KOTA TEGAL"
+    },
+    "ihk_komoditas": {
+      "val": 61,
+      "label": "KOTA TEGAL"
+    }
+  },
+  {
+    "id": "gunungkidul",
+    "name": "Kab. Gunungkidul",
+    "inflasi": {
+      "val": 3403,
+      "label": "KAB GUNUNGKIDUL"
+    },
+    "ihk_komoditas": {
+      "val": 62,
+      "label": "KAB GUNUNGKIDUL"
+    }
+  },
+  {
+    "id": "yogyakarta",
+    "name": "Kota Yogyakarta",
+    "inflasi": {
+      "val": 3471,
+      "label": "KOTA YOGYAKARTA"
+    },
+    "ihk_komoditas": {
+      "val": 63,
+      "label": "KOTA YOGYAKARTA"
+    }
+  },
+  {
+    "id": "tulungagung",
+    "name": "Kab. Tulungagung",
+    "inflasi": {
+      "val": 3504,
+      "label": "KAB TULUNGAGUNG"
+    },
+    "ihk_komoditas": {
+      "val": 64,
+      "label": "KAB TULUNGAGUNG"
+    }
+  },
+  {
+    "id": "jember",
+    "name": "Jember",
+    "inflasi": {
+      "val": 3509,
+      "label": "JEMBER"
+    },
+    "ihk_komoditas": {
+      "val": 65,
+      "label": "JEMBER"
+    }
+  },
+  {
+    "id": "banyuwangi",
+    "name": "Banyuwangi",
+    "inflasi": {
+      "val": 3510,
+      "label": "BANYUWANGI"
+    },
+    "ihk_komoditas": {
+      "val": 66,
+      "label": "BANYUWANGI"
+    }
+  },
+  {
+    "id": "bojonegoro",
+    "name": "Kab. Bojonegoro",
+    "inflasi": {
+      "val": 3522,
+      "label": "KAB BOJONEGORO"
+    },
+    "ihk_komoditas": {
+      "val": 67,
+      "label": "KAB BOJONEGORO"
+    }
+  },
+  {
+    "id": "gresik",
+    "name": "Kab. Gresik",
+    "inflasi": {
+      "val": 3525,
+      "label": "KAB GRESIK"
+    },
+    "ihk_komoditas": {
+      "val": 68,
+      "label": "KAB GRESIK"
+    }
+  },
+  {
+    "id": "sumenep",
+    "name": "Sumenep",
+    "inflasi": {
+      "val": 3529,
+      "label": "SUMENEP"
+    },
+    "ihk_komoditas": {
+      "val": 69,
+      "label": "SUMENEP"
+    }
+  },
+  {
+    "id": "kediri",
+    "name": "Kota Kediri",
+    "inflasi": {
+      "val": 3571,
+      "label": "KOTA KEDIRI"
+    },
+    "ihk_komoditas": {
+      "val": 70,
+      "label": "KOTA KEDIRI"
+    }
+  },
+  {
+    "id": "malang",
+    "name": "Kota Malang",
+    "inflasi": {
+      "val": 3573,
+      "label": "KOTA MALANG"
+    },
+    "ihk_komoditas": {
+      "val": 71,
+      "label": "KOTA MALANG"
+    }
+  },
+  {
+    "id": "probolinggo",
+    "name": "Kota Probolinggo",
+    "inflasi": {
+      "val": 3574,
+      "label": "KOTA PROBOLINGGO"
+    },
+    "ihk_komoditas": {
+      "val": 72,
+      "label": "KOTA PROBOLINGGO"
+    }
+  },
+  {
+    "id": "madiun",
+    "name": "Kota Madiun",
+    "inflasi": {
+      "val": 3577,
+      "label": "KOTA MADIUN"
+    },
+    "ihk_komoditas": {
+      "val": 73,
+      "label": "KOTA MADIUN"
+    }
+  },
+  {
+    "id": "surabaya",
+    "name": "Kota Surabaya",
+    "inflasi": {
+      "val": 3578,
+      "label": "KOTA SURABAYA"
+    },
+    "ihk_komoditas": {
+      "val": 74,
+      "label": "KOTA SURABAYA"
+    }
+  },
+  {
+    "id": "pandeglang",
+    "name": "Kab. Pandeglang",
+    "inflasi": {
+      "val": 3601,
+      "label": "KAB PANDEGLANG"
+    },
+    "ihk_komoditas": {
+      "val": 75,
+      "label": "KAB PANDEGLANG"
+    }
+  },
+  {
+    "id": "lebak",
+    "name": "Kab. Lebak",
+    "inflasi": {
+      "val": 3602,
+      "label": "KAB LEBAK"
+    },
+    "ihk_komoditas": {
+      "val": 76,
+      "label": "KAB LEBAK"
+    }
+  },
+  {
+    "id": "tangerang",
+    "name": "Kota Tangerang",
+    "inflasi": {
+      "val": 3671,
+      "label": "KOTA TANGERANG"
+    },
+    "ihk_komoditas": {
+      "val": 77,
+      "label": "KOTA TANGERANG"
+    }
+  },
+  {
+    "id": "cilegon",
+    "name": "Kota Cilegon",
+    "inflasi": {
+      "val": 3672,
+      "label": "KOTA CILEGON"
+    },
+    "ihk_komoditas": {
+      "val": 78,
+      "label": "KOTA CILEGON"
+    }
+  },
+  {
+    "id": "serang",
+    "name": "Kota Serang",
+    "inflasi": {
+      "val": 3673,
+      "label": "KOTA SERANG"
+    },
+    "ihk_komoditas": {
+      "val": 79,
+      "label": "KOTA SERANG"
+    }
+  },
+  {
+    "id": "tabanan",
+    "name": "Kab. Tabanan",
+    "inflasi": {
+      "val": 5102,
+      "label": "KAB TABANAN"
+    },
+    "ihk_komoditas": {
+      "val": 80,
+      "label": "KAB TABANAN"
+    }
+  },
+  {
+    "id": "badung",
+    "name": "Kab. Badung",
+    "inflasi": {
+      "val": 5103,
+      "label": "KAB BADUNG"
+    },
+    "ihk_komoditas": {
+      "val": 81,
+      "label": "KAB BADUNG"
+    }
+  },
+  {
+    "id": "singaraja",
+    "name": "Singaraja",
+    "inflasi": {
+      "val": 5108,
+      "label": "SINGARAJA"
+    },
+    "ihk_komoditas": {
+      "val": 82,
+      "label": "SINGARAJA"
+    }
+  },
+  {
+    "id": "denpasar",
+    "name": "Kota Denpasar",
+    "inflasi": {
+      "val": 5171,
+      "label": "KOTA DENPASAR"
+    },
+    "ihk_komoditas": {
+      "val": 83,
+      "label": "KOTA DENPASAR"
+    }
+  },
+  {
+    "id": "sumbawa",
+    "name": "Kab. Sumbawa",
+    "inflasi": {
+      "val": 5204,
+      "label": "KAB SUMBAWA"
+    },
+    "ihk_komoditas": {
+      "val": 84,
+      "label": "KAB SUMBAWA"
+    }
+  },
+  {
+    "id": "mataram",
+    "name": "Kota Mataram",
+    "inflasi": {
+      "val": 5271,
+      "label": "KOTA MATARAM"
+    },
+    "ihk_komoditas": {
+      "val": 85,
+      "label": "KOTA MATARAM"
+    }
+  },
+  {
+    "id": "bima",
+    "name": "Kota Bima",
+    "inflasi": {
+      "val": 5272,
+      "label": "KOTA BIMA"
+    },
+    "ihk_komoditas": {
+      "val": 86,
+      "label": "KOTA BIMA"
+    }
+  },
+  {
+    "id": "waingapu",
+    "name": "Waingapu",
+    "inflasi": {
+      "val": 5302,
+      "label": "WAINGAPU"
+    },
+    "ihk_komoditas": {
+      "val": 87,
+      "label": "WAINGAPU"
+    }
+  },
+  {
+    "id": "timor-tengah-selatan",
+    "name": "Kab. Timor Tengah Selatan",
+    "inflasi": {
+      "val": 5304,
+      "label": "KAB TIMOR TENGAH SELATAN"
+    },
+    "ihk_komoditas": {
+      "val": 88,
+      "label": "KAB TIMOR TENGAH SELATAN"
+    }
+  },
+  {
+    "id": "maumere",
+    "name": "Maumere",
+    "inflasi": {
+      "val": 5310,
+      "label": "MAUMERE"
+    },
+    "ihk_komoditas": {
+      "val": 89,
+      "label": "MAUMERE"
+    }
+  },
+  {
+    "id": "ngada",
+    "name": "Kab. Ngada",
+    "inflasi": {
+      "val": 5312,
+      "label": "KAB NGADA"
+    },
+    "ihk_komoditas": {
+      "val": 90,
+      "label": "KAB NGADA"
+    }
+  },
+  {
+    "id": "kupang",
+    "name": "Kota Kupang",
+    "inflasi": {
+      "val": 5371,
+      "label": "KOTA KUPANG"
+    },
+    "ihk_komoditas": {
+      "val": 91,
+      "label": "KOTA KUPANG"
+    }
+  },
+  {
+    "id": "dili",
+    "name": "Dili",
+    "inflasi": {
+      "val": 5400,
+      "label": "DILI"
+    },
+    "ihk_komoditas": null
+  },
+  {
+    "id": "ketapang",
+    "name": "Kab. Ketapang",
+    "inflasi": {
+      "val": 6106,
+      "label": "KAB KETAPANG"
+    },
+    "ihk_komoditas": {
+      "val": 92,
+      "label": "KAB KETAPANG"
+    }
+  },
+  {
+    "id": "sintang",
+    "name": "Sintang",
+    "inflasi": {
+      "val": 6107,
+      "label": "SINTANG"
+    },
+    "ihk_komoditas": {
+      "val": 93,
+      "label": "SINTANG"
+    }
+  },
+  {
+    "id": "kayong-utara",
+    "name": "Kab. Kayong Utara",
+    "inflasi": {
+      "val": 6111,
+      "label": "KAB KAYONG UTARA"
+    },
+    "ihk_komoditas": {
+      "val": 94,
+      "label": "KAB KAYONG UTARA"
+    }
+  },
+  {
+    "id": "pontianak",
+    "name": "Kota Pontianak",
+    "inflasi": {
+      "val": 6171,
+      "label": "KOTA PONTIANAK"
+    },
+    "ihk_komoditas": {
+      "val": 95,
+      "label": "KOTA PONTIANAK"
+    }
+  },
+  {
+    "id": "singkawang",
+    "name": "Kota Singkawang",
+    "inflasi": {
+      "val": 6172,
+      "label": "KOTA SINGKAWANG"
+    },
+    "ihk_komoditas": {
+      "val": 96,
+      "label": "KOTA SINGKAWANG"
+    }
+  },
+  {
+    "id": "sampit",
+    "name": "Sampit",
+    "inflasi": {
+      "val": 6202,
+      "label": "SAMPIT"
+    },
+    "ihk_komoditas": {
+      "val": 97,
+      "label": "SAMPIT"
+    }
+  },
+  {
+    "id": "kapuas",
+    "name": "Kab. Kapuas",
+    "inflasi": {
+      "val": 6203,
+      "label": "KAB KAPUAS"
+    },
+    "ihk_komoditas": {
+      "val": 98,
+      "label": "KAB KAPUAS"
+    }
+  },
+  {
+    "id": "sukamara",
+    "name": "Kab. Sukamara",
+    "inflasi": {
+      "val": 6206,
+      "label": "KAB SUKAMARA"
+    },
+    "ihk_komoditas": {
+      "val": 99,
+      "label": "KAB SUKAMARA"
+    }
+  },
+  {
+    "id": "palangka-raya",
+    "name": "Kota Palangka Raya",
+    "inflasi": {
+      "val": 6271,
+      "label": "KOTA PALANGKA RAYA"
+    },
+    "ihk_komoditas": {
+      "val": 100,
+      "label": "KOTA PALANGKARAYA"
+    }
+  },
+  {
+    "id": "tanah-laut",
+    "name": "Kab. Tanah Laut",
+    "inflasi": {
+      "val": 6301,
+      "label": "KAB TANAH LAUT"
+    },
+    "ihk_komoditas": {
+      "val": 101,
+      "label": "KAB TANAH LAUT"
+    }
+  },
+  {
+    "id": "kotabaru",
+    "name": "Kotabaru",
+    "inflasi": {
+      "val": 6302,
+      "label": "KOTABARU"
+    },
+    "ihk_komoditas": {
+      "val": 102,
+      "label": "KOTABARU"
+    }
+  },
+  {
+    "id": "hulu-sungai-tengah",
+    "name": "Kab. Hulu Sungai Tengah",
+    "inflasi": {
+      "val": 6307,
+      "label": "KAB HULU SUNGAI TENGAH"
+    },
+    "ihk_komoditas": {
+      "val": 103,
+      "label": "KAB HULU SUNGAI TENGAH"
+    }
+  },
+  {
+    "id": "tanjung",
+    "name": "Tanjung",
+    "inflasi": {
+      "val": 6309,
+      "label": "TANJUNG"
+    },
+    "ihk_komoditas": {
+      "val": 104,
+      "label": "TANJUNG"
+    }
+  },
+  {
+    "id": "banjarmasin",
+    "name": "Kota Banjarmasin",
+    "inflasi": {
+      "val": 6371,
+      "label": "KOTA BANJARMASIN"
+    },
+    "ihk_komoditas": {
+      "val": 105,
+      "label": "KOTA BANJARMASIN"
+    }
+  },
+  {
+    "id": "berau",
+    "name": "Kab. Berau",
+    "inflasi": {
+      "val": 6405,
+      "label": "KAB BERAU"
+    },
+    "ihk_komoditas": {
+      "val": 106,
+      "label": "KAB BERAU"
+    }
+  },
+  {
+    "id": "penajam-paser-utara",
+    "name": "Kab. Penajam Paser Utara",
+    "inflasi": {
+      "val": 6409,
+      "label": "KAB PENAJAM PASER UTARA"
+    },
+    "ihk_komoditas": {
+      "val": 107,
+      "label": "KAB PENAJAM PASER UTARA"
+    }
+  },
+  {
+    "id": "balikpapan",
+    "name": "Kota Balikpapan",
+    "inflasi": {
+      "val": 6471,
+      "label": "KOTA BALIKPAPAN"
+    },
+    "ihk_komoditas": {
+      "val": 108,
+      "label": "KOTA BALIKPAPAN"
+    }
+  },
+  {
+    "id": "samarinda",
+    "name": "Kota Samarinda",
+    "inflasi": {
+      "val": 6472,
+      "label": "KOTA SAMARINDA"
+    },
+    "ihk_komoditas": {
+      "val": 109,
+      "label": "KOTA SAMARINDA"
+    }
+  },
+  {
+    "id": "tanjung-selor",
+    "name": "Tanjung Selor",
+    "inflasi": {
+      "val": 6502,
+      "label": "TANJUNG SELOR"
+    },
+    "ihk_komoditas": {
+      "val": 110,
+      "label": "TANJUNG SELOR"
+    }
+  },
+  {
+    "id": "nunukan",
+    "name": "Kab. Nunukan",
+    "inflasi": {
+      "val": 6504,
+      "label": "KAB NUNUKAN"
+    },
+    "ihk_komoditas": {
+      "val": 111,
+      "label": "KAB NUNUKAN"
+    }
+  },
+  {
+    "id": "tarakan",
+    "name": "Kota Tarakan",
+    "inflasi": {
+      "val": 6571,
+      "label": "KOTA TARAKAN"
+    },
+    "ihk_komoditas": {
+      "val": 112,
+      "label": "KOTA TARAKAN"
+    }
+  },
+  {
+    "id": "minahasa-selatan",
+    "name": "Kab. Minahasa Selatan",
+    "inflasi": {
+      "val": 7105,
+      "label": "KAB MINAHASA SELATAN"
+    },
+    "ihk_komoditas": {
+      "val": 113,
+      "label": "KAB MINAHASA SELATAN"
+    }
+  },
+  {
+    "id": "minahasa-utara",
+    "name": "Kab. Minahasa Utara",
+    "inflasi": {
+      "val": 7106,
+      "label": "KAB MINAHASA UTARA"
+    },
+    "ihk_komoditas": {
+      "val": 114,
+      "label": "KAB MINAHASA UTARA"
+    }
+  },
+  {
+    "id": "manado",
+    "name": "Kota Manado",
+    "inflasi": {
+      "val": 7171,
+      "label": "KOTA MANADO"
+    },
+    "ihk_komoditas": {
+      "val": 115,
+      "label": "KOTA MANADO"
+    }
+  },
+  {
+    "id": "kotamobagu",
+    "name": "Kota Kotamobagu",
+    "inflasi": {
+      "val": 7174,
+      "label": "KOTA KOTAMOBAGU"
+    },
+    "ihk_komoditas": {
+      "val": 116,
+      "label": "KOTA KOTAMOBAGU"
+    }
+  },
+  {
+    "id": "luwuk",
+    "name": "Luwuk",
+    "inflasi": {
+      "val": 7202,
+      "label": "LUWUK"
+    },
+    "ihk_komoditas": {
+      "val": 117,
+      "label": "LUWUK"
+    }
+  },
+  {
+    "id": "morowali",
+    "name": "Kab. Morowali",
+    "inflasi": {
+      "val": 7203,
+      "label": "KAB MOROWALI"
+    },
+    "ihk_komoditas": {
+      "val": 118,
+      "label": "KAB MOROWALI"
+    }
+  },
+  {
+    "id": "toli-toli",
+    "name": "Kab. Toli Toli",
+    "inflasi": {
+      "val": 7206,
+      "label": "KAB TOLI TOLI"
+    },
+    "ihk_komoditas": {
+      "val": 119,
+      "label": "KAB TOLI TOLI"
+    }
+  },
+  {
+    "id": "palu",
+    "name": "Kota Palu",
+    "inflasi": {
+      "val": 7271,
+      "label": "KOTA PALU"
+    },
+    "ihk_komoditas": {
+      "val": 120,
+      "label": "KOTA PALU"
+    }
+  },
+  {
+    "id": "bulukumba",
+    "name": "Bulukumba",
+    "inflasi": {
+      "val": 7302,
+      "label": "BULUKUMBA"
+    },
+    "ihk_komoditas": {
+      "val": 121,
+      "label": "BULUKUMBA"
+    }
+  },
+  {
+    "id": "watampone",
+    "name": "Watampone",
+    "inflasi": {
+      "val": 7311,
+      "label": "WATAMPONE"
+    },
+    "ihk_komoditas": {
+      "val": 122,
+      "label": "WATAMPONE"
+    }
+  },
+  {
+    "id": "wajo",
+    "name": "Kab. Wajo",
+    "inflasi": {
+      "val": 7313,
+      "label": "KAB WAJO"
+    },
+    "ihk_komoditas": {
+      "val": 123,
+      "label": "KAB WAJO"
+    }
+  },
+  {
+    "id": "sidenreng-rappang",
+    "name": "Kab. Sidenreng Rappang",
+    "inflasi": {
+      "val": 7314,
+      "label": "KAB SIDENRENG RAPPANG"
+    },
+    "ihk_komoditas": {
+      "val": 124,
+      "label": "KAB SIDENRENG RAPPANG"
+    }
+  },
+  {
+    "id": "luwu-timur",
+    "name": "Kab. Luwu Timur",
+    "inflasi": {
+      "val": 7325,
+      "label": "KAB LUWU TIMUR"
+    },
+    "ihk_komoditas": {
+      "val": 125,
+      "label": "KAB LUWU TIMUR"
+    }
+  },
+  {
+    "id": "makassar",
+    "name": "Kota Makassar",
+    "inflasi": {
+      "val": 7371,
+      "label": "KOTA MAKASSAR"
+    },
+    "ihk_komoditas": {
+      "val": 126,
+      "label": "KOTA MAKASSAR"
+    }
+  },
+  {
+    "id": "pare-pare",
+    "name": "Kota Pare-pare",
+    "inflasi": {
+      "val": 7372,
+      "label": "KOTA PARE-PARE"
+    },
+    "ihk_komoditas": {
+      "val": 127,
+      "label": "KOTA PARE PARE"
+    }
+  },
+  {
+    "id": "palopo",
+    "name": "Kota Palopo",
+    "inflasi": {
+      "val": 7373,
+      "label": "KOTA PALOPO"
+    },
+    "ihk_komoditas": {
+      "val": 128,
+      "label": "KOTA PALOPO"
+    }
+  },
+  {
+    "id": "konawe",
+    "name": "Kab. Konawe",
+    "inflasi": {
+      "val": 7403,
+      "label": "KAB KONAWE"
+    },
+    "ihk_komoditas": {
+      "val": 129,
+      "label": "KAB KONAWE"
+    }
+  },
+  {
+    "id": "kolaka",
+    "name": "Kab. Kolaka",
+    "inflasi": {
+      "val": 7404,
+      "label": "KAB KOLAKA"
+    },
+    "ihk_komoditas": {
+      "val": 130,
+      "label": "KAB KOLAKA"
+    }
+  },
+  {
+    "id": "kendari",
+    "name": "Kota Kendari",
+    "inflasi": {
+      "val": 7471,
+      "label": "KOTA KENDARI"
+    },
+    "ihk_komoditas": {
+      "val": 131,
+      "label": "KOTA KENDARI"
+    }
+  },
+  {
+    "id": "bau-bau",
+    "name": "Kota Bau-bau",
+    "inflasi": {
+      "val": 7472,
+      "label": "KOTA BAU-BAU"
+    },
+    "ihk_komoditas": {
+      "val": 132,
+      "label": "KOTA BAU BAU"
+    }
+  },
+  {
+    "id": "gorontalo",
+    "name": "Kab. Gorontalo",
+    "inflasi": {
+      "val": 7502,
+      "label": "KAB GORONTALO"
+    },
+    "ihk_komoditas": {
+      "val": 133,
+      "label": "KAB GORONTALO"
+    }
+  },
+  {
+    "id": "gorontalo",
+    "name": "Kota Gorontalo",
+    "inflasi": {
+      "val": 7571,
+      "label": "KOTA GORONTALO"
+    },
+    "ihk_komoditas": {
+      "val": 134,
+      "label": "KOTA GORONTALO"
+    }
+  },
+  {
+    "id": "majene",
+    "name": "Kab. Majene",
+    "inflasi": {
+      "val": 7601,
+      "label": "KAB MAJENE"
+    },
+    "ihk_komoditas": {
+      "val": 135,
+      "label": "KAB MAJENE"
+    }
+  },
+  {
+    "id": "mamuju",
+    "name": "Mamuju",
+    "inflasi": {
+      "val": 7604,
+      "label": "MAMUJU"
+    },
+    "ihk_komoditas": {
+      "val": 136,
+      "label": "MAMUJU"
+    }
+  },
+  {
+    "id": "maluku-tengah",
+    "name": "Kab. Maluku Tengah",
+    "inflasi": {
+      "val": 8103,
+      "label": "KAB MALUKU TENGAH"
+    },
+    "ihk_komoditas": {
+      "val": 137,
+      "label": "KAB MALUKU TENGAH"
+    }
+  },
+  {
+    "id": "ambon",
+    "name": "Kota Ambon",
+    "inflasi": {
+      "val": 8171,
+      "label": "KOTA AMBON"
+    },
+    "ihk_komoditas": {
+      "val": 138,
+      "label": "KOTA AMBON"
+    }
+  },
+  {
+    "id": "tual",
+    "name": "Kota Tual",
+    "inflasi": {
+      "val": 8172,
+      "label": "KOTA TUAL"
+    },
+    "ihk_komoditas": {
+      "val": 139,
+      "label": "KOTA TUAL"
+    }
+  },
+  {
+    "id": "halmahera-tengah",
+    "name": "Kab. Halmahera Tengah",
+    "inflasi": {
+      "val": 8202,
+      "label": "KAB HALMAHERA TENGAH"
+    },
+    "ihk_komoditas": {
+      "val": 140,
+      "label": "KAB HALMAHERA TENGAH"
+    }
+  },
+  {
+    "id": "ternate",
+    "name": "Kota Ternate",
+    "inflasi": {
+      "val": 8271,
+      "label": "KOTA TERNATE"
+    },
+    "ihk_komoditas": {
+      "val": 141,
+      "label": "KOTA TERNATE"
+    }
+  },
+  {
+    "id": "manokwari",
+    "name": "Manokwari",
+    "inflasi": {
+      "val": 9105,
+      "label": "MANOKWARI"
+    },
+    "ihk_komoditas": {
+      "val": 142,
+      "label": "MANOKWARI"
+    }
+  },
+  {
+    "id": "sorong",
+    "name": "Kab. Sorong",
+    "inflasi": {
+      "val": 9202,
+      "label": "KAB SORONG"
+    },
+    "ihk_komoditas": {
+      "val": 143,
+      "label": "KAB SORONG"
+    }
+  },
+  {
+    "id": "sorong-selatan",
+    "name": "Kab. Sorong Selatan",
+    "inflasi": {
+      "val": 9203,
+      "label": "KAB SORONG SELATAN"
+    },
+    "ihk_komoditas": {
+      "val": 144,
+      "label": "KAB SORONG SELATAN"
+    }
+  },
+  {
+    "id": "sorong",
+    "name": "Kota Sorong",
+    "inflasi": {
+      "val": 9271,
+      "label": "KOTA SORONG"
+    },
+    "ihk_komoditas": {
+      "val": 145,
+      "label": "KOTA SORONG"
+    }
+  },
+  {
+    "id": "jayapura",
+    "name": "Kota Jayapura",
+    "inflasi": {
+      "val": 9471,
+      "label": "KOTA JAYAPURA"
+    },
+    "ihk_komoditas": {
+      "val": 146,
+      "label": "KOTA JAYAPURA"
+    }
+  },
+  {
+    "id": "merauke",
+    "name": "Merauke",
+    "inflasi": {
+      "val": 9501,
+      "label": "MERAUKE"
+    },
+    "ihk_komoditas": {
+      "val": 147,
+      "label": "MERAUKE"
+    }
+  },
+  {
+    "id": "timika",
+    "name": "Timika",
+    "inflasi": {
+      "val": 9601,
+      "label": "TIMIKA"
+    },
+    "ihk_komoditas": {
+      "val": 148,
+      "label": "TIMIKA"
+    }
+  },
+  {
+    "id": "nabire",
+    "name": "Kab. Nabire",
+    "inflasi": {
+      "val": 9604,
+      "label": "KAB NABIRE"
+    },
+    "ihk_komoditas": {
+      "val": 149,
+      "label": "KAB NABIRE"
+    }
+  },
+  {
+    "id": "jayawijaya",
+    "name": "Kab. Jayawijaya",
+    "inflasi": {
+      "val": 9702,
+      "label": "KAB JAYAWIJAYA"
+    },
+    "ihk_komoditas": {
+      "val": 150,
+      "label": "KAB JAYAWIJAYA"
+    }
+  },
+  {
+    "id": "indonesia",
+    "name": "Indonesia",
+    "inflasi": {
+      "val": 9999,
+      "label": "INDONESIA"
+    },
+    "ihk_komoditas": {
+      "val": 151,
+      "label": "INDONESIA"
+    }
+  }
+]

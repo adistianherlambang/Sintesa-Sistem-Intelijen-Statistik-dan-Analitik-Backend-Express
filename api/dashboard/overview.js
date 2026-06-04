@@ -6,6 +6,7 @@ import { getInflasiByKota, getAllInflasi } from "../../controller/dashboard/infl
 import { getIhkByKota, getAllIhk } from "../../controller/dashboard/ihkController.js";
 import { getKomoditasByKota, getAllKomoditas } from "../../controller/dashboard/komoditasController.js";
 import { testBPSAPI, getAllDashboard } from "../../controller/dashboard/dashboardController.js";
+import { getAISummaryByKota } from "../../controller/dashboard/AISummaryController.js";
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ const router = e.Router();
  */
 const handleError = (res, error, statusCode = 500) => {
   const message = error.message || "Internal server error";
-  
+
   // Determine status code based on error message
   if (message.includes("wajib diisi")) {
     return res.status(400).json({ message });
@@ -25,7 +26,7 @@ const handleError = (res, error, statusCode = 500) => {
   if (message.includes("tidak ditemukan")) {
     return res.status(404).json({ message });
   }
-  
+
   res.status(statusCode).json({ message });
 };
 
@@ -83,6 +84,16 @@ router.post("/komoditas", async (req, res) => {
   try {
     const { kota } = req.body;
     const result = await getKomoditasByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/aisummary", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getAISummaryByKota(kota);
     res.json(result);
   } catch (err) {
     handleError(res, err);

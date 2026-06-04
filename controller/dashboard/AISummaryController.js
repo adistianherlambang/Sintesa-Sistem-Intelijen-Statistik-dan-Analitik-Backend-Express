@@ -1,5 +1,4 @@
-import AISummary from "../../db/models/AISummary";
-import { findRegionByDataset } from "./helpers";
+import AISummary from "../../db/models/AISummary.js";
 
 /**
  * Pure function: Dapatkan data IHK untuk kota tertentu
@@ -13,7 +12,7 @@ export const getAISummaryByKota = async (kota) => {
     throw new Error("kota wajib diisi");
   }
 
-  const doc = await AISummary.findOne({ city: kota }).lean();
+  const doc = await AISummary.findOne({ kota: kota }).lean();
 
   if (!doc) {
     throw new Error("Data tidak ditemukan");

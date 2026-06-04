@@ -5,6 +5,14 @@ import path from "path";
 import fs from "fs"; // Ditambahkan untuk menulis file
 import { fileURLToPath } from "url"; // Ditambahkan untuk mendapatkan path file saat ini
 
+// Mendapatkan direktori dari file saat ini untuk memastikan airesult.json selevel
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({
+  path: path.resolve(__dirname, "../.env"),
+});
+
 //controller
 import { getInflasiByKota } from "../controller/dashboard/inflasiController.js";
 import { getIhkByKota } from "../controller/dashboard/ihkController.js";
@@ -13,21 +21,15 @@ import { getKomoditasByKota } from "../controller/dashboard/komoditasController.
 //json
 import kota from "../json/kota.json" with {type: "json"}
 
-dotenv.config();
-
 import APIDataBPS from "../db/models/APIDataBPS.js";
 import { type } from "os";
-
-dotenv.config({
-  path: path.resolve("../.env"),
-});
-
-// Mendapatkan direktori dari file saat ini untuk memastikan airesult.json selevel
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { connectDB } from "../db/mongo.js";
 
 export const AISummary = async () => {
   try {
+    if (mongoose.connection.readyState === 0) {
+      await connectDB();
+    }
 
     const date = new Date()
     const month = Number(date.getMonth()) - 1
@@ -42,23 +44,22 @@ export const AISummary = async () => {
     // Array penampung hasil untuk disimpan ke JSON
     const allResults = [];
 
-    for(const key in kota) {
-
-      const dataInflasi = await getInflasiByKota({kota: key})
-      const inflasi = dataInflasi.dashboard.now
-      const compareMonthInflasi = dataInflasi.dashboard.compare
+    for (const namaKota of kota) {
+      const dataInflasi = await getInflasiByKota(namaKota);
+      const inflasi = dataInflasi.dashboard.now;
+      const compareMonthInflasi = dataInflasi.dashboard.compare;
 
       const inflasiYoY = dataInflasi.yoy.find((item) => 
         item.key.endsWith(`${yearYoy}${month}`)
-      )
+      );
 
-      const dataIHK = await getIhkByKota({kota: key})
-      const ihk = dataIHK.dashboard.now
-      const compareMonthIHK = dataIHK.dashboard.compare
+      const dataIHK = await getIhkByKota(namaKota);
+      const ihk = dataIHK.dashboard.now;
+      const compareMonthIHK = dataIHK.dashboard.compare;
 
-      const dataKomoditas = await getKomoditasByKota({kota: key})
-      const namaKomoditas = dataKomoditas.biggest.label
-      const valueKomoditas = dataKomoditas.biggest.value
+      const dataKomoditas = await getKomoditasByKota(namaKota);
+      const namaKomoditas = dataKomoditas.biggest.label;
+      const valueKomoditas = dataKomoditas.biggest.value;
 
       const res = await axios.post(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
@@ -73,7 +74,7 @@ export const AISummary = async () => {
                     Berdasarkan data IHK dan inflasi berikut, buat ringkasan kondisi ekonomi daerah.
 
                     Data:
-                    - Wilayah: ${kota}
+                    - Wilayah: ${namaKota}
                     - Periode: ${bulan[month - 1]} ${year}
                     - IHK: ${ihk}
                     - IHK bulan sebelumnya: ${compareMonthIHK}
@@ -106,10 +107,9 @@ export const AISummary = async () => {
       const aiText = res.data.candidates[0].content.parts[0].text;
       console.log(aiText);
 
-      // Memasukkan data ke array penampung
+      // Memasukkan data ke array penampung hanya dengan properti kota dan summary
       allResults.push({
         kota: key,
-        periode: `${bulan[month - 1]} ${year}`,
         summary: aiText.trim()
       });
 

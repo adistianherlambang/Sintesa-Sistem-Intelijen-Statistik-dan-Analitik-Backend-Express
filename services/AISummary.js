@@ -2,6 +2,8 @@ import axios from "axios";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
+import fs from "fs"; // Ditambahkan untuk menulis file
+import { fileURLToPath } from "url"; // Ditambahkan untuk mendapatkan path file saat ini
 
 //controller
 import { getInflasiByKota } from "../controller/dashboard/inflasiController.js";
@@ -20,6 +22,10 @@ dotenv.config({
   path: path.resolve("../.env"),
 });
 
+// Mendapatkan direktori dari file saat ini untuk memastikan airesult.json selevel
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export const AISummary = async () => {
   try {
 
@@ -29,13 +35,22 @@ export const AISummary = async () => {
     const year = date.getFullYear()
     const previousYear = Number(year) - 1
 
+    const yearYoy = `1${String(year).slice(-2)}`;
+
     const bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+
+    // Array penampung hasil untuk disimpan ke JSON
+    const allResults = [];
 
     for(const key in kota) {
 
       const dataInflasi = await getInflasiByKota({kota: key})
       const inflasi = dataInflasi.dashboard.now
       const compareMonthInflasi = dataInflasi.dashboard.compare
+
+      const inflasiYoY = dataInflasi.yoy.find((item) => 
+        item.key.endsWith(`${yearYoy}${month}`)
+      )
 
       const dataIHK = await getIhkByKota({kota: key})
       const ihk = dataIHK.dashboard.now
@@ -64,7 +79,7 @@ export const AISummary = async () => {
                     - IHK bulan sebelumnya: ${compareMonthIHK}
                     - Inflasi MoM: ${inflasi}%
                     - Inflasi bulan sebelumnya: ${compareMonthInflasi}
-                    - Inflasi YoY: {{inflasi_yoy}}%
+                    - Inflasi YoY: ${inflasiYoY}%
                     - komoditas pendorong inflasi terbesar: ${namaKomoditas}
                     - value komoditas pendorong inflasi: ${valueKomoditas}
 
@@ -88,9 +103,23 @@ export const AISummary = async () => {
         },
       );
 
-      console.log(res.data.candidates[0].content.parts[0].text);
+      const aiText = res.data.candidates[0].content.parts[0].text;
+      console.log(aiText);
+
+      // Memasukkan data ke array penampung
+      allResults.push({
+        kota: key,
+        periode: `${bulan[month - 1]} ${year}`,
+        summary: aiText.trim()
+      });
 
     }
+    
+    // Menulis file airesult.json selevel dengan file ini setelah loop selesai
+    const outputPath = path.join(__dirname, "airesult.json");
+    fs.writeFileSync(outputPath, JSON.stringify(allResults, null, 2), "utf-8");
+    console.log(`Berhasil menyimpan hasil ke ${outputPath}`);
+
   } catch (err) {
     console.error(err.message);
   }

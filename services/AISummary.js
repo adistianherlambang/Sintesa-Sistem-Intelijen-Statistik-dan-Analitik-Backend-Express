@@ -41,6 +41,10 @@ export const AISummary = async () => {
       const ihk = dataIHK.dashboard.now
       const compareMonthIHK = dataIHK.dashboard.compare
 
+      const dataKomoditas = await getKomoditasByKota({kota: key})
+      const namaKomoditas = dataKomoditas.biggest.label
+      const valueKomoditas = dataKomoditas.biggest.value
+
       const res = await axios.post(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
         {
@@ -61,15 +65,14 @@ export const AISummary = async () => {
                     - Inflasi MoM: ${inflasi}%
                     - Inflasi bulan sebelumnya: ${compareMonthInflasi}
                     - Inflasi YoY: {{inflasi_yoy}}%
-                    - Pendorong inflasi: {{pendorong}}
-                    - Penahan inflasi: {{penahan}}
+                    - komoditas pendorong inflasi terbesar: ${namaKomoditas}
+                    - value komoditas pendorong inflasi: ${valueKomoditas}
 
                     Aturan:
                     - Maksimal 300 karakter termasuk spasi.
                     - Hanya 1 kalimat.
                     - Sebutkan IHK dan inflasi YoY.
                     - Sebutkan faktor utama pendorong inflasi.
-                    - Sebutkan faktor penahan inflasi jika tersedia.
                     - Jangan menambahkan data yang tidak diberikan.
                   `,
                 },

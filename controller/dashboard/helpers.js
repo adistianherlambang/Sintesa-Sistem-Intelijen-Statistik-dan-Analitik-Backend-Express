@@ -1,3 +1,5 @@
+import kotaConfig from "../../json/kota.json" with { type: "json" };
+
 /**
  * Helper functions untuk dashboard controllers
  */
@@ -120,49 +122,78 @@ export const getDateInfo = () => {
 };
 
 /**
- * Helper: Find region by name with fallbacks (Kota, Kabupaten, Kab)
- * @param {Array} vervar - List of regions
- * @param {String} kota - City name
- * @returns {Object|null} Matching region or null
+ * Helper: Find the index of a region based on its label in either list.
+ * @param {String} searchName - The input name (e.g. "meulaboh", "MUARA BUNGO")
+ * @returns {Number} Index in the arrays, or -1 if not found.
  */
-export const findRegion = (vervar, kota) => {
-  if (!kota || !vervar) return null;
-  
-  // Standardize search term (uppercase and trimmed)
-  const searchUpper = kota.toUpperCase().trim();
+export const findRegionIndex = (searchName) => {
+  if (!searchName) return -1;
 
-  // Helper to extract base name by removing prefix if present
-  const stripPrefix = (str) => {
-    if (str.startsWith("KOTA ")) {
-      return str.slice(5).trim();
-    }
-    if (str.startsWith("KABUPATEN ")) {
-      return str.slice(10).trim();
-    }
-    if (str.startsWith("KAB ")) {
-      return str.slice(4).trim();
-    }
-    return str;
-  };
+  const clean = (str) => str.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const searchClean = clean(searchName);
 
-  const strippedSearch = stripPrefix(searchUpper);
-
-  // Generate candidate search terms in order of preference:
-  const candidates = [
-    searchUpper,                       // 1. Direct match (e.g. "KOTA MEULABOH" or "MEULABOH")
-    strippedSearch,                    // 2. Stripped prefix (e.g. "MEULABOH" if input was "KOTA MEULABOH")
-    "KOTA " + strippedSearch,          // 3. Prepend "KOTA " to base name
-    "KABUPATEN " + strippedSearch,     // 4. Prepend "KABUPATEN " to base name
-    "KAB " + strippedSearch            // 5. Prepend "KAB " to base name
-  ];
-
-  // Try each candidate in order of preference
-  for (const candidate of candidates) {
-    const found = vervar.find((item) => item.label.toUpperCase().trim() === candidate);
-    if (found) {
-      return found;
+  // 1. Try exact clean match on either list
+  for (let i = 0; i < kotaConfig.inflasi.length; i++) {
+    if (
+      clean(kotaConfig.inflasi[i].label) === searchClean ||
+      clean(kotaConfig.ihk_komoditas[i].label) === searchClean
+    ) {
+      return i;
     }
   }
 
-  return null;
+  // 2. Try prefix-stripped clean match
+  const strip = (str) => str.replace(/^(KOTA|KABUPATEN|KAB)/g, "");
+  const searchStripped = strip(searchClean);
+
+  for (let i = 0; i < kotaConfig.inflasi.length; i++) {
+    const inflasiClean = clean(kotaConfig.inflasi[i].label);
+    const ihkClean = clean(kotaConfig.ihk_komoditas[i].label);
+
+    if (
+      strip(inflasiClean) === searchStripped ||
+      strip(ihkClean) === searchStripped
+    ) {
+      return i;
+    }
+  }
+
+  // 3. Fallback for specific names like BUNGO vs MUARA BUNGO
+  const searchUpper = searchName.toUpperCase().trim();
+  if (searchUpper.includes("BUNGO")) {
+    for (let i = 0; i < kotaConfig.inflasi.length; i++) {
+      if (
+        kotaConfig.inflasi[i].label.includes("BUNGO") ||
+        kotaConfig.ihk_komoditas[i].label.includes("BUNGO")
+      ) {
+        return i;
+      }
+    }
+  }
+
+  return -1;
+};
+
+/**
+ * Helper: Find region object in the database's vervar list using the structured kota.json mapping.
+ * @param {Array} vervar - vervar array from database document
+ * @param {String} searchName - User input city name
+ * @param {String} datasetType - "inflasi" or "ihk_komoditas"
+ * @returns {Object|null} Matching region or null
+ */
+export const findRegionByDataset = (vervar, searchName, datasetType) => {
+  if (!searchName || !vervar) return null;
+
+  const index = findRegionIndex(searchName);
+  if (index === -1) return null;
+
+  // Get the target canonical label based on dataset type
+  const targetLabel =
+    datasetType === "inflasi"
+      ? kotaConfig.inflasi[index].label
+      : kotaConfig.ihk_komoditas[index].label;
+
+  // Find exact match in vervar list (case-insensitive)
+  const targetUpper = targetLabel.toUpperCase().trim();
+  return vervar.find((item) => item.label.toUpperCase().trim() === targetUpper) || null;
 };

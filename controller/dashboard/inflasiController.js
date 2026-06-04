@@ -2,7 +2,7 @@ import APIDataBPS from "../../db/models/APIDataBPS.js";
 import {
   buildFilteredKeyValue,
   buildResponseWithDashboard,
-  findRegion,
+  findRegionByDataset,
 } from "./helpers.js";
 
 /**
@@ -28,7 +28,7 @@ export const getInflasiByKota = async (kota) => {
   }
 
   const inflasiVar = doc.var.find((item) => item.val === 1);
-  const region = findRegion(doc.vervar, kota);
+  const region = findRegionByDataset(doc.vervar, kota, "inflasi");
 
   if (!region) {
     throw new Error("kota tidak ditemukan");

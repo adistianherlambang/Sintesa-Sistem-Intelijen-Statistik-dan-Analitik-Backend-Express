@@ -1,6 +1,6 @@
 import APIDataBPS from "../../db/models/APIDataBPS.js";
 import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" };
-import { sort, getDateInfo, findRegion } from "./helpers.js";
+import { sort, getDateInfo, findRegionByDataset } from "./helpers.js";
 
 /**
  * Helper: Process komoditas data untuk satu item
@@ -204,7 +204,7 @@ export const getKomoditasByKota = async (kota) => {
     throw new Error("data komoditas tidak ditemukan");
   }
 
-  const region = findRegion(sampleDoc.vervar, kota);
+  const region = findRegionByDataset(sampleDoc.vervar, kota, "ihk_komoditas");
   if (!region) {
     throw new Error("kota tidak ditemukan");
   }

@@ -19,7 +19,7 @@ import { getIhkByKota } from "../controller/dashboard/ihkController.js";
 import { getKomoditasByKota } from "../controller/dashboard/komoditasController.js";
 
 //json
-import kota from "../json/kota.json" with {type: "json"}
+import kotaConfig from "../json/kota.json" with {type: "json"}
 
 import APIDataBPS from "../db/models/APIDataBPS.js";
 import { type } from "os";
@@ -59,9 +59,12 @@ export const AISummary = async () => {
 
     console.log("Mengambil data untuk semua wilayah...");
 
-    for (const namaKota of kota) {
+    for (let i = 0; i < kotaConfig.inflasi.length; i++) {
+      const namaKotaInflasi = kotaConfig.inflasi[i].label;
+      const namaKotaIhk = kotaConfig.ihk_komoditas[i].label;
+
       try {
-        const dataInflasi = await getInflasiByKota(namaKota);
+        const dataInflasi = await getInflasiByKota(namaKotaInflasi);
         const inflasi = dataInflasi.dashboard.now;
         const compareMonthInflasi = dataInflasi.dashboard.compare;
 
@@ -70,16 +73,16 @@ export const AISummary = async () => {
         );
         const inflasiYoY = inflasiYoYObj ? inflasiYoYObj.value : "N/A";
 
-        const dataIHK = await getIhkByKota(namaKota);
+        const dataIHK = await getIhkByKota(namaKotaIhk);
         const ihk = dataIHK.dashboard.now;
         const compareMonthIHK = dataIHK.dashboard.compare;
 
-        const dataKomoditas = await getKomoditasByKota(namaKota);
+        const dataKomoditas = await getKomoditasByKota(namaKotaIhk);
         const namaKomoditas = dataKomoditas.biggest ? dataKomoditas.biggest.label : "N/A";
         const valueKomoditas = dataKomoditas.biggest ? dataKomoditas.biggest.value : 0;
 
         inputData.push({
-          kota: namaKota,
+          kota: namaKotaIhk,
           periode: `${bulan[month - 1]} ${year}`,
           IHK: ihk,
           compareIHK: compareMonthIHK,
@@ -90,7 +93,7 @@ export const AISummary = async () => {
           valueKomoditas: valueKomoditas,
         });
       } catch (err) {
-        console.warn(`⚠ Melewati wilayah "${namaKota}" karena error: ${err.message}`);
+        console.warn(`⚠ Melewati wilayah "${namaKotaIhk}" / "${namaKotaInflasi}" karena error: ${err.message}`);
       }
     }
 

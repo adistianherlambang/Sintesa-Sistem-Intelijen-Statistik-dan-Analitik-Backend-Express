@@ -4,6 +4,7 @@ import {
   registerUser,
   loginUser,
   updateUserProfile,
+  updateUserPassword,
 } from "../../controller/user/userController.js";
 import {
   logActivity,
@@ -65,10 +66,21 @@ router.post(
   "/profile",
   authMiddleware,
   asyncRoute(async (req, res) => {
-    const { name, avatar } = req.body;
-    const user = await updateUserProfile(req.user._id, { name, avatar });
+    const { name, avatar, instansiType, picName, picPhone } = req.body;
+    const user = await updateUserProfile(req.user._id, { name, avatar, instansiType, picName, picPhone });
     await logActivity(req.user._id, "Mengubah data profil");
     res.json({ message: "Profil diperbarui", user });
+  })
+);
+
+router.post(
+  "/profile/password",
+  authMiddleware,
+  asyncRoute(async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    await updateUserPassword(req.user._id, oldPassword, newPassword);
+    await logActivity(req.user._id, "Mengubah kata sandi akun");
+    res.json({ message: "Kata sandi berhasil diperbarui" });
   })
 );
 

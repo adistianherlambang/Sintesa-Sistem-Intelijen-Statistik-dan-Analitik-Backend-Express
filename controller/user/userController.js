@@ -35,6 +35,11 @@ export const registerUser = async (email, password, name, cityChoice) => {
     throw new Error("Kota tidak ditemukan atau tidak valid");
   }
 
+  const existingCityClaim = await User.findOne({ "location.id": city.id });
+  if (existingCityClaim) {
+    throw new Error("Wilayah ini sudah diklaim oleh instansi/user lain");
+  }
+
   const hashedPassword = hashPassword(password);
   
   const user = new User({
@@ -89,6 +94,9 @@ export const updateUserProfile = async (userId, profileData) => {
   const updateFields = {};
   if (profileData.name !== undefined) updateFields["profile.name"] = profileData.name;
   if (profileData.avatar !== undefined) updateFields["profile.avatar"] = profileData.avatar;
+  if (profileData.instansiType !== undefined) updateFields["profile.instansiType"] = profileData.instansiType;
+  if (profileData.picName !== undefined) updateFields["profile.picName"] = profileData.picName;
+  if (profileData.picPhone !== undefined) updateFields["profile.picPhone"] = profileData.picPhone;
 
   const user = await User.findByIdAndUpdate(
     userId,
@@ -101,4 +109,26 @@ export const updateUserProfile = async (userId, profileData) => {
   }
 
   return user;
+};
+
+/**
+ * Update user password after verification
+ */
+export const updateUserPassword = async (userId, oldPassword, newPassword) => {
+  if (!oldPassword || !newPassword) {
+    throw new Error("Kata sandi lama dan baru wajib diisi");
+  }
+
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new Error("User tidak ditemukan");
+  }
+
+  if (!verifyPassword(oldPassword, user.password)) {
+    throw new Error("Kata sandi lama salah");
+  }
+
+  user.password = hashPassword(newPassword);
+  await user.save();
+  return true;
 };

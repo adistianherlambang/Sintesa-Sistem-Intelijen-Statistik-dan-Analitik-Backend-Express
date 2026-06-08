@@ -5,16 +5,28 @@ import { logActivity } from "./activityController.js";
 
 // Subscription Plans config
 const PLANS = {
-  premium_monthly: {
-    name: "Premium Bulanan",
+  wa_only_monthly: {
+    name: "Bot WhatsApp Only (Bulanan)",
     amount: 50000,
-    quota: 25,
+    quota: 30,
     durationDays: 30,
   },
-  premium_yearly: {
-    name: "Premium Tahunan",
+  wa_only_yearly: {
+    name: "Bot WhatsApp Only (Tahunan)",
     amount: 500000,
-    quota: 350,
+    quota: 365,
+    durationDays: 365,
+  },
+  wa_analisis_monthly: {
+    name: "Bot WhatsApp + Analisis (Bulanan)",
+    amount: 60000,
+    quota: 50,
+    durationDays: 30,
+  },
+  wa_analisis_yearly: {
+    name: "Bot WhatsApp + Analisis (Tahunan)",
+    amount: 600000,
+    quota: 600,
     durationDays: 365,
   },
 };

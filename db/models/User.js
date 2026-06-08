@@ -22,6 +22,9 @@ const UserSchema = new mongoose.Schema(
     profile: {
       name: { type: String, default: "" },
       avatar: { type: String, default: "" },
+      instansiType: { type: String, default: "" },
+      picName: { type: String, default: "" },
+      picPhone: { type: String, default: "" },
     },
     location: {
       type: mongoose.Schema.Types.Mixed, // Stores full object from kota.json

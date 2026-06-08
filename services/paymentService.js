@@ -19,8 +19,8 @@ export const createBayarGGPayment = async (amount, description) => {
       CREATE_PAYMENT_URL,
       {
         amount,
-        description,
-        payment_method: "qris_bayar_gg",
+        payment_method: "qris",
+        use_qris_converter: false,
       },
       {
         headers: {

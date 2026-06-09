@@ -109,7 +109,7 @@ export const initializeWhatsAppClient = async (userId) => {
           qrCode: qrDataUrl,
           lastSync: null,
         },
-        { upsert: true, new: true }
+        { upsert: true, returnDocument: "after" }
       );
       emitToUser(userId, "session_update", updatedSession);
     } catch (err) {
@@ -134,7 +134,7 @@ export const initializeWhatsAppClient = async (userId) => {
           sessionId: phone,
           lastSync: new Date(),
         },
-        { new: true }
+        { returnDocument: "after" }
       );
       emitToUser(userId, "session_update", updatedSession);
     } catch (err) {
@@ -151,7 +151,7 @@ export const initializeWhatsAppClient = async (userId) => {
           status: "disconnected",
           qrCode: "",
         },
-        { new: true }
+        { returnDocument: "after" }
       );
       emitToUser(userId, "session_update", updatedSession);
       activeClients.delete(userId.toString());
@@ -169,7 +169,7 @@ export const initializeWhatsAppClient = async (userId) => {
           status: "disconnected",
           qrCode: "",
         },
-        { new: true }
+        { returnDocument: "after" }
       );
       emitToUser(userId, "session_update", updatedSession);
       activeClients.delete(userId.toString());
@@ -353,7 +353,7 @@ Jawaban Asisten:`;
             totalMessageCount: 1, // Add 1 for the outgoing reply (making it 2 total for incoming+outgoing)
           },
         },
-        { new: true }
+        { returnDocument: "after" }
       );
       console.log(`Updated replied counts in database.`);
       emitToUser(userId, "session_update", updatedSession);
@@ -392,7 +392,7 @@ export const destroyWhatsAppClient = async (userId) => {
       status: "disconnected",
       qrCode: "",
     },
-    { new: true }
+    { returnDocument: "after" }
   );
   emitToUser(userId, "session_update", updatedSession);
 };

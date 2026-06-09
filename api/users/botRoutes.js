@@ -86,7 +86,7 @@ router.put(
           activeTimeEnd,
         },
       },
-      { new: true, upsert: true }
+      { returnDocument: "after", upsert: true }
     );
     await logActivity(req.user._id, "Mengubah konfigurasi jam aktif/status Bot WhatsApp");
     res.json({ message: "Konfigurasi bot disimpan", session });
@@ -139,7 +139,7 @@ router.put(
     const item = await BotKnowledge.findOneAndUpdate(
       { _id: id, userId: req.user._id },
       { $set: { title, category, content } },
-      { new: true }
+      { returnDocument: "after" }
     );
     if (!item) {
       return res.status(444).json({ message: "Data knowledge tidak ditemukan" });

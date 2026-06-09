@@ -20,13 +20,13 @@ const PLANS = {
   wa_analisis_monthly: {
     name: "Bot WhatsApp + Analisis (Bulanan)",
     amount: 60000,
-    quota: 50,
+    quota: 10,
     durationDays: 30,
   },
   wa_analisis_yearly: {
     name: "Bot WhatsApp + Analisis (Tahunan)",
     amount: 600000,
-    quota: 600,
+    quota: 10,
     durationDays: 365,
   },
 };

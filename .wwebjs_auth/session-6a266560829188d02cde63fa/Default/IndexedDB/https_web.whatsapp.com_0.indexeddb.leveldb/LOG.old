@@ -1,3 +1,37 @@
-2026/06/09-15:18:06.689 705d5 Reusing MANIFEST /Users/aaaa/Documents/kampus/SKRIPSI/Code/test/git/bebe/backend/.wwebjs_auth/session-6a266560829188d02cde63fa/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/06/09-15:18:06.690 705d5 Recovering log #412
-2026/06/09-15:18:06.737 705d5 Reusing old log /Users/aaaa/Documents/kampus/SKRIPSI/Code/test/git/bebe/backend/.wwebjs_auth/session-6a266560829188d02cde63fa/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000412.log 
+2026/06/09-15:21:26.539 719a7 Reusing MANIFEST /Users/aaaa/Documents/kampus/SKRIPSI/Code/test/git/bebe/backend/.wwebjs_auth/session-6a266560829188d02cde63fa/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/06/09-15:21:26.539 719a7 Recovering log #526
+2026/06/09-15:21:26.571 719a7 Reusing old log /Users/aaaa/Documents/kampus/SKRIPSI/Code/test/git/bebe/backend/.wwebjs_auth/session-6a266560829188d02cde63fa/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000526.log 
+2026/06/09-15:21:27.421 719a9 Level-0 table #548: started
+2026/06/09-15:21:27.453 719a9 Level-0 table #548: 1144670 bytes OK
+2026/06/09-15:21:27.458 719a9 Delete type=0 #526
+2026/06/09-15:21:28.016 719a9 Compacting 1@0 + 0@1 files
+2026/06/09-15:21:28.027 719a9 Generated table #549@0: 23168 keys, 301061 bytes
+2026/06/09-15:21:28.034 719a9 Generated table #550@0: 11757 keys, 316967 bytes
+2026/06/09-15:21:28.034 719a9 Compacted 1@0 + 0@1 files => 618028 bytes
+2026/06/09-15:21:28.036 719a9 compacted to: files[ 0 2 17 0 0 0 0 ]
+2026/06/09-15:21:28.037 719a9 Compacting 1@1 + 10@2 files
+2026/06/09-15:21:28.081 719a9 Generated table #551@1: 56560 keys, 2234127 bytes
+2026/06/09-15:21:28.119 719a9 Generated table #552@1: 15575 keys, 2167549 bytes
+2026/06/09-15:21:28.144 719a9 Generated table #553@1: 2560 keys, 2150196 bytes
+2026/06/09-15:21:28.155 719a9 Generated table #554@1: 1576 keys, 2138762 bytes
+2026/06/09-15:21:28.176 719a9 Generated table #555@1: 2078 keys, 2152164 bytes
+2026/06/09-15:21:28.189 719a9 Generated table #556@1: 2248 keys, 2150529 bytes
+2026/06/09-15:21:28.201 719a9 Generated table #557@1: 2224 keys, 2144564 bytes
+2026/06/09-15:21:28.237 719a9 Generated table #558@1: 30752 keys, 2257468 bytes
+2026/06/09-15:21:28.267 719a9 Generated table #559@1: 27072 keys, 2258791 bytes
+2026/06/09-15:21:28.290 719a9 Generated table #560@1: 15369 keys, 2110121 bytes
+2026/06/09-15:21:28.290 719a9 Compacted 1@1 + 10@2 files => 21764271 bytes
+2026/06/09-15:21:28.292 719a9 compacted to: files[ 0 1 17 0 0 0 0 ]
+2026/06/09-15:21:28.293 719a9 Delete type=2 #539
+2026/06/09-15:21:28.293 719a9 Delete type=2 #538
+2026/06/09-15:21:28.293 719a9 Delete type=2 #548
+2026/06/09-15:21:28.293 719a9 Delete type=2 #549
+2026/06/09-15:21:28.293 719a9 Delete type=2 #544
+2026/06/09-15:21:28.293 719a9 Delete type=2 #545
+2026/06/09-15:21:28.293 719a9 Delete type=2 #542
+2026/06/09-15:21:28.293 719a9 Delete type=2 #543
+2026/06/09-15:21:28.293 719a9 Delete type=2 #541
+2026/06/09-15:21:28.293 719a9 Delete type=2 #540
+2026/06/09-15:21:28.293 719a9 Delete type=2 #536
+2026/06/09-15:21:28.293 719a9 Delete type=2 #537
+2026/06/09-15:21:30.481 719a7 Compacting 1@1 + 5@2 files

@@ -244,21 +244,23 @@ export const initializeWhatsAppClient = async (userId) => {
           .map((k, i) => `Entri ${i + 1}:\n[Kategori] ${k.category}\n[Judul] ${k.title}\n[Informasi] ${k.content}`)
           .join("\n\n");
 
-        const systemPrompt = `Anda adalah AI WhatsApp Bot Asisten Dinas/Instansi resmi. Tugas Anda adalah membantu menjawab pertanyaan pelanggan dengan sopan dan singkat berdasarkan data "Bot Knowledge Resmi" di bawah ini.
+        const systemPrompt = `Anda adalah AI WhatsApp Bot Asisten Dinas/Instansi resmi. Tugas Anda adalah membantu menjawab pertanyaan pelanggan dengan sopan, jelas, dan informatif berdasarkan data "Bot Knowledge Resmi" di bawah ini.
 
-ATURAN PENTING & KETAT:
-1. JAWAB HANYA berdasarkan informasi yang disediakan dalam "Bot Knowledge Resmi".
-2. Jika pertanyaan di luar konteks, tidak relevan, atau tidak ada dalam data "Bot Knowledge Resmi", jawab dengan ramah: "Maaf, saya hanya dapat membantu menjawab pertanyaan terkait informasi resmi instansi kami."
-3. JANGAN berimprovisasi, jangan mengarang informasi, jangan menjawab pertanyaan umum (seperti matematika, pemrograman, resep masakan, dll) di luar data yang diberikan.
-4. Jawaban harus singkat, padat, ramah, dan tidak boleh melebihi 100 token.
+          ATURAN PENTING & KETAT:
+          1. JAWAB HANYA berdasarkan informasi yang disediakan dalam "Bot Knowledge Resmi".
+          2. Jika pertanyaan di luar konteks, tidak relevan, atau tidak ada dalam data "Bot Knowledge Resmi", jawab dengan ramah: "Maaf, saya hanya dapat membantu menjawab pertanyaan terkait informasi resmi instansi kami."
+          3. JANGAN berimprovisasi, jangan mengarang informasi, jangan menjawab pertanyaan umum (seperti matematika, pemrograman, resep masakan, dll) di luar data yang diberikan.
+          4. Jawaban harus jelas, lengkap, dan mudah dipahami. Gunakan kalimat yang sopan dan informatif. Jika memungkinkan, sertakan detail penting seperti alamat, jam operasional, atau langkah-langkah yang diperlukan agar pelanggan mendapat informasi yang cukup tanpa perlu bertanya ulang.
+          5. Hindari jawaban yang terlalu singkat atau tidak memberikan informasi yang cukup. Usahakan menjawab secara lengkap namun tetap ringkas dan tidak bertele-tele.
+          6. BATAS MAKSIMAL jawaban adalah 80 kata. Jangan melebihi batas ini.
 
-Bot Knowledge Resmi:
-${knowledgeBaseText}
+          Bot Knowledge Resmi:
+          ${knowledgeBaseText}
 
-Pertanyaan Pelanggan:
-${msg.body}
+          Pertanyaan Pelanggan:
+          ${msg.body}
 
-Jawaban Asisten:`;
+          Jawaban Asisten:`;
 
         const geminiApiKey = process.env.GEMINI_API_KEY;
         if (!geminiApiKey) {
@@ -269,7 +271,7 @@ Jawaban Asisten:`;
             console.log(`[WhatsApp Bot] Sending prompt to Mistral API for ${msg.from}...`);
             const response = await openai.chat.completions.create({
               model: "mistral-small-latest",
-              max_tokens: 100,
+              max_tokens: 150,
               messages: [
                 {
                   role: "user",
@@ -303,7 +305,7 @@ Jawaban Asisten:`;
                         },
                       ],
                       generationConfig: {
-                        maxOutputTokens: 100,
+                        maxOutputTokens: 150,
                       },
                     },
                     {

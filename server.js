@@ -4,8 +4,6 @@ import axios from "axios";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import https from "https";
-import http from "http";
-import { initSocket } from "./services/socketService.js";
 
 //api
 import api from "./api/api.js";
@@ -48,12 +46,8 @@ app.use("/api", api);
 startBPSCron();
 
 const port = process.env.PORT;
-const server = http.createServer(app);
 
-// Initialize Socket.io server
-initSocket(server);
-
-server.listen(port, () => {
+app.listen(port, () => {
   console.log("App jalan di ", port);
 });
 

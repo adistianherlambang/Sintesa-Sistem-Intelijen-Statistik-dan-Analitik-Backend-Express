@@ -8,7 +8,7 @@ import Subscription from "../db/models/Subscription.js";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import { emitToUser } from "./socketService.js";
+
 import { OpenAI } from "openai";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -77,7 +77,6 @@ export const initializeWhatsAppClient = async (userId) => {
   sessionObj.status = "connecting";
   sessionObj.qrCode = "";
   await sessionObj.save();
-  emitToUser(userId, "session_update", sessionObj);
 
   const client = new Client({
     authStrategy: new LocalAuth({
@@ -102,7 +101,7 @@ export const initializeWhatsAppClient = async (userId) => {
     try {
       console.log(`QR received for user ${userId}`);
       const qrDataUrl = await QRCode.toDataURL(qr);
-      const updatedSession = await WhatsAppSession.findOneAndUpdate(
+      await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           status: "connecting",
@@ -111,7 +110,6 @@ export const initializeWhatsAppClient = async (userId) => {
         },
         { upsert: true, returnDocument: "after" }
       );
-      emitToUser(userId, "session_update", updatedSession);
     } catch (err) {
       console.error(`Error generating QR for user ${userId}:`, err.message);
     }
@@ -125,7 +123,7 @@ export const initializeWhatsAppClient = async (userId) => {
     try {
       console.log(`WhatsApp client ready for user ${userId}`);
       const phone = client.info.wid.user;
-      const updatedSession = await WhatsAppSession.findOneAndUpdate(
+      await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           status: "connected",
@@ -136,7 +134,6 @@ export const initializeWhatsAppClient = async (userId) => {
         },
         { returnDocument: "after" }
       );
-      emitToUser(userId, "session_update", updatedSession);
     } catch (err) {
       console.error(`Error on ready for user ${userId}:`, err.message);
     }
@@ -145,7 +142,7 @@ export const initializeWhatsAppClient = async (userId) => {
   client.on("disconnected", async (reason) => {
     try {
       console.log(`WhatsApp client disconnected for user ${userId}:`, reason);
-      const updatedSession = await WhatsAppSession.findOneAndUpdate(
+      await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           status: "disconnected",
@@ -153,7 +150,6 @@ export const initializeWhatsAppClient = async (userId) => {
         },
         { returnDocument: "after" }
       );
-      emitToUser(userId, "session_update", updatedSession);
       activeClients.delete(userId.toString());
     } catch (err) {
       console.error(`Error on disconnect for user ${userId}:`, err.message);
@@ -163,7 +159,7 @@ export const initializeWhatsAppClient = async (userId) => {
   client.on("auth_failure", async (msg) => {
     try {
       console.error(`WhatsApp auth failure for user ${userId}:`, msg);
-      const updatedSession = await WhatsAppSession.findOneAndUpdate(
+      await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           status: "disconnected",
@@ -171,7 +167,6 @@ export const initializeWhatsAppClient = async (userId) => {
         },
         { returnDocument: "after" }
       );
-      emitToUser(userId, "session_update", updatedSession);
       activeClients.delete(userId.toString());
     } catch (err) {
       console.error(`Error on auth failure for user ${userId}:`, err.message);
@@ -216,7 +211,7 @@ export const initializeWhatsAppClient = async (userId) => {
       const limit = getMessageLimit(sub);
       console.log(`Active subscription found: ${sub ? sub.subscriptionId : "None (Free/Trial)"}`);
       console.log(`Message Limit: ${limit}, Current count: ${session.totalMessageCount}`);
-      
+
       // Check total messages limit
       if (session.totalMessageCount >= limit) {
         console.log(`Message limit reached (${session.totalMessageCount}/${limit}). Skipping reply.`);
@@ -228,12 +223,11 @@ export const initializeWhatsAppClient = async (userId) => {
       session.totalMessageCount += 1;
       await session.save();
       console.log(`Incoming count incremented. Today: ${session.incomingCountToday}, Total: ${session.totalMessageCount}`);
-      emitToUser(userId, "session_update", session);
 
       // 3. Retrieve user's Bot Knowledge base
       const knowledge = await BotKnowledge.find({ userId });
       console.log(`Found ${knowledge.length} knowledge entries in database.`);
-      
+
       let replyText = "";
 
       if (knowledge.length === 0) {
@@ -287,10 +281,10 @@ Jawaban Asisten:`;
             console.warn("⚠ Gagal menggunakan Mistral, beralih ke Gemini sebagai fallback:", mistralErr.message);
             try {
               console.log(`Sending prompt to Gemini API (with auto-retry support)...`);
-              
+
               const maxAttempts = 3;
               let success = false;
-              
+
               for (let attempt = 1; attempt <= maxAttempts; attempt++) {
                 try {
                   if (attempt > 1) {
@@ -345,7 +339,7 @@ Jawaban Asisten:`;
       console.log(`Reply successfully sent.`);
 
       // Increment replied counts
-      const updatedSession = await WhatsAppSession.findOneAndUpdate(
+      await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           $inc: {
@@ -356,7 +350,6 @@ Jawaban Asisten:`;
         { returnDocument: "after" }
       );
       console.log(`Updated replied counts in database.`);
-      emitToUser(userId, "session_update", updatedSession);
 
     } catch (err) {
       console.error(`Error processing message for user ${userId}:`, err.message);
@@ -386,7 +379,7 @@ export const destroyWhatsAppClient = async (userId) => {
     activeClients.delete(userId.toString());
   }
 
-  const updatedSession = await WhatsAppSession.findOneAndUpdate(
+  await WhatsAppSession.findOneAndUpdate(
     { userId },
     {
       status: "disconnected",
@@ -394,7 +387,6 @@ export const destroyWhatsAppClient = async (userId) => {
     },
     { returnDocument: "after" }
   );
-  emitToUser(userId, "session_update", updatedSession);
 };
 
 /**

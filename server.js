@@ -49,3 +49,5 @@ const port = process.env.PORT;
 app.listen(port, () => {
   console.log("App jalan di ", port);
 });
+
+// Trigger nodemon reload - server boots and re-initializes client.

@@ -33,7 +33,9 @@ const isBotWithinActiveHours = (session) => {
  * Helper to get user's message limit based on subscriptionId
  */
 const getMessageLimit = (subscription) => {
-  if (!subscription || subscription.status !== "active") return 0;
+  if (!subscription || subscription.status !== "active") {
+    return 100; // Allow 100 free/test messages for trial/unsubscribed users so they can test the bot
+  }
   const subId = subscription.subscriptionId;
   if (subId.startsWith("wa_only")) {
     return 1000;
@@ -41,7 +43,7 @@ const getMessageLimit = (subscription) => {
   if (subId.startsWith("wa_analisis")) {
     return 1500;
   }
-  return 0;
+  return 100;
 };
 
 /**
@@ -91,6 +93,10 @@ export const initializeWhatsAppClient = async (userId) => {
     } catch (err) {
       console.error(`Error generating QR for user ${userId}:`, err.message);
     }
+  });
+
+  client.on("authenticated", () => {
+    console.log(`WhatsApp client authenticated successfully for user ${userId}`);
   });
 
   client.on("ready", async () => {

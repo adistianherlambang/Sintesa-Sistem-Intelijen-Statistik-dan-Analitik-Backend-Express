@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "fs"; // Ditambahkan untuk menulis file
 import { fileURLToPath } from "url"; // Ditambahkan untuk mendapatkan path file saat ini
+import { OpenAI } from "openai";
 
 // Mendapatkan direktori dari file saat ini untuk memastikan airesult.json selevel
 const __filename = fileURLToPath(import.meta.url);
@@ -155,31 +156,60 @@ export const AISummary = async () => {
       ]
     `;
 
-    const res = await axios.post(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
-      {
-        contents: [
+    let aiText = "";
+    try {
+      console.log("Mengirim prompt summary ke Mistral...");
+      const client = new OpenAI({
+        apiKey: process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
+        baseURL: "https://api.mistral.ai/v1"
+      });
+      const response = await client.chat.completions.create({
+        model: "mistral-small-latest",
+        response_format: { type: "json_object" },
+        messages: [
           {
-            parts: [
+            role: "user",
+            content: prompt
+          }
+        ]
+      });
+      aiText = response.choices[0].message.content;
+      console.log("Summary berhasil didapatkan dari Mistral.");
+    } catch (mistralErr) {
+      console.warn("⚠ Gagal menggunakan Mistral, beralih ke Gemini sebagai fallback:", mistralErr.message);
+      try {
+        console.log("Mengirim prompt summary ke Gemini...");
+        const res = await axios.post(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+          {
+            contents: [
               {
-                text: prompt,
+                parts: [
+                  {
+                    text: prompt,
+                  },
+                ],
               },
             ],
+            generationConfig: {
+              responseMimeType: "application/json",
+            },
           },
-        ],
-        generationConfig: {
-          responseMimeType: "application/json",
-        },
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "X-goog-api-key": process.env.GEMINI_API_KEY,
-        },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "X-goog-api-key": process.env.GEMINI_API_KEY,
+            },
+          }
+        );
+        aiText = res.data.candidates[0].content.parts[0].text;
+        console.log("Summary berhasil didapatkan dari Gemini.");
+      } catch (geminiErr) {
+        console.error("❌ Gagal total mendapatkan summary dari Mistral dan Gemini:", geminiErr.message);
+        throw geminiErr;
       }
-    );
+    }
 
-    const aiText = res.data.candidates[0].content.parts[0].text;
     const allResults = JSON.parse(aiText);
 
     // Simpan/Upsert ke database MongoDB

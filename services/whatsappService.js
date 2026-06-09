@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import { emitToUser } from "./socketService.js";
+import { OpenAI } from "openai";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -265,54 +266,75 @@ Jawaban Asisten:`;
           replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
         } else {
           try {
-            console.log(`Sending prompt to Gemini API (with auto-retry support)...`);
-            
-            const maxAttempts = 3;
-            let success = false;
-            
-            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-              try {
-                if (attempt > 1) {
-                  console.log(`Retrying Gemini API call (attempt ${attempt}/${maxAttempts})...`);
+            console.log("Sending prompt to Mistral API...");
+            const client = new OpenAI({
+              apiKey: process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
+              baseURL: "https://api.mistral.ai/v1"
+            });
+            const response = await client.chat.completions.create({
+              model: "mistral-small-latest",
+              max_tokens: 100,
+              messages: [
+                {
+                  role: "user",
+                  content: systemPrompt
                 }
-                const res = await axios.post(
-                  "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
-                  {
-                    contents: [
-                      {
-                        parts: [
-                          { text: systemPrompt },
-                        ],
-                      },
-                    ],
-                    generationConfig: {
-                      maxOutputTokens: 100,
-                    },
-                  },
-                  {
-                    headers: {
-                      "Content-Type": "application/json",
-                      "X-goog-api-key": geminiApiKey,
-                    },
+              ]
+            });
+            replyText = response.choices[0].message.content.trim();
+            console.log(`Mistral reply successfully generated: "${replyText}"`);
+          } catch (mistralErr) {
+            console.warn("⚠ Gagal menggunakan Mistral, beralih ke Gemini sebagai fallback:", mistralErr.message);
+            try {
+              console.log(`Sending prompt to Gemini API (with auto-retry support)...`);
+              
+              const maxAttempts = 3;
+              let success = false;
+              
+              for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                try {
+                  if (attempt > 1) {
+                    console.log(`Retrying Gemini API call (attempt ${attempt}/${maxAttempts})...`);
                   }
-                );
+                  const res = await axios.post(
+                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+                    {
+                      contents: [
+                        {
+                          parts: [
+                            { text: systemPrompt },
+                          ],
+                        },
+                      ],
+                      generationConfig: {
+                        maxOutputTokens: 100,
+                      },
+                    },
+                    {
+                      headers: {
+                        "Content-Type": "application/json",
+                        "X-goog-api-key": geminiApiKey,
+                      },
+                    }
+                  );
 
-                replyText = res.data.candidates[0].content.parts[0].text.trim();
-                console.log(`Gemini reply successfully generated on attempt ${attempt}: "${replyText}"`);
-                success = true;
-                break;
-              } catch (attemptErr) {
-                console.warn(`Gemini API attempt ${attempt} failed: ${attemptErr.response?.data?.error?.message || attemptErr.message}`);
-                if (attempt === maxAttempts) {
-                  throw attemptErr;
+                  replyText = res.data.candidates[0].content.parts[0].text.trim();
+                  console.log(`Gemini reply successfully generated on attempt ${attempt}: "${replyText}"`);
+                  success = true;
+                  break;
+                } catch (attemptErr) {
+                  console.warn(`Gemini API attempt ${attempt} failed: ${attemptErr.response?.data?.error?.message || attemptErr.message}`);
+                  if (attempt === maxAttempts) {
+                    throw attemptErr;
+                  }
+                  // Wait 1.5 seconds before retrying
+                  await new Promise((resolve) => setTimeout(resolve, 1500));
                 }
-                // Wait 1.5 seconds before retrying
-                await new Promise((resolve) => setTimeout(resolve, 1500));
               }
+            } catch (aiErr) {
+              console.error("Gemini API final error after all attempts:", aiErr.message);
+              replyText = "Maaf, asisten AI mengalami kegagalan sistem saat memproses pesan Anda.";
             }
-          } catch (aiErr) {
-            console.error("Gemini API final error after all attempts:", aiErr.message);
-            replyText = "Maaf, asisten AI mengalami kegagalan sistem saat memproses pesan Anda.";
           }
         }
       }

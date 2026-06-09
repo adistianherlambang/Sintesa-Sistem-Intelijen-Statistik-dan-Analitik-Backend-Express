@@ -4,6 +4,7 @@ import User from "../db/models/User.js";
 //middleware
 import overview from "./dashboard/overview.js";
 import userRoutes from "./users/userRoutes.js"
+import botRoutes from "./users/botRoutes.js";
 
 import kota from "../json/kota.json" with { type: "json" };
 
@@ -11,6 +12,7 @@ const router = e.Router();
 
 router.use("/dashboard/overview", overview);
 router.use("/users", userRoutes);
+router.use("/users/bot", botRoutes);
 
 router.get("/kota", async (req, res) => {
   try {

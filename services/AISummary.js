@@ -37,7 +37,7 @@ export const AISummary = async () => {
       .sort({ lastUpdate: -1 })
       .select("lastUpdate")
       .lean();
-    
+
     const lastUpdate = latestDoc && latestDoc.lastUpdate
       ? new Date(latestDoc.lastUpdate).toISOString()
       : new Date().toISOString();
@@ -132,28 +132,28 @@ export const AISummary = async () => {
     console.log(`Berhasil mengambil data untuk ${inputData.length} wilayah. Mengirim ke Gemini...`);
 
     const prompt = `
-Anda adalah analis ekonomi daerah.
-Berdasarkan data IHK dan inflasi berikut, buat ringkasan kondisi ekonomi daerah untuk masing-masing wilayah dalam format JSON array.
+      Anda adalah analis ekonomi daerah.
+      Berdasarkan data IHK dan inflasi berikut, buat ringkasan kondisi ekonomi daerah untuk masing-masing wilayah dalam format JSON array.
 
-Data Wilayah:
-${JSON.stringify(inputData, null, 2)}
+      Data Wilayah:
+      ${JSON.stringify(inputData, null, 2)}
 
-Aturan summary untuk masing-masing wilayah:
-- Maksimal 300 karakter termasuk spasi.
-- Hanya 1 kalimat.
-- Sebutkan IHK dan inflasi YoY (jika "N/A" sebutkan data YoY tidak tersedia).
-- Sebutkan faktor utama pendorong inflasi.
-- Jangan menambahkan data yang tidak diberikan.
-- Nilai properti "kota" pada JSON output harus sama persis dengan nilai "kota" pada data input (misal "KAB ACEH TENGAH" tetap "KAB ACEH TENGAH", jangan diubah).
+      Aturan summary untuk masing-masing wilayah:
+      - Maksimal 300 karakter termasuk spasi.
+      - Hanya 1 kalimat.
+      - Sebutkan IHK dan inflasi YoY (jika "N/A" sebutkan data YoY tidak tersedia).
+      - Sebutkan faktor utama pendorong inflasi.
+      - Jangan menambahkan data yang tidak diberikan.
+      - Nilai properti "kota" pada JSON output harus sama persis dengan nilai "kota" pada data input (misal "KAB ACEH TENGAH" tetap "KAB ACEH TENGAH", jangan diubah).
 
-Output HARUS berupa JSON array valid dengan format:
-[
-  {
-    "kota": "NAMA WILAYAH",
-    "summary": "Summary ringkasan kondisi ekonomi daerah..."
-  }
-]
-`;
+      Output HARUS berupa JSON array valid dengan format:
+      [
+        {
+          "kota": "NAMA WILAYAH",
+          "summary": "Summary ringkasan kondisi ekonomi daerah..."
+        }
+      ]
+    `;
 
     const res = await axios.post(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",

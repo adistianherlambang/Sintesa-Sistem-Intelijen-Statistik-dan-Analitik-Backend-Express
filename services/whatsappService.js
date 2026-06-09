@@ -87,6 +87,7 @@ export const initializeWhatsAppClient = async (userId) => {
   const client = new Client({
     authStrategy: new LocalAuth({
       clientId: userId.toString(),
+      dataPath: path.resolve(__dirname, "../../.wwebjs_auth")
     }),
     webVersionCache: {
       type: "remote",
@@ -148,6 +149,11 @@ export const initializeWhatsAppClient = async (userId) => {
   client.on("disconnected", async (reason) => {
     try {
       console.log(`WhatsApp client disconnected for user ${userId}:`, reason);
+      try {
+        await client.destroy();
+      } catch (destroyErr) {
+        console.warn(`Error calling destroy on disconnect for user ${userId}:`, destroyErr.message);
+      }
       await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
@@ -165,6 +171,11 @@ export const initializeWhatsAppClient = async (userId) => {
   client.on("auth_failure", async (msg) => {
     try {
       console.error(`WhatsApp auth failure for user ${userId}:`, msg);
+      try {
+        await client.destroy();
+      } catch (destroyErr) {
+        console.warn(`Error calling destroy on auth failure for user ${userId}:`, destroyErr.message);
+      }
       await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
@@ -253,6 +264,7 @@ export const initializeWhatsAppClient = async (userId) => {
           4. Jawaban harus jelas, lengkap, dan mudah dipahami. Gunakan kalimat yang sopan dan informatif. Jika memungkinkan, sertakan detail penting seperti alamat, jam operasional, atau langkah-langkah yang diperlukan agar pelanggan mendapat informasi yang cukup tanpa perlu bertanya ulang.
           5. Hindari jawaban yang terlalu singkat atau tidak memberikan informasi yang cukup. Usahakan menjawab secara lengkap namun tetap ringkas dan tidak bertele-tele.
           6. BATAS MAKSIMAL jawaban adalah 80 kata. Jangan melebihi batas ini.
+          7. Jangan gunakan karakter llm dikarenakan ini untuk wbatsapp, untuk bold hanya *bold* 
 
           Bot Knowledge Resmi:
           ${knowledgeBaseText}
@@ -360,8 +372,21 @@ export const initializeWhatsAppClient = async (userId) => {
     }
   });
 
-  client.initialize().catch((err) => {
+  client.initialize().catch(async (err) => {
     console.error(`Failed to initialize WhatsApp client for user ${userId}:`, err.message);
+    try {
+      await client.destroy();
+    } catch (destroyErr) {
+      console.warn(`Error destroying client after init failure for user ${userId}:`, destroyErr.message);
+    }
+    activeClients.delete(userId.toString());
+    await WhatsAppSession.findOneAndUpdate(
+      { userId },
+      {
+        status: "disconnected",
+        qrCode: "",
+      }
+    ).catch((dbErr) => console.error(`Error resetting session status after init failure:`, dbErr.message));
   });
 
   activeClients.set(userId.toString(), client);
@@ -398,4 +423,20 @@ export const destroyWhatsAppClient = async (userId) => {
  */
 export const getActiveClient = (userId) => {
   return activeClients.get(userId.toString());
+};
+
+/**
+ * Destroy all active WhatsApp clients (useful on process exit)
+ */
+export const cleanupAllClients = async () => {
+  console.log("Cleaning up all active WhatsApp clients...");
+  for (const [userId, client] of activeClients.entries()) {
+    try {
+      await client.destroy();
+      console.log(`WhatsApp client successfully destroyed for user ${userId}`);
+    } catch (err) {
+      console.error(`Failed to destroy client for user ${userId} during cleanup:`, err.message);
+    }
+  }
+  activeClients.clear();
 };

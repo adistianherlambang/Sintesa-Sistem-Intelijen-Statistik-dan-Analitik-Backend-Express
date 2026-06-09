@@ -255,33 +255,53 @@ Jawaban Asisten:`;
           replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
         } else {
           try {
-            console.log(`Sending prompt to Gemini API...`);
-            const res = await axios.post(
-              "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
-              {
-                contents: [
+            console.log(`Sending prompt to Gemini API (with auto-retry support)...`);
+            
+            const maxAttempts = 3;
+            let success = false;
+            
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+              try {
+                if (attempt > 1) {
+                  console.log(`Retrying Gemini API call (attempt ${attempt}/${maxAttempts})...`);
+                }
+                const res = await axios.post(
+                  "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
                   {
-                    parts: [
-                      { text: systemPrompt },
+                    contents: [
+                      {
+                        parts: [
+                          { text: systemPrompt },
+                        ],
+                      },
                     ],
+                    generationConfig: {
+                      maxOutputTokens: 100,
+                    },
                   },
-                ],
-                generationConfig: {
-                  maxOutputTokens: 100,
-                },
-              },
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  "X-goog-api-key": geminiApiKey,
-                },
-              }
-            );
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      "X-goog-api-key": geminiApiKey,
+                    },
+                  }
+                );
 
-            replyText = res.data.candidates[0].content.parts[0].text.trim();
-            console.log(`Gemini reply successfully generated: "${replyText}"`);
+                replyText = res.data.candidates[0].content.parts[0].text.trim();
+                console.log(`Gemini reply successfully generated on attempt ${attempt}: "${replyText}"`);
+                success = true;
+                break;
+              } catch (attemptErr) {
+                console.warn(`Gemini API attempt ${attempt} failed: ${attemptErr.response?.data?.error?.message || attemptErr.message}`);
+                if (attempt === maxAttempts) {
+                  throw attemptErr;
+                }
+                // Wait 1.5 seconds before retrying
+                await new Promise((resolve) => setTimeout(resolve, 1500));
+              }
+            }
           } catch (aiErr) {
-            console.error("Gemini API Error:", aiErr.message);
+            console.error("Gemini API final error after all attempts:", aiErr.message);
             replyText = "Maaf, asisten AI mengalami kegagalan sistem saat memproses pesan Anda.";
           }
         }

@@ -5,6 +5,16 @@ import axios from "axios";
 import WhatsAppSession from "../db/models/WhatsAppSession.js";
 import BotKnowledge from "../db/models/BotKnowledge.js";
 import Subscription from "../db/models/Subscription.js";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({
+  path: path.resolve(__dirname, "../.env"),
+});
 
 const activeClients = new Map();
 
@@ -59,8 +69,12 @@ export const initializeWhatsAppClient = async (userId) => {
   let sessionObj = await WhatsAppSession.findOne({ userId });
   if (!sessionObj) {
     sessionObj = new WhatsAppSession({ userId });
-    await sessionObj.save();
   }
+
+  // Reset session status and QR code immediately to show loading on UI
+  sessionObj.status = "connecting";
+  sessionObj.qrCode = "";
+  await sessionObj.save();
 
   const client = new Client({
     authStrategy: new LocalAuth({
@@ -155,26 +169,47 @@ export const initializeWhatsAppClient = async (userId) => {
   });
 
   client.on("message", async (msg) => {
+    console.log(`\n--- [WhatsApp Message Event] ---`);
+    console.log(`Received message from: ${msg.from}`);
+    console.log(`Message body: "${msg.body}"`);
+
     // Only process private chats (avoid group chats)
-    if (!msg.from.endsWith("@c.us")) return;
+    const isPrivateChat = msg.from.endsWith("@c.us") || msg.from.endsWith("@lid");
+    if (!isPrivateChat) {
+      console.log(`Skipping non-private/group message from ${msg.from}`);
+      return;
+    }
 
     try {
       // 1. Fetch current session configuration and check enabled/active hours
       const session = await WhatsAppSession.findOne({ userId });
-      if (!session || !session.botEnabled) return;
+      if (!session) {
+        console.log(`No WhatsApp session found in database for user ${userId}`);
+        return;
+      }
 
-      if (!isBotWithinActiveHours(session)) {
-        console.log(`Bot for user ${userId} is outside active hours. Skipping reply.`);
+      console.log(`Bot enabled: ${session.botEnabled}`);
+      if (!session.botEnabled) {
+        console.log(`Bot is currently disabled. Skipping reply.`);
+        return;
+      }
+
+      const withinHours = isBotWithinActiveHours(session);
+      console.log(`Bot within active hours (${session.activeTimeStart} - ${session.activeTimeEnd}): ${withinHours}`);
+      if (!withinHours) {
+        console.log(`Outside active hours. Skipping reply.`);
         return;
       }
 
       // 2. Subscription package and limit check
       const sub = await Subscription.findOne({ userId, status: "active" });
       const limit = getMessageLimit(sub);
+      console.log(`Active subscription found: ${sub ? sub.subscriptionId : "None (Free/Trial)"}`);
+      console.log(`Message Limit: ${limit}, Current count: ${session.totalMessageCount}`);
       
       // Check total messages limit
       if (session.totalMessageCount >= limit) {
-        console.log(`User ${userId} bot message limit reached (${session.totalMessageCount}/${limit}). Skipping reply.`);
+        console.log(`Message limit reached (${session.totalMessageCount}/${limit}). Skipping reply.`);
         return;
       }
 
@@ -182,14 +217,17 @@ export const initializeWhatsAppClient = async (userId) => {
       session.incomingCountToday += 1;
       session.totalMessageCount += 1;
       await session.save();
+      console.log(`Incoming count incremented. Today: ${session.incomingCountToday}, Total: ${session.totalMessageCount}`);
 
       // 3. Retrieve user's Bot Knowledge base
       const knowledge = await BotKnowledge.find({ userId });
+      console.log(`Found ${knowledge.length} knowledge entries in database.`);
       
       let replyText = "";
 
       if (knowledge.length === 0) {
         replyText = "Maaf, saat ini belum ada informasi resmi yang tersedia di database kami.";
+        console.log(`No knowledge base found. Using default reply.`);
       } else {
         const knowledgeBaseText = knowledge
           .map((k, i) => `Entri ${i + 1}:\n[Kategori] ${k.category}\n[Judul] ${k.title}\n[Informasi] ${k.content}`)
@@ -217,6 +255,7 @@ Jawaban Asisten:`;
           replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
         } else {
           try {
+            console.log(`Sending prompt to Gemini API...`);
             const res = await axios.post(
               "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
               {
@@ -240,6 +279,7 @@ Jawaban Asisten:`;
             );
 
             replyText = res.data.candidates[0].content.parts[0].text.trim();
+            console.log(`Gemini reply successfully generated: "${replyText}"`);
           } catch (aiErr) {
             console.error("Gemini API Error:", aiErr.message);
             replyText = "Maaf, asisten AI mengalami kegagalan sistem saat memproses pesan Anda.";
@@ -248,7 +288,9 @@ Jawaban Asisten:`;
       }
 
       // Send the reply
+      console.log(`Sending reply message back to: ${msg.from}`);
       await client.sendMessage(msg.from, replyText);
+      console.log(`Reply successfully sent.`);
 
       // Increment replied counts
       await WhatsAppSession.findOneAndUpdate(
@@ -260,6 +302,7 @@ Jawaban Asisten:`;
           },
         }
       );
+      console.log(`Updated replied counts in database.`);
 
     } catch (err) {
       console.error(`Error processing message for user ${userId}:`, err.message);

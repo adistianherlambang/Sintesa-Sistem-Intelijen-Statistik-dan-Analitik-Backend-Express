@@ -8,6 +8,7 @@ import Subscription from "../db/models/Subscription.js";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import { emitToUser } from "./socketService.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -75,6 +76,7 @@ export const initializeWhatsAppClient = async (userId) => {
   sessionObj.status = "connecting";
   sessionObj.qrCode = "";
   await sessionObj.save();
+  emitToUser(userId, "session_update", sessionObj);
 
   const client = new Client({
     authStrategy: new LocalAuth({
@@ -99,15 +101,16 @@ export const initializeWhatsAppClient = async (userId) => {
     try {
       console.log(`QR received for user ${userId}`);
       const qrDataUrl = await QRCode.toDataURL(qr);
-      await WhatsAppSession.findOneAndUpdate(
+      const updatedSession = await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           status: "connecting",
           qrCode: qrDataUrl,
           lastSync: null,
         },
-        { upsert: true }
+        { upsert: true, new: true }
       );
+      emitToUser(userId, "session_update", updatedSession);
     } catch (err) {
       console.error(`Error generating QR for user ${userId}:`, err.message);
     }
@@ -121,7 +124,7 @@ export const initializeWhatsAppClient = async (userId) => {
     try {
       console.log(`WhatsApp client ready for user ${userId}`);
       const phone = client.info.wid.user;
-      await WhatsAppSession.findOneAndUpdate(
+      const updatedSession = await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           status: "connected",
@@ -129,8 +132,10 @@ export const initializeWhatsAppClient = async (userId) => {
           qrCode: "",
           sessionId: phone,
           lastSync: new Date(),
-        }
+        },
+        { new: true }
       );
+      emitToUser(userId, "session_update", updatedSession);
     } catch (err) {
       console.error(`Error on ready for user ${userId}:`, err.message);
     }
@@ -139,13 +144,15 @@ export const initializeWhatsAppClient = async (userId) => {
   client.on("disconnected", async (reason) => {
     try {
       console.log(`WhatsApp client disconnected for user ${userId}:`, reason);
-      await WhatsAppSession.findOneAndUpdate(
+      const updatedSession = await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           status: "disconnected",
           qrCode: "",
-        }
+        },
+        { new: true }
       );
+      emitToUser(userId, "session_update", updatedSession);
       activeClients.delete(userId.toString());
     } catch (err) {
       console.error(`Error on disconnect for user ${userId}:`, err.message);
@@ -155,13 +162,15 @@ export const initializeWhatsAppClient = async (userId) => {
   client.on("auth_failure", async (msg) => {
     try {
       console.error(`WhatsApp auth failure for user ${userId}:`, msg);
-      await WhatsAppSession.findOneAndUpdate(
+      const updatedSession = await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           status: "disconnected",
           qrCode: "",
-        }
+        },
+        { new: true }
       );
+      emitToUser(userId, "session_update", updatedSession);
       activeClients.delete(userId.toString());
     } catch (err) {
       console.error(`Error on auth failure for user ${userId}:`, err.message);
@@ -218,6 +227,7 @@ export const initializeWhatsAppClient = async (userId) => {
       session.totalMessageCount += 1;
       await session.save();
       console.log(`Incoming count incremented. Today: ${session.incomingCountToday}, Total: ${session.totalMessageCount}`);
+      emitToUser(userId, "session_update", session);
 
       // 3. Retrieve user's Bot Knowledge base
       const knowledge = await BotKnowledge.find({ userId });
@@ -313,16 +323,18 @@ Jawaban Asisten:`;
       console.log(`Reply successfully sent.`);
 
       // Increment replied counts
-      await WhatsAppSession.findOneAndUpdate(
+      const updatedSession = await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
           $inc: {
             repliedCountToday: 1,
             totalMessageCount: 1, // Add 1 for the outgoing reply (making it 2 total for incoming+outgoing)
           },
-        }
+        },
+        { new: true }
       );
       console.log(`Updated replied counts in database.`);
+      emitToUser(userId, "session_update", updatedSession);
 
     } catch (err) {
       console.error(`Error processing message for user ${userId}:`, err.message);
@@ -352,13 +364,15 @@ export const destroyWhatsAppClient = async (userId) => {
     activeClients.delete(userId.toString());
   }
 
-  await WhatsAppSession.findOneAndUpdate(
+  const updatedSession = await WhatsAppSession.findOneAndUpdate(
     { userId },
     {
       status: "disconnected",
       qrCode: "",
-    }
+    },
+    { new: true }
   );
+  emitToUser(userId, "session_update", updatedSession);
 };
 
 /**

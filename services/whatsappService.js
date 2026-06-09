@@ -18,6 +18,12 @@ dotenv.config({
   path: path.resolve(__dirname, "../.env"),
 });
 
+// Initialize OpenAI client for Mistral API once at module scope
+const openai = new OpenAI({
+  apiKey: process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
+  baseURL: "https://api.mistral.ai/v1"
+});
+
 const activeClients = new Map();
 
 /**
@@ -260,12 +266,8 @@ Jawaban Asisten:`;
           replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
         } else {
           try {
-            console.log("Sending prompt to Mistral API...");
-            const client = new OpenAI({
-              apiKey: process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
-              baseURL: "https://api.mistral.ai/v1"
-            });
-            const response = await client.chat.completions.create({
+            console.log(`[WhatsApp Bot] Sending prompt to Mistral API for ${msg.from}...`);
+            const response = await openai.chat.completions.create({
               model: "mistral-small-latest",
               max_tokens: 100,
               messages: [
@@ -276,11 +278,11 @@ Jawaban Asisten:`;
               ]
             });
             replyText = response.choices[0].message.content.trim();
-            console.log(`Mistral reply successfully generated: "${replyText}"`);
+            console.log(`[WhatsApp Bot] Mistral reply successfully generated for ${msg.from}: "${replyText}"`);
           } catch (mistralErr) {
-            console.warn("⚠ Gagal menggunakan Mistral, beralih ke Gemini sebagai fallback:", mistralErr.message);
+            console.warn(`[WhatsApp Bot] ⚠ Gagal menggunakan Mistral untuk ${msg.from}, beralih ke Gemini sebagai fallback:`, mistralErr.message);
             try {
-              console.log(`Sending prompt to Gemini API (with auto-retry support)...`);
+              console.log(`[WhatsApp Bot] Sending prompt to Gemini API for ${msg.from} (with auto-retry support)...`);
 
               const maxAttempts = 3;
               let success = false;
@@ -313,11 +315,11 @@ Jawaban Asisten:`;
                   );
 
                   replyText = res.data.candidates[0].content.parts[0].text.trim();
-                  console.log(`Gemini reply successfully generated on attempt ${attempt}: "${replyText}"`);
+                  console.log(`[WhatsApp Bot] Gemini reply successfully generated on attempt ${attempt} for ${msg.from}: "${replyText}"`);
                   success = true;
                   break;
                 } catch (attemptErr) {
-                  console.warn(`Gemini API attempt ${attempt} failed: ${attemptErr.response?.data?.error?.message || attemptErr.message}`);
+                  console.warn(`[WhatsApp Bot] Gemini API attempt ${attempt} failed for ${msg.from}: ${attemptErr.response?.data?.error?.message || attemptErr.message}`);
                   if (attempt === maxAttempts) {
                     throw attemptErr;
                   }
@@ -326,7 +328,7 @@ Jawaban Asisten:`;
                 }
               }
             } catch (aiErr) {
-              console.error("Gemini API final error after all attempts:", aiErr.message);
+              console.error(`[WhatsApp Bot] Gemini API final error after all attempts for ${msg.from}:`, aiErr.message);
               replyText = "Maaf, asisten AI mengalami kegagalan sistem saat memproses pesan Anda.";
             }
           }
@@ -334,9 +336,9 @@ Jawaban Asisten:`;
       }
 
       // Send the reply
-      console.log(`Sending reply message back to: ${msg.from}`);
+      console.log(`[WhatsApp Bot] Sending reply message back to: ${msg.from}`);
       await client.sendMessage(msg.from, replyText);
-      console.log(`Reply successfully sent.`);
+      console.log(`[WhatsApp Bot] Reply successfully sent to: ${msg.from}`);
 
       // Increment replied counts
       await WhatsAppSession.findOneAndUpdate(

@@ -7,6 +7,7 @@ import { getIhkByKota, getAllIhk } from "../../controller/dashboard/ihkControlle
 import { getKomoditasByKota, getAllKomoditas } from "../../controller/dashboard/komoditasController.js";
 import { testBPSAPI, getAllDashboard } from "../../controller/dashboard/dashboardController.js";
 import { getAISummaryByKota } from "../../controller/dashboard/AISummaryController.js";
+import ForecastResult from "../../db/models/ForecastResult.js";
 
 dotenv.config();
 
@@ -29,6 +30,54 @@ const handleError = (res, error, statusCode = 500) => {
 
   res.status(statusCode).json({ message });
 };
+
+// ============= FORECASTING ROUTES =============
+router.post("/forecast/save", async (req, res) => {
+  try {
+    const { kota, regionVal_ihk, regionVal_inflasi, forecast, hyperparameters } = req.body;
+    if (!kota) {
+      return res.status(400).json({ message: "Nama kota wajib diisi" });
+    }
+
+    const doc = await ForecastResult.findOneAndUpdate(
+      { kota },
+      {
+        $set: {
+          regionVal_ihk,
+          regionVal_inflasi,
+          forecast,
+          hyperparameters
+        }
+      },
+      { upsert: true, returnDocument: "after" }
+    );
+    res.json({ message: `Hasil peramalan untuk ${kota} berhasil disimpan.`, data: doc });
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/forecast/:kota", async (req, res) => {
+  try {
+    const { kota } = req.params;
+    const doc = await ForecastResult.findOne({ kota });
+    if (!doc) {
+      return res.status(404).json({ message: `Hasil peramalan untuk ${kota} tidak ditemukan.` });
+    }
+    res.json(doc);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/forecast", async (req, res) => {
+  try {
+    const list = await ForecastResult.find({}, "kota regionVal_ihk regionVal_inflasi updatedAt");
+    res.json(list);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
 
 // ============= INFLASI ROUTES =============
 router.post("/inflasi", async (req, res) => {

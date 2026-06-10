@@ -34,7 +34,7 @@ const handleError = (res, error, statusCode = 500) => {
 // ============= FORECASTING ROUTES =============
 router.post("/forecast/save", async (req, res) => {
   try {
-    const { kota, regionVal_ihk, regionVal_inflasi, forecast, hyperparameters } = req.body;
+    const { kota, regionVal_ihk, regionVal_inflasi, forecast } = req.body;
     if (!kota) {
       return res.status(400).json({ message: "Nama kota wajib diisi" });
     }
@@ -45,8 +45,7 @@ router.post("/forecast/save", async (req, res) => {
         $set: {
           regionVal_ihk,
           regionVal_inflasi,
-          forecast,
-          hyperparameters
+          forecast
         }
       },
       { upsert: true, returnDocument: "after" }
@@ -70,14 +69,16 @@ router.get("/forecast/:kota", async (req, res) => {
   }
 });
 
-router.get("/forecast", async (req, res) => {
-  try {
-    const list = await ForecastResult.find({}, "kota regionVal_ihk regionVal_inflasi updatedAt");
-    res.json(list);
-  } catch (err) {
-    handleError(res, err);
-  }
-});
+router.
+
+  router.get("/forecast", async (req, res) => {
+    try {
+      const list = await ForecastResult.find({}, "kota regionVal_ihk regionVal_inflasi updatedAt");
+      res.json(list);
+    } catch (err) {
+      handleError(res, err);
+    }
+  });
 
 // ============= INFLASI ROUTES =============
 router.post("/inflasi", async (req, res) => {

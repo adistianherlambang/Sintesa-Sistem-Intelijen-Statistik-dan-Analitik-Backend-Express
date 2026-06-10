@@ -10,31 +10,9 @@ const ForecastResultSchema = new mongoose.Schema(
     regionVal_ihk: String,
     regionVal_inflasi: String,
     forecast: {
-      inflasi: {
-        historical_series: [Number],
-        forecast_value: Number,
-        loss_history: [Number],
-        final_loss: Number,
-        train_predictions: [Number],
-        actual_targets: [Number]
-      },
-      ihk: {
-        historical_series: [Number],
-        forecast_value: Number,
-        loss_history: [Number],
-        final_loss: Number,
-        train_predictions: [Number],
-        actual_targets: [Number]
-      },
-      komoditas: mongoose.Schema.Types.Mixed,
-    },
-    hyperparameters: {
-      lag: Number,
-      epochs: Number,
-      batch_size: Number,
-      learning_rate: Number,
-      dropout_rate: Number,
-      hidden_neurons: [Number]
+      inflasi: [Number], // 3 elements array: [Month 18, Month 19, Month 20]
+      ihk: [Number],     // 3 elements array: [Month 18, Month 19, Month 20]
+      komoditas: mongoose.Schema.Types.Mixed, // Map: { "Commodity Name": [Month 18, Month 19, Month 20], ... }
     }
   },
   { 

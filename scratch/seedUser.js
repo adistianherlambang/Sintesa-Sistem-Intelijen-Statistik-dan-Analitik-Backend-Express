@@ -6,7 +6,9 @@ dotenv.config({ path: "../.env" });
 
 async function seed() {
   try {
-    await mongoose.connect(process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sintesa");
+    await mongoose.connect(
+      process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sintesa",
+    );
     console.log("DB terhubung...");
 
     const email = "admin@bps.go.id";

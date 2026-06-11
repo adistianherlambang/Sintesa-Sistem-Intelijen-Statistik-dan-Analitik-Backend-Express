@@ -40,11 +40,7 @@ const exportToJson = async () => {
 
     const exportFile = path.join(exportDir, "APIDataBPS.json");
 
-    fs.writeFileSync(
-      exportFile,
-      JSON.stringify(data, null, 2),
-      "utf8",
-    );
+    fs.writeFileSync(exportFile, JSON.stringify(data, null, 2), "utf8");
 
     console.log(`✔ Export completed`);
     console.log(`📂 File saved: ${exportFile}`);

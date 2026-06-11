@@ -83,11 +83,13 @@ Endpoint utama mengembalikan data inflasi, IHK, komoditas, dan dokumentasi statu
 - Struktur `datacontent` dan `yoy` diasumsikan menggunakan key yang memiliki format khusus berdasarkan region, var, turvar, tahun, dan bulan.
 
 ## Struktur API BPS
+
 Format key pada data BPS mengikuti pola berikut:
 
 `"34 2233 1601 126 2"`
 
 Setiap bagian merepresentasikan:
+
 - `kota`
 - `var`
 - `turvar`

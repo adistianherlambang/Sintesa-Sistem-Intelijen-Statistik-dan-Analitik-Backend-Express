@@ -21,9 +21,9 @@ const run = async () => {
         batch_size: "",
         learning_rate: "",
         dropout_rate: "",
-        hidden_neurons: ""
-      }
-    }
+        hidden_neurons: "",
+      },
+    },
   );
 
   console.log("Cleanup finished.");

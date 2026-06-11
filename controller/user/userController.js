@@ -5,7 +5,9 @@ import { findUnifiedCity } from "../dashboard/helpers.js";
 // Helper: Hash password using built-in crypto
 const hashPassword = (password) => {
   const salt = crypto.randomBytes(16).toString("hex");
-  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, "sha512").toString("hex");
+  const hash = crypto
+    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+    .toString("hex");
   return `${salt}:${hash}`;
 };
 
@@ -13,7 +15,9 @@ const hashPassword = (password) => {
 const verifyPassword = (password, storedPassword) => {
   if (!storedPassword || !storedPassword.includes(":")) return false;
   const [salt, hash] = storedPassword.split(":");
-  const verifyHash = crypto.pbkdf2Sync(password, salt, 1000, 64, "sha512").toString("hex");
+  const verifyHash = crypto
+    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+    .toString("hex");
   return hash === verifyHash;
 };
 
@@ -41,7 +45,7 @@ export const registerUser = async (email, password, name, cityChoice) => {
   }
 
   const hashedPassword = hashPassword(password);
-  
+
   const user = new User({
     email: email.toLowerCase(),
     password: hashedPassword,
@@ -92,17 +96,24 @@ export const loginUser = async (email, password) => {
  */
 export const updateUserProfile = async (userId, profileData) => {
   const updateFields = {};
-  if (profileData.name !== undefined) updateFields["profile.name"] = profileData.name;
-  if (profileData.avatar !== undefined) updateFields["profile.avatar"] = profileData.avatar;
-  if (profileData.instansiType !== undefined) updateFields["profile.instansiType"] = profileData.instansiType;
-  if (profileData.picName !== undefined) updateFields["profile.picName"] = profileData.picName;
-  if (profileData.picPhone !== undefined) updateFields["profile.picPhone"] = profileData.picPhone;
+  if (profileData.name !== undefined)
+    updateFields["profile.name"] = profileData.name;
+  if (profileData.avatar !== undefined)
+    updateFields["profile.avatar"] = profileData.avatar;
+  if (profileData.instansiType !== undefined)
+    updateFields["profile.instansiType"] = profileData.instansiType;
+  if (profileData.picName !== undefined)
+    updateFields["profile.picName"] = profileData.picName;
+  if (profileData.picPhone !== undefined)
+    updateFields["profile.picPhone"] = profileData.picPhone;
 
   const user = await User.findByIdAndUpdate(
     userId,
     { $set: updateFields },
-    { returnDocument: "after" }
-  ).select("-password").lean();
+    { returnDocument: "after" },
+  )
+    .select("-password")
+    .lean();
 
   if (!user) {
     throw new Error("User tidak ditemukan");

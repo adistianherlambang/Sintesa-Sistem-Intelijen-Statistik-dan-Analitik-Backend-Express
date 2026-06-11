@@ -11,13 +11,13 @@ const ForecastResultSchema = new mongoose.Schema(
     regionVal_inflasi: String,
     forecast: {
       inflasi: [Number], // 3 elements array: [Month 18, Month 19, Month 20]
-      ihk: [Number],     // 3 elements array: [Month 18, Month 19, Month 20]
+      ihk: [Number], // 3 elements array: [Month 18, Month 19, Month 20]
       komoditas: mongoose.Schema.Types.Mixed, // Map: { "Commodity Name": [Month 18, Month 19, Month 20], ... }
-    }
+    },
   },
-  { 
-    timestamps: true 
-  }
+  {
+    timestamps: true,
+  },
 );
 
 export default mongoose.model("ForecastResult", ForecastResultSchema);

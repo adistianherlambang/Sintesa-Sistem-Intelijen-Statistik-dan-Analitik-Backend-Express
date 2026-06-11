@@ -3,7 +3,12 @@ import Subscription from "../../db/models/Subscription.js";
 /**
  * Create or update a subscription for a user
  */
-export const createOrUpdateSubscription = async (userId, planId, quota = 10, durationDays = 30) => {
+export const createOrUpdateSubscription = async (
+  userId,
+  planId,
+  quota = 10,
+  durationDays = 30,
+) => {
   if (!userId || !planId) {
     throw new Error("userId dan planId wajib diisi");
   }
@@ -15,7 +20,7 @@ export const createOrUpdateSubscription = async (userId, planId, quota = 10, dur
   // Deactivate any existing active subscriptions first
   await Subscription.updateMany(
     { userId, status: "active" },
-    { $set: { status: "expired" } }
+    { $set: { status: "expired" } },
   );
 
   const subscription = new Subscription({

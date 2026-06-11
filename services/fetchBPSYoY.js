@@ -100,7 +100,7 @@ const fetchSingleUrl = async (url, index, total) => {
       const updated = await APIDataBPS.findOneAndUpdate(
         { "var.val": varVal },
         { $set: { yoy: data.datacontent || [] } },
-        { returnDocument: 'after' },
+        { returnDocument: "after" },
       );
 
       stopLoading(`Success YoY ${index}/${total}`);

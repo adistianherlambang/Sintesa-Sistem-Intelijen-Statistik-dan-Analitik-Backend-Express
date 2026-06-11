@@ -42,7 +42,7 @@ router.post(
     const { email, password, name, kota } = req.body;
     const user = await registerUser(email, password, name, kota);
     res.status(201).json({ message: "Registrasi berhasil", user });
-  })
+  }),
 );
 
 router.post(
@@ -51,7 +51,7 @@ router.post(
     const { email, password } = req.body;
     const result = await loginUser(email, password);
     res.json({ message: "Login berhasil", ...result });
-  })
+  }),
 );
 
 // ================= USER PROFILE & LOCATION =================
@@ -60,7 +60,7 @@ router.get(
   authMiddleware,
   asyncRoute(async (req, res) => {
     res.json({ user: req.user });
-  })
+  }),
 );
 
 router.post(
@@ -68,10 +68,16 @@ router.post(
   authMiddleware,
   asyncRoute(async (req, res) => {
     const { name, avatar, instansiType, picName, picPhone } = req.body;
-    const user = await updateUserProfile(req.user._id, { name, avatar, instansiType, picName, picPhone });
+    const user = await updateUserProfile(req.user._id, {
+      name,
+      avatar,
+      instansiType,
+      picName,
+      picPhone,
+    });
     await logActivity(req.user._id, "Mengubah data profil");
     res.json({ message: "Profil diperbarui", user });
-  })
+  }),
 );
 
 router.post(
@@ -82,7 +88,7 @@ router.post(
     await updateUserPassword(req.user._id, oldPassword, newPassword);
     await logActivity(req.user._id, "Mengubah kata sandi akun");
     res.json({ message: "Kata sandi berhasil diperbarui" });
-  })
+  }),
 );
 
 // ================= USER ACTIVITIES =================
@@ -92,7 +98,7 @@ router.get(
   asyncRoute(async (req, res) => {
     const activities = await getUserActivities(req.user._id);
     res.json(activities);
-  })
+  }),
 );
 
 router.post(
@@ -102,7 +108,7 @@ router.post(
     const { activityName } = req.body;
     const activity = await logActivity(req.user._id, activityName);
     res.status(201).json(activity);
-  })
+  }),
 );
 
 // ================= ANALYSIS HISTORY =================
@@ -112,7 +118,7 @@ router.get(
   asyncRoute(async (req, res) => {
     const history = await getUserAnalysisHistory(req.user._id);
     res.json(history);
-  })
+  }),
 );
 
 router.post(
@@ -120,9 +126,11 @@ router.post(
   authMiddleware,
   asyncRoute(async (req, res) => {
     const { title, periode, fileContent, fileName } = req.body;
-    
+
     if (!fileContent) {
-      return res.status(400).json({ message: "fileContent (base64) wajib disertakan" });
+      return res
+        .status(400)
+        .json({ message: "fileContent (base64) wajib disertakan" });
     }
 
     // Convert base64 back to binary buffer
@@ -132,12 +140,17 @@ router.post(
       title,
       periode,
       fileBuffer,
-      fileName || "report.idml"
+      fileName || "report.idml",
     );
 
-    await logActivity(req.user._id, `Membuat riwayat analisis: ${title} (${periode})`);
-    res.status(201).json({ message: "Riwayat analisis berhasil disimpan", history });
-  })
+    await logActivity(
+      req.user._id,
+      `Membuat riwayat analisis: ${title} (${periode})`,
+    );
+    res
+      .status(201)
+      .json({ message: "Riwayat analisis berhasil disimpan", history });
+  }),
 );
 
 router.get(
@@ -146,10 +159,13 @@ router.get(
   asyncRoute(async (req, res) => {
     const { id } = req.params;
     const { filePath, filename } = await getAnalysisFilePath(req.user._id, id);
-    
-    await logActivity(req.user._id, `Mengunduh file analisis IDML untuk riwayat ID: ${id}`);
+
+    await logActivity(
+      req.user._id,
+      `Mengunduh file analisis IDML untuk riwayat ID: ${id}`,
+    );
     res.download(filePath, filename);
-  })
+  }),
 );
 
 router.get(
@@ -160,14 +176,19 @@ router.get(
     const { filePath, filename } = await getAnalysisFilePath(req.user._id, id);
     const pdfFilePath = filePath.replace(/\.idml$/, ".pdf");
     const pdfFilename = filename.replace(/\.idml$/, ".pdf");
-    
+
     if (!fs.existsSync(pdfFilePath)) {
-      return res.status(404).json({ message: "File PDF tidak ditemukan di server" });
+      return res
+        .status(404)
+        .json({ message: "File PDF tidak ditemukan di server" });
     }
-    
-    await logActivity(req.user._id, `Mengunduh file analisis PDF untuk riwayat ID: ${id}`);
+
+    await logActivity(
+      req.user._id,
+      `Mengunduh file analisis PDF untuk riwayat ID: ${id}`,
+    );
     res.download(pdfFilePath, pdfFilename);
-  })
+  }),
 );
 
 // ================= SUBSCRIPTION =================
@@ -177,7 +198,7 @@ router.get(
   asyncRoute(async (req, res) => {
     const sub = await getSubscriptionStatus(req.user._id);
     res.json(sub);
-  })
+  }),
 );
 
 router.post(
@@ -185,10 +206,18 @@ router.post(
   authMiddleware,
   asyncRoute(async (req, res) => {
     const { planId, quota, durationDays } = req.body;
-    const sub = await createOrUpdateSubscription(req.user._id, planId, quota, durationDays);
+    const sub = await createOrUpdateSubscription(
+      req.user._id,
+      planId,
+      quota,
+      durationDays,
+    );
     await logActivity(req.user._id, `Berlangganan paket: ${planId}`);
-    res.status(201).json({ message: "Langganan berhasil diaktifkan/diperbarui", subscription: sub });
-  })
+    res.status(201).json({
+      message: "Langganan berhasil diaktifkan/diperbarui",
+      subscription: sub,
+    });
+  }),
 );
 
 // ================= BILLING TRANSACTIONS =================
@@ -198,7 +227,7 @@ router.get(
   asyncRoute(async (req, res) => {
     const history = await getBillingHistory(req.user._id);
     res.json(history);
-  })
+  }),
 );
 
 router.post(
@@ -207,9 +236,12 @@ router.post(
   asyncRoute(async (req, res) => {
     const { planId } = req.body;
     const result = await initiatePayment(req.user._id, planId);
-    await logActivity(req.user._id, `Memulai pembayaran paket langganan: ${planId}`);
+    await logActivity(
+      req.user._id,
+      `Memulai pembayaran paket langganan: ${planId}`,
+    );
     res.status(201).json(result);
-  })
+  }),
 );
 
 router.get(
@@ -219,7 +251,7 @@ router.get(
     const { invoiceId } = req.params;
     const result = await verifyPayment(req.user._id, invoiceId);
     res.json(result);
-  })
+  }),
 );
 
 export default router;

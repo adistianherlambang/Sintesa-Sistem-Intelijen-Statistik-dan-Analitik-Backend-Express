@@ -20,7 +20,7 @@ import { getIhkByKota } from "../controller/dashboard/ihkController.js";
 import { getKomoditasByKota } from "../controller/dashboard/komoditasController.js";
 
 //json
-import kotaConfig from "../json/kota.json" with {type: "json"}
+import kotaConfig from "../json/kota.json" with { type: "json" };
 
 import APIDataBPS from "../db/models/APIDataBPS.js";
 import AISummaryModel from "../db/models/AISummary.js";
@@ -39,9 +39,10 @@ export const AISummary = async () => {
       .select("lastUpdate")
       .lean();
 
-    const lastUpdate = latestDoc && latestDoc.lastUpdate
-      ? new Date(latestDoc.lastUpdate).toISOString()
-      : new Date().toISOString();
+    const lastUpdate =
+      latestDoc && latestDoc.lastUpdate
+        ? new Date(latestDoc.lastUpdate).toISOString()
+        : new Date().toISOString();
 
     const date = new Date();
     const month = Number(date.getMonth()) - 1;
@@ -86,7 +87,7 @@ export const AISummary = async () => {
           compareMonthInflasi = dataInflasi.dashboard.compare;
 
           const inflasiYoYObj = dataInflasi.yoy.find((item) =>
-            item.key.endsWith(`${yearYoy}${month}`)
+            item.key.endsWith(`${yearYoy}${month}`),
           );
           inflasiYoY = inflasiYoYObj ? inflasiYoYObj.value : "N/A";
         }
@@ -105,8 +106,12 @@ export const AISummary = async () => {
 
         if (namaKotaIhk) {
           const dataKomoditas = await getKomoditasByKota(namaKotaIhk);
-          namaKomoditas = dataKomoditas.biggest ? dataKomoditas.biggest.label : "N/A";
-          valueKomoditas = dataKomoditas.biggest ? dataKomoditas.biggest.value : 0;
+          namaKomoditas = dataKomoditas.biggest
+            ? dataKomoditas.biggest.label
+            : "N/A";
+          valueKomoditas = dataKomoditas.biggest
+            ? dataKomoditas.biggest.value
+            : 0;
         }
 
         inputData.push({
@@ -121,16 +126,22 @@ export const AISummary = async () => {
           valueKomoditas: valueKomoditas,
         });
       } catch (err) {
-        console.warn(`⚠ Melewati wilayah "${city.name}" karena error: ${err.message}`);
+        console.warn(
+          `⚠ Melewati wilayah "${city.name}" karena error: ${err.message}`,
+        );
       }
     }
 
     if (inputData.length === 0) {
-      console.error("❌ Tidak ada data yang berhasil diambil untuk semua wilayah.");
+      console.error(
+        "❌ Tidak ada data yang berhasil diambil untuk semua wilayah.",
+      );
       return;
     }
 
-    console.log(`Berhasil mengambil data untuk ${inputData.length} wilayah. Mengirim ke Gemini...`);
+    console.log(
+      `Berhasil mengambil data untuk ${inputData.length} wilayah. Mengirim ke Gemini...`,
+    );
 
     const prompt = `
       Anda adalah analis ekonomi daerah.
@@ -160,8 +171,9 @@ export const AISummary = async () => {
     try {
       console.log("Mengirim prompt summary ke Mistral...");
       const client = new OpenAI({
-        apiKey: process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
-        baseURL: "https://api.mistral.ai/v1"
+        apiKey:
+          process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
+        baseURL: "https://api.mistral.ai/v1",
       });
       const response = await client.chat.completions.create({
         model: "mistral-small-latest",
@@ -169,14 +181,17 @@ export const AISummary = async () => {
         messages: [
           {
             role: "user",
-            content: prompt
-          }
-        ]
+            content: prompt,
+          },
+        ],
       });
       aiText = response.choices[0].message.content;
       console.log("Summary berhasil didapatkan dari Mistral.");
     } catch (mistralErr) {
-      console.warn("⚠ Gagal menggunakan Mistral, beralih ke Gemini sebagai fallback:", mistralErr.message);
+      console.warn(
+        "⚠ Gagal menggunakan Mistral, beralih ke Gemini sebagai fallback:",
+        mistralErr.message,
+      );
       try {
         console.log("Mengirim prompt summary ke Gemini...");
         const res = await axios.post(
@@ -200,12 +215,15 @@ export const AISummary = async () => {
               "Content-Type": "application/json",
               "X-goog-api-key": process.env.GEMINI_API_KEY,
             },
-          }
+          },
         );
         aiText = res.data.candidates[0].content.parts[0].text;
         console.log("Summary berhasil didapatkan dari Gemini.");
       } catch (geminiErr) {
-        console.error("❌ Gagal total mendapatkan summary dari Mistral dan Gemini:", geminiErr.message);
+        console.error(
+          "❌ Gagal total mendapatkan summary dari Mistral dan Gemini:",
+          geminiErr.message,
+        );
         throw geminiErr;
       }
     }
@@ -222,7 +240,7 @@ export const AISummary = async () => {
           summary: result.summary,
           lastUpdate: lastUpdate,
         },
-        { upsert: true, returnDocument: "after" }
+        { upsert: true, returnDocument: "after" },
       );
     }
     console.log("Berhasil menyimpan summary ke database.");
@@ -231,10 +249,9 @@ export const AISummary = async () => {
     const outputPath = path.join(__dirname, "airesult.json");
     fs.writeFileSync(outputPath, JSON.stringify(allResults, null, 2), "utf-8");
     console.log(`Berhasil menyimpan hasil ke ${outputPath}`);
-
   } catch (err) {
     console.error("❌ Terjadi error pada AISummary:", err.message);
   }
 };
 
-AISummary()
+AISummary();

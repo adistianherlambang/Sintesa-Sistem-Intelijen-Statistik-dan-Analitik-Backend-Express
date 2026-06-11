@@ -25,7 +25,5 @@ export const getUserActivities = async (userId) => {
     throw new Error("userId wajib diisi");
   }
 
-  return await UserActivity.find({ userId })
-    .sort({ createdAt: -1 })
-    .lean();
+  return await UserActivity.find({ userId }).sort({ createdAt: -1 }).lean();
 };

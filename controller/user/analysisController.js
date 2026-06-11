@@ -15,7 +15,13 @@ if (!fs.existsSync(EXPORT_DIR)) {
 /**
  * Add a report analysis history with an IDML file upload
  */
-export const addAnalysisHistory = async (userId, title, periode, fileBuffer, originalName = "analysis.idml") => {
+export const addAnalysisHistory = async (
+  userId,
+  title,
+  periode,
+  fileBuffer,
+  originalName = "analysis.idml",
+) => {
   if (!userId || !title || !periode || !fileBuffer) {
     throw new Error("userId, title, periode, dan fileBuffer wajib diisi");
   }
@@ -48,9 +54,7 @@ export const getUserAnalysisHistory = async (userId) => {
     throw new Error("userId wajib diisi");
   }
 
-  return await AnalysisHistory.find({ userId })
-    .sort({ createdAt: -1 })
-    .lean();
+  return await AnalysisHistory.find({ userId }).sort({ createdAt: -1 }).lean();
 };
 
 /**
@@ -78,6 +82,6 @@ export const getAnalysisFilePath = async (userId, historyId) => {
 
   return {
     filePath,
-    filename: history.title.replace(/[^a-zA-Z0-9]/g, "_") + ".idml"
+    filename: history.title.replace(/[^a-zA-Z0-9]/g, "_") + ".idml",
   };
 };

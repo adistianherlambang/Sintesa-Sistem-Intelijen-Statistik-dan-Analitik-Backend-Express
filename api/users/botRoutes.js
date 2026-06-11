@@ -32,7 +32,7 @@ router.get(
       await session.save();
     }
     res.json(session);
-  })
+  }),
 );
 
 // Connect session
@@ -43,7 +43,7 @@ router.post(
     await initializeWhatsAppClient(req.user._id);
     await logActivity(req.user._id, "Membuka sesi koneksi WhatsApp");
     res.json({ message: "Menghubungkan klien WhatsApp..." });
-  })
+  }),
 );
 
 // Disconnect session
@@ -54,7 +54,7 @@ router.post(
     await destroyWhatsAppClient(req.user._id);
     await logActivity(req.user._id, "Memutus koneksi WhatsApp");
     res.json({ message: "Sesi WhatsApp terputus" });
-  })
+  }),
 );
 
 // Restart session
@@ -68,7 +68,7 @@ router.post(
     await initializeWhatsAppClient(req.user._id);
     await logActivity(req.user._id, "Memulai ulang sesi koneksi WhatsApp");
     res.json({ message: "Sesi WhatsApp berhasil dimuat ulang" });
-  })
+  }),
 );
 
 // Update configuration
@@ -86,11 +86,14 @@ router.put(
           activeTimeEnd,
         },
       },
-      { returnDocument: "after", upsert: true }
+      { returnDocument: "after", upsert: true },
     );
-    await logActivity(req.user._id, "Mengubah konfigurasi jam aktif/status Bot WhatsApp");
+    await logActivity(
+      req.user._id,
+      "Mengubah konfigurasi jam aktif/status Bot WhatsApp",
+    );
     res.json({ message: "Konfigurasi bot disimpan", session });
-  })
+  }),
 );
 
 // ================= BOT KNOWLEDGE CRUD =================
@@ -100,9 +103,11 @@ router.get(
   "/knowledge",
   authMiddleware,
   asyncRoute(async (req, res) => {
-    const list = await BotKnowledge.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    const list = await BotKnowledge.find({ userId: req.user._id }).sort({
+      createdAt: -1,
+    });
     res.json(list);
-  })
+  }),
 );
 
 // Add new knowledge entry
@@ -123,7 +128,7 @@ router.post(
     await item.save();
     await logActivity(req.user._id, `Menambahkan bot knowledge: ${title}`);
     res.status(201).json(item);
-  })
+  }),
 );
 
 // Update knowledge entry
@@ -139,14 +144,16 @@ router.put(
     const item = await BotKnowledge.findOneAndUpdate(
       { _id: id, userId: req.user._id },
       { $set: { title, category, content } },
-      { returnDocument: "after" }
+      { returnDocument: "after" },
     );
     if (!item) {
-      return res.status(444).json({ message: "Data knowledge tidak ditemukan" });
+      return res
+        .status(444)
+        .json({ message: "Data knowledge tidak ditemukan" });
     }
     await logActivity(req.user._id, `Mengubah bot knowledge: ${title}`);
     res.json(item);
-  })
+  }),
 );
 
 // Delete knowledge entry
@@ -155,13 +162,18 @@ router.delete(
   authMiddleware,
   asyncRoute(async (req, res) => {
     const { id } = req.params;
-    const item = await BotKnowledge.findOneAndDelete({ _id: id, userId: req.user._id });
+    const item = await BotKnowledge.findOneAndDelete({
+      _id: id,
+      userId: req.user._id,
+    });
     if (!item) {
-      return res.status(444).json({ message: "Data knowledge tidak ditemukan" });
+      return res
+        .status(444)
+        .json({ message: "Data knowledge tidak ditemukan" });
     }
     await logActivity(req.user._id, `Menghapus bot knowledge: ${item.title}`);
     res.json({ message: "Data knowledge berhasil dihapus", item });
-  })
+  }),
 );
 
 // CSV parser helper
@@ -170,7 +182,12 @@ function parseCSV(text) {
   const result = [];
   if (lines.length <= 1) return result;
 
-  const headers = lines[0].split(",").map((h) => h.trim().toLowerCase().replace(/^["']|["']$/g, ""));
+  const headers = lines[0].split(",").map((h) =>
+    h
+      .trim()
+      .toLowerCase()
+      .replace(/^["']|["']$/g, ""),
+  );
 
   for (let i = 1; i < lines.length; i++) {
     const line = lines[i].trim();
@@ -210,7 +227,9 @@ router.post(
   asyncRoute(async (req, res) => {
     const { format, importData } = req.body;
     if (!format || !importData) {
-      return res.status(400).json({ message: "Format dan data impor wajib dikirim" });
+      return res
+        .status(400)
+        .json({ message: "Format dan data impor wajib dikirim" });
     }
 
     let items = [];
@@ -220,10 +239,14 @@ router.post(
       } else if (format === "json") {
         items = JSON.parse(importData);
       } else {
-        return res.status(400).json({ message: "Format impor tidak valid (harus csv atau json)" });
+        return res
+          .status(400)
+          .json({ message: "Format impor tidak valid (harus csv atau json)" });
       }
     } catch (parseErr) {
-      return res.status(400).json({ message: `Gagal memproses file impor: ${parseErr.message}` });
+      return res
+        .status(400)
+        .json({ message: `Gagal memproses file impor: ${parseErr.message}` });
     }
 
     if (!Array.isArray(items)) {
@@ -233,7 +256,8 @@ router.post(
     const savedItems = [];
     for (const item of items) {
       const title = item.judul || item.title || item.Judul;
-      const category = item.kategori || item.category || item.Kategori || "General";
+      const category =
+        item.kategori || item.category || item.Kategori || "General";
       const content = item.konten || item.content || item.Konten;
 
       if (!title || !content) continue; // skip invalid records
@@ -248,12 +272,15 @@ router.post(
       savedItems.push(dbItem);
     }
 
-    await logActivity(req.user._id, `Mengimpor ${savedItems.length} knowledge ke dalam Bot Knowledge`);
+    await logActivity(
+      req.user._id,
+      `Mengimpor ${savedItems.length} knowledge ke dalam Bot Knowledge`,
+    );
     res.status(201).json({
       message: `Berhasil mengimpor ${savedItems.length} data knowledge`,
       count: savedItems.length,
     });
-  })
+  }),
 );
 
 export default router;

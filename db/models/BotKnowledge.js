@@ -23,7 +23,7 @@ const BotKnowledgeSchema = new mongoose.Schema(
       trim: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("BotKnowledge", BotKnowledgeSchema);

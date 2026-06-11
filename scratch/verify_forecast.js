@@ -12,7 +12,7 @@ const run = async () => {
   console.log(`\n=== Total ForecastResult Documents: ${results.length} ===`);
 
   // Find Kota Metro specifically
-  const metro = results.find(r => r.kota.toLowerCase().includes("metro"));
+  const metro = results.find((r) => r.kota.toLowerCase().includes("metro"));
   if (metro) {
     console.log("\n=== Kota Metro Forecast Document ===");
     console.log(JSON.stringify(metro, null, 2));

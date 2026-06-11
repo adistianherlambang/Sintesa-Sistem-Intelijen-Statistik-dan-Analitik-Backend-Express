@@ -20,9 +20,9 @@ const AnalysisHistorySchema = new mongoose.Schema(
       required: true,
     },
   },
-  { 
-    timestamps: { createdAt: true, updatedAt: false } 
-  }
+  {
+    timestamps: { createdAt: true, updatedAt: false },
+  },
 );
 
 export default mongoose.model("AnalysisHistory", AnalysisHistorySchema);

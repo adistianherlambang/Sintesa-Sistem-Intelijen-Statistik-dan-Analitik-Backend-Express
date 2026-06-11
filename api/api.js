@@ -3,7 +3,7 @@ import User from "../db/models/User.js";
 
 //middleware
 import overview from "./dashboard/overview.js";
-import userRoutes from "./users/userRoutes.js"
+import userRoutes from "./users/userRoutes.js";
 import botRoutes from "./users/botRoutes.js";
 
 import kota from "../json/kota.json" with { type: "json" };
@@ -17,17 +17,19 @@ router.use("/users/bot", botRoutes);
 router.get("/kota", async (req, res) => {
   try {
     const users = await User.find({ location: { $ne: null } }, "location.id");
-    const claimedIds = new Set(users.map(u => u.location?.id).filter(Boolean));
-    const kotaWithClaims = kota.map(c => ({
+    const claimedIds = new Set(
+      users.map((u) => u.location?.id).filter(Boolean),
+    );
+    const kotaWithClaims = kota.map((c) => ({
       ...c,
-      claimed: claimedIds.has(c.id)
+      claimed: claimedIds.has(c.id),
     }));
     res.json(kotaWithClaims);
   } catch (err) {
     res.status(500).json({
-      message: err.message
-    })
+      message: err.message,
+    });
   }
-})
+});
 
 export default router;

@@ -21,7 +21,7 @@ dotenv.config({
 // Initialize OpenAI client for Mistral API once at module scope
 const openai = new OpenAI({
   apiKey: process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
-  baseURL: "https://api.mistral.ai/v1"
+  baseURL: "https://api.mistral.ai/v1",
 });
 
 const activeClients = new Map();
@@ -87,11 +87,12 @@ export const initializeWhatsAppClient = async (userId) => {
   const client = new Client({
     authStrategy: new LocalAuth({
       clientId: userId.toString(),
-      dataPath: path.resolve(__dirname, "../../.wwebjs_auth")
+      dataPath: path.resolve(__dirname, "../../.wwebjs_auth"),
     }),
     webVersionCache: {
       type: "remote",
-      remotePath: "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
+      remotePath:
+        "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
     },
     puppeteer: {
       headless: true,
@@ -115,7 +116,7 @@ export const initializeWhatsAppClient = async (userId) => {
           qrCode: qrDataUrl,
           lastSync: null,
         },
-        { upsert: true, returnDocument: "after" }
+        { upsert: true, returnDocument: "after" },
       );
     } catch (err) {
       console.error(`Error generating QR for user ${userId}:`, err.message);
@@ -123,7 +124,9 @@ export const initializeWhatsAppClient = async (userId) => {
   });
 
   client.on("authenticated", () => {
-    console.log(`WhatsApp client authenticated successfully for user ${userId}`);
+    console.log(
+      `WhatsApp client authenticated successfully for user ${userId}`,
+    );
   });
 
   client.on("ready", async () => {
@@ -139,7 +142,7 @@ export const initializeWhatsAppClient = async (userId) => {
           sessionId: phone,
           lastSync: new Date(),
         },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
     } catch (err) {
       console.error(`Error on ready for user ${userId}:`, err.message);
@@ -152,7 +155,10 @@ export const initializeWhatsAppClient = async (userId) => {
       try {
         await client.destroy();
       } catch (destroyErr) {
-        console.warn(`Error calling destroy on disconnect for user ${userId}:`, destroyErr.message);
+        console.warn(
+          `Error calling destroy on disconnect for user ${userId}:`,
+          destroyErr.message,
+        );
       }
       await WhatsAppSession.findOneAndUpdate(
         { userId },
@@ -160,7 +166,7 @@ export const initializeWhatsAppClient = async (userId) => {
           status: "disconnected",
           qrCode: "",
         },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       activeClients.delete(userId.toString());
     } catch (err) {
@@ -174,7 +180,10 @@ export const initializeWhatsAppClient = async (userId) => {
       try {
         await client.destroy();
       } catch (destroyErr) {
-        console.warn(`Error calling destroy on auth failure for user ${userId}:`, destroyErr.message);
+        console.warn(
+          `Error calling destroy on auth failure for user ${userId}:`,
+          destroyErr.message,
+        );
       }
       await WhatsAppSession.findOneAndUpdate(
         { userId },
@@ -182,7 +191,7 @@ export const initializeWhatsAppClient = async (userId) => {
           status: "disconnected",
           qrCode: "",
         },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       activeClients.delete(userId.toString());
     } catch (err) {
@@ -196,7 +205,8 @@ export const initializeWhatsAppClient = async (userId) => {
     console.log(`Message body: "${msg.body}"`);
 
     // Only process private chats (avoid group chats)
-    const isPrivateChat = msg.from.endsWith("@c.us") || msg.from.endsWith("@lid");
+    const isPrivateChat =
+      msg.from.endsWith("@c.us") || msg.from.endsWith("@lid");
     if (!isPrivateChat) {
       console.log(`Skipping non-private/group message from ${msg.from}`);
       return;
@@ -217,7 +227,9 @@ export const initializeWhatsAppClient = async (userId) => {
       }
 
       const withinHours = isBotWithinActiveHours(session);
-      console.log(`Bot within active hours (${session.activeTimeStart} - ${session.activeTimeEnd}): ${withinHours}`);
+      console.log(
+        `Bot within active hours (${session.activeTimeStart} - ${session.activeTimeEnd}): ${withinHours}`,
+      );
       if (!withinHours) {
         console.log(`Outside active hours. Skipping reply.`);
         return;
@@ -226,12 +238,18 @@ export const initializeWhatsAppClient = async (userId) => {
       // 2. Subscription package and limit check
       const sub = await Subscription.findOne({ userId, status: "active" });
       const limit = getMessageLimit(sub);
-      console.log(`Active subscription found: ${sub ? sub.subscriptionId : "None (Free/Trial)"}`);
-      console.log(`Message Limit: ${limit}, Current count: ${session.totalMessageCount}`);
+      console.log(
+        `Active subscription found: ${sub ? sub.subscriptionId : "None (Free/Trial)"}`,
+      );
+      console.log(
+        `Message Limit: ${limit}, Current count: ${session.totalMessageCount}`,
+      );
 
       // Check total messages limit
       if (session.totalMessageCount >= limit) {
-        console.log(`Message limit reached (${session.totalMessageCount}/${limit}). Skipping reply.`);
+        console.log(
+          `Message limit reached (${session.totalMessageCount}/${limit}). Skipping reply.`,
+        );
         return;
       }
 
@@ -239,7 +257,9 @@ export const initializeWhatsAppClient = async (userId) => {
       session.incomingCountToday += 1;
       session.totalMessageCount += 1;
       await session.save();
-      console.log(`Incoming count incremented. Today: ${session.incomingCountToday}, Total: ${session.totalMessageCount}`);
+      console.log(
+        `Incoming count incremented. Today: ${session.incomingCountToday}, Total: ${session.totalMessageCount}`,
+      );
 
       // 3. Retrieve user's Bot Knowledge base
       const knowledge = await BotKnowledge.find({ userId });
@@ -248,11 +268,15 @@ export const initializeWhatsAppClient = async (userId) => {
       let replyText = "";
 
       if (knowledge.length === 0) {
-        replyText = "Maaf, saat ini belum ada informasi resmi yang tersedia di database kami.";
+        replyText =
+          "Maaf, saat ini belum ada informasi resmi yang tersedia di database kami.";
         console.log(`No knowledge base found. Using default reply.`);
       } else {
         const knowledgeBaseText = knowledge
-          .map((k, i) => `Entri ${i + 1}:\n[Kategori] ${k.category}\n[Judul] ${k.title}\n[Informasi] ${k.content}`)
+          .map(
+            (k, i) =>
+              `Entri ${i + 1}:\n[Kategori] ${k.category}\n[Judul] ${k.title}\n[Informasi] ${k.content}`,
+          )
           .join("\n\n");
 
         const systemPrompt = `Anda adalah AI WhatsApp Bot Asisten Dinas/Instansi resmi. Tugas Anda adalah membantu menjawab pertanyaan pelanggan dengan sopan, jelas, dan informatif berdasarkan data "Bot Knowledge Resmi" di bawah ini.
@@ -280,23 +304,32 @@ export const initializeWhatsAppClient = async (userId) => {
           replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
         } else {
           try {
-            console.log(`[WhatsApp Bot] Sending prompt to Mistral API for ${msg.from}...`);
+            console.log(
+              `[WhatsApp Bot] Sending prompt to Mistral API for ${msg.from}...`,
+            );
             const response = await openai.chat.completions.create({
               model: "mistral-small-latest",
               max_tokens: 150,
               messages: [
                 {
                   role: "user",
-                  content: systemPrompt
-                }
-              ]
+                  content: systemPrompt,
+                },
+              ],
             });
             replyText = response.choices[0].message.content.trim();
-            console.log(`[WhatsApp Bot] Mistral reply successfully generated for ${msg.from}: "${replyText}"`);
+            console.log(
+              `[WhatsApp Bot] Mistral reply successfully generated for ${msg.from}: "${replyText}"`,
+            );
           } catch (mistralErr) {
-            console.warn(`[WhatsApp Bot] ⚠ Gagal menggunakan Mistral untuk ${msg.from}, beralih ke Gemini sebagai fallback:`, mistralErr.message);
+            console.warn(
+              `[WhatsApp Bot] ⚠ Gagal menggunakan Mistral untuk ${msg.from}, beralih ke Gemini sebagai fallback:`,
+              mistralErr.message,
+            );
             try {
-              console.log(`[WhatsApp Bot] Sending prompt to Gemini API for ${msg.from} (with auto-retry support)...`);
+              console.log(
+                `[WhatsApp Bot] Sending prompt to Gemini API for ${msg.from} (with auto-retry support)...`,
+              );
 
               const maxAttempts = 3;
               let success = false;
@@ -304,16 +337,16 @@ export const initializeWhatsAppClient = async (userId) => {
               for (let attempt = 1; attempt <= maxAttempts; attempt++) {
                 try {
                   if (attempt > 1) {
-                    console.log(`Retrying Gemini API call (attempt ${attempt}/${maxAttempts})...`);
+                    console.log(
+                      `Retrying Gemini API call (attempt ${attempt}/${maxAttempts})...`,
+                    );
                   }
                   const res = await axios.post(
                     "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
                     {
                       contents: [
                         {
-                          parts: [
-                            { text: systemPrompt },
-                          ],
+                          parts: [{ text: systemPrompt }],
                         },
                       ],
                       generationConfig: {
@@ -325,15 +358,20 @@ export const initializeWhatsAppClient = async (userId) => {
                         "Content-Type": "application/json",
                         "X-goog-api-key": geminiApiKey,
                       },
-                    }
+                    },
                   );
 
-                  replyText = res.data.candidates[0].content.parts[0].text.trim();
-                  console.log(`[WhatsApp Bot] Gemini reply successfully generated on attempt ${attempt} for ${msg.from}: "${replyText}"`);
+                  replyText =
+                    res.data.candidates[0].content.parts[0].text.trim();
+                  console.log(
+                    `[WhatsApp Bot] Gemini reply successfully generated on attempt ${attempt} for ${msg.from}: "${replyText}"`,
+                  );
                   success = true;
                   break;
                 } catch (attemptErr) {
-                  console.warn(`[WhatsApp Bot] Gemini API attempt ${attempt} failed for ${msg.from}: ${attemptErr.response?.data?.error?.message || attemptErr.message}`);
+                  console.warn(
+                    `[WhatsApp Bot] Gemini API attempt ${attempt} failed for ${msg.from}: ${attemptErr.response?.data?.error?.message || attemptErr.message}`,
+                  );
                   if (attempt === maxAttempts) {
                     throw attemptErr;
                   }
@@ -342,8 +380,12 @@ export const initializeWhatsAppClient = async (userId) => {
                 }
               }
             } catch (aiErr) {
-              console.error(`[WhatsApp Bot] Gemini API final error after all attempts for ${msg.from}:`, aiErr.message);
-              replyText = "Maaf, asisten AI mengalami kegagalan sistem saat memproses pesan Anda.";
+              console.error(
+                `[WhatsApp Bot] Gemini API final error after all attempts for ${msg.from}:`,
+                aiErr.message,
+              );
+              replyText =
+                "Maaf, asisten AI mengalami kegagalan sistem saat memproses pesan Anda.";
             }
           }
         }
@@ -363,21 +405,29 @@ export const initializeWhatsAppClient = async (userId) => {
             totalMessageCount: 1, // Add 1 for the outgoing reply (making it 2 total for incoming+outgoing)
           },
         },
-        { returnDocument: "after" }
+        { returnDocument: "after" },
       );
       console.log(`Updated replied counts in database.`);
-
     } catch (err) {
-      console.error(`Error processing message for user ${userId}:`, err.message);
+      console.error(
+        `Error processing message for user ${userId}:`,
+        err.message,
+      );
     }
   });
 
   client.initialize().catch(async (err) => {
-    console.error(`Failed to initialize WhatsApp client for user ${userId}:`, err.message);
+    console.error(
+      `Failed to initialize WhatsApp client for user ${userId}:`,
+      err.message,
+    );
     try {
       await client.destroy();
     } catch (destroyErr) {
-      console.warn(`Error destroying client after init failure for user ${userId}:`, destroyErr.message);
+      console.warn(
+        `Error destroying client after init failure for user ${userId}:`,
+        destroyErr.message,
+      );
     }
     activeClients.delete(userId.toString());
     await WhatsAppSession.findOneAndUpdate(
@@ -385,8 +435,13 @@ export const initializeWhatsAppClient = async (userId) => {
       {
         status: "disconnected",
         qrCode: "",
-      }
-    ).catch((dbErr) => console.error(`Error resetting session status after init failure:`, dbErr.message));
+      },
+    ).catch((dbErr) =>
+      console.error(
+        `Error resetting session status after init failure:`,
+        dbErr.message,
+      ),
+    );
   });
 
   activeClients.set(userId.toString(), client);
@@ -403,7 +458,10 @@ export const destroyWhatsAppClient = async (userId) => {
       await client.destroy();
       console.log(`WhatsApp client destroyed for user ${userId}`);
     } catch (err) {
-      console.error(`Error destroying WhatsApp client for user ${userId}:`, err.message);
+      console.error(
+        `Error destroying WhatsApp client for user ${userId}:`,
+        err.message,
+      );
     }
     activeClients.delete(userId.toString());
   }
@@ -414,7 +472,7 @@ export const destroyWhatsAppClient = async (userId) => {
       status: "disconnected",
       qrCode: "",
     },
-    { returnDocument: "after" }
+    { returnDocument: "after" },
   );
 };
 
@@ -435,7 +493,10 @@ export const cleanupAllClients = async () => {
       await client.destroy();
       console.log(`WhatsApp client successfully destroyed for user ${userId}`);
     } catch (err) {
-      console.error(`Failed to destroy client for user ${userId} during cleanup:`, err.message);
+      console.error(
+        `Failed to destroy client for user ${userId} during cleanup:`,
+        err.message,
+      );
     }
   }
   activeClients.clear();

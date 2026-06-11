@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const API_KEY = process.env.BAYAR_GG_API_KEY || "API-5d864b221d780ce5c29c6eae56cbf860afe3d26d8afe4956";
+const API_KEY =
+  process.env.BAYAR_GG_API_KEY ||
+  "API-5d864b221d780ce5c29c6eae56cbf860afe3d26d8afe4956";
 const CREATE_PAYMENT_URL = "https://www.bayar.gg/api/create-payment.php";
 const CHECK_PAYMENT_URL = "https://www.bayar.gg/api/check-payment.php";
 
@@ -27,18 +29,22 @@ export const createBayarGGPayment = async (amount, description) => {
           "Content-Type": "application/json",
           "X-API-Key": API_KEY,
         },
-      }
+      },
     );
 
     if (!res.data || !res.data.success) {
-      throw new Error(res.data?.message || "Gagal membuat invoice pembayaran bayar.gg");
+      throw new Error(
+        res.data?.message || "Gagal membuat invoice pembayaran bayar.gg",
+      );
     }
 
     return res.data.data;
   } catch (err) {
     // FALLBACK MOCK MODE (if external API is offline or returns error in test/dev environment)
     if (process.env.NODE_ENV !== "production") {
-      console.warn("⚠️ API bayar.gg gagal / nonaktif. Menggunakan Mock Response...");
+      console.warn(
+        "⚠️ API bayar.gg gagal / nonaktif. Menggunakan Mock Response...",
+      );
       const mockInvoice = `BAYAR-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
       return {
         invoice_id: mockInvoice,
@@ -49,10 +55,13 @@ export const createBayarGGPayment = async (amount, description) => {
         payment_method: "qris_bayar_gg",
         payment_method_label: "QRIS BAYAR GG (MOCK)",
         final_amount: amount,
-        qris_dynamic_image_url: "https://www.bayar.gg/qris-info/api/qr.php?text=000201...",
+        qris_dynamic_image_url:
+          "https://www.bayar.gg/qris-info/api/qr.php?text=000201...",
       };
     }
-    const errorDetails = err.response?.data ? JSON.stringify(err.response.data) : err.message;
+    const errorDetails = err.response?.data
+      ? JSON.stringify(err.response.data)
+      : err.message;
     throw new Error(`Integrasi Pembayaran Gagal: ${errorDetails}`);
   }
 };
@@ -71,13 +80,20 @@ export const checkBayarGGPayment = async (invoiceId) => {
     });
 
     if (!res.data || !res.data.success) {
-      throw new Error(res.data?.message || "Gagal mengecek status pembayaran bayar.gg");
+      throw new Error(
+        res.data?.message || "Gagal mengecek status pembayaran bayar.gg",
+      );
     }
 
     return res.data;
   } catch (err) {
-    if (process.env.NODE_ENV !== "production" || invoiceId.startsWith("BAYAR-")) {
-      console.warn("⚠️ API bayar.gg gagal / nonaktif. Menggunakan Mock Check Status (Auto-Paid)...");
+    if (
+      process.env.NODE_ENV !== "production" ||
+      invoiceId.startsWith("BAYAR-")
+    ) {
+      console.warn(
+        "⚠️ API bayar.gg gagal / nonaktif. Menggunakan Mock Check Status (Auto-Paid)...",
+      );
       return {
         success: true,
         invoice_id: invoiceId,

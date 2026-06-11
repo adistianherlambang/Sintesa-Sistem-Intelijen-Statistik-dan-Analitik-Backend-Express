@@ -67,20 +67,24 @@ const saveDebugJSON = (data, index) => {
 export const fetchBPS = async () => {
   try {
     // 1. Validasi Environment dan Koneksi MongoDB
-    const mongoURI = process.env.MONGO_URL; 
+    const mongoURI = process.env.MONGO_URL;
     if (!mongoURI) {
-      throw new Error(`MONGO_URL tidak ditemukan! Pastikan file .env ada di: ${rootEnvPath}`);
+      throw new Error(
+        `MONGO_URL tidak ditemukan! Pastikan file .env ada di: ${rootEnvPath}`,
+      );
     }
-    
+
     console.log("⏳ Connecting to MongoDB...");
     await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 5000 
+      serverSelectionTimeoutMS: 5000,
     });
     console.log("🚀 Connected to MongoDB successfully\n");
 
     // 2. Load Configuration URLs
     if (!fs.existsSync(configPath)) {
-      throw new Error(`File config fetchBPS.json tidak ditemukan di: ${configPath}`);
+      throw new Error(
+        `File config fetchBPS.json tidak ditemukan di: ${configPath}`,
+      );
     }
     const urls = JSON.parse(fs.readFileSync(configPath, "utf-8"));
 
@@ -130,7 +134,7 @@ export const fetchBPS = async () => {
           }
 
           console.log(`\n=== FETCH ${index + 1} SUCCESS ===`);
-          console.log(`Status API BPS: ${data.status || "OK"}`); 
+          console.log(`Status API BPS: ${data.status || "OK"}`);
 
           stopLoading(`Success ${index + 1}/${urls.length}`);
 
@@ -173,7 +177,9 @@ export const fetchBPS = async () => {
       }
 
       if (!varVal) {
-        console.log(`⚠ Skip indeks ke-${index + 1}: Struktur 'var.val' tidak valid atau kosong.`);
+        console.log(
+          `⚠ Skip indeks ke-${index + 1}: Struktur 'var.val' tidak valid atau kosong.`,
+        );
         continue;
       }
 
@@ -183,23 +189,25 @@ export const fetchBPS = async () => {
       const createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
 
       try {
-        startLoading(`Saving ${index + 1}/${results.length} (ID Var: ${varVal})`);
+        startLoading(
+          `Saving ${index + 1}/${results.length} (ID Var: ${varVal})`,
+        );
 
         // Hanya meng-update createdAt dan datacontent
         await APIDataBPS.findOneAndUpdate(
           {
-            "var.val": varVal 
+            "var.val": varVal,
           },
           {
             $set: {
               datacontent: datacontent,
-              createdAt: createdAt
-            }
+              createdAt: createdAt,
+            },
           },
           {
-            upsert: true,            // Tetap buat baru jika data var.val belum ada di DB sama sekali
-            returnDocument: 'after', 
-          }
+            upsert: true, // Tetap buat baru jika data var.val belum ada di DB sama sekali
+            returnDocument: "after",
+          },
         );
 
         stopLoading(`Saved ${index + 1}/${results.length} (ID Var: ${varVal})`);

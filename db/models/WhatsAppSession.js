@@ -54,7 +54,7 @@ const WhatsAppSessionSchema = new mongoose.Schema(
       default: "23:59",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("WhatsAppSession", WhatsAppSessionSchema);

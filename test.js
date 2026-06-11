@@ -5,7 +5,7 @@ dotenv.config();
 
 const client = new OpenAI({
   apiKey: "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
-  baseURL: "https://api.mistral.ai/v1"
+  baseURL: "https://api.mistral.ai/v1",
 });
 
 const response = await client.chat.completions.create({
@@ -13,9 +13,9 @@ const response = await client.chat.completions.create({
   messages: [
     {
       role: "user",
-      content: "halo! test mistral tulis 200 kata"
-    }
-  ]
+      content: "halo! test mistral tulis 200 kata",
+    },
+  ],
 });
 
 console.log(response.choices[0].message.content);

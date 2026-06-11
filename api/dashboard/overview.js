@@ -2,12 +2,29 @@ import e from "express";
 import dotenv from "dotenv";
 
 // Controllers (pure functions)
-import { getInflasiByKota, getAllInflasi } from "../../controller/dashboard/inflasiController.js";
-import { getIhkByKota, getAllIhk } from "../../controller/dashboard/ihkController.js";
-import { getKomoditasByKota, getAllKomoditas } from "../../controller/dashboard/komoditasController.js";
-import { testBPSAPI, getAllDashboard } from "../../controller/dashboard/dashboardController.js";
+import {
+  getInflasiByKota,
+  getAllInflasi,
+} from "../../controller/dashboard/inflasiController.js";
+import {
+  getIhkByKota,
+  getAllIhk,
+} from "../../controller/dashboard/ihkController.js";
+import {
+  getKomoditasByKota,
+  getAllKomoditas,
+} from "../../controller/dashboard/komoditasController.js";
+import {
+  testBPSAPI,
+  getAllDashboard,
+} from "../../controller/dashboard/dashboardController.js";
 import { getAISummaryByKota } from "../../controller/dashboard/AISummaryController.js";
-import { parseAndVerifyDataset, generateBRS, generateSummary, generateAndSaveBRS } from "../../controller/dashboard/analysisController.js";
+import {
+  parseAndVerifyDataset,
+  generateBRS,
+  generateSummary,
+  generateAndSaveBRS,
+} from "../../controller/dashboard/analysisController.js";
 import { authMiddleware } from "../../controller/user/authMiddleware.js";
 import ForecastResult from "../../db/models/ForecastResult.js";
 
@@ -47,12 +64,15 @@ router.post("/forecast/save", async (req, res) => {
         $set: {
           regionVal_ihk,
           regionVal_inflasi,
-          forecast
-        }
+          forecast,
+        },
       },
-      { upsert: true, returnDocument: "after" }
+      { upsert: true, returnDocument: "after" },
     );
-    res.json({ message: `Hasil peramalan untuk ${kota} berhasil disimpan.`, data: doc });
+    res.json({
+      message: `Hasil peramalan untuk ${kota} berhasil disimpan.`,
+      data: doc,
+    });
   } catch (err) {
     handleError(res, err);
   }
@@ -63,7 +83,9 @@ router.get("/forecast/:kota", async (req, res) => {
     const { kota } = req.params;
     const doc = await ForecastResult.findOne({ kota });
     if (!doc) {
-      return res.status(404).json({ message: `Hasil peramalan untuk ${kota} tidak ditemukan.` });
+      return res
+        .status(404)
+        .json({ message: `Hasil peramalan untuk ${kota} tidak ditemukan.` });
     }
     res.json(doc);
   } catch (err) {
@@ -73,7 +95,10 @@ router.get("/forecast/:kota", async (req, res) => {
 
 router.get("/forecast", async (req, res) => {
   try {
-    const list = await ForecastResult.find({}, "kota regionVal_ihk regionVal_inflasi updatedAt");
+    const list = await ForecastResult.find(
+      {},
+      "kota regionVal_ihk regionVal_inflasi updatedAt",
+    );
     res.json(list);
   } catch (err) {
     handleError(res, err);

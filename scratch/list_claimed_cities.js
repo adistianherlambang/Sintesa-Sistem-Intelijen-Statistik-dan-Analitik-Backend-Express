@@ -6,17 +6,20 @@ dotenv.config({ path: "../.env" });
 
 async function check() {
   try {
-    const mongoUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sintesa";
+    const mongoUrl =
+      process.env.MONGO_URL || "mongodb://127.0.0.1:27017/sintesa";
     await mongoose.connect(mongoUrl);
-    
+
     const users = await User.find({ location: { $ne: null } });
-    
+
     if (users.length === 0) {
       console.log("Belum ada wilayah/kota yang diklaim.");
     } else {
       console.log("=== DAFTAR WILAYAH/KOTA YANG SUDAH DIKLAIM ===");
       users.forEach((user, index) => {
-        console.log(`${index + 1}. Kota/Kabupaten: ${user.location?.name || "Tidak diketahui"}`);
+        console.log(
+          `${index + 1}. Kota/Kabupaten: ${user.location?.name || "Tidak diketahui"}`,
+        );
         console.log(`   ID Wilayah: ${user.location?.id}`);
         console.log(`   Nama Instansi: ${user.profile?.name || "Tidak diisi"}`);
         console.log(`   Email Admin: ${user.email}`);

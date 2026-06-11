@@ -2,7 +2,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import { initializeWhatsAppClient, getActiveClient } from "../services/whatsappService.js";
+import {
+  initializeWhatsAppClient,
+  getActiveClient,
+} from "../services/whatsappService.js";
 import WhatsAppSession from "../db/models/WhatsAppSession.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,16 +20,21 @@ const run = async () => {
   console.log("Connected to MongoDB");
 
   const userId = "6a266560829188d02cde63fa";
-  
+
   // Reset session status to disconnected first to ensure a clean slate
   console.log("Resetting WhatsApp session status to disconnected...");
-  await WhatsAppSession.findOneAndUpdate({ userId }, { status: "disconnected", qrCode: "" });
+  await WhatsAppSession.findOneAndUpdate(
+    { userId },
+    { status: "disconnected", qrCode: "" },
+  );
 
   console.log(`Initializing WhatsApp client for user ${userId}...`);
   const client = await initializeWhatsAppClient(userId);
 
   client.on("qr", () => {
-    console.log("EVENT: QR received! Please open frontend, refresh session, and scan.");
+    console.log(
+      "EVENT: QR received! Please open frontend, refresh session, and scan.",
+    );
   });
 
   client.on("authenticated", () => {

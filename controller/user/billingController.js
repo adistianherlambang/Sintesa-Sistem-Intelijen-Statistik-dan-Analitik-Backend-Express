@@ -1,6 +1,9 @@
 import BillingTransaction from "../../db/models/BillingTransaction.js";
 import Subscription from "../../db/models/Subscription.js";
-import { createBayarGGPayment, checkBayarGGPayment } from "../../services/paymentService.js";
+import {
+  createBayarGGPayment,
+  checkBayarGGPayment,
+} from "../../services/paymentService.js";
 import { logActivity } from "./activityController.js";
 
 // Subscription Plans config
@@ -70,7 +73,8 @@ export const initiatePayment = async (userId, planId) => {
     amount: plan.amount,
     finalAmount: paymentData.final_amount,
     paymentUrl: paymentData.payment_url,
-    qrisImageUrl: paymentData.qris_dynamic_image_url || paymentData.qris_static_image_url,
+    qrisImageUrl:
+      paymentData.qris_dynamic_image_url || paymentData.qris_static_image_url,
     status: "pending",
   });
   await transaction.save();
@@ -81,7 +85,8 @@ export const initiatePayment = async (userId, planId) => {
       invoiceId: paymentData.invoice_id,
       finalAmount: paymentData.final_amount,
       paymentUrl: paymentData.payment_url,
-      qrisImageUrl: paymentData.qris_dynamic_image_url || paymentData.qris_static_image_url,
+      qrisImageUrl:
+        paymentData.qris_dynamic_image_url || paymentData.qris_static_image_url,
       expiresAt: paymentData.expires_at,
     },
   };
@@ -116,21 +121,25 @@ export const verifyPayment = async (userId, invoiceId) => {
   if (checkData.status === "paid") {
     // 1. Update Transaction to paid
     transaction.status = "paid";
-    transaction.paidAt = checkData.paid_at ? new Date(checkData.paid_at) : new Date();
+    transaction.paidAt = checkData.paid_at
+      ? new Date(checkData.paid_at)
+      : new Date();
     await transaction.save();
 
     // 2. Find and activate Subscription
-    const subscription = await Subscription.findById(transaction.subscriptionId);
+    const subscription = await Subscription.findById(
+      transaction.subscriptionId,
+    );
     if (subscription) {
       // Deactivate any other active subscriptions
       await Subscription.updateMany(
         { userId, status: "active", _id: { $ne: subscription._id } },
-        { $set: { status: "expired" } }
+        { $set: { status: "expired" } },
       );
 
       subscription.status = "active";
       subscription.startedAt = new Date();
-      
+
       const plan = PLANS[subscription.subscriptionId];
       if (plan) {
         const expiredAt = new Date();
@@ -140,12 +149,18 @@ export const verifyPayment = async (userId, invoiceId) => {
       }
       await subscription.save();
 
-      await logActivity(userId, `Pembayaran invoice ${invoiceId} lunas. Paket ${subscription.subscriptionId} aktif.`);
+      await logActivity(
+        userId,
+        `Pembayaran invoice ${invoiceId} lunas. Paket ${subscription.subscriptionId} aktif.`,
+      );
       return { transaction, subscription };
     }
   }
 
-  return { transaction, message: `Status pembayaran saat ini: ${checkData.status}` };
+  return {
+    transaction,
+    message: `Status pembayaran saat ini: ${checkData.status}`,
+  };
 };
 
 /**

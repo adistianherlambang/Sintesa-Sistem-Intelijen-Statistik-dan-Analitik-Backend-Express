@@ -5,13 +5,7 @@ import { sort, getDateInfo, findRegionByDataset } from "./helpers.js";
 /**
  * Helper: Process komoditas data untuk satu item
  */
-const processKomoditasItem = async (
-  komoditasItem,
-  kota,
-  month,
-  year,
-  yoy,
-) => {
+const processKomoditasItem = async (komoditasItem, kota, month, year, yoy) => {
   const doc = await APIDataBPS.findOne({
     "var.val": komoditasItem.var,
     "turvar.val": komoditasItem.turvar,
@@ -165,9 +159,7 @@ const processKomoditasItem = async (
 
     const sortedResultYoy = sort(resultYoy);
     const mainDataYoy =
-      sortedResultYoy && sortedResultYoy.length > 0
-        ? sortedResultYoy[0]
-        : null;
+      sortedResultYoy && sortedResultYoy.length > 0 ? sortedResultYoy[0] : null;
 
     yoyItem = {
       label: komoditasItem.nama,

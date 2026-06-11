@@ -12,7 +12,10 @@ import api from "./api/api.js";
 import { startBPSCron } from "./cronjob/cronBPSAPI.js";
 
 // WhatsApp Bot service reconnect helpers
-import { initializeWhatsAppClient, cleanupAllClients } from "./services/whatsappService.js";
+import {
+  initializeWhatsAppClient,
+  cleanupAllClients,
+} from "./services/whatsappService.js";
 import WhatsAppSession from "./db/models/WhatsAppSession.js";
 
 dotenv.config();
@@ -41,23 +44,32 @@ const reconnectActiveSessions = async () => {
     // Reset connecting status to disconnected on startup to prevent headless browsers hanging forever
     const resetResult = await WhatsAppSession.updateMany(
       { status: "connecting" },
-      { $set: { status: "disconnected", qrCode: "" } }
+      { $set: { status: "disconnected", qrCode: "" } },
     );
     if (resetResult.modifiedCount > 0) {
-      console.log(`[Startup] Reset ${resetResult.modifiedCount} stale connecting sessions to disconnected.`);
+      console.log(
+        `[Startup] Reset ${resetResult.modifiedCount} stale connecting sessions to disconnected.`,
+      );
     }
 
     // Reconnect only previously connected active sessions
     const activeSessions = await WhatsAppSession.find({ status: "connected" });
-    console.log(`Auto-reconnecting ${activeSessions.length} active WhatsApp sessions...`);
-    
+    console.log(
+      `Auto-reconnecting ${activeSessions.length} active WhatsApp sessions...`,
+    );
+
     // Stagger client initialization to prevent CPU/RAM spikes on boot
     for (let i = 0; i < activeSessions.length; i++) {
       const session = activeSessions[i];
       setTimeout(() => {
-        console.log(`[Startup] Initializing auto-reconnect for user ${session.userId}...`);
+        console.log(
+          `[Startup] Initializing auto-reconnect for user ${session.userId}...`,
+        );
         initializeWhatsAppClient(session.userId).catch((err) => {
-          console.error(`Failed auto-reconnect for user ${session.userId}:`, err.message);
+          console.error(
+            `Failed auto-reconnect for user ${session.userId}:`,
+            err.message,
+          );
         });
       }, i * 5000); // 5 seconds interval
     }

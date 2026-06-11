@@ -23,7 +23,7 @@ const run = async () => {
   // Deactivate any existing active subscriptions
   await Subscription.updateMany(
     { userId: user._id, status: "active" },
-    { $set: { status: "expired" } }
+    { $set: { status: "expired" } },
   );
   console.log("Expired existing active subscriptions.");
 
@@ -41,10 +41,15 @@ const run = async () => {
   });
 
   await premiumSub.save();
-  console.log(`Successfully activated "Bot WA + Analisis (Tahunan)" package for ${user.email}!`);
-  
+  console.log(
+    `Successfully activated "Bot WA + Analisis (Tahunan)" package for ${user.email}!`,
+  );
+
   // Verify
-  const activeSub = await Subscription.findOne({ userId: user._id, status: "active" });
+  const activeSub = await Subscription.findOne({
+    userId: user._id,
+    status: "active",
+  });
   console.log("Active Subscription details:", activeSub);
 
   await mongoose.disconnect();

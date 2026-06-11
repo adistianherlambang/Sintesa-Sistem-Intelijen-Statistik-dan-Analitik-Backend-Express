@@ -183,10 +183,14 @@ export const findRegionByDataset = (vervar, searchName, datasetType) => {
   if (!city) return null;
 
   // Get the target dataset details
-  const targetData = datasetType === "inflasi" ? city.inflasi : city.ihk_komoditas;
+  const targetData =
+    datasetType === "inflasi" ? city.inflasi : city.ihk_komoditas;
   if (!targetData) return null; // e.g. Dili in ihk_komoditas
 
   // Find exact match in vervar list (case-insensitive)
   const targetUpper = targetData.label.toUpperCase().trim();
-  return vervar.find((item) => item.label.toUpperCase().trim() === targetUpper) || null;
+  return (
+    vervar.find((item) => item.label.toUpperCase().trim() === targetUpper) ||
+    null
+  );
 };

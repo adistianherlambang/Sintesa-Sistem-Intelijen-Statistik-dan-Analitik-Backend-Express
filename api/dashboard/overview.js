@@ -69,16 +69,14 @@ router.get("/forecast/:kota", async (req, res) => {
   }
 });
 
-router.
-
-  router.get("/forecast", async (req, res) => {
-    try {
-      const list = await ForecastResult.find({}, "kota regionVal_ihk regionVal_inflasi updatedAt");
-      res.json(list);
-    } catch (err) {
-      handleError(res, err);
-    }
-  });
+router.get("/forecast", async (req, res) => {
+  try {
+    const list = await ForecastResult.find({}, "kota regionVal_ihk regionVal_inflasi updatedAt");
+    res.json(list);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
 
 // ============= INFLASI ROUTES =============
 router.post("/inflasi", async (req, res) => {

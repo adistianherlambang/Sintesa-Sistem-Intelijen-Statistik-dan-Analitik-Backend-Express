@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 import { authMiddleware } from "../../controller/user/authMiddleware.js";
 import {
   registerUser,
@@ -148,6 +149,24 @@ router.get(
     
     await logActivity(req.user._id, `Mengunduh file analisis IDML untuk riwayat ID: ${id}`);
     res.download(filePath, filename);
+  })
+);
+
+router.get(
+  "/analysis/:id/download/pdf",
+  authMiddleware,
+  asyncRoute(async (req, res) => {
+    const { id } = req.params;
+    const { filePath, filename } = await getAnalysisFilePath(req.user._id, id);
+    const pdfFilePath = filePath.replace(/\.idml$/, ".pdf");
+    const pdfFilename = filename.replace(/\.idml$/, ".pdf");
+    
+    if (!fs.existsSync(pdfFilePath)) {
+      return res.status(404).json({ message: "File PDF tidak ditemukan di server" });
+    }
+    
+    await logActivity(req.user._id, `Mengunduh file analisis PDF untuk riwayat ID: ${id}`);
+    res.download(pdfFilePath, pdfFilename);
   })
 );
 

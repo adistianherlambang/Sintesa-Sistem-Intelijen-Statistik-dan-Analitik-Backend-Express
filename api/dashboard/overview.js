@@ -7,7 +7,8 @@ import { getIhkByKota, getAllIhk } from "../../controller/dashboard/ihkControlle
 import { getKomoditasByKota, getAllKomoditas } from "../../controller/dashboard/komoditasController.js";
 import { testBPSAPI, getAllDashboard } from "../../controller/dashboard/dashboardController.js";
 import { getAISummaryByKota } from "../../controller/dashboard/AISummaryController.js";
-import { parseAndVerifyDataset, generateBRS } from "../../controller/dashboard/analysisController.js";
+import { parseAndVerifyDataset, generateBRS, generateSummary, generateAndSaveBRS } from "../../controller/dashboard/analysisController.js";
+import { authMiddleware } from "../../controller/user/authMiddleware.js";
 import ForecastResult from "../../db/models/ForecastResult.js";
 
 dotenv.config();
@@ -151,6 +152,8 @@ router.post("/aisummary", async (req, res) => {
 
 router.post("/upload-dataset", parseAndVerifyDataset);
 router.post("/generate-brs", generateBRS);
+router.post("/generate-summary", generateSummary);
+router.post("/generate-and-save-brs", authMiddleware, generateAndSaveBRS);
 
 // ============= TEST & GENERAL ROUTES =============
 router.post("/testapi", async (req, res) => {

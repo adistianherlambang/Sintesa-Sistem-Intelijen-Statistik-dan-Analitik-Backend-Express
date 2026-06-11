@@ -13,6 +13,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "adm-zip": "^0.5.17",
     "axios": "^1.16.1",
     "cloudscraper": "^4.6.0",
     "cors": "^2.8.6",
@@ -28,7 +29,8 @@
     "puppeteer": "^25.0.2",
     "qrcode": "^1.5.4",
     "socket.io": "^4.8.3",
-    "whatsapp-web.js": "^1.34.7"
+    "whatsapp-web.js": "^1.34.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "prettier": "^3.8.3"

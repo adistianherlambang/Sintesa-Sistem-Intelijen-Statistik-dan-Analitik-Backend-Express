@@ -82,20 +82,35 @@ export const getIhkInfografisByKota = async (kota) => {
   const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key));
   const { now, compare, then } = getLastTwoValues(sorted);
 
-  const getShortMonthYearLabel = (key) => {
-    const yearCode = parseInt(key.slice(regionVal.length + 6, regionVal.length + 8), 10);
-    const monthCode = parseInt(key.slice(regionVal.length + 8), 10);
+  const parseIhkKey = (key, regVal) => {
+    const yearCode = parseInt(key.slice(regVal.length + 6, regVal.length + 8), 10);
+    const monthCode = parseInt(key.slice(regVal.length + 8), 10);
     const year = yearCode < 100 ? 2000 + yearCode : 1900 + yearCode;
+    return { year, month: monthCode };
+  };
+
+  const getShortMonthYearLabel = (key) => {
+    const { year, month } = parseIhkKey(key, regionVal);
     const monthNames = [
       "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", 
       "Jul", "Agu", "Sep", "Okt", "Nov", "Des"
     ];
-    const shortMonth = monthNames[monthCode - 1] || "";
+    const shortMonth = monthNames[month - 1] || "";
     const shortYear = String(year).slice(-2);
     return `${shortMonth} ${shortYear}`;
   };
 
-  const ihkLast13 = sorted.slice(-13).map((item) => ({
+  const combined = [...result, ...resultYoy];
+  const sortedCombined = combined.sort((a, b) => {
+    const parsedA = parseIhkKey(a.key, regionVal);
+    const parsedB = parseIhkKey(b.key, regionVal);
+    if (parsedA.year !== parsedB.year) {
+      return parsedA.year - parsedB.year;
+    }
+    return parsedA.month - parsedB.month;
+  });
+
+  const ihkLast13 = sortedCombined.slice(-13).map((item) => ({
     label: getShortMonthYearLabel(item.key),
     value: item.value,
   }));

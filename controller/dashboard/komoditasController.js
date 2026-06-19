@@ -269,11 +269,160 @@ export const getKomoditasByKota = async (kota) => {
     }, hierarki[0]);
   }
 
+  const getShortLabel = (label) => {
+    const mapping = {
+      "Makanan, Minuman dan Tembakau": "Makanan",
+      "Pakaian dan Alas Kaki": "Pakaian",
+      "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga": "Perumahan",
+      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga": "Peralatan RT",
+      "Kesehatan": "Kesehatan",
+      "Informasi, Komunikasi dan Jasa Keuangan": "Komunikasi",
+      "Transportasi": "Transportasi",
+      "Rekreasi, Olahraga dan Budaya": "Rekreasi",
+      "Pendidikan": "Pendidikan",
+      "Penyediaan Makanan dan Minuman / Restoran": "Restoran",
+      "Perawatan Pribadi dan Jasa Lainnya": "Perawatan",
+    };
+    return mapping[label] || label;
+  };
+
+  const top5Mom = [...hierarki]
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const top5Yoy = [...yoyList]
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
   return {
     totalKomoditas: hierarki.length,
     hierarki,
     yoy: yoyList,
     biggest,
+  };
+};
+
+export const getKomoditasInfografisByKota = async (kota) => {
+  if (!kota) {
+    throw new Error("kota wajib diisi");
+  }
+
+  const sampleDoc = await APIDataBPS.findOne({
+    "var.val": varKelompokIHK[0].var,
+    "turvar.val": varKelompokIHK[0].turvar,
+  })
+    .select("vervar")
+    .lean();
+
+  if (!sampleDoc) {
+    throw new Error("data komoditas tidak ditemukan");
+  }
+
+  const region = findRegionByDataset(sampleDoc.vervar, kota, "ihk_komoditas");
+  if (!region) {
+    throw new Error("kota tidak ditemukan");
+  }
+
+  const resolvedKota = region.label;
+
+  const { month, year, yoy } = getDateInfo();
+  let hierarki = [];
+  let yoyList = [];
+  let biggest = null;
+
+  for (const i in varKelompokIHK) {
+    const result = await processKomoditasItem(
+      varKelompokIHK[i],
+      resolvedKota,
+      month,
+      year,
+      yoy,
+    );
+
+    if (result) {
+      hierarki.push(result.hierarki);
+      if (result.yoyItem) {
+        yoyList.push(result.yoyItem);
+      }
+    }
+  }
+
+  for (const key in hierarki) {
+    const subsObj = hierarki[key].sub || {};
+    hierarki[key].sub = Object.entries(subsObj)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  for (const key in yoyList) {
+    const subsObjYoy = yoyList[key].sub || {};
+    yoyList[key].sub = Object.entries(subsObjYoy)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  if (hierarki.length > 0) {
+    biggest = hierarki.reduce((max, item) => {
+      const currentVal = parseFloat(item.value) || 0;
+      const maxVal = parseFloat(max.value) || 0;
+      return currentVal > maxVal ? item : max;
+    }, hierarki[0]);
+  }
+
+  const getShortLabel = (label) => {
+    const mapping = {
+      "Makanan, Minuman dan Tembakau": "Makanan",
+      "Pakaian dan Alas Kaki": "Pakaian",
+      "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga": "Perumahan",
+      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga": "Peralatan RT",
+      "Kesehatan": "Kesehatan",
+      "Informasi, Komunikasi dan Jasa Keuangan": "Komunikasi",
+      "Transportasi": "Transportasi",
+      "Rekreasi, Olahraga dan Budaya": "Rekreasi",
+      "Pendidikan": "Pendidikan",
+      "Penyediaan Makanan dan Minuman / Restoran": "Restoran",
+      "Perawatan Pribadi dan Jasa Lainnya": "Perawatan",
+    };
+    return mapping[label] || label;
+  };
+
+  const top5Mom = [...hierarki]
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const top5Yoy = [...yoyList]
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  return {
+    totalKomoditas: hierarki.length,
+    hierarki,
+    yoy: yoyList,
+    biggest,
+    top5Mom,
+    top5Yoy,
   };
 };
 

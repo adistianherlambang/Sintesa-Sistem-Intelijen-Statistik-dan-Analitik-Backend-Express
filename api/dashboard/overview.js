@@ -5,14 +5,17 @@ import dotenv from "dotenv";
 import {
   getInflasiByKota,
   getAllInflasi,
+  getInflasiInfografisByKota,
 } from "../../controller/dashboard/inflasiController.js";
 import {
   getIhkByKota,
   getAllIhk,
+  getIhkInfografisByKota,
 } from "../../controller/dashboard/ihkController.js";
 import {
   getKomoditasByKota,
   getAllKomoditas,
+  getKomoditasInfografisByKota,
 } from "../../controller/dashboard/komoditasController.js";
 import {
   testBPSAPI,
@@ -116,6 +119,16 @@ router.post("/inflasi", async (req, res) => {
   }
 });
 
+router.post("/inflasi-infografis", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getInflasiInfografisByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
 router.get("/inflasi", async (req, res) => {
   try {
     const result = await getAllInflasi();
@@ -130,6 +143,16 @@ router.post("/ihk", async (req, res) => {
   try {
     const { kota } = req.body;
     const result = await getIhkByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/ihk-infografis", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getIhkInfografisByKota(kota);
     res.json(result);
   } catch (err) {
     handleError(res, err);
@@ -159,6 +182,16 @@ router.post("/komoditas", async (req, res) => {
   try {
     const { kota } = req.body;
     const result = await getKomoditasByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/komoditas-infografis", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getKomoditasInfografisByKota(kota);
     res.json(result);
   } catch (err) {
     handleError(res, err);

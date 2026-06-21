@@ -1,6 +1,7 @@
 import express from "express";
 import Infografis from "../../db/models/Infografis.js";
 import { authMiddleware } from "../../controller/user/authMiddleware.js";
+import { logActivity } from "../../controller/user/activityController.js";
 
 const router = express.Router();
 
@@ -64,6 +65,7 @@ router.post(
     });
 
     await newInfografis.save();
+    await logActivity(req.user._id, "Membuat infografis baru");
 
     res.status(201).json({
       message: "Infografis berhasil dibuat",
@@ -91,6 +93,7 @@ router.put(
     if (!updated) {
       return res.status(404).json({ message: "Infografis tidak ditemukan atau akses ditolak" });
     }
+    await logActivity(req.user._id, "Memperbarui data infografis");
 
     res.json({
       message: "Infografis berhasil diperbarui",
@@ -115,6 +118,7 @@ router.delete(
     if (!deleted) {
       return res.status(404).json({ message: "Infografis tidak ditemukan atau akses ditolak" });
     }
+    await logActivity(req.user._id, "Menghapus infografis");
 
     res.json({ message: "Infografis berhasil dihapus" });
   })

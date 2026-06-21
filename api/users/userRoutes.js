@@ -236,10 +236,6 @@ router.post(
   asyncRoute(async (req, res) => {
     const { planId } = req.body;
     const result = await initiatePayment(req.user._id, planId);
-    await logActivity(
-      req.user._id,
-      `Memulai pembayaran paket langganan: ${planId}`,
-    );
     res.status(201).json(result);
   }),
 );

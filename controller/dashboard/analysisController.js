@@ -6,6 +6,7 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import puppeteer from "puppeteer";
 import AnalysisHistory from "../../db/models/AnalysisHistory.js";
+import { logActivity } from "../user/activityController.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -549,6 +550,8 @@ export const generateAndSaveBRS = async (req, res) => {
       analysisFile: idmlFilename,
     });
     await history.save();
+
+    await logActivity(userId, `Melakukan analisis BRS: Laporan BRS IHK ${targetCity} - ${periodText}`);
 
     res.json({
       success: true,

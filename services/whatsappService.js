@@ -8,6 +8,8 @@ import Subscription from "../db/models/Subscription.js";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import { logActivity } from "../controller/user/activityController.js";
+
 
 import { OpenAI } from "openai";
 
@@ -144,6 +146,7 @@ export const initializeWhatsAppClient = async (userId) => {
         },
         { returnDocument: "after" },
       );
+      await logActivity(userId, "Berhasil menyambungkan akun WhatsApp");
     } catch (err) {
       console.error(`Error on ready for user ${userId}:`, err.message);
     }
@@ -169,6 +172,7 @@ export const initializeWhatsAppClient = async (userId) => {
         { returnDocument: "after" },
       );
       activeClients.delete(userId.toString());
+      await logActivity(userId, "Akun WhatsApp terputus");
     } catch (err) {
       console.error(`Error on disconnect for user ${userId}:`, err.message);
     }

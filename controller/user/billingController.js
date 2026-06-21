@@ -79,6 +79,9 @@ export const initiatePayment = async (userId, planId) => {
   });
   await transaction.save();
 
+  await logActivity(userId, `Menunggu pembayaran paket: ${plan.name}`);
+
+
   return {
     transaction,
     payment: {
@@ -151,7 +154,7 @@ export const verifyPayment = async (userId, invoiceId) => {
 
       await logActivity(
         userId,
-        `Pembayaran invoice ${invoiceId} lunas. Paket ${subscription.subscriptionId} aktif.`,
+        `Pembayaran berhasil. Paket ${plan ? plan.name : subscription.subscriptionId} aktif.`,
       );
       return { transaction, subscription };
     }

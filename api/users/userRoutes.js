@@ -185,7 +185,7 @@ router.get(
 
     await logActivity(
       req.user._id,
-      `Mengunduh file analisis PDF untuk riwayat ID: ${id}`,
+      `Mengunduh file analisis`,
     );
     res.download(pdfFilePath, pdfFilename);
   }),

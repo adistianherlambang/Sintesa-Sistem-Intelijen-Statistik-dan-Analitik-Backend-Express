@@ -87,7 +87,7 @@ app.use("/api", api);
 
 startBPSCron();
 
-const port = process.env.PORT;
+const port = parseInt(process.env.PORT, 10) || 5000;
 
 app.listen(port, () => {
   console.log("App jalan di ", port);

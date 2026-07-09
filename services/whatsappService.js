@@ -28,6 +28,94 @@ const openai = new OpenAI({
 
 const activeClients = new Map();
 
+// Track hourly message frequency per contact (Rule 13)
+const contactMessageTracker = new Map();
+
+// Track session active message count and resting cooldowns (Rule 12)
+const sessionRestTracker = new Map();
+
+/**
+ * Checks if the bot can send a message to the contact (limit: 4 per hour)
+ */
+const canSendMessage = (userId, contactId) => {
+  const now = Date.now();
+  const oneHourAgo = now - 60 * 60 * 1000;
+
+  if (!contactMessageTracker.has(userId.toString())) {
+    return true;
+  }
+  const userTracker = contactMessageTracker.get(userId.toString());
+  if (!userTracker.has(contactId)) {
+    return true;
+  }
+
+  // Clean up old timestamps and update tracker
+  const timestamps = userTracker.get(contactId).filter((ts) => ts > oneHourAgo);
+  userTracker.set(contactId, timestamps);
+
+  return timestamps.length < 4;
+};
+
+/**
+ * Records a sent message timestamp for a contact
+ */
+const recordSentMessage = (userId, contactId) => {
+  const now = Date.now();
+  if (!contactMessageTracker.has(userId.toString())) {
+    contactMessageTracker.set(userId.toString(), new Map());
+  }
+  const userTracker = contactMessageTracker.get(userId.toString());
+  if (!userTracker.has(contactId)) {
+    userTracker.set(contactId, []);
+  }
+  userTracker.get(contactId).push(now);
+};
+
+/**
+ * Checks if the session is currently in a random rest period (Rule 12)
+ */
+const isSessionResting = (userId) => {
+  const tracker = sessionRestTracker.get(userId.toString());
+  if (!tracker) return false;
+
+  const now = Date.now();
+  if (tracker.nextAvailableTime && now < tracker.nextAvailableTime) {
+    const remainingMin = Math.round((tracker.nextAvailableTime - now) / 60000);
+    console.log(`[WhatsApp Bot] Session for user ${userId} is currently resting. Remaining: ${remainingMin} minutes.`);
+    return true;
+  }
+  return false;
+};
+
+/**
+ * Tracks session message count and triggers a random rest period if threshold reached
+ */
+const trackSessionMessage = (userId) => {
+  if (!sessionRestTracker.has(userId.toString())) {
+    sessionRestTracker.set(userId.toString(), {
+      messagesSinceLastRest: 0,
+      nextAvailableTime: null,
+    });
+  }
+
+  const tracker = sessionRestTracker.get(userId.toString());
+  tracker.messagesSinceLastRest += 1;
+
+  // Choose a random message threshold between 15 and 25 messages if not already set
+  const threshold = tracker.threshold || (Math.floor(Math.random() * (25 - 15 + 1)) + 15);
+  tracker.threshold = threshold;
+
+  if (tracker.messagesSinceLastRest >= threshold) {
+    // Rest duration between 15 and 30 minutes
+    const restDurationMs = (Math.floor(Math.random() * (30 - 15 + 1)) + 15) * 60 * 1000;
+    tracker.nextAvailableTime = Date.now() + restDurationMs;
+    tracker.messagesSinceLastRest = 0;
+    // Set a new random threshold for the next block
+    tracker.threshold = Math.floor(Math.random() * (25 - 15 + 1)) + 15;
+    console.log(`[WhatsApp Bot] Session for user ${userId} triggered rest period for ${restDurationMs / 60000} minutes after ${threshold} messages.`);
+  }
+};
+
 /**
  * Helper to check active hours
  */
@@ -239,6 +327,33 @@ export const initializeWhatsAppClient = async (userId) => {
         return;
       }
 
+      // Check resting period (Rule 12)
+      if (isSessionResting(userId)) {
+        console.log(`[WhatsApp Bot] Session is resting. Skipping reply.`);
+        return;
+      }
+
+      // Check frequency limit per contact (Rule 13)
+      if (!canSendMessage(userId, msg.from)) {
+        console.log(`[WhatsApp Bot] Frequency limit (max 4 per hour) exceeded for contact ${msg.from}. Skipping reply.`);
+        return;
+      }
+
+      // Get chat object
+      const chat = await msg.getChat();
+
+      // 1. Mark as read immediately (Rule 5)
+      await chat.sendSeen();
+
+      // Check if we have replied before in this chat (Rule 14)
+      let hasRepliedBefore = false;
+      try {
+        const historyMsgs = await chat.fetchMessages({ limit: 10 });
+        hasRepliedBefore = historyMsgs.some(m => m.fromMe);
+      } catch (historyErr) {
+        console.warn(`[WhatsApp Bot] Failed to fetch message history for ${msg.from}:`, historyErr.message);
+      }
+
       // 2. Subscription package and limit check
       const sub = await Subscription.findOne({ userId, status: "active" });
       const limit = getMessageLimit(sub);
@@ -283,7 +398,7 @@ export const initializeWhatsAppClient = async (userId) => {
           )
           .join("\n\n");
 
-        const systemPrompt = `Anda adalah AI WhatsApp Bot Asisten Dinas/Instansi resmi. Tugas Anda adalah membantu menjawab pertanyaan pelanggan dengan sopan, jelas, dan informatif berdasarkan data "Bot Knowledge Resmi" di bawah ini.
+        let systemPrompt = `Anda adalah AI WhatsApp Bot Asisten Dinas/Instansi resmi. Tugas Anda adalah membantu menjawab pertanyaan pelanggan dengan sopan, jelas, dan informatif berdasarkan data "Bot Knowledge Resmi" di bawah ini.
 
           ATURAN PENTING & KETAT:
           1. JAWAB HANYA berdasarkan informasi yang disediakan dalam "Bot Knowledge Resmi".
@@ -293,6 +408,7 @@ export const initializeWhatsAppClient = async (userId) => {
           5. Hindari jawaban yang terlalu singkat atau tidak memberikan informasi yang cukup. Usahakan menjawab secara lengkap namun tetap ringkas dan tidak bertele-tele.
           6. BATAS MAKSIMAL jawaban adalah 80 kata. Jangan melebihi batas ini.
           7. Jangan gunakan karakter llm dikarenakan ini untuk wbatsapp, untuk bold hanya *bold* 
+          8. Variasikan sapaan, susunan kalimat, dan emoji secukupnya di setiap pesan agar terkesan natural dan ramah (misalnya menggunakan variasi sapaan "Halo", "Hai", "Selamat pagi/siang/sore", dll). Jangan menggunakan template jawaban yang kaku dan identik di setiap respons.
 
           Bot Knowledge Resmi:
           ${knowledgeBaseText}
@@ -301,6 +417,10 @@ export const initializeWhatsAppClient = async (userId) => {
           ${msg.body}
 
           Jawaban Asisten:`;
+
+        if (!hasRepliedBefore) {
+          systemPrompt += `\n\n[PENTING] Ini adalah pesan pertama dari pelanggan ini. Jawaban Anda HARUS singkat, jelas, langsung menjawab intinya, tidak mengandung promosi, tidak berisi link/tautan apapun, dan maksimal 40 kata.`;
+        }
 
         const geminiApiKey = process.env.GEMINI_API_KEY;
         if (!geminiApiKey) {
@@ -395,10 +515,58 @@ export const initializeWhatsAppClient = async (userId) => {
         }
       }
 
-      // Send the reply
-      console.log(`[WhatsApp Bot] Sending reply message back to: ${msg.from}`);
-      await client.sendMessage(msg.from, replyText);
-      console.log(`[WhatsApp Bot] Reply successfully sent to: ${msg.from}`);
+      // Sanitize the generated reply text (converting http to https links)
+      if (replyText) {
+        replyText = replyText.replace(/http:\/\//gi, "https://");
+      }
+
+      // Simulate typing and send message
+      let typingStateActive = false;
+      try {
+        // 2. Start typing indicator
+        await chat.sendStateTyping();
+        typingStateActive = true;
+
+        // 3. Determine random delay based on reply length
+        let delayMs = 0;
+        const charCount = replyText.length;
+        if (charCount <= 50) {
+          // Short message: 2 to 5 seconds
+          delayMs = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000;
+        } else if (charCount <= 150) {
+          // Medium message: 5 to 10 seconds
+          delayMs = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
+        } else {
+          // Long message: 8 to 15 seconds
+          delayMs = Math.floor(Math.random() * (15000 - 8000 + 1)) + 8000;
+        }
+
+        console.log(`[WhatsApp Bot] Simulating typing status for ${delayMs}ms (message length: ${charCount} chars)...`);
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+
+        // 4. Stop typing indicator
+        await chat.clearState();
+        typingStateActive = false;
+
+        // 5. Send the reply
+        console.log(`[WhatsApp Bot] Sending reply message back to: ${msg.from}`);
+        await client.sendMessage(msg.from, replyText);
+        console.log(`[WhatsApp Bot] Reply successfully sent to: ${msg.from}`);
+
+        // Record tracking data after successful send
+        recordSentMessage(userId, msg.from);
+        trackSessionMessage(userId);
+      } catch (sendErr) {
+        console.error(`[WhatsApp Bot] Error during typing simulation or message sending:`, sendErr.message);
+      } finally {
+        if (typingStateActive) {
+          try {
+            await chat.clearState();
+          } catch (clearErr) {
+            console.warn(`[WhatsApp Bot] Failed to clear typing state:`, clearErr.message);
+          }
+        }
+      }
 
       // Increment replied counts
       await WhatsAppSession.findOneAndUpdate(

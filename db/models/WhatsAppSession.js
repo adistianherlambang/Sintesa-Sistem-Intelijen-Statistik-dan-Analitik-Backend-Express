@@ -53,6 +53,10 @@ const WhatsAppSessionSchema = new mongoose.Schema(
       type: String, // HH:MM format
       default: "23:59",
     },
+    lastResetDate: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true },
 );

@@ -7,6 +7,7 @@ import BotKnowledge from "../db/models/BotKnowledge.js";
 import Subscription from "../db/models/Subscription.js";
 import dotenv from "dotenv";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { logActivity } from "../controller/user/activityController.js";
 
@@ -25,6 +26,46 @@ const openai = new OpenAI({
   apiKey: process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
   baseURL: "https://api.mistral.ai/v1",
 });
+
+/**
+ * Helper to get the current date in YYYY-MM-DD local format
+ */
+export const getLocalDateString = () => {
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+/**
+ * Checks and resets daily statistics if the day has changed
+ */
+export const checkAndResetDailyStats = async (session) => {
+  const todayStr = getLocalDateString();
+  if (session.lastResetDate !== todayStr) {
+    session.incomingCountToday = 0;
+    session.repliedCountToday = 0;
+    session.lastResetDate = todayStr;
+    await session.save();
+    console.log(`[WhatsApp Bot] Daily stats reset for user ${session.userId} to date: ${todayStr}`);
+  }
+};
+
+/**
+ * Safely delete the local session credentials folder
+ */
+const deleteSessionFolder = (userId) => {
+  const sessionPath = path.resolve(__dirname, `../../.wwebjs_auth/session-${userId}`);
+  if (fs.existsSync(sessionPath)) {
+    try {
+      fs.rmSync(sessionPath, { recursive: true, force: true });
+      console.log(`[WhatsApp Bot] Cleaned up local auth folder for user ${userId}: ${sessionPath}`);
+    } catch (err) {
+      console.error(`[WhatsApp Bot] Failed to delete auth folder for user ${userId}:`, err.message);
+    }
+  }
+};
 
 const activeClients = new Map();
 
@@ -159,8 +200,20 @@ const getMessageLimit = (subscription) => {
  */
 export const initializeWhatsAppClient = async (userId) => {
   if (activeClients.has(userId.toString())) {
-    console.log(`WhatsApp client already exists for user ${userId}`);
-    return activeClients.get(userId.toString());
+    const existingClient = activeClients.get(userId.toString());
+    const sessionObj = await WhatsAppSession.findOne({ userId });
+    if (sessionObj && sessionObj.status === "connected") {
+      console.log(`WhatsApp client already connected for user ${userId}`);
+      return existingClient;
+    }
+
+    console.log(`Stale WhatsApp client found in memory for user ${userId}. Destroying it before re-initializing.`);
+    try {
+      await existingClient.destroy();
+    } catch (destroyErr) {
+      console.warn(`Error destroying stale client for user ${userId}:`, destroyErr.message);
+    }
+    activeClients.delete(userId.toString());
   }
 
   // Find or create WhatsAppSession in DB
@@ -277,6 +330,8 @@ export const initializeWhatsAppClient = async (userId) => {
           destroyErr.message,
         );
       }
+      // Delete session folder to clean up corrupted files
+      deleteSessionFolder(userId);
       await WhatsAppSession.findOneAndUpdate(
         { userId },
         {
@@ -311,6 +366,8 @@ export const initializeWhatsAppClient = async (userId) => {
         console.log(`No WhatsApp session found in database for user ${userId}`);
         return;
       }
+
+      await checkAndResetDailyStats(session);
 
       console.log(`Bot enabled: ${session.botEnabled}`);
       if (!session.botEnabled) {
@@ -423,33 +480,34 @@ export const initializeWhatsAppClient = async (userId) => {
         }
 
         const geminiApiKey = process.env.GEMINI_API_KEY;
-        if (!geminiApiKey) {
-          console.error("GEMINI_API_KEY not configured in env variables.");
-          replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
-        } else {
-          try {
-            console.log(
-              `[WhatsApp Bot] Sending prompt to Mistral API for ${msg.from}...`,
-            );
-            const response = await openai.chat.completions.create({
-              model: "mistral-small-latest",
-              max_tokens: 150,
-              messages: [
-                {
-                  role: "user",
-                  content: systemPrompt,
-                },
-              ],
-            });
-            replyText = response.choices[0].message.content.trim();
-            console.log(
-              `[WhatsApp Bot] Mistral reply successfully generated for ${msg.from}: "${replyText}"`,
-            );
-          } catch (mistralErr) {
-            console.warn(
-              `[WhatsApp Bot] ⚠ Gagal menggunakan Mistral untuk ${msg.from}, beralih ke Gemini sebagai fallback:`,
-              mistralErr.message,
-            );
+        try {
+          console.log(
+            `[WhatsApp Bot] Sending prompt to Mistral API for ${msg.from}...`,
+          );
+          const response = await openai.chat.completions.create({
+            model: "mistral-small-latest",
+            max_tokens: 150,
+            messages: [
+              {
+                role: "user",
+                content: systemPrompt,
+              },
+            ],
+          });
+          replyText = response.choices[0].message.content.trim();
+          console.log(
+            `[WhatsApp Bot] Mistral reply successfully generated for ${msg.from}: "${replyText}"`,
+          );
+        } catch (mistralErr) {
+          console.warn(
+            `[WhatsApp Bot] ⚠ Gagal menggunakan Mistral untuk ${msg.from}, beralih ke Gemini sebagai fallback:`,
+            mistralErr.message,
+          );
+
+          if (!geminiApiKey) {
+            console.error("GEMINI_API_KEY not configured in env variables and Mistral failed.");
+            replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
+          } else {
             try {
               console.log(
                 `[WhatsApp Bot] Sending prompt to Gemini API for ${msg.from} (with auto-retry support)...`,
@@ -637,6 +695,9 @@ export const destroyWhatsAppClient = async (userId) => {
     }
     activeClients.delete(userId.toString());
   }
+
+  // Delete local session folder to ensure clean state next connect
+  deleteSessionFolder(userId);
 
   await WhatsAppSession.findOneAndUpdate(
     { userId },

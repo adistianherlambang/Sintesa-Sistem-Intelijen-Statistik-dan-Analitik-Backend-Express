@@ -4,6 +4,7 @@ import {
   initializeWhatsAppClient,
   destroyWhatsAppClient,
   getActiveClient,
+  checkAndResetDailyStats,
 } from "../../services/whatsappService.js";
 import WhatsAppSession from "../../db/models/WhatsAppSession.js";
 import BotKnowledge from "../../db/models/BotKnowledge.js";
@@ -30,6 +31,8 @@ router.get(
       // Create a default session model for the user if it doesn't exist
       session = new WhatsAppSession({ userId: req.user._id });
       await session.save();
+    } else {
+      await checkAndResetDailyStats(session);
     }
     res.json(session);
   }),

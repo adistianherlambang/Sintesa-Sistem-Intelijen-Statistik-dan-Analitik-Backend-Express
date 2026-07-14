@@ -359,6 +359,14 @@ export const initializeWhatsAppClient = async (userId) => {
       return;
     }
 
+    // Rule 3: Only reply to messages received in the last 1 minute (60 seconds)
+    const nowTime = Date.now();
+    const msgTimeMs = msg.timestamp * 1000;
+    if (nowTime - msgTimeMs > 60000) {
+      console.log(`[WhatsApp Bot] Message from ${msg.from} is too old (${Math.round((nowTime - msgTimeMs)/1000)}s ago). Skipping reply.`);
+      return;
+    }
+
     try {
       // 1. Fetch current session configuration and check enabled/active hours
       const session = await WhatsAppSession.findOne({ userId });
@@ -402,11 +410,18 @@ export const initializeWhatsAppClient = async (userId) => {
       // 1. Mark as read immediately (Rule 5)
       await chat.sendSeen();
 
-      // Check if we have replied before in this chat (Rule 14)
+      // Check if we have replied before in this chat (Rule 14) and prevent consecutive messages (Rule 2)
       let hasRepliedBefore = false;
       try {
         const historyMsgs = await chat.fetchMessages({ limit: 10 });
         hasRepliedBefore = historyMsgs.some(m => m.fromMe);
+        if (historyMsgs.length > 0) {
+          const lastMsg = historyMsgs[historyMsgs.length - 1];
+          if (lastMsg.fromMe) {
+            console.log(`[WhatsApp Bot] Last message in chat with ${msg.from} was sent by us. Skipping reply to avoid consecutive messages.`);
+            return;
+          }
+        }
       } catch (historyErr) {
         console.warn(`[WhatsApp Bot] Failed to fetch message history for ${msg.from}:`, historyErr.message);
       }
@@ -578,14 +593,51 @@ export const initializeWhatsAppClient = async (userId) => {
         replyText = replyText.replace(/http:\/\//gi, "https://");
       }
 
+      // Delay to the next minute if the current minute matches the message timestamp minute (Rule 4)
+      const msgTime = new Date(msg.timestamp * 1000);
+      const nowBeforeDelay = new Date();
+      if (
+        nowBeforeDelay.getMinutes() === msgTime.getMinutes() &&
+        nowBeforeDelay.getDate() === msgTime.getDate() &&
+        nowBeforeDelay.getMonth() === msgTime.getMonth() &&
+        nowBeforeDelay.getFullYear() === msgTime.getFullYear()
+      ) {
+        const msUntilNextMinute = (60 - nowBeforeDelay.getSeconds()) * 1000 - nowBeforeDelay.getMilliseconds();
+        // Add dynamic typing delay to make it natural and not at :00 seconds
+        const extraDelay = Math.floor(Math.random() * 10000) + 5000; // 5-15 seconds
+        const totalDelay = msUntilNextMinute + extraDelay;
+        console.log(`[WhatsApp Bot] Message received in the same minute. Delaying reply by ${totalDelay / 1000}s to reply in the next minute.`);
+        await new Promise((resolve) => setTimeout(resolve, totalDelay));
+      }
+
       // Simulate typing and send message
       let typingStateActive = false;
       try {
-        // 2. Start typing indicator
+        // Fetch latest message history right before sending to ensure no newer messages or bot replies have occurred
+        const finalChat = await msg.getChat();
+        const finalHistory = await finalChat.fetchMessages({ limit: 5 });
+        if (finalHistory.length > 0) {
+          const lastMsg = finalHistory[finalHistory.length - 1];
+          if (lastMsg.fromMe) {
+            console.log(`[WhatsApp Bot] Aborting reply to ${msg.from} because the last message in chat is already from us.`);
+            return;
+          }
+          if (lastMsg.id._serialized !== msg.id._serialized) {
+            console.log(`[WhatsApp Bot] Aborting reply to ${msg.from} because a newer message has been received.`);
+            return;
+          }
+        }
+
+        // 2. Pre-typing delay: simulate reading the message before starting to type (1-3 seconds)
+        const preTypingDelay = Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
+        console.log(`[WhatsApp Bot] Pre-typing delay: ${preTypingDelay}ms before starting to type...`);
+        await new Promise((resolve) => setTimeout(resolve, preTypingDelay));
+
+        // 3. Start typing indicator
         await chat.sendStateTyping();
         typingStateActive = true;
 
-        // 3. Determine random delay based on reply length
+        // 4. Determine random delay based on reply length
         let delayMs = 0;
         const charCount = replyText.length;
         if (charCount <= 50) {
@@ -602,11 +654,11 @@ export const initializeWhatsAppClient = async (userId) => {
         console.log(`[WhatsApp Bot] Simulating typing status for ${delayMs}ms (message length: ${charCount} chars)...`);
         await new Promise((resolve) => setTimeout(resolve, delayMs));
 
-        // 4. Stop typing indicator
+        // 5. Stop typing indicator
         await chat.clearState();
         typingStateActive = false;
 
-        // 5. Send the reply
+        // 6. Send the reply
         console.log(`[WhatsApp Bot] Sending reply message back to: ${msg.from}`);
         await client.sendMessage(msg.from, replyText);
         console.log(`[WhatsApp Bot] Reply successfully sent to: ${msg.from}`);

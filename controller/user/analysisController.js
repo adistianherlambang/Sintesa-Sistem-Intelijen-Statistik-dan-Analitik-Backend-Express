@@ -75,7 +75,48 @@ export const getAnalysisFilePath = async (userId, historyId) => {
     throw new Error("Akses ditolak. Riwayat analisis bukan milik Anda.");
   }
 
-  const filePath = path.join(EXPORT_DIR, history.analysisFile);
+  let filePath = path.join(EXPORT_DIR, history.analysisFile);
+  if (!fs.existsSync(filePath)) {
+    // Fallback: search for any file belonging to the user for the same report/period
+    const match = history.analysisFile.match(/^([a-f0-9]+)_(\d+)_(.+)$/i);
+    if (match) {
+      const suffix = match[3]; // e.g. "brs_KOTA_METRO_Mei_2026.idml"
+      if (fs.existsSync(EXPORT_DIR)) {
+        const files = fs.readdirSync(EXPORT_DIR);
+        const fallbackFile = files.find(
+          (f) => f.startsWith(userId.toString()) && f.endsWith(suffix)
+        );
+        if (fallbackFile) {
+          const fallbackPath = path.join(EXPORT_DIR, fallbackFile);
+          try {
+            fs.copyFileSync(fallbackPath, filePath);
+            console.log(
+              `[Download Fallback] Restored missing file ${history.analysisFile} using fallback ${fallbackFile}`
+            );
+
+            // Also check and copy corresponding PDF if it exists
+            const fallbackPdfFile = fallbackFile.replace(/\.idml$/, ".pdf");
+            const targetPdfFile = history.analysisFile.replace(/\.idml$/, ".pdf");
+            const fallbackPdfPath = path.join(EXPORT_DIR, fallbackPdfFile);
+            const targetPdfPath = path.join(EXPORT_DIR, targetPdfFile);
+            if (fs.existsSync(fallbackPdfPath)) {
+              fs.copyFileSync(fallbackPdfPath, targetPdfPath);
+              console.log(
+                `[Download Fallback] Restored missing PDF file ${targetPdfFile} using fallback ${fallbackPdfFile}`
+              );
+            }
+          } catch (err) {
+            console.error(
+              `[Download Fallback] Failed to copy fallback file:`,
+              err.message
+            );
+            filePath = fallbackPath;
+          }
+        }
+      }
+    }
+  }
+
   if (!fs.existsSync(filePath)) {
     throw new Error("File IDML tidak ditemukan di server");
   }

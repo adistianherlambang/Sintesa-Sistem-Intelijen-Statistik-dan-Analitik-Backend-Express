@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="uba3" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<XMLElement Self="di3i508" MarkupTag="XMLTag/Story" XMLContent="uba3">
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FillColor="Color/Paper" FontStyle="Bold">
+					<Properties>
+						<Leading type="unit">18</Leading>
+					</Properties>
+					
+					<Content>Penjelasan Teknis</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">20</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">5</Leading>
+					</Properties>
+					
+					<Br />
+					<Content>Indeks Harga Konsume</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>n (IHK) merupakan salah satu indikator ekonomi yang  digunakan untuk mengukur tingkat perubahan harga (inflasi/deflasi) di tingkat konsumen. Dengan adanya perubahan pola konsumsi masyarakat, maka mulai Januari 2024,  pengukuran inflasi di Indonesia menggunakan IHK tahun dasar 2022=100. Beberapa perubahan mendasar dalam penghitungan IHK (2022=100) dibandingkan (IHK 2018=100), khususnya dari sisi cakupan wilayah, penambahan pasar </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>online</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>, metodologi penghitungan IHK, paket komoditas, dan diagram timbang. Perubahan tersebut didasarkan pada Survei Biaya Hidup (SBH) yang dilaksanakan oleh BPS selama tahun 2022, sebagai salah satu bahan dasar utama dalam penghitungan IHK. </Content>
+					<Br />
+					<Content>SBH 2022 dilaksanakan di 150 kabupaten/kota, yang terdiri dari 38 ibukota provinsi dan 112 kabupaten/kota. Dari 150 kabupaten/kota tersebut, 90 kota merupakan lanjutan kabupaten/kota SBH 2018 yang mencakup wilayah urban dan 60 kabupaten merupakan kabupaten tambahan yang mencakup wilayah urban dan rural. Survei ini dilaksanakan di daerah perkotaan dan pedesaan dengan total sampel sebanyak 240.000 rumah tangga. Paket komoditas hasil SBH 2022 KOTA KOTA METRO berjumlah 271 komoditas.</Content>
+					<Br />
+					<Content>Pengelompokan komoditas didasarkan pada </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>Classification of Individual Consumption According to Purpose</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content> (COICOP) 2018. Secara nasional pengelompokan komoditas terdiri dari 11 kelompok dan 43 subkelompok. Adapun untuk level Kabupaten/Kota/Provinsi pengelompokan komoditas terdiri dari 11 kelompok dan dapat bervariasi jumlah subkelompoknya.</Content>
+					<Br />
+					<Content>Perubahan metodologi IHK (2022=100) dalam pemutakhiran Diagram Timbang dan penghitungan Indeks Harga Konsumen mengacu pada Manual standar internasional, yaitu </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>Consumer Price Index Manual: Theory and Practice</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content> (2004),  </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>Practical Guide to Producing Consumer Price Indices</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content> (2009), </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>Classification of Individual Consumption According to Purpose</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>/ COICOP (2018), </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.3</Leading>
+					</Properties>
+					
+					<Content>Consumer Price Index Manual: Conce</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>pts and M</Content>
+				
+					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content>ethods</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content> (2020).</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+		</XMLElement>
+	</Story>
+</idPkg:Story>

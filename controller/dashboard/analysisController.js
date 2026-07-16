@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import puppeteer from "puppeteer";
 import AnalysisHistory from "../../db/models/AnalysisHistory.js";
 import { logActivity } from "../user/activityController.js";
+import { getKomoditasByKota } from "./komoditasController.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -179,26 +180,29 @@ const fillStoryXML = (
 ) => {
   let newXml = originalXml;
 
-  // Replace City name
-  newXml = newXml.replaceAll("Kota Metro", targetCity);
-  newXml = newXml.replaceAll("Metro", targetCity);
-  newXml = newXml.replaceAll("METRO", targetCity.toUpperCase());
+  const monthIndex = months.indexOf(monthName) !== -1 ? months.indexOf(monthName) : 10;
+  const currentMonth = monthName;
+  const currentYear = parseInt(yr, 10) || new Date().getFullYear();
 
-  // Replace Period
-  newXml = newXml.replaceAll("November 2025", `${monthName} ${yr}`);
-  newXml = newXml.replaceAll("November 2024", `${monthName} ${yr - 1}`);
-  newXml = newXml.replaceAll("November", monthName);
+  const prevMonthIndex = (monthIndex - 1 + 12) % 12;
+  const prevMonthName = months[prevMonthIndex];
+  const prevMonthYear = monthIndex === 0 ? currentYear - 1 : currentYear;
 
-  // Replace YoY inflation (original is 1,88)
-  newXml = newXml.replaceAll("1,88", infYoY);
+  const prevYear = currentYear - 1;
+  const twoYearsAgo = currentYear - 2;
 
-  // Replace MoM inflation (original is 0,19)
-  newXml = newXml.replaceAll("0,19", infMoM);
+  // Format numbers to Indonesian locale (comma decimal separator)
+  const toIndoNum = (val) => {
+    if (val === undefined || val === null) return "";
+    if (typeof val === "string" && val.includes(",")) return val;
+    if (typeof val === "string") return val.replace(".", ",");
+    return Number(val).toFixed(2).replace(".", ",");
+  };
 
-  // Replace IHK (original is 107,93)
-  newXml = newXml.replaceAll("107,93", targetIhk);
+  const formattedInfMoM = toIndoNum(infMoM);
+  const formattedInfYoY = toIndoNum(infYoY);
+  const formattedTargetIhk = toIndoNum(targetIhk);
 
-  // Replace previous IHK (original is 105.94 or 105,94)
   const ihkNowNum = parseFloat(String(targetIhk).replace(",", "."));
   const infYoYNum = parseFloat(String(infYoY).replace(",", "."));
   let ihkPrev = "105,94";
@@ -206,11 +210,52 @@ const fillStoryXML = (
     const prevNum = ihkNowNum / (1 + infYoYNum / 100);
     ihkPrev = prevNum.toFixed(2).replace(".", ",");
   }
-  newXml = newXml.replaceAll("105.94", ihkPrev.replace(",", "."));
-  newXml = newXml.replaceAll("105,94", ihkPrev);
+
+  // Replace City name
+  newXml = newXml.replace(/Kota Metro/g, targetCity);
+  newXml = newXml.replace(/Metro/g, targetCity);
+  newXml = newXml.replace(/METRO/g, targetCity.toUpperCase());
+
+  // Replace Current Period (with regex for flexible spacing)
+  newXml = newXml.replace(/November\s+2025/g, `${currentMonth} ${currentYear}`);
+  newXml = newXml.replace(/NOVEMBER\s+2025/g, `${currentMonth.toUpperCase()} ${currentYear}`);
+
+  // Replace Previous Period
+  newXml = newXml.replace(/November\s+2024/g, `${currentMonth} ${prevYear}`);
+  newXml = newXml.replace(/NOVEMBER\s+2024/g, `${currentMonth.toUpperCase()} ${prevYear}`);
+  newXml = newXml.replace(/November\s+2023/g, `${currentMonth} ${twoYearsAgo}`);
+
+  // Replace Month name
+  newXml = newXml.replace(/\bNovember\b/g, currentMonth);
+  newXml = newXml.replace(/\bNOVEMBER\b/g, currentMonth.toUpperCase());
+
+  // Replace previous month date references
+  newXml = newXml.replace(/Oktober\s+2025/g, `${prevMonthName} ${prevMonthYear}`);
+  newXml = newXml.replace(/OKTOBER\s+2025/g, `${prevMonthName.toUpperCase()} ${prevMonthYear}`);
+  newXml = newXml.replace(/Oktober\s+2024/g, `${prevMonthName} ${prevMonthYear - 1}`);
+  newXml = newXml.replace(/\bOktober\b/g, prevMonthName);
+  newXml = newXml.replace(/\bOKTOBER\b/g, prevMonthName.toUpperCase());
+
+  // Replace previous year December references
+  newXml = newXml.replace(/Desember\s+2024/g, `Desember ${prevYear}`);
+  newXml = newXml.replace(/DESEMBER\s+2024/g, `DESEMBER ${prevYear}`);
+  newXml = newXml.replace(/Desember\s+2023/g, `Desember ${twoYearsAgo}`);
+
+  // Replace YoY inflation (original is 1,88)
+  newXml = newXml.replace(/1,88/g, formattedInfYoY);
+
+  // Replace MoM inflation (original is 0,19)
+  newXml = newXml.replace(/0,19/g, formattedInfMoM);
+
+  // Replace IHK (original is 107,93)
+  newXml = newXml.replace(/107,93/g, formattedTargetIhk);
+
+  // Replace previous IHK (original is 105.94 or 105,94)
+  newXml = newXml.replace(/105\.94/g, ihkPrev.replace(",", "."));
+  newXml = newXml.replace(/105,94/g, ihkPrev);
 
   // Replace YtD inflation (original is 1,41)
-  newXml = newXml.replaceAll("1,41", infMoM);
+  newXml = newXml.replace(/1,41/g, formattedInfMoM);
 
   return newXml;
 };
@@ -252,48 +297,25 @@ export const generateBRS = async (req, res) => {
       });
     }
 
-    const originalXml = storyEntry.getData().toString("utf8");
-    const newXml = fillStoryXML(
-      originalXml,
-      targetCity,
-      monthName,
-      yr,
-      infMoM,
-      infYoY,
-      targetIhk,
-    );
-
-    // Update u8e9.xml in Zip
-    zip.updateFile("Stories/Story_u8e9.xml", Buffer.from(newXml, "utf8"));
-
-    // Apply basic keyword search-replace across all other files in IDML for consistency (e.g. titles, headers, footers)
+    // Apply the replacements to all XML files inside the IDML
     const zipEntries = zip.getEntries();
     zipEntries.forEach((entry) => {
-      if (entry.entryName === "Stories/Story_u8e9.xml") return;
       if (entry.isDirectory) return;
+      if (!entry.entryName.endsWith(".xml")) return;
 
-      let fileText = entry.getData().toString("utf8");
-      let modified = false;
+      const originalXml = entry.getData().toString("utf8");
+      const newXml = fillStoryXML(
+        originalXml,
+        targetCity,
+        monthName,
+        yr,
+        infMoM,
+        infYoY,
+        targetIhk,
+      );
 
-      if (fileText.includes("November 2025")) {
-        fileText = fileText.replaceAll("November 2025", `${monthName} ${yr}`);
-        modified = true;
-      }
-      if (fileText.includes("November")) {
-        fileText = fileText.replaceAll("November", monthName);
-        modified = true;
-      }
-      if (fileText.includes("Metro")) {
-        fileText = fileText.replaceAll("Metro", targetCity);
-        modified = true;
-      }
-      if (fileText.includes("METRO")) {
-        fileText = fileText.replaceAll("METRO", targetCity.toUpperCase());
-        modified = true;
-      }
-
-      if (modified) {
-        zip.updateFile(entry.entryName, Buffer.from(fileText, "utf8"));
+      if (newXml !== originalXml) {
+        zip.updateFile(entry.entryName, Buffer.from(newXml, "utf8"));
       }
     });
 
@@ -444,6 +466,84 @@ export const generateSummary = async (req, res) => {
   }
 };
 
+/**
+ * Helper: resolve division-level inflation value from divisionData array.
+ * Matches by checking if the group name contains the keyword (case-insensitive).
+ */
+const getDivisionInflasi = (divisionData, keyword) => {
+  if (!Array.isArray(divisionData)) return "0,00";
+  const found = divisionData.find((d) =>
+    String(d.name || "").toLowerCase().includes(keyword.toLowerCase())
+  );
+  if (!found) return "0,00";
+  const val = parseFloat(found.inflasi);
+  return isNaN(val) ? "0,00" : val.toFixed(2).replace(".", ",");
+};
+
+/**
+ * Build a complete IDML buffer from the idmlExtract folder,
+ * substituting all ${placeholder} variables with real data.
+ */
+const buildIdmlFromExtract = (variables) => {
+  const IDML_SRC = path.resolve(__dirname, "../../idmlExtract");
+  if (!fs.existsSync(IDML_SRC)) {
+    throw new Error(
+      `Folder idmlExtract tidak ditemukan di: ${IDML_SRC}`
+    );
+  }
+
+  const zip = new AdmZip();
+
+  // IDML requires 'mimetype' as the FIRST entry, stored uncompressed (no compression)
+  const mimetypePath = path.join(IDML_SRC, "mimetype");
+  if (fs.existsSync(mimetypePath)) {
+    // AdmZip doesn't expose per-entry compression level, so we use raw zip entry creation
+    const mimetypeContent = fs.readFileSync(mimetypePath);
+    // Add as STORE (0) – AdmZip always deflates, so we work around by adding normally
+    // InDesign can handle compressed mimetype as long as all other files are present
+    zip.addFile("mimetype", mimetypeContent);
+  }
+
+  // Recursively add all other files from idmlExtract, replacing placeholders in XML files
+  const addDirToZip = (dirPath, zipPrefix) => {
+    const entries = fs.readdirSync(dirPath);
+    for (const entry of entries) {
+      const fullPath = path.join(dirPath, entry);
+      const zipPath = zipPrefix ? `${zipPrefix}/${entry}` : entry;
+      const stat = fs.statSync(fullPath);
+
+      if (stat.isDirectory()) {
+        addDirToZip(fullPath, zipPath);
+      } else {
+        if (entry === "mimetype") continue; // Already added first
+
+        let content;
+        if (entry.endsWith(".xml")) {
+          let xmlText = fs.readFileSync(fullPath, "utf8");
+          // Replace all ${placeholderName} occurrences
+          xmlText = xmlText.replace(/\$\{([^}]+)\}/g, (match, key) => {
+            if (variables.hasOwnProperty(key)) {
+              return variables[key];
+            }
+            // Fallback for numeric placeholders: e.g. nilaiPersen_0_05 -> 0,05
+            if (key.startsWith("nilaiPersen_")) {
+              return key.replace("nilaiPersen_", "").replace(/_/g, ",");
+            }
+            return match;
+          });
+          content = Buffer.from(xmlText, "utf8");
+        } else {
+          content = fs.readFileSync(fullPath);
+        }
+        zip.addFile(zipPath, content);
+      }
+    }
+  };
+
+  addDirToZip(IDML_SRC, "");
+  return zip.toBuffer();
+};
+
 export const generateAndSaveBRS = async (req, res) => {
   try {
     const {
@@ -460,75 +560,197 @@ export const generateAndSaveBRS = async (req, res) => {
     const userId = req.user._id;
 
     const monthName = months[monthIndex !== undefined ? monthIndex : 2];
-    const yr = year || new Date().getFullYear();
+    const yr = String(year || new Date().getFullYear());
     const targetCity = city || "KOTA METRO";
     const infMoM = inflasiMoM || "0,00";
     const infYoY = inflasiYoY || "0,00";
     const targetIhk = ihkNow || "100,00";
     const periodText = `${monthName} ${yr}`;
 
-    // 1. Generate modified IDML using Zip
-    const idmlPath = path.resolve(__dirname, "../../../perkembanganIHK.idml");
-    if (!fs.existsSync(idmlPath)) {
-      return res.status(404).json({
-        message: "Template IDML perkembanganIHK.idml tidak ditemukan di root.",
-      });
+    const monthIdx = months.indexOf(monthName) !== -1 ? months.indexOf(monthName) : 0;
+    const prevMonthIdx = (monthIdx - 1 + 12) % 12;
+    const prevMonthName = months[prevMonthIdx];
+    const currentYear = parseInt(yr, 10);
+    const prevYear = currentYear - 1;
+
+    // Helper to format values
+    const toIndoNum = (val) => {
+      if (val === undefined || val === null) return "0,00";
+      if (typeof val === "string" && val.includes(",")) return val;
+      if (typeof val === "string") return val.replace(".", ",");
+      return Number(val).toFixed(2).replace(".", ",");
+    };
+
+    // Compute derived IHK for previous year
+    const ihkNowNum = parseFloat(String(targetIhk).replace(",", "."));
+    const infYoYNum = parseFloat(String(infYoY).replace(",", "."));
+    let ihkPrev = "0,00";
+    if (!isNaN(ihkNowNum) && !isNaN(infYoYNum)) {
+      const prevNum = ihkNowNum / (1 + infYoYNum / 100);
+      ihkPrev = prevNum.toFixed(2).replace(".", ",");
     }
 
-    const zip = new AdmZip(idmlPath);
-    const storyEntry = zip.getEntry("Stories/Story_u8e9.xml");
-    if (!storyEntry) {
-      return res.status(404).json({
-        message: "File Stories/Story_u8e9.xml tidak ditemukan di dalam IDML.",
-      });
+    // Determine inflasi status text
+    const infMoMNum = parseFloat(String(infMoM).replace(",", "."));
+    const statusKenaikanAtauPenurunan =
+      infMoMNum >= 0 ? "kenaikan harga" : "penurunan harga";
+
+    // 1. Build basic variable map from the request metadata
+    const variables = {
+      // Basic period & city
+      bulan: monthName,
+      tahun: yr,
+      tahunKemarin: String(prevYear),
+      bulanKemarin: prevMonthName,
+      namaKota: targetCity,
+      "namaKota.upperCase()": targetCity.toUpperCase(),
+      "namaKota.uppercase()": targetCity.toUpperCase(),
+
+      // Inflation values
+      inflasiYoY: toIndoNum(infYoY),
+      inflasiMtM: toIndoNum(infMoM),
+      inflasiYtD: toIndoNum(infMoM), // YtD ≈ MtM for current period
+      inflasiYoYTahunLalu: toIndoNum(infYoY),
+      inflasiYoYDuaTahunLalu: toIndoNum(infYoY),
+      inflasi: toIndoNum(infYoY),
+
+      // IHK values
+      ihkSekarang: toIndoNum(targetIhk),
+      ihk: toIndoNum(targetIhk),
+      ihkTahunLalu: ihkPrev,
+
+      // Status text
+      statusKenaikanAtauPenurunan,
+
+      // Division/Kelompok inflation from divisionData (MoM fallbacks)
+      inflasiKelompokMakanan: getDivisionInflasi(divisionData, "makanan"),
+      inflasiKelompokPerumahan: getDivisionInflasi(divisionData, "perumahan"),
+      inflasiKelompokKesehatan: getDivisionInflasi(divisionData, "kesehatan"),
+      inflasiKelompokTransportasi: getDivisionInflasi(divisionData, "transportasi"),
+      inflasiKelompokRekreasi: getDivisionInflasi(divisionData, "rekreasi"),
+      inflasiKelompokRestoran: getDivisionInflasi(
+        divisionData,
+        "restoran"
+      ) || getDivisionInflasi(divisionData, "kuliner"),
+      inflasiKelompokPerawatanPribadi: getDivisionInflasi(
+        divisionData,
+        "perawatan"
+      ),
+      inflasiKelompokPakaian: getDivisionInflasi(divisionData, "pakaian"),
+      inflasiKelompokPerlengkapan: getDivisionInflasi(
+        divisionData,
+        "perlengkapan"
+      ),
+      inflasiKelompokInformasi: getDivisionInflasi(divisionData, "infokom") ||
+        getDivisionInflasi(divisionData, "informasi"),
+      inflasiKelompokPendidikan: getDivisionInflasi(divisionData, "pendidikan"),
+
+      // Placeholder fallbacks
+      inflasi_X: "0,00",
+      nilaiInflasiKelompok: "0,00",
+    };
+
+    // 2. Fetch detailed BPS commodity data for the city and integrate hierarchy & YoY
+    try {
+      const komoditasData = await getKomoditasByKota(targetCity);
+      if (komoditasData && Array.isArray(komoditasData.hierarki)) {
+        komoditasData.hierarki.forEach((group) => {
+          const cleanName = group.label.toLowerCase();
+          
+          // Map Group MoM values
+          if (cleanName.includes("makanan")) {
+            variables["inflasiKelompokMakanan"] = toIndoNum(group.value);
+          } else if (cleanName.includes("pakaian")) {
+            variables["inflasiKelompokPakaian"] = toIndoNum(group.value);
+          } else if (cleanName.includes("perumahan")) {
+            variables["inflasiKelompokPerumahan"] = toIndoNum(group.value);
+          } else if (cleanName.includes("perlengkapan")) {
+            variables["inflasiKelompokPerlengkapan"] = toIndoNum(group.value);
+          } else if (cleanName.includes("kesehatan")) {
+            variables["inflasiKelompokKesehatan"] = toIndoNum(group.value);
+          } else if (cleanName.includes("transportasi")) {
+            variables["inflasiKelompokTransportasi"] = toIndoNum(group.value);
+          } else if (cleanName.includes("informasi") || cleanName.includes("komunikasi")) {
+            variables["inflasiKelompokInformasi"] = toIndoNum(group.value);
+          } else if (cleanName.includes("rekreasi")) {
+            variables["inflasiKelompokRekreasi"] = toIndoNum(group.value);
+          } else if (cleanName.includes("pendidikan")) {
+            variables["inflasiKelompokPendidikan"] = toIndoNum(group.value);
+          } else if (cleanName.includes("restoran") || cleanName.includes("penyediaan makanan")) {
+            variables["inflasiKelompokRestoran"] = toIndoNum(group.value);
+          } else if (cleanName.includes("perawatan")) {
+            variables["inflasiKelompokPerawatanPribadi"] = toIndoNum(group.value);
+          }
+
+          // Map Subgroup MoM values
+          if (Array.isArray(group.sub)) {
+            group.sub.forEach((sub) => {
+              const subKey = "inflasi_" + sub.label.toLowerCase()
+                .replace(/[^a-z0-9\s]/g, "")
+                .trim()
+                .replace(/\s+/g, "_");
+              variables[subKey] = toIndoNum(sub.value);
+            });
+          }
+        });
+      }
+
+      if (komoditasData && Array.isArray(komoditasData.yoy)) {
+        komoditasData.yoy.forEach((group) => {
+          const cleanName = group.label.toLowerCase();
+          
+          // Map Group YoY values to specific template placeholders
+          if (cleanName.includes("makanan")) {
+            variables["nilaiPersen_3_54"] = toIndoNum(group.value);
+          } else if (cleanName.includes("pakaian")) {
+            variables["nilaiPersen_0_18"] = toIndoNum(group.value);
+          } else if (cleanName.includes("perumahan")) {
+            variables["nilaiPersen_1_25"] = toIndoNum(group.value);
+          } else if (cleanName.includes("perlengkapan")) {
+            variables["nilaiPersen_2_18"] = toIndoNum(group.value);
+          } else if (cleanName.includes("kesehatan")) {
+            variables["nilaiPersen_1_48"] = toIndoNum(group.value);
+          } else if (cleanName.includes("transportasi")) {
+            variables["nilaiPersen_1_69"] = toIndoNum(group.value);
+          } else if (cleanName.includes("informasi") || cleanName.includes("komunikasi")) {
+            variables["nilaiPersen_0_92"] = toIndoNum(group.value);
+          } else if (cleanName.includes("rekreasi")) {
+            variables["nilaiPersen_0_38"] = toIndoNum(group.value);
+          } else if (cleanName.includes("pendidikan")) {
+            variables["nilaiPersen_6_29"] = toIndoNum(group.value);
+          } else if (cleanName.includes("restoran") || cleanName.includes("penyediaan makanan")) {
+            variables["nilaiPersen_0_88"] = toIndoNum(group.value);
+          } else if (cleanName.includes("perawatan")) {
+            variables["nilaiPersen_13_46"] = toIndoNum(group.value);
+          }
+
+          // Map Subgroup YoY values
+          if (Array.isArray(group.sub)) {
+            group.sub.forEach((sub) => {
+              const subLabel = sub.label.toLowerCase();
+              if (subLabel.includes("sewa dan kontrak")) {
+                variables["nilaiPersen_0_48"] = toIndoNum(sub.value);
+              } else if (subLabel.includes("pemeliharaan, perbaikan")) {
+                variables["nilaiPersen_0_15"] = toIndoNum(sub.value);
+              } else if (subLabel.includes("dasar dan anak usia dini")) {
+                variables["nilaiPersen_0_02"] = toIndoNum(sub.value);
+              } else if (subLabel.includes("pendidikan menengah")) {
+                variables["nilaiPersen_0_46"] = toIndoNum(sub.value);
+              } else if (subLabel.includes("pendidikan lainnya")) {
+                variables["nilaiPersen_0_03"] = toIndoNum(sub.value);
+              }
+            });
+          }
+        });
+      }
+    } catch (dbErr) {
+      console.warn("⚠ Gagal mengambil database komoditas BPS:", dbErr.message);
     }
 
-    const originalXml = storyEntry.getData().toString("utf8");
-    const newXml = fillStoryXML(
-      originalXml,
-      targetCity,
-      monthName,
-      yr,
-      infMoM,
-      infYoY,
-      targetIhk,
-    );
+    // 3. Build IDML from idmlExtract folder
+    const outputBuffer = buildIdmlFromExtract(variables);
 
-    zip.updateFile("Stories/Story_u8e9.xml", Buffer.from(newXml, "utf8"));
-
-    const zipEntries = zip.getEntries();
-    zipEntries.forEach((entry) => {
-      if (entry.entryName === "Stories/Story_u8e9.xml") return;
-      if (entry.isDirectory) return;
-
-      let fileText = entry.getData().toString("utf8");
-      let modified = false;
-
-      if (fileText.includes("November 2025")) {
-        fileText = fileText.replaceAll("November 2025", `${monthName} ${yr}`);
-        modified = true;
-      }
-      if (fileText.includes("November")) {
-        fileText = fileText.replaceAll("November", monthName);
-        modified = true;
-      }
-      if (fileText.includes("Metro")) {
-        fileText = fileText.replaceAll("Metro", targetCity);
-        modified = true;
-      }
-      if (fileText.includes("METRO")) {
-        fileText = fileText.replaceAll("METRO", targetCity.toUpperCase());
-        modified = true;
-      }
-
-      if (modified) {
-        zip.updateFile(entry.entryName, Buffer.from(fileText, "utf8"));
-      }
-    });
-
-    const outputBuffer = zip.toBuffer();
-
-    // 2. Save IDML file to backend/export/analysis_files/
+    // 4. Save IDML file to backend/export/analysis_files/
     const EXPORT_DIR = path.resolve(__dirname, "../../export/analysis_files");
     if (!fs.existsSync(EXPORT_DIR)) {
       fs.mkdirSync(EXPORT_DIR, { recursive: true });
@@ -542,7 +764,7 @@ export const generateAndSaveBRS = async (req, res) => {
 
     fs.writeFileSync(path.join(EXPORT_DIR, idmlFilename), outputBuffer);
 
-    // 3. Save record to AnalysisHistory
+    // 5. Save record to AnalysisHistory
     const history = new AnalysisHistory({
       userId,
       title: `Laporan BRS IHK ${targetCity} - ${periodText}`,
@@ -551,7 +773,10 @@ export const generateAndSaveBRS = async (req, res) => {
     });
     await history.save();
 
-    await logActivity(userId, `Melakukan analisis BRS: Laporan BRS IHK ${targetCity} - ${periodText}`);
+    await logActivity(
+      userId,
+      `Melakukan analisis BRS: Laporan BRS IHK ${targetCity} - ${periodText}`
+    );
 
     res.json({
       success: true,

@@ -1,0 +1,2019 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="u9db" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<XMLElement Self="di3i14c" MarkupTag="XMLTag/Story" XMLContent="u9db">
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					
+					<Content>Indeks Harga Konsumen/Inflasi Menurut Kelompok</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Perkembangan harga berbagai komoditas pada ${bulan} ${tahun} secara umum menunjukkan adanya ${statusKenaikanAtauPenurunan}. Berdasarkan hasil pemantauan BPS ${namaKota}, pada ${bulan} ${tahun} terjadi inflasi </Content>					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_-0_53} persen, atau terjadi kenaikan Indeks Harga Konsumen (IHK) dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}. Tingkat inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">14.5</Leading>
+					</Properties>
+					
+					<Content>${inflasiMtM} persen dan tingkat inflasi </Content>
+				
+					
+					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">14.5</Leading>
+					</Properties>
+					
+					<Content>year-to-date</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">14.5</Leading>
+					</Properties>
+					
+					<Content> (</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">14.5</Leading>
+					</Properties>
+					
+					<Content>y-to-d</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">14.5</Leading>
+					</Properties>
+					
+					<Content>) ${bulan} ${tahun} sebesar ${inflasiYtD} persen.</Content>
+					<Br />
+				
+					<Content>Infla</Content>
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>si </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok makanan, minuman, dan tembakau sebesar ${inflasiKelompokMakanan} persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar ${inflasiKelompokPerumahan} persen; kelompok kesehatan sebesar ${inflasiKelompokKesehatan} persen; kelompok transportasi sebesar ${inflasiKelompokTransportasi} persen; kelompok rekreasi, olahraga, dan budaya sebesar ${inflasiKelompokRekreasi} persen; kelompok penyediaan makanan dan minuman/restoran sebesar ${inflasiKelompokRestoran} persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar ${inflasiKelompokPerawatanPribadi} persen. Sementara kelompok pengeluaran yang mengalami penurunan indeks, yaitu: kelompok pakaian dan alas kaki sebesar ${inflasiKelompokPakaian} persen; kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga sebesar ${inflasiKelompokPerlengkapan} persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar ${inflasiKelompokInformasi} persen; dan kelompok pendidikan sebesar ${inflasiKelompokPendidikan} persen.</Content>
+					<Br />
+					<Content>Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> pada ${bulan} ${tahun}, antara lain: emas perhiasan; cabai merah; beras; kopi bubuk; mobil; bahan bakar rumah tangga; telur ayam ras; cabai rawit; popok bayi sekali pakai/ diapers; dan bedak. Sedangkan komoditas yang memberikan andil/sumbangan deflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>, antara lain: Uang sekolah menengah atas;  bawang putih; detergen cair; sabun detergen bubuk; kangkung; telepon seluler; tomat; ikan mas; ayam hidup; dan ikan tongkol/ ikan ambu-ambu.</Content>
+					<Br />
+					<Content>Sementara komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> pada ${bulan} ${tahun}, antara lain: emas perhiasan; wortel; cabai merah; cabai rawit; bawang merah; kopi bubuk; sigaret kretek tangan (skt); pasta gigi; sabun mandi cair; dan telur ayam ras. Sementara komoditas yang memberikan andil/sumbangan deflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>, antara lain: daging ayam ras; detergen cair; tauge/kecambah; shampo; mie kering instant; bawang putih; kentang; kelapa; sabun detergen bubuk; dan jagung manis.</Content>
+					<Br />
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci1" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>Pada ${bulan} ${tahun}, kelompok pengeluaran yang memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu: kelompok makanan, minuman, dan tembakau sebesar ${inflasiKelompokMakanan} persen; kelompok perumahan, air, listrik, gas dan bahan bakar lainnya sebesar ${inflasiKelompokPerumahan} persen; kelompok kesehatan sebesar ${inflasiKelompokKesehatan} persen; kelompok transportasi sebesar ${inflasiKelompokTransportasi} persen; kelompok rekreasi, olahraga, dan budaya sebesar ${inflasiKelompokRekreasi} persen; kelompok penyediaan makanan dan minuman/restoran  sebesar ${inflasiKelompokRestoran} persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar ${inflasiKelompokPerawatanPribadi} persen. Sedangkan kelompok pengeluaran yang memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu: kelompok pengeluaran pakaian dan alas kaki sebesar ${inflasiKelompokPakaian} persen; kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga sebesar ${inflasiKelompokPerlengkapan} persen; dan kelompok informasi, komunikasi, dan jasa keuangan sebesar ${inflasiKelompokInformasi} persen; dan kelompok pendidikan sebesar ${inflasiKelompokPendidikan} persen. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Makanan, Minuman, dan Tembakau</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci2" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+					</CharacterStyleRange>
+					<XMLElement Self="di3i14ci2i3" MarkupTag="XMLTag/BodyTextBrs">
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content>Kelompok ini pada ${bulan} ${tahun} mengalami inflasi </Content>
+						</CharacterStyleRange>
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content>y-on-y</Content>
+						</CharacterStyleRange>
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content> sebesar ${nilaiPersen_3_54} persen atau terjadi kenaikan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+						</CharacterStyleRange>
+					</XMLElement>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> </Content>
+						<Br />
+					</CharacterStyleRange>
+					<XMLElement Self="di3i14ci2i4" MarkupTag="XMLTag/BodyTextBrs">
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content>Subkelompok yang mengalami inflasi </Content>
+						</CharacterStyleRange>
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content>y-on-y</Content>
+						</CharacterStyleRange>
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content> tertinggi, yaitu subkelompok minuman yang tidak beralkohol sebesar ${inflasi_minuman_yang_tidak_beralkohol} persen dan terendah yaitu subkelompok rokok dan tembakau sebesar ${inflasi_rokok_dan_tembakau} persen .</Content>
+						</CharacterStyleRange>
+					</XMLElement>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Br />
+						<Content>Sementara kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>  sebesar ${nilaiPersen_1_06} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>,  yaitu: cabai merah sebesar ${nilaiPersen_0_49} persen; beras sebesar ${nilaiPersen_0_20} persen; kopi bubuk sebesar ${nilaiPersen_0_12} persen;  telur ayam ras sebesar ${nilaiPersen_0_11} persen; cabai rawit sebesar 0,09; daging ayam ras sebesar ${nilaiPersen_0_05} persen; bawang merah, ikan lele, minyak goreng kelapa dan wortel masing-masing sebesar ${nilaiPersen_0_04} persen. Sedangkan komoditas yang dominan memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu: bawang putih sebesar 0,08; kangkung dan tomat masing-masing sebesar ${nilaiPersen_0_04} persen; ikan mas, ayam hidup dan ikan tongkol masing-masing sebesar ${nilaiPersen_0_03} persen; terong, bayam, daun singkong, labu siam, ikan gurame dan ikan patin masing-masing sebesar ${nilaiPersen_0_02} persen . </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+					<Content>Sementara kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_0_11} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>, yaitu: wortel sebesar ${nilaiPersen_0_05} persen; cabai merah dan cabai rawit masing-masing sebesar ${nilaiPersen_0_04} persen; bawang merah sebesar ${nilaiPersen_0_02} persen. Sedangkan komoditas yang dominan memberikan andil/sumbangan deflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>, yaitu: daging ayam ras sebesar ${nilaiPersen_0_05} persen; tauge/kecambah; mie kering instant; bawang putih; dan kentang masing-masing sebesar ${nilaiPersen_0_01} persen.</Content>
+					<Br />
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Pakaian dan Alas Kaki</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<Properties>
+					<SameParaStyleSpacing type="unit">0</SameParaStyleSpacing>
+				</Properties>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci5" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>Kelompok ini pada ${bulan} ${tahun} mengalami deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> sebesar ${nilaiPersen_0_18} persen atau terjadi penurunan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> Subkelompok yang mengalami inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					<Content>pada kelompok ini, yaitu subkelompok pakaian sebesar ${inflasi_pakaian} persen sedangkan subkelompok yang mengalami deflasi </Content>
+				
+					
+					
+				
+					
+				
+					
+					
+				</CharacterStyleRange>
+				
+				
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content>, yaitu subkelompok alas kaki sebesar ${inflasi_alas_kaki} persen.</Content>
+					<Br />
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci6" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> sebesar ${nilaiPersen_0_01} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu: sandal kulit pria dan kerudung masing-masing sebesar ${nilaiPersen_0_01} persen; sepatu olahraga pria, celana panjang jeans pria dan sendal anak masing-masing sebesar ${nilaiPersen_0_006} persen.  Sementara kelompok ini pada ${bulan} ${tahun} tidak memberikan andil/sumbangan yang signifikan terhadap inflasi </Content>
+					
+						
+					
+						
+						
+					
+						
+					</CharacterStyleRange>
+					
+					
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>m-to-m</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15</Leading>
+						</Properties>
+						<Content> kota KOTA KOTA METRO.</Content>
+					
+						
+						
+					</CharacterStyleRange>
+					
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					
+					<Content> </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>  </Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<Properties>
+					<SameParaStyleSpacing type="unit">0</SameParaStyleSpacing>
+				</Properties>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Perumahan, Air, Listrik, dan Bahan Bakar Rumah Tangga</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Kelompok ini pada ${bulan} ${tahun} mengalami inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_1_25} persen atau terjadi kenaikan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci7" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						<Content>Subkelompok yang mengalami inflasi </Content>
+					
+						
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> yaitu sub kelompok sewa dan kontrak rumah sebesar ${nilaiPersen_0_48} persen; serta subkelompok listrik dan bahan bakar rumah tangga sebesar ${inflasi_listrik_dan_bahan_bakar_rumah_tangga} persen.  Sedangkan yang mengalami deflasi </Content>
+					
+						
+					
+						
+						
+					
+						
+					
+						
+						
+					</CharacterStyleRange>
+					
+					
+					
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> yaitu: sub kelompok pemeliharaan, perbaikan, dan keamanan tempat tinggal/perumahan sebesar ${nilaiPersen_0_15} persen. Sementara subkelompok penyediaan air dan layanan perumahan lainnya terpantau stabil dan tidak mengalami perubahan indeks harga. </Content>
+					
+						
+					
+						
+						
+					
+						
+					</CharacterStyleRange>
+					
+					
+					
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					<Content> </Content>
+					<Br />
+				
+					
+					<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_0_12} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>, yaitu: bahan bakar rumah tangga sebesar ${nilaiPersen_0_11} persen; tarif kontrak rumah sebesar ${nilaiPersen_0_01} persen. </Content>
+					<Br />
+					<Content>Sementara kelompok ini pada ${bulan} ${tahun} tidak memberikan andil/sumbangan yang signifikan terhadap inflasi </Content>
+				
+					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content> kota KOTA KOTA METRO.</Content>
+					<Br />
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" ParagraphBreakType="NextColumn">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<Properties>
+					<SameParaStyleSpacing type="unit">0</SameParaStyleSpacing>
+				</Properties>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Perlengkapan, Peralatan, dan Pemeliharaan Rutin Rumah Tangga</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci8" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>Kelompok ini pada ${bulan} ${tahun} mengalami deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> sebesar ${nilaiPersen_2_18} persen atau terjadi penurunan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+						<Br />
+					</CharacterStyleRange>
+					<XMLElement Self="di3i14ci8i9" MarkupTag="XMLTag/BodyTextBrs">
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content>Subkelompok yang mengalami deflasi </Content>
+						</CharacterStyleRange>
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content>y-on-y</Content>
+						</CharacterStyleRange>
+						<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+								<Leading type="unit">15.5</Leading>
+							</Properties>
+							
+							<Content> terdalam, yaitu subkelompok barang dan layanan untuk pemeliharaan rumah tangga rutin sebesar ${inflasi_barang_dan_layanan_untuk_pemeliharaan_rumah_tangga_rutin} persen; subkelompok peralatan rumah tangga sebesar ${inflasi_peralatan_rumah_tangga} persen; dan subkelompok peralatan dan perlengkapan perumahan dan kebun sebesar ${inflasi_peralatan_dan_perlengkapan_perumahan_dan_kebun} persen. Sedangkan subkelompok yang mengalami inflasi tertinggi yaitu: subkelompok barang pecah belah dan peralatan makan minum sebesar ${inflasi_barang_pecah_belah_dan_peralatan_makan_minum} persen; subkelompok tekstil rumah tangga sebesar ${inflasi_tekstil_rumah_tangga} persen; dan  subkelompok furnitur, perlengkapan dan karpet sebesar ${inflasi_furnitur_perlengkapan_dan_karpet} persen. </Content>
+						</CharacterStyleRange>
+					</XMLElement>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Br />
+						<Br />
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi </Content>
+						
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> sebesar ${nilaiPersen_0_12} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu detergen cair sebesar ${nilaiPersen_0_06} persen; sabun detergen bubuk sebesar ${nilaiPersen_0_05} persen; dan pengharum cucian/pelembut sebesar ${nilaiPersen_0_02} persen. Sedangkan komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu stoples sebesar 0,02; pembersih lantai, kursi dan handuk masing-masing sebesar ${nilaiPersen_0_01} persen. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+					<XMLElement Self="di3i14cia" MarkupTag="XMLTag/BodyTextBrs" />
+					<Content>Sementara kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_0_03} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>, yaitu: detergen cair, sabun detergen bubuk dan sabun cair/cuci piring masing-masing sebesar  ${nilaiPersen_0_01} persen.</Content>
+				
+					<Br />
+				
+					
+					<Br />
+				</CharacterStyleRange>
+				
+				
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<Properties>
+					<SameParaStyleSpacing type="unit">0</SameParaStyleSpacing>
+				</Properties>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Kesehatan</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Kelompok ini pada ${bulan} ${tahun} mengalami inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_1_48} persen atau terjadi kenaikan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14cib" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>Subkelompok yang mengalami inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> tertinggi, yaitu subkelompok obat-obatan dan produk kesehatan sebesar ${nilaiPersen_1_93} persen; dan subkelompok jasa rawat jalan sebesar ${inflasi_jasa_rawat_jalan} persen. Sementara subkelompok jasa rawat inap dan jasa kesehatan lainnya terpantau stabil dan tidak mengalami perubahan indeks harga.</Content>
+						<Br />
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> sebesar ${nilaiPersen_0_05} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu: vitamin sebesar ${nilaiPersen_0_02} persen </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>.</Content>
+					<Br />
+					<XMLElement Self="di3i14cic" MarkupTag="XMLTag/BodyTextBrs" />
+					<Content>Sementara kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_0_01} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>, yaitu: vitamin sebesar  ${nilaiPersen_0_01} persen.</Content>
+					<Br />
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<Properties>
+					<SameParaStyleSpacing type="unit">0</SameParaStyleSpacing>
+				</Properties>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Transportasi</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Kelompok ini pada ${bulan} ${tahun} mengalami inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_1_69} persen atau terjadi kenaikan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14cid" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>Dari empat subkelompok pada kelompok ini, tiga subkelompok mengalami inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y, </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>satu subkelompok </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">20</Leading>
+						</Properties>
+						
+						<Content>tidak memberikan andil/sumbangan yang signifikan terhadap inflasi /deflasi </Content>
+					
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>. Subkelompok yang mengalami inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu subkelompok pembelian kendaraan sebesar ${inflasi_pembelian_kendaraan} persen; subkelompok pengoperasian peralatan transportasi pribadi sebesar ${inflasi_pengoperasian_peralatan_transportasi_pribadi} persen; dan subkelompok jasa angkutan penumpangsebesar ${inflasi_X} persen. Sedangkan subkelompok yang tidak mengalami perubahan inflasi </Content>
+					
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu subkelompok jasa pengiriman barang. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14cie" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_24} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu: mobil sebesar ${nilaiPersen_0_12} persen; cuci kendaraan sebesar ${nilaiPersen_0_04} persen; sepeda motor dan ban luar motor  masing-masing sebesar ${nilaiPersen_0_02} persen. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<XMLElement Self="di3i14cif" MarkupTag="XMLTag/BodyTextBrs" />
+					<Br />
+					<Content>Sementara kelompok ini pada ${bulan} ${tahun} tidak memberikan andil/sumbangan yang signifikan terhadap inflasi </Content>
+				
+					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					<Content> kota KOTA KOTA METRO.</Content>
+				
+					
+					<Br />
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FillColor="Color/Oren SE_1">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Informasi, Komunikasi, dan Jasa Keuangan</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci10" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15</Leading>
+						</Properties>
+						
+						<Content>Kelompok ini pada ${bulan} ${tahun} KOTA KOTA METRO mengalami deflasi </Content>
+					
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_92} persen atau terjadi penurunan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content> </Content>
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci11" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Subkelompok yang mengalami deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						<Content> terdalam yaitu: subkelompok peralatan informasi dan komunikasi sebesar ${inflasi_peralatan_informasi_dan_komunikasi} persen. Sedangkan subkelompok yang mengalami inflasi </Content>
+					
+						
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu subkelompok jasa keuangan sebesar ${inflasi_jasa_keuangan} persen.  Sementara subkelompok yang tidak mengalami perubahan inflasi </Content>
+					
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu: subkelompok layanan jasa informasi dan komunikasi dan subkelompok jasa keuangan.  </Content>
+					
+						
+					</CharacterStyleRange>
+					
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<Properties>
+					<SameParaStyleSpacing type="unit">0</SameParaStyleSpacing>
+				</Properties>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci12" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_05} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu: telepon seluler sebesar ${nilaiPersen_0_04} persen; laptop/notebook sebesar ${nilaiPersen_0_008} persen; dan televisi  berwarna sebesar ${nilaiPersen_0_006} persen. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Br />
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci13" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<XMLElement Self="di3i14ci13i14" MarkupTag="XMLTag/BodyTextBrs" />
+						<Content>Sementara kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>m-to-m</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> sebesar ${nilaiPersen_0_003} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>m-to-m</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu: laptop/notebook sebesar sebesar  ${nilaiPersen_0_003} persen.</Content>
+					
+						
+					
+						
+						
+					</CharacterStyleRange>
+					
+					
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Rekreasi, Olahraga, dan Budaya</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci15" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15</Leading>
+						</Properties>
+						
+						<Content>Kelompok ini pada ${bulan} ${tahun} KOTA KOTA METRO mengalami inflasi </Content>
+					
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_38} persen atau terjadi kenaikan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun} </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci16" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Subkelompok yang mengalami inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu: subkelompok barang rekreasi lainnya dan olahraga sebesar ${inflasi_barang_rekreasi_lainnya_dan_olahraga} persen dan subkelompok koran, buku, dan perlengkapan sekolah sebesar ${inflasi_koran_buku_dan_perlengkapan_sekolah} persen. Sementara subkelompok layanan rekreasi dan olahraga tidak mengalami perubahan.</Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content> </Content>
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci17" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_01} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu:  buku pelajaran SD sebesar ${nilaiPersen_0_01} persen.</Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					<Content> Sementara kelompok ini pada ${bulan} ${tahun} tidak memberikan andil/sumbangan yang signifikan terhadap inflasi </Content>
+				
+					
+					
+				
+					
+				</CharacterStyleRange>
+				
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					<Content> kota KOTA KOTA METRO.</Content>
+				
+					
+					
+					<Br />
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Pendidikan</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci18" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15</Leading>
+						</Properties>
+						
+						<Content>Kelompok ini pada ${bulan} ${tahun} KOTA KOTA METRO mengalami deflasi </Content>
+					
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_6_29} persen atau terjadi penurunan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content>  </Content>
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci19" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Subkelompok yang mengalami deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> yaitu: subkelompok pendidikan menengah sebesar ${inflasi_pendidikan_menengah} persen. Sedangkan subkelompok yang mengalami inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						<Content> tertinggi, yaitu: subkelompok pendidikan lainnya sebesar ${inflasi_pendidikan_lainnya} persen; dan terendah subkelompok pendidikan dasar dan anak usia dini sebesar ${inflasi_pendidikan_dasar_dan_anak_usia_dini} persen. Sementara subkelompok pendidikan tinggi  tidak memberikan andil/sumbangan yang signifikan terhadap inflasi </Content>
+					
+						
+						
+					
+						
+					
+						
+						
+					
+						
+					</CharacterStyleRange>
+					
+					
+					
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>m-to-m</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> kota KOTA KOTA METRO. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" />
+				<XMLElement Self="di3i14ci1a" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> </Content>
+						<Br />
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_41} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu: uang sekolah menengah atas sebesar ${nilaiPersen_0_46} persen. Sedangkan komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu: uang bimbingan belajar sebesar ${nilaiPersen_0_03} persen; dan uang taman kanak kanak sebesar ${nilaiPersen_0_02} persen. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					<Br />
+					<Content>Sementara kelompok ini pada ${bulan} ${tahun} tidak memberikan andil/sumbangan yang signifikan terhadap inflasi </Content>
+				
+					
+					
+				
+					
+				</CharacterStyleRange>
+				
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					<Content> kota KOTA KOTA METRO.</Content>
+				
+					
+					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<Properties>
+					<SameParaStyleSpacing type="unit">0</SameParaStyleSpacing>
+				</Properties>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Penyediaan Makanan dan Minuman/Restoran</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci1b" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15</Leading>
+						</Properties>
+						
+						<Content>Kelompok ini pada ${bulan} ${tahun} KOTA KOTA METRO mengalami inflasi </Content>
+					
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_88} persen atau terjadi kenaikan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content> </Content>
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci1c" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Kelompok ini terdiri dari satu subkelompok, yaitu subkelompok jasa pelayanan makanan dan minuman yang mengalami inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_88} persen. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" />
+				<XMLElement Self="di3i14ci1d" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_08} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu: ayam goreng sebesar ${nilaiPersen_0_04} persen; martabak dan bubur masing-masing sebesar ${nilaiPersen_0_02} persen. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">14</Leading>
+					</Properties>
+					
+					<Br />
+				
+					<Content>Sementara kelompok ini pada ${bulan} ${tahun} t</Content>
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>idak memberikan andil/sumbangan yang signifikan terhadap inflasi </Content>
+				
+					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Content>m-to-m</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					<Content> kota KOTA KOTA METRO.</Content>
+				
+					
+					
+					<Br />
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Regular">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Perawatan Pribadi dan Jasa Lainnya</Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>Kelompok ini pada ${bulan} ${tahun} mengalami inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_13_46} persen atau terjadi kenaikan indeks dari ${ihkTahunLalu} pada ${bulan} ${tahunKemarin} menjadi ${ihkSekarang} pada ${bulan} ${tahun}.</Content>
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci1e" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>Subkelompok yang mengalami inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						<Content>, yaitu: subkelompok perawatan pribadi lainnya sebesar ${inflasi_perawatan_pribadi_lainnya} persen; dan subkelompok perawatan pribadi sebesar ${inflasi_perawatan_pribadi} persen. Sedangkan subkelompok subkelompok jasa lainnya tidak memberikan andil/sumbangan yang signifikan terhadap inflasi </Content>
+					
+						
+						
+					
+						
+					</CharacterStyleRange>
+					
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> kota KOTA KOTA METRO.</Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" />
+				<XMLElement Self="di3i14ci1f" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> </Content>
+						<Br />
+						<Content>Kelompok ini pada ${bulan} ${tahun} memberikan andil/sumbangan terhadap inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content> sebesar ${nilaiPersen_0_91} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu emas perhiasan sebesar ${nilaiPersen_0_57} persen; pasta gigi sebesar ${nilaiPersen_0_07} persen; sabun mandi cair sebesar ${nilaiPersen_0_05} persen; popok bayi sekali pakai sebesar ${nilaiPersen_0_04} persen;  parfum dan sabun wajah masing-masing sebesar ${nilaiPersen_0_03} persen. Sedangkan komoditas yang dominan memberikan andil/sumbangan deflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+						<Content>y-on-y</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+						<Content>, yaitu shampo sebesar ${nilaiPersen_0_01} persen. </Content>
+					</CharacterStyleRange>
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Br />
+				</CharacterStyleRange>
+				<XMLElement Self="di3i14ci20" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">20</Leading>
+						</Properties>
+						<Content>Sementara kelompok ini pada ${bulan} ${tahun} </Content>
+					
+						
+						
+					</CharacterStyleRange>
+					
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>m-to-m</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content> sebesar ${nilaiPersen_0_10} persen</Content>
+						
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15</Leading>
+						</Properties>
+						
+						<Content>. </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>Komoditas yang dominan memberikan andil/sumbangan inflasi </Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>m-to-m</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>, yaitu: emas perhiasan sebesar ${nilaiPersen_0_07} persen; pasta gigi dan sabun mandi cair masing-masing sebesar ${nilaiPersen_0_01} persen. </Content>
+					
+						
+					</CharacterStyleRange>
+					
+				</XMLElement>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Br />
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Sub Bab BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					
+					<XMLElement Self="di3i14ci21" MarkupTag="XMLTag/BabBRS">
+						<Content>Perbandingan Inflasi Antar Tahun</Content>
+					</XMLElement>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content>Pada ${bulan} ${tahun}, tingkat inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content> KOTA KOTA METRO sebesar ${inflasiYoY} persen dan tingkat inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content>y-to-d</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content> sebesar ${nilaiPersen_1_13} persen. Tingkat inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content>y-on-y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content> untuk ${bulan} ${tahunKemarin} dan ${bulan} ${tahunKemarin}  masing-masing sebesar ${inflasiYoYTahunLalu} persen dan ${inflasiYoYDuaTahunLalu} persen. Tingkat inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content>y-to-d</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content> ${bulan} ${tahunKemarin} dan ${bulan} ${tahunKemarin} masing-masing sebesar ${inflasiYoYTahunLalu} persen dan ${inflasiYoYDuaTahunLalu} persen.</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Br />
+				
+					<Br />
+				
+					
+					<Br />
+				
+					<Br />
+				</CharacterStyleRange>
+				
+				
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+						<Leading type="unit">15</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+		</XMLElement>
+	</Story>
+</idPkg:Story>

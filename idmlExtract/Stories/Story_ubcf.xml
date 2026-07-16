@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="ubcf" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<XMLElement Self="di3i50a" MarkupTag="XMLTag/Story" XMLContent="ubcf">
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FillColor="Color/Paper" FontStyle="Bold">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content>Perubahan Tahun Dasar</Content>
+				</CharacterStyleRange>
+				<XMLElement Self="di3i50ai1" MarkupTag="XMLTag/BodyTextBrs">
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+							<Leading type="unit">10</Leading>
+						</Properties>
+						
+						<Br />
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+							<Leading type="unit">10</Leading>
+						</Properties>
+						
+						<Content>Adan</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+							<Leading type="unit">15.5</Leading>
+						</Properties>
+						
+						<Content>ya pergantian tahun dasar yang baru menyebabkan diskontinuitas indeks harga antara periode berjalan dengan periode sebelumnya. Tabel 3 menyajikan IHK KOTA KOTA METRO pada Januari 2023 sampai dengan ${bulanKemarin} ${tahunKemarin} menurut tahun d</Content>
+					</CharacterStyleRange>
+					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+							<Leading type="unit">10</Leading>
+						</Properties>
+						
+						<Content>asar 2022=100.</Content>
+					</CharacterStyleRange>
+				</XMLElement>
+			</ParagraphStyleRange>
+		</XMLElement>
+	</Story>
+</idPkg:Story>

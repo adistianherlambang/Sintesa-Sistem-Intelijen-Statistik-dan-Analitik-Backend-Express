@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="ube5" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<XMLElement Self="di3i50b" MarkupTag="XMLTag/Story" XMLContent="ube5">
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Tabel BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="11">
+					<XMLElement Self="di3i50bi1" MarkupTag="XMLTag/JudulTabelBRS">
+						<Content>Indeks Harga Konsumen (IHK) KOTA KOTA METRO 2023-2025 </Content>
+						<XMLElement Self="di3i50bi1i2" MarkupTag="XMLTag/JudulTabelBRS">
+							<Content>(2022=100)</Content>
+						</XMLElement>
+					</XMLElement>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="10">
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/NormalParagraphStyle">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Br />
+					<XMLElement Self="di3i50bi3" MarkupTag="XMLTag/Table" XMLContent="ube5ide5" NoTextMarker="true">
+						<Table Self="ube5ide5" HeaderRowCount="0" FooterRowCount="0" TextTopInset="4" TextLeftInset="4" TextBottomInset="4" TextRightInset="4" ClipContentToTextCell="false" BodyRowCount="15" ColumnCount="4" AppliedTableStyle="TableStyle/Table Style 1" TableDirection="LeftToRightDirection" StartRowStrokeColor="Color/Black" StartRowStrokeCount="1" StartRowStrokeType="n" EndRowStrokeType="n" StartColumnStrokeColor="Color/Black" StartColumnStrokeCount="1" StartColumnStrokeType="n" EndColumnLineStyle="n" StartRowStrokeWeight="0" EndRowStrokeWeight="0" StartColumnStrokeWeight="0" EndColumnStrokeWeight="0">
+							<Row Self="ube5ide5Row0" Name="0" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="14.56528473414437" MinimumHeight="14.56528473414437" MaximumHeight="566.9291338582677" AutoGrow="true" />
+							<Row Self="ube5ide5Row1" Name="1" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="17.007874022621763" MinimumHeight="17.007874022621763" MaximumHeight="566.9291338582677" AutoGrow="true" />
+							<Row Self="ube5ide5Row2" Name="2" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="13.187725685900432" MinimumHeight="13.187725685900432" AutoGrow="true" />
+							<Row Self="ube5ide5Row3" Name="3" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Row4" Name="4" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Row5" Name="5" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Row6" Name="6" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Row7" Name="7" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Row8" Name="8" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Row9" Name="9" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Rowa" Name="10" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Rowb" Name="11" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Rowc" Name="12" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Rowd" Name="13" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Row Self="ube5ide5Rowe" Name="14" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleRowHeight="15.590551181102363" MinimumHeight="15.590551181102363" AutoGrow="true" />
+							<Column Self="ube5ide5Column0" Name="0" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleColumnWidth="58.02559055149837" />
+							<Column Self="ube5ide5Column1" Name="1" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleColumnWidth="58.39370078758273" />
+							<Column Self="ube5ide5Column2" Name="2" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleColumnWidth="59.527559054936916" />
+							<Column Self="ube5ide5Column3" Name="3" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" SingleColumnWidth="60.8169291334506" />
+							<Cell Self="ube5ide5i0" Name="0:0" RowSpan="2" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="0" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FillColor="Color/Oren SE_1" FillTint="-1" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="20" RightEdgeStrokePriority="47" TopEdgeStrokePriority="22" BottomEdgeStrokePriority="1" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i50bi3i4" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i0">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Periode</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i1" Name="1:0" RowSpan="1" ColumnSpan="3" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="0" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FillColor="Color/Oren SE_1" FillTint="-1" LeftEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0.5" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Paper" LeftEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="47" TopEdgeStrokePriority="49" BottomEdgeStrokePriority="79" LeftEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i50bi3i5" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i1">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>IHK</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i5" Name="1:1" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1155" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FillColor="Color/Oren SE_1" FillTint="-1" LeftEdgeStrokeWeight="0" TopEdgeStrokeWeight="0.5" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Paper" LeftEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/Solid" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" TopEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="47" TopEdgeStrokePriority="79" BottomEdgeStrokePriority="87" LeftEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i50bi3i8" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i5">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>2023</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i6" Name="2:1" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2314" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FillColor="Color/Oren SE_1" FillTint="-1" TopEdgeStrokeWeight="0.5" TopEdgeStrokeColor="Color/Paper" TopEdgeStrokeType="StrokeStyle/$ID/Solid" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" TopEdgeStrokeTint="100" ClipContentToCell="false" WritingDirection="true" TopEdgeStrokePriority="79" BottomEdgeStrokePriority="87" TopEdgeStrokeGapTint="100" TopEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i50bi3i9" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i6">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>2024</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i7" Name="3:1" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="0" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FillColor="Color/Oren SE_1" FillTint="-1" TopEdgeStrokeWeight="0.5" TopEdgeStrokeColor="Color/Paper" TopEdgeStrokeType="StrokeStyle/$ID/Solid" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" TopEdgeStrokeTint="100" ClipContentToCell="false" WritingDirection="true" TopEdgeStrokePriority="79" BottomEdgeStrokePriority="87" TopEdgeStrokeGapTint="100" TopEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i50bi3ia" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i7">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>2025</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i8" Name="0:2" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/Nomor Kolom" AppliedCellStylePriority="1149" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" TopEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="87" RightEdgeStrokePriority="74" TopEdgeStrokePriority="87" BottomEdgeStrokePriority="87" TopEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i50bi3ib" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i8">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Nomor Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(1)</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i9" Name="1:2" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/Nomor Kolom" AppliedCellStylePriority="2304" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" TopEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="74" RightEdgeStrokePriority="76" TopEdgeStrokePriority="87" BottomEdgeStrokePriority="87">
+								<XMLElement Self="di3i50bi3ic" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i9">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Nomor Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(2)</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5ia" Name="2:2" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/Nomor Kolom" AppliedCellStylePriority="3463" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" TopEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="76" RightEdgeStrokePriority="76" TopEdgeStrokePriority="87" BottomEdgeStrokePriority="87">
+								<XMLElement Self="di3i50bi3id" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5ia">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Nomor Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(3)</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5ib" Name="3:2" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/Nomor Kolom" AppliedCellStylePriority="1149" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" TopEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="76" RightEdgeStrokePriority="76" TopEdgeStrokePriority="87" BottomEdgeStrokePriority="87">
+								<XMLElement Self="di3i50bi3ie" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5ib">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Nomor Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(4)</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5ic" Name="0:3" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true" TopEdgeStrokePriority="87">
+								<XMLElement Self="di3i50bi3if" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5ic">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Januari</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5id" Name="1:3" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true" TopEdgeStrokePriority="87">
+								<XMLElement Self="di3i50bi3i10" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5id">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>102,48</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5ie" Name="2:3" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true" TopEdgeStrokePriority="87">
+								<XMLElement Self="di3i50bi3i11" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5ie">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>104,52</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5if" Name="3:3" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true" TopEdgeStrokePriority="87">
+								<XMLElement Self="di3i50bi3i12" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5if">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>106,13</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i10" Name="0:4" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i13" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i10">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Februari</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i11" Name="1:4" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i14" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i11">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>102,70</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i12" Name="2:4" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i15" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i12">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,13</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i13" Name="3:4" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i16" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i13">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,19</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i14" Name="0:5" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i17" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i14">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Maret</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i15" Name="1:5" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i18" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i15">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>102,49</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i16" Name="2:5" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i19" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i16">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,78</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i17" Name="3:5" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i1a" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i17">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>107,25</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i18" Name="0:6" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i1b" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i18">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>April</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i19" Name="1:6" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i1c" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i19">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>102,80</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i1a" Name="2:6" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i1d" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i1a">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,76</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i1b" Name="3:6" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i1e" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i1b">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>107,96</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i1c" Name="0:7" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i1f" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i1c">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Mei</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i1d" Name="1:7" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i20" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i1d">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>103,10</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i1e" Name="2:7" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i21" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i1e">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,42</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i1f" Name="3:7" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i22" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i1f">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>107,39</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i20" Name="0:8" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i23" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i20">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Juni</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i21" Name="1:8" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i24" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i21">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>103,08</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i22" Name="2:8" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i25" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i22">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,52</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i23" Name="3:8" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i26" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i23">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>107,43</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i24" Name="0:9" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i27" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i24">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Juli</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i25" Name="1:9" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i28" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i25">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>103,33</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i26" Name="2:9" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i29" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i26">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,39</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i27" Name="3:9" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i2a" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i27">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>107,77</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i28" Name="0:10" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i2b" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i28">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Agustus</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i29" Name="1:10" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i2c" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i29">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>103,25</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i2a" Name="2:10" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i2d" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i2a">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,37</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i2b" Name="3:10" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i2e" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i2b">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>107,06</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i2c" Name="0:11" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i2f" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i2c">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>September</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i2d" Name="1:11" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i30" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i2d">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>103,46</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i2e" Name="2:11" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i31" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i2e">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,38</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i2f" Name="3:11" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i32" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i2f">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>107,48</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i30" Name="0:12" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i33" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i30">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>April</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i31" Name="1:12" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i34" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i31">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>103,93</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i32" Name="2:12" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i35" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i32">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>105,57</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i33" Name="3:12" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i36" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i33">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>107,73</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i34" Name="0:13" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i37" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i34">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Mei</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i35" Name="1:13" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i38" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i35">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>104,80</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i36" Name="2:13" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i39" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i36">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>111,00</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i37" Name="3:13" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i3a" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i37">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>110,41</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i38" Name="0:14" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="-2073440070" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i3b" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i38">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>Desember</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i39" Name="1:14" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="2312" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i3c" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i39">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>104,85</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i3a" Name="2:14" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="3471" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i3d" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i3a">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="8">
+											<Content>106,43</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ube5ide5i3b" Name="3:14" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="0" TextLeftInset="5.400000095367432" TextBottomInset="0" TextRightInset="5.400000095367432" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="1157" LeftInset="5.400000095367432" TopInset="0" RightInset="5.400000095367432" BottomInset="0" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" ClipContentToCell="false" WritingDirection="true">
+								<XMLElement Self="di3i50bi3i3e" MarkupTag="XMLTag/Cell" XMLContent="ube5ide5i3b">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS" RightIndent="22.06220453385589">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" />
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+						</Table>
+					</XMLElement>
+					<Br />
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+		</XMLElement>
+	</Story>
+</idPkg:Story>

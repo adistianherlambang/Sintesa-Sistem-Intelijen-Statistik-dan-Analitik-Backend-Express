@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="ub0f" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<XMLElement Self="di3i14d" MarkupTag="XMLTag/Story" XMLContent="ub0f">
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Tabel BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content>Tingkat Inflasi </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Bold Italic">
+					<Content>Month-to-Month</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content> (</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Bold Italic">
+					<Content>M-to-M</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content>), </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Bold Italic">
+					<Content>Year-to-Date</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content> (</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Bold Italic">
+					<Content>Y-to-D</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content>), dan </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Bold Italic">
+					<Content>Year-on-Year</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content> (</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Bold Italic">
+					<Content>Y-on-Y</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Content>) bulan Mei (persen), 2023–2025 </Content>
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/NormalParagraphStyle">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Br />
+					<XMLElement Self="di3i14di1" MarkupTag="XMLTag/Table" XMLContent="ub0fidfa" NoTextMarker="true">
+						<Table Self="ub0fidfa" HeaderRowCount="0" FooterRowCount="0" TextTopInset="4" TextLeftInset="4" TextBottomInset="4" TextRightInset="4" ClipContentToTextCell="false" BodyRowCount="5" ColumnCount="4" AppliedTableStyle="TableStyle/Table Style 1" TableDirection="LeftToRightDirection" LeftBorderStrokeWeight="0.5" RightBorderStrokeWeight="0.5" TopBorderStrokeWeight="0.5" BottomBorderStrokeWeight="0.5" StartRowStrokeColor="Color/Black" StartRowStrokeCount="1" StartColumnStrokeColor="Color/Black" StartColumnStrokeCount="1" StartRowStrokeWeight="0.5" EndRowStrokeWeight="0.5" StartColumnStrokeWeight="0.5" EndColumnStrokeWeight="0.5">
+							<Row Self="ub0fidfaRow0" Name="0" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleRowHeight="21.319615449679986" MinimumHeight="21.319615449679986" AutoGrow="true" />
+							<Row Self="ub0fidfaRow1" Name="1" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleRowHeight="12.139941215515137" MinimumHeight="3" AutoGrow="true" />
+							<Row Self="ub0fidfaRow2" Name="2" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleRowHeight="17.00787401574803" MinimumHeight="17.00787401574803" AutoGrow="true" />
+							<Row Self="ub0fidfaRow3" Name="3" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleRowHeight="17.00787401574803" MinimumHeight="17.00787401574803" AutoGrow="true" />
+							<Row Self="ub0fidfaRow4" Name="4" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleRowHeight="17.00787401574803" MinimumHeight="17.00787401574803" AutoGrow="true" />
+							<Column Self="ub0fidfaColumn0" Name="0" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleColumnWidth="272.12598425178743" />
+							<Column Self="ub0fidfaColumn1" Name="1" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleColumnWidth="76.27007263664188" />
+							<Column Self="ub0fidfaColumn2" Name="2" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleColumnWidth="69.7141793320431" />
+							<Column Self="ub0fidfaColumn3" Name="3" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" SingleColumnWidth="63.47795885978326" />
+							<Cell Self="ub0fidfai0" Name="0:0" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="4" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" FillColor="Color/Oren SE_1" FillTint="-1" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/ThinThin" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="20" RightEdgeStrokePriority="47" TopEdgeStrokePriority="22" BottomEdgeStrokePriority="567" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i2" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai0">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>Tingkat Inflasi</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai1" Name="1:0" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="4" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" FillColor="Color/Oren SE_1" FillTint="-1" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/ThinThin" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="47" RightEdgeStrokePriority="74" TopEdgeStrokePriority="49" BottomEdgeStrokePriority="567" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i3" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai1">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>2023</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai2" Name="2:0" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="4" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" FillColor="Color/Oren SE_1" FillTint="-1" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/ThinThin" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="74" RightEdgeStrokePriority="101" TopEdgeStrokePriority="76" BottomEdgeStrokePriority="567" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i4" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai2">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS" Justification="LeftAlign">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>         2024</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai3" Name="3:0" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="4" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" FillColor="Color/Oren SE_1" FillTint="-1" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/ThinThin" BottomEdgeStrokeType="StrokeStyle/$ID/Solid" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="101" RightEdgeStrokePriority="102" TopEdgeStrokePriority="103" BottomEdgeStrokePriority="567" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i5" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai3">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Judul Kolom Tabel BRS" Justification="LeftAlign">
+										<Properties>
+											<TabList type="list">
+												<ListItem type="record">
+													<Alignment type="enumeration">LeftAlign</Alignment>
+													<AlignmentCharacter type="string">.</AlignmentCharacter>
+													<Leader type="string"></Leader>
+													<Position type="unit">53</Position>
+												</ListItem>
+											</TabList>
+										</Properties>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>      2025</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai4" Name="0:1" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/Nomor Kolom" AppliedCellStylePriority="13" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/Solid" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="567" RightEdgeStrokePriority="102" TopEdgeStrokePriority="567" BottomEdgeStrokePriority="567" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i6" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai4">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Nomor Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(1)</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai5" Name="1:1" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/Nomor Kolom" AppliedCellStylePriority="13" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/Solid" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="102" RightEdgeStrokePriority="111" TopEdgeStrokePriority="567" BottomEdgeStrokePriority="567" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i7" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai5">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Nomor Kolom Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(2)</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai6" Name="2:1" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/Nomor Kolom" AppliedCellStylePriority="13" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/Solid" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="111" RightEdgeStrokePriority="120" TopEdgeStrokePriority="567" BottomEdgeStrokePriority="567" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i8" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai6">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Nomor Kolom Tabel BRS" Justification="LeftAlign">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>            (3)</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai7" Name="3:1" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/Nomor Kolom" AppliedCellStylePriority="13" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="StrokeStyle/$ID/Solid" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="120" RightEdgeStrokePriority="567" TopEdgeStrokePriority="567" BottomEdgeStrokePriority="567" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i9" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai7">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Nomor Kolom Tabel BRS" Justification="LeftAlign">
+										<Properties>
+											<TabList type="list">
+												<ListItem type="record">
+													<Alignment type="enumeration">LeftAlign</Alignment>
+													<AlignmentCharacter type="string">.</AlignmentCharacter>
+													<Leader type="string"></Leader>
+													<Position type="unit">53</Position>
+												</ListItem>
+											</TabList>
+										</Properties>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>         (4)</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai8" Name="0:2" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="45" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="237" RightEdgeStrokePriority="265" TopEdgeStrokePriority="567" BottomEdgeStrokePriority="351" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1ia" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai8">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content>Month-to-Month </Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content>M-to-M</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>)</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content> </Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai9" Name="1:2" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="265" RightEdgeStrokePriority="293" TopEdgeStrokePriority="567" BottomEdgeStrokePriority="379" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1ib" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai9">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>0.83</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfaia" Name="2:2" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="293" RightEdgeStrokePriority="321" TopEdgeStrokePriority="567" BottomEdgeStrokePriority="407" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1ic" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfaia">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>0.35</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfaib" Name="3:2" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="321" RightEdgeStrokePriority="322" TopEdgeStrokePriority="567" BottomEdgeStrokePriority="435" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1id" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfaib">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>0.19</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfaic" Name="0:3" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="45" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="349" RightEdgeStrokePriority="377" TopEdgeStrokePriority="351" BottomEdgeStrokePriority="463" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1ie" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfaic">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content>Year-to-Date </Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content>Y-to-D</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>)</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content> </Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfaid" Name="1:3" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="377" RightEdgeStrokePriority="405" TopEdgeStrokePriority="379" BottomEdgeStrokePriority="491" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1if" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfaid">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>3.08</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfaie" Name="2:3" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="405" RightEdgeStrokePriority="433" TopEdgeStrokePriority="407" BottomEdgeStrokePriority="519" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i10" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfaie">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>1.04</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfaif" Name="3:3" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="n" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="433" RightEdgeStrokePriority="434" TopEdgeStrokePriority="435" BottomEdgeStrokePriority="547" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i11" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfaif">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>1.41</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai10" Name="0:4" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="2.8499999046325684" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="45" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="2.8499999046325684" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="StrokeStyle/$ID/ThinThin" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="461" RightEdgeStrokePriority="489" TopEdgeStrokePriority="463" BottomEdgeStrokePriority="464" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i12" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai10">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Stub Table BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content>Year-on-Year </Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>(</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content>Y-on-Y</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>)</Content>
+										</CharacterStyleRange>
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+											<Content> </Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai11" Name="1:4" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="StrokeStyle/$ID/ThinThin" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="489" RightEdgeStrokePriority="517" TopEdgeStrokePriority="491" BottomEdgeStrokePriority="492" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i13" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai11">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>3.73</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai12" Name="2:4" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="StrokeStyle/$ID/ThinThin" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="517" RightEdgeStrokePriority="545" TopEdgeStrokePriority="519" BottomEdgeStrokePriority="520" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i14" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai12">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>1.09</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+							<Cell Self="ub0fidfai13" Name="3:4" RowSpan="1" ColumnSpan="1" CellType="TextTypeCell" TextTopInset="2.8499999046325684" TextLeftInset="2.8499999046325684" TextBottomInset="2.8499999046325684" TextRightInset="28.346456692913385" ClipContentToTextCell="false" AppliedCellStyle="CellStyle/$ID/[None]" AppliedCellStylePriority="285" LeftInset="2.8499999046325684" TopInset="2.8499999046325684" RightInset="28.346456692913385" BottomInset="2.8499999046325684" LeftEdgeStrokeWeight="0" RightEdgeStrokeWeight="0" TopEdgeStrokeWeight="0" BottomEdgeStrokeWeight="0" LeftEdgeStrokeColor="Color/Black" TopEdgeStrokeColor="Color/Black" RightEdgeStrokeColor="Color/Black" BottomEdgeStrokeColor="Color/Black" LeftEdgeStrokeType="n" RightEdgeStrokeType="n" TopEdgeStrokeType="n" BottomEdgeStrokeType="StrokeStyle/$ID/ThinThin" FirstBaselineOffset="AscentOffset" VerticalJustification="CenterAlign" LeftEdgeStrokeTint="100" RightEdgeStrokeTint="100" TopEdgeStrokeTint="100" BottomEdgeStrokeTint="100" LeftEdgeStrokeOverprint="false" RightEdgeStrokeOverprint="false" TopEdgeStrokeOverprint="false" BottomEdgeStrokeOverprint="false" ClipContentToCell="false" WritingDirection="true" LeftEdgeStrokePriority="545" RightEdgeStrokePriority="546" TopEdgeStrokePriority="547" BottomEdgeStrokePriority="548" LeftEdgeStrokeGapTint="100" RightEdgeStrokeGapTint="100" TopEdgeStrokeGapTint="100" BottomEdgeStrokeGapTint="100" LeftEdgeStrokeGapOverprint="false" RightEdgeStrokeGapOverprint="false" TopEdgeStrokeGapOverprint="false" BottomEdgeStrokeGapOverprint="false">
+								<XMLElement Self="di3i14di1i15" MarkupTag="XMLTag/Cell" XMLContent="ub0fidfai13">
+									<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Content Tabel BRS">
+										<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+											<Content>1.88</Content>
+										</CharacterStyleRange>
+									</ParagraphStyleRange>
+								</XMLElement>
+							</Cell>
+						</Table>
+					</XMLElement>
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+		</XMLElement>
+	</Story>
+</idPkg:Story>

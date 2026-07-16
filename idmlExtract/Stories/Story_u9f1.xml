@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="u9f1" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Pointer Utama BRS">
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">15</Leading>
+				</Properties>
+				<Content>Pada ${bulan} ${tahun}</Content>
+			
+				
+				
+			</CharacterStyleRange>
+			
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content> terjadi inflasi </Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>year-on-year</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content> (</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>y-on-y</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>) sebesar ${inflasi} persen dengan Indeks Harga Konsumen (IHK) sebesar${ihk}. </Content>
+				<Br />
+				<Content>Inflasi </Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>y-on-y</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content> terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: ${komoditasNaik.map(item =&gt; ${namaKelompok} ${nilaiInflasiKelompok} persen,). Sementara kelompok yang mengalami penurunan indeks, yaitu . ${komoditasTurun.map(item =&gt; ${namaKelompok} ${nilaiInflasiKelompok} persen,) </Content>
+			
+				
+			
+				
+				
+			
+				
+				<Br />
+			
+				
+				<Content>Tingkat inflasi </Content>
+			</CharacterStyleRange>
+			
+			
+			
+			
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>month-to-month</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content> (</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>m-to-m</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>) ${bulan} ${tahun} sebesar ${inflasiMtM} persen dan tingkat inflasi </Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>year-to-date</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content> (</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>y-to-d</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+					<Properties>
+					<Leading type="unit">14.5</Leading>
+				</Properties>
+				
+				<Content>) ${bulan} ${tahun} sebesar ${inflasiYtD} persen.</Content>
+				<Br />
+			</CharacterStyleRange>
+		</ParagraphStyleRange>
+	</Story>
+</idPkg:Story>

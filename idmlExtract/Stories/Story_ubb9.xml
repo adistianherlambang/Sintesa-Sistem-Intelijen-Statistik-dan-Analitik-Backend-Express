@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="ubb9" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<XMLElement Self="di3i509" MarkupTag="XMLTag/Story" XMLContent="ubb9">
+			<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Body Text BRS">
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					<Content>SBH 2022 juga menangkap informasi pengeluaran rumah tangga melalui transaksi pasar </Content>
+				
+					
+					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>online</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>, sehingga pada penghitungan IHK 2022=100 dilakukan pencacahan beberapa komoditas tertentu melalui pasar </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>online</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> (</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>marketplace</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>). Sebagai permulaan, pencacahan pasar </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>online</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> ini dilakukan di 5 kota besar (DKI Jakarta, Kota Bogor, Kota Depok, Kota Tangerang, KOTA KOTA METRO) dengan cakupan 6 komoditas (baju muslim wanita, telepon seluler, parfum, sepatu olahraga pria, sepatu wanita, sepatu pria) yang berdasarkan hasil SBH 2022 memiliki bobot pasar </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FontStyle="Italic" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>online</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content> terbesar.</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">14</Leading>
+					</Properties>
+					
+					<Br />
+					<Content>Pada IHK 2022=100, BPS </Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">15.5</Leading>
+					</Properties>
+					
+					<Content>kembali menyempurnakan penghitungan IHK dengan mengakomodasi bobot jenis pasar dalam penghitungan rata-rata harga di setiap komoditas. Selain itu, jika sebelumnya diseminasi IHK hanya dilakukan di level Nasional dan Kabupaten/Kota, IHK dengan tahun dasar 2022=100 akan didiseminasikan juga di level Provinsi (38 Provinsi).</Content>
+				
+					
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9" ParagraphBreakType="NextColumn">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					<Br />
+				
+					
+					<Br />
+				</CharacterStyleRange>
+				
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FillColor="Color/Paper" FontStyle="Bold">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Content>Perubahan Tahun Dasar</Content>
+				</CharacterStyleRange>
+				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="9">
+					<Properties>
+						<Leading type="unit">17</Leading>
+					</Properties>
+					
+					<Br />
+				</CharacterStyleRange>
+			</ParagraphStyleRange>
+		</XMLElement>
+	</Story>
+</idPkg:Story>

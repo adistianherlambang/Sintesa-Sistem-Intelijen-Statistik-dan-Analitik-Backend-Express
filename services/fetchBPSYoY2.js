@@ -162,4 +162,4 @@ export const fetchBPSYoY2 = async () => {
   }
 };
 
-fetchBPSYoY2()
+// fetchBPSYoY2()

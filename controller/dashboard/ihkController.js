@@ -20,7 +20,7 @@ export const getIhkByKota = async (kota) => {
   const doc = await APIDataBPS.findOne({
     "var.val": 2245,
   })
-    .select("var vervar datacontent yoy")
+    .select("var vervar datacontent yoy yoy2")
     .lean();
 
   if (!doc) {
@@ -37,7 +37,11 @@ export const getIhkByKota = async (kota) => {
   const regionVal = region.val.toString();
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
   const resultYoy = buildFilteredKeyValue(doc.yoy || {}, regionVal, 2);
+  const resultYoy2 = buildFilteredKeyValue(doc.yoy2 || {}, regionVal, 2);
   const sortedYoy = [...resultYoy].sort(
+    (a, b) => Number(a.key) - Number(b.key),
+  );
+  const sortedYoy2 = [...resultYoy2].sort(
     (a, b) => Number(a.key) - Number(b.key),
   );
 
@@ -47,6 +51,7 @@ export const getIhkByKota = async (kota) => {
     regionVal,
     result,
     sortedYoy,
+    sortedYoy2,
   );
 };
 
@@ -58,7 +63,7 @@ export const getIhkInfografisByKota = async (kota) => {
   const doc = await APIDataBPS.findOne({
     "var.val": 2245,
   })
-    .select("var vervar datacontent yoy")
+    .select("var vervar datacontent yoy yoy2")
     .lean();
 
   if (!doc) {
@@ -75,7 +80,11 @@ export const getIhkInfografisByKota = async (kota) => {
   const regionVal = region.val.toString();
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
   const resultYoy = buildFilteredKeyValue(doc.yoy || {}, regionVal, 2);
+  const resultYoy2 = buildFilteredKeyValue(doc.yoy2 || {}, regionVal, 2);
   const sortedYoy = [...resultYoy].sort(
+    (a, b) => Number(a.key) - Number(b.key),
+  );
+  const sortedYoy2 = [...resultYoy2].sort(
     (a, b) => Number(a.key) - Number(b.key),
   );
 
@@ -92,7 +101,7 @@ export const getIhkInfografisByKota = async (kota) => {
   const getShortMonthYearLabel = (key) => {
     const { year, month } = parseIhkKey(key, regionVal);
     const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", 
+      "Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
       "Jul", "Agu", "Sep", "Okt", "Nov", "Des"
     ];
     const shortMonth = monthNames[month - 1] || "";
@@ -122,6 +131,7 @@ export const getIhkInfografisByKota = async (kota) => {
     total: result.length,
     data: sorted,
     yoy: sortedYoy,
+    yoy2: sortedYoy2,
     ihkLast13,
     dashboard: {
       now,
@@ -139,7 +149,7 @@ export const getIhkInfografisByKota = async (kota) => {
 export const getAllIhk = async () => {
   const doc = await APIDataBPS.findOne({
     "var.val": 2245,
-  }).lean();
+  }).lean()
 
   if (!doc) {
     throw new Error("data IHK tidak ditemukan");

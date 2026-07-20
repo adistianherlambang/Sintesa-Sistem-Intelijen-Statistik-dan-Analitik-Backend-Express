@@ -16,6 +16,7 @@ const APIDataBPSSchema = new mongoose.Schema(
 
     datacontent: Object,
     yoy: Object,
+    yoy2: Object,
   },
   { timestamps: true },
 );

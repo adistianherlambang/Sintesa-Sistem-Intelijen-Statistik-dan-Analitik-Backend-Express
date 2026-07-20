@@ -90,6 +90,7 @@ export const buildResponseWithDashboard = (
   regionVal,
   result,
   sortedYoy,
+  sortedYoy2
 ) => {
   const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key));
   const { now, compare, then } = getLastTwoValues(sorted);
@@ -106,6 +107,7 @@ export const buildResponseWithDashboard = (
       compare: Number(compare.toFixed(2)),
     },
     yoy: sortedYoy,
+    yoy2: sortedYoy2
   };
 };
 

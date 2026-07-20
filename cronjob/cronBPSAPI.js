@@ -2,6 +2,7 @@ import cron from "node-cron";
 import APIDataBPS from "../db/models/APIDataBPS.js";
 import { fetchBPS } from "../services/fetchBPS.js";
 import { fetchBPSYoY } from "../services/fetchBPSYoY.js";
+import { fetchBPSYoY2 } from "../services/fetchBPSYoY2.js";
 // import { AISummary } from "../services/AISummary.js";
 
 export const startBPSCron = () => {
@@ -87,6 +88,7 @@ export const startBPSCron = () => {
         if (month === 0 && lastYear !== year) {
           console.log("✔ Jalankan fungsi fetch YoY...");
           await fetchBPSYoY();
+          await fetchBPSYoY2();
         } else {
           console.log("⚠ Tidak perlu update YoY");
         }

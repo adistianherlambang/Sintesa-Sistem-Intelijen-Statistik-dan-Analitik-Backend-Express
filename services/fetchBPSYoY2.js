@@ -126,7 +126,7 @@ const fetchSingleUrl = async (url, index, total) => {
 };
 
 // --- MAIN EXPORT FUNCTION ---
-export const fetchBPSYoY = async () => {
+export const fetchBPSYoY2 = async () => {
   try {
     if (mongoose.connection.readyState === 0) {
       await mongoose.connect(process.env.MONGO_URL);
@@ -162,4 +162,4 @@ export const fetchBPSYoY = async () => {
   }
 };
 
-// fetchBPSYoY()
+fetchBPSYoY2()

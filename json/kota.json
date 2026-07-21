@@ -14,7 +14,12 @@
     "alamat": "Jl. Pahlawan No. 690, Takengon, Aceh Tengah",
     "nomor_telepon_faksimili": "Telp (0643) 21047",
     "alamat_email": "bps1106@bps.go.id",
-    "tautan": "https://acehtengahkab.bps.go.id"
+    "tautan": "https://acehtengahkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 1,
+      "name": "Aceh"
+    }
   },
   {
     "id": "meulaboh",
@@ -31,7 +36,15 @@
     "alamat": "Jl. Sisingamangaraja No. 2, Meulaboh, Aceh Barat",
     "nomor_telepon_faksimili": "Telp (0655) 7009023",
     "alamat_email": "bps1107@bps.go.id",
-    "tautan": "https://acehbaratkab.bps.go.id"
+    "tautan": "https://acehbaratkab.bps.go.id",
+    "BIKota": {
+      "id": 3,
+      "name": "Kota Meulaboh"
+    },
+    "BIProvinsi": {
+      "id": 1,
+      "name": "Aceh"
+    }
   },
   {
     "id": "aceh-tamiang",
@@ -48,7 +61,12 @@
     "alamat": "Jl. Ir H Juanda Kampung Tanah Terban",
     "nomor_telepon_faksimili": "Telp (0641) 332597",
     "alamat_email": "bps1114@bps.go.id",
-    "tautan": "https://acehtamiangkab.bps.go.id"
+    "tautan": "https://acehtamiangkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 1,
+      "name": "Aceh"
+    }
   },
   {
     "id": "banda-aceh",
@@ -65,7 +83,15 @@
     "alamat": "Jl. Laksamana Malahayati KM 6,5, Desa Baet, Aceh Besar",
     "nomor_telepon_faksimili": "Telp (0651) 7428345",
     "alamat_email": "bps1171@bps.go.id",
-    "tautan": "https://bandaacehkota.bps.go.id"
+    "tautan": "https://bandaacehkota.bps.go.id",
+    "BIKota": {
+      "id": 1,
+      "name": "Kota Banda Aceh"
+    },
+    "BIProvinsi": {
+      "id": 1,
+      "name": "Aceh"
+    }
   },
   {
     "id": "lhokseumawe",
@@ -82,7 +108,15 @@
     "alamat": "Jl. Tgk Chik Di Tiro No. 5, Lancang Garam, Lhokseumawe",
     "nomor_telepon_faksimili": "Telp (0645) 47884",
     "alamat_email": "bps1174@bps.go.id",
-    "tautan": "https://lhokseumawekota.bps.go.id"
+    "tautan": "https://lhokseumawekota.bps.go.id",
+    "BIKota": {
+      "id": 2,
+      "name": "Kota Lhokseumawe"
+    },
+    "BIProvinsi": {
+      "id": 1,
+      "name": "Aceh"
+    }
   },
   {
     "id": "labuhanbatu",
@@ -99,7 +133,12 @@
     "alamat": "Jl. Flamboyan No. 3, Kompleks Bupati, Rantauprapat",
     "nomor_telepon_faksimili": "Telp (0624) 21207 Fax (0624) 21075",
     "alamat_email": "bps1207@bps.go.id",
-    "tautan": "https://labuhanbatukab.bps.go.id"
+    "tautan": "https://labuhanbatukab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 2,
+      "name": "Sumatera Utara"
+    }
   },
   {
     "id": "karo",
@@ -116,7 +155,12 @@
     "alamat": "Jl. Djamin Ginting No. 131 (Raya) Berastagi",
     "nomor_telepon_faksimili": "Telp (0628) 92675 Fax (0628) 92851",
     "alamat_email": "bps1211@bps.go.id",
-    "tautan": "https://karokab.bps.go.id"
+    "tautan": "https://karokab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 2,
+      "name": "Sumatera Utara"
+    }
   },
   {
     "id": "deli-serdang",
@@ -133,7 +177,12 @@
     "alamat": "Jl. Karya Utama Kompleks Pemkab, Deli Serdang, Lubuk Pakam 20514",
     "nomor_telepon_faksimili": "Telp (061) 7951326, 7955111 Fax (061) 7951326",
     "alamat_email": "bps1212@bps.go.id",
-    "tautan": "https://deliserdangkab.bps.go.id"
+    "tautan": "https://deliserdangkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 2,
+      "name": "Sumatera Utara"
+    }
   },
   {
     "id": "sibolga",
@@ -150,7 +199,15 @@
     "alamat": "Jl. Tuanku Dorong Hutagalung No. 2, Sibolga",
     "nomor_telepon_faksimili": "Telp (0631) 22082 Fax (0631) 25959",
     "alamat_email": "bps1271@bps.go.id",
-    "tautan": "https://sibolgakota.bps.go.id"
+    "tautan": "https://sibolgakota.bps.go.id",
+    "BIKota": {
+      "id": 5,
+      "name": "Kota Sibolga"
+    },
+    "BIProvinsi": {
+      "id": 2,
+      "name": "Sumatera Utara"
+    }
   },
   {
     "id": "pematang-siantar",
@@ -167,7 +224,15 @@
     "alamat": "Jl. Porsea No. 5, Pematangsiantar, Pematang Siantar",
     "nomor_telepon_faksimili": "Telp (0622) 24495 Fax (0622) 24495",
     "alamat_email": "bps1273@bps.go.id",
-    "tautan": "https://siantarkota.bps.go.id"
+    "tautan": "https://siantarkota.bps.go.id",
+    "BIKota": {
+      "id": 6,
+      "name": "Kota Pematang Siantar"
+    },
+    "BIProvinsi": {
+      "id": 2,
+      "name": "Sumatera Utara"
+    }
   },
   {
     "id": "medan",
@@ -184,7 +249,15 @@
     "alamat": "Jl. Gaperta/Brigjen H Abdul Manaf Lubis No. 311, Medan",
     "nomor_telepon_faksimili": "Telp (061) 8449285 Fax (061) 8449270",
     "alamat_email": "bps1275@bps.go.id",
-    "tautan": "https://medankota.bps.go.id"
+    "tautan": "https://medankota.bps.go.id",
+    "BIKota": {
+      "id": 4,
+      "name": "Kota Medan"
+    },
+    "BIProvinsi": {
+      "id": 2,
+      "name": "Sumatera Utara"
+    }
   },
   {
     "id": "padangsidimpuan",
@@ -201,7 +274,15 @@
     "alamat": "Jl. HT Rizal Nurdin KM 7, Pal IV Pijarkoling, Padangsidimpuan",
     "nomor_telepon_faksimili": "Telp (0634) 28775 Fax (0634) 28775",
     "alamat_email": "bps1277@bps.go.id",
-    "tautan": "https://padangsidimpuankota.bps.go.id"
+    "tautan": "https://padangsidimpuankota.bps.go.id",
+    "BIKota": {
+      "id": 7,
+      "name": "Kota Padang Sidempuan"
+    },
+    "BIProvinsi": {
+      "id": 2,
+      "name": "Sumatera Utara"
+    }
   },
   {
     "id": "gunungsitoli",
@@ -218,7 +299,15 @@
     "alamat": "Jl. Sutomo No. 1278, Desa Lasara Bahilli, Kec Gunungsitoli, Kota Gunungsitoli 22814",
     "nomor_telepon_faksimili": "Telp/Fax (0639) 22558",
     "alamat_email": "bps1278@bps.go.id",
-    "tautan": "https://gunungsitolikota.bps.go.id"
+    "tautan": "https://gunungsitolikota.bps.go.id",
+    "BIKota": {
+      "id": 455,
+      "name": "Kota Gunung Sitoli"
+    },
+    "BIProvinsi": {
+      "id": 2,
+      "name": "Sumatera Utara"
+    }
   },
   {
     "id": "dharmasraya",
@@ -235,7 +324,12 @@
     "alamat": "Jl. Lintas Sumatera KM 5, Sikabau, Kec Pulau Punjung, Kab Dharmasraya 27616",
     "nomor_telepon_faksimili": "Telp (0754) 451548",
     "alamat_email": "bps1311@bps.go.id",
-    "tautan": "https://dharmasrayakab.bps.go.id"
+    "tautan": "https://dharmasrayakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 3,
+      "name": "Sumatera Barat"
+    }
   },
   {
     "id": "pasaman-barat",
@@ -252,7 +346,12 @@
     "alamat": "Jl. Pertanian Padang Tujuah Pasaman Barat 26566",
     "nomor_telepon_faksimili": "Telp (0753) 7465195 Fax (0753) 7465195",
     "alamat_email": "bps1312@bps.go.id",
-    "tautan": "https://pasamanbaratkab.bps.go.id"
+    "tautan": "https://pasamanbaratkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 3,
+      "name": "Sumatera Barat"
+    }
   },
   {
     "id": "padang",
@@ -269,7 +368,15 @@
     "alamat": "Jl. Raya Bypass KM 13, Sungai Sapih, Kec. Kuranji Padang, Kota Padang",
     "nomor_telepon_faksimili": "Telp/Fax (0751) 498515, 497515",
     "alamat_email": "bps1371@bps.go.id",
-    "tautan": "https://padangkota.bps.go.id"
+    "tautan": "https://padangkota.bps.go.id",
+    "BIKota": {
+      "id": 8,
+      "name": "Kota Padang"
+    },
+    "BIProvinsi": {
+      "id": 3,
+      "name": "Sumatera Barat"
+    }
   },
   {
     "id": "bukittinggi",
@@ -286,7 +393,15 @@
     "alamat": "Jl. Perwira No 50, Belakang Balok, Bukittinggi 26136",
     "nomor_telepon_faksimili": "Telp (0752) 21251 Fax (0752) 624629",
     "alamat_email": "bps1375@bps.go.id",
-    "tautan": "https://bukittinggikota.bps.go.id"
+    "tautan": "https://bukittinggikota.bps.go.id",
+    "BIKota": {
+      "id": 9,
+      "name": "Kota Bukittinggi"
+    },
+    "BIProvinsi": {
+      "id": 3,
+      "name": "Sumatera Barat"
+    }
   },
   {
     "id": "tembilahan",
@@ -303,7 +418,12 @@
     "alamat": "Jl. Bunga/Praja Sakti No. 11, Tembilahan 29212",
     "nomor_telepon_faksimili": "Telp/Fax (0768) 22489",
     "alamat_email": "bps1403@bps.go.id",
-    "tautan": "https://inhilkab.bps.go.id"
+    "tautan": "https://inhilkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 4,
+      "name": "Riau"
+    }
   },
   {
     "id": "kampar",
@@ -320,7 +440,12 @@
     "alamat": "Jl. H. R. Soebrantas Siswanto No. 82, Bangkinang 28412",
     "nomor_telepon_faksimili": "Telp/Fax (0762) 20046",
     "alamat_email": "bps1406@bps.go.id",
-    "tautan": "https://kamparkab.bps.go.id"
+    "tautan": "https://kamparkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 4,
+      "name": "Riau"
+    }
   },
   {
     "id": "pekanbaru",
@@ -337,7 +462,15 @@
     "alamat": "Jl. Rawa Indah, Kel. Sidomulyo Timur, Pekanbaru",
     "nomor_telepon_faksimili": "Telp/Fax (0761) 34220",
     "alamat_email": "bps1471@bps.go.id",
-    "tautan": "https://pekanbarukota.bps.go.id"
+    "tautan": "https://pekanbarukota.bps.go.id",
+    "BIKota": {
+      "id": 10,
+      "name": "Kota Pekanbaru"
+    },
+    "BIProvinsi": {
+      "id": 4,
+      "name": "Riau"
+    }
   },
   {
     "id": "dumai",
@@ -354,7 +487,12 @@
     "alamat": "Jl. Tuanku Tambusai Dumai 28882",
     "nomor_telepon_faksimili": "Telp (0765) 440711 Fax (0765) 440712",
     "alamat_email": "bps1472@bps.go.id",
-    "tautan": "https://dumaikota.bps.go.id"
+    "tautan": "https://dumaikota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 4,
+      "name": "Riau"
+    }
   },
   {
     "id": "kerinci",
@@ -371,7 +509,12 @@
     "alamat": "Jl. Muradi, Koto Keras, Kec. Pesisir Bukit, Kota Sungai Penuh, Jambi 37113",
     "nomor_telepon_faksimili": "Telp (0748) 21085",
     "alamat_email": "bps1501@bps.go.id",
-    "tautan": "https://kerincikab.bps.go.id"
+    "tautan": "https://kerincikab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 6,
+      "name": "Jambi"
+    }
   },
   {
     "id": "bungo",
@@ -388,7 +531,15 @@
     "alamat": "Jl. R.M. Thaher, Kel. Cadika, Kec. Rimbo Tengah, Bungo 37214",
     "nomor_telepon_faksimili": "Telp/Fax (0747) 21120",
     "alamat_email": "bps1509@bps.go.id",
-    "tautan": "https://bungokab.bps.go.id"
+    "tautan": "https://bungokab.bps.go.id",
+    "BIKota": {
+      "id": 16,
+      "name": "Kab. Bungo"
+    },
+    "BIProvinsi": {
+      "id": 6,
+      "name": "Jambi"
+    }
   },
   {
     "id": "jambi",
@@ -405,7 +556,15 @@
     "alamat": "Jl. Basuki Rachmat, Kota Jambi, Jambi 38128",
     "nomor_telepon_faksimili": "Telp (0741) 40539",
     "alamat_email": "bps1571@bps.go.id",
-    "tautan": "https://jambikota.bps.go.id"
+    "tautan": "https://jambikota.bps.go.id",
+    "BIKota": {
+      "id": 15,
+      "name": "Kota Jambi"
+    },
+    "BIProvinsi": {
+      "id": 6,
+      "name": "Jambi"
+    }
   },
   {
     "id": "ogan-komering-ilir",
@@ -422,7 +581,12 @@
     "alamat": "Jl. Kapten H. Sulaiman Raden Anom (Lintas Sumatera), Kel. Jua-Jua, Kota Kayuagung 30616",
     "nomor_telepon_faksimili": "Telp/Fax (0712) 321015",
     "alamat_email": "bps1602@bps.go.id",
-    "tautan": "https://okikab.bps.go.id"
+    "tautan": "https://okikab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 8,
+      "name": "Sumatera Selatan"
+    }
   },
   {
     "id": "muara-enim",
@@ -439,7 +603,12 @@
     "alamat": "Jl. Bambang Utoyo No. 44, Muara Enim",
     "nomor_telepon_faksimili": "Telp/Fax (0734) 421088",
     "alamat_email": "bps1603@bps.go.id",
-    "tautan": "https://muaraenimkab.bps.go.id"
+    "tautan": "https://muaraenimkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 8,
+      "name": "Sumatera Selatan"
+    }
   },
   {
     "id": "palembang",
@@ -456,7 +625,15 @@
     "alamat": "Jl. P. A. K. Abdul Rohim RT 21 RW 8 No. 2, Kel. Talang Semut, Palembang 30145",
     "nomor_telepon_faksimili": "Telp/Fax (0711) 352184",
     "alamat_email": "bps1671@bps.go.id",
-    "tautan": "https://palembangkota.bps.go.id"
+    "tautan": "https://palembangkota.bps.go.id",
+    "BIKota": {
+      "id": 18,
+      "name": "Kota Palembang"
+    },
+    "BIProvinsi": {
+      "id": 8,
+      "name": "Sumatera Selatan"
+    }
   },
   {
     "id": "lubuklinggau",
@@ -473,7 +650,12 @@
     "alamat": "Jl. Perumdam No. 1, Kel. Lubuk Tanjung, Lubuk Linggau",
     "nomor_telepon_faksimili": "Telp/Fax (0733) 3236930",
     "alamat_email": "bps1674@bps.go.id",
-    "tautan": "https://lubuklinggaukota.bps.go.id"
+    "tautan": "https://lubuklinggaukota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 8,
+      "name": "Sumatera Selatan"
+    }
   },
   {
     "id": "muko-muko",
@@ -490,7 +672,12 @@
     "alamat": "KOMPLK. PERKANTORAN PEMDA MUKOMUKO KEL. BANDAR RATU",
     "nomor_telepon_faksimili": "Telp. (0737) 71633 Fax. (0737) 71633",
     "alamat_email": "bps1706@bps.goid",
-    "tautan": "https://mukomukokab.bps.go.id"
+    "tautan": "https://mukomukokab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 7,
+      "name": "Bengkulu"
+    }
   },
   {
     "id": "bengkulu",
@@ -507,7 +694,15 @@
     "alamat": "JL. S. PARMAN NO. 89 PADANG JATI BENGKULU 38227",
     "nomor_telepon_faksimili": "Telp. (0736) 21876 Fax. (0736) 344775",
     "alamat_email": "bps1771@bps.go.id",
-    "tautan": "https://bengkulukota.bps.go.id"
+    "tautan": "https://bengkulukota.bps.go.id",
+    "BIKota": {
+      "id": 17,
+      "name": "Kota Bengkulu"
+    },
+    "BIProvinsi": {
+      "id": 7,
+      "name": "Bengkulu"
+    }
   },
   {
     "id": "lampung-timur",
@@ -524,7 +719,12 @@
     "alamat": "Jl. Lintas Timur, Desa Mataram Marga, Kec. Sukadana, Lampung Timur 39194",
     "nomor_telepon_faksimili": "Telp/Fax (0725) 7660014",
     "alamat_email": "bps1804@bps.go.id",
-    "tautan": "https://lampungtimurkab.bps.go.id"
+    "tautan": "https://lampungtimurkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 10,
+      "name": "Lampung"
+    }
   },
   {
     "id": "mesuji",
@@ -541,7 +741,12 @@
     "alamat": "Jl. Jendral Sudirman No. 10, Samping Radio Mutiara, Simpang Pematang, Mesuji",
     "nomor_telepon_faksimili": "Telp 087886546219",
     "alamat_email": "bps1811@bps.go.id",
-    "tautan": "https://mesujikab.bps.go.id"
+    "tautan": "https://mesujikab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 10,
+      "name": "Lampung"
+    }
   },
   {
     "id": "bandar-lampung",
@@ -558,7 +763,15 @@
     "alamat": "Jl. Sutan Syahrir No. 30, Pahoman, Bandar Lampung 35213",
     "nomor_telepon_faksimili": "Telp/Fax (0721) 255980",
     "alamat_email": "bps1871@bps.go.id",
-    "tautan": "https://bandarlampungkota.bps.go.id"
+    "tautan": "https://bandarlampungkota.bps.go.id",
+    "BIKota": {
+      "id": 22,
+      "name": "Kota Bandar Lampung"
+    },
+    "BIProvinsi": {
+      "id": 10,
+      "name": "Lampung"
+    }
   },
   {
     "id": "metro",
@@ -575,7 +788,15 @@
     "alamat": "Jl. AR Prawiranegara, Kauman, Kota Metro",
     "nomor_telepon_faksimili": "Telp/Fax (0725) 41758",
     "alamat_email": "bps1872@bps.go.id",
-    "tautan": "https://metrokota.bps.go.id"
+    "tautan": "https://metrokota.bps.go.id",
+    "BIKota": {
+      "id": 23,
+      "name": "Kota Metro"
+    },
+    "BIProvinsi": {
+      "id": 10,
+      "name": "Lampung"
+    }
   },
   {
     "id": "tanjung-pandan",
@@ -592,7 +813,12 @@
     "alamat": "Jl. Hasan Basri No. 16, Tanjung Pandan, Belitung 33412",
     "nomor_telepon_faksimili": "Telp (0719) 21065 Fax (0719) 21551",
     "alamat_email": "bps1902@bps.go.id",
-    "tautan": "https://belitungkab.bps.go.id"
+    "tautan": "https://belitungkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 9,
+      "name": "Kepulauan Bangka Belitung"
+    }
   },
   {
     "id": "bangka-barat",
@@ -609,7 +835,12 @@
     "alamat": "Komplek Perkantoran Pemerintah Kabupaten Bangka Barat, Kp. Daya Baru, Pal 4 Muntok",
     "nomor_telepon_faksimili": "Telp (0716) 7323066, 7323067 Fax (0716) 7323068",
     "alamat_email": "bps1903@bps.go.id",
-    "tautan": "https://bangkabaratkab.bps.go.id"
+    "tautan": "https://bangkabaratkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 9,
+      "name": "Kepulauan Bangka Belitung"
+    }
   },
   {
     "id": "belitung-timur",
@@ -626,7 +857,12 @@
     "alamat": "Jl. Raya Manggarawan, Desa Padang Manggar, Kep. Bangka Belitung",
     "nomor_telepon_faksimili": "Telp (0719) 9220090, 9220091",
     "alamat_email": "bps1906@bps.go.id",
-    "tautan": "https://belitungtimurkab.bps.go.id"
+    "tautan": "https://belitungtimurkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 9,
+      "name": "Kepulauan Bangka Belitung"
+    }
   },
   {
     "id": "pangkal-pinang",
@@ -643,7 +879,15 @@
     "alamat": "Jl. Komodor Yos Sudarso, Pangkal Balam, Pangkalpinang",
     "nomor_telepon_faksimili": "Telp (0717) 422825, 436081 Fax (0717) 422825",
     "alamat_email": "bps1971@bps.go.id",
-    "tautan": "https://pangkalpinangkota.bps.go.id"
+    "tautan": "https://pangkalpinangkota.bps.go.id",
+    "BIKota": {
+      "id": 20,
+      "name": "Kota Pangkal Pinang"
+    },
+    "BIProvinsi": {
+      "id": 9,
+      "name": "Kepulauan Bangka Belitung"
+    }
   },
   {
     "id": "karimun",
@@ -660,7 +904,12 @@
     "alamat": "Jl. Sudirman (Poros) Komplek Pemkab Karimun",
     "nomor_telepon_faksimili": "Telp/Fax (0777) 7366027",
     "alamat_email": "bps2101@bps.go.id",
-    "tautan": "https://karimunkab.bps.go.id"
+    "tautan": "https://karimunkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 5,
+      "name": "Kepulauan Riau"
+    }
   },
   {
     "id": "batam",
@@ -677,7 +926,15 @@
     "alamat": "Jl. Raja Ali Kelana Batam Center, Kota Batam",
     "nomor_telepon_faksimili": "Telp (0778) 7433299",
     "alamat_email": "bps2171@bps.go.id",
-    "tautan": "https://batamkota.bps.go.id"
+    "tautan": "https://batamkota.bps.go.id",
+    "BIKota": {
+      "id": 13,
+      "name": "Kota Batam"
+    },
+    "BIProvinsi": {
+      "id": 5,
+      "name": "Kepulauan Riau"
+    }
   },
   {
     "id": "tanjung-pinang",
@@ -694,7 +951,12 @@
     "alamat": "Jl. W.R. Supratman No. 01 KM X, Kota Tanjungpinang, Prov. Kepulauan Riau 29125",
     "nomor_telepon_faksimili": "Telp (0771) 4442004",
     "alamat_email": "bps2172@bps.go.id",
-    "tautan": "https://tanjungpinangkota.bps.go.id"
+    "tautan": "https://tanjungpinangkota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 5,
+      "name": "Kepulauan Riau"
+    }
   },
   {
     "id": "dki-jakarta",
@@ -711,7 +973,15 @@
     "alamat": "Jl. Salemba Tengah 36-38, Paseban, Senen, Jakarta Pusat",
     "nomor_telepon_faksimili": "Telp. (021) 31928493 Fax. (021) 3152004",
     "alamat_email": "bps3100@bps.go.id",
-    "tautan": "https://jakarta.bps.go.id"
+    "tautan": "https://jakarta.bps.go.id",
+    "BIKota": {
+      "id": 34,
+      "name": "Kota Jakarta Pusat"
+    },
+    "BIProvinsi": {
+      "id": 13,
+      "name": "DKI Jakarta"
+    }
   },
   {
     "id": "bandung",
@@ -728,7 +998,12 @@
     "alamat": "Jl. Raya Soreang KM 17, Komplek Pemda Kab. Bandung",
     "nomor_telepon_faksimili": "Telp (022) 5895905 Fax (022) 5880882",
     "alamat_email": "bps3204@bps.go.id",
-    "tautan": "https://bandungkab.bps.go.id"
+    "tautan": "https://bandungkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "majalengka",
@@ -745,7 +1020,12 @@
     "alamat": "Jl. Gerakan Koperasi 39, Majalengka 45411",
     "nomor_telepon_faksimili": "Telp/Fax (0233) 281055",
     "alamat_email": "bps3210@bps.go.id",
-    "tautan": "https://majalengkakab.bps.go.id"
+    "tautan": "https://majalengkakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "subang",
@@ -762,7 +1042,12 @@
     "alamat": "Jl. Aipda KS Tubun No. 12 Subang 41211",
     "nomor_telepon_faksimili": "Telp/Fax (0260) 411101",
     "alamat_email": "bps3213@bps.go.id",
-    "tautan": "https://subangkab.bps.go.id"
+    "tautan": "https://subangkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "bogor",
@@ -779,7 +1064,15 @@
     "alamat": "Jl. Layungsari III No. 13 Bogor 16132",
     "nomor_telepon_faksimili": "Telp/Fax (0251) 89970329",
     "alamat_email": "bps3271@bps.go.id",
-    "tautan": "https://bogorkota.bps.go.id"
+    "tautan": "https://bogorkota.bps.go.id",
+    "BIKota": {
+      "id": 31,
+      "name": "Kota Bogor"
+    },
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "sukabumi",
@@ -796,7 +1089,15 @@
     "alamat": "Jl. Selabintana No. 14 Sukabumi 43113",
     "nomor_telepon_faksimili": "Telp (0266) 221926",
     "alamat_email": "bps3272@bps.go.id",
-    "tautan": "https://sukabumikota.bps.go.id"
+    "tautan": "https://sukabumikota.bps.go.id",
+    "BIKota": {
+      "id": 33,
+      "name": "Kota Sukabumi"
+    },
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "bandung",
@@ -813,7 +1114,15 @@
     "alamat": "Jl. Jend. Gatot Subroto No. 93 Bandung 40273",
     "nomor_telepon_faksimili": "Telp/Fax (0266) 7305091",
     "alamat_email": "bps3273@bps.go.id",
-    "tautan": "https://bandungkota.bps.go.id"
+    "tautan": "https://bandungkota.bps.go.id",
+    "BIKota": {
+      "id": 27,
+      "name": "Kota Bandung"
+    },
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "cirebon",
@@ -830,7 +1139,15 @@
     "alamat": "Jl. Sekar Kemuning I -Evakuasi, Kota Cirebon",
     "nomor_telepon_faksimili": "Telp (0231) 485524",
     "alamat_email": "bps3274@bps.go.id",
-    "tautan": "https://cirebonkota.bps.go.id"
+    "tautan": "https://cirebonkota.bps.go.id",
+    "BIKota": {
+      "id": 28,
+      "name": "Kota Cirebon"
+    },
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "bekasi",
@@ -847,7 +1164,15 @@
     "alamat": "Jl. Rawa Tembaga I No. 6, Bekasi 17141",
     "nomor_telepon_faksimili": "Telp/Fax (021) 8855877",
     "alamat_email": "bps3275@bps.go.id",
-    "tautan": "https://bekasikota.bps.go.id"
+    "tautan": "https://bekasikota.bps.go.id",
+    "BIKota": {
+      "id": 30,
+      "name": "Kota Bekasi"
+    },
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "depok",
@@ -864,7 +1189,15 @@
     "alamat": "Jl. Boulevard Sektor Anggrek, Grand Depok City Kel. Kalimulya, Kec.Cilodong, Depok",
     "nomor_telepon_faksimili": "Telp (021) 7710370 Fax (021) 77825913",
     "alamat_email": "bps3276@bps.go.id",
-    "tautan": "https://depokkota.bps.go.id"
+    "tautan": "https://depokkota.bps.go.id",
+    "BIKota": {
+      "id": 32,
+      "name": "Kota Depok"
+    },
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "tasikmalaya",
@@ -881,7 +1214,15 @@
     "alamat": "Jl. Sukarindik No. 71 Kel Panyingkiran Kec. Indihiang Tasikmalaya",
     "nomor_telepon_faksimili": "Telp (0265) 346022 Fax. (0265) 346030",
     "alamat_email": "bps3278@bps.go.id",
-    "tautan": "https://tasikmalayakota.bps.go.id"
+    "tautan": "https://tasikmalayakota.bps.go.id",
+    "BIKota": {
+      "id": 29,
+      "name": "Kota Tasikmalaya"
+    },
+    "BIProvinsi": {
+      "id": 12,
+      "name": "Jawa Barat"
+    }
   },
   {
     "id": "cilacap",
@@ -898,7 +1239,15 @@
     "alamat": "Jl. Dr. Soetomo no 16A Cilacap",
     "nomor_telepon_faksimili": "(0282) 534328",
     "alamat_email": "(0282) 535011",
-    "tautan": "https://cilacapkab.bps.go.id"
+    "tautan": "https://cilacapkab.bps.go.id",
+    "BIKota": {
+      "id": 39,
+      "name": "Kab. Cilacap"
+    },
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "purwokerto",
@@ -915,7 +1264,15 @@
     "alamat": "Jl. Warga Bhakti No. 5, Purwokerto 53114 Telp. (0281) 635496",
     "nomor_telepon_faksimili": "(0281) 635496",
     "alamat_email": "(0281) 624865",
-    "tautan": "https://banyumaskab.bps.go.id"
+    "tautan": "https://banyumaskab.bps.go.id",
+    "BIKota": {
+      "id": 38,
+      "name": "Kab. Banyumas"
+    },
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "wonosobo",
@@ -932,7 +1289,12 @@
     "alamat": "Jl. Bambang Sugeng Km 2,2 Wonosobo",
     "nomor_telepon_faksimili": "(0286) 324270",
     "alamat_email": "(0286) 325380",
-    "tautan": "https://wonosobokab.bps.go.id"
+    "tautan": "https://wonosobokab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "wonogiri",
@@ -949,7 +1311,12 @@
     "alamat": "Jl. Ki Mangun Sarkoro , Kaloran, Giripurwo Wonogiri",
     "nomor_telepon_faksimili": "(0273) 321055",
     "alamat_email": "(0273) 321055",
-    "tautan": "https://wonogirikab.bps.go.id"
+    "tautan": "https://wonogirikab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "rembang",
@@ -966,7 +1333,12 @@
     "alamat": "Jl. Blora Km. 1, Rembang 59217",
     "nomor_telepon_faksimili": "(0295) 691040",
     "alamat_email": "(0295) 691040",
-    "tautan": "https://rembangkab.bps.go.id"
+    "tautan": "https://rembangkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "kudus",
@@ -983,7 +1355,12 @@
     "alamat": "Jl. Mejobo Komplek Perkantoran, Kudus 59319",
     "nomor_telepon_faksimili": "(0291) 433382",
     "alamat_email": "(0291) 433382",
-    "tautan": "https://kuduskab.bps.go.id"
+    "tautan": "https://kuduskab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "surakarta",
@@ -1000,7 +1377,15 @@
     "alamat": "Jl. Dr. P. Lumban Tobing No. 6 ,Surakarta 57133",
     "nomor_telepon_faksimili": "(0271) 635428",
     "alamat_email": "(0271) 635428",
-    "tautan": "https://surakartakota.bps.go.id"
+    "tautan": "https://surakartakota.bps.go.id",
+    "BIKota": {
+      "id": 36,
+      "name": "Kota Surakarta (Solo)"
+    },
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "semarang",
@@ -1017,7 +1402,15 @@
     "alamat": "Jl. Pemuda No. 148, Semarang 50132",
     "nomor_telepon_faksimili": "(024) 3546413",
     "alamat_email": "(024) 3546413",
-    "tautan": "https://semarangkota.bps.go.id"
+    "tautan": "https://semarangkota.bps.go.id",
+    "BIKota": {
+      "id": 35,
+      "name": "Kota Semarang"
+    },
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "tegal",
@@ -1034,7 +1427,15 @@
     "alamat": "Jl. Nakulo No. 36 A,Tegal 52124",
     "nomor_telepon_faksimili": "(0283) 351593",
     "alamat_email": "(0283) 351593",
-    "tautan": "https://tegalkota.bps.go.id"
+    "tautan": "https://tegalkota.bps.go.id",
+    "BIKota": {
+      "id": 37,
+      "name": "Kota Tegal"
+    },
+    "BIProvinsi": {
+      "id": 14,
+      "name": "Jawa Tengah"
+    }
   },
   {
     "id": "gunungkidul",
@@ -1051,7 +1452,12 @@
     "alamat": "Jl. Pemuda 19A Baleharjo Wonosai 55811",
     "nomor_telepon_faksimili": "Telp/Fax (0274) 394180",
     "alamat_email": "bps3403@bps.go.id",
-    "tautan": "https://gunungkidulkab.bps.go.id"
+    "tautan": "https://gunungkidulkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 15,
+      "name": "DI Yogyakarta"
+    }
   },
   {
     "id": "yogyakarta",
@@ -1068,7 +1474,15 @@
     "alamat": "Jl. Brigjen Katamso (Kompleks THR), Yogyakarta",
     "nomor_telepon_faksimili": "Telp (0274) 387752 Fax (0274) 387753",
     "alamat_email": "bps3471@bps.go.id",
-    "tautan": "https://jogjakota.bps.go.id"
+    "tautan": "https://jogjakota.bps.go.id",
+    "BIKota": {
+      "id": 41,
+      "name": "Kota Yogyakarta"
+    },
+    "BIProvinsi": {
+      "id": 15,
+      "name": "DI Yogyakarta"
+    }
   },
   {
     "id": "tulungagung",
@@ -1085,7 +1499,12 @@
     "alamat": "Jl. Pahlawan (Komplek Stadion), Tulungagung 66225",
     "nomor_telepon_faksimili": "Telp/Fax (0355) 321501",
     "alamat_email": "bps3504@bps.go.id",
-    "tautan": "https://tulungagungkab.bps.go.id"
+    "tautan": "https://tulungagungkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "jember",
@@ -1102,7 +1521,15 @@
     "alamat": "Jl.Cendrawasih No. 20 Jember 69116",
     "nomor_telepon_faksimili": "Telp (0331) 487642, 427533",
     "alamat_email": "bps3509@bps.go.id",
-    "tautan": "https://jemberkab.bps.go.id"
+    "tautan": "https://jemberkab.bps.go.id",
+    "BIKota": {
+      "id": 45,
+      "name": "Kab. Jember"
+    },
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "banyuwangi",
@@ -1119,7 +1546,15 @@
     "alamat": "Jl. Akhmad Yani No. 91 Banyuwangi 68416",
     "nomor_telepon_faksimili": "Telp (0333) 421774 Fax (0333) 413904",
     "alamat_email": "bps3510@bps.go.id",
-    "tautan": "https://banyuwangikab.bps.go.id"
+    "tautan": "https://banyuwangikab.bps.go.id",
+    "BIKota": {
+      "id": 46,
+      "name": "Kab. Banyuwangi"
+    },
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "bojonegoro",
@@ -1136,7 +1571,12 @@
     "alamat": "Jl. Sawunggaling No. 62, Bojonegoro 62111",
     "nomor_telepon_faksimili": "Telp/Fax. (0353) 881080",
     "alamat_email": "bps3522@bps.go.id",
-    "tautan": "https://bojonegorokab.bps.go.id"
+    "tautan": "https://bojonegorokab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "gresik",
@@ -1153,7 +1593,12 @@
     "alamat": "Jl. Dr. Wahidin Sudirohusodo No. 364, Kel. Dahanrejo, Gresik 61122",
     "nomor_telepon_faksimili": "Telp/Fax. (031) 3984787",
     "alamat_email": "bps3525@bps.go.id",
-    "tautan": "https://gresikkab.bps.go.id"
+    "tautan": "https://gresikkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "sumenep",
@@ -1170,7 +1615,12 @@
     "alamat": "Jl. Seludang No. 4 Sumenep 69416",
     "nomor_telepon_faksimili": "Telp/Fax. (0328) 662226",
     "alamat_email": "bps3529@bps.go.id",
-    "tautan": "https://sumenepkab.bps.go.id"
+    "tautan": "https://sumenepkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "kediri",
@@ -1187,7 +1637,15 @@
     "alamat": "Jl. Penanggungan No. 14G, Kel. Lirboyo, Kec. Mojoroto, Kota Kediri 64117",
     "nomor_telepon_faksimili": "Telp (0354) 773238 Fax. (0354) 773119",
     "alamat_email": "bps3571@bps.go.id",
-    "tautan": "https://kedirikota.bps.go.id"
+    "tautan": "https://kedirikota.bps.go.id",
+    "BIKota": {
+      "id": 44,
+      "name": "Kota Kediri"
+    },
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "malang",
@@ -1204,7 +1662,15 @@
     "alamat": "Jl. Raya Janti Barat No. 47, Kota Malang 65132",
     "nomor_telepon_faksimili": "Telp (0341) 801164 Fax. (0341) 805871",
     "alamat_email": "bps3573@bps.go.id",
-    "tautan": "https://malangkota.bps.go.id"
+    "tautan": "https://malangkota.bps.go.id",
+    "BIKota": {
+      "id": 43,
+      "name": "Kota Malang"
+    },
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "probolinggo",
@@ -1221,7 +1687,15 @@
     "alamat": "Jl. Bromo No. 32 Probolinggo 67222",
     "nomor_telepon_faksimili": "Telp (0335) 421791 Fax. (0335) 431661",
     "alamat_email": "bps3574@bps.go.id",
-    "tautan": "https://probolinggokota.bps.go.id"
+    "tautan": "https://probolinggokota.bps.go.id",
+    "BIKota": {
+      "id": 48,
+      "name": "Kota Probolinggo"
+    },
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "madiun",
@@ -1238,7 +1712,15 @@
     "alamat": "Jl. Mayjen Panjaitan No. 11, Kec. Taman, Kota Madiun 63136",
     "nomor_telepon_faksimili": "Telp/Fax. (0351) 495814",
     "alamat_email": "bps3577@bps.go.id",
-    "tautan": "https://madiunkota.bps.go.id"
+    "tautan": "https://madiunkota.bps.go.id",
+    "BIKota": {
+      "id": 47,
+      "name": "Kota Madiun"
+    },
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "surabaya",
@@ -1255,7 +1737,15 @@
     "alamat": "Jl. Ahmad Yani No. 152 E, Surabaya",
     "nomor_telepon_faksimili": "Telp (031) 8296691 Fax. (031) 8296692",
     "alamat_email": "bps3578@bps.go.id",
-    "tautan": "https://surabayakota.bps.go.id"
+    "tautan": "https://surabayakota.bps.go.id",
+    "BIKota": {
+      "id": 42,
+      "name": "Kota Surabaya"
+    },
+    "BIProvinsi": {
+      "id": 16,
+      "name": "Jawa Timur"
+    }
   },
   {
     "id": "pandeglang",
@@ -1272,7 +1762,12 @@
     "alamat": "Jl. Raya Labuan Km.4 No.1 Cikoneng Kaduhejo Pandeglang 42253",
     "nomor_telepon_faksimili": "Telp (0254) 201138 Fax (0253) 203949",
     "alamat_email": "bps3601@bps.go.id",
-    "tautan": "https://pandeglangkab.bps.go.id"
+    "tautan": "https://pandeglangkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 11,
+      "name": "Banten"
+    }
   },
   {
     "id": "lebak",
@@ -1289,7 +1784,12 @@
     "alamat": "Jl. H. Tubagus Hasan Pasir Ona Cisemir Rangkasbitung 42313",
     "nomor_telepon_faksimili": "Telp/Fax. (0252) 280779",
     "alamat_email": "bps3602@bps.go.id",
-    "tautan": "https://lebakkab.bps.go.id"
+    "tautan": "https://lebakkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 11,
+      "name": "Banten"
+    }
   },
   {
     "id": "tangerang",
@@ -1306,7 +1806,15 @@
     "alamat": "Jl. Noer Radji No. 28 Garendeng Tangerang 15111",
     "nomor_telepon_faksimili": "Telp (021) 55792858 Fax. (021) 55796910",
     "alamat_email": "bps3671@bps.go.id",
-    "tautan": "https://tangerangkota.bps.go.id"
+    "tautan": "https://tangerangkota.bps.go.id",
+    "BIKota": {
+      "id": 26,
+      "name": "Kota Tangerang"
+    },
+    "BIProvinsi": {
+      "id": 11,
+      "name": "Banten"
+    }
   },
   {
     "id": "cilegon",
@@ -1323,7 +1831,12 @@
     "alamat": "Jl. Sukabumi/BBS II Kavling Blok 1, Cilegon 42418",
     "nomor_telepon_faksimili": "Telp (0254) 385524 Fax. (0254) 385040",
     "alamat_email": "bps3672@bps.go.id",
-    "tautan": "https://cilegonkota.bps.go.id"
+    "tautan": "https://cilegonkota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 11,
+      "name": "Banten"
+    }
   },
   {
     "id": "serang",
@@ -1340,7 +1853,15 @@
     "alamat": "Jl. Letnan Jidun No. 6 Kepandean, Serang",
     "nomor_telepon_faksimili": "Telp (0254) 200705 Fax. (0254) 212935",
     "alamat_email": "bps3673@bps.go.id",
-    "tautan": "https://serangkota.bps.go.id"
+    "tautan": "https://serangkota.bps.go.id",
+    "BIKota": {
+      "id": 24,
+      "name": "Kota Serang"
+    },
+    "BIProvinsi": {
+      "id": 11,
+      "name": "Banten"
+    }
   },
   {
     "id": "tabanan",
@@ -1357,7 +1878,12 @@
     "alamat": "Jl. Pahlawan No. 1B, Tabanan",
     "nomor_telepon_faksimili": "Telp (0361) 811571 Fax. (0361) 814967",
     "alamat_email": "bps5102@bps.go.id",
-    "tautan": "https://tabanankab.bps.go.id"
+    "tautan": "https://tabanankab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 17,
+      "name": "Bali"
+    }
   },
   {
     "id": "badung",
@@ -1374,7 +1900,15 @@
     "alamat": "Jl. Raya Darmasaba, Abiansemal, Badung 80352",
     "nomor_telepon_faksimili": "Telp (0361) 8441616 Fax (0361) 8441717",
     "alamat_email": "bps5103@bps.go.id",
-    "tautan": "https://badungkab.bps.go.id"
+    "tautan": "https://badungkab.bps.go.id",
+    "BIKota": {
+      "id": 319,
+      "name": "Kab. Badung "
+    },
+    "BIProvinsi": {
+      "id": 17,
+      "name": "Bali"
+    }
   },
   {
     "id": "singaraja",
@@ -1391,7 +1925,15 @@
     "alamat": "Jl. Dewi Sartika No. 19 Singaraja 81118",
     "nomor_telepon_faksimili": "Telp (0362) 22145 Fax (0363) 29747",
     "alamat_email": "bps5108@bps.go.id",
-    "tautan": "https://bulelengkab.bps.go.id"
+    "tautan": "https://bulelengkab.bps.go.id",
+    "BIKota": {
+      "id": 51,
+      "name": "Kota Singaraja"
+    },
+    "BIProvinsi": {
+      "id": 17,
+      "name": "Bali"
+    }
   },
   {
     "id": "denpasar",
@@ -1408,7 +1950,15 @@
     "alamat": "Jl. Mulawarman No. 11, Denpasar 80111",
     "nomor_telepon_faksimili": "Telp (0361) 418770 Fax (0361) 434326",
     "alamat_email": "bps5171@bps.go.id",
-    "tautan": "https://denpasarkota.bps.go.id"
+    "tautan": "https://denpasarkota.bps.go.id",
+    "BIKota": {
+      "id": 50,
+      "name": "Kota Denpasar"
+    },
+    "BIProvinsi": {
+      "id": 17,
+      "name": "Bali"
+    }
   },
   {
     "id": "sumbawa",
@@ -1425,7 +1975,12 @@
     "alamat": "Jl. Durian No. 70 Sumbawa Besar 84317, NTB",
     "nomor_telepon_faksimili": "Telp.(0371) 21047, fax (0371) 2629045",
     "alamat_email": "bps5204@bps.go.id",
-    "tautan": "https://sumbawakab.bps.go.id"
+    "tautan": "https://sumbawakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 18,
+      "name": "Nusa Tenggara Barat"
+    }
   },
   {
     "id": "mataram",
@@ -1442,7 +1997,15 @@
     "alamat": "Jl. Jendral Sudirman No. 71 Mataram, Rembiga, Mataram, NTB",
     "nomor_telepon_faksimili": "Telp/Fax : (0370) 642544",
     "alamat_email": "bps5271@bps.go.id",
-    "tautan": "https://mataramkota.bps.go.id"
+    "tautan": "https://mataramkota.bps.go.id",
+    "BIKota": {
+      "id": 52,
+      "name": "Kota Mataram"
+    },
+    "BIProvinsi": {
+      "id": 18,
+      "name": "Nusa Tenggara Barat"
+    }
   },
   {
     "id": "bima",
@@ -1459,7 +2022,15 @@
     "alamat": "Jl.Soekarno Hatta no.14,Kota Bima, NTB 84113",
     "nomor_telepon_faksimili": "Telp (0374)6647460",
     "alamat_email": "bps5272@bps.go.id",
-    "tautan": "https://bimakota.bps.go.id"
+    "tautan": "https://bimakota.bps.go.id",
+    "BIKota": {
+      "id": 54,
+      "name": "Kota Bima"
+    },
+    "BIProvinsi": {
+      "id": 18,
+      "name": "Nusa Tenggara Barat"
+    }
   },
   {
     "id": "waingapu",
@@ -1476,7 +2047,12 @@
     "alamat": "Jl. L. D. Dapawole No. 1 Waingapu 87111",
     "nomor_telepon_faksimili": "Telp/Fax. (0387) 61368",
     "alamat_email": "bps5302@bps.go.id",
-    "tautan": "https://sumbatimurkab.bps.go.id"
+    "tautan": "https://sumbatimurkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 19,
+      "name": "Nusa Tenggara Timur"
+    }
   },
   {
     "id": "timor-tengah-selatan",
@@ -1493,7 +2069,12 @@
     "alamat": "Jl. Proklamasi No. 6A Soe – Kab TTS 85511",
     "nomor_telepon_faksimili": "Telp/Fax. (0388) 21051",
     "alamat_email": "bps5304@bps.go.id",
-    "tautan": "https://timortengahselatankab.bps.go.id"
+    "tautan": "https://timortengahselatankab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 19,
+      "name": "Nusa Tenggara Timur"
+    }
   },
   {
     "id": "maumere",
@@ -1510,7 +2091,15 @@
     "alamat": "Jl. Wairklau No. 29 Maumere 86112",
     "nomor_telepon_faksimili": "Telp/Fax. (0382) 21371",
     "alamat_email": "bps5310@bps.go.id",
-    "tautan": "https://sikkakab.bps.go.id"
+    "tautan": "https://sikkakab.bps.go.id",
+    "BIKota": {
+      "id": 56,
+      "name": "Kota Maumere"
+    },
+    "BIProvinsi": {
+      "id": 19,
+      "name": "Nusa Tenggara Timur"
+    }
   },
   {
     "id": "ngada",
@@ -1527,7 +2116,12 @@
     "alamat": "Jl. Slamet Riyadi, Bajawa 84614",
     "nomor_telepon_faksimili": "Telp/Fax. (0384) 21359",
     "alamat_email": "bps5312@bps.go.id",
-    "tautan": "https://ngadakab.bps.go.id"
+    "tautan": "https://ngadakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 19,
+      "name": "Nusa Tenggara Timur"
+    }
   },
   {
     "id": "kupang",
@@ -1544,7 +2138,15 @@
     "alamat": "Jl. Frans Seda, Kupang 85111",
     "nomor_telepon_faksimili": "Telp/Fax. (0380) 824432",
     "alamat_email": "bps5371@bps.go.id",
-    "tautan": "https://kupangkota.bps.go.id"
+    "tautan": "https://kupangkota.bps.go.id",
+    "BIKota": {
+      "id": 55,
+      "name": "Kota Kupang"
+    },
+    "BIProvinsi": {
+      "id": 19,
+      "name": "Nusa Tenggara Timur"
+    }
   },
   {
     "id": "dili",
@@ -1558,7 +2160,9 @@
     "alamat": null,
     "nomor_telepon_faksimili": null,
     "alamat_email": null,
-    "tautan": null
+    "tautan": null,
+    "BIKota": {},
+    "BIProvinsi": {}
   },
   {
     "id": "ketapang",
@@ -1575,7 +2179,12 @@
     "alamat": "Jl. Letjen, S. Parman No. 101",
     "nomor_telepon_faksimili": "Telp (0534) 32017 Fax. (0534) 3037840",
     "alamat_email": "bps6106@bps.go.id",
-    "tautan": "https://ketapangkab.bps.go.id"
+    "tautan": "https://ketapangkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 20,
+      "name": "Kalimantan Barat"
+    }
   },
   {
     "id": "sintang",
@@ -1592,7 +2201,12 @@
     "alamat": "Jl. Dr. Wahidin Sudirohusodo – Sintang 78612",
     "nomor_telepon_faksimili": "Telp/Fax. (0565) 21704",
     "alamat_email": "bps6107@bps.go.id",
-    "tautan": "https://sintangkab.bps.go.id"
+    "tautan": "https://sintangkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 20,
+      "name": "Kalimantan Barat"
+    }
   },
   {
     "id": "kayong-utara",
@@ -1609,7 +2223,12 @@
     "alamat": "Jl. Batu Daya I no No. 8 Sukadana 78852",
     "nomor_telepon_faksimili": "Telp/Fax. (0561) 3031316 (0561) 732184",
     "alamat_email": "bps6111@bps.go.id",
-    "tautan": "https://kayongutarakab.bps.go.id"
+    "tautan": "https://kayongutarakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 20,
+      "name": "Kalimantan Barat"
+    }
   },
   {
     "id": "pontianak",
@@ -1626,7 +2245,12 @@
     "alamat": "Jl. Letjen Sutoyo No. 17 Pontianak 78121",
     "nomor_telepon_faksimili": "Telp (0561) 736471 Hp. 0561–761374",
     "alamat_email": "bps6171@bps.go.id",
-    "tautan": "https://pontianakkota.bps.go.id"
+    "tautan": "https://pontianakkota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 20,
+      "name": "Kalimantan Barat"
+    }
   },
   {
     "id": "singkawang",
@@ -1643,7 +2267,15 @@
     "alamat": "Jl. Ahmad Yan No. 75 Pasiran, Singkawang – Kalimantan Barat 79115",
     "nomor_telepon_faksimili": "Telp (0562) 6313354",
     "alamat_email": "bps6171@bps.go.id",
-    "tautan": "https://singkawangkota.bps.go.id"
+    "tautan": "https://singkawangkota.bps.go.id",
+    "BIKota": {
+      "id": 58,
+      "name": "Kota Singkawang"
+    },
+    "BIProvinsi": {
+      "id": 20,
+      "name": "Kalimantan Barat"
+    }
   },
   {
     "id": "sampit",
@@ -1660,7 +2292,12 @@
     "alamat": "Jl. Jend. A.Yani No. 05 Sampit 74322",
     "nomor_telepon_faksimili": "Telp (0513) 30249 Fax. (0513) 21221",
     "alamat_email": "bps6202@bps.go.id",
-    "tautan": "https://kotimkab.bps.go.id"
+    "tautan": "https://kotimkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 22,
+      "name": "Kalimantan Tengah"
+    }
   },
   {
     "id": "kapuas",
@@ -1677,7 +2314,12 @@
     "alamat": "Jl. Tambun Bungai No. 15 Kuala Kapuas 73514",
     "nomor_telepon_faksimili": "Telp/Fax (0513) 21093",
     "alamat_email": "bps6203@bps.go.id",
-    "tautan": "https://kapuaskab.bps.go.id"
+    "tautan": "https://kapuaskab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 22,
+      "name": "Kalimantan Tengah"
+    }
   },
   {
     "id": "sukamara",
@@ -1694,7 +2336,12 @@
     "alamat": "Jl. Tjlik Riwut KM 8, Sukamara",
     "nomor_telepon_faksimili": "Telp (0532) 6715134 Fax. (0532) 26119",
     "alamat_email": "bps6206@bps.go.id",
-    "tautan": "https://sukamarakab.bps.go.id"
+    "tautan": "https://sukamarakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 22,
+      "name": "Kalimantan Tengah"
+    }
   },
   {
     "id": "palangka-raya",
@@ -1711,7 +2358,15 @@
     "alamat": "Jl. Dr. Wahidin Sudirohusodo No. 05 Palangka Raya 73111",
     "nomor_telepon_faksimili": "Telp (0536) 3222098, Fax (0536) 3237448",
     "alamat_email": "bps6271@bps.go.id",
-    "tautan": "https://palangkakota.bps.go.id"
+    "tautan": "https://palangkakota.bps.go.id",
+    "BIKota": {
+      "id": 61,
+      "name": "Kota Palangkaraya"
+    },
+    "BIProvinsi": {
+      "id": 22,
+      "name": "Kalimantan Tengah"
+    }
   },
   {
     "id": "tanah-laut",
@@ -1728,7 +2383,12 @@
     "alamat": "Jl. A. Syairani No. 9 Komp. Perkantoran Gagas, Pelaihari 70814",
     "nomor_telepon_faksimili": "Telp (0512) 21092 Fax. 0512-21313",
     "alamat_email": "bps6301@bps.go.id",
-    "tautan": "https://tanahlautkab.bps.go.id"
+    "tautan": "https://tanahlautkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 21,
+      "name": "Kalimantan Selatan"
+    }
   },
   {
     "id": "kotabaru",
@@ -1745,7 +2405,12 @@
     "alamat": "Jl. Jamrud I Dirgahayu, Kota Baru 70242",
     "nomor_telepon_faksimili": "Telp (0518) 21145 Fax. (0518) 23009",
     "alamat_email": "bps6302@bps.go.id",
-    "tautan": "https://kotabarukab.bps.go.id"
+    "tautan": "https://kotabarukab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 21,
+      "name": "Kalimantan Selatan"
+    }
   },
   {
     "id": "hulu-sungai-tengah",
@@ -1762,7 +2427,12 @@
     "alamat": "Jl. Keramat Manjang No. 10 Barabai 71313",
     "nomor_telepon_faksimili": "Telp/Fax. (0517) 41236",
     "alamat_email": "bps6307@bps.go.id",
-    "tautan": "https://hulusungaitengahkab.bps.go.id"
+    "tautan": "https://hulusungaitengahkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 21,
+      "name": "Kalimantan Selatan"
+    }
   },
   {
     "id": "tanjung",
@@ -1779,7 +2449,12 @@
     "alamat": "Jl. Jaksa Agung Soeprapto RT. 15 No. 82 Tanjung 71513",
     "nomor_telepon_faksimili": "Telp/Fax. (0520) 2021214",
     "alamat_email": "bps6309@bps.go.id",
-    "tautan": "https://tabalongkab.bps.go.id"
+    "tautan": "https://tabalongkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 21,
+      "name": "Kalimantan Selatan"
+    }
   },
   {
     "id": "banjarmasin",
@@ -1796,7 +2471,15 @@
     "alamat": "Jl.H.Djafri Zam-zam No. 10, Banjarmasin 70116",
     "nomor_telepon_faksimili": "Telp (0511) 3354158 Fax. (0511) 3354178",
     "alamat_email": "bps6371@bps.go.id",
-    "tautan": "https://banjarmasinkota.bps.go.id"
+    "tautan": "https://banjarmasinkota.bps.go.id",
+    "BIKota": {
+      "id": 59,
+      "name": "Kota Banjarmasin"
+    },
+    "BIProvinsi": {
+      "id": 21,
+      "name": "Kalimantan Selatan"
+    }
   },
   {
     "id": "berau",
@@ -1813,7 +2496,12 @@
     "alamat": "Jl. Mangga II No. 53 Tanjung Redeb, Berau",
     "nomor_telepon_faksimili": "Telp/Fax. (0543) 21543",
     "alamat_email": "bps6405@bps.go.id",
-    "tautan": "https://beraukab.bps.go.id"
+    "tautan": "https://beraukab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 23,
+      "name": "Kalimantan Timur"
+    }
   },
   {
     "id": "penajam-paser-utara",
@@ -1830,7 +2518,12 @@
     "alamat": "Jl. Provinsi Km. 9 Nipah-Nipah, Penajam 76411, Kel. Nenang Penajam",
     "nomor_telepon_faksimili": "Telp (0542) 7211471 Fax. (0542) 7211478",
     "alamat_email": "bps6409@bps.go.id",
-    "tautan": "https://ppukab.bps.go.id"
+    "tautan": "https://ppukab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 23,
+      "name": "Kalimantan Timur"
+    }
   },
   {
     "id": "balikpapan",
@@ -1847,7 +2540,15 @@
     "alamat": "Jl. Jend. Sudirman No.84 Balikpapan 76112",
     "nomor_telepon_faksimili": "Telp/Fax. (0542) 737554",
     "alamat_email": "bps6471@bps.go.id",
-    "tautan": "https://balikpapankota.bps.go.id"
+    "tautan": "https://balikpapankota.bps.go.id",
+    "BIKota": {
+      "id": 64,
+      "name": "Kota Balikpapan"
+    },
+    "BIProvinsi": {
+      "id": 23,
+      "name": "Kalimantan Timur"
+    }
   },
   {
     "id": "samarinda",
@@ -1864,7 +2565,15 @@
     "alamat": "Jl. KH Ahmad Dahlan No. 33 Samarinda 75117",
     "nomor_telepon_faksimili": "Telp (0541) 743661",
     "alamat_email": "bps6472@bps.go.id",
-    "tautan": "https://samarindakota.bps.go.id"
+    "tautan": "https://samarindakota.bps.go.id",
+    "BIKota": {
+      "id": 63,
+      "name": "Kota Samarinda"
+    },
+    "BIProvinsi": {
+      "id": 23,
+      "name": "Kalimantan Timur"
+    }
   },
   {
     "id": "tanjung-selor",
@@ -1881,7 +2590,15 @@
     "alamat": "Jl. H. Kol. Soetadji No. 85 Tanjung Selor 77212",
     "nomor_telepon_faksimili": "Telp/Fax (0552) 21171",
     "alamat_email": "bps6407@bps.go.id",
-    "tautan": "https://bulungankab.bps.go.id"
+    "tautan": "https://bulungankab.bps.go.id",
+    "BIKota": {
+      "id": 340,
+      "name": "Kab. Bulungan"
+    },
+    "BIProvinsi": {
+      "id": 24,
+      "name": "Kalimantan Utara"
+    }
   },
   {
     "id": "nunukan",
@@ -1898,7 +2615,15 @@
     "alamat": "Jl. Ujung Dewa, Kompleks Perkantoran Vertikal, Nunukan Selatan, Kalimantan Utara 77482",
     "nomor_telepon_faksimili": "Telp (0556) 2027937 Fax. (0556) 2027937",
     "alamat_email": "bps6408@bps.go.id",
-    "tautan": "https://nunukankab.bps.go.id"
+    "tautan": "https://nunukankab.bps.go.id",
+    "BIKota": {
+      "id": 348,
+      "name": "Kab. Nunukan"
+    },
+    "BIProvinsi": {
+      "id": 24,
+      "name": "Kalimantan Utara"
+    }
   },
   {
     "id": "tarakan",
@@ -1915,7 +2640,15 @@
     "alamat": "Jl. P. Kalimantan No. 9 Kamp. Satu Skip Tarakan",
     "nomor_telepon_faksimili": "Telp (0551) 31715 Fax. (0551) 31715",
     "alamat_email": "bps6473@bps.go.id",
-    "tautan": "https://tarakankota.bps.go.id"
+    "tautan": "https://tarakankota.bps.go.id",
+    "BIKota": {
+      "id": 65,
+      "name": "Kota Tarakan"
+    },
+    "BIProvinsi": {
+      "id": 24,
+      "name": "Kalimantan Utara"
+    }
   },
   {
     "id": "minahasa-selatan",
@@ -1932,7 +2665,12 @@
     "alamat": "Jl. Trans Sulawesi, Desa Teep, Kecamatan Amurang Barat, Minahasa Selatan 95955",
     "nomor_telepon_faksimili": "Telp (0430) 22798",
     "alamat_email": "bps7105@bps.go.id",
-    "tautan": "https://minselkab.bps.go.id"
+    "tautan": "https://minselkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 29,
+      "name": "Sulawesi Utara"
+    }
   },
   {
     "id": "minahasa-utara",
@@ -1949,7 +2687,12 @@
     "alamat": "Komp. Perkantoran Pemda Kab. Minahasa Utara 95731",
     "nomor_telepon_faksimili": "Telp (0431) 891050",
     "alamat_email": "bps7106@bps.go.id",
-    "tautan": "https://minutkab.bps.go.id"
+    "tautan": "https://minutkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 29,
+      "name": "Sulawesi Utara"
+    }
   },
   {
     "id": "manado",
@@ -1966,7 +2709,15 @@
     "alamat": "Jl. Mangga III, Bum Nyiur, Manado",
     "nomor_telepon_faksimili": "Telp (0431) 858091",
     "alamat_email": "bps7171@bps.go.id",
-    "tautan": "https://manadokota.bps.go.id"
+    "tautan": "https://manadokota.bps.go.id",
+    "BIKota": {
+      "id": 75,
+      "name": "Kota Manado"
+    },
+    "BIProvinsi": {
+      "id": 29,
+      "name": "Sulawesi Utara"
+    }
   },
   {
     "id": "kotamobagu",
@@ -1983,7 +2734,15 @@
     "alamat": "Jl. Paloko Kinalang Jalur 2, Kotamobagu Timur 95712",
     "nomor_telepon_faksimili": "Telp (0434) 21411",
     "alamat_email": "bps7174@bps.go.id",
-    "tautan": "https://kotamobagukota.bps.go.id"
+    "tautan": "https://kotamobagukota.bps.go.id",
+    "BIKota": {
+      "id": 249,
+      "name": "Kota Kotamobagu"
+    },
+    "BIProvinsi": {
+      "id": 29,
+      "name": "Sulawesi Utara"
+    }
   },
   {
     "id": "luwuk",
@@ -2000,7 +2759,15 @@
     "alamat": "Jl. S. Parman No. 27 Luwuk 94711",
     "nomor_telepon_faksimili": "Telp (0461) 21336, 325113",
     "alamat_email": "bps7202@bps.go.id",
-    "tautan": "https://banggaikab.bps.go.id"
+    "tautan": "https://banggaikab.bps.go.id",
+    "BIKota": {
+      "id": 285,
+      "name": "Kab. Banggai "
+    },
+    "BIProvinsi": {
+      "id": 28,
+      "name": "Sulawesi Tengah"
+    }
   },
   {
     "id": "morowali",
@@ -2017,7 +2784,12 @@
     "alamat": "Kompleks Perkantooran Fonuasingko, Morowali 94973",
     "nomor_telepon_faksimili": "Telp (0409) 2220096",
     "alamat_email": "bps7203@bps.go.id",
-    "tautan": "https://morowaliutarakab.bps.go.id"
+    "tautan": "https://morowaliutarakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 28,
+      "name": "Sulawesi Tengah"
+    }
   },
   {
     "id": "toli-toli",
@@ -2034,7 +2806,12 @@
     "alamat": "Jl. Magamu No. 111, Kel. Tuweley, Tolitoli 94515",
     "nomor_telepon_faksimili": "Telp (0453) 21351",
     "alamat_email": "bps7206@bps.go.id",
-    "tautan": "https://tolitolikab.bps.go.id"
+    "tautan": "https://tolitolikab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 28,
+      "name": "Sulawesi Tengah"
+    }
   },
   {
     "id": "palu",
@@ -2051,7 +2828,15 @@
     "alamat": "Jl. Baruga No. 19 Palu – Selawesi Tngah 94234",
     "nomor_telepon_faksimili": "Telp (0451) 422066 Fax (0451) 421266",
     "alamat_email": "bps7271@bps.go.id",
-    "tautan": "https://palukota.bps.go.id"
+    "tautan": "https://palukota.bps.go.id",
+    "BIKota": {
+      "id": 74,
+      "name": "Kota Palu"
+    },
+    "BIProvinsi": {
+      "id": 28,
+      "name": "Sulawesi Tengah"
+    }
   },
   {
     "id": "bulukumba",
@@ -2068,7 +2853,12 @@
     "alamat": "Jl. Jendral Ahmad Yani No. 18 Bulukumba 92512",
     "nomor_telepon_faksimili": "Telp (0413) 81090 Faks. (0413) 85001",
     "alamat_email": "bps7302@bps.go.id",
-    "tautan": "https://bulukumbakab.bps.go.id"
+    "tautan": "https://bulukumbakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 26,
+      "name": "Sulawesi Selatan"
+    }
   },
   {
     "id": "watampone",
@@ -2085,7 +2875,12 @@
     "alamat": "Jl. Dr. Wahidin Sudirohusodo No. 4 Watampone 92732",
     "nomor_telepon_faksimili": "Telp (0481) 21054 Fax. (0481) 25220",
     "alamat_email": "bps7311@bps.go.id",
-    "tautan": "https://bonekab.bps.go.id"
+    "tautan": "https://bonekab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 26,
+      "name": "Sulawesi Selatan"
+    }
   },
   {
     "id": "wajo",
@@ -2102,7 +2897,12 @@
     "alamat": "Jl. Veteran No. 2, Sengkang 90913",
     "nomor_telepon_faksimili": "Telp/Fax. (0485) 21071",
     "alamat_email": "bps7313@bps.go.id",
-    "tautan": "https://wajokab.bps.go.id"
+    "tautan": "https://wajokab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 26,
+      "name": "Sulawesi Selatan"
+    }
   },
   {
     "id": "sidenreng-rappang",
@@ -2119,7 +2919,12 @@
     "alamat": "Jl. Jend. Sudirman No. 125 Pangkajene 91611",
     "nomor_telepon_faksimili": "Telp (0421) 384115, 3842508, 3810291",
     "alamat_email": "bps7314@bps.go.id",
-    "tautan": "https://sidrapkab.bps.go.id"
+    "tautan": "https://sidrapkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 26,
+      "name": "Sulawesi Selatan"
+    }
   },
   {
     "id": "luwu-timur",
@@ -2136,7 +2941,12 @@
     "alamat": "JI. Soekarno Hatta (Kompleks Perkantoran Pemda Luwu Timur), Puncak Indah Malili",
     "nomor_telepon_faksimili": "Telp (0474) 3220038",
     "alamat_email": "bps7325@bps.go.id",
-    "tautan": "https://luwutimurkab.bps.go.id"
+    "tautan": "https://luwutimurkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 26,
+      "name": "Sulawesi Selatan"
+    }
   },
   {
     "id": "makassar",
@@ -2153,7 +2963,15 @@
     "alamat": "Jl. Prof. Abdurah,am Basalamah I 90231 Indonesia",
     "nomor_telepon_faksimili": "Telp/Fax. (0411) 442698",
     "alamat_email": "bps7371@bps.go.id",
-    "tautan": "https://makassarkota.bps.go.id"
+    "tautan": "https://makassarkota.bps.go.id",
+    "BIKota": {
+      "id": 67,
+      "name": "Kota Makassar"
+    },
+    "BIProvinsi": {
+      "id": 26,
+      "name": "Sulawesi Selatan"
+    }
   },
   {
     "id": "pare-pare",
@@ -2170,7 +2988,12 @@
     "alamat": "Jl. Jend. Sudirman No. 66 Parepare 91122",
     "nomor_telepon_faksimili": "Telp (0421) 22766 Fax (0411) 434781",
     "alamat_email": "bps7372@bps.go.id",
-    "tautan": "https://pareparekota.bps.go.id"
+    "tautan": "https://pareparekota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 26,
+      "name": "Sulawesi Selatan"
+    }
   },
   {
     "id": "palopo",
@@ -2187,7 +3010,12 @@
     "alamat": "Jl. Patang II No. 24, Palopo 91923",
     "nomor_telepon_faksimili": "Telp/Fax. (0471) 21129",
     "alamat_email": "bps7373@bps.go.id",
-    "tautan": "https://palopokota.bps.go.id"
+    "tautan": "https://palopokota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 26,
+      "name": "Sulawesi Selatan"
+    }
   },
   {
     "id": "konawe",
@@ -2204,7 +3032,12 @@
     "alamat": "Jl. Kompleks Perkantoran Pemda Kabupaten Konawe, Jl. Inolobunggadue II, Kel. Puunaaha, Unaaha 93411",
     "nomor_telepon_faksimili": "Telp/Fax (0408) 2421019",
     "alamat_email": "bps7403@bps.go.id",
-    "tautan": "https://konkepkab.bps.go.id"
+    "tautan": "https://konkepkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 27,
+      "name": "Sulawesi Tenggara"
+    }
   },
   {
     "id": "kolaka",
@@ -2221,7 +3054,12 @@
     "alamat": "Jl. Pahlawan No. 75 Kel. Lamokato, Kolaka 93516",
     "nomor_telepon_faksimili": "Telp/Fax. (0405) 2321031",
     "alamat_email": "bps7404@bps.go.id",
-    "tautan": "https://kolakakab.bps.go.id"
+    "tautan": "https://kolakakab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 27,
+      "name": "Sulawesi Tenggara"
+    }
   },
   {
     "id": "kendari",
@@ -2238,7 +3076,15 @@
     "alamat": "Jl. Balai Kota II No. 97 Kendari 93117",
     "nomor_telepon_faksimili": "Telp/Fax. (0401) 3121776",
     "alamat_email": "bps7471@bps.go.id",
-    "tautan": "https://kendarikota.bps.go.id"
+    "tautan": "https://kendarikota.bps.go.id",
+    "BIKota": {
+      "id": 72,
+      "name": "Kota Kendari"
+    },
+    "BIProvinsi": {
+      "id": 27,
+      "name": "Sulawesi Tenggara"
+    }
   },
   {
     "id": "bau-bau",
@@ -2255,7 +3101,12 @@
     "alamat": "Jl. Murhum No. 52 Bau-Bau 93726",
     "nomor_telepon_faksimili": "Telp/Fax. (0402) 2821277",
     "alamat_email": "bps7472@bps.go.id",
-    "tautan": "https://baubaukota.bps.go.id"
+    "tautan": "https://baubaukota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 27,
+      "name": "Sulawesi Tenggara"
+    }
   },
   {
     "id": "gorontalo",
@@ -2272,7 +3123,12 @@
     "alamat": "Jl. Samaun Pulubuhu, Kelurahan Tenilo, Kecamatan Limboto, Kabupaten Gorontalo",
     "nomor_telepon_faksimili": "Telp (0435) 881435",
     "alamat_email": "bps7502@bps.go.id",
-    "tautan": "https://gorontalokab.bps.go.id"
+    "tautan": "https://gorontalokab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 25,
+      "name": "Gorontalo"
+    }
   },
   {
     "id": "gorontalo",
@@ -2289,7 +3145,15 @@
     "alamat": "Jalan Dewi Sartika No. 21, Kota Tengah, Kota Gorontalo",
     "nomor_telepon_faksimili": "Telp (0435) 821956",
     "alamat_email": "bps7571@bps.go.id",
-    "tautan": "https://gorontalokota.bps.go.id"
+    "tautan": "https://gorontalokota.bps.go.id",
+    "BIKota": {
+      "id": 66,
+      "name": "Kota Gorontalo"
+    },
+    "BIProvinsi": {
+      "id": 25,
+      "name": "Gorontalo"
+    }
   },
   {
     "id": "majene",
@@ -2306,7 +3170,15 @@
     "alamat": "JL. JEND AHMAD YANI, KEL RANGAS, KEC BANGGAE",
     "nomor_telepon_faksimili": null,
     "alamat_email": "bps7601@bps.go.id",
-    "tautan": "https://majenekab.bps.go.id"
+    "tautan": "https://majenekab.bps.go.id",
+    "BIKota": {
+      "id": 499,
+      "name": "Kab. Majene"
+    },
+    "BIProvinsi": {
+      "id": 30,
+      "name": "Sulawesi Barat"
+    }
   },
   {
     "id": "mamuju",
@@ -2323,7 +3195,15 @@
     "alamat": "JL. TRANS SULAWESI, KEL MAMUNYU, MAMUJU 91511",
     "nomor_telepon_faksimili": null,
     "alamat_email": "bps7604@bps.go.id",
-    "tautan": "https://mamujukab.bps.go.id"
+    "tautan": "https://mamujukab.bps.go.id",
+    "BIKota": {
+      "id": 76,
+      "name": "Kota Mamuju"
+    },
+    "BIProvinsi": {
+      "id": 30,
+      "name": "Sulawesi Barat"
+    }
   },
   {
     "id": "maluku-tengah",
@@ -2340,7 +3220,12 @@
     "alamat": "Jl. R.A. Kartini No. 15, Kel. Namaelo, Kec. Kota Masohi 97512",
     "nomor_telepon_faksimili": "Telp/Fax. (0914) 21561",
     "alamat_email": "bps8103@bps.go.id",
-    "tautan": "https://malukutengahkab.bps.go.id"
+    "tautan": "https://malukutengahkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 31,
+      "name": "Maluku"
+    }
   },
   {
     "id": "ambon",
@@ -2357,7 +3242,15 @@
     "alamat": "Jl. Haruhun, Karang Panjang Komp. Puleh, Kel. Waihakota, Kec. Sirimau, Ambon 97121",
     "nomor_telepon_faksimili": "Telp (0911) 312421 Fax. (0911) 352774",
     "alamat_email": "bps8171@bps.go.id",
-    "tautan": "https://ambonkota.bps.go.id"
+    "tautan": "https://ambonkota.bps.go.id",
+    "BIKota": {
+      "id": 77,
+      "name": "Kota Ambon"
+    },
+    "BIProvinsi": {
+      "id": 31,
+      "name": "Maluku"
+    }
   },
   {
     "id": "tual",
@@ -2374,7 +3267,12 @@
     "alamat": null,
     "nomor_telepon_faksimili": null,
     "alamat_email": null,
-    "tautan": "https://tualkota.bps.go.id"
+    "tautan": "https://tualkota.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 31,
+      "name": "Maluku"
+    }
   },
   {
     "id": "halmahera-tengah",
@@ -2391,7 +3289,12 @@
     "alamat": "Jl. Weda-Payahe, Halmahera Tengah, Maluku Utara",
     "nomor_telepon_faksimili": null,
     "alamat_email": "bps8202@bps.go.id",
-    "tautan": "https://haltengkab.bps.go.id"
+    "tautan": "https://haltengkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 32,
+      "name": "Maluku Utara"
+    }
   },
   {
     "id": "ternate",
@@ -2408,7 +3311,15 @@
     "alamat": "Gg. Arrahma RT 004/RW 03, Lingk. Falajawa II, Kel. Bastiong Karance, Kec Ternate Selatan – Kota Ternate",
     "nomor_telepon_faksimili": "Telp (0921) 3121650",
     "alamat_email": "bps8271@bps.go.id",
-    "tautan": "https://ternatekota.bps.go.id"
+    "tautan": "https://ternatekota.bps.go.id",
+    "BIKota": {
+      "id": 79,
+      "name": "Kota Ternate"
+    },
+    "BIProvinsi": {
+      "id": 32,
+      "name": "Maluku Utara"
+    }
   },
   {
     "id": "manokwari",
@@ -2425,7 +3336,15 @@
     "alamat": "Jl. Percetakan Negara, Kabupaten Manokwari, Provinsi Papua Barat",
     "nomor_telepon_faksimili": "Telp (0986) 214960 Fax. (0986) 211143",
     "alamat_email": "bps9105@bps.go.id",
-    "tautan": "https://manokwarikab.bps.go.id"
+    "tautan": "https://manokwarikab.bps.go.id",
+    "BIKota": {
+      "id": 82,
+      "name": "Kab. Manokwari"
+    },
+    "BIProvinsi": {
+      "id": 34,
+      "name": "Papua Barat"
+    }
   },
   {
     "id": "sorong",
@@ -2442,7 +3361,12 @@
     "alamat": "Jl. Basuki Rahmat Km.13,5 Klasaman Sorong",
     "nomor_telepon_faksimili": "Telp (0951) 321072 Fax. (0951) 335485",
     "alamat_email": "bps9107@bps.go.id",
-    "tautan": "https://sorongkab.bps.go.id"
+    "tautan": "https://sorongkab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 34,
+      "name": "Papua Barat"
+    }
   },
   {
     "id": "sorong-selatan",
@@ -2459,7 +3383,12 @@
     "alamat": "Kompleks Pemda Kabupaten Sorong Selatan, Jalan Teminabuan-Ayamaru, Teminabuan – Sorong Selatan",
     "nomor_telepon_faksimili": null,
     "alamat_email": "bps9106@bps.go.id",
-    "tautan": "https://sorongselatankab.bps.go.id"
+    "tautan": "https://sorongselatankab.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {
+      "id": 34,
+      "name": "Papua Barat"
+    }
   },
   {
     "id": "sorong",
@@ -2476,7 +3405,15 @@
     "alamat": "Jl. Merpati No. 7, Kelurahan Remu Utara, Kota Sorong, Papua Barat",
     "nomor_telepon_faksimili": "Telp (0951) 333628",
     "alamat_email": "bps9171@bps.go.id",
-    "tautan": "https://sorongkota.bps.go.id"
+    "tautan": "https://sorongkota.bps.go.id",
+    "BIKota": {
+      "id": 83,
+      "name": "Kota Sorong"
+    },
+    "BIProvinsi": {
+      "id": 34,
+      "name": "Papua Barat"
+    }
   },
   {
     "id": "jayapura",
@@ -2493,7 +3430,15 @@
     "alamat": "JL. DEWI SARTIKA NO. 2 KOTA JAYAPURA 99351",
     "nomor_telepon_faksimili": "Telp. (0967) 581336 Fax. (0967) 581336",
     "alamat_email": "bps9471@bps.go.id",
-    "tautan": "https://jayapurakota.bps.go.id"
+    "tautan": "https://jayapurakota.bps.go.id",
+    "BIKota": {
+      "id": 80,
+      "name": "Kota Jayapura"
+    },
+    "BIProvinsi": {
+      "id": 33,
+      "name": "Papua"
+    }
   },
   {
     "id": "merauke",
@@ -2510,7 +3455,15 @@
     "alamat": "JL. R. E. MARTADINATA NO. 2 MERAUKE 99611",
     "nomor_telepon_faksimili": "Telp. (0971) 3330883",
     "alamat_email": "bps9401@bps.go.id",
-    "tautan": "https://meraukekab.bps.go.id"
+    "tautan": "https://meraukekab.bps.go.id",
+    "BIKota": {
+      "id": 81,
+      "name": "Kab. Merauke"
+    },
+    "BIProvinsi": {
+      "id": 33,
+      "name": "Papua"
+    }
   },
   {
     "id": "timika",
@@ -2527,7 +3480,15 @@
     "alamat": "JL. HASANUDDIN NO. 01, KEL. SEMPAN, DISTRIK MIMIKA BARU, MIMIKA 99910",
     "nomor_telepon_faksimili": null,
     "alamat_email": "bps9412@bps.go.id",
-    "tautan": "https://mimikakab.bps.go.id"
+    "tautan": "https://mimikakab.bps.go.id",
+    "BIKota": {
+      "id": 200,
+      "name": "Kab. Mimika"
+    },
+    "BIProvinsi": {
+      "id": 33,
+      "name": "Papua"
+    }
   },
   {
     "id": "nabire",
@@ -2544,7 +3505,15 @@
     "alamat": "JL. PEPERA NO. 18, NABIRE 99815",
     "nomor_telepon_faksimili": "Telp. (0984) 21026, 24235",
     "alamat_email": "bps9404@bps.go.id",
-    "tautan": "https://nabirekab.bps.go.id"
+    "tautan": "https://nabirekab.bps.go.id",
+    "BIKota": {
+      "id": 205,
+      "name": "Kab. Nabire"
+    },
+    "BIProvinsi": {
+      "id": 33,
+      "name": "Papua"
+    }
   },
   {
     "id": "jayawijaya",
@@ -2561,7 +3530,15 @@
     "alamat": "JL. DIPONEGORO NO. 25 WAMENA, KAB. JAYAWIJAYA 99551",
     "nomor_telepon_faksimili": "Telp. (0969) 31253, 31555 Fax. (0969) 31555",
     "alamat_email": "bps9402@bps.go.id",
-    "tautan": "https://jayawijayakab.bps.go.id"
+    "tautan": "https://jayawijayakab.bps.go.id",
+    "BIKota": {
+      "id": 219,
+      "name": "Kab. Jayawijaya"
+    },
+    "BIProvinsi": {
+      "id": 33,
+      "name": "Papua"
+    }
   },
   {
     "id": "indonesia",
@@ -2578,6 +3555,8 @@
     "alamat": "Jl. Dr. Sutomo No. 6-8, Jakarta 10710",
     "nomor_telepon_faksimili": "Telp (021) 3841195, 3842508, 3810291 Fax (021) 3857046",
     "alamat_email": "bpspusat@bps.go.id",
-    "tautan": "https://www.bps.go.id"
+    "tautan": "https://www.bps.go.id",
+    "BIKota": {},
+    "BIProvinsi": {}
   }
 ]

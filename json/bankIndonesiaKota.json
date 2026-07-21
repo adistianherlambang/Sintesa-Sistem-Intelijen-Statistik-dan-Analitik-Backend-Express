@@ -1,0 +1,316 @@
+{
+  "data": [
+    {
+      "id": 77,
+      "name": "Kota Ambon"
+    },
+    {
+      "id": 319,
+      "name": "Kab. Badung "
+    },
+    {
+      "id": 64,
+      "name": "Kota Balikpapan"
+    },
+    {
+      "id": 1,
+      "name": "Kota Banda Aceh"
+    },
+    {
+      "id": 22,
+      "name": "Kota Bandar Lampung"
+    },
+    {
+      "id": 27,
+      "name": "Kota Bandung"
+    },
+    {
+      "id": 285,
+      "name": "Kab. Banggai "
+    },
+    {
+      "id": 59,
+      "name": "Kota Banjarmasin"
+    },
+    {
+      "id": 38,
+      "name": "Kab. Banyumas"
+    },
+    {
+      "id": 46,
+      "name": "Kab. Banyuwangi"
+    },
+    {
+      "id": 13,
+      "name": "Kota Batam"
+    },
+    {
+      "id": 30,
+      "name": "Kota Bekasi"
+    },
+    {
+      "id": 17,
+      "name": "Kota Bengkulu"
+    },
+    {
+      "id": 54,
+      "name": "Kota Bima"
+    },
+    {
+      "id": 135,
+      "name": "Kota Blitar"
+    },
+    {
+      "id": 31,
+      "name": "Kota Bogor"
+    },
+    {
+      "id": 346,
+      "name": "Kota Bontang"
+    },
+    {
+      "id": 9,
+      "name": "Kota Bukittinggi"
+    },
+    {
+      "id": 340,
+      "name": "Kab. Bulungan"
+    },
+    {
+      "id": 16,
+      "name": "Kab. Bungo"
+    },
+    {
+      "id": 39,
+      "name": "Kab. Cilacap"
+    },
+    {
+      "id": 28,
+      "name": "Kota Cirebon"
+    },
+    {
+      "id": 50,
+      "name": "Kota Denpasar"
+    },
+    {
+      "id": 32,
+      "name": "Kota Depok"
+    },
+    {
+      "id": 66,
+      "name": "Kota Gorontalo"
+    },
+    {
+      "id": 455,
+      "name": "Kota Gunung Sitoli"
+    },
+    {
+      "id": 34,
+      "name": "Kota Jakarta Pusat"
+    },
+    {
+      "id": 15,
+      "name": "Kota Jambi"
+    },
+    {
+      "id": 80,
+      "name": "Kota Jayapura"
+    },
+    {
+      "id": 219,
+      "name": "Kab. Jayawijaya"
+    },
+    {
+      "id": 45,
+      "name": "Kab. Jember"
+    },
+    {
+      "id": 44,
+      "name": "Kota Kediri"
+    },
+    {
+      "id": 72,
+      "name": "Kota Kendari"
+    },
+    {
+      "id": 787,
+      "name": "Kota Surakarta"
+    },
+    {
+      "id": 249,
+      "name": "Kota Kotamobagu"
+    },
+    {
+      "id": 55,
+      "name": "Kota Kupang"
+    },
+    {
+      "id": 2,
+      "name": "Kota Lhokseumawe"
+    },
+    {
+      "id": 47,
+      "name": "Kota Madiun"
+    },
+    {
+      "id": 499,
+      "name": "Kab. Majene"
+    },
+    {
+      "id": 67,
+      "name": "Kota Makassar"
+    },
+    {
+      "id": 43,
+      "name": "Kota Malang"
+    },
+    {
+      "id": 76,
+      "name": "Kota Mamuju"
+    },
+    {
+      "id": 75,
+      "name": "Kota Manado"
+    },
+    {
+      "id": 82,
+      "name": "Kab. Manokwari"
+    },
+    {
+      "id": 52,
+      "name": "Kota Mataram"
+    },
+    {
+      "id": 56,
+      "name": "Kota Maumere"
+    },
+    {
+      "id": 4,
+      "name": "Kota Medan"
+    },
+    {
+      "id": 81,
+      "name": "Kab. Merauke"
+    },
+    {
+      "id": 23,
+      "name": "Kota Metro"
+    },
+    {
+      "id": 3,
+      "name": "Kota Meulaboh"
+    },
+    {
+      "id": 200,
+      "name": "Kab. Mimika"
+    },
+    {
+      "id": 205,
+      "name": "Kab. Nabire"
+    },
+    {
+      "id": 348,
+      "name": "Kab. Nunukan"
+    },
+    {
+      "id": 8,
+      "name": "Kota Padang"
+    },
+    {
+      "id": 7,
+      "name": "Kota Padang Sidempuan"
+    },
+    {
+      "id": 61,
+      "name": "Kota Palangkaraya"
+    },
+    {
+      "id": 18,
+      "name": "Kota Palembang"
+    },
+    {
+      "id": 74,
+      "name": "Kota Palu"
+    },
+    {
+      "id": 20,
+      "name": "Kota Pangkal Pinang"
+    },
+    {
+      "id": 10,
+      "name": "Kota Pekanbaru"
+    },
+    {
+      "id": 6,
+      "name": "Kota Pematang Siantar"
+    },
+    {
+      "id": 48,
+      "name": "Kota Probolinggo"
+    },
+    {
+      "id": 63,
+      "name": "Kota Samarinda"
+    },
+    {
+      "id": 35,
+      "name": "Kota Semarang"
+    },
+    {
+      "id": 24,
+      "name": "Kota Serang"
+    },
+    {
+      "id": 5,
+      "name": "Kota Sibolga"
+    },
+    {
+      "id": 51,
+      "name": "Kota Singaraja"
+    },
+    {
+      "id": 58,
+      "name": "Kota Singkawang"
+    },
+    {
+      "id": 83,
+      "name": "Kota Sorong"
+    },
+    {
+      "id": 33,
+      "name": "Kota Sukabumi"
+    },
+    {
+      "id": 42,
+      "name": "Kota Surabaya"
+    },
+    {
+      "id": 36,
+      "name": "Kota Surakarta (Solo)"
+    },
+    {
+      "id": 26,
+      "name": "Kota Tangerang"
+    },
+    {
+      "id": 65,
+      "name": "Kota Tarakan"
+    },
+    {
+      "id": 29,
+      "name": "Kota Tasikmalaya"
+    },
+    {
+      "id": 37,
+      "name": "Kota Tegal"
+    },
+    {
+      "id": 79,
+      "name": "Kota Ternate"
+    },
+    {
+      "id": 41,
+      "name": "Kota Yogyakarta"
+    }
+  ]
+}

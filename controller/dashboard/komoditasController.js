@@ -1,6 +1,6 @@
 import APIDataBPS from "../../db/models/APIDataBPS.js";
 import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" };
-import { sort, getDateInfo, findRegionByDataset } from "./helpers.js";
+import { sort, getDateInfo, findRegionByDataset, findUnifiedCity } from "./helpers.js";
 
 /**
  * Helper: Process komoditas data untuk satu item
@@ -249,6 +249,44 @@ const processKomoditasItem = async (komoditasItem, kota, month, year, yoy, yoy2)
 };
 
 /**
+ * Helper: Ambil data HargaBI berdasarkan ID kota dari kota.json
+ */
+const parseNumber = (val) => {
+  if (typeof val === "number") return val;
+  if (!val) return 0;
+  const clean = String(val).replace(/,/g, "");
+  const num = Number(clean);
+  return isNaN(num) ? 0 : num;
+};
+
+const getHargaBIForKota = async (searchName) => {
+  let hargaBI = [];
+  const city = findUnifiedCity(searchName);
+  if (city && city.BIKota && city.BIKota.id !== undefined) {
+    const biDoc = await APIDataBPS.findOne({
+      "var.val": 2223,
+      "turvar.val": 1551,
+    })
+      .select("HargaBI")
+      .lean();
+
+    if (biDoc && Array.isArray(biDoc.HargaBI)) {
+      const matchedBI = biDoc.HargaBI.find(
+        (item) => Number(item.kotaId) === Number(city.BIKota.id)
+      );
+      if (matchedBI && matchedBI.data) {
+        hargaBI = matchedBI.data.map((item) => ({
+          ...item,
+          akhir: parseNumber(item.akhir),
+          awal: parseNumber(item.awal),
+        }));
+      }
+    }
+  }
+  return hargaBI;
+};
+
+/**
  * Pure function: Dapatkan data komoditas untuk kota tertentu dengan breakdown per sub-komoditas
  * @param {String} kota - Nama kota
  * @returns {Object} Data komoditas dengan hierarki dan YoY
@@ -393,6 +431,14 @@ export const getKomoditasByKota = async (kota) => {
     .slice(0, 5)
     .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
 
+  const hargaBI = await getHargaBIForKota(kota);
+  const makananItem = hierarki.find(
+    (item) => item.label && item.label.includes("Makanan")
+  );
+  if (makananItem) {
+    makananItem.hargaBI = hargaBI;
+  }
+
   return {
     totalKomoditas: hierarki.length,
     hierarki,
@@ -535,6 +581,14 @@ export const getKomoditasInfografisByKota = async (kota) => {
     .slice(0, 5)
     .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
 
+  const hargaBI = await getHargaBIForKota(kota);
+  const makananInfografisItem = hierarki.find(
+    (item) => item.label && item.label.includes("Makanan")
+  );
+  if (makananInfografisItem) {
+    makananInfografisItem.hargaBI = hargaBI;
+  }
+
   return {
     totalKomoditas: hierarki.length,
     hierarki,
@@ -553,7 +607,7 @@ export const getKomoditasInfografisByKota = async (kota) => {
  */
 export const getAllKomoditas = async () => {
   const doc = await APIDataBPS.findOne({
-    "var.val": 2223,
+    "var.val": 2224,
   });
 
   if (!doc) {

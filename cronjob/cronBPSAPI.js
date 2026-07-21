@@ -3,6 +3,7 @@ import APIDataBPS from "../db/models/APIDataBPS.js";
 import { fetchBPS } from "../services/fetchBPS.js";
 import { fetchBPSYoY } from "../services/fetchBPSYoY.js";
 import { fetchBPSYoY2 } from "../services/fetchBPSYoY2.js";
+import { fetchBI } from "../services/fetchBI.js";
 // import { AISummary } from "../services/AISummary.js";
 
 export const startBPSCron = () => {
@@ -47,7 +48,6 @@ export const startBPSCron = () => {
         console.log("✔ Fetching new BPS data...");
         await fetchBPS();
         await AISummary();
-
       } catch (err) {
         console.error("✖ Cron BPS Error:", err.message);
       }
@@ -90,6 +90,7 @@ export const startBPSCron = () => {
           console.log("✔ Jalankan fungsi fetch YoY...");
           await fetchBPSYoY();
           await fetchBPSYoY2();
+          await fetchBI()
         } else {
           console.log("⚠ Tidak perlu update YoY");
         }

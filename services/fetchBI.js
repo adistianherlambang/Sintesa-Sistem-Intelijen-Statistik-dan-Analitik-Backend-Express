@@ -16,7 +16,10 @@ dotenv.config({
   path: rootEnvPath,
 });
 
-const json = JSON.parse(fs.readFileSync("../json/kota.json", "utf-8"))
+const kotaJsonPath = path.join(__dirname, "../json/kota.json");
+const biJsonPath = path.join(__dirname, "../json/bi.json");
+
+const json = JSON.parse(fs.readFileSync(kotaJsonPath, "utf-8"));
 
 const now = new Date();
 const endDateStr = now.toISOString().split("T")[0];
@@ -80,6 +83,14 @@ export const fetchBI = async () => {
 
           const data = await response.json();
 
+          const parseNumber = (val) => {
+            if (typeof val === "number") return val;
+            if (!val) return 0;
+            const clean = String(val).replace(/,/g, "");
+            const num = Number(clean);
+            return isNaN(num) ? 0 : num;
+          };
+
           const hasil = data.data
             .filter(item => item.level === 1)
             .map(item => {
@@ -92,9 +103,9 @@ export const fetchBI = async () => {
               return {
                 name: item.name,
                 tanggalAkhir: secondLastDate,
-                akhir: item[secondLastDate],
+                akhir: parseNumber(item[secondLastDate]),
                 tanggalAwal: dateKeys[0],
-                awal: item[dateKeys[0]]
+                awal: parseNumber(item[dateKeys[0]])
               };
             });
 
@@ -119,7 +130,7 @@ export const fetchBI = async () => {
       }
     }
 
-    fs.writeFileSync('../json/bi.json', JSON.stringify(result, null, 2), 'utf-8');
+    fs.writeFileSync(biJsonPath, JSON.stringify(result, null, 2), 'utf-8');
 
     //mongodb
     await APIDataBPS.findOneAndUpdate({

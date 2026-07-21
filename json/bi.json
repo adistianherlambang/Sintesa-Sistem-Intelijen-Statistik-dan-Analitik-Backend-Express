@@ -1,0 +1,5051 @@
+[
+  {
+    "kotaId": 3,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,550"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "39,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,100"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,550"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,600"
+      }
+    ]
+  },
+  {
+    "kotaId": 1,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,750"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "32,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "32,750"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "38,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "59,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "50,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,000"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "50,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,000"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "67,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "67,600"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,350"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,250"
+      }
+    ]
+  },
+  {
+    "kotaId": 2,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,750"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "37,400"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,200"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,750"
+      }
+    ]
+  },
+  {
+    "kotaId": 5,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,250"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "35,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "34,850"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,500"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,150"
+      }
+    ]
+  },
+  {
+    "kotaId": 6,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,250"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "54,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "54,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "170,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "170,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "45,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "49,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "53,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "53,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "53,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "43,750"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "67,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "70,750"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "69,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "53,600"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,350"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "160,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "158,450"
+      }
+    ]
+  },
+  {
+    "kotaId": 4,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,700"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "38,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "182,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "182,200"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "27,100"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "38,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,500"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "45,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "43,500"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "62,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "73,000"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "66,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "49,800"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,550"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,850"
+      }
+    ]
+  },
+  {
+    "kotaId": 7,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,400"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "36,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "40,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "21,100"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 455,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,650"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "37,800"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,150"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,250"
+      }
+    ]
+  },
+  {
+    "kotaId": 8,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,950"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "158,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "158,950"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "29,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "30,950"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "52,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "52,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "51,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "51,400"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "80,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "80,400"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "76,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "76,450"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,100"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,850"
+      }
+    ]
+  },
+  {
+    "kotaId": 9,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,450"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "62,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "65,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "34,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "31,200"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "46,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "48,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,200"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "61,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "61,000"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "60,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "60,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,300"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,350"
+      }
+    ]
+  },
+  {
+    "kotaId": 10,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,200"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,350"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "200,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "198,250"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "35,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "36,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "70,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "70,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "71,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "66,700"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "77,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "77,950"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "102,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "102,350"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,750"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,450"
+      }
+    ]
+  },
+  {
+    "kotaId": 16,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,900"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "30,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "30,150"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "70,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "70,800"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "46,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,500"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,750"
+      }
+    ]
+  },
+  {
+    "kotaId": 15,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,300"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "56,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "56,150"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "177,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "177,400"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "27,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "29,350"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "40,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "40,300"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "37,250"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "87,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "84,650"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "63,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "67,850"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,750"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,850"
+      }
+    ]
+  },
+  {
+    "kotaId": 18,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,200"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "46,900"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "175,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "175,650"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "28,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "29,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "67,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "67,400"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "49,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "47,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "90,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "80,150"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "98,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "78,650"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,350"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,750"
+      }
+    ]
+  },
+  {
+    "kotaId": 17,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,950"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "44,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "47,050"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "159,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "159,200"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "28,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "28,550"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "59,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,950"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "45,450"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "76,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "80,200"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "78,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "78,950"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,800"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,300"
+      }
+    ]
+  },
+  {
+    "kotaId": 22,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,900"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "49,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "49,400"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "187,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "182,150"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "27,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "57,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "57,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "50,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,750"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "83,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "97,750"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "78,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "89,250"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,550"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,150"
+      }
+    ]
+  },
+  {
+    "kotaId": 23,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,150"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "39,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "185,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "180,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "42,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,500"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "66,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "87,500"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "77,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "77,500"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,750"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 20,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,700"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,900"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "169,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "169,900"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "28,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "28,750"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "65,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "65,450"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "57,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "57,450"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "90,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "90,450"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "99,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "99,700"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,000"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,200"
+      }
+    ]
+  },
+  {
+    "kotaId": 13,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,300"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "45,350"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "176,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "177,800"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,950"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "27,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "35,400"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,700"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "72,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "73,100"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "77,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "80,200"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,100"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,400"
+      }
+    ]
+  },
+  {
+    "kotaId": 34,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,150"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "47,200"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "210,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "211,150"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,850"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "68,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "75,450"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "57,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "56,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "78,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "89,950"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "89,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "97,950"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,650"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 31,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,500"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "40,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "49,400"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "196,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "191,600"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,350"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "68,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "76,450"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "48,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "91,200"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "89,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "98,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,550"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,450"
+      }
+    ]
+  },
+  {
+    "kotaId": 33,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,550"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "42,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,450"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "174,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "171,600"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,700"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "74,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "72,450"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "51,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,450"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "101,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "101,100"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "107,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "107,100"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,800"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,450"
+      }
+    ]
+  },
+  {
+    "kotaId": 27,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,200"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,250"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "200,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "197,600"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,200"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "74,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "72,950"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "86,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "100,700"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "97,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "104,700"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,850"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,750"
+      }
+    ]
+  },
+  {
+    "kotaId": 28,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,300"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "43,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "43,200"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "188,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "185,650"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,750"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "66,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "57,450"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "51,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "46,450"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "96,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "95,550"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "103,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "109,700"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,950"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,600"
+      }
+    ]
+  },
+  {
+    "kotaId": 30,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,250"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "49,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "53,150"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "185,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "168,600"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "27,050"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "75,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "75,400"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "59,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "59,700"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "117,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "132,650"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "126,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "133,200"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,650"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 32,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,800"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "52,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "52,750"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "199,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "199,150"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,850"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "68,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "76,250"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,750"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "81,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "90,700"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "83,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "98,450"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,350"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 29,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,550"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "44,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,700"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "213,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "198,850"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,250"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "76,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "56,250"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "59,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "49,250"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "89,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "121,250"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "89,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "119,750"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,950"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,400"
+      }
+    ]
+  },
+  {
+    "kotaId": 39,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "42,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,250"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "154,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "144,250"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,800"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "59,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "59,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "44,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "70,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "74,950"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "80,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "104,950"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,300"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 38,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,350"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "43,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,200"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "160,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "160,750"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,250"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "44,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "57,950"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "43,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "38,400"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "59,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "70,500"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "62,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "80,500"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,800"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,200"
+      }
+    ]
+  },
+  {
+    "kotaId": 36,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,000"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "59,400"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "272,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "271,200"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "28,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "30,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "77,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "77,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "65,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "59,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "78,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "85,300"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "90,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "97,700"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,700"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 35,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,650"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "51,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "56,150"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "185,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "188,100"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,300"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "62,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "67,550"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "52,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "42,250"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "74,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "81,200"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "66,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "87,050"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,250"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 37,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,850"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "35,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "35,950"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "160,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "160,450"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "64,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "68,250"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "43,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "72,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "78,150"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "77,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "85,250"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "21,750"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,000"
+      }
+    ]
+  },
+  {
+    "kotaId": 41,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,900"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "44,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,700"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "179,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "179,550"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,750"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "75,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "72,450"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "58,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "92,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "93,450"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "87,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "94,700"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,100"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 45,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,100"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "54,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "54,900"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "172,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "178,200"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,600"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "53,050"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "43,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "42,700"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "70,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "71,600"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "82,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "91,900"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,150"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,600"
+      }
+    ]
+  },
+  {
+    "kotaId": 46,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,050"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,500"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "21,150"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,300"
+      }
+    ]
+  },
+  {
+    "kotaId": 44,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,850"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "40,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,200"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "174,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "174,450"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,100"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "61,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "63,950"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "57,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,250"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "72,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "82,400"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "79,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "84,900"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,200"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 43,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,900"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "47,400"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "195,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "195,900"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,100"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "58,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "59,700"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "48,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "45,400"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "76,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "87,550"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "92,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "92,250"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,650"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 48,
+    "data": []
+  },
+  {
+    "kotaId": 47,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,350"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "54,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,900"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "175,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "177,800"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,100"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "56,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "57,400"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "45,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "42,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "83,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "80,450"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "89,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "88,500"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,950"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 42,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,850"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "39,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,250"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "183,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "183,900"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,200"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "63,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "66,550"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "57,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "46,550"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "82,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "88,850"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "91,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "91,750"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,550"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 26,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,500"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "45,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,950"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "162,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "162,450"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "27,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "28,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "86,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "86,850"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "60,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "60,700"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "123,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "124,950"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "132,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "130,350"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,600"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 24,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,100"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "38,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "46,250"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "184,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "179,300"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,750"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "71,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "72,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "56,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "90,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "117,200"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "103,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "111,600"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,350"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,150"
+      }
+    ]
+  },
+  {
+    "kotaId": 319,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,600"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "48,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "49,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "187,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "187,500"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "38,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "38,400"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "64,500"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "42,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "67,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "93,800"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "77,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "105,400"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,200"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,950"
+      }
+    ]
+  },
+  {
+    "kotaId": 51,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,300"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "51,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "52,050"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "180,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "-"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "38,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "38,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "66,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "77,600"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "57,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "60,800"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "70,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "87,100"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "68,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "96,450"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,450"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,950"
+      }
+    ]
+  },
+  {
+    "kotaId": 50,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,350"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "43,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "45,450"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "185,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "185,500"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "31,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "36,800"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "73,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "77,500"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "59,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "61,500"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "52,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "74,650"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "64,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "87,200"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,050"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,650"
+      }
+    ]
+  },
+  {
+    "kotaId": 52,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "13,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "13,700"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "49,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "49,200"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "178,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "185,900"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "33,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "33,250"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "61,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "61,550"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "41,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "41,650"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "72,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "72,750"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "99,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "103,300"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,550"
+      }
+    ]
+  },
+  {
+    "kotaId": 54,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,850"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "33,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "33,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,500"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,250"
+      }
+    ]
+  },
+  {
+    "kotaId": 56,
+    "data": []
+  },
+  {
+    "kotaId": 55,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,100"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "57,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "59,300"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "199,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "199,900"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "39,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "38,700"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "84,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "84,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "69,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "69,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "99,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "74,900"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "-",
+        "tanggalAwal": "22/06/2026",
+        "awal": "129,900"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "28,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "28,800"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,750"
+      }
+    ]
+  },
+  {
+    "kotaId": 58,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,400"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "37,950"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "155,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "155,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "33,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "33,900"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "79,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "79,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "56,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "56,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "120,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "104,450"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "139,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "119,450"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,500"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,400"
+      }
+    ]
+  },
+  {
+    "kotaId": 61,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,400"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "32,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "36,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "182,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "177,400"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "32,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "33,450"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "66,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "64,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "51,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,600"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "82,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "85,800"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "95,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "119,100"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,150"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,900"
+      }
+    ]
+  },
+  {
+    "kotaId": 59,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,550"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,750"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "162,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "173,150"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "28,200"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "82,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "82,400"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "50,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,400"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "108,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "106,900"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "113,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "113,650"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "-"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 64,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,500"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "50,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,950"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "201,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "188,650"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "89,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "89,850"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "77,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "77,450"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "156,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "156,300"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "169,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "175,700"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,550"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,700"
+      }
+    ]
+  },
+  {
+    "kotaId": 63,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,400"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "56,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "56,250"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "34,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "34,400"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "82,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "74,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "64,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "64,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "111,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "99,900"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "119,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "136,400"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,000"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 340,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,900"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "37,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "40,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "40,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "37,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,300"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,900"
+      }
+    ]
+  },
+  {
+    "kotaId": 348,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,700"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "50,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,000"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "107,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "105,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "30,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "30,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "62,500"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "37,500"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "62,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "63,750"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "77,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "80,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,250"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,150"
+      }
+    ]
+  },
+  {
+    "kotaId": 65,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,200"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "32,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "34,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "32,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "47,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "39,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,000"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "100,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "125,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,850"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,100"
+      }
+    ]
+  },
+  {
+    "kotaId": 75,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "16,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "16,700"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "39,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "40,450"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "168,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "168,250"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "28,900"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "49,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "84,500"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,500"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "62,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "79,000"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "65,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "101,950"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,450"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,350"
+      }
+    ]
+  },
+  {
+    "kotaId": 249,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "15,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "15,450"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "50,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "47,750"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "170,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "170,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "29,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "29,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "56,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "82,500"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "47,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,000"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "38,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "65,000"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "68,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "87,500"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "21,400"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,150"
+      }
+    ]
+  },
+  {
+    "kotaId": 285,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,150"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "37,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "45,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "45,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "45,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,200"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,950"
+      }
+    ]
+  },
+  {
+    "kotaId": 74,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,700"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "61,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "61,200"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "180,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "159,450"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "42,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "42,250"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "65,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "71,450"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "59,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,450"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "64,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "65,200"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "115,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "115,100"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "21,350"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,850"
+      }
+    ]
+  },
+  {
+    "kotaId": 67,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,900"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "43,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "48,400"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "181,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "179,800"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "28,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "30,700"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "63,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "68,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "48,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "42,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "60,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "68,650"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "45,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "71,900"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "25,200",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,450"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      }
+    ]
+  },
+  {
+    "kotaId": 72,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,750"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "48,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,900"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "175,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "171,400"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "36,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "37,850"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "65,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "65,950"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "58,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "58,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "64,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "64,400"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "59,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "59,700"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,900"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,650"
+      }
+    ]
+  },
+  {
+    "kotaId": 66,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,250"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "62,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,450"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "173,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "173,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,900"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "73,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "81,450"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "63,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "56,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "76,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "89,950"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "86,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "101,450"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,250"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "20,400"
+      }
+    ]
+  },
+  {
+    "kotaId": 499,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,450"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,000"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "140,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "135,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "35,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "35,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "42,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "35,000"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "35,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "47,500"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "20,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,500"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,000"
+      }
+    ]
+  },
+  {
+    "kotaId": 76,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "14,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "14,750"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "32,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "34,300"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "139,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "139,150"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,650"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "51,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "52,650"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "42,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "43,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "54,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "62,500"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "52,800",
+        "tanggalAwal": "22/06/2026",
+        "awal": "54,950"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,100"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,900"
+      }
+    ]
+  },
+  {
+    "kotaId": 77,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,550"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "54,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "53,700"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "211,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "192,700"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "41,600",
+        "tanggalAwal": "22/06/2026",
+        "awal": "41,900"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "88,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "95,800"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "65,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "56,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "106,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "79,900"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "97,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "83,500"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,350"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,050"
+      }
+    ]
+  },
+  {
+    "kotaId": 79,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,300"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "45,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "39,450"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "181,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "181,900"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "41,650",
+        "tanggalAwal": "22/06/2026",
+        "awal": "43,350"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "110,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "79,900"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "69,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "64,900"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "132,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "126,400"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "179,900",
+        "tanggalAwal": "22/06/2026",
+        "awal": "179,900"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,100",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,100"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "19,250"
+      }
+    ]
+  },
+  {
+    "kotaId": 82,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,150"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "50,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "54,150"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "165,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "161,250"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "43,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "41,450"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "72,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "63,150"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "53,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,950"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "84,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "66,750"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "123,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "74,200"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,500"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "22,050",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,050"
+      }
+    ]
+  },
+  {
+    "kotaId": 83,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,650"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "41,700",
+        "tanggalAwal": "22/06/2026",
+        "awal": "44,800"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "150,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "150,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "48,400",
+        "tanggalAwal": "22/06/2026",
+        "awal": "54,000"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "76,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "94,250"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,750"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "141,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "124,650"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "97,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "65,200"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,550",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,650"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "21,350"
+      }
+    ]
+  },
+  {
+    "kotaId": 80,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "17,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "17,500"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "44,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "45,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "161,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "161,850"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "35,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "35,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "96,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "69,500"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "54,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "53,500"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "115,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "128,250"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "94,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "130,000"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,900"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "21,750"
+      }
+    ]
+  },
+  {
+    "kotaId": 81,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,300",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,300"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "55,000"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "135,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "135,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "43,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "43,750"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "75,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "65,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "55,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "50,000"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "72,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "140,000"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "90,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "77,500"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "23,550"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "21,950",
+        "tanggalAwal": "22/06/2026",
+        "awal": "21,950"
+      }
+    ]
+  },
+  {
+    "kotaId": 200,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "19,150",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,500"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "54,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "54,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "229,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "225,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "57,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "43,850"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "74,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "71,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "61,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "60,250"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "107,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "111,000"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "107,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "120,750"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "23,450",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,250"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "22,750"
+      }
+    ]
+  },
+  {
+    "kotaId": 205,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "18,750",
+        "tanggalAwal": "22/06/2026",
+        "awal": "18,750"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "51,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "51,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "200,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "200,000"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "40,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "42,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "70,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "75,000"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "65,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "62,500"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "65,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "86,250"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "52,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "96,250"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "26,500"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "24,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "24,250"
+      }
+    ]
+  },
+  {
+    "kotaId": 219,
+    "data": [
+      {
+        "name": "Beras",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "26,350",
+        "tanggalAwal": "22/06/2026",
+        "awal": "25,900"
+      },
+      {
+        "name": "Daging Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "61,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "63,500"
+      },
+      {
+        "name": "Daging Sapi",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "211,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "211,250"
+      },
+      {
+        "name": "Telur Ayam",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "46,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "47,500"
+      },
+      {
+        "name": "Bawang Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "115,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "107,500"
+      },
+      {
+        "name": "Bawang Putih",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "75,000",
+        "tanggalAwal": "22/06/2026",
+        "awal": "67,500"
+      },
+      {
+        "name": "Cabai Merah",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "102,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "113,750"
+      },
+      {
+        "name": "Cabai Rawit",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "92,500",
+        "tanggalAwal": "22/06/2026",
+        "awal": "97,500"
+      },
+      {
+        "name": "Minyak Goreng",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "34,850",
+        "tanggalAwal": "22/06/2026",
+        "awal": "34,850"
+      },
+      {
+        "name": "Gula Pasir",
+        "tanggalAkhir": "20/07/2026",
+        "akhir": "31,250",
+        "tanggalAwal": "22/06/2026",
+        "awal": "31,250"
+      }
+    ]
+  }
+]

@@ -30,6 +30,10 @@ export const fetchBI = async () => {
     //   "turvar.val": 1551
     // })
 
+    const dataBPS = doc.datacontent[0]
+
+    let result = []
+
     for (let i in json) {
       const kota = json[i].BIKota.id
       const prov = json[i].BIProvinsi.id
@@ -63,7 +67,7 @@ export const fetchBI = async () => {
 
       const data = await response.json();
 
-      const result = data.data
+      const hasil = data.data
         .filter(item => item.level === 1)
         .map(item => {
           const dateKeys = Object.keys(item).filter(key =>
@@ -74,16 +78,31 @@ export const fetchBI = async () => {
 
           return {
             name: item.name,
-            value: item[secondLastDate],
+            tanggalAkhir: secondLastDate,
+            akhir: item[secondLastDate],
+            tanggalAwal: dateKeys[0],
             awal: item[dateKeys[0]]
           };
         });
 
-      console.log(result);
+      console.log(hasil);
 
-      //mongo
-
+      result.push({
+        data: hasil
+      })
     }
+
+    fs.writeFileSync('../json/bi.json', JSON.stringify(result, null, 2), 'utf-8');
+
+    //mongodb
+    await APIDataBPS.findOneAndUpdate({
+      "var.val": 2223,
+      "turvar.val": 1551
+    }, {
+      $set: {
+        "HargaBI": result
+      }
+    })
 
   } catch (error) {
     console.error(error)

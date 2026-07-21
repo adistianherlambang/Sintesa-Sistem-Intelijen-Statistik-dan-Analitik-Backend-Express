@@ -47,6 +47,7 @@ export const startBPSCron = () => {
         console.log("✔ Fetching new BPS data...");
         await fetchBPS();
         await AISummary();
+
       } catch (err) {
         console.error("✖ Cron BPS Error:", err.message);
       }

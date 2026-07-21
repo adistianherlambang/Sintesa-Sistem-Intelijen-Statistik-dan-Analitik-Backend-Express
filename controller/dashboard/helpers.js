@@ -120,8 +120,9 @@ export const getDateInfo = () => {
   const month = String(date.getMonth() - 1);
   const year = "1" + String(date.getFullYear()).slice(2, 4);
   const yoy = year - 1;
+  const yoy2 = year - 2;
 
-  return { month, year, yoy };
+  return { month, year, yoy, yoy2 };
 };
 
 /**

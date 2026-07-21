@@ -5,12 +5,12 @@ import { sort, getDateInfo, findRegionByDataset } from "./helpers.js";
 /**
  * Helper: Process komoditas data untuk satu item
  */
-const processKomoditasItem = async (komoditasItem, kota, month, year, yoy) => {
+const processKomoditasItem = async (komoditasItem, kota, month, year, yoy, yoy2) => {
   const doc = await APIDataBPS.findOne({
     "var.val": komoditasItem.var,
     "turvar.val": komoditasItem.turvar,
   })
-    .select("var vervar datacontent yoy")
+    .select("var vervar datacontent yoy yoy2")
     .lean();
 
   if (!doc || !doc.vervar) {
@@ -170,7 +170,82 @@ const processKomoditasItem = async (komoditasItem, kota, month, year, yoy) => {
     };
   }
 
-  return { hierarki, yoyItem };
+  // Process YoY2 data
+  let yoy2Item = null;
+  if (doc.yoy2) {
+    const resultYoy2 = [];
+    const subYoy2 = {};
+    const dataYoy2 = {};
+    const subDataYoy2 = {};
+
+    for (const key in doc.yoy2) {
+      const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
+      const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
+      const keyMonth = key.slice(regionVal.length + 11);
+
+      if (
+        key.startsWith(regionVal) &&
+        key.slice(regionVal.length, regionVal.length + 1) === "2" &&
+        Number(keyMonth) === Number(month) &&
+        Number(keyYear) === Number(yoy2)
+      ) {
+        resultYoy2.push({
+          key,
+          value: doc.yoy2[key],
+          bulan: keyMonth,
+        });
+      }
+
+      for (const kelompok of varKelompokIHK) {
+        if (
+          key.startsWith(regionVal) &&
+          turvar === String(kelompok.turvar) &&
+          Number(keyYear) === Number(yoy2)
+        ) {
+          dataYoy2[key] = doc.yoy2[key];
+        }
+
+        for (const item of kelompok.sub) {
+          if (
+            key.startsWith(regionVal) &&
+            turvar === String(item.val) &&
+            Number(keyYear) === Number(yoy2)
+          ) {
+            if (!subDataYoy2[item.val]) subDataYoy2[item.val] = {};
+            subDataYoy2[item.val][key] = doc.yoy2[key];
+          }
+
+          if (
+            key.startsWith(regionVal) &&
+            turvar === String(item.val) &&
+            Number(keyYear) === Number(yoy2) &&
+            Number(keyMonth) === Number(month)
+          ) {
+            subYoy2[item.val] = {
+              label: item.label,
+              value: doc.yoy2[key],
+              bulan: Number(keyMonth),
+              data: sort(subDataYoy2)[item.val],
+            };
+          }
+        }
+      }
+    }
+
+    const sortedResultYoy2 = sort(resultYoy2);
+    const mainDataYoy2 =
+      sortedResultYoy2 && sortedResultYoy2.length > 0 ? sortedResultYoy2[0] : null;
+
+    yoy2Item = {
+      label: komoditasItem.nama,
+      value: mainDataYoy2 ? mainDataYoy2.value : 0,
+      bulan: mainDataYoy2 ? Number(mainDataYoy2.bulan) : Number(month),
+      data: sort(dataYoy2),
+      sub: subYoy2,
+    };
+  }
+
+  return { hierarki, yoyItem, yoy2Item };
 };
 
 /**
@@ -203,9 +278,10 @@ export const getKomoditasByKota = async (kota) => {
 
   const resolvedKota = region.label;
 
-  const { month, year, yoy } = getDateInfo();
+  const { month, year, yoy, yoy2 } = getDateInfo();
   let hierarki = [];
   let yoyList = [];
+  let yoy2List = [];
   let biggest = null;
 
   // Process setiap komoditas
@@ -216,12 +292,16 @@ export const getKomoditasByKota = async (kota) => {
       month,
       year,
       yoy,
+      yoy2,
     );
 
     if (result) {
       hierarki.push(result.hierarki);
       if (result.yoyItem) {
         yoyList.push(result.yoyItem);
+      }
+      if (result.yoy2Item) {
+        yoy2List.push(result.yoy2Item);
       }
     }
   }
@@ -247,6 +327,23 @@ export const getKomoditasByKota = async (kota) => {
   for (const key in yoyList) {
     const subsObjYoy = yoyList[key].sub || {};
     yoyList[key].sub = Object.entries(subsObjYoy)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  // Format sub-komoditas untuk YoY2
+  for (const key in yoy2List) {
+    const subsObjYoy2 = yoy2List[key].sub || {};
+    yoy2List[key].sub = Object.entries(subsObjYoy2)
       .sort((a, b) => Number(a[0]) - Number(b[0]))
       .map(([k, v]) => ({
         label: v.label,
@@ -300,6 +397,7 @@ export const getKomoditasByKota = async (kota) => {
     totalKomoditas: hierarki.length,
     hierarki,
     yoy: yoyList,
+    yoy2: yoy2List,
     biggest,
   };
 };
@@ -327,9 +425,10 @@ export const getKomoditasInfografisByKota = async (kota) => {
 
   const resolvedKota = region.label;
 
-  const { month, year, yoy } = getDateInfo();
+  const { month, year, yoy, yoy2 } = getDateInfo();
   let hierarki = [];
   let yoyList = [];
+  let yoy2List = [];
   let biggest = null;
 
   for (const i in varKelompokIHK) {
@@ -339,12 +438,16 @@ export const getKomoditasInfografisByKota = async (kota) => {
       month,
       year,
       yoy,
+      yoy2,
     );
 
     if (result) {
       hierarki.push(result.hierarki);
       if (result.yoyItem) {
         yoyList.push(result.yoyItem);
+      }
+      if (result.yoy2Item) {
+        yoy2List.push(result.yoy2Item);
       }
     }
   }
@@ -368,6 +471,22 @@ export const getKomoditasInfografisByKota = async (kota) => {
   for (const key in yoyList) {
     const subsObjYoy = yoyList[key].sub || {};
     yoyList[key].sub = Object.entries(subsObjYoy)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  for (const key in yoy2List) {
+    const subsObjYoy2 = yoy2List[key].sub || {};
+    yoy2List[key].sub = Object.entries(subsObjYoy2)
       .sort((a, b) => Number(a[0]) - Number(b[0]))
       .map(([k, v]) => ({
         label: v.label,
@@ -420,6 +539,7 @@ export const getKomoditasInfografisByKota = async (kota) => {
     totalKomoditas: hierarki.length,
     hierarki,
     yoy: yoyList,
+    yoy2: yoy2List,
     biggest,
     top5Mom,
     top5Yoy,

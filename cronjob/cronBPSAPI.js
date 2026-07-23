@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import APIDataBPS from "../db/models/APIDataBPS.js";
 import { fetchBPS } from "../services/fetchBPS.js";
-import { fetchBPSYoY } from "../services/fetchBPSYoY.js";
+import { fetchBPSPrevMoM } from "../services/fetchBPSPrevMoM.js";
 import { fetchBPSYoY2 } from "../services/fetchBPSYoY2.js";
 import { fetchBI } from "../services/fetchBI.js";
 // import { AISummary } from "../services/AISummary.js";

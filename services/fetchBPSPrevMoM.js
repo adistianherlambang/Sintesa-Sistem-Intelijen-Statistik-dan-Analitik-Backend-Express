@@ -33,10 +33,10 @@ const stopLoading = (text = "Done") => {
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const buildYoYUrl = (url, yearYoY) =>
-  url.replace(/\/th\/[0-9]+(?=\/|$)/, `/th/1${yearYoY}`);
+const buildPrevMoMUrl = (url, yearPrevMoM) =>
+  url.replace(/\/th\/[0-9]+(?=\/|$)/, `/th/1${yearPrevMoM}`);
 
-const getYearYoY = () => {
+const getYearPrevMoM = () => {
   const currentYear = new Date().getFullYear();
   return String(currentYear).slice(2, 4) - 1;
 };
@@ -49,7 +49,7 @@ const writeLog = async (text) => {
 const fetchSingleUrl = async (url, index, total) => {
   for (let retry = 1; retry <= 5; retry++) {
     try {
-      startLoading(`Fetching YoY ${index}/${total} | Retry ${retry}/5`);
+      startLoading(`Fetching Prev MoM ${index}/${total} | Retry ${retry}/5`);
 
       const responseText = await cloudscraper.get(url, {
         headers: {
@@ -84,7 +84,7 @@ const fetchSingleUrl = async (url, index, total) => {
 
       // Validasi ketersediaan data
       if (data["data-availability"] === "list-not-available") {
-        stopLoading(`No YoY data ${index}/${total}`);
+        stopLoading(`No Prev MoM data ${index}/${total}`);
         console.log("⚠ BPS data not available");
         return true;
       }
@@ -99,13 +99,13 @@ const fetchSingleUrl = async (url, index, total) => {
       // Update Database
       const updated = await APIDataBPS.findOneAndUpdate(
         { "var.val": varVal },
-        { $set: { yoy: data.datacontent || [] } },
+        { $set: { prevMom: data.datacontent || [] } },
         { returnDocument: "after" },
       );
 
-      stopLoading(`Success YoY ${index}/${total}`);
+      stopLoading(`Success Prev MoM ${index}/${total}`);
       if (updated) {
-        console.log(`✔ YoY updated for var.val ${varVal}`);
+        console.log(`✔ Prev MoM updated for var.val ${varVal}`);
       } else {
         console.log(`⚠ Document not found for var.val ${varVal}`);
       }
@@ -116,7 +116,7 @@ const fetchSingleUrl = async (url, index, total) => {
       // Mencatat log error ke result.txt menggunakan pemisah \n
       await writeLog(`\nERROR ON LINK: ${url}\nMESSAGE: ${err.message}\n\n`);
       console.log(
-        `\n✖ Failed YoY ${index}/${total} | Retry ${retry}/5 | ${err.message}`,
+        `\n✖ Failed Prev MoM ${index}/${total} | Retry ${retry}/5 | ${err.message}`,
       );
 
       if (retry < 5) await delay(2000);
@@ -126,7 +126,7 @@ const fetchSingleUrl = async (url, index, total) => {
 };
 
 // --- MAIN EXPORT FUNCTION ---
-export const fetchBPSYoY = async () => {
+export const fetchBPSPrevMoM = async () => {
   try {
     if (mongoose.connection.readyState === 0) {
       await mongoose.connect(process.env.MONGO_URL);
@@ -135,11 +135,11 @@ export const fetchBPSYoY = async () => {
 
     const configFile = await fs.readFile(configPath, "utf-8");
     const urls = JSON.parse(configFile);
-    const yearYoY = getYearYoY();
-    const yoYUrls = urls.map((url) => buildYoYUrl(url, yearYoY));
+    const yearPrevMoM = getYearPrevMoM();
+    const yoYUrls = urls.map((url) => buildPrevMoMUrl(url, yearPrevMoM));
 
-    console.log("✔ YoY config loaded");
-    console.log(`Total YoY URL: ${yoYUrls.length}\n`);
+    console.log("✔ Prev MoM config loaded");
+    console.log(`Total Prev MoM URL: ${yoYUrls.length}\n`);
 
     await fs.writeFile(resultPath, "");
 
@@ -150,16 +150,16 @@ export const fetchBPSYoY = async () => {
       const isSuccess = await fetchSingleUrl(url, humanIndex, yoYUrls.length);
 
       if (!isSuccess) {
-        console.log(`⚠ Skip YoY URL ${humanIndex}/${yoYUrls.length}`);
+        console.log(`⚠ Skip Prev MoM URL ${humanIndex}/${yoYUrls.length}`);
       }
     }
 
-    console.log("\n✔ Finished fetch YoY");
+    console.log("\n✔ Finished fetch Prev MoM");
     console.log("✔ Result saved to result.txt\n");
   } catch (err) {
     clearInterval(spinner);
-    console.error("\nFatal YoY error:", err.message);
+    console.error("\nFatal Prev MoM error:", err.message);
   }
 };
 
-// fetchBPSYoY()
+// fetchBPSPrevMoM()

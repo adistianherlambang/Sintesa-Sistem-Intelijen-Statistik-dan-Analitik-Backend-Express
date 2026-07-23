@@ -261,3 +261,79 @@ export const getAllInflasi = async () => {
 
   return { doc };
 };
+
+/**
+ * Pure function: Dapatkan data inflasi YoY (var.val = 2249) untuk kota tertentu
+ * @param {String} kota - Nama kota
+ * @returns {Object} Response data
+ * @throws Error jika kota tidak ditemukan atau data tidak tersedia
+ */
+export const getInflasiYoyByKota = async (kota) => {
+  if (!kota) {
+    throw new Error("kota wajib diisi");
+  }
+
+  // Ambil dokumen inflasi YoY dengan var.val = 2249
+  const doc = await APIDataBPS.findOne({
+    "var.val": 2249,
+  })
+    .select("var vervar datacontent prevYoy prev2Yoy")
+    .lean();
+
+  if (!doc) {
+    throw new Error("data inflasi YoY tidak ditemukan");
+  }
+
+  // Dapatkan vervar (jika tidak ada di doc 2249, gunakan vervar dari IHK/inflasi)
+  let vervar = doc.vervar && doc.vervar.length > 0 ? doc.vervar : null;
+  if (!vervar) {
+    const docIhk = await APIDataBPS.findOne({ "var.val": 2245 }).select("vervar").lean();
+    vervar = docIhk?.vervar || [];
+  }
+
+  const inflasiVar =
+    (doc.var && Array.isArray(doc.var) && doc.var.find((item) => item.val === 2249)) ||
+    doc.var?.[0] || { val: 2249, label: "Inflasi Year-on-Year" };
+
+  const region =
+    findRegionByDataset(vervar, kota, "ihk_komoditas") ||
+    findRegionByDataset(vervar, kota, "inflasi");
+
+  if (!region) {
+    throw new Error("kota tidak ditemukan");
+  }
+
+  const regionVal = region.val.toString();
+
+  const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
+  const resultPrevYoy = buildFilteredKeyValue(doc.prevYoy || {}, regionVal, 2);
+
+  const sortedPrevYoy = [...resultPrevYoy].sort(
+    (a, b) => Number(a.key) - Number(b.key),
+  );
+
+  return buildResponseWithDashboard(
+    region.label,
+    inflasiVar,
+    regionVal,
+    result,
+    sortedPrevYoy,
+  );
+};
+
+/**
+ * Pure function: Dapatkan dokumen inflasi YoY lengkap (var.val = 2249)
+ * @returns {Object} Dokumen inflasi YoY
+ * @throws Error jika data tidak tersedia
+ */
+export const getAllInflasiYoy = async () => {
+  const doc = await APIDataBPS.findOne({
+    "var.val": 2249,
+  });
+
+  if (!doc) {
+    throw new Error("data inflasi YoY tidak ditemukan");
+  }
+
+  return { doc };
+};

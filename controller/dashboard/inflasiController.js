@@ -20,7 +20,7 @@ export const getInflasiByKota = async (kota) => {
   const doc = await APIDataBPS.findOne({
     "var.val": 1,
   })
-    .select("var vervar datacontent yoy yoy2")
+    .select("var vervar datacontent prevMom")
     .lean();
 
   if (!doc) {
@@ -37,13 +37,9 @@ export const getInflasiByKota = async (kota) => {
   const regionVal = region.val.toString();
 
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 1);
-  const resultYoy = buildFilteredKeyValue(doc.yoy || {}, regionVal, 1);
-  const resultYoy2 = buildFilteredKeyValue(doc.yoy2 || {}, regionVal, 1);
+  const resultYoy = buildFilteredKeyValue(doc.prevMom || {}, regionVal, 1);
 
   const sortedYoy = [...resultYoy].sort(
-    (a, b) => Number(a.key) - Number(b.key),
-  );
-  const sortedYoy2 = [...resultYoy2].sort(
     (a, b) => Number(a.key) - Number(b.key),
   );
 
@@ -53,7 +49,6 @@ export const getInflasiByKota = async (kota) => {
     regionVal,
     result,
     sortedYoy,
-    sortedYoy2,
   );
 };
 
@@ -65,7 +60,7 @@ export const getInflasiInfografisByKota = async (kota) => {
   const doc = await APIDataBPS.findOne({
     "var.val": 1,
   })
-    .select("var vervar datacontent yoy yoy2")
+    .select("var vervar datacontent prevMom")
     .lean();
 
   if (!doc) {
@@ -82,8 +77,7 @@ export const getInflasiInfografisByKota = async (kota) => {
   const regionVal = region.val.toString();
 
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 1);
-  const resultYoy = buildFilteredKeyValue(doc.yoy || {}, regionVal, 1);
-  const resultYoy2 = buildFilteredKeyValue(doc.yoy2 || {}, regionVal, 1);
+  const resultYoy = buildFilteredKeyValue(doc.prevMom || {}, regionVal, 1);
 
   const parseInflasiKey = (key, regVal) => {
     const yearCode = parseInt(key.slice(regVal.length + 2, regVal.length + 5), 10);
@@ -104,7 +98,7 @@ export const getInflasiInfografisByKota = async (kota) => {
   };
 
   // Gabungkan MoM tahun berjalan (2026) dan tahun kemarin (2025)
-  const combined = [...result, ...resultYoy, ...resultYoy2];
+  const combined = [...result, ...resultYoy];
   const sortedCombined = combined.sort((a, b) => {
     const parsedA = parseInflasiKey(a.key, regionVal);
     const parsedB = parseInflasiKey(b.key, regionVal);
@@ -157,8 +151,8 @@ export const getInflasiInfografisByKota = async (kota) => {
     return parsedA.month - parsedB.month;
   });
 
-  // Load data IHK untuk menghitung YoY secara dinamis
-  const docIhk = await APIDataBPS.findOne({ "var.val": 2245 }).select("vervar datacontent yoy yoy2").lean();
+  // Load data IHK untuk menghitung PrevMoM secara dinamis
+  const docIhk = await APIDataBPS.findOne({ "var.val": 2245 }).select("vervar datacontent prevMom").lean();
 
   const getDynamicYoyValue = (key, regVal) => {
     if (!docIhk) return 0;
@@ -177,9 +171,7 @@ export const getInflasiInfografisByKota = async (kota) => {
       if (yr === 26) {
         return parseFloat(docIhk.datacontent[k]);
       } else if (yr === 25) {
-        return docIhk.yoy ? parseFloat(docIhk.yoy[k]) : null;
-      } else {
-        return docIhk.yoy2 ? parseFloat(docIhk.yoy2[k]) : null;
+        return docIhk.prevMom ? parseFloat(docIhk.prevMom[k]) : null;
       }
     };
 
@@ -192,15 +184,6 @@ export const getInflasiInfografisByKota = async (kota) => {
     }
     return 0;
   };
-
-  const sortedYoy2 = [...resultYoy2].sort((a, b) => {
-    const parsedA = parseInflasiKey(a.key, regionVal);
-    const parsedB = parseInflasiKey(b.key, regionVal);
-    if (parsedA.year !== parsedB.year) {
-      return parsedA.year - parsedB.year;
-    }
-    return parsedA.month - parsedB.month;
-  });
 
   // 2. Format 13 Bulan Terakhir dengan Label Singkat
   const m2mLast13 = sortedCombined.slice(-13).map((item) => ({
@@ -220,7 +203,7 @@ export const getInflasiInfografisByKota = async (kota) => {
       yoyVal = getDynamicYoyValue(item.key, regionVal);
     }
     if (!yoyVal) {
-      yoyVal = parseFloat(item.value) || 0; // Fallback jika YoY tahun 2025 atau data IHK kosong
+      yoyVal = parseFloat(item.value) || 0; // Fallback jika PrevMoM tahun 2025 atau data IHK kosong
     }
     return {
       key: item.key,
@@ -248,9 +231,9 @@ export const getInflasiInfografisByKota = async (kota) => {
     total: result.length,
     data: sorted,
     ytd: sortedYtd,
-    yoy: yoyResult,
-    yoy2: sortedYoy2,
+    prevMom: yoyResult,
     m2mLast13,
+    prevMomLast13: yoyLast13,
     yoyLast13,
     ytdLast13,
     dashboard: {
@@ -258,7 +241,7 @@ export const getInflasiInfografisByKota = async (kota) => {
       then,
       compare: Number(compare.toFixed(2)),
       ytd: ytdLatest,
-      yoy: yoyLatest,
+      prevMom: yoyLatest,
     },
   };
 };

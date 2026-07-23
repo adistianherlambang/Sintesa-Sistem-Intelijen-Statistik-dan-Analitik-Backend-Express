@@ -16,6 +16,7 @@ const APIDataBPSSchema = new mongoose.Schema(
 
     datacontent: Object,
     prevMoM: Object,
+    prevMom: Object,
 
     HargaBI: Object,
   },

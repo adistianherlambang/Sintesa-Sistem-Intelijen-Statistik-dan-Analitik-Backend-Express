@@ -86,7 +86,8 @@ export const AISummary = async () => {
           inflasi = dataInflasi.dashboard.now;
           compareMonthInflasi = dataInflasi.dashboard.compare;
 
-          const inflasiYoYObj = dataInflasi.yoy.find((item) =>
+          const prevMomList = dataInflasi.prevMom || dataInflasi.yoy || [];
+          const inflasiYoYObj = prevMomList.find((item) =>
             item.key.endsWith(`${yearYoy}${month}`),
           );
           inflasiYoY = inflasiYoYObj ? inflasiYoYObj.value : "N/A";

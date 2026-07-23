@@ -2,7 +2,6 @@ import cron from "node-cron";
 import APIDataBPS from "../db/models/APIDataBPS.js";
 import { fetchBPS } from "../services/fetchBPS.js";
 import { fetchBPSPrevMoM } from "../services/fetchBPSPrevMoM.js";
-import { fetchBPSYoY2 } from "../services/fetchBPSYoY2.js";
 import { fetchBI } from "../services/fetchBI.js";
 // import { AISummary } from "../services/AISummary.js";
 
@@ -57,12 +56,12 @@ export const startBPSCron = () => {
     },
   );
 
-  // Setiap tanggal 1-10 Januari jam 00:00 WIB (Untuk YoY)
+  // Setiap tanggal 1-10 Januari jam 00:00 WIB (Untuk PrevMoM)
   cron.schedule(
     "0 0 1-10 1 *",
     async () => {
       try {
-        console.log("✔ Cron YoY Executed", new Date());
+        console.log("✔ Cron PrevMoM Executed", new Date());
 
         const now = new Date();
         const month = now.getMonth(); // Januari = 0
@@ -74,7 +73,7 @@ export const startBPSCron = () => {
           .lean();
 
         if (!latest?.lastUpdate) {
-          console.log("⚠ lastUpdate tidak ditemukan, skip YoY.");
+          console.log("⚠ lastUpdate tidak ditemukan, skip PrevMoM.");
           return;
         }
 
@@ -87,15 +86,14 @@ export const startBPSCron = () => {
 
         // Jalankan jika data terakhir di DB belum diperbarui ke tahun yang sekarang
         if (month === 0 && lastYear !== year) {
-          console.log("✔ Jalankan fungsi fetch YoY...");
-          await fetchBPSYoY();
-          await fetchBPSYoY2();
-          await fetchBI()
+          console.log("✔ Jalankan fungsi fetch PrevMoM...");
+          await fetchBPSPrevMoM();
+          await fetchBI();
         } else {
-          console.log("⚠ Tidak perlu update YoY");
+          console.log("⚠ Tidak perlu update PrevMoM");
         }
       } catch (err) {
-        console.log("✖ Cron YoY Error:", err.message);
+        console.log("✖ Cron PrevMoM Error:", err.message);
       }
     },
     {

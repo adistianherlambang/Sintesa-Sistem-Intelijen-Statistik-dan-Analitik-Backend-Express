@@ -20,7 +20,7 @@ export const getIhkByKota = async (kota) => {
   const doc = await APIDataBPS.findOne({
     "var.val": 2245,
   })
-    .select("var vervar datacontent prevMom")
+    .select("var vervar datacontent prevYear prev2Year")
     .lean();
 
   if (!doc) {
@@ -36,8 +36,13 @@ export const getIhkByKota = async (kota) => {
 
   const regionVal = region.val.toString();
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
-  const resultPrevMom = buildFilteredKeyValue(doc.prevMom || {}, regionVal, 2);
-  const sortedPrevMom = [...resultPrevMom].sort(
+  const resultPrevYear = buildFilteredKeyValue(doc.prevYear || {}, regionVal, 2);
+  const resultPrev2Year = buildFilteredKeyValue(doc.prev2Year || {}, regionVal, 2);
+
+  const sortedPrevYear = [...resultPrevYear].sort(
+    (a, b) => Number(a.key) - Number(b.key),
+  );
+  const sortedPrev2Year = [...resultPrev2Year].sort(
     (a, b) => Number(a.key) - Number(b.key),
   );
 
@@ -46,7 +51,8 @@ export const getIhkByKota = async (kota) => {
     inflasiVar,
     regionVal,
     result,
-    sortedPrevMom,
+    sortedPrevYear,
+    sortedPrev2Year,
   );
 };
 
@@ -58,7 +64,7 @@ export const getIhkInfografisByKota = async (kota) => {
   const doc = await APIDataBPS.findOne({
     "var.val": 2245,
   })
-    .select("var vervar datacontent prevMom")
+    .select("var vervar datacontent prevYear prev2Year")
     .lean();
 
   if (!doc) {
@@ -74,8 +80,13 @@ export const getIhkInfografisByKota = async (kota) => {
 
   const regionVal = region.val.toString();
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
-  const resultPrevMom = buildFilteredKeyValue(doc.prevMom || {}, regionVal, 2);
-  const sortedPrevMom = [...resultPrevMom].sort(
+  const resultPrevYear = buildFilteredKeyValue(doc.prevYear || {}, regionVal, 2);
+  const resultPrev2Year = buildFilteredKeyValue(doc.prev2Year || {}, regionVal, 2);
+
+  const sortedPrevYear = [...resultPrevYear].sort(
+    (a, b) => Number(a.key) - Number(b.key),
+  );
+  const sortedPrev2Year = [...resultPrev2Year].sort(
     (a, b) => Number(a.key) - Number(b.key),
   );
 
@@ -100,7 +111,7 @@ export const getIhkInfografisByKota = async (kota) => {
     return `${shortMonth} ${shortYear}`;
   };
 
-  const combined = [...result, ...resultPrevMom];
+  const combined = [...result, ...resultPrevYear];
   const sortedCombined = combined.sort((a, b) => {
     const parsedA = parseIhkKey(a.key, regionVal);
     const parsedB = parseIhkKey(b.key, regionVal);
@@ -121,7 +132,8 @@ export const getIhkInfografisByKota = async (kota) => {
     regionVal,
     total: result.length,
     data: sorted,
-    prevMom: sortedPrevMom,
+    prevYear: sortedPrevYear,
+    prev2Year: sortedPrev2Year,
     ihkLast13,
     dashboard: {
       now,

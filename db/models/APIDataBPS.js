@@ -15,10 +15,8 @@ const APIDataBPSSchema = new mongoose.Schema(
     turtahun: Array,
 
     datacontent: Object,
-    prevMom: Object,
-
-    prevYoy: Object,
-    prev2Yoy: Object,
+    prevYear: Object,
+    prev2Year: Object,
 
     HargaBI: Object,
   },

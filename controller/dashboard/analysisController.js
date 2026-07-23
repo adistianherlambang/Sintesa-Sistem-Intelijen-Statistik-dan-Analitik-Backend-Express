@@ -695,9 +695,9 @@ export const generateAndSaveBRS = async (req, res) => {
         });
       }
 
-      const prevMomData = komoditasData?.prevMom || komoditasData?.yoy;
-      if (prevMomData && Array.isArray(prevMomData)) {
-        prevMomData.forEach((group) => {
+      const prevYearData = komoditasData?.prevYear || komoditasData?.prevMom || komoditasData?.yoy;
+      if (prevYearData && Array.isArray(prevYearData)) {
+        prevYearData.forEach((group) => {
           const cleanName = group.label.toLowerCase();
           
           // Map Group YoY values to specific template placeholders

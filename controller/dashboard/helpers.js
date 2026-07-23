@@ -89,7 +89,8 @@ export const buildResponseWithDashboard = (
   inflasiVar,
   regionVal,
   result,
-  sortedPrevMom,
+  sortedPrevYear,
+  sortedPrev2Year,
 ) => {
   const sorted = [...result].sort((a, b) => Number(a.key) - Number(b.key));
   const { now, compare, then } = getLastTwoValues(sorted);
@@ -105,21 +106,23 @@ export const buildResponseWithDashboard = (
       then,
       compare: Number(compare.toFixed(2)),
     },
-    prevMom: sortedPrevMom,
+    prevYear: sortedPrevYear,
+    prev2Year: sortedPrev2Year,
   };
 };
 
 /**
  * Get current date info untuk filter tahun/bulan
- * @returns {Object} {month, year, prevMom}
+ * @returns {Object} {month, year, prevYear, prev2Year}
  */
 export const getDateInfo = () => {
   const date = new Date();
   const month = String(date.getMonth() - 1);
   const year = "1" + String(date.getFullYear()).slice(2, 4);
-  const prevMom = year - 1;
+  const prevYear = year - 1;
+  const prev2Year = year - 2;
 
-  return { month, year, prevMom };
+  return { month, year, prevYear, prev2Year };
 };
 
 /**

@@ -5,15 +5,12 @@ import { sort, getDateInfo, findRegionByDataset, findUnifiedCity } from "./helpe
 /**
  * Helper: Process komoditas data untuk satu item
  */
-/**
- * Helper: Process komoditas data untuk satu item
- */
-const processKomoditasItem = async (komoditasItem, kota, month, year, prevMom) => {
+const processKomoditasItem = async (komoditasItem, kota, month, year, prevYear, prev2Year) => {
   const doc = await APIDataBPS.findOne({
     "var.val": komoditasItem.var,
     "turvar.val": komoditasItem.turvar,
   })
-    .select("var vervar datacontent prevMom")
+    .select("var vervar datacontent prevYear prev2Year")
     .lean();
 
   if (!doc || !doc.vervar) {
@@ -98,16 +95,15 @@ const processKomoditasItem = async (komoditasItem, kota, month, year, prevMom) =
     sub,
   };
 
-  // Process PrevMoM data
-  let prevMomItem = null;
-  const prevMomDataSection = doc.prevMom || doc.prevMoM;
-  if (prevMomDataSection) {
-    const resultPrevMom = [];
-    const subPrevMom = {};
-    const dataPrevMom = {};
-    const subDataPrevMom = {};
+  // Process prevYear data
+  let prevYearItem = null;
+  if (doc.prevYear) {
+    const resultPrevYear = [];
+    const subPrevYear = {};
+    const dataPrevYear = {};
+    const subDataPrevYear = {};
 
-    for (const key in prevMomDataSection) {
+    for (const key in doc.prevYear) {
       const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
       const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
       const keyMonth = key.slice(regionVal.length + 11);
@@ -116,11 +112,11 @@ const processKomoditasItem = async (komoditasItem, kota, month, year, prevMom) =
         key.startsWith(regionVal) &&
         key.slice(regionVal.length, regionVal.length + 1) === "2" &&
         Number(keyMonth) === Number(month) &&
-        Number(keyYear) === Number(prevMom)
+        Number(keyYear) === Number(prevYear)
       ) {
-        resultPrevMom.push({
+        resultPrevYear.push({
           key,
-          value: prevMomDataSection[key],
+          value: doc.prevYear[key],
           bulan: keyMonth,
         });
       }
@@ -129,52 +125,127 @@ const processKomoditasItem = async (komoditasItem, kota, month, year, prevMom) =
         if (
           key.startsWith(regionVal) &&
           turvar === String(kelompok.turvar) &&
-          Number(keyYear) === Number(prevMom)
+          Number(keyYear) === Number(prevYear)
         ) {
-          dataPrevMom[key] = prevMomDataSection[key];
+          dataPrevYear[key] = doc.prevYear[key];
         }
 
         for (const item of kelompok.sub) {
           if (
             key.startsWith(regionVal) &&
             turvar === String(item.val) &&
-            Number(keyYear) === Number(prevMom)
+            Number(keyYear) === Number(prevYear)
           ) {
-            if (!subDataPrevMom[item.val]) subDataPrevMom[item.val] = {};
-            subDataPrevMom[item.val][key] = prevMomDataSection[key];
+            if (!subDataPrevYear[item.val]) subDataPrevYear[item.val] = {};
+            subDataPrevYear[item.val][key] = doc.prevYear[key];
           }
 
           if (
             key.startsWith(regionVal) &&
             turvar === String(item.val) &&
-            Number(keyYear) === Number(prevMom) &&
+            Number(keyYear) === Number(prevYear) &&
             Number(keyMonth) === Number(month)
           ) {
-            subPrevMom[item.val] = {
+            subPrevYear[item.val] = {
               label: item.label,
-              value: prevMomDataSection[key],
+              value: doc.prevYear[key],
               bulan: Number(keyMonth),
-              data: sort(subDataPrevMom)[item.val],
+              data: sort(subDataPrevYear)[item.val],
             };
           }
         }
       }
     }
 
-    const sortedResultPrevMom = sort(resultPrevMom);
-    const mainDataPrevMom =
-      sortedResultPrevMom && sortedResultPrevMom.length > 0 ? sortedResultPrevMom[0] : null;
+    const sortedResultPrevYear = sort(resultPrevYear);
+    const mainDataPrevYear =
+      sortedResultPrevYear && sortedResultPrevYear.length > 0 ? sortedResultPrevYear[0] : null;
 
-    prevMomItem = {
+    prevYearItem = {
       label: komoditasItem.nama,
-      value: mainDataPrevMom ? mainDataPrevMom.value : 0,
-      bulan: mainDataPrevMom ? Number(mainDataPrevMom.bulan) : Number(month),
-      data: sort(dataPrevMom),
-      sub: subPrevMom,
+      value: mainDataPrevYear ? mainDataPrevYear.value : 0,
+      bulan: mainDataPrevYear ? Number(mainDataPrevYear.bulan) : Number(month),
+      data: sort(dataPrevYear),
+      sub: subPrevYear,
     };
   }
 
-  return { hierarki, prevMomItem };
+  // Process prev2Year data
+  let prev2YearItem = null;
+  if (doc.prev2Year) {
+    const resultPrev2Year = [];
+    const subPrev2Year = {};
+    const dataPrev2Year = {};
+    const subDataPrev2Year = {};
+
+    for (const key in doc.prev2Year) {
+      const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
+      const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
+      const keyMonth = key.slice(regionVal.length + 11);
+
+      if (
+        key.startsWith(regionVal) &&
+        key.slice(regionVal.length, regionVal.length + 1) === "2" &&
+        Number(keyMonth) === Number(month) &&
+        Number(keyYear) === Number(prev2Year)
+      ) {
+        resultPrev2Year.push({
+          key,
+          value: doc.prev2Year[key],
+          bulan: keyMonth,
+        });
+      }
+
+      for (const kelompok of varKelompokIHK) {
+        if (
+          key.startsWith(regionVal) &&
+          turvar === String(kelompok.turvar) &&
+          Number(keyYear) === Number(prev2Year)
+        ) {
+          dataPrev2Year[key] = doc.prev2Year[key];
+        }
+
+        for (const item of kelompok.sub) {
+          if (
+            key.startsWith(regionVal) &&
+            turvar === String(item.val) &&
+            Number(keyYear) === Number(prev2Year)
+          ) {
+            if (!subDataPrev2Year[item.val]) subDataPrev2Year[item.val] = {};
+            subDataPrev2Year[item.val][key] = doc.prev2Year[key];
+          }
+
+          if (
+            key.startsWith(regionVal) &&
+            turvar === String(item.val) &&
+            Number(keyYear) === Number(prev2Year) &&
+            Number(keyMonth) === Number(month)
+          ) {
+            subPrev2Year[item.val] = {
+              label: item.label,
+              value: doc.prev2Year[key],
+              bulan: Number(keyMonth),
+              data: sort(subDataPrev2Year)[item.val],
+            };
+          }
+        }
+      }
+    }
+
+    const sortedResultPrev2Year = sort(resultPrev2Year);
+    const mainDataPrev2Year =
+      sortedResultPrev2Year && sortedResultPrev2Year.length > 0 ? sortedResultPrev2Year[0] : null;
+
+    prev2YearItem = {
+      label: komoditasItem.nama,
+      value: mainDataPrev2Year ? mainDataPrev2Year.value : 0,
+      bulan: mainDataPrev2Year ? Number(mainDataPrev2Year.bulan) : Number(month),
+      data: sort(dataPrev2Year),
+      sub: subPrev2Year,
+    };
+  }
+
+  return { hierarki, prevYearItem, prev2YearItem };
 };
 
 /**
@@ -218,7 +289,7 @@ const getHargaBIForKota = async (searchName) => {
 /**
  * Pure function: Dapatkan data komoditas untuk kota tertentu dengan breakdown per sub-komoditas
  * @param {String} kota - Nama kota
- * @returns {Object} Data komoditas dengan hierarki dan PrevMoM
+ * @returns {Object} Data komoditas dengan hierarki, prevYear, dan prev2Year
  * @throws Error jika kota tidak diisi
  */
 export const getKomoditasByKota = async (kota) => {
@@ -226,7 +297,6 @@ export const getKomoditasByKota = async (kota) => {
     throw new Error("kota wajib diisi");
   }
 
-  // Get a sample document to resolve/validate the region name
   const sampleDoc = await APIDataBPS.findOne({
     "var.val": varKelompokIHK[0].var,
     "turvar.val": varKelompokIHK[0].turvar,
@@ -245,30 +315,33 @@ export const getKomoditasByKota = async (kota) => {
 
   const resolvedKota = region.label;
 
-  const { month, year, prevMom } = getDateInfo();
+  const { month, year, prevYear, prev2Year } = getDateInfo();
   let hierarki = [];
-  let prevMomList = [];
+  let prevYearList = [];
+  let prev2YearList = [];
   let biggest = null;
 
-  // Process setiap komoditas
   for (const i in varKelompokIHK) {
     const result = await processKomoditasItem(
       varKelompokIHK[i],
       resolvedKota,
       month,
       year,
-      prevMom,
+      prevYear,
+      prev2Year,
     );
 
     if (result) {
       hierarki.push(result.hierarki);
-      if (result.prevMomItem) {
-        prevMomList.push(result.prevMomItem);
+      if (result.prevYearItem) {
+        prevYearList.push(result.prevYearItem);
+      }
+      if (result.prev2YearItem) {
+        prev2YearList.push(result.prev2YearItem);
       }
     }
   }
 
-  // Format sub-komoditas untuk hierarki
   for (const key in hierarki) {
     const subsObj = hierarki[key].sub || {};
     hierarki[key].sub = Object.entries(subsObj)
@@ -285,10 +358,9 @@ export const getKomoditasByKota = async (kota) => {
       }));
   }
 
-  // Format sub-komoditas untuk PrevMoM
-  for (const key in prevMomList) {
-    const subsObjPrevMom = prevMomList[key].sub || {};
-    prevMomList[key].sub = Object.entries(subsObjPrevMom)
+  for (const key in prevYearList) {
+    const subsObjPrev = prevYearList[key].sub || {};
+    prevYearList[key].sub = Object.entries(subsObjPrev)
       .sort((a, b) => Number(a[0]) - Number(b[0]))
       .map(([k, v]) => ({
         label: v.label,
@@ -302,7 +374,22 @@ export const getKomoditasByKota = async (kota) => {
       }));
   }
 
-  // Cari komoditas dengan nilai terbesar
+  for (const key in prev2YearList) {
+    const subsObjPrev2 = prev2YearList[key].sub || {};
+    prev2YearList[key].sub = Object.entries(subsObjPrev2)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
   if (hierarki.length > 0) {
     biggest = hierarki.reduce((max, item) => {
       const currentVal = parseFloat(item.value) || 0;
@@ -310,33 +397,6 @@ export const getKomoditasByKota = async (kota) => {
       return currentVal > maxVal ? item : max;
     }, hierarki[0]);
   }
-
-  const getShortLabel = (label) => {
-    const mapping = {
-      "Makanan, Minuman dan Tembakau": "Makanan",
-      "Pakaian dan Alas Kaki": "Pakaian",
-      "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga": "Perumahan",
-      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga": "Peralatan RT",
-      "Kesehatan": "Kesehatan",
-      "Informasi, Komunikasi dan Jasa Keuangan": "Komunikasi",
-      "Transportasi": "Transportasi",
-      "Rekreasi, Olahraga dan Budaya": "Rekreasi",
-      "Pendidikan": "Pendidikan",
-      "Penyediaan Makanan dan Minuman / Restoran": "Restoran",
-      "Perawatan Pribadi dan Jasa Lainnya": "Perawatan",
-    };
-    return mapping[label] || label;
-  };
-
-  const top5Mom = [...hierarki]
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 5)
-    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
-
-  const top5PrevMom = [...prevMomList]
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 5)
-    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
 
   const hargaBI = await getHargaBIForKota(kota);
   const makananItem = hierarki.find(
@@ -349,7 +409,8 @@ export const getKomoditasByKota = async (kota) => {
   return {
     totalKomoditas: hierarki.length,
     hierarki,
-    prevMom: prevMomList,
+    prevYear: prevYearList,
+    prev2Year: prev2YearList,
     biggest,
   };
 };
@@ -377,9 +438,10 @@ export const getKomoditasInfografisByKota = async (kota) => {
 
   const resolvedKota = region.label;
 
-  const { month, year, prevMom } = getDateInfo();
+  const { month, year, prevYear, prev2Year } = getDateInfo();
   let hierarki = [];
-  let prevMomList = [];
+  let prevYearList = [];
+  let prev2YearList = [];
   let biggest = null;
 
   for (const i in varKelompokIHK) {
@@ -388,13 +450,17 @@ export const getKomoditasInfografisByKota = async (kota) => {
       resolvedKota,
       month,
       year,
-      prevMom,
+      prevYear,
+      prev2Year,
     );
 
     if (result) {
       hierarki.push(result.hierarki);
-      if (result.prevMomItem) {
-        prevMomList.push(result.prevMomItem);
+      if (result.prevYearItem) {
+        prevYearList.push(result.prevYearItem);
+      }
+      if (result.prev2YearItem) {
+        prev2YearList.push(result.prev2YearItem);
       }
     }
   }
@@ -415,9 +481,25 @@ export const getKomoditasInfografisByKota = async (kota) => {
       }));
   }
 
-  for (const key in prevMomList) {
-    const subsObjPrevMom = prevMomList[key].sub || {};
-    prevMomList[key].sub = Object.entries(subsObjPrevMom)
+  for (const key in prevYearList) {
+    const subsObjPrev = prevYearList[key].sub || {};
+    prevYearList[key].sub = Object.entries(subsObjPrev)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  for (const key in prev2YearList) {
+    const subsObjPrev2 = prev2YearList[key].sub || {};
+    prev2YearList[key].sub = Object.entries(subsObjPrev2)
       .sort((a, b) => Number(a[0]) - Number(b[0]))
       .map(([k, v]) => ({
         label: v.label,
@@ -461,7 +543,12 @@ export const getKomoditasInfografisByKota = async (kota) => {
     .slice(0, 5)
     .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
 
-  const top5PrevMom = [...prevMomList]
+  const top5PrevYear = [...prevYearList]
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const top5Prev2Year = [...prev2YearList]
     .sort((a, b) => b.value - a.value)
     .slice(0, 5)
     .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
@@ -477,10 +564,12 @@ export const getKomoditasInfografisByKota = async (kota) => {
   return {
     totalKomoditas: hierarki.length,
     hierarki,
-    prevMom: prevMomList,
+    prevYear: prevYearList,
+    prev2Year: prev2YearList,
     biggest,
     top5Mom,
-    top5PrevMom,
+    top5PrevYear,
+    top5Prev2Year,
   };
 };
 

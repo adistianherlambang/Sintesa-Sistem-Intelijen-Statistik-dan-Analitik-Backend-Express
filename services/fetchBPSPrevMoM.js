@@ -33,23 +33,28 @@ const stopLoading = (text = "Done") => {
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const buildPrevMoMUrl = (url, yearPrevMoM) =>
-  url.replace(/\/th\/[0-9]+(?=\/|$)/, `/th/1${yearPrevMoM}`);
+const buildYearUrl = (url, yearCode) =>
+  url.replace(/\/th\/[0-9]+(?=\/|$)/, `/th/1${yearCode}`);
 
-const getYearPrevMoM = () => {
+const getYearPrevYear = () => {
   const currentYear = new Date().getFullYear();
   return String(currentYear).slice(2, 4) - 1;
+};
+
+const getYearPrev2Year = () => {
+  const currentYear = new Date().getFullYear();
+  return String(currentYear).slice(2, 4) - 2;
 };
 
 const writeLog = async (text) => {
   await fs.appendFile(resultPath, text);
 };
 
-// --- CORE FETCH LOGIC FOR SINGLE URL ---
-const fetchSingleUrl = async (url, index, total) => {
+// --- CORE FETCH LOGIC FOR A SINGLE URL & YEAR ---
+const fetchSingleUrl = async (url, label) => {
   for (let retry = 1; retry <= 5; retry++) {
     try {
-      startLoading(`Fetching Prev MoM ${index}/${total} | Retry ${retry}/5`);
+      startLoading(`Fetching ${label} | Retry ${retry}/5`);
 
       const responseText = await cloudscraper.get(url, {
         headers: {
@@ -65,7 +70,6 @@ const fetchSingleUrl = async (url, index, total) => {
         },
       });
 
-      // Mencatat log respon ke result.txt menggunakan pemisah \n
       await writeLog(`\nLINK : ${url}\nRESPONSE CONTENT:\n${responseText}\n\n`);
 
       if (!responseText) throw new Error("Empty response");
@@ -77,55 +81,21 @@ const fetchSingleUrl = async (url, index, total) => {
         throw new Error("Invalid JSON response");
       }
 
-      // Log ke konsol menggunakan pemisah \n
       console.log(
         `\nLINK : ${url}\nRESPONSE STATUS : ${data?.status || "-"}\nAVAILABILITY : ${data?.["data-availability"] || "-"}\nVAR : ${data?.var?.[0]?.val || "-"}\n`,
       );
 
-      // Validasi ketersediaan data
-      if (data["data-availability"] === "list-not-available") {
-        stopLoading(`No Prev MoM data ${index}/${total}`);
-        console.log("⚠ BPS data not available");
-        return true;
-      }
-
-      const varVal = data.var?.[0]?.val;
-      if (!varVal) {
-        stopLoading(`Invalid or missing var value ${index}/${total}`);
-        console.log("⚠ Missing var.val");
-        return true;
-      }
-
-      // Update Database
-      const updated = await APIDataBPS.findOneAndUpdate(
-        { "var.val": varVal },
-        {
-          $set: { prevMom: data.datacontent || {} },
-          $unset: { prevMoM: "" },
-        },
-        { returnDocument: "after" },
-      );
-
-      stopLoading(`Success Prev MoM ${index}/${total}`);
-      if (updated) {
-        console.log(`✔ Prev MoM updated for var.val ${varVal}`);
-      } else {
-        console.log(`⚠ Document not found for var.val ${varVal}`);
-      }
-
-      return true;
+      stopLoading(`Success ${label}`);
+      return data;
     } catch (err) {
       clearInterval(spinner);
-      // Mencatat log error ke result.txt menggunakan pemisah \n
       await writeLog(`\nERROR ON LINK: ${url}\nMESSAGE: ${err.message}\n\n`);
-      console.log(
-        `\n✖ Failed Prev MoM ${index}/${total} | Retry ${retry}/5 | ${err.message}`,
-      );
+      console.log(`\n✖ Failed ${label} | Retry ${retry}/5 | ${err.message}`);
 
       if (retry < 5) await delay(2000);
     }
   }
-  return false;
+  return null;
 };
 
 // --- MAIN EXPORT FUNCTION ---
@@ -138,30 +108,65 @@ export const fetchBPSPrevMoM = async () => {
 
     const configFile = await fs.readFile(configPath, "utf-8");
     const urls = JSON.parse(configFile);
-    const yearPrevMoM = getYearPrevMoM();
-    const yoYUrls = urls.map((url) => buildPrevMoMUrl(url, yearPrevMoM));
+    const yearPrevYear = getYearPrevYear();
+    const yearPrev2Year = getYearPrev2Year();
 
-    console.log("✔ Prev MoM config loaded");
-    console.log(`Total Prev MoM URL: ${yoYUrls.length}\n`);
+    console.log("✔ PrevYear config loaded");
+    console.log(`Total URLs to process: ${urls.length}\n`);
 
     await fs.writeFile(resultPath, "");
 
-    for (let index = 0; index < yoYUrls.length; index++) {
-      const url = yoYUrls[index];
+    for (let index = 0; index < urls.length; index++) {
+      const baseUrl = urls[index];
       const humanIndex = index + 1;
 
-      const isSuccess = await fetchSingleUrl(url, humanIndex, yoYUrls.length);
+      const urlPrevYear = buildYearUrl(baseUrl, yearPrevYear);
+      const urlPrev2Year = buildYearUrl(baseUrl, yearPrev2Year);
 
-      if (!isSuccess) {
-        console.log(`⚠ Skip Prev MoM URL ${humanIndex}/${yoYUrls.length}`);
+      const dataPrevYear = await fetchSingleUrl(
+        urlPrevYear,
+        `PrevYear ${humanIndex}/${urls.length}`,
+      );
+      const dataPrev2Year = await fetchSingleUrl(
+        urlPrev2Year,
+        `Prev2Year ${humanIndex}/${urls.length}`,
+      );
+
+      const varVal = dataPrevYear?.var?.[0]?.val || dataPrev2Year?.var?.[0]?.val;
+
+      if (varVal) {
+        const updated = await APIDataBPS.findOneAndUpdate(
+          { "var.val": varVal },
+          {
+            $set: {
+              prevYear: dataPrevYear?.datacontent || {},
+              prev2Year: dataPrev2Year?.datacontent || {},
+            },
+            $unset: {
+              prevMom: "",
+              prevMoM: "",
+              prevYoy: "",
+              prev2Yoy: "",
+            },
+          },
+          { returnDocument: "after" },
+        );
+
+        if (updated) {
+          console.log(`✔ prevYear & prev2Year updated for var.val ${varVal}`);
+        } else {
+          console.log(`⚠ Document not found for var.val ${varVal}`);
+        }
+      } else {
+        console.log(`⚠ Skip item ${humanIndex}/${urls.length}: missing varVal`);
       }
     }
 
-    console.log("\n✔ Finished fetch Prev MoM");
+    console.log("\n✔ Finished fetch PrevYear & Prev2Year");
     console.log("✔ Result saved to result.txt\n");
   } catch (err) {
     clearInterval(spinner);
-    console.error("\nFatal Prev MoM error:", err.message);
+    console.error("\nFatal PrevYear error:", err.message);
   }
 };
 

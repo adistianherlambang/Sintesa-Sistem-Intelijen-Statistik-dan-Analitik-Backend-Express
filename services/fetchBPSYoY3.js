@@ -14,7 +14,7 @@ dotenv.config({ path: path.join(__dirname, "../.env") });
 const URL =
   "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/1/th/123/key/6140cf4d3d3cc537fe36176ad6ad09d2/";
 
-export const fetchSingleBPS = async () => {
+export const fetchBPSYoY3 = async () => {
   try {
     if (mongoose.connection.readyState === 0) {
       await mongoose.connect(process.env.MONGO_URL);
@@ -75,4 +75,4 @@ export const fetchSingleBPS = async () => {
   }
 };
 
-fetchSingleBPS();
+// fetchBPSYoY3()

@@ -8,6 +8,8 @@ import {
   getInflasiInfografisByKota,
   getInflasiYoyByKota,
   getAllInflasiYoy,
+  getInflasiYtdByKota,
+  getAllInflasiYtd,
 } from "../../controller/dashboard/inflasiController.js";
 import {
   getIhkByKota,
@@ -153,6 +155,25 @@ router.post("/inflasi/yoy", async (req, res) => {
 router.get("/inflasi/yoy", async (req, res) => {
   try {
     const result = await getAllInflasiYoy();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/inflasi/ytd", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getInflasiYtdByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/inflasi/ytd", async (req, res) => {
+  try {
+    const result = await getAllInflasiYtd();
     res.json(result);
   } catch (err) {
     handleError(res, err);

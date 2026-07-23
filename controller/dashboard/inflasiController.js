@@ -349,3 +349,84 @@ export const getAllInflasiYoy = async () => {
 
   return { doc };
 };
+
+/**
+ * Pure function: Dapatkan data inflasi YTD (var.val = 2388) untuk kota tertentu
+ * @param {String} kota - Nama kota
+ * @returns {Object} Response data
+ * @throws Error jika kota tidak ditemukan atau data tidak tersedia
+ */
+export const getInflasiYtdByKota = async (kota) => {
+  if (!kota) {
+    throw new Error("kota wajib diisi");
+  }
+
+  // Ambil dokumen inflasi YTD dengan var.val = 2388
+  const doc = await APIDataBPS.findOne({
+    "var.val": 2388,
+  })
+    .select("var vervar datacontent prevYear prev2Year")
+    .lean();
+
+  if (!doc) {
+    throw new Error("data inflasi YTD tidak ditemukan");
+  }
+
+  // Dapatkan vervar (jika tidak ada di doc 2388, gunakan vervar dari IHK/inflasi)
+  let vervar = doc.vervar && doc.vervar.length > 0 ? doc.vervar : null;
+  if (!vervar) {
+    const docIhk = await APIDataBPS.findOne({ "var.val": 2245 }).select("vervar").lean();
+    vervar = docIhk?.vervar || [];
+  }
+
+  const inflasiVar =
+    (doc.var && Array.isArray(doc.var) && doc.var.find((item) => item.val === 2388)) ||
+    doc.var?.[0] || { val: 2388, label: "Inflasi Year-to-Date" };
+
+  const region =
+    findRegionByDataset(vervar, kota, "ihk_komoditas") ||
+    findRegionByDataset(vervar, kota, "inflasi");
+
+  if (!region) {
+    throw new Error("kota tidak ditemukan");
+  }
+
+  const regionVal = region.val.toString();
+
+  const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
+  const resultPrevYear = buildFilteredKeyValue(doc.prevYear || {}, regionVal, 2);
+  const resultPrev2Year = buildFilteredKeyValue(doc.prev2Year || {}, regionVal, 2);
+
+  const sortedPrevYear = [...resultPrevYear].sort(
+    (a, b) => Number(a.key) - Number(b.key),
+  );
+  const sortedPrev2Year = [...resultPrev2Year].sort(
+    (a, b) => Number(a.key) - Number(b.key),
+  );
+
+  return buildResponseWithDashboard(
+    region.label,
+    inflasiVar,
+    regionVal,
+    result,
+    sortedPrevYear,
+    sortedPrev2Year,
+  );
+};
+
+/**
+ * Pure function: Dapatkan dokumen inflasi YTD lengkap (var.val = 2388)
+ * @returns {Object} Dokumen inflasi YTD
+ * @throws Error jika data tidak tersedia
+ */
+export const getAllInflasiYtd = async () => {
+  const doc = await APIDataBPS.findOne({
+    "var.val": 2388,
+  });
+
+  if (!doc) {
+    throw new Error("data inflasi YTD tidak ditemukan");
+  }
+
+  return { doc };
+};

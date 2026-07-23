@@ -234,7 +234,6 @@ export const getInflasiInfografisByKota = async (kota) => {
     prevMom: yoyResult,
     m2mLast13,
     prevMomLast13: yoyLast13,
-    yoyLast13,
     ytdLast13,
     dashboard: {
       now,

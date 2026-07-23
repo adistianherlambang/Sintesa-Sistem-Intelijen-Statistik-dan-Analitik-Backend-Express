@@ -99,7 +99,10 @@ const fetchSingleUrl = async (url, index, total) => {
       // Update Database
       const updated = await APIDataBPS.findOneAndUpdate(
         { "var.val": varVal },
-        { $set: { prevMom: data.datacontent || [] } },
+        {
+          $set: { prevMom: data.datacontent || {} },
+          $unset: { prevMoM: "" },
+        },
         { returnDocument: "after" },
       );
 

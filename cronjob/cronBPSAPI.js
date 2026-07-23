@@ -2,6 +2,7 @@ import cron from "node-cron";
 import APIDataBPS from "../db/models/APIDataBPS.js";
 import { fetchBPS } from "../services/fetchBPS.js";
 import { fetchBPSPrevMoM } from "../services/fetchBPSPrevMoM.js";
+import { fetchBPSPrevYear } from "../services/fetchBPSPrevYear.js";
 import { fetchBI } from "../services/fetchBI.js";
 // import { AISummary } from "../services/AISummary.js";
 
@@ -88,6 +89,7 @@ export const startBPSCron = () => {
         if (month === 0 && lastYear !== year) {
           console.log("✔ Jalankan fungsi fetch PrevMoM...");
           await fetchBPSPrevMoM();
+          await fetchBPSPrevYear();
           await fetchBI();
         } else {
           console.log("⚠ Tidak perlu update PrevMoM");

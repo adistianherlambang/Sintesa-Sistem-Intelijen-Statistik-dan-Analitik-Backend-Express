@@ -231,4 +231,4 @@ export const fetchBPS = async () => {
 };
 
 // Eksekusi otomatis
-fetchBPS();
+// fetchBPS();

@@ -238,7 +238,9 @@ export const getInflasiInfografisByKota = async (kota) => {
     data: sorted,
     ytd: sortedYtd,
     prevYear: yoyResult,
+    yoy: yoyResult,
     prev2Year: resultPrev2Year,
+    yoy2: resultPrev2Year,
     m2mLast13,
     prevYearLast13: yoyLast13,
     ytdLast13,
@@ -248,6 +250,7 @@ export const getInflasiInfografisByKota = async (kota) => {
       compare: Number(compare.toFixed(2)),
       ytd: ytdLatest,
       prevYear: yoyLatest,
+      yoy: yoyLatest,
     },
   };
 };

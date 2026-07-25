@@ -649,6 +649,8 @@ export const getKomoditasInfografisByKota = async (kota) => {
     top5Prev2Year,
     topSubMom,
     topSubYoy,
+    topsubmom: topSubMom,
+    topsubyoy: topSubYoy,
   };
 };
 

@@ -1,0 +1,65 @@
+{
+  "keterangan": {
+    "satuan": "persen (%)",
+    "total_bobot_kelompok": 100.0,
+    "metode": "Bobot diturunkan dari rumus: bobot = (andil / inflasi) x 100, menggunakan data YoY sebagai prioritas (lebih stabil terhadap rounding), cross-reference Mei 2026 dan Juni 2026",
+    "catatan_rounding": "Sedikit perbedaan antar bulan disebabkan pembulatan 2 desimal pada data publikasi BPS, bukan perubahan bobot struktural"
+  },
+  "bobot": [
+    {
+      "kelompok": "Makanan, Minuman, dan Tembakau",
+      "bobot": 30.0,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Pakaian dan Alas Kaki",
+      "bobot": 6.2261,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Perumahan, Air, Listrik, dan Bahan Bakar Rumah Tangga",
+      "bobot": 9.9494,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Perlengkapan, Peralatan, dan Pemeliharaan Rutin Rumah Tangga",
+      "bobot": 5.5072,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Kesehatan",
+      "bobot": 3.1277,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Transportasi",
+      "bobot": 14.2514,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Informasi, Komunikasi, dan Jasa Keuangan",
+      "bobot": 5.6776,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Rekreasi, Olahraga, dan Budaya",
+      "bobot": 2.0004,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Pendidikan",
+      "bobot": 6.4284,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Penyediaan Makanan dan Minuman/Restoran",
+      "bobot": 9.6447,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    },
+    {
+      "kelompok": "Perawatan Pribadi dan Jasa Lainnya",
+      "bobot": 7.1235,
+      "keterangan_metode": "rata-rata YoY (Mei & Juni)"
+    }
+  ]
+}

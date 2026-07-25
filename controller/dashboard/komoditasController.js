@@ -398,6 +398,38 @@ export const getKomoditasByKota = async (kota) => {
     }, hierarki[0]);
   }
 
+  const getShortLabel = (label) => {
+    const mapping = {
+      "Makanan, Minuman dan Tembakau": "Makanan",
+      "Pakaian dan Alas Kaki": "Pakaian",
+      "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga": "Perumahan",
+      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga": "Peralatan RT",
+      "Kesehatan": "Kesehatan",
+      "Informasi, Komunikasi dan Jasa Keuangan": "Komunikasi",
+      "Transportasi": "Transportasi",
+      "Rekreasi, Olahraga dan Budaya": "Rekreasi",
+      "Pendidikan": "Pendidikan",
+      "Penyediaan Makanan dan Minuman / Restoran": "Restoran",
+      "Perawatan Pribadi dan Jasa Lainnya": "Perawatan",
+    };
+    return mapping[label] || label;
+  };
+
+  const topMom = [...hierarki]
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const topYoy = [...prevYearList]
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const top5Prev2Year = [...prev2YearList]
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
   const hargaBI = await getHargaBIForKota(kota);
   const makananItem = hierarki.find(
     (item) => item.label && item.label.includes("Makanan")
@@ -412,6 +444,14 @@ export const getKomoditasByKota = async (kota) => {
     prevYear: prevYearList,
     prev2Year: prev2YearList,
     biggest,
+    topmom: topMom,
+    topyoy: topYoy,
+    topMom,
+    topYoy,
+    top5Mom: topMom,
+    top5Yoy: topYoy,
+    top5PrevYear: topYoy,
+    top5Prev2Year,
   };
 };
 
@@ -538,20 +578,52 @@ export const getKomoditasInfografisByKota = async (kota) => {
     return mapping[label] || label;
   };
 
-  const top5Mom = [...hierarki]
-    .sort((a, b) => b.value - a.value)
+  const topMom = [...hierarki]
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
     .slice(0, 5)
     .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
 
-  const top5PrevYear = [...prevYearList]
-    .sort((a, b) => b.value - a.value)
+  const topYoy = [...prevYearList]
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
     .slice(0, 5)
     .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
 
   const top5Prev2Year = [...prev2YearList]
-    .sort((a, b) => b.value - a.value)
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
     .slice(0, 5)
     .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const allSubMom = [];
+  hierarki.forEach((group) => {
+    if (Array.isArray(group.sub)) {
+      group.sub.forEach((subItem) => {
+        allSubMom.push({
+          label: subItem.label,
+          value: parseFloat(subItem.value) || 0,
+          group: getShortLabel(group.label),
+        });
+      });
+    }
+  });
+  const topSubMom = allSubMom
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
+
+  const allSubYoy = [];
+  prevYearList.forEach((group) => {
+    if (Array.isArray(group.sub)) {
+      group.sub.forEach((subItem) => {
+        allSubYoy.push({
+          label: subItem.label,
+          value: parseFloat(subItem.value) || 0,
+          group: getShortLabel(group.label),
+        });
+      });
+    }
+  });
+  const topSubYoy = allSubYoy
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
 
   const hargaBI = await getHargaBIForKota(kota);
   const makananInfografisItem = hierarki.find(
@@ -567,9 +639,16 @@ export const getKomoditasInfografisByKota = async (kota) => {
     prevYear: prevYearList,
     prev2Year: prev2YearList,
     biggest,
-    top5Mom,
-    top5PrevYear,
+    topmom: topMom,
+    topyoy: topYoy,
+    topMom,
+    topYoy,
+    top5Mom: topMom,
+    top5Yoy: topYoy,
+    top5PrevYear: topYoy,
     top5Prev2Year,
+    topSubMom,
+    topSubYoy,
   };
 };
 

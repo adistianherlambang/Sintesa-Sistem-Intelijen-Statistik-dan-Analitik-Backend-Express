@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import AdmZip from "adm-zip";
+import mongoose from "mongoose";
 import { processIdmlVariables, toIndoNum } from "../services/idmlDataProcessor.js";
 import { generateIdmlNarratives } from "../services/idmlNarrativeGenerator.js";
 
@@ -12,65 +13,112 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 /**
- * Pemrosesan blok kontekstual per kelompok pengeluaran untuk Story_ucc5.xml
+ * Pemrosesan blok kontekstual per kelompok pengeluaran untuk Story_ucc5.xml menggunakan pemotongan blok presisi
  */
 export const processStoryUcc5Contextually = (xmlContent, rawData) => {
   const groupProcessedData = rawData.groupProcessedData || {};
 
-  const groupSections = [
+  const headers = [
     { header: "Makanan, Minuman, dan Tembakau", key: "makanan" },
     { header: "Pakaian dan Alas Kaki", key: "pakaian" },
     { header: "Perumahan, Air, Listrik, dan Bahan Bakar Rumah Tangga", key: "perumahan" },
     { header: "Perlengkapan, Peralatan, dan Pemeliharaan Rutin Rumah Tangga", key: "perlengkapan" },
     { header: "Kesehatan", key: "kesehatan" },
-    { header: "Transportasi", key: "transportasi" },
     { header: "Informasi, Komunikasi, dan Jasa Keuangan", key: "informasi" },
+    { header: "Transportasi", key: "transportasi" },
     { header: "Rekreasi, Olahraga, dan Budaya", key: "rekreasi" },
     { header: "Pendidikan", key: "pendidikan" },
     { header: "Penyediaan Makanan dan Minuman/Restoran", key: "restoran" },
     { header: "Perawatan Pribadi dan Jasa Lainnya", key: "perawatan" },
   ];
 
-  let newXml = xmlContent;
+  const startSearchPos = xmlContent.indexOf("ParagraphStyle/Sub Sub Bab BRS");
+  const searchBase = startSearchPos !== -1 ? startSearchPos : 0;
 
-  groupSections.forEach(({ header, key }) => {
-    const data = groupProcessedData[key] || {};
-    const groupNameLower = header.toLowerCase();
-
-    const headerRegex = new RegExp(`(<Content>${header}</Content>[\\s\\S]*?)(?=<Content>(?:Makanan|Pakaian|Perumahan|Perlengkapan|Kesehatan|Transportasi|Informasi|Rekreasi|Pendidikan|Penyediaan|Perawatan)|</idPkg:Story>|$)`, "i");
-
-    newXml = newXml.replace(headerRegex, (match, blockContent) => {
-      let updatedBlock = blockContent;
-
-      const yoyVal = data.yoy || 0.0;
-      const andilYoyVal = data.andilYoy || 0.0;
-      const andilMtmVal = data.andilMtm || 0.0;
-      const ihkPrevVal = data.ihkSebelumnya || 104.5;
-      const ihkNowVal = data.ihkBerjalan || 106.8;
-
-      updatedBlock = updatedBlock.replace(/\$\{namaKelompok\}/g, groupNameLower);
-      updatedBlock = updatedBlock.replace(/\$\{inflasiYoy\}/g, toIndoNum(Math.abs(yoyVal)));
-      updatedBlock = updatedBlock.replace(/\$\{deflasiYoy\}/g, toIndoNum(Math.abs(yoyVal)));
-      updatedBlock = updatedBlock.replace(/\$\{indeksTahunSebelumnya\}/g, toIndoNum(ihkPrevVal));
-      updatedBlock = updatedBlock.replace(/\$\{indeksSaatIni\}/g, toIndoNum(ihkNowVal));
-
-      updatedBlock = updatedBlock.replace(/\$\{andilInflasiYoy\}/g, toIndoNum(Math.abs(andilYoyVal)));
-      updatedBlock = updatedBlock.replace(/\$\{andilDeflasiYoy\}/g, toIndoNum(Math.abs(andilYoyVal)));
-      updatedBlock = updatedBlock.replace(/\$\{andilInflasiMtm\}/g, toIndoNum(Math.abs(andilMtmVal)));
-      updatedBlock = updatedBlock.replace(/\$\{andilDeflasiMtm\}/g, toIndoNum(Math.abs(andilMtmVal)));
-
-      return updatedBlock;
-    });
+  const matches = [];
+  headers.forEach((h) => {
+    const targetTag = `<Content>${h.header}</Content>`;
+    const pos = xmlContent.indexOf(targetTag, searchBase);
+    if (pos !== -1) {
+      matches.push({ pos, header: h.header, key: h.key, tagLength: targetTag.length });
+    }
   });
 
-  return newXml;
+  matches.sort((a, b) => a.pos - b.pos);
+  if (matches.length === 0) return xmlContent;
+
+  let result = xmlContent.slice(0, matches[0].pos);
+
+  for (let i = 0; i < matches.length; i++) {
+    const current = matches[i];
+    const nextPos = i + 1 < matches.length ? matches[i + 1].pos : xmlContent.length;
+    let blockContent = xmlContent.slice(current.pos, nextPos);
+
+    const data = groupProcessedData[current.key] || {};
+    const groupNameLower = current.header.toLowerCase();
+
+    const yoyVal = parseFloat(data.yoy) || 0.0;
+    const andilYoyVal = parseFloat(data.andilYoy) || 0.0;
+    const andilMtmVal = parseFloat(data.andilMtm) || 0.0;
+    const ihkPrevVal = parseFloat(data.ihkSebelumnya) || 104.5;
+    const ihkNowVal = parseFloat(data.ihkBerjalan) || 106.8;
+
+    const subItems = Array.isArray(data.sub) ? data.sub : [];
+    let subHighest = subItems.length > 0 ? subItems.reduce((max, s) => (parseFloat(s.value) || 0) > (parseFloat(max.value) || 0) ? s : max, subItems[0]) : null;
+    let subLowest = subItems.length > 0 ? subItems.reduce((min, s) => (parseFloat(s.value) || 0) < (parseFloat(min.value) || 0) ? s : min, subItems[0]) : null;
+
+    let subInflasiList = subItems.filter(s => (parseFloat(s.value) || 0) > 0);
+    let subDeflasiList = subItems.filter(s => (parseFloat(s.value) || 0) < 0);
+    let subStabilList = subItems.filter(s => (parseFloat(s.value) || 0) === 0);
+
+    blockContent = blockContent.replace(/\$\{namaKelompok\}/g, groupNameLower);
+    blockContent = blockContent.replace(/\$\{inflasiYoy\}/g, toIndoNum(Math.abs(yoyVal)));
+    blockContent = blockContent.replace(/\$\{deflasiYoy\}/g, toIndoNum(Math.abs(yoyVal)));
+    blockContent = blockContent.replace(/\$\{indeksTahunSebelumnya\}/g, toIndoNum(ihkPrevVal));
+    blockContent = blockContent.replace(/\$\{indeksSaatIni\}/g, toIndoNum(ihkNowVal));
+
+    blockContent = blockContent.replace(/\$\{andilInflasiYoy\}/g, toIndoNum(Math.abs(andilYoyVal)));
+    blockContent = blockContent.replace(/\$\{andilDeflasiYoy\}/g, toIndoNum(Math.abs(andilYoyVal)));
+    blockContent = blockContent.replace(/\$\{andilInflasiMtm\}/g, toIndoNum(Math.abs(andilMtmVal)));
+    blockContent = blockContent.replace(/\$\{andilDeflasiMtm\}/g, toIndoNum(Math.abs(andilMtmVal)));
+
+    blockContent = blockContent.replace(/\$\{subkelompokInflasiTertinggi\}/g, subHighest ? subHighest.label.toLowerCase() : "makanan jadi");
+    blockContent = blockContent.replace(/\$\{inflasiSubkelompokTertinggi\}/g, subHighest ? toIndoNum(Math.abs(subHighest.value)) : "0,00");
+    blockContent = blockContent.replace(/\$\{inflasiSubkelompokTertinggiYoy\}/g, subHighest ? toIndoNum(Math.abs(subHighest.value)) : "0,00");
+
+    blockContent = blockContent.replace(/\$\{subkelompokInflasiTerendah\}/g, subLowest ? subLowest.label.toLowerCase() : "minuman non-alkohol");
+    blockContent = blockContent.replace(/\$\{inflasiSubkelompokTerendah\}/g, subLowest ? toIndoNum(Math.abs(subLowest.value)) : "0,00");
+    blockContent = blockContent.replace(/\$\{inflasiSubkelompokTerendahYoy\}/g, subLowest ? toIndoNum(Math.abs(subLowest.value)) : "0,00");
+
+    blockContent = blockContent.replace(/\$\{subkelompokInflasi\}/g, subInflasiList.length > 0 ? subInflasiList[0].label.toLowerCase() : "makanan");
+    blockContent = blockContent.replace(/\$\{inflasiSubkelompokYoy\}/g, subInflasiList.length > 0 ? toIndoNum(Math.abs(subInflasiList[0].value)) : "0,00");
+
+    blockContent = blockContent.replace(/\$\{subkelompokDeflasi\}/g, subDeflasiList.length > 0 ? subDeflasiList[0].label.toLowerCase() : "pakaian");
+    blockContent = blockContent.replace(/\$\{deflasiSubkelompokYoy\}/g, subDeflasiList.length > 0 ? toIndoNum(Math.abs(subDeflasiList[0].value)) : "0,00");
+
+    blockContent = blockContent.replace(/\$\{subkelompokStabil\}/g, subStabilList.length > 0 ? subStabilList.map(s => s.label.toLowerCase()).join(", ") : "lainnya");
+
+    blockContent = blockContent.replace(/\$\{jumlahSubkelompok\}/g, String(subItems.length));
+    blockContent = blockContent.replace(/\$\{jumlahSubkelompokInflasi\}/g, String(subInflasiList.length));
+    blockContent = blockContent.replace(/\$\{jumlahSubkelompokStabil\}/g, String(subStabilList.length));
+
+    result += blockContent;
+  }
+
+  return result;
 };
 
 /**
  * Pindai direktori idmlExtract dan ganti seluruh placeholder ${...}
  */
-export const runIdmlTemplateFiller = async (targetCity = "Kota Malang") => {
+export const runIdmlTemplateFiller = async (targetCity = "KOTA METRO") => {
   console.log(`🚀 Memproses template IDML XML untuk kota: ${targetCity}...`);
+
+  if (mongoose.connection.readyState === 0) {
+    const mongoUrl = process.env.MONGO_URL || process.env.MONGO_URI || "mongodb://localhost:27017/sintesa";
+    console.log(`🔌 Menghubungkan ke MongoDB: ${mongoUrl}...`);
+    await mongoose.connect(mongoUrl);
+  }
 
   const IDML_DIR = path.resolve(__dirname, "../idmlExtract");
   const OUT_DIR = path.resolve(__dirname, "../export/populated_xml");
@@ -99,13 +147,11 @@ export const runIdmlTemplateFiller = async (targetCity = "Kota Malang") => {
   let replacedFilesCount = 0;
   let totalPlaceholdersReplaced = 0;
 
-  // Add mimetype
   const mimetypePath = path.join(IDML_DIR, "mimetype");
   if (fs.existsSync(mimetypePath)) {
     zip.addFile("mimetype", fs.readFileSync(mimetypePath));
   }
 
-  // Rekursif salin & ganti seluruh file XML di idmlExtract ke outDir & zip
   const copyAndReplace = (srcDir, outDir, zipPrefix) => {
     const entries = fs.readdirSync(srcDir);
     for (const entry of entries) {
@@ -161,7 +207,6 @@ export const runIdmlTemplateFiller = async (targetCity = "Kota Malang") => {
 
   copyAndReplace(IDML_DIR, OUT_DIR, "");
 
-  // 4. Simpan output IDML
   const exportDir = path.resolve(__dirname, "../export/analysis_files");
   if (!fs.existsSync(exportDir)) {
     fs.mkdirSync(exportDir, { recursive: true });
@@ -171,7 +216,6 @@ export const runIdmlTemplateFiller = async (targetCity = "Kota Malang") => {
   const idmlOutputPath = path.join(exportDir, `BRS_Populated_${cleanCity}.idml`);
   zip.writeZip(idmlOutputPath);
 
-  // 5. Verifikasi akhir: Pastikan 0 placeholder tersisa pada output XML
   let unreplacedCount = 0;
   const verifyNoPlaceholders = (dirPath) => {
     const entries = fs.readdirSync(dirPath);
@@ -215,7 +259,7 @@ export const runIdmlTemplateFiller = async (targetCity = "Kota Malang") => {
 };
 
 if (process.argv[1] && process.argv[1].endsWith("processIdmlTemplate.js")) {
-  const cityArg = process.argv[2] || "Kota Malang";
+  const cityArg = process.argv[2] || "KOTA METRO";
   runIdmlTemplateFiller(cityArg)
     .then(() => process.exit(0))
     .catch((err) => {

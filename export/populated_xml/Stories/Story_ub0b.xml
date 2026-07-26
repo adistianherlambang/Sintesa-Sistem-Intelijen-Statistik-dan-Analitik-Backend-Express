@@ -9,15 +9,15 @@
 					<Leading type="unit">14.5</Leading>
 					<AppliedFont type="string">Raleway</AppliedFont>
 				</Properties>
-				<Content>Pada Juni 2026 terjadi inflasi year-on-year (y-on-y) sebesar 3,16 persen dengan Indeks Harga Konsumen (IHK) sebesar 0,00. </Content>
+				<Content>Pada Juni 2026 terjadi inflasi year-on-year (y-on-y) sebesar 3,07 persen dengan Indeks Harga Konsumen (IHK) sebesar 0,00. </Content>
 				<Br />
-				<Content>Inflasi y-on-y terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok makanan, minuman, dan tembakau sebesar 0,00 persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar 0,00 persen; kelompok kesehatan sebesar 2,10 persen; kelompok transportasi sebesar 2,10 persen; kelompok rekreasi, olahraga, dan budaya sebesar 0,00 persen; kelompok penyediaan makanan dan minuman/restoran sebesar 2,10 persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar 0,00 persen.</Content>
+				<Content>Inflasi y-on-y terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok makanan, minuman, dan tembakau sebesar 0,00 persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar 0,00 persen; kelompok kesehatan sebesar 0,39 persen; kelompok transportasi sebesar -0,32 persen; kelompok rekreasi, olahraga, dan budaya sebesar 0,00 persen; kelompok penyediaan makanan dan minuman/restoran sebesar 0,00 persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar 0,00 persen.</Content>
 			</CharacterStyleRange>
 			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
 				<Properties>
 					<AppliedFont type="string">Raleway</AppliedFont>
 				</Properties>
-				<Content> Sementara kelompok yang mengalami penurunan indeks, yaitu kelompok pakaian dan alas kaki sebesar 0,00 persen; kelompok perlengkapan, peralatan dan pemeliharaan rutin rumah tangga sebesar 0,00 persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar 0,00 persen; dan kelompok pendidikan sebesar 2,10 persen. </Content>
+				<Content> Sementara kelompok yang mengalami penurunan indeks, yaitu kelompok pakaian dan alas kaki sebesar 0,00 persen; kelompok perlengkapan, peralatan dan pemeliharaan rutin rumah tangga sebesar 0,00 persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar 0,00 persen; dan kelompok pendidikan sebesar 0,00 persen. </Content>
 				<Br />
 			</CharacterStyleRange>
 			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
@@ -25,7 +25,7 @@
 					<Leading type="unit">14.5</Leading>
 					<AppliedFont type="string">Raleway</AppliedFont>
 				</Properties>
-				<Content>Tingkat inflasi month-to-month (m-to-m) Juni 2026 sebesar 0,00 persen dan tingkat inflasi year-to-date (y-to-d) Juni 2026 sebesar 1,65 persen.</Content>
+				<Content>Tingkat inflasi month-to-month (m-to-m) Juni 2026 sebesar 0,00 persen dan tingkat inflasi year-to-date (y-to-d) Juni 2026 sebesar 1,91 persen.</Content>
 			</CharacterStyleRange>
 		</ParagraphStyleRange>
 	</Story>

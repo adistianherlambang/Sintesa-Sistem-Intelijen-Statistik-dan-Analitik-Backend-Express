@@ -54,6 +54,14 @@ export const toIndoNum = (val, decimals = 2) => {
 };
 
 /**
+ * Normalisasi string nama kelompok/komoditas untuk pencocokan kunci yang fleksibel
+ */
+export const normalizeGroupName = (str) => {
+  if (!str) return "";
+  return str.toLowerCase().replace(/[^a-z0-9]/g, "");
+};
+
+/**
  * Membaca data bobot dari backend/json/bobot.json
  */
 export const loadBobotData = () => {
@@ -66,14 +74,14 @@ export const loadBobotData = () => {
   const map = {};
   if (Array.isArray(content.bobot)) {
     content.bobot.forEach((item) => {
-      map[item.kelompok.toLowerCase()] = item.bobot;
+      map[normalizeGroupName(item.kelompok)] = item.bobot;
     });
   }
   return map;
 };
 
 /**
- * Memunculkan daftar nama komoditas pendorong/penghambat yang dipisahkan koma dan 'dan'
+ * Format daftar nama komoditas pendorong/penghambat
  */
 const formatCommodityList = (items) => {
   if (!items || !Array.isArray(items) || items.length === 0) {
@@ -88,7 +96,7 @@ const formatCommodityList = (items) => {
 /**
  * Fungsi utama memproses data BPS dan menyusun dictionary placeholder
  */
-export const processIdmlVariables = async (targetCity = "Kota Malang") => {
+export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
   const bobotMap = loadBobotData();
 
   // 1. Fetch data dari controller BPS
@@ -104,8 +112,7 @@ export const processIdmlVariables = async (targetCity = "Kota Malang") => {
   const now = new Date();
   const currentYear = now.getFullYear();
 
-  // Default month: Juni / index 5
-  let monthIndex = 5;
+  let monthIndex = 5; // Default Juni (index 5)
   if (inflasiMoMData && Array.isArray(inflasiMoMData.data) && inflasiMoMData.data.length > 0) {
     const lastItem = inflasiMoMData.data[inflasiMoMData.data.length - 1];
     const keyStr = String(lastItem.key);
@@ -120,11 +127,11 @@ export const processIdmlVariables = async (targetCity = "Kota Malang") => {
   const twoYearsAgo = currentYear - 2;
 
   // Nilai inflasi & IHK umum
-  const umumMoMVal = parseFloat(inflasiMoMData?.dashboard?.now ?? 0.43);
+  const umumMoMVal = parseFloat(inflasiMoMData?.dashboard?.now ?? 0.29);
   const umumYtdVal = parseFloat(inflasiYtdData?.dashboard?.now ?? 1.65);
   const umumYoYVal = parseFloat(inflasiYoyData?.dashboard?.now ?? 3.16);
-  const umumIhkBerjalanVal = parseFloat(ihkData?.dashboard?.now ?? 106.85);
-  const umumIhkSebelumnyaVal = parseFloat(ihkData?.dashboard?.then ?? 106.39);
+  const umumIhkBerjalanVal = parseFloat(ihkData?.dashboard?.now ?? 110.73);
+  const umumIhkSebelumnyaVal = parseFloat(ihkData?.dashboard?.then ?? 110.41);
   const umumIhkPembandingVal = Number((umumIhkBerjalanVal / (1 + umumYoYVal / 100)).toFixed(2));
 
   const bobotTotalUtama = 100.0;
@@ -194,7 +201,6 @@ export const processIdmlVariables = async (targetCity = "Kota Malang") => {
     email: `bps${targetCity.toLowerCase().replace(/[^a-z0-9]/g, "")}`,
   };
 
-  // Group prefix mapping
   const groupPrefixMap = [
     { key: "makanan", match: "makanan" },
     { key: "pakaian", match: "pakaian" },
@@ -209,37 +215,37 @@ export const processIdmlVariables = async (targetCity = "Kota Malang") => {
     { key: "perawatan", match: "perawatan" },
   ];
 
-  // Default values per kelompok
   const groupProcessedData = {};
   groupPrefixMap.forEach((g) => {
     groupProcessedData[g.key] = {
       label: g.match,
       bobot: 5.0,
-      ihkPembanding: 104.5,
-      ihkSebelumnya: 106.0,
-      ihkBerjalan: 106.8,
-      ytd: 1.2,
-      yoy: 2.1,
-      andilMtm: 0.05,
-      andilYoy: 0.1,
+      mom: 0.0,
+      yoy: 0.0,
+      ytd: umumYtdVal,
+      ihkBerjalan: umumIhkBerjalanVal,
+      ihkSebelumnya: umumIhkSebelumnyaVal,
+      ihkPembanding: umumIhkPembandingVal,
+      andilMtm: 0.0,
+      andilYoy: 0.0,
       sub: [],
     };
   });
 
-  // Integrasi data kelompok dari komoditasData.hierarki & komoditasData.prevYear
   if (komoditasData && Array.isArray(komoditasData.hierarki)) {
     komoditasData.hierarki.forEach((item) => {
-      const labelLower = item.label.toLowerCase();
-      const matched = groupPrefixMap.find((g) => labelLower.includes(g.match));
+      const norm = normalizeGroupName(item.label);
+      const matched = groupPrefixMap.find((g) => norm.includes(g.match));
 
       if (matched) {
         const groupKey = matched.key;
-        const bobotVal = bobotMap[labelLower] || 5.0;
+        const bobotVal = bobotMap[norm] || 5.0;
         const momVal = parseFloat(item.value) || 0.0;
         const andilMtmVal = Number(((bobotVal * momVal) / 100).toFixed(2));
 
         groupProcessedData[groupKey].label = item.label;
         groupProcessedData[groupKey].bobot = bobotVal;
+        groupProcessedData[groupKey].mom = momVal;
         groupProcessedData[groupKey].andilMtm = andilMtmVal;
         if (Array.isArray(item.sub)) {
           groupProcessedData[groupKey].sub = item.sub;
@@ -248,11 +254,10 @@ export const processIdmlVariables = async (targetCity = "Kota Malang") => {
     });
   }
 
-  // Integrasi data YoY per kelompok
   if (komoditasData && Array.isArray(komoditasData.prevYear)) {
     komoditasData.prevYear.forEach((item) => {
-      const labelLower = item.label.toLowerCase();
-      const matched = groupPrefixMap.find((g) => labelLower.includes(g.match));
+      const norm = normalizeGroupName(item.label);
+      const matched = groupPrefixMap.find((g) => norm.includes(g.match));
 
       if (matched) {
         const groupKey = matched.key;
@@ -260,8 +265,15 @@ export const processIdmlVariables = async (targetCity = "Kota Malang") => {
         const bobotVal = groupProcessedData[groupKey].bobot || 5.0;
         const andilYoyVal = Number(((bobotVal * yoyVal) / 100).toFixed(2));
 
+        const ihkNowGroup = Number((100 * (1 + (groupProcessedData[groupKey].mom || 0) / 100)).toFixed(2)) + 5.0;
+        const ihkPrevMonthGroup = Number((ihkNowGroup / (1 + (groupProcessedData[groupKey].mom || 0) / 100)).toFixed(2));
+        const ihkPrevYearGroup = Number((ihkNowGroup / (1 + yoyVal / 100)).toFixed(2));
+
         groupProcessedData[groupKey].yoy = yoyVal;
         groupProcessedData[groupKey].andilYoy = andilYoyVal;
+        groupProcessedData[groupKey].ihkBerjalan = ihkNowGroup;
+        groupProcessedData[groupKey].ihkSebelumnya = ihkPrevMonthGroup;
+        groupProcessedData[groupKey].ihkPembanding = ihkPrevYearGroup;
       }
     });
   }

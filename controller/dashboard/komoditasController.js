@@ -5,79 +5,96 @@ import { sort, getDateInfo, findRegionByDataset, findUnifiedCity } from "./helpe
 /**
  * Helper: Process komoditas data untuk satu item
  */
-const processKomoditasItem = async (komoditasItem, kota, month, year, prevYear, prev2Year) => {
+const processKomoditasItem = async (
+  komoditasItem,
+  kota,
+  month,
+  year,
+  prevYear,
+  prev2Year,
+  varKeyField = "var",
+  fallbackRegionVal = null
+) => {
+  const targetVar = komoditasItem[varKeyField] || komoditasItem.var;
   const doc = await APIDataBPS.findOne({
-    "var.val": komoditasItem.var,
-    "turvar.val": komoditasItem.turvar,
+    "var.val": targetVar,
   })
     .select("var vervar datacontent prevYear prev2Year")
     .lean();
 
-  if (!doc || !doc.vervar) {
+  if (!doc) {
     return null;
   }
 
-  const region = doc.vervar.find((item) => item.label === kota);
-  if (!region) {
+  let regionVal = fallbackRegionVal;
+  if (Array.isArray(doc.vervar) && doc.vervar.length > 0) {
+    const region = doc.vervar.find((item) => item.label === kota);
+    if (region) {
+      regionVal = region.val.toString();
+    }
+  }
+
+  if (!regionVal) {
     return null;
   }
 
-  const regionVal = region.val.toString();
   const result = [];
   const sub = {};
   const data = {};
   const subData = {};
 
   // Process current year data
-  for (const key in doc.datacontent) {
-    const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
-    const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
-    const keyMonth = key.slice(regionVal.length + 11);
+  if (doc.datacontent) {
+    for (const key in doc.datacontent) {
+      const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
+      const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
+      const keyMonth = key.slice(regionVal.length + 11);
 
-    if (
-      key.startsWith(regionVal) &&
-      key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-      Number(keyMonth) === Number(month) &&
-      Number(keyYear) === Number(year)
-    ) {
-      result.push({
-        key,
-        value: doc.datacontent[key],
-        bulan: keyMonth,
-      });
-    }
-
-    for (const kelompok of varKelompokIHK) {
       if (
         key.startsWith(regionVal) &&
-        turvar === String(kelompok.turvar) &&
+        key.slice(regionVal.length, regionVal.length + 1) === "2" &&
+        Number(keyMonth) === Number(month) &&
         Number(keyYear) === Number(year)
       ) {
-        data[key] = doc.datacontent[key];
+        result.push({
+          key,
+          value: doc.datacontent[key],
+          bulan: keyMonth,
+        });
       }
 
-      for (const item of kelompok.sub) {
+      for (const kelompok of varKelompokIHK) {
         if (
           key.startsWith(regionVal) &&
-          turvar === String(item.val) &&
+          turvar === String(kelompok.turvar) &&
           Number(keyYear) === Number(year)
         ) {
-          if (!subData[item.val]) subData[item.val] = {};
-          subData[item.val][key] = doc.datacontent[key];
+          data[key] = doc.datacontent[key];
         }
 
-        if (
-          key.startsWith(regionVal) &&
-          turvar === String(item.val) &&
-          Number(keyYear) === Number(year) &&
-          Number(keyMonth) === Number(month)
-        ) {
-          sub[item.val] = {
-            label: item.label,
-            value: doc.datacontent[key],
-            bulan: Number(keyMonth),
-            data: sort(subData)[item.val],
-          };
+        for (const item of kelompok.sub) {
+          if (
+            key.startsWith(regionVal) &&
+            turvar === String(item.val) &&
+            Number(keyYear) === Number(year)
+          ) {
+            if (!subData[item.val]) subData[item.val] = {};
+            subData[item.val][key] = doc.datacontent[key];
+          }
+
+          if (
+            key.startsWith(regionVal) &&
+            turvar === String(item.val) &&
+            Number(keyYear) === Number(year) &&
+            Number(keyMonth) === Number(month)
+          ) {
+            sub[item.val] = {
+              label: item.label,
+              value: doc.datacontent[key],
+              bulan: Number(keyMonth),
+              data: sort(subData)[item.val],
+            };
+          }
         }
       }
     }
@@ -157,9 +174,9 @@ const processKomoditasItem = async (komoditasItem, kota, month, year, prevYear, 
       }
     }
 
-    const sortedResultPrevYear = sort(resultPrevYear);
+    const sortedPrevYear = sort(resultPrevYear);
     const mainDataPrevYear =
-      sortedResultPrevYear && sortedResultPrevYear.length > 0 ? sortedResultPrevYear[0] : null;
+      sortedPrevYear && sortedPrevYear.length > 0 ? sortedPrevYear[0] : null;
 
     prevYearItem = {
       label: komoditasItem.nama,
@@ -232,9 +249,9 @@ const processKomoditasItem = async (komoditasItem, kota, month, year, prevYear, 
       }
     }
 
-    const sortedResultPrev2Year = sort(resultPrev2Year);
+    const sortedPrev2Year = sort(resultPrev2Year);
     const mainDataPrev2Year =
-      sortedResultPrev2Year && sortedResultPrev2Year.length > 0 ? sortedResultPrev2Year[0] : null;
+      sortedPrev2Year && sortedPrev2Year.length > 0 ? sortedPrev2Year[0] : null;
 
     prev2YearItem = {
       label: komoditasItem.nama,
@@ -289,22 +306,31 @@ const getHargaBIForKota = async (searchName) => {
 /**
  * Pure function: Dapatkan data komoditas untuk kota tertentu dengan breakdown per sub-komoditas
  * @param {String} kota - Nama kota
+ * @param {String} [varKeyField="var"] - Field nama var yang digunakan ("var", "yoy", "ytd")
  * @returns {Object} Data komoditas dengan hierarki, prevYear, dan prev2Year
  * @throws Error jika kota tidak diisi
  */
-export const getKomoditasByKota = async (kota) => {
+export const getKomoditasByKota = async (kota, varKeyField = "var") => {
   if (!kota) {
     throw new Error("kota wajib diisi");
   }
 
-  const sampleDoc = await APIDataBPS.findOne({
-    "var.val": varKelompokIHK[0].var,
-    "turvar.val": varKelompokIHK[0].turvar,
+  const sampleVar = varKelompokIHK[0][varKeyField] || varKelompokIHK[0].var;
+  let sampleDoc = await APIDataBPS.findOne({
+    "var.val": sampleVar,
   })
     .select("vervar")
     .lean();
 
-  if (!sampleDoc) {
+  if (!sampleDoc || !Array.isArray(sampleDoc.vervar) || sampleDoc.vervar.length === 0) {
+    sampleDoc = await APIDataBPS.findOne({
+      "var.val": varKelompokIHK[0].var,
+    })
+      .select("vervar")
+      .lean();
+  }
+
+  if (!sampleDoc || !Array.isArray(sampleDoc.vervar) || sampleDoc.vervar.length === 0) {
     throw new Error("data komoditas tidak ditemukan");
   }
 
@@ -314,6 +340,7 @@ export const getKomoditasByKota = async (kota) => {
   }
 
   const resolvedKota = region.label;
+  const regionVal = region.val.toString();
 
   const { month, year, prevYear, prev2Year } = getDateInfo();
   let hierarki = [];
@@ -329,169 +356,8 @@ export const getKomoditasByKota = async (kota) => {
       year,
       prevYear,
       prev2Year,
-    );
-
-    if (result) {
-      hierarki.push(result.hierarki);
-      if (result.prevYearItem) {
-        prevYearList.push(result.prevYearItem);
-      }
-      if (result.prev2YearItem) {
-        prev2YearList.push(result.prev2YearItem);
-      }
-    }
-  }
-
-  for (const key in hierarki) {
-    const subsObj = hierarki[key].sub || {};
-    hierarki[key].sub = Object.entries(subsObj)
-      .sort((a, b) => Number(a[0]) - Number(b[0]))
-      .map(([k, v]) => ({
-        label: v.label,
-        value: v.value,
-        bulan: v.bulan,
-        data: Object.fromEntries(
-          Object.entries(v.data || {}).sort(
-            (x, y) => Number(x[0]) - Number(y[0]),
-          ),
-        ),
-      }));
-  }
-
-  for (const key in prevYearList) {
-    const subsObjPrev = prevYearList[key].sub || {};
-    prevYearList[key].sub = Object.entries(subsObjPrev)
-      .sort((a, b) => Number(a[0]) - Number(b[0]))
-      .map(([k, v]) => ({
-        label: v.label,
-        value: v.value,
-        bulan: v.bulan,
-        data: Object.fromEntries(
-          Object.entries(v.data || {}).sort(
-            (x, y) => Number(x[0]) - Number(y[0]),
-          ),
-        ),
-      }));
-  }
-
-  for (const key in prev2YearList) {
-    const subsObjPrev2 = prev2YearList[key].sub || {};
-    prev2YearList[key].sub = Object.entries(subsObjPrev2)
-      .sort((a, b) => Number(a[0]) - Number(b[0]))
-      .map(([k, v]) => ({
-        label: v.label,
-        value: v.value,
-        bulan: v.bulan,
-        data: Object.fromEntries(
-          Object.entries(v.data || {}).sort(
-            (x, y) => Number(x[0]) - Number(y[0]),
-          ),
-        ),
-      }));
-  }
-
-  if (hierarki.length > 0) {
-    biggest = hierarki.reduce((max, item) => {
-      const currentVal = parseFloat(item.value) || 0;
-      const maxVal = parseFloat(max.value) || 0;
-      return currentVal > maxVal ? item : max;
-    }, hierarki[0]);
-  }
-
-  const getShortLabel = (label) => {
-    const mapping = {
-      "Makanan, Minuman dan Tembakau": "Makanan",
-      "Pakaian dan Alas Kaki": "Pakaian",
-      "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga": "Perumahan",
-      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga": "Peralatan RT",
-      "Kesehatan": "Kesehatan",
-      "Informasi, Komunikasi dan Jasa Keuangan": "Komunikasi",
-      "Transportasi": "Transportasi",
-      "Rekreasi, Olahraga dan Budaya": "Rekreasi",
-      "Pendidikan": "Pendidikan",
-      "Penyediaan Makanan dan Minuman / Restoran": "Restoran",
-      "Perawatan Pribadi dan Jasa Lainnya": "Perawatan",
-    };
-    return mapping[label] || label;
-  };
-
-  const topMom = [...hierarki]
-    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
-    .slice(0, 5)
-    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
-
-  const topYoy = [...prevYearList]
-    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
-    .slice(0, 5)
-    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
-
-  const top5Prev2Year = [...prev2YearList]
-    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
-    .slice(0, 5)
-    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
-
-  const hargaBI = await getHargaBIForKota(kota);
-  const makananItem = hierarki.find(
-    (item) => item.label && item.label.includes("Makanan")
-  );
-  if (makananItem) {
-    makananItem.hargaBI = hargaBI;
-  }
-
-  return {
-    totalKomoditas: hierarki.length,
-    hierarki,
-    prevYear: prevYearList,
-    prev2Year: prev2YearList,
-    biggest,
-    topmom: topMom,
-    topyoy: topYoy,
-    topMom,
-    topYoy,
-    top5Mom: topMom,
-    top5Yoy: topYoy,
-    top5PrevYear: topYoy,
-    top5Prev2Year,
-  };
-};
-
-export const getKomoditasInfografisByKota = async (kota) => {
-  if (!kota) {
-    throw new Error("kota wajib diisi");
-  }
-
-  const sampleDoc = await APIDataBPS.findOne({
-    "var.val": varKelompokIHK[0].var,
-    "turvar.val": varKelompokIHK[0].turvar,
-  })
-    .select("vervar")
-    .lean();
-
-  if (!sampleDoc) {
-    throw new Error("data komoditas tidak ditemukan");
-  }
-
-  const region = findRegionByDataset(sampleDoc.vervar, kota, "ihk_komoditas");
-  if (!region) {
-    throw new Error("kota tidak ditemukan");
-  }
-
-  const resolvedKota = region.label;
-
-  const { month, year, prevYear, prev2Year } = getDateInfo();
-  let hierarki = [];
-  let prevYearList = [];
-  let prev2YearList = [];
-  let biggest = null;
-
-  for (const i in varKelompokIHK) {
-    const result = await processKomoditasItem(
-      varKelompokIHK[i],
-      resolvedKota,
-      month,
-      year,
-      prevYear,
-      prev2Year,
+      varKeyField,
+      regionVal
     );
 
     if (result) {
@@ -625,7 +491,7 @@ export const getKomoditasInfografisByKota = async (kota) => {
     .sort((a, b) => b.value - a.value)
     .slice(0, 5);
 
-  const hargaBI = await getHargaBIForKota(kota);
+  const hargaBI = await getHargaBIForKota(resolvedKota);
   const makananInfografisItem = hierarki.find(
     (item) => item.label && item.label.includes("Makanan")
   );
@@ -654,14 +520,198 @@ export const getKomoditasInfografisByKota = async (kota) => {
   };
 };
 
+export const getKomoditasYoyByKota = async (kota) => {
+  return getKomoditasByKota(kota, "yoy");
+};
+
+export const getKomoditasYtdByKota = async (kota) => {
+  return getKomoditasByKota(kota, "ytd");
+};
+
+export const getKomoditasInfografisByKota = async (kota, varKeyField = "var") => {
+  if (!kota) {
+    throw new Error("kota wajib diisi");
+  }
+
+  const sampleVar = varKelompokIHK[0][varKeyField] || varKelompokIHK[0].var;
+  let sampleDoc = await APIDataBPS.findOne({
+    "var.val": sampleVar,
+  })
+    .select("vervar")
+    .lean();
+
+  if (!sampleDoc || !Array.isArray(sampleDoc.vervar) || sampleDoc.vervar.length === 0) {
+    sampleDoc = await APIDataBPS.findOne({
+      "var.val": varKelompokIHK[0].var,
+    })
+      .select("vervar")
+      .lean();
+  }
+
+  if (!sampleDoc || !Array.isArray(sampleDoc.vervar) || sampleDoc.vervar.length === 0) {
+    throw new Error("data komoditas tidak ditemukan");
+  }
+
+  const region = findRegionByDataset(sampleDoc.vervar, kota, "ihk_komoditas");
+  if (!region) {
+    throw new Error("kota tidak ditemukan");
+  }
+
+  const resolvedKota = region.label;
+  const regionVal = region.val.toString();
+
+  const { month, year, prevYear, prev2Year } = getDateInfo();
+  let hierarki = [];
+  let prevYearList = [];
+  let prev2YearList = [];
+  let biggest = null;
+
+  for (const i in varKelompokIHK) {
+    const result = await processKomoditasItem(
+      varKelompokIHK[i],
+      resolvedKota,
+      month,
+      year,
+      prevYear,
+      prev2Year,
+      varKeyField,
+      regionVal
+    );
+
+    if (result) {
+      hierarki.push(result.hierarki);
+      if (result.prevYearItem) {
+        prevYearList.push(result.prevYearItem);
+      }
+      if (result.prev2YearItem) {
+        prev2YearList.push(result.prev2YearItem);
+      }
+    }
+  }
+
+  for (const key in hierarki) {
+    const subsObj = hierarki[key].sub || {};
+    hierarki[key].sub = Object.entries(subsObj)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  for (const key in prevYearList) {
+    const subsObjPrev = prevYearList[key].sub || {};
+    prevYearList[key].sub = Object.entries(subsObjPrev)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  for (const key in prev2YearList) {
+    const subsObjPrev2 = prev2YearList[key].sub || {};
+    prev2YearList[key].sub = Object.entries(subsObjPrev2)
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([k, v]) => ({
+        label: v.label,
+        value: v.value,
+        bulan: v.bulan,
+        data: Object.fromEntries(
+          Object.entries(v.data || {}).sort(
+            (x, y) => Number(x[0]) - Number(y[0]),
+          ),
+        ),
+      }));
+  }
+
+  if (hierarki.length > 0) {
+    biggest = hierarki.reduce((max, item) => {
+      const currentVal = parseFloat(item.value) || 0;
+      const maxVal = parseFloat(max.value) || 0;
+      return currentVal > maxVal ? item : max;
+    }, hierarki[0]);
+  }
+
+  const getShortLabel = (label) => {
+    const mapping = {
+      "Makanan, Minuman dan Tembakau": "Makanan",
+      "Pakaian dan Alas Kaki": "Pakaian",
+      "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga": "Perumahan",
+      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga": "Peralatan RT",
+      "Kesehatan": "Kesehatan",
+      "Informasi, Komunikasi dan Jasa Keuangan": "Komunikasi",
+      "Transportasi": "Transportasi",
+      "Rekreasi, Olahraga dan Budaya": "Rekreasi",
+      "Pendidikan": "Pendidikan",
+      "Penyediaan Makanan dan Minuman / Restoran": "Restoran",
+      "Perawatan Pribadi dan Jasa Lainnya": "Perawatan",
+    };
+    return mapping[label] || label;
+  };
+
+  const topMom = [...hierarki]
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const topYoy = [...prevYearList]
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const top5Prev2Year = [...prev2YearList]
+    .sort((a, b) => (parseFloat(b.value) || 0) - (parseFloat(a.value) || 0))
+    .slice(0, 5)
+    .map((item) => ({ label: getShortLabel(item.label), value: item.value }));
+
+  const hargaBI = await getHargaBIForKota(resolvedKota);
+  const makananItem = hierarki.find(
+    (item) => item.label && item.label.includes("Makanan")
+  );
+  if (makananItem) {
+    makananItem.hargaBI = hargaBI;
+  }
+
+  return {
+    totalKomoditas: hierarki.length,
+    hierarki,
+    prevYear: prevYearList,
+    prev2Year: prev2YearList,
+    biggest,
+    topmom: topMom,
+    topyoy: topYoy,
+    topMom,
+    topYoy,
+    top5Mom: topMom,
+    top5Yoy: topYoy,
+    top5PrevYear: topYoy,
+    top5Prev2Year,
+  };
+};
+
 /**
  * Pure function: Dapatkan dokumen komoditas lengkap
+ * @param {String} [varKeyField="var"] - Field nama var yang digunakan ("var", "yoy", "ytd")
  * @returns {Object} Dokumen komoditas
  * @throws Error jika data tidak ditemukan
  */
-export const getAllKomoditas = async () => {
+export const getAllKomoditas = async (varKeyField = "var") => {
+  const targetVar = varKelompokIHK[0][varKeyField] || varKelompokIHK[0].var;
   const doc = await APIDataBPS.findOne({
-    "var.val": 2224,
+    "var.val": targetVar,
   });
 
   if (!doc) {
@@ -669,4 +719,12 @@ export const getAllKomoditas = async () => {
   }
 
   return doc;
+};
+
+export const getAllKomoditasYoy = async () => {
+  return getAllKomoditas("yoy");
+};
+
+export const getAllKomoditasYtd = async () => {
+  return getAllKomoditas("ytd");
 };

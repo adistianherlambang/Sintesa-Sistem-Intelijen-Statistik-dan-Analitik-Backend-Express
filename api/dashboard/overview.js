@@ -18,7 +18,11 @@ import {
 } from "../../controller/dashboard/ihkController.js";
 import {
   getKomoditasByKota,
+  getKomoditasYoyByKota,
+  getKomoditasYtdByKota,
   getAllKomoditas,
+  getAllKomoditasYoy,
+  getAllKomoditasYtd,
   getKomoditasInfografisByKota,
 } from "../../controller/dashboard/komoditasController.js";
 import {
@@ -224,6 +228,44 @@ router.post("/komoditas", async (req, res) => {
   try {
     const { kota } = req.body;
     const result = await getKomoditasByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/komoditas/yoy", async (req, res) => {
+  try {
+    const result = await getAllKomoditasYoy();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/komoditas/yoy", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getKomoditasYoyByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/komoditas/ytd", async (req, res) => {
+  try {
+    const result = await getAllKomoditasYtd();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/komoditas/ytd", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getKomoditasYtdByKota(kota);
     res.json(result);
   } catch (err) {
     handleError(res, err);

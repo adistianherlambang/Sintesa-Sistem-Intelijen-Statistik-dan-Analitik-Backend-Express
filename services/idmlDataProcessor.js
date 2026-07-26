@@ -128,8 +128,8 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
 
   // Nilai inflasi & IHK umum
   const umumMoMVal = parseFloat(inflasiMoMData?.dashboard?.now ?? 0.29);
-  const umumYtdVal = parseFloat(inflasiYtdData?.dashboard?.now ?? 1.65);
-  const umumYoYVal = parseFloat(inflasiYoyData?.dashboard?.now ?? 3.16);
+  const umumYtdVal = parseFloat(inflasiYtdData?.dashboard?.now ?? 1.91);
+  const umumYoYVal = parseFloat(inflasiYoyData?.dashboard?.now ?? 3.07);
   const umumIhkBerjalanVal = parseFloat(ihkData?.dashboard?.now ?? 110.73);
   const umumIhkSebelumnyaVal = parseFloat(ihkData?.dashboard?.then ?? 110.41);
   const umumIhkPembandingVal = Number((umumIhkBerjalanVal / (1 + umumYoYVal / 100)).toFixed(2));
@@ -265,7 +265,7 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
         const bobotVal = groupProcessedData[groupKey].bobot || 5.0;
         const andilYoyVal = Number(((bobotVal * yoyVal) / 100).toFixed(2));
 
-        const ihkNowGroup = Number((100 * (1 + (groupProcessedData[groupKey].mom || 0) / 100)).toFixed(2)) + 5.0;
+        const ihkNowGroup = Number((umumIhkBerjalanVal + (groupProcessedData[groupKey].mom || 0)).toFixed(2));
         const ihkPrevMonthGroup = Number((ihkNowGroup / (1 + (groupProcessedData[groupKey].mom || 0) / 100)).toFixed(2));
         const ihkPrevYearGroup = Number((ihkNowGroup / (1 + yoyVal / 100)).toFixed(2));
 
@@ -292,7 +292,13 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
     variables[`${k}AndilYoy`] = toIndoNum(data.andilYoy);
   });
 
-  // Placeholder spesifik teks paragraf per kelompok
+  // Pengelompokan Dinamis Kelompok Inflasi vs Deflasi untuk Narasi Utama Paragraf 1 & 4
+  const groupArray = Object.values(groupProcessedData);
+  const inflasiYoYList = groupArray.filter((g) => g.yoy > 0);
+  const deflasiYoYList = groupArray.filter((g) => g.yoy < 0);
+  const andilInflasiYoYList = groupArray.filter((g) => g.andilYoy > 0);
+  const andilDeflasiYoYList = groupArray.filter((g) => g.andilYoy < 0);
+
   variables["kelompokMakanan"] = "makanan, minuman, dan tembakau";
   variables["indeksMakananYoy"] = toIndoNum(groupProcessedData["makanan"].yoy);
   variables["andilMakananYoy"] = toIndoNum(groupProcessedData["makanan"].andilYoy);

@@ -71,6 +71,17 @@ export const processStoryUcc5Contextually = (xmlContent, rawData) => {
     let subDeflasiList = subItems.filter(s => (parseFloat(s.value) || 0) < 0);
     let subStabilList = subItems.filter(s => (parseFloat(s.value) || 0) === 0);
 
+    // Dynamic inflasi vs deflasi wording
+    if (yoyVal >= 0) {
+      blockContent = blockContent.replace(/mengalami deflasi y-on-y/g, "mengalami inflasi y-on-y");
+      blockContent = blockContent.replace(/penurunan indeks/g, "kenaikan indeks");
+      blockContent = blockContent.replace(/andil\/sumbangan deflasi y-on-y/g, "andil/sumbangan inflasi y-on-y");
+    } else {
+      blockContent = blockContent.replace(/mengalami inflasi y-on-y/g, "mengalami deflasi y-on-y");
+      blockContent = blockContent.replace(/kenaikan indeks/g, "penurunan indeks");
+      blockContent = blockContent.replace(/andil\/sumbangan inflasi y-on-y/g, "andil/sumbangan deflasi y-on-y");
+    }
+
     blockContent = blockContent.replace(/\$\{namaKelompok\}/g, groupNameLower);
     blockContent = blockContent.replace(/\$\{inflasiYoy\}/g, toIndoNum(Math.abs(yoyVal)));
     blockContent = blockContent.replace(/\$\{deflasiYoy\}/g, toIndoNum(Math.abs(yoyVal)));

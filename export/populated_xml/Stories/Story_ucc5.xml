@@ -20,7 +20,7 @@
 						<Leading type="unit">15</Leading>
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
-					<Content>Perkembangan harga berbagai komoditas pada Juni 2026 secara umum menunjukkan adanya kenaikan harga. Berdasarkan hasil pemantauan Badan Pusat Statistik KOTA METRO, pada Juni 2026 terjadi inflasi y-on-y sebesar 3,07 persen, atau terjadi kenaikan Indeks Harga Konsumen (IHK) dari 107,43 pada Juni 2025 menjadi 110,73 pada Juni 2026.</Content>
+					<Content>Perkembangan harga berbagai komoditas pada Juni 2026 secara umum menunjukkan adanya kenaikan harga. Berdasarkan hasil pemantauan Badan Pusat Statistik Kota Malang, pada Juni 2026 terjadi inflasi y-on-y sebesar 3,16 persen, atau terjadi kenaikan Indeks Harga Konsumen (IHK) dari 108,35 pada Juni 2025 menjadi 111,77 pada Juni 2026.</Content>
 					<Br />
 				</CharacterStyleRange>
 			</ParagraphStyleRange>
@@ -29,7 +29,7 @@
 					<Properties>
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
-					<Content>IHK dan Tingkat Inflasi Month-to-Month (M-to-M), Year-to-Date (Y-to-D), dan Year-on-Year (Y-on-Y) KOTA METRO Menurut Kelompok Pengeluaran (2022=100), Juni 2026 </Content>
+					<Content>IHK dan Tingkat Inflasi Month-to-Month (M-to-M), Year-to-Date (Y-to-D), dan Year-on-Year (Y-on-Y) Kota Malang Menurut Kelompok Pengeluaran (2022=100), Juni 2026 </Content>
 				</CharacterStyleRange>
 				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FillColor="Color/Black" FontStyle="Regular" DiacriticPosition="OpentypePosition">
 					<Properties>
@@ -244,7 +244,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>107,43</Content>
+									<Content>108,35</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -254,7 +254,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>110,41</Content>
+									<Content>111,29</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -264,7 +264,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>110,73</Content>
+									<Content>111,77</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -274,7 +274,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -284,7 +284,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>3,07</Content>
+									<Content>3,16</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -294,7 +294,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,29</Content>
+									<Content>0,43</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -304,7 +304,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>3,07</Content>
+									<Content>3,16</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -324,7 +324,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,77</Content>
+									<Content>112,13</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -334,7 +334,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>104,96</Content>
+									<Content>111,72</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -344,7 +344,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,77</Content>
+									<Content>112,23</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -354,7 +354,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -364,7 +364,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,00</Content>
+									<Content>0,09</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -374,7 +374,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,07</Content>
+									<Content>0,04</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -384,7 +384,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,00</Content>
+									<Content>0,01</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -404,7 +404,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,24</Content>
+									<Content>112,03</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -414,7 +414,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>111,74</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -424,7 +424,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,03</Content>
+									<Content>112,06</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -434,7 +434,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -444,7 +444,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,20</Content>
+									<Content>0,03</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -454,7 +454,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,00</Content>
+									<Content>0,02</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -464,7 +464,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,01</Content>
+									<Content>0,00</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -484,7 +484,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,07</Content>
+									<Content>111,85</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -494,7 +494,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>111,76</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -504,7 +504,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,02</Content>
+									<Content>111,85</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -514,7 +514,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -524,7 +524,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,05</Content>
+									<Content>0,00</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -534,7 +534,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,00</Content>
+									<Content>0,01</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -564,7 +564,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>106,76</Content>
+									<Content>111,71</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -574,7 +574,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>104,93</Content>
+									<Content>111,76</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -584,7 +584,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>106,47</Content>
+									<Content>111,86</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -594,7 +594,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -604,7 +604,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,27</Content>
+									<Content>0,13</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -614,7 +614,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,08</Content>
+									<Content>0,00</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -624,7 +624,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,01</Content>
+									<Content>0,01</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -644,7 +644,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>104,59</Content>
+									<Content>112,40</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -654,7 +654,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>111,68</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -664,7 +664,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>112,57</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -674,7 +674,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -684,7 +684,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,39</Content>
+									<Content>0,15</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -694,7 +694,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,00</Content>
+									<Content>0,03</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -704,7 +704,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,01</Content>
+									<Content>0,00</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -724,7 +724,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,66</Content>
+									<Content>112,04</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -734,7 +734,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>104,98</Content>
+									<Content>111,75</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -744,7 +744,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,32</Content>
+									<Content>111,91</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -754,7 +754,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -764,7 +764,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,32</Content>
+									<Content>-0,12</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -774,7 +774,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,05</Content>
+									<Content>0,02</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -784,7 +784,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,05</Content>
+									<Content>-0,02</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -804,7 +804,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>110,27</Content>
+									<Content>111,84</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -814,7 +814,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>104,75</Content>
+									<Content>111,72</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -824,7 +824,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>110,24</Content>
+									<Content>112,23</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -834,7 +834,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -844,7 +844,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,03</Content>
+									<Content>0,35</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -854,7 +854,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,30</Content>
+									<Content>0,03</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -864,7 +864,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,00</Content>
+									<Content>0,02</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -884,7 +884,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,04</Content>
+									<Content>112,61</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -894,7 +894,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>111,69</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -904,7 +904,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>112,45</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -914,7 +914,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -924,7 +924,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>-0,04</Content>
+									<Content>-0,14</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -934,7 +934,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,00</Content>
+									<Content>0,01</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -964,7 +964,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>111,77</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -974,7 +974,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>111,77</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -984,7 +984,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,00</Content>
+									<Content>111,77</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -994,7 +994,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1044,7 +1044,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>107,43</Content>
+									<Content>108,35</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1054,7 +1054,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>110,41</Content>
+									<Content>111,29</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1064,7 +1064,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>110,73</Content>
+									<Content>111,77</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1074,7 +1074,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1124,7 +1124,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>104,16</Content>
+									<Content>111,30</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1134,7 +1134,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>105,03</Content>
+									<Content>111,83</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1144,7 +1144,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>104,45</Content>
+									<Content>111,24</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1154,7 +1154,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>1,91</Content>
+									<Content>1,66</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1164,7 +1164,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,28</Content>
+									<Content>-0,05</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1184,7 +1184,7 @@
 									<Properties>
 										<AppliedFont type="string">Raleway</AppliedFont>
 									</Properties>
-									<Content>0,02</Content>
+									<Content>0,00</Content>
 								</CharacterStyleRange>
 							</ParagraphStyleRange>
 						</Cell>
@@ -1265,13 +1265,13 @@
 						<Leading type="unit">15</Leading>
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
-					<Content>Inflasi y-on-y terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok makanan, minuman, dan tembakau sebesar 0,00 persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar -0,05 persen; kelompok kesehatan sebesar 0,39 persen; kelompok transportasi sebesar -0,32 persen; kelompok rekreasi, olahraga, dan budaya sebesar -0,04 persen; kelompok penyediaan makanan dan minuman/restoran sebesar 0,00 persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar 0,28 persen. Sementara kelompok pengeluaran yang mengalami penurunan indeks, yaitu: kelompok pakaian dan alas kaki sebesar 0,20 persen; kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga sebesar 0,27 persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar 0,03 persen; dan kelompok pendidikan sebesar 0,00 persen.</Content>
+					<Content>Inflasi y-on-y terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok makanan, minuman, dan tembakau sebesar 0,09 persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar 0,00 persen; kelompok kesehatan sebesar 0,15 persen; kelompok transportasi sebesar -0,12 persen; kelompok rekreasi, olahraga, dan budaya sebesar -0,14 persen; kelompok penyediaan makanan dan minuman/restoran sebesar 0,00 persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar -0,05 persen. Sementara kelompok pengeluaran yang mengalami penurunan indeks, yaitu: kelompok pakaian dan alas kaki sebesar 0,03 persen; kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga sebesar 0,13 persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar 0,35 persen; dan kelompok pendidikan sebesar 0,00 persen.</Content>
 					<Br />
-					<Content>Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y pada Juni 2026, antara lain: Kesehatan dan Perawatan. Sedangkan komoditas yang memberikan andil/sumbangan deflasi y-on-y, antara lain: Komunikasi.</Content>
+					<Content>Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y pada Juni 2026, antara lain: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian. Sedangkan komoditas yang memberikan andil/sumbangan deflasi y-on-y, antara lain: bawang merah dan minyak goreng.</Content>
 					<Br />
-					<Content>Sementara komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m pada Juni 2026, antara lain: Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi. Sementara komoditas yang memberikan andil/sumbangan deflasi m-to-m, antara lain: bawang merah dan daging ayam ras.</Content>
+					<Content>Sementara komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m pada Juni 2026, antara lain: Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian. Sementara komoditas yang memberikan andil/sumbangan deflasi m-to-m, antara lain: bawang merah dan daging ayam ras.</Content>
 					<Br />
-					<Content>Pada Juni 2026, kelompok pengeluaran yang memberikan andil/sumbangan inflasi y-on-y, yaitu: kelompok makanan, minuman, dan tembakau sebesar 0,00 persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar 0,00 persen; kelompok kesehatan sebesar 0,01 persen; kelompok transportasi sebesar -0,05 persen; kelompok rekreasi, olahraga, dan budaya sebesar 0,00 persen; kelompok penyediaan makanan dan minuman/restoran sebesar 0,00 persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar 0,02 persen. Sedangkan kelompok pengeluaran yang memberikan andil/sumbangan deflasi y-on-y, yaitu: kelompok pakaian dan alas kaki sebesar 0,01 persen; kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga sebesar 0,01 persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar 0,00 persen; dan kelompok pendidikan sebesar 0,00 persen.</Content>
+					<Content>Pada Juni 2026, kelompok pengeluaran yang memberikan andil/sumbangan inflasi y-on-y, yaitu: kelompok makanan, minuman, dan tembakau sebesar 0,01 persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar 0,00 persen; kelompok kesehatan sebesar 0,00 persen; kelompok transportasi sebesar -0,02 persen; kelompok rekreasi, olahraga, dan budaya sebesar 0,00 persen; kelompok penyediaan makanan dan minuman/restoran sebesar 0,00 persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar 0,00 persen. Sedangkan kelompok pengeluaran yang memberikan andil/sumbangan deflasi y-on-y, yaitu: kelompok pakaian dan alas kaki sebesar 0,00 persen; kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga sebesar 0,01 persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar 0,02 persen; dan kelompok pendidikan sebesar 0,00 persen.</Content>
 					<Br />
 				</CharacterStyleRange>
 			</ParagraphStyleRange>
@@ -1293,13 +1293,13 @@
 					</Properties>
 					<XMLElement Self="di2i3i20" MarkupTag="XMLTag/BodyTextBrs">
 						<XMLElement Self="di2i3i20i1f" MarkupTag="XMLTag/BodyTextBrs">
-							<Content>Kelompok makanan, minuman, dan tembakau pada Juni 2026 mengalami inflasi y-on-y sebesar 0,00 persen atau terjadi kenaikan indeks dari 104,96 pada Juni 2025 menjadi 105,77 pada Juni 2026.</Content>
+							<Content>Kelompok makanan, minuman, dan tembakau pada Juni 2026 mengalami inflasi y-on-y sebesar 0,09 persen atau terjadi kenaikan indeks dari 111,72 pada Juni 2025 menjadi 112,23 pada Juni 2026.</Content>
 							<Br />
-							<Content>Subkelompok yang mengalami inflasi y-on-y tertinggi, yaitu subkelompok jasa pelayanan makanan dan minuman sebesar 0,77 persen dan terendah yaitu subkelompok jasa pelayanan makanan dan minuman sebesar 0,77 persen.</Content>
+							<Content>Subkelompok yang mengalami inflasi y-on-y tertinggi, yaitu subkelompok jasa pelayanan makanan dan minuman sebesar 0,46 persen dan terendah yaitu subkelompok jasa pelayanan makanan dan minuman sebesar 0,46 persen.</Content>
 							<Br />
-							<Content>Sementara kelompok makanan, minuman, dan tembakau pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Kesehatan dan Perawatan. Sedangkan komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: Komunikasi.</Content>
+							<Content>Sementara kelompok makanan, minuman, dan tembakau pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,01 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian. Sedangkan komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: bawang merah dan minyak goreng.</Content>
 							<Br />
-							<Content>Sementara kelompok makanan, minuman, dan tembakau pada Juni 2026 memberikan andil/sumbangan inflasi m-to-m sebesar 0,07 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi. Sedangkan komoditas yang dominan memberikan andil/sumbangan deflasi m-to-m, yaitu: bawang merah dan daging ayam ras.</Content>
+							<Content>Sementara kelompok makanan, minuman, dan tembakau pada Juni 2026 memberikan andil/sumbangan inflasi m-to-m sebesar 0,04 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian. Sedangkan komoditas yang dominan memberikan andil/sumbangan deflasi m-to-m, yaitu: bawang merah dan daging ayam ras.</Content>
 						</XMLElement>
 					</XMLElement>
 				</CharacterStyleRange>
@@ -1343,9 +1343,9 @@
 							<Leading type="unit">15</Leading>
 							<AppliedFont type="string">Raleway</AppliedFont>
 						</Properties>
-						<Content>Kelompok pakaian dan alas kaki pada Juni 2026 mengalami deflasi y-on-y sebesar 0,20 persen atau terjadi penurunan indeks dari 105,00 pada Juni 2025 menjadi 105,03 pada Juni 2026. Subkelompok yang mengalami inflasi y-on-y pada kelompok pakaian dan alas kaki, yaitu subkelompok pakaian sebesar 0,02 persen sedangkan subkelompok yang mengalami deflasi y-on-y, yaitu subkelompok pakaian sebesar 0,00 persen.</Content>
+						<Content>Kelompok pakaian dan alas kaki pada Juni 2026 mengalami inflasi y-on-y sebesar 0,03 persen atau terjadi kenaikan indeks dari 111,74 pada Juni 2025 menjadi 112,06 pada Juni 2026. Subkelompok yang mengalami inflasi y-on-y pada kelompok pakaian dan alas kaki, yaitu subkelompok pakaian sebesar 0,27 persen sedangkan subkelompok yang mengalami inflasi y-on-y, yaitu subkelompok pakaian sebesar 0,00 persen.</Content>
 						<Br />
-						<Content>Kelompok pakaian dan alas kaki pada Juni 2026 memberikan andil/sumbangan deflasi y-on-y sebesar 0,01 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: Komunikasi. Sementara kelompok pakaian dan alas kaki pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,07 persen dipicu oleh Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi.</Content>
+						<Content>Kelompok pakaian dan alas kaki pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: bawang merah dan minyak goreng. Sementara kelompok pakaian dan alas kaki pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,04 persen dipicu oleh Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian.</Content>
 					</CharacterStyleRange>
 				</XMLElement>
 				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
@@ -1383,13 +1383,13 @@
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
 					<XMLElement Self="di2i3i1b" MarkupTag="XMLTag/BodyTextBrs">
-						<Content>Kelompok perumahan, air, listrik, dan bahan bakar rumah tangga pada Juni 2026 mengalami inflasi y-on-y sebesar 0,05 persen atau terjadi kenaikan indeks dari 105,00 pada Juni 2025 menjadi 105,02 pada Juni 2026.</Content>
+						<Content>Kelompok perumahan, air, listrik, dan bahan bakar rumah tangga pada Juni 2026 mengalami inflasi y-on-y sebesar 0,00 persen atau terjadi kenaikan indeks dari 111,76 pada Juni 2025 menjadi 111,85 pada Juni 2026.</Content>
 						<Br />
-						<Content>Subkelompok yang mengalami inflasi y-on-y yaitu subkelompok sewa rumah sebesar 1,25 persen; serta subkelompok pemeliharaan rumah sebesar 0,48 persen. Sedangkan yang mengalami deflasi y-on-y yaitu subkelompok pakaian sebesar 0,00 persen. Sementara subkelompok sewa dan kontrak rumah, penyediaan air dan layanan perumahan lainnya, listrik dan bahan bakar rumah tangga terpantau stabil dan tidak mengalami perubahan indeks harga.</Content>
+						<Content>Subkelompok yang mengalami inflasi y-on-y yaitu subkelompok sewa rumah sebesar 1,25 persen; serta subkelompok pemeliharaan rumah sebesar 0,48 persen. Sedangkan yang mengalami inflasi y-on-y yaitu subkelompok pakaian sebesar 0,00 persen. Sementara subkelompok sewa dan kontrak rumah, penyediaan air dan layanan perumahan lainnya terpantau stabil dan tidak mengalami perubahan indeks harga.</Content>
 						<Br />
-						<Content>Kelompok perumahan, air, listrik, dan bahan bakar rumah tangga pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Kesehatan dan Perawatan.</Content>
+						<Content>Kelompok perumahan, air, listrik, dan bahan bakar rumah tangga pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian.</Content>
 						<Br />
-						<Content>Sementara kelompok perumahan, air, listrik, dan bahan bakar rumah tangga pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,07 persen dipicu oleh Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi. </Content>
+						<Content>Sementara kelompok perumahan, air, listrik, dan bahan bakar rumah tangga pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,04 persen dipicu oleh Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian. </Content>
 					</XMLElement>
 					<Content> </Content>
 					<Br />
@@ -1440,13 +1440,13 @@
 							<AppliedFont type="string">Raleway</AppliedFont>
 						</Properties>
 						<XMLElement Self="di2i3i3bi3a" MarkupTag="XMLTag/BodyTextBrs">
-							<Content>Kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga pada Juni 2026 mengalami deflasi y-on-y sebesar 0,27 persen atau terjadi penurunan indeks dari 104,93 pada Juni 2025 menjadi 106,47 pada Juni 2026.</Content>
+							<Content>Kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga pada Juni 2026 mengalami inflasi y-on-y sebesar 0,13 persen atau terjadi kenaikan indeks dari 111,76 pada Juni 2025 menjadi 111,86 pada Juni 2026.</Content>
 							<Br />
-							<Content>Subkelompok yang mengalami deflasi y-on-y terdalam, yaitu subkelompok pakaian pria sebesar 0,18 persen; subkelompok pakaian wanita sebesar 0,15 persen; dan subkelompok 0,00 sebesar 0,00 persen. Sedangkan subkelompok yang mengalami inflasi tertinggi yaitu: subkelompok sewa rumah sebesar 1,25 persen; subkelompok pemeliharaan rumah sebesar 0,48 persen; dan subkelompok 0,00 sebesar 0,00 persen.</Content>
+							<Content>Subkelompok yang mengalami inflasi y-on-y terdalam, yaitu subkelompok pakaian pria sebesar 0,18 persen; subkelompok pakaian wanita sebesar 0,15 persen; dan subkelompok 0,00 sebesar 0,00 persen. Sedangkan subkelompok yang mengalami inflasi tertinggi yaitu: subkelompok sewa rumah sebesar 1,25 persen; subkelompok pemeliharaan rumah sebesar 0,48 persen; dan subkelompok 0,00 sebesar 0,00 persen.</Content>
 							<Br />
-							<Content>Kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga pada Juni 2026 memberikan andil/sumbangan deflasi y-on-y sebesar 0,01 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu Komunikasi. Sedangkan komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu Kesehatan dan Perawatan.</Content>
+							<Content>Kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,01 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu bawang merah dan minyak goreng. Sedangkan komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian.</Content>
 							<Br />
-							<Content>Sementara kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga pada Juni 2026 memberikan andil/sumbangan deflasi m-to-m sebesar 0,08 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi m-to-m, yaitu: 0,00.</Content>
+							<Content>Sementara kelompok perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga pada Juni 2026 memberikan andil/sumbangan deflasi m-to-m sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi m-to-m, yaitu: 0,00.</Content>
 						</XMLElement>
 					</CharacterStyleRange>
 				</ParagraphStyleRange>
@@ -1486,13 +1486,13 @@
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
 					<XMLElement Self="di2i3i38" MarkupTag="XMLTag/BodyTextBrs">
-						<Content>Kelompok kesehatan pada Juni 2026 mengalami inflasi y-on-y sebesar 0,39 persen atau terjadi kenaikan indeks dari 105,00 pada Juni 2025 menjadi 105,00 pada Juni 2026.</Content>
+						<Content>Kelompok kesehatan pada Juni 2026 mengalami inflasi y-on-y sebesar 0,15 persen atau terjadi kenaikan indeks dari 111,68 pada Juni 2025 menjadi 112,57 pada Juni 2026.</Content>
 						<Br />
 						<Content>Subkelompok yang mengalami inflasi y-on-y tertinggi, yaitu subkelompok sewa rumah sebesar 1,25 persen; dan subkelompok pemeliharaan rumah sebesar 0,48 persen. Sementara subkelompok jasa rawat jalan, jasa rawat inap, jasa kesehatan lainnya terpantau stabil dan tidak mengalami perubahan indeks harga.</Content>
 						<Br />
-						<Content>Kelompok kesehatan pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,01 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Kesehatan dan Perawatan.</Content>
+						<Content>Kelompok kesehatan pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian.</Content>
 						<Br />
-						<Content>Sementara kelompok kesehatan pada Juni 2026 memberikan andil/sumbangan inflasi m-to-m sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi.</Content>
+						<Content>Sementara kelompok kesehatan pada Juni 2026 memberikan andil/sumbangan inflasi m-to-m sebesar 0,03 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian.</Content>
 					</XMLElement>
 				</CharacterStyleRange>
 				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
@@ -1535,13 +1535,13 @@
 							<Leading type="unit">15</Leading>
 							<AppliedFont type="string">Raleway</AppliedFont>
 						</Properties>
-						<Content>Kelompok transportasi pada Juni 2026 mengalami inflasi y-on-y sebesar 0,32 persen atau terjadi kenaikan indeks dari 104,98 pada Juni 2025 menjadi 105,32 pada Juni 2026.</Content>
+						<Content>Kelompok transportasi pada Juni 2026 mengalami deflasi y-on-y sebesar 0,12 persen atau terjadi penurunan indeks dari 111,75 pada Juni 2025 menjadi 111,91 pada Juni 2026.</Content>
 						<Br />
-						<Content>Dari 5 subkelompok pada kelompok transportasi, 4 subkelompok mengalami inflasi y-on-y, 1 subkelompok tidak memberikan andil/sumbangan yang signifikan terhadap inflasi/deflasi y-on-y. Subkelompok yang mengalami inflasi y-on-y, yaitu subkelompok sewa rumah sebesar 1,25 persen; subkelompok pemeliharaan rumah sebesar 0,48 persen; dan subkelompok 0,00 sebesar 0,00 persen. Sedangkan subkelompok yang tidak mengalami perubahan inflasi y-on-y, yaitu subkelompok jasa pengiriman barang.</Content>
+						<Content>Dari 5 subkelompok pada kelompok transportasi, 3 subkelompok mengalami deflasi y-on-y, 1 subkelompok tidak memberikan andil/sumbangan yang signifikan terhadap inflasi/deflasi y-on-y. Subkelompok yang mengalami deflasi y-on-y, yaitu subkelompok sewa rumah sebesar 1,25 persen; subkelompok pemeliharaan rumah sebesar 0,48 persen; dan subkelompok 0,00 sebesar 0,00 persen. Sedangkan subkelompok yang tidak mengalami perubahan inflasi y-on-y, yaitu subkelompok jasa pengiriman barang.</Content>
 						<Br />
-						<Content>Kelompok transportasi pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,05 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Kesehatan dan Perawatan.</Content>
+						<Content>Kelompok transportasi pada Juni 2026 memberikan andil/sumbangan deflasi y-on-y sebesar 0,02 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian.</Content>
 						<Br />
-						<Content>Sementara kelompok transportasi pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,07 persen dipicu oleh Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi.</Content>
+						<Content>Sementara kelompok transportasi pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,04 persen dipicu oleh Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian.</Content>
 					</CharacterStyleRange>
 					<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
 						<Properties>
@@ -1582,13 +1582,13 @@
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
 					<XMLElement Self="di2i3i32" MarkupTag="XMLTag/BodyTextBrs">
-						<Content>Kelompok informasi, komunikasi, dan jasa keuangan pada Juni 2026 di KOTA METRO mengalami deflasi y-on-y sebesar 0,03 persen atau terjadi penurunan indeks dari 104,75 pada Juni 2025 menjadi 110,24 pada Juni 2026.</Content>
+						<Content>Kelompok informasi, komunikasi, dan jasa keuangan pada Juni 2026 di Kota Malang mengalami inflasi y-on-y sebesar 0,35 persen atau terjadi kenaikan indeks dari 111,72 pada Juni 2025 menjadi 112,23 pada Juni 2026.</Content>
 						<Br />
-						<Content>Subkelompok yang mengalami deflasi y-on-y terdalam yaitu: subkelompok pakaian sebesar 0,00 persen. Sedangkan subkelompok yang mengalami inflasi y-on-y, yaitu subkelompok peralatan informasi dan komunikasi sebesar 19,03 persen. Sementara subkelompok yang tidak mengalami perubahan inflasi y-on-y, yaitu: layanan informasi dan komunikasi, jasa keuangan.</Content>
+						<Content>Subkelompok yang mengalami inflasi y-on-y terdalam yaitu: subkelompok pakaian sebesar 0,00 persen. Sedangkan subkelompok yang mengalami inflasi y-on-y, yaitu subkelompok peralatan informasi dan komunikasi sebesar 1,84 persen. Sementara subkelompok yang tidak mengalami perubahan inflasi y-on-y, yaitu: layanan informasi dan komunikasi, asuransi, jasa keuangan.</Content>
 						<Br />
-						<Content>Kelompok informasi, komunikasi, dan jasa keuangan pada Juni 2026 memberikan andil/sumbangan deflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: Komunikasi.</Content>
+						<Content>Kelompok informasi, komunikasi, dan jasa keuangan pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,02 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: bawang merah dan minyak goreng.</Content>
 						<Br />
-						<Content>Sementara  kelompok informasi, komunikasi, dan jasa keuangan pada Juni 2026 memberikan andil/sumbangan inflasi m-to-m sebesar 0,30 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi. </Content>
+						<Content>Sementara  kelompok informasi, komunikasi, dan jasa keuangan pada Juni 2026 memberikan andil/sumbangan inflasi m-to-m sebesar 0,03 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian. </Content>
 					</XMLElement>
 				</CharacterStyleRange>
 				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
@@ -1622,11 +1622,11 @@
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
 					<XMLElement Self="di2i3i2d" MarkupTag="XMLTag/BodyTextBrs">
-						<Content>Kelompok rekreasi, olahraga, dan budaya pada Juni 2026 di KOTA METRO mengalami inflasi y-on-y sebesar 0,04 persen atau terjadi kenaikan indeks dari 105,00 pada Juni 2025 menjadi 105,00 pada Juni 2026.</Content>
+						<Content>Kelompok rekreasi, olahraga, dan budaya pada Juni 2026 di Kota Malang mengalami deflasi y-on-y sebesar 0,14 persen atau terjadi penurunan indeks dari 111,69 pada Juni 2025 menjadi 112,45 pada Juni 2026.</Content>
 						<Br />
-						<Content>Subkelompok yang mengalami inflasi y-on-y, yaitu: subkelompok sewa rumah sebesar 1,25 persen dan subkelompok pemeliharaan rumah sebesar 0,48 persen. Sementara subkelompok barang rekreasi lainnya dan olahraga, layanan rekreasi dan olahraga, koran, buku dan perlengkapan sekolah tidak mengalami perubahan.</Content>
+						<Content>Subkelompok yang mengalami deflasi y-on-y, yaitu: subkelompok sewa rumah sebesar 1,25 persen dan subkelompok pemeliharaan rumah sebesar 0,48 persen. Sementara subkelompok barang rekreasi lainnya dan olahraga, layanan rekreasi dan olahraga, perlengkapan kebudayaan, layanan kebudayaan tidak mengalami perubahan.</Content>
 						<Br />
-						<Content>Kelompok rekreasi, olahraga, dan budaya pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Kesehatan dan Perawatan. Sementara kelompok rekreasi, olahraga, dan budaya pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,07 persen dipicu oleh Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi..</Content>
+						<Content>Kelompok rekreasi, olahraga, dan budaya pada Juni 2026 memberikan andil/sumbangan deflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian. Sementara kelompok rekreasi, olahraga, dan budaya pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,04 persen dipicu oleh Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian..</Content>
 					</XMLElement>
 					<Content> </Content>
 					<Br />
@@ -1655,13 +1655,13 @@
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
 					<XMLElement Self="di2i3i2a" MarkupTag="XMLTag/BodyTextBrs">
-						<Content>Kelompok pendidikan pada Juni 2026 di KOTA METRO mengalami deflasi y-on-y sebesar 0,00 persen atau terjadi penurunan indeks dari 105,00 pada Juni 2025 menjadi 105,00 pada Juni 2026.</Content>
+						<Content>Kelompok pendidikan pada Juni 2026 di Kota Malang mengalami inflasi y-on-y sebesar 0,00 persen atau terjadi kenaikan indeks dari 111,77 pada Juni 2025 menjadi 111,77 pada Juni 2026.</Content>
 						<Br />
-						<Content>Subkelompok yang mengalami deflasi y-on-y yaitu: subkelompok pakaian sebesar 0,00 persen. Sedangkan subkelompok yang mengalami inflasi y-on-y tertinggi, yaitu: subkelompok pendidikan sebesar 0,00 persen; dan terendah subkelompok pendidikan sebesar 0,00 persen. Sementara subkelompok pendidikan, pendidikan dasar dan anak usia dini, pendidikan menengah, pendidikan tinggi, pendidikan lainnya terpantau stabil tanpa perubahan indeks yang signifikan.</Content>
+						<Content>Subkelompok yang mengalami inflasi y-on-y yaitu: subkelompok pakaian sebesar 0,00 persen. Sedangkan subkelompok yang mengalami inflasi y-on-y tertinggi, yaitu: subkelompok pendidikan sebesar 0,00 persen; dan terendah subkelompok pendidikan sebesar 0,00 persen. Sementara subkelompok pendidikan, pendidikan dasar dan anak usia dini, pendidikan menengah, pendidikan tinggi, pendidikan lainnya terpantau stabil tanpa perubahan indeks yang signifikan.</Content>
 						<Br />
-						<Content>Kelompok pendidikan pada Juni 2026 memberikan andil/sumbangan deflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: Komunikasi. Sedangkan komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Kesehatan dan Perawatan.</Content>
+						<Content>Kelompok pendidikan pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: bawang merah dan minyak goreng. Sedangkan komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian.</Content>
 						<Br />
-						<Content>Sementara kelompok pendidikan pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,07 persen dipicu oleh Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi.</Content>
+						<Content>Sementara kelompok pendidikan pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,04 persen dipicu oleh Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian.</Content>
 					</XMLElement>
 					<Br />
 				</CharacterStyleRange>
@@ -1683,13 +1683,13 @@
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
 					<XMLElement Self="di2i3i28" MarkupTag="XMLTag/BodyTextBrs">
-						<Content>Kelompok penyediaan makanan dan minuman/restoran pada Juni 2026 di KOTA METRO mengalami inflasi y-on-y sebesar 0,00 persen atau terjadi kenaikan indeks dari 110,41 pada Juni 2025 menjadi 110,73 pada Juni 2026.</Content>
+						<Content>Kelompok penyediaan makanan dan minuman/restoran pada Juni 2026 di Kota Malang mengalami inflasi y-on-y sebesar 0,00 persen atau terjadi kenaikan indeks dari 111,29 pada Juni 2025 menjadi 111,77 pada Juni 2026.</Content>
 						<Br />
 						<Content>Kelompok penyediaan makanan dan minuman/restoran terdiri dari 0 subkelompok, yaitu subkelompok 0,00 yang mengalami inflasi y-on-y sebesar 0,00 persen.</Content>
 						<Br />
-						<Content>Kelompok penyediaan makanan dan minuman/restoran pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Kesehatan dan Perawatan.</Content>
+						<Content>Kelompok penyediaan makanan dan minuman/restoran pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian.</Content>
 						<Br />
-						<Content>Sementara kelompok penyediaan makanan dan minuman/restoran pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,07 persen dipicu oleh Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi.</Content>
+						<Content>Sementara kelompok penyediaan makanan dan minuman/restoran pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,04 persen dipicu oleh Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian.</Content>
 					</XMLElement>
 				</CharacterStyleRange>
 				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
@@ -1724,13 +1724,13 @@
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
 					<XMLElement Self="di2i3i25" MarkupTag="XMLTag/BodyTextBrs">
-						<Content>Kelompok perawatan pribadi dan jasa lainnya pada Juni 2026 di KOTA METRO mengalami inflasi y-on-y sebesar 0,28 persen atau terjadi kenaikan indeks dari 105,03 pada Juni 2025 menjadi 104,45 pada Juni 2026.</Content>
+						<Content>Kelompok perawatan pribadi dan jasa lainnya pada Juni 2026 di Kota Malang mengalami deflasi y-on-y sebesar 0,05 persen atau terjadi penurunan indeks dari 111,83 pada Juni 2025 menjadi 111,24 pada Juni 2026.</Content>
 						<Br />
-						<Content>Kelompok perawatan pribadi dan jasa lainnya terdiri dari 3 subkelompok, yaitu subkelompok 0,00 yang mengalami inflasi y-on-y sebesar 0,00 persen.</Content>
+						<Content>Kelompok perawatan pribadi dan jasa lainnya terdiri dari 4 subkelompok, yaitu subkelompok 0,00 yang mengalami deflasi y-on-y sebesar 0,20 persen.</Content>
 						<Br />
-						<Content>Kelompok perawatan pribadi dan jasa lainnya pada Juni 2026 memberikan andil/sumbangan inflasi y-on-y sebesar 0,02 persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: Kesehatan dan Perawatan.</Content>
+						<Content>Kelompok perawatan pribadi dan jasa lainnya pada Juni 2026 memberikan andil/sumbangan deflasi y-on-y sebesar 0,00 persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: Komunikasi, Kesehatan, Peralatan RT, Restoran, dan Pakaian.</Content>
 						<Br />
-						<Content>Sementara kelompok perawatan pribadi dan jasa lainnya pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,07 persen dipicu oleh Komunikasi, Makanan, Peralatan RT, Restoran, dan Transportasi.</Content>
+						<Content>Sementara kelompok perawatan pribadi dan jasa lainnya pada Juni 2026 memberikan andil inflasi m-to-m sebesar 0,04 persen dipicu oleh Kesehatan, Rekreasi, Komunikasi, Restoran, dan Pakaian.</Content>
 					</XMLElement>
 				</CharacterStyleRange>
 				<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" FillColor="Color/Oren SE_1" FontStyle="Bold" PointSize="14" DiacriticPosition="OpentypePosition">
@@ -1766,7 +1766,7 @@
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
 					<XMLElement Self="di2i3i3c" MarkupTag="XMLTag/BodyTextBrs">
-						<Content>Pada Juni 2026, tingkat inflasi y-on-y KOTA METRO sebesar 3,07 persen dan tingkat inflasi y-to-d sebesar 1,91 persen. Tingkat inflasi y-on-y untuk Juni 2025 dan Juni 2024 masing-masing sebesar 0,00 persen dan 0,00 persen. Tingkat inflasi y-to-d Juni 2025 dan Juni 2024 masing-masing sebesar 0,00 persen dan 0,00 persen.</Content>
+						<Content>Pada Juni 2026, tingkat inflasi y-on-y Kota Malang sebesar 3,16 persen dan tingkat inflasi y-to-d sebesar 1,66 persen. Tingkat inflasi y-on-y untuk Juni 2025 dan Juni 2024 masing-masing sebesar 0,00 persen dan 0,00 persen. Tingkat inflasi y-to-d Juni 2025 dan Juni 2024 masing-masing sebesar 0,00 persen dan 0,00 persen.</Content>
 					</XMLElement>
 					<Br />
 				</CharacterStyleRange>
@@ -1776,7 +1776,7 @@
 					<Properties>
 						<AppliedFont type="string">Raleway</AppliedFont>
 					</Properties>
-					<Content>Tingkat Inflasi Month-to-Month (M-to-M), Year-to-Date (Y-to-D), dan Year-on-Year (Y-on-Y) bulan Juni KOTA METRO (persen), 2024–2026</Content>
+					<Content>Tingkat Inflasi Month-to-Month (M-to-M), Year-to-Date (Y-to-D), dan Year-on-Year (Y-on-Y) bulan Juni Kota Malang (persen), 2024–2026</Content>
 					<Br />
 				</CharacterStyleRange>
 			</ParagraphStyleRange>

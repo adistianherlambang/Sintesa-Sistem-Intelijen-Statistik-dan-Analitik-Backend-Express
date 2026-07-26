@@ -3,6 +3,8 @@
     "nama": "Makanan, Minuman dan Tembakau",
     "var": 2223,
     "turvar": 1551,
+    "yoy": 2250,
+    "ytd": 2234,
     "sub": [
       {
         "val": 1552,
@@ -26,6 +28,8 @@
     "nama": "Pakaian dan Alas Kaki",
     "var": 2224,
     "turvar": 1555,
+    "yoy": 2251,
+    "ytd": 2235,
     "sub": [
       {
         "val": 1556,
@@ -41,6 +45,8 @@
     "nama": "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga",
     "var": 2225,
     "turvar": 1558,
+    "yoy": 2252,
+    "ytd": 2236,
     "sub": [
       {
         "val": 1559,
@@ -64,6 +70,8 @@
     "nama": "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga",
     "var": 2226,
     "turvar": 1563,
+    "yoy": 2253,
+    "ytd": 2237,
     "sub": [
       {
         "val": 1564,
@@ -95,6 +103,8 @@
     "nama": "Kesehatan",
     "var": 2227,
     "turvar": 1570,
+    "yoy": 2254,
+    "ytd": 2238,
     "sub": [
       {
         "val": 1571,
@@ -118,6 +128,8 @@
     "nama": "Informasi, Komunikasi dan Jasa Keuangan",
     "var": 2228,
     "turvar": 1580,
+    "yoy": 2256,
+    "ytd": 2240,
     "sub": [
       {
         "val": 1581,
@@ -141,6 +153,8 @@
     "nama": "Transportasi",
     "var": 2229,
     "turvar": 1575,
+    "yoy": 2255,
+    "ytd": 2239,
     "sub": [
       {
         "val": 1575,
@@ -168,6 +182,8 @@
     "nama": "Rekreasi, Olahraga dan Budaya",
     "var": 2230,
     "turvar": 1585,
+    "yoy": 2257,
+    "ytd": 2241,
     "sub": [
       {
         "val": 1586,
@@ -199,6 +215,8 @@
     "nama": "Pendidikan",
     "var": 2231,
     "turvar": 1592,
+    "yoy": 2258,
+    "ytd": 2242,
     "sub": [
       {
         "val": 1592,
@@ -226,6 +244,8 @@
     "nama": "Penyediaan Makanan dan Minuman / Restoran",
     "var": 2232,
     "turvar": 1597,
+    "yoy": 2259,
+    "ytd": 2243,
     "sub": [
       {
         "val": 1598,
@@ -237,6 +257,8 @@
     "nama": "Perawatan Pribadi dan Jasa Lainnya",
     "var": 2233,
     "turvar": 1599,
+    "yoy": 2260,
+    "ytd": 2244,
     "sub": [
       {
         "val": 1600,

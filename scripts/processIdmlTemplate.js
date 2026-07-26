@@ -63,7 +63,7 @@ export const processStoryUcc5Contextually = (xmlContent, rawData) => {
     const ihkPrevVal = parseFloat(data.ihkSebelumnya) || 104.5;
     const ihkNowVal = parseFloat(data.ihkBerjalan) || 106.8;
 
-    const subItems = Array.isArray(data.sub) ? data.sub : [];
+    const subItems = Array.isArray(data.subYoy) && data.subYoy.length > 0 ? data.subYoy : (Array.isArray(data.subMom) ? data.subMom : []);
     let subHighest = subItems.length > 0 ? subItems.reduce((max, s) => (parseFloat(s.value) || 0) > (parseFloat(max.value) || 0) ? s : max, subItems[0]) : null;
     let subLowest = subItems.length > 0 ? subItems.reduce((min, s) => (parseFloat(s.value) || 0) < (parseFloat(min.value) || 0) ? s : min, subItems[0]) : null;
 
@@ -93,11 +93,11 @@ export const processStoryUcc5Contextually = (xmlContent, rawData) => {
     blockContent = blockContent.replace(/\$\{andilInflasiMtm\}/g, toIndoNum(Math.abs(andilMtmVal)));
     blockContent = blockContent.replace(/\$\{andilDeflasiMtm\}/g, toIndoNum(Math.abs(andilMtmVal)));
 
-    blockContent = blockContent.replace(/\$\{subkelompokInflasiTertinggi\}/g, subHighest ? subHighest.label.toLowerCase() : "makanan jadi");
+    blockContent = blockContent.replace(/\$\{subkelompokInflasiTertinggi\}/g, subHighest ? subHighest.label.toLowerCase() : "makanan");
     blockContent = blockContent.replace(/\$\{inflasiSubkelompokTertinggi\}/g, subHighest ? toIndoNum(Math.abs(subHighest.value)) : "0,00");
     blockContent = blockContent.replace(/\$\{inflasiSubkelompokTertinggiYoy\}/g, subHighest ? toIndoNum(Math.abs(subHighest.value)) : "0,00");
 
-    blockContent = blockContent.replace(/\$\{subkelompokInflasiTerendah\}/g, subLowest ? subLowest.label.toLowerCase() : "minuman non-alkohol");
+    blockContent = blockContent.replace(/\$\{subkelompokInflasiTerendah\}/g, subLowest ? subLowest.label.toLowerCase() : "minuman");
     blockContent = blockContent.replace(/\$\{inflasiSubkelompokTerendah\}/g, subLowest ? toIndoNum(Math.abs(subLowest.value)) : "0,00");
     blockContent = blockContent.replace(/\$\{inflasiSubkelompokTerendahYoy\}/g, subLowest ? toIndoNum(Math.abs(subLowest.value)) : "0,00");
 

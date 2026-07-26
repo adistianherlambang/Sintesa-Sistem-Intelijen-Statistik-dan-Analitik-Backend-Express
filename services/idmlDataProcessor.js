@@ -1,7 +1,11 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { getKomoditasByKota } from "../controller/dashboard/komoditasController.js";
+import {
+  getKomoditasByKota,
+  getKomoditasYoyByKota,
+  getKomoditasYtdByKota,
+} from "../controller/dashboard/komoditasController.js";
 import { getIhkByKota } from "../controller/dashboard/ihkController.js";
 import {
   getInflasiByKota,
@@ -81,6 +85,25 @@ export const loadBobotData = () => {
 };
 
 /**
+ * Pencocokan kunci kelompok presisi
+ */
+export const matchGroupKey = (label) => {
+  const norm = normalizeGroupName(label);
+  if (norm.includes("tembakau") || (norm.includes("makanan") && norm.includes("minuman") && !norm.includes("restoran"))) return "makanan";
+  if (norm.includes("pakaian") || norm.includes("alaskaki")) return "pakaian";
+  if (norm.includes("perumahan") || norm.includes("bahanbakar")) return "perumahan";
+  if (norm.includes("perlengkapan") || norm.includes("pemeliharaan")) return "perlengkapan";
+  if (norm.includes("kesehatan")) return "kesehatan";
+  if (norm.includes("transportasi")) return "transportasi";
+  if (norm.includes("informasi") || norm.includes("komunikasi")) return "informasi";
+  if (norm.includes("rekreasi") || norm.includes("olahraga")) return "rekreasi";
+  if (norm.includes("pendidikan")) return "pendidikan";
+  if (norm.includes("restoran") || (norm.includes("penyediaan") && norm.includes("makanan"))) return "restoran";
+  if (norm.includes("perawatan") || norm.includes("jasalainnya")) return "perawatan";
+  return null;
+};
+
+/**
  * Format daftar nama komoditas pendorong/penghambat
  */
 const formatCommodityList = (items) => {
@@ -99,15 +122,24 @@ const formatCommodityList = (items) => {
 export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
   const bobotMap = loadBobotData();
 
-  // 1. Fetch data dari controller BPS
-  const [komoditasData, ihkData, inflasiMoMData, inflasiYtdData, inflasiYoyData] =
-    await Promise.all([
-      getKomoditasByKota(targetCity).catch(() => null),
-      getIhkByKota(targetCity).catch(() => null),
-      getInflasiByKota(targetCity).catch(() => null),
-      getInflasiYtdByKota(targetCity).catch(() => null),
-      getInflasiYoyByKota(targetCity).catch(() => null),
-    ]);
+  // 1. Fetch data MoM, YoY, YtD, IHK dari controller BPS
+  const [
+    komoditasMomData,
+    komoditasYoyData,
+    komoditasYtdData,
+    ihkData,
+    inflasiMoMData,
+    inflasiYtdData,
+    inflasiYoyData,
+  ] = await Promise.all([
+    getKomoditasByKota(targetCity).catch(() => null),
+    getKomoditasYoyByKota(targetCity).catch(() => null),
+    getKomoditasYtdByKota(targetCity).catch(() => null),
+    getIhkByKota(targetCity).catch(() => null),
+    getInflasiByKota(targetCity).catch(() => null),
+    getInflasiYtdByKota(targetCity).catch(() => null),
+    getInflasiYoyByKota(targetCity).catch(() => null),
+  ]);
 
   const now = new Date();
   const currentYear = now.getFullYear();
@@ -201,88 +233,75 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
     email: `bps${targetCity.toLowerCase().replace(/[^a-z0-9]/g, "")}`,
   };
 
-  const groupPrefixMap = [
-    { key: "makanan", match: "makanan" },
-    { key: "pakaian", match: "pakaian" },
-    { key: "perumahan", match: "perumahan" },
-    { key: "perlengkapan", match: "perlengkapan" },
-    { key: "kesehatan", match: "kesehatan" },
-    { key: "transportasi", match: "transportasi" },
-    { key: "informasi", match: "informasi" },
-    { key: "rekreasi", match: "rekreasi" },
-    { key: "pendidikan", match: "pendidikan" },
-    { key: "restoran", match: "restoran" },
-    { key: "perawatan", match: "perawatan" },
+  const groupKeys = [
+    "makanan",
+    "pakaian",
+    "perumahan",
+    "perlengkapan",
+    "kesehatan",
+    "transportasi",
+    "informasi",
+    "rekreasi",
+    "pendidikan",
+    "restoran",
+    "perawatan",
   ];
 
   const groupProcessedData = {};
-  groupPrefixMap.forEach((g) => {
-    groupProcessedData[g.key] = {
-      label: g.match,
+  groupKeys.forEach((k) => {
+    groupProcessedData[k] = {
+      label: "",
       bobot: 5.0,
       mom: 0.0,
       yoy: 0.0,
-      ytd: umumYtdVal,
+      ytd: 0.0,
       ihkBerjalan: umumIhkBerjalanVal,
       ihkSebelumnya: umumIhkSebelumnyaVal,
       ihkPembanding: umumIhkPembandingVal,
       andilMtm: 0.0,
       andilYoy: 0.0,
-      sub: [],
+      subMom: [],
+      subYoy: [],
+      subYtd: [],
     };
   });
 
-  if (komoditasData && Array.isArray(komoditasData.hierarki)) {
-    komoditasData.hierarki.forEach((item) => {
-      const norm = normalizeGroupName(item.label);
-      const matched = groupPrefixMap.find((g) => norm.includes(g.match));
-
-      if (matched) {
-        const groupKey = matched.key;
-        const bobotVal = bobotMap[norm] || 5.0;
-        const momVal = parseFloat(item.value) || 0.0;
-        const andilMtmVal = Number(((bobotVal * momVal) / 100).toFixed(2));
-
-        groupProcessedData[groupKey].label = item.label;
-        groupProcessedData[groupKey].bobot = bobotVal;
-        groupProcessedData[groupKey].mom = momVal;
-        groupProcessedData[groupKey].andilMtm = andilMtmVal;
-        if (Array.isArray(item.sub)) {
-          groupProcessedData[groupKey].sub = item.sub;
+  const fillGroupData = (dataset, valField, subField) => {
+    if (dataset && Array.isArray(dataset.hierarki)) {
+      dataset.hierarki.forEach((item) => {
+        const k = matchGroupKey(item.label);
+        if (k && groupProcessedData[k]) {
+          groupProcessedData[k].label = item.label;
+          const norm = normalizeGroupName(item.label);
+          if (bobotMap[norm]) {
+            groupProcessedData[k].bobot = bobotMap[norm];
+          }
+          groupProcessedData[k][valField] = parseFloat(item.value) || 0.0;
+          groupProcessedData[k][subField] = Array.isArray(item.sub) ? item.sub : [];
         }
-      }
-    });
-  }
+      });
+    }
+  };
 
-  if (komoditasData && Array.isArray(komoditasData.prevYear)) {
-    komoditasData.prevYear.forEach((item) => {
-      const norm = normalizeGroupName(item.label);
-      const matched = groupPrefixMap.find((g) => norm.includes(g.match));
+  fillGroupData(komoditasMomData, "mom", "subMom");
+  fillGroupData(komoditasYoyData, "yoy", "subYoy");
+  fillGroupData(komoditasYtdData, "ytd", "subYtd");
 
-      if (matched) {
-        const groupKey = matched.key;
-        const yoyVal = parseFloat(item.value) || 0.0;
-        const bobotVal = groupProcessedData[groupKey].bobot || 5.0;
-        const andilYoyVal = Number(((bobotVal * yoyVal) / 100).toFixed(2));
-
-        const ihkNowGroup = Number((umumIhkBerjalanVal + (groupProcessedData[groupKey].mom || 0)).toFixed(2));
-        const ihkPrevMonthGroup = Number((ihkNowGroup / (1 + (groupProcessedData[groupKey].mom || 0) / 100)).toFixed(2));
-        const ihkPrevYearGroup = Number((ihkNowGroup / (1 + yoyVal / 100)).toFixed(2));
-
-        groupProcessedData[groupKey].yoy = yoyVal;
-        groupProcessedData[groupKey].andilYoy = andilYoyVal;
-        groupProcessedData[groupKey].ihkBerjalan = ihkNowGroup;
-        groupProcessedData[groupKey].ihkSebelumnya = ihkPrevMonthGroup;
-        groupProcessedData[groupKey].ihkPembanding = ihkPrevYearGroup;
-      }
-    });
-  }
-
-  // Populate placeholder kelompok ke dictionary variables
-  groupPrefixMap.forEach((g) => {
-    const k = g.key;
+  // Hitung andil inflasi & IHK per kelompok
+  groupKeys.forEach((k) => {
     const data = groupProcessedData[k];
+    data.andilMtm = Number(((data.bobot * data.mom) / 100).toFixed(2));
+    data.andilYoy = Number(((data.bobot * data.yoy) / 100).toFixed(2));
 
+    const ihkNowGroup = Number((umumIhkBerjalanVal + data.mom).toFixed(2));
+    const ihkPrevMonthGroup = Number((ihkNowGroup / (1 + data.mom / 100)).toFixed(2));
+    const ihkPrevYearGroup = Number((ihkNowGroup / (1 + data.yoy / 100)).toFixed(2));
+
+    data.ihkBerjalan = ihkNowGroup;
+    data.ihkSebelumnya = ihkPrevMonthGroup;
+    data.ihkPembanding = ihkPrevYearGroup;
+
+    // Populate placeholder variabel kelompok
     variables[`${k}IhkPembanding`] = toIndoNum(data.ihkPembanding);
     variables[`${k}IhkSebelumnya`] = toIndoNum(data.ihkSebelumnya);
     variables[`${k}IhkBerjalan`] = toIndoNum(data.ihkBerjalan);
@@ -292,13 +311,7 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
     variables[`${k}AndilYoy`] = toIndoNum(data.andilYoy);
   });
 
-  // Pengelompokan Dinamis Kelompok Inflasi vs Deflasi untuk Narasi Utama Paragraf 1 & 4
-  const groupArray = Object.values(groupProcessedData);
-  const inflasiYoYList = groupArray.filter((g) => g.yoy > 0);
-  const deflasiYoYList = groupArray.filter((g) => g.yoy < 0);
-  const andilInflasiYoYList = groupArray.filter((g) => g.andilYoy > 0);
-  const andilDeflasiYoYList = groupArray.filter((g) => g.andilYoy < 0);
-
+  // Placeholder spesifik teks paragraf per kelompok
   variables["kelompokMakanan"] = "makanan, minuman, dan tembakau";
   variables["indeksMakananYoy"] = toIndoNum(groupProcessedData["makanan"].yoy);
   variables["andilMakananYoy"] = toIndoNum(groupProcessedData["makanan"].andilYoy);
@@ -345,8 +358,8 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
   variables["andilPerawatanPribadiYoy"] = toIndoNum(groupProcessedData["perawatan"].andilYoy);
 
   // Komoditas pendorong & penghambat
-  const topMom = komoditasData?.top5Mom || komoditasData?.topMom || [];
-  const topYoy = komoditasData?.top5Yoy || komoditasData?.topYoy || [];
+  const topMom = komoditasMomData?.top5Mom || komoditasMomData?.topMom || [];
+  const topYoy = komoditasYoyData?.top5Yoy || komoditasYoyData?.topYoy || komoditasMomData?.top5Yoy || [];
 
   const inflasiMtmItems = topMom.filter((i) => (parseFloat(i.value) || 0) > 0);
   const deflasiMtmItems = topMom.filter((i) => (parseFloat(i.value) || 0) < 0);
@@ -380,13 +393,15 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
       targetCity,
       currentMonth,
       currentYear,
-      komoditasData,
+      komoditasMomData,
+      komoditasYoyData,
+      komoditasYtdData,
       ihkData,
       inflasiMoMData,
       inflasiYtdData,
       inflasiYoyData,
       groupProcessedData,
-      hargaBI: komoditasData?.hargaBI || komoditasData?.harga_bi || [],
+      hargaBI: komoditasMomData?.hargaBI || komoditasMomData?.harga_bi || [],
     },
   };
 };

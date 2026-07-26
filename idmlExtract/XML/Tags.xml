@@ -15,31 +15,6 @@
 			<TagColor type="enumeration">GrassGreen</TagColor>
 		</Properties>
 	</XMLTag>
-	<XMLTag Self="XMLTag/HeaderTabelBRS" Name="HeaderTabelBRS">
-		<Properties>
-			<TagColor type="enumeration">Teal</TagColor>
-		</Properties>
-	</XMLTag>
-	<XMLTag Self="XMLTag/JudulGambarBRS" Name="JudulGambarBRS">
-		<Properties>
-			<TagColor type="enumeration">Lavender</TagColor>
-		</Properties>
-	</XMLTag>
-	<XMLTag Self="XMLTag/JudulTabelBRS" Name="JudulTabelBRS">
-		<Properties>
-			<TagColor type="enumeration">DarkGreen</TagColor>
-		</Properties>
-	</XMLTag>
-	<XMLTag Self="XMLTag/KeteranganTabelBRS" Name="KeteranganTabelBRS">
-		<Properties>
-			<TagColor type="enumeration">Violet</TagColor>
-		</Properties>
-	</XMLTag>
-	<XMLTag Self="XMLTag/PointerUtamaBRS" Name="PointerUtamaBRS">
-		<Properties>
-			<TagColor type="enumeration">Gray</TagColor>
-		</Properties>
-	</XMLTag>
 	<XMLTag Self="XMLTag/Root" Name="Root">
 		<Properties>
 			<TagColor type="enumeration">LightBlue</TagColor>
@@ -48,16 +23,6 @@
 	<XMLTag Self="XMLTag/Story" Name="Story">
 		<Properties>
 			<TagColor type="enumeration">BrickRed</TagColor>
-		</Properties>
-	</XMLTag>
-	<XMLTag Self="XMLTag/SubBabBRS" Name="SubBabBRS">
-		<Properties>
-			<TagColor type="enumeration">Cyan</TagColor>
-		</Properties>
-	</XMLTag>
-	<XMLTag Self="XMLTag/Superscript" Name="Superscript">
-		<Properties>
-			<TagColor type="enumeration">Burgundy</TagColor>
 		</Properties>
 	</XMLTag>
 	<XMLTag Self="XMLTag/Table" Name="Table">

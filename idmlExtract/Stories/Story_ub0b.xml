@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="ub0b" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Pointer Utama BRS" SpaceAfter="11.338582677165354" DropcapDetail="0" TreatIdeographicSpaceAsSpace="false" ParagraphBorderTopLeftCornerRadius="1" ParagraphBorderTopRightCornerRadius="1" ParagraphBorderBottomLeftCornerRadius="1" ParagraphBorderBottomRightCornerRadius="1" ParagraphShadingTopLeftCornerRadius="1" ParagraphShadingTopRightCornerRadius="1" ParagraphShadingBottomLeftCornerRadius="1" ParagraphShadingBottomRightCornerRadius="1">
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
+				<Properties>
+					<Leading type="unit">14.5</Leading>
+					<AppliedFont type="string">Raleway</AppliedFont>
+				</Properties>
+				<Content>Pada ${bulan} ${tahun} terjadi inflasi year-on-year (y-on-y) sebesar ${inflasiYoy} persen dengan Indeks Harga Konsumen (IHK) sebesar ${ihk}. </Content>
+				<Br />
+				<Content>Inflasi y-on-y terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok makanan, minuman, dan tembakau sebesar ${makananMinumanTembakauYoy} persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar ${perumahanAirListrikBahanBakarYoy} persen; kelompok kesehatan sebesar ${kesehatanYoy} persen; kelompok transportasi sebesar ${transportasiYoy} persen; kelompok rekreasi, olahraga, dan budaya sebesar ${rekreasiOlahragaBudayaYoy} persen; kelompok penyediaan makanan dan minuman/restoran sebesar ${restoranYoy} persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar ${perawatanPribadiJasaLainnyaYoy} persen.</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
+				<Properties>
+					<AppliedFont type="string">Raleway</AppliedFont>
+				</Properties>
+				<Content> Sementara kelompok yang mengalami penurunan indeks, yaitu kelompok pakaian dan alas kaki sebesar ${pakaianAlasKakiYoy} persen; kelompok perlengkapan, peralatan dan pemeliharaan rutin rumah tangga sebesar ${perlengkapanRumahTanggaYoy} persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar ${informasiKomunikasiJasaKeuanganYoy} persen; dan kelompok pendidikan sebesar ${pendidikanYoy} persen. </Content>
+				<Br />
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
+				<Properties>
+					<Leading type="unit">14.5</Leading>
+					<AppliedFont type="string">Raleway</AppliedFont>
+				</Properties>
+				<Content>Tingkat inflasi month-to-month (m-to-m) ${bulan} ${tahun} sebesar ${inflasiMtm} persen dan tingkat inflasi year-to-date (y-to-d) ${bulan} ${tahun} sebesar ${inflasiYtd} persen.</Content>
+			</CharacterStyleRange>
+		</ParagraphStyleRange>
+	</Story>
+</idPkg:Story>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Tags xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<XMLTag Self="XMLTag/BabBRS" Name="BabBRS">
+		<Properties>
+			<TagColor type="enumeration">Magenta</TagColor>
+		</Properties>
+	</XMLTag>
+	<XMLTag Self="XMLTag/BodyTextBrs" Name="BodyTextBrs">
+		<Properties>
+			<TagColor type="enumeration">Blue</TagColor>
+		</Properties>
+	</XMLTag>
+	<XMLTag Self="XMLTag/Cell" Name="Cell">
+		<Properties>
+			<TagColor type="enumeration">GrassGreen</TagColor>
+		</Properties>
+	</XMLTag>
+	<XMLTag Self="XMLTag/Root" Name="Root">
+		<Properties>
+			<TagColor type="enumeration">LightBlue</TagColor>
+		</Properties>
+	</XMLTag>
+	<XMLTag Self="XMLTag/Story" Name="Story">
+		<Properties>
+			<TagColor type="enumeration">BrickRed</TagColor>
+		</Properties>
+	</XMLTag>
+	<XMLTag Self="XMLTag/Table" Name="Table">
+		<Properties>
+			<TagColor type="enumeration">DarkBlue</TagColor>
+		</Properties>
+	</XMLTag>
+</idPkg:Tags>

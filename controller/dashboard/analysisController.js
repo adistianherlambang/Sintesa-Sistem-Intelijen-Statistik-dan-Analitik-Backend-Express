@@ -8,6 +8,9 @@ import puppeteer from "puppeteer";
 import AnalysisHistory from "../../db/models/AnalysisHistory.js";
 import { logActivity } from "../user/activityController.js";
 import { getKomoditasByKota } from "./komoditasController.js";
+import { processIdmlVariables } from "../../services/idmlDataProcessor.js";
+import { generateIdmlNarratives } from "../../services/idmlNarrativeGenerator.js";
+import { processStoryUcc5Contextually } from "../../scripts/processIdmlTemplate.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -484,7 +487,7 @@ const getDivisionInflasi = (divisionData, keyword) => {
  * Build a complete IDML buffer from the idmlExtract folder,
  * substituting all ${placeholder} variables with real data.
  */
-const buildIdmlFromExtract = (variables) => {
+const buildIdmlFromExtract = (variables, rawData = {}) => {
   const IDML_SRC = path.resolve(__dirname, "../../idmlExtract");
   if (!fs.existsSync(IDML_SRC)) {
     throw new Error(
@@ -494,17 +497,12 @@ const buildIdmlFromExtract = (variables) => {
 
   const zip = new AdmZip();
 
-  // IDML requires 'mimetype' as the FIRST entry, stored uncompressed (no compression)
   const mimetypePath = path.join(IDML_SRC, "mimetype");
   if (fs.existsSync(mimetypePath)) {
-    // AdmZip doesn't expose per-entry compression level, so we use raw zip entry creation
     const mimetypeContent = fs.readFileSync(mimetypePath);
-    // Add as STORE (0) – AdmZip always deflates, so we work around by adding normally
-    // InDesign can handle compressed mimetype as long as all other files are present
     zip.addFile("mimetype", mimetypeContent);
   }
 
-  // Recursively add all other files from idmlExtract, replacing placeholders in XML files
   const addDirToZip = (dirPath, zipPrefix) => {
     const entries = fs.readdirSync(dirPath);
     for (const entry of entries) {
@@ -515,21 +513,25 @@ const buildIdmlFromExtract = (variables) => {
       if (stat.isDirectory()) {
         addDirToZip(fullPath, zipPath);
       } else {
-        if (entry === "mimetype") continue; // Already added first
+        if (entry === "mimetype") continue;
 
         let content;
         if (entry.endsWith(".xml")) {
           let xmlText = fs.readFileSync(fullPath, "utf8");
-          // Replace all ${placeholderName} occurrences
+
+          if (entry === "Story_ucc5.xml") {
+            xmlText = processStoryUcc5Contextually(xmlText, rawData);
+          }
+
           xmlText = xmlText.replace(/\$\{([^}]+)\}/g, (match, key) => {
-            if (variables.hasOwnProperty(key)) {
-              return variables[key];
+            const trimmedKey = key.trim();
+            if (variables.hasOwnProperty(trimmedKey)) {
+              return variables[trimmedKey];
             }
-            // Fallback for numeric placeholders: e.g. nilaiPersen_0_05 -> 0,05
-            if (key.startsWith("nilaiPersen_")) {
-              return key.replace("nilaiPersen_", "").replace(/_/g, ",");
+            if (trimmedKey.startsWith("nilaiPersen_")) {
+              return trimmedKey.replace("nilaiPersen_", "").replace(/_/g, ",");
             }
-            return match;
+            return "0,00";
           });
           content = Buffer.from(xmlText, "utf8");
         } else {
@@ -548,210 +550,29 @@ export const generateAndSaveBRS = async (req, res) => {
   try {
     const {
       city,
-      monthIndex,
-      year,
-      inflasiMoM,
-      inflasiYoY,
-      ihkNow,
-      komoditasPendorong,
-      aiSummary,
-      divisionData,
     } = req.body;
     const userId = req.user._id;
 
-    const monthName = months[monthIndex !== undefined ? monthIndex : 2];
-    const yr = String(year || new Date().getFullYear());
-    const targetCity = city || "KOTA METRO";
-    const infMoM = inflasiMoM || "0,00";
-    const infYoY = inflasiYoY || "0,00";
-    const targetIhk = ihkNow || "100,00";
-    const periodText = `${monthName} ${yr}`;
+    const targetCity = city || "Kota Malang";
 
-    const monthIdx = months.indexOf(monthName) !== -1 ? months.indexOf(monthName) : 0;
-    const prevMonthIdx = (monthIdx - 1 + 12) % 12;
-    const prevMonthName = months[prevMonthIdx];
-    const currentYear = parseInt(yr, 10);
-    const prevYear = currentYear - 1;
+    // 1. Ambil & olah data statistik BPS serta hitung andil dari bobot.json
+    const { variables: baseVars, raw: rawData } = await processIdmlVariables(targetCity);
 
-    // Helper to format values
-    const toIndoNum = (val) => {
-      if (val === undefined || val === null) return "0,00";
-      if (typeof val === "string" && val.includes(",")) return val;
-      if (typeof val === "string") return val.replace(".", ",");
-      return Number(val).toFixed(2).replace(".", ",");
-    };
+    // 2. Hasilkan narasi keterangan BPS dari AI (Gemini LLM)
+    const narrativeVars = await generateIdmlNarratives(rawData, baseVars);
 
-    // Compute derived IHK for previous year
-    const ihkNowNum = parseFloat(String(targetIhk).replace(",", "."));
-    const infYoYNum = parseFloat(String(infYoY).replace(",", "."));
-    let ihkPrev = "0,00";
-    if (!isNaN(ihkNowNum) && !isNaN(infYoYNum)) {
-      const prevNum = ihkNowNum / (1 + infYoYNum / 100);
-      ihkPrev = prevNum.toFixed(2).replace(".", ",");
-    }
-
-    // Determine inflasi status text
-    const infMoMNum = parseFloat(String(infMoM).replace(",", "."));
-    const statusKenaikanAtauPenurunan =
-      infMoMNum >= 0 ? "kenaikan harga" : "penurunan harga";
-
-    // 1. Build basic variable map from the request metadata
+    // 3. Gabungkan seluruh variabel ke dictionary utama
     const variables = {
-      // Basic period & city
-      bulan: monthName,
-      tahun: yr,
-      tahunKemarin: String(prevYear),
-      bulanKemarin: prevMonthName,
-      namaKota: targetCity,
-      "namaKota.upperCase()": targetCity.toUpperCase(),
-      "namaKota.uppercase()": targetCity.toUpperCase(),
-
-      // Inflation values
-      inflasiYoY: toIndoNum(infYoY),
-      inflasiMtM: toIndoNum(infMoM),
-      inflasiYtD: toIndoNum(infMoM), // YtD ≈ MtM for current period
-      inflasiYoYTahunLalu: toIndoNum(infYoY),
-      inflasiYoYDuaTahunLalu: toIndoNum(infYoY),
-      inflasi: toIndoNum(infYoY),
-
-      // IHK values
-      ihkSekarang: toIndoNum(targetIhk),
-      ihk: toIndoNum(targetIhk),
-      ihkTahunLalu: ihkPrev,
-
-      // Status text
-      statusKenaikanAtauPenurunan,
-
-      // Division/Kelompok inflation from divisionData (MoM fallbacks)
-      inflasiKelompokMakanan: getDivisionInflasi(divisionData, "makanan"),
-      inflasiKelompokPerumahan: getDivisionInflasi(divisionData, "perumahan"),
-      inflasiKelompokKesehatan: getDivisionInflasi(divisionData, "kesehatan"),
-      inflasiKelompokTransportasi: getDivisionInflasi(divisionData, "transportasi"),
-      inflasiKelompokRekreasi: getDivisionInflasi(divisionData, "rekreasi"),
-      inflasiKelompokRestoran: getDivisionInflasi(
-        divisionData,
-        "restoran"
-      ) || getDivisionInflasi(divisionData, "kuliner"),
-      inflasiKelompokPerawatanPribadi: getDivisionInflasi(
-        divisionData,
-        "perawatan"
-      ),
-      inflasiKelompokPakaian: getDivisionInflasi(divisionData, "pakaian"),
-      inflasiKelompokPerlengkapan: getDivisionInflasi(
-        divisionData,
-        "perlengkapan"
-      ),
-      inflasiKelompokInformasi: getDivisionInflasi(divisionData, "infokom") ||
-        getDivisionInflasi(divisionData, "informasi"),
-      inflasiKelompokPendidikan: getDivisionInflasi(divisionData, "pendidikan"),
-
-      // Placeholder fallbacks
-      inflasi_X: "0,00",
-      nilaiInflasiKelompok: "0,00",
+      ...baseVars,
+      ...narrativeVars,
     };
 
-    // 2. Fetch detailed BPS commodity data for the city and integrate hierarchy & YoY
-    try {
-      const komoditasData = await getKomoditasByKota(targetCity);
-      if (komoditasData && Array.isArray(komoditasData.hierarki)) {
-        komoditasData.hierarki.forEach((group) => {
-          const cleanName = group.label.toLowerCase();
-          
-          // Map Group MoM values
-          if (cleanName.includes("makanan")) {
-            variables["inflasiKelompokMakanan"] = toIndoNum(group.value);
-          } else if (cleanName.includes("pakaian")) {
-            variables["inflasiKelompokPakaian"] = toIndoNum(group.value);
-          } else if (cleanName.includes("perumahan")) {
-            variables["inflasiKelompokPerumahan"] = toIndoNum(group.value);
-          } else if (cleanName.includes("perlengkapan")) {
-            variables["inflasiKelompokPerlengkapan"] = toIndoNum(group.value);
-          } else if (cleanName.includes("kesehatan")) {
-            variables["inflasiKelompokKesehatan"] = toIndoNum(group.value);
-          } else if (cleanName.includes("transportasi")) {
-            variables["inflasiKelompokTransportasi"] = toIndoNum(group.value);
-          } else if (cleanName.includes("informasi") || cleanName.includes("komunikasi")) {
-            variables["inflasiKelompokInformasi"] = toIndoNum(group.value);
-          } else if (cleanName.includes("rekreasi")) {
-            variables["inflasiKelompokRekreasi"] = toIndoNum(group.value);
-          } else if (cleanName.includes("pendidikan")) {
-            variables["inflasiKelompokPendidikan"] = toIndoNum(group.value);
-          } else if (cleanName.includes("restoran") || cleanName.includes("penyediaan makanan")) {
-            variables["inflasiKelompokRestoran"] = toIndoNum(group.value);
-          } else if (cleanName.includes("perawatan")) {
-            variables["inflasiKelompokPerawatanPribadi"] = toIndoNum(group.value);
-          }
+    const periodText = `${variables.bulan} ${variables.tahun}`;
 
-          // Map Subgroup MoM values
-          if (Array.isArray(group.sub)) {
-            group.sub.forEach((sub) => {
-              const subKey = "inflasi_" + sub.label.toLowerCase()
-                .replace(/[^a-z0-9\s]/g, "")
-                .trim()
-                .replace(/\s+/g, "_");
-              variables[subKey] = toIndoNum(sub.value);
-            });
-          }
-        });
-      }
+    // 4. Build IDML buffer dari idmlExtract
+    const outputBuffer = buildIdmlFromExtract(variables, rawData);
 
-      const prevYearData = komoditasData?.prevYear || komoditasData?.prevMom || komoditasData?.yoy;
-      if (prevYearData && Array.isArray(prevYearData)) {
-        prevYearData.forEach((group) => {
-          const cleanName = group.label.toLowerCase();
-          
-          // Map Group YoY values to specific template placeholders
-          if (cleanName.includes("makanan")) {
-            variables["nilaiPersen_3_54"] = toIndoNum(group.value);
-          } else if (cleanName.includes("pakaian")) {
-            variables["nilaiPersen_0_18"] = toIndoNum(group.value);
-          } else if (cleanName.includes("perumahan")) {
-            variables["nilaiPersen_1_25"] = toIndoNum(group.value);
-          } else if (cleanName.includes("perlengkapan")) {
-            variables["nilaiPersen_2_18"] = toIndoNum(group.value);
-          } else if (cleanName.includes("kesehatan")) {
-            variables["nilaiPersen_1_48"] = toIndoNum(group.value);
-          } else if (cleanName.includes("transportasi")) {
-            variables["nilaiPersen_1_69"] = toIndoNum(group.value);
-          } else if (cleanName.includes("informasi") || cleanName.includes("komunikasi")) {
-            variables["nilaiPersen_0_92"] = toIndoNum(group.value);
-          } else if (cleanName.includes("rekreasi")) {
-            variables["nilaiPersen_0_38"] = toIndoNum(group.value);
-          } else if (cleanName.includes("pendidikan")) {
-            variables["nilaiPersen_6_29"] = toIndoNum(group.value);
-          } else if (cleanName.includes("restoran") || cleanName.includes("penyediaan makanan")) {
-            variables["nilaiPersen_0_88"] = toIndoNum(group.value);
-          } else if (cleanName.includes("perawatan")) {
-            variables["nilaiPersen_13_46"] = toIndoNum(group.value);
-          }
-
-          // Map Subgroup YoY values
-          if (Array.isArray(group.sub)) {
-            group.sub.forEach((sub) => {
-              const subLabel = sub.label.toLowerCase();
-              if (subLabel.includes("sewa dan kontrak")) {
-                variables["nilaiPersen_0_48"] = toIndoNum(sub.value);
-              } else if (subLabel.includes("pemeliharaan, perbaikan")) {
-                variables["nilaiPersen_0_15"] = toIndoNum(sub.value);
-              } else if (subLabel.includes("dasar dan anak usia dini")) {
-                variables["nilaiPersen_0_02"] = toIndoNum(sub.value);
-              } else if (subLabel.includes("pendidikan menengah")) {
-                variables["nilaiPersen_0_46"] = toIndoNum(sub.value);
-              } else if (subLabel.includes("pendidikan lainnya")) {
-                variables["nilaiPersen_0_03"] = toIndoNum(sub.value);
-              }
-            });
-          }
-        });
-      }
-    } catch (dbErr) {
-      console.warn("⚠ Gagal mengambil database komoditas BPS:", dbErr.message);
-    }
-
-    // 3. Build IDML from idmlExtract folder
-    const outputBuffer = buildIdmlFromExtract(variables);
-
-    // 4. Save IDML file to backend/export/analysis_files/
+    // 5. Save IDML file to backend/export/analysis_files/
     const EXPORT_DIR = path.resolve(__dirname, "../../export/analysis_files");
     if (!fs.existsSync(EXPORT_DIR)) {
       fs.mkdirSync(EXPORT_DIR, { recursive: true });
@@ -765,7 +586,7 @@ export const generateAndSaveBRS = async (req, res) => {
 
     fs.writeFileSync(path.join(EXPORT_DIR, idmlFilename), outputBuffer);
 
-    // 5. Save record to AnalysisHistory
+    // 6. Save record to AnalysisHistory
     const history = new AnalysisHistory({
       userId,
       title: `Laporan BRS IHK ${targetCity} - ${periodText}`,
@@ -789,6 +610,6 @@ export const generateAndSaveBRS = async (req, res) => {
     console.error("Error generateAndSaveBRS:", err.message);
     res
       .status(500)
-      .json({ message: "Gagal menyimpan & mengenerate BRS: " + err.message });
+      .json({ message: "Gagal men-generate BRS IDML: " + err.message });
   }
 };

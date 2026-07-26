@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="21.3">
+	<Story Self="ub0b" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Pointer Utama BRS" SpaceAfter="11.338582677165354" DropcapDetail="0" TreatIdeographicSpaceAsSpace="false" ParagraphBorderTopLeftCornerRadius="1" ParagraphBorderTopRightCornerRadius="1" ParagraphBorderBottomLeftCornerRadius="1" ParagraphBorderBottomRightCornerRadius="1" ParagraphShadingTopLeftCornerRadius="1" ParagraphShadingTopRightCornerRadius="1" ParagraphShadingBottomLeftCornerRadius="1" ParagraphShadingBottomRightCornerRadius="1">
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
+				<Properties>
+					<Leading type="unit">14.5</Leading>
+					<AppliedFont type="string">Raleway</AppliedFont>
+				</Properties>
+				<Content>Pada Juni 2026 terjadi inflasi year-on-year (y-on-y) sebesar 3,16 persen dengan Indeks Harga Konsumen (IHK) sebesar 0,00. </Content>
+				<Br />
+				<Content>Inflasi y-on-y terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok makanan, minuman, dan tembakau sebesar 0,00 persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar 0,00 persen; kelompok kesehatan sebesar 2,10 persen; kelompok transportasi sebesar 2,10 persen; kelompok rekreasi, olahraga, dan budaya sebesar 0,00 persen; kelompok penyediaan makanan dan minuman/restoran sebesar 2,10 persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar 0,00 persen.</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
+				<Properties>
+					<AppliedFont type="string">Raleway</AppliedFont>
+				</Properties>
+				<Content> Sementara kelompok yang mengalami penurunan indeks, yaitu kelompok pakaian dan alas kaki sebesar 0,00 persen; kelompok perlengkapan, peralatan dan pemeliharaan rutin rumah tangga sebesar 0,00 persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar 0,00 persen; dan kelompok pendidikan sebesar 2,10 persen. </Content>
+				<Br />
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" DiacriticPosition="OpentypePosition">
+				<Properties>
+					<Leading type="unit">14.5</Leading>
+					<AppliedFont type="string">Raleway</AppliedFont>
+				</Properties>
+				<Content>Tingkat inflasi month-to-month (m-to-m) Juni 2026 sebesar 0,00 persen dan tingkat inflasi year-to-date (y-to-d) Juni 2026 sebesar 1,65 persen.</Content>
+			</CharacterStyleRange>
+		</ParagraphStyleRange>
+	</Story>
+</idPkg:Story>

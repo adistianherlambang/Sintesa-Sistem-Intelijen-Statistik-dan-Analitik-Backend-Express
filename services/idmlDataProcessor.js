@@ -119,8 +119,10 @@ const formatCommodityList = (items) => {
 /**
  * Fungsi utama memproses data BPS dan menyusun dictionary placeholder
  */
-export const processIdmlVariables = async (targetCityInput = "") => {
+export const processIdmlVariables = async (targetCityInput = "", customDataInput = null) => {
   let targetCity = "";
+  let customData = customDataInput;
+
   if (typeof targetCityInput === "string") {
     targetCity = targetCityInput;
   } else if (targetCityInput && typeof targetCityInput === "object") {
@@ -130,19 +132,27 @@ export const processIdmlVariables = async (targetCityInput = "") => {
       targetCityInput.kota ||
       targetCityInput.city ||
       "";
+    if (!customData) {
+      customData =
+        targetCityInput.body?.editedData ||
+        targetCityInput.body?.parsedData ||
+        targetCityInput.editedData ||
+        targetCityInput.parsedData ||
+        targetCityInput;
+    }
   }
 
   const bobotMap = loadBobotData();
 
   // 1. Fetch data MoM, YoY, YtD, IHK dari controller BPS
   const [
-    komoditasMomData,
-    komoditasYoyData,
-    komoditasYtdData,
-    ihkData,
-    inflasiMoMData,
-    inflasiYtdData,
-    inflasiYoyData,
+    fetchedKomoditasMom,
+    fetchedKomoditasYoy,
+    fetchedKomoditasYtd,
+    fetchedIhk,
+    fetchedInflasiMoM,
+    fetchedInflasiYtd,
+    fetchedInflasiYoy,
   ] = await Promise.all([
     getKomoditasByKota(targetCity).catch(() => null),
     getKomoditasYoyByKota(targetCity).catch(() => null),
@@ -152,6 +162,18 @@ export const processIdmlVariables = async (targetCityInput = "") => {
     getInflasiYtdByKota(targetCity).catch(() => null),
     getInflasiYoyByKota(targetCity).catch(() => null),
   ]);
+
+  // Gunakan data dari tabel halaman analisis (editedData / parsedData) jika tersedia
+  const editedData = customData?.editedData || (customData?.inflasiData ? customData : null);
+  const parsedData = customData?.parsedData || (Array.isArray(customData) ? customData : null);
+
+  const komoditasMomData = editedData?.komoditasData?.mom || fetchedKomoditasMom;
+  const komoditasYoyData = editedData?.komoditasData?.yoy || fetchedKomoditasYoy;
+  const komoditasYtdData = editedData?.komoditasData?.ytd || fetchedKomoditasYtd;
+  const ihkData = editedData?.ihkData || fetchedIhk;
+  const inflasiMoMData = editedData?.inflasiData?.mom || fetchedInflasiMoM;
+  const inflasiYtdData = editedData?.inflasiData?.ytd || fetchedInflasiYtd;
+  const inflasiYoyData = editedData?.inflasiData?.yoy || fetchedInflasiYoy;
 
   const now = new Date();
   const currentYear = now.getFullYear();

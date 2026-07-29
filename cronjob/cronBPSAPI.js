@@ -3,7 +3,7 @@ import APIDataBPS from "../db/models/APIDataBPS.js";
 import { fetchBPS } from "../services/fetchBPS.js";
 import { fetchBPSPrevMoM } from "../services/fetchBPSPrevMoM.js";
 import { fetchBI } from "../services/fetchBI.js";
-// import { AISummary } from "../services/AISummary.js";
+import { AISummary } from "../services/AISummary.js";
 
 export const startBPSCron = () => {
   console.log("✔ Cron Registered", new Date());

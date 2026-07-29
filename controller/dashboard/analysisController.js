@@ -552,13 +552,15 @@ export const generateAndSaveBRS = async (req, res) => {
     const {
       city,
       kota,
+      editedData,
+      parsedData,
     } = req.body;
     const userId = req.user._id;
 
     const targetCity = kota || city || "Kota Malang";
 
-    // 1. Ambil & olah data statistik BPS serta hitung andil dari bobot.json
-    const { variables: baseVars, raw: rawData } = await processIdmlVariables(targetCity);
+    // 1. Ambil & olah data statistik BPS (serta gunakan editedData/parsedData dari tabel jika ada)
+    const { variables: baseVars, raw: rawData } = await processIdmlVariables(targetCity, { editedData, parsedData });
 
     // 2. Hasilkan narasi keterangan BPS dari AI (Gemini LLM)
     const narrativeVars = await generateIdmlNarratives(rawData, baseVars);

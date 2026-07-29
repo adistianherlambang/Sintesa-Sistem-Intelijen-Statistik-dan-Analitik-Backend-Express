@@ -504,6 +504,8 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
     hierarki,
     prevYear: prevYearList,
     prev2Year: prev2YearList,
+    prevYearList,
+    prev2YearList,
     biggest,
     topmom: topMom,
     topyoy: topYoy,

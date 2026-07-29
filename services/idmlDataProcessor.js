@@ -353,13 +353,13 @@ export const processIdmlVariables = async (targetCityInput = "") => {
   fillGroupData(komoditasYoyData?.hierarki, "yoyNow", "subYoy");
   fillGroupData(komoditasYtdData?.hierarki, "ytdNow", "subYtd");
 
-  fillGroupData(komoditasMomData?.prevYearList, "momPrevYear", null);
-  fillGroupData(komoditasYoyData?.prevYearList, "yoyPrevYear", null);
-  fillGroupData(komoditasYtdData?.prevYearList, "ytdPrevYear", null);
+  fillGroupData(komoditasMomData?.prevYear || komoditasMomData?.prevYearList, "momPrevYear", null);
+  fillGroupData(komoditasYoyData?.prevYear || komoditasYoyData?.prevYearList, "yoyPrevYear", null);
+  fillGroupData(komoditasYtdData?.prevYear || komoditasYtdData?.prevYearList, "ytdPrevYear", null);
 
-  fillGroupData(komoditasMomData?.prev2YearList, "momPrev2Year", null);
-  fillGroupData(komoditasYoyData?.prev2YearList, "yoyPrev2Year", null);
-  fillGroupData(komoditasYtdData?.prev2YearList, "ytdPrev2Year", null);
+  fillGroupData(komoditasMomData?.prev2Year || komoditasMomData?.prev2YearList, "momPrev2Year", null);
+  fillGroupData(komoditasYoyData?.prev2Year || komoditasYoyData?.prev2YearList, "yoyPrev2Year", null);
+  fillGroupData(komoditasYtdData?.prev2Year || komoditasYtdData?.prev2YearList, "ytdPrev2Year", null);
 
   // Synchronize backward-compatible group values & compute andil/IHK
   groupKeys.forEach((k) => {
@@ -516,18 +516,18 @@ export const processIdmlVariables = async (targetCityInput = "") => {
       },
       komoditasMom: {
         now: komoditasMomData?.hierarki || [],
-        prevYear: komoditasMomData?.prevYearList || [],
-        prev2Year: komoditasMomData?.prev2YearList || [],
+        prevYear: komoditasMomData?.prevYear || komoditasMomData?.prevYearList || [],
+        prev2Year: komoditasMomData?.prev2Year || komoditasMomData?.prev2YearList || [],
       },
       komoditasYoy: {
         now: komoditasYoyData?.hierarki || [],
-        prevYear: komoditasYoyData?.prevYearList || [],
-        prev2Year: komoditasYoyData?.prev2YearList || [],
+        prevYear: komoditasYoyData?.prevYear || komoditasYoyData?.prevYearList || [],
+        prev2Year: komoditasYoyData?.prev2Year || komoditasYoyData?.prev2YearList || [],
       },
       komoditasYtd: {
         now: komoditasYtdData?.hierarki || [],
-        prevYear: komoditasYtdData?.prevYearList || [],
-        prev2Year: komoditasYtdData?.prev2YearList || [],
+        prevYear: komoditasYtdData?.prevYear || komoditasYtdData?.prevYearList || [],
+        prev2Year: komoditasYtdData?.prev2Year || komoditasYtdData?.prev2YearList || [],
       },
       komoditasMomData,
       komoditasYoyData,

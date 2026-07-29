@@ -156,7 +156,7 @@ export const parseAndVerifyDataset = async (req, res) => {
         sheet: sheetName,
       },
       context: {
-        city: extractedCity || city || "KOTA METRO",
+        city: extractedCity || req.body?.kota || city || "",
         period: periodText,
         monthIndex,
         year: yearVal,
@@ -270,6 +270,7 @@ export const generateBRS = async (req, res) => {
   try {
     const {
       city,
+      kota,
       monthIndex,
       year,
       inflasiMoM,
@@ -280,7 +281,7 @@ export const generateBRS = async (req, res) => {
 
     const monthName = months[monthIndex !== undefined ? monthIndex : 2]; // default Maret
     const yr = year || new Date().getFullYear();
-    const targetCity = city || "KOTA METRO";
+    const targetCity = kota || city || "";
     const infMoM = inflasiMoM || "0,00";
     const infYoY = inflasiYoY || "0,00";
     const targetIhk = ihkNow || "100,00";
@@ -550,10 +551,11 @@ export const generateAndSaveBRS = async (req, res) => {
   try {
     const {
       city,
+      kota,
     } = req.body;
     const userId = req.user._id;
 
-    const targetCity = city || "Kota Malang";
+    const targetCity = kota || city || "Kota Malang";
 
     // 1. Ambil & olah data statistik BPS serta hitung andil dari bobot.json
     const { variables: baseVars, raw: rawData } = await processIdmlVariables(targetCity);

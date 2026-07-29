@@ -119,7 +119,19 @@ const formatCommodityList = (items) => {
 /**
  * Fungsi utama memproses data BPS dan menyusun dictionary placeholder
  */
-export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
+export const processIdmlVariables = async (targetCityInput = "") => {
+  let targetCity = "";
+  if (typeof targetCityInput === "string") {
+    targetCity = targetCityInput;
+  } else if (targetCityInput && typeof targetCityInput === "object") {
+    targetCity =
+      targetCityInput.body?.kota ||
+      targetCityInput.body?.city ||
+      targetCityInput.kota ||
+      targetCityInput.city ||
+      "";
+  }
+
   const bobotMap = loadBobotData();
 
   // 1. Fetch data MoM, YoY, YtD, IHK dari controller BPS
@@ -158,11 +170,39 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
   const prevYear = currentYear - 1;
   const twoYearsAgo = currentYear - 2;
 
-  // Nilai inflasi & IHK umum
+  // Helper untuk membaca nilai berdasarkan index bulan dari array dataset BPS
+  const getValueForMonth = (dataArray, mIndex) => {
+    if (!Array.isArray(dataArray) || dataArray.length === 0) return 0;
+    const targetMonthNum = mIndex + 1; // 1-12
+    const found = dataArray.find((item) => {
+      if (!item || item.key === undefined) return false;
+      const keyStr = String(item.key);
+      const mNum = parseInt(keyStr.slice(-2), 10);
+      if (mNum === targetMonthNum) return true;
+      const mNumSingle = parseInt(keyStr.slice(-1), 10);
+      return mNumSingle === targetMonthNum;
+    });
+    if (found) return parseFloat(found.value) || 0;
+    const last = dataArray[dataArray.length - 1];
+    return last ? parseFloat(last.value) || 0 : 0;
+  };
+
+  // Nilai inflasi & IHK umum 3 Periode (Now, PrevYear, Prev2Year)
   const umumMoMVal = parseFloat(inflasiMoMData?.dashboard?.now ?? 0.29);
+  const umumMoMValPrevYear = getValueForMonth(inflasiMoMData?.prevYear, monthIndex);
+  const umumMoMValPrev2Year = getValueForMonth(inflasiMoMData?.prev2Year, monthIndex);
+
   const umumYtdVal = parseFloat(inflasiYtdData?.dashboard?.now ?? 1.91);
+  const umumYtdValPrevYear = getValueForMonth(inflasiYtdData?.prevYear, monthIndex);
+  const umumYtdValPrev2Year = getValueForMonth(inflasiYtdData?.prev2Year, monthIndex);
+
   const umumYoYVal = parseFloat(inflasiYoyData?.dashboard?.now ?? 3.07);
+  const umumYoYValPrevYear = getValueForMonth(inflasiYoyData?.prevYear, monthIndex);
+  const umumYoYValPrev2Year = getValueForMonth(inflasiYoyData?.prev2Year, monthIndex);
+
   const umumIhkBerjalanVal = parseFloat(ihkData?.dashboard?.now ?? 110.73);
+  const umumIhkPrevYearVal = getValueForMonth(ihkData?.prevYear, monthIndex);
+  const umumIhkPrev2YearVal = getValueForMonth(ihkData?.prev2Year, monthIndex);
   const umumIhkSebelumnyaVal = parseFloat(ihkData?.dashboard?.then ?? 110.41);
   const umumIhkPembandingVal = Number((umumIhkBerjalanVal / (1 + umumYoYVal / 100)).toFixed(2));
 
@@ -206,17 +246,31 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
     tahun2: String(prevYear),
     tahun3: String(currentYear),
 
-    // Nilai umum
+    // Nilai umum (Now, PrevYear, Prev2Year)
     inflasiMoM: toIndoNum(umumMoMVal),
     inflasiMtM: toIndoNum(umumMoMVal),
+    inflasiMoMNow: toIndoNum(umumMoMVal),
+    inflasiMoMPrevYear: toIndoNum(umumMoMValPrevYear),
+    inflasiMoMPrev2Year: toIndoNum(umumMoMValPrev2Year),
+
     inflasiYoy: toIndoNum(umumYoYVal),
     inflasiYoY: toIndoNum(umumYoYVal),
+    inflasiYoYNow: toIndoNum(umumYoYVal),
+    inflasiYoYPrevYear: toIndoNum(umumYoYValPrevYear),
+    inflasiYoYPrev2Year: toIndoNum(umumYoYValPrev2Year),
+
     inflasiYtd: toIndoNum(umumYtdVal),
     inflasiYtD: toIndoNum(umumYtdVal),
+    inflasiYtdNow: toIndoNum(umumYtdVal),
+    inflasiYtdPrevYear: toIndoNum(umumYtdValPrevYear),
+    inflasiYtdPrev2Year: toIndoNum(umumYtdValPrev2Year),
 
     ihkSaatIni: toIndoNum(umumIhkBerjalanVal),
     ihkTahunSebelumnya: toIndoNum(umumIhkPembandingVal),
     ihkSekarang: toIndoNum(umumIhkBerjalanVal),
+    ihkNow: toIndoNum(umumIhkBerjalanVal),
+    ihkPrevYear: toIndoNum(umumIhkPrevYearVal),
+    ihkPrev2Year: toIndoNum(umumIhkPrev2YearVal),
 
     umumIhkPembanding: toIndoNum(umumIhkPembandingVal),
     umumIhkSebelumnya: toIndoNum(umumIhkSebelumnyaVal),
@@ -252,6 +306,15 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
     groupProcessedData[k] = {
       label: "",
       bobot: 5.0,
+      momNow: 0.0,
+      momPrevYear: 0.0,
+      momPrev2Year: 0.0,
+      yoyNow: 0.0,
+      yoyPrevYear: 0.0,
+      yoyPrev2Year: 0.0,
+      ytdNow: 0.0,
+      ytdPrevYear: 0.0,
+      ytdPrev2Year: 0.0,
       mom: 0.0,
       yoy: 0.0,
       ytd: 0.0,
@@ -266,30 +329,45 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
     };
   });
 
-  const fillGroupData = (dataset, valField, subField) => {
-    if (dataset && Array.isArray(dataset.hierarki)) {
-      dataset.hierarki.forEach((item) => {
-        const k = matchGroupKey(item.label);
+  const fillGroupData = (dataList, valField, subField) => {
+    if (Array.isArray(dataList)) {
+      dataList.forEach((item) => {
+        const k = matchGroupKey(item.label || item.nama);
         if (k && groupProcessedData[k]) {
-          groupProcessedData[k].label = item.label;
-          const norm = normalizeGroupName(item.label);
+          groupProcessedData[k].label = item.label || item.nama;
+          const norm = normalizeGroupName(item.label || item.nama);
           if (bobotMap[norm]) {
             groupProcessedData[k].bobot = bobotMap[norm];
           }
           groupProcessedData[k][valField] = parseFloat(item.value) || 0.0;
-          groupProcessedData[k][subField] = Array.isArray(item.sub) ? item.sub : [];
+          if (subField) {
+            groupProcessedData[k][subField] = Array.isArray(item.sub) ? item.sub : [];
+          }
         }
       });
     }
   };
 
-  fillGroupData(komoditasMomData, "mom", "subMom");
-  fillGroupData(komoditasYoyData, "yoy", "subYoy");
-  fillGroupData(komoditasYtdData, "ytd", "subYtd");
+  // Populate 3-year data for groups
+  fillGroupData(komoditasMomData?.hierarki, "momNow", "subMom");
+  fillGroupData(komoditasYoyData?.hierarki, "yoyNow", "subYoy");
+  fillGroupData(komoditasYtdData?.hierarki, "ytdNow", "subYtd");
 
-  // Hitung andil inflasi & IHK per kelompok
+  fillGroupData(komoditasMomData?.prevYearList, "momPrevYear", null);
+  fillGroupData(komoditasYoyData?.prevYearList, "yoyPrevYear", null);
+  fillGroupData(komoditasYtdData?.prevYearList, "ytdPrevYear", null);
+
+  fillGroupData(komoditasMomData?.prev2YearList, "momPrev2Year", null);
+  fillGroupData(komoditasYoyData?.prev2YearList, "yoyPrev2Year", null);
+  fillGroupData(komoditasYtdData?.prev2YearList, "ytdPrev2Year", null);
+
+  // Synchronize backward-compatible group values & compute andil/IHK
   groupKeys.forEach((k) => {
     const data = groupProcessedData[k];
+    data.mom = data.momNow;
+    data.yoy = data.yoyNow;
+    data.ytd = data.ytdNow;
+
     data.andilMtm = Number(((data.bobot * data.mom) / 100).toFixed(2));
     data.andilYoy = Number(((data.bobot * data.yoy) / 100).toFixed(2));
 
@@ -301,12 +379,26 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
     data.ihkSebelumnya = ihkPrevMonthGroup;
     data.ihkPembanding = ihkPrevYearGroup;
 
-    // Populate placeholder variabel kelompok
+    // Populate placeholder variabel kelompok 3 Periode
     variables[`${k}IhkPembanding`] = toIndoNum(data.ihkPembanding);
     variables[`${k}IhkSebelumnya`] = toIndoNum(data.ihkSebelumnya);
     variables[`${k}IhkBerjalan`] = toIndoNum(data.ihkBerjalan);
-    variables[`${k}Ytd`] = toIndoNum(data.ytd);
-    variables[`${k}Yoy`] = toIndoNum(data.yoy);
+
+    variables[`${k}Ytd`] = toIndoNum(data.ytdNow);
+    variables[`${k}YtdNow`] = toIndoNum(data.ytdNow);
+    variables[`${k}YtdPrevYear`] = toIndoNum(data.ytdPrevYear);
+    variables[`${k}YtdPrev2Year`] = toIndoNum(data.ytdPrev2Year);
+
+    variables[`${k}Yoy`] = toIndoNum(data.yoyNow);
+    variables[`${k}YoyNow`] = toIndoNum(data.yoyNow);
+    variables[`${k}YoyPrevYear`] = toIndoNum(data.yoyPrevYear);
+    variables[`${k}YoyPrev2Year`] = toIndoNum(data.yoyPrev2Year);
+
+    variables[`${k}Mom`] = toIndoNum(data.momNow);
+    variables[`${k}MomNow`] = toIndoNum(data.momNow);
+    variables[`${k}MomPrevYear`] = toIndoNum(data.momPrevYear);
+    variables[`${k}MomPrev2Year`] = toIndoNum(data.momPrev2Year);
+
     variables[`${k}AndilMtm`] = toIndoNum(data.andilMtm);
     variables[`${k}AndilYoy`] = toIndoNum(data.andilYoy);
   });
@@ -379,12 +471,16 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
     deflasiYoyItems.length > 0 ? deflasiYoyItems : [{ name: "bawang merah" }, { name: "minyak goreng" }]
   );
 
-  // Dynamic values untuk bulanan (Story_u15d2.xml)
+  // Values bulanan nyata 3 tahun (Story_u15d2.xml)
   monthNamesShort.forEach((mShort, idx) => {
     const keyPrefix = mShort.toLowerCase();
-    variables[`${keyPrefix}Tahun1`] = toIndoNum(2.1 + idx * 0.1);
-    variables[`${keyPrefix}Tahun2`] = toIndoNum(2.5 + idx * 0.05);
-    variables[`${keyPrefix}Tahun3`] = toIndoNum(1.8 + idx * 0.08);
+    const valTahun1 = getValueForMonth(inflasiMoMData?.prev2Year, idx);
+    const valTahun2 = getValueForMonth(inflasiMoMData?.prevYear, idx);
+    const valTahun3 = getValueForMonth(inflasiMoMData?.data, idx);
+
+    variables[`${keyPrefix}Tahun1`] = toIndoNum(valTahun1);
+    variables[`${keyPrefix}Tahun2`] = toIndoNum(valTahun2);
+    variables[`${keyPrefix}Tahun3`] = toIndoNum(valTahun3);
   });
 
   return {
@@ -393,6 +489,46 @@ export const processIdmlVariables = async (targetCity = "KOTA METRO") => {
       targetCity,
       currentMonth,
       currentYear,
+      years: {
+        now: currentYear,
+        prevYear: prevYear,
+        prev2Year: twoYearsAgo,
+      },
+      ihkMom: {
+        now: ihkData?.data || [],
+        prevYear: ihkData?.prevYear || [],
+        prev2Year: ihkData?.prev2Year || [],
+      },
+      inflasiMom: {
+        now: inflasiMoMData?.data || [],
+        prevYear: inflasiMoMData?.prevYear || [],
+        prev2Year: inflasiMoMData?.prev2Year || [],
+      },
+      inflasiYoy: {
+        now: inflasiYoyData?.data || [],
+        prevYear: inflasiYoyData?.prevYear || [],
+        prev2Year: inflasiYoyData?.prev2Year || [],
+      },
+      inflasiYtd: {
+        now: inflasiYtdData?.data || [],
+        prevYear: inflasiYtdData?.prevYear || [],
+        prev2Year: inflasiYtdData?.prev2Year || [],
+      },
+      komoditasMom: {
+        now: komoditasMomData?.hierarki || [],
+        prevYear: komoditasMomData?.prevYearList || [],
+        prev2Year: komoditasMomData?.prev2YearList || [],
+      },
+      komoditasYoy: {
+        now: komoditasYoyData?.hierarki || [],
+        prevYear: komoditasYoyData?.prevYearList || [],
+        prev2Year: komoditasYoyData?.prev2YearList || [],
+      },
+      komoditasYtd: {
+        now: komoditasYtdData?.hierarki || [],
+        prevYear: komoditasYtdData?.prevYearList || [],
+        prev2Year: komoditasYtdData?.prev2YearList || [],
+      },
       komoditasMomData,
       komoditasYoyData,
       komoditasYtdData,

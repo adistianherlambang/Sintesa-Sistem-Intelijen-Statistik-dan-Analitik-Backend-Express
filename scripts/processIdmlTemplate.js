@@ -122,8 +122,8 @@ export const processStoryUcc5Contextually = (xmlContent, rawData) => {
 /**
  * Pindai direktori idmlExtract dan ganti seluruh placeholder ${...}
  */
-export const runIdmlTemplateFiller = async (targetCity = "KOTA METRO") => {
-  console.log(`🚀 Memproses template IDML XML untuk kota: ${targetCity}...`);
+export const runIdmlTemplateFiller = async (targetCity = "") => {
+  console.log(`🚀 Memproses template IDML XML untuk kota: ${targetCity || "Default"}...`);
 
   if (mongoose.connection.readyState === 0) {
     const mongoUrl = process.env.MONGO_URL || process.env.MONGO_URI || "mongodb://localhost:27017/sintesa";
@@ -270,7 +270,7 @@ export const runIdmlTemplateFiller = async (targetCity = "KOTA METRO") => {
 };
 
 if (process.argv[1] && process.argv[1].endsWith("processIdmlTemplate.js")) {
-  const cityArg = process.argv[2] || "KOTA METRO";
+  const cityArg = process.argv[2] || "";
   runIdmlTemplateFiller(cityArg)
     .then(() => process.exit(0))
     .catch((err) => {

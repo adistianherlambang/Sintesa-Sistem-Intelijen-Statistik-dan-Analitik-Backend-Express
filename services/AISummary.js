@@ -76,7 +76,7 @@ export const AISummary = async () => {
       "November",
       "Desember",
     ];
-    const bulan = bulanList[month - 1] || "Juni";
+    const bulan = bulanList[month] || "Juni";
     const tahun = String(year);
 
     console.log("\n==========================================================================");
@@ -183,9 +183,7 @@ export const AISummary = async () => {
       }
     }
 
-    console.log("\n=======================================================");
     console.log(`✔ Selesai membuat & menyimpan AISummary untuk ${allResults.length} wilayah.`);
-    console.log("=======================================================\n");
 
     // Menulis file airesult.json selevel dengan file ini setelah loop selesai
     const outputPath = path.join(__dirname, "airesult.json");

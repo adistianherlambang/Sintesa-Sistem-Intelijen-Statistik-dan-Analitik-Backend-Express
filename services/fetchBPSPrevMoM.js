@@ -111,7 +111,12 @@ export const fetchBPSPrevMoM = async () => {
       throw new Error("API_BPS tidak ditemukan di environment variables!");
     }
     const configFile = await fs.readFile(configPath, "utf-8");
-    const rawUrls = JSON.parse(configFile);
+    const rawConfig = JSON.parse(configFile);
+    const rawUrls = Array.isArray(rawConfig)
+      ? rawConfig.flatMap((item) =>
+          typeof item === "string" ? item : item.content || [],
+        )
+      : [];
     const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
     const yearPrevYear = getYearPrevYear();
     const yearPrev2Year = getYearPrev2Year();

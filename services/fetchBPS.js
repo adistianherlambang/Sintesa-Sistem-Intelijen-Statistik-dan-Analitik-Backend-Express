@@ -92,7 +92,12 @@ export const fetchBPS = async () => {
         `API_BPS tidak ditemukan! Pastikan file .env ada di: ${rootEnvPath}`,
       );
     }
-    const rawUrls = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+    const rawConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+    const rawUrls = Array.isArray(rawConfig)
+      ? rawConfig.flatMap((item) =>
+          typeof item === "string" ? item : item.content || [],
+        )
+      : [];
     const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
 
     console.log("✔ Config loaded");

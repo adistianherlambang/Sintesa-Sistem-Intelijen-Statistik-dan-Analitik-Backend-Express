@@ -205,25 +205,46 @@ export const fetchBPS = async () => {
         continue;
       }
 
-      // Ambil hanya createdAt dan datacontent dari data response
-      // Jika di response BPS field waktu bernama 'last_update', sesuaikan nilainya ke 'createdAt'
-      const datacontent = data.datacontent;
-      const createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
+      // Ambil seluruh data dari response BPS API
+      const {
+        status,
+        "data-availability": dataAvailability,
+        last_update,
+        subject,
+        var: varArr,
+        turvar,
+        labelvervar,
+        vervar,
+        tahun,
+        turtahun,
+        datacontent,
+      } = data;
+
+      const lastUpdate = last_update ? new Date(last_update) : new Date();
 
       try {
         startLoading(
           `Saving ${index + 1}/${results.length} (ID Var: ${varVal})`,
         );
 
-        // Hanya meng-update createdAt dan datacontent
+        // Update seluruh field metadata dan datacontent dari response BPS API
         await APIDataBPS.findOneAndUpdate(
           {
             "var.val": varVal,
           },
           {
             $set: {
-              datacontent: datacontent,
-              createdAt: createdAt,
+              status: status || "OK",
+              dataAvailability: dataAvailability || "available",
+              lastUpdate: lastUpdate,
+              subject: subject || [],
+              var: varArr || [],
+              turvar: turvar || [],
+              labelvervar: labelvervar || "",
+              vervar: vervar || [],
+              tahun: tahun || [],
+              turtahun: turtahun || [],
+              datacontent: datacontent || {},
             },
           },
           {

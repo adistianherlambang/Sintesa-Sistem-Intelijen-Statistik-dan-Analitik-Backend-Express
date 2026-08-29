@@ -41,6 +41,7 @@ import {
 import {
   testBPSAPI,
   getAllDashboard,
+  getAllApiVariables,
 } from "../../controller/dashboard/dashboardController.js";
 import { getAISummaryByKota } from "../../controller/dashboard/AISummaryController.js";
 import {
@@ -491,6 +492,33 @@ router.post("/generate-and-save-brs", authMiddleware, generateAndSaveBRS);
 router.post("/testapi", async (req, res) => {
   try {
     const result = await testBPSAPI();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/variables", async (req, res) => {
+  try {
+    const result = await getAllApiVariables();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/indicators", async (req, res) => {
+  try {
+    const result = await getAllApiVariables();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/vars", async (req, res) => {
+  try {
+    const result = await getAllApiVariables();
     res.json(result);
   } catch (err) {
     handleError(res, err);

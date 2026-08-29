@@ -32,3 +32,16 @@ export const getAllDashboard = async () => {
 
   return { doc };
 };
+
+/**
+ * Pure function: Dapatkan daftar variabel (var.val & var.label) dari MongoDB
+ * @returns {Array} List dokumen dengan { var: [{ val, label }] }
+ */
+export const getAllApiVariables = async () => {
+  const list = await APIDataBPS.find(
+    {},
+    { _id: 0, "var.val": 1, "var.label": 1 },
+  ).lean();
+
+  return list;
+};

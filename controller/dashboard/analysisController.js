@@ -183,7 +183,8 @@ const fillStoryXML = (
 ) => {
   let newXml = originalXml;
 
-  const monthIndex = months.indexOf(monthName) !== -1 ? months.indexOf(monthName) : 10;
+  const monthIndex =
+    months.indexOf(monthName) !== -1 ? months.indexOf(monthName) : 10;
   const currentMonth = monthName;
   const currentYear = parseInt(yr, 10) || new Date().getFullYear();
 
@@ -221,11 +222,17 @@ const fillStoryXML = (
 
   // Replace Current Period (with regex for flexible spacing)
   newXml = newXml.replace(/November\s+2025/g, `${currentMonth} ${currentYear}`);
-  newXml = newXml.replace(/NOVEMBER\s+2025/g, `${currentMonth.toUpperCase()} ${currentYear}`);
+  newXml = newXml.replace(
+    /NOVEMBER\s+2025/g,
+    `${currentMonth.toUpperCase()} ${currentYear}`,
+  );
 
   // Replace Previous Period
   newXml = newXml.replace(/November\s+2024/g, `${currentMonth} ${prevYear}`);
-  newXml = newXml.replace(/NOVEMBER\s+2024/g, `${currentMonth.toUpperCase()} ${prevYear}`);
+  newXml = newXml.replace(
+    /NOVEMBER\s+2024/g,
+    `${currentMonth.toUpperCase()} ${prevYear}`,
+  );
   newXml = newXml.replace(/November\s+2023/g, `${currentMonth} ${twoYearsAgo}`);
 
   // Replace Month name
@@ -233,9 +240,18 @@ const fillStoryXML = (
   newXml = newXml.replace(/\bNOVEMBER\b/g, currentMonth.toUpperCase());
 
   // Replace previous month date references
-  newXml = newXml.replace(/Oktober\s+2025/g, `${prevMonthName} ${prevMonthYear}`);
-  newXml = newXml.replace(/OKTOBER\s+2025/g, `${prevMonthName.toUpperCase()} ${prevMonthYear}`);
-  newXml = newXml.replace(/Oktober\s+2024/g, `${prevMonthName} ${prevMonthYear - 1}`);
+  newXml = newXml.replace(
+    /Oktober\s+2025/g,
+    `${prevMonthName} ${prevMonthYear}`,
+  );
+  newXml = newXml.replace(
+    /OKTOBER\s+2025/g,
+    `${prevMonthName.toUpperCase()} ${prevMonthYear}`,
+  );
+  newXml = newXml.replace(
+    /Oktober\s+2024/g,
+    `${prevMonthName} ${prevMonthYear - 1}`,
+  );
   newXml = newXml.replace(/\bOktober\b/g, prevMonthName);
   newXml = newXml.replace(/\bOKTOBER\b/g, prevMonthName.toUpperCase());
 
@@ -477,7 +493,9 @@ export const generateSummary = async (req, res) => {
 const getDivisionInflasi = (divisionData, keyword) => {
   if (!Array.isArray(divisionData)) return "0,00";
   const found = divisionData.find((d) =>
-    String(d.name || "").toLowerCase().includes(keyword.toLowerCase())
+    String(d.name || "")
+      .toLowerCase()
+      .includes(keyword.toLowerCase()),
   );
   if (!found) return "0,00";
   const val = parseFloat(found.inflasi);
@@ -491,9 +509,7 @@ const getDivisionInflasi = (divisionData, keyword) => {
 const buildIdmlFromExtract = (variables, rawData = {}) => {
   const IDML_SRC = path.resolve(__dirname, "../../idmlExtract");
   if (!fs.existsSync(IDML_SRC)) {
-    throw new Error(
-      `Folder idmlExtract tidak ditemukan di: ${IDML_SRC}`
-    );
+    throw new Error(`Folder idmlExtract tidak ditemukan di: ${IDML_SRC}`);
   }
 
   const zip = new AdmZip();
@@ -549,18 +565,16 @@ const buildIdmlFromExtract = (variables, rawData = {}) => {
 
 export const generateAndSaveBRS = async (req, res) => {
   try {
-    const {
-      city,
-      kota,
-      editedData,
-      parsedData,
-    } = req.body;
+    const { city, kota, editedData, parsedData } = req.body;
     const userId = req.user._id;
 
     const targetCity = kota || city || "Kota Malang";
 
     // 1. Ambil & olah data statistik BPS (serta gunakan editedData/parsedData dari tabel jika ada)
-    const { variables: baseVars, raw: rawData } = await processIdmlVariables(targetCity, { editedData, parsedData });
+    const { variables: baseVars, raw: rawData } = await processIdmlVariables(
+      targetCity,
+      { editedData, parsedData },
+    );
 
     // 2. Hasilkan narasi keterangan BPS dari AI (Gemini LLM)
     const narrativeVars = await generateIdmlNarratives(rawData, baseVars);
@@ -601,7 +615,7 @@ export const generateAndSaveBRS = async (req, res) => {
 
     await logActivity(
       userId,
-      `Melakukan analisis BRS: Laporan BRS IHK ${targetCity} - ${periodText}`
+      `Melakukan analisis BRS: Laporan BRS IHK ${targetCity} - ${periodText}`,
     );
 
     res.json({

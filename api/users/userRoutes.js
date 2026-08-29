@@ -183,10 +183,7 @@ router.get(
         .json({ message: "File PDF tidak ditemukan di server" });
     }
 
-    await logActivity(
-      req.user._id,
-      `Mengunduh file analisis`,
-    );
+    await logActivity(req.user._id, `Mengunduh file analisis`);
     res.download(pdfFilePath, pdfFilename);
   }),
 );

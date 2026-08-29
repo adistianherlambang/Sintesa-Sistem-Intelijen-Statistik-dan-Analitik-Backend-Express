@@ -73,9 +73,15 @@ export const AISummary = async () => {
     // Array penampung data input untuk dikirim ke LLM
     const inputData = [];
 
-    console.log("\n==========================================================================");
-    console.log("🚀 Memulai Pengambilan 7 Data Indikator & Pembuatan AI Summary per Wilayah");
-    console.log("==========================================================================\n");
+    console.log(
+      "\n==========================================================================",
+    );
+    console.log(
+      "🚀 Memulai Pengambilan 7 Data Indikator & Pembuatan AI Summary per Wilayah",
+    );
+    console.log(
+      "==========================================================================\n",
+    );
 
     const totalCities = kotaConfig.length;
     let cityCounter = 0;
@@ -88,10 +94,11 @@ export const AISummary = async () => {
       const percent = Math.round((cityCounter / totalCities) * 100);
       const barLength = 20;
       const filledLength = Math.round((barLength * cityCounter) / totalCities);
-      const progressBar = "█".repeat(filledLength) + "░".repeat(barLength - filledLength);
+      const progressBar =
+        "█".repeat(filledLength) + "░".repeat(barLength - filledLength);
 
       process.stdout.write(
-        `\r⏳ [${String(cityCounter).padStart(3, " ")}/${totalCities}] [${progressBar}] ${percent}% | Process: ${city.name.padEnd(25)}`
+        `\r⏳ [${String(cityCounter).padStart(3, " ")}/${totalCities}] [${progressBar}] ${percent}% | Process: ${city.name.padEnd(25)}`,
       );
 
       try {
@@ -100,11 +107,12 @@ export const AISummary = async () => {
         let inflasiYtdVal = "N/A";
 
         if (namaKotaInflasi) {
-          const [dataInflasiMoM, dataInflasiYoY, dataInflasiYtd] = await Promise.all([
-            getInflasiByKota(namaKotaInflasi).catch(() => null),
-            getInflasiYoyByKota(namaKotaInflasi).catch(() => null),
-            getInflasiYtdByKota(namaKotaInflasi).catch(() => null),
-          ]);
+          const [dataInflasiMoM, dataInflasiYoY, dataInflasiYtd] =
+            await Promise.all([
+              getInflasiByKota(namaKotaInflasi).catch(() => null),
+              getInflasiYoyByKota(namaKotaInflasi).catch(() => null),
+              getInflasiYtdByKota(namaKotaInflasi).catch(() => null),
+            ]);
 
           inflasiMoMVal = dataInflasiMoM?.dashboard?.now ?? 0;
           inflasiYoYVal = dataInflasiYoY?.dashboard?.now ?? "N/A";
@@ -117,7 +125,12 @@ export const AISummary = async () => {
         let komoditasYtdLabel = "N/A";
 
         if (namaKotaIhk) {
-          const [dataIhkMom, dataKomoditasMoM, dataKomoditasYoY, dataKomoditasYtd] = await Promise.all([
+          const [
+            dataIhkMom,
+            dataKomoditasMoM,
+            dataKomoditasYoY,
+            dataKomoditasYtd,
+          ] = await Promise.all([
             getIhkByKota(namaKotaIhk).catch(() => null),
             getKomoditasByKota(namaKotaIhk).catch(() => null),
             getKomoditasYoyByKota(namaKotaIhk).catch(() => null),
@@ -150,7 +163,7 @@ export const AISummary = async () => {
         });
 
         process.stdout.write(
-          `\r✔ [${String(cityCounter).padStart(3, " ")}/${totalCities}] [${progressBar}] ${percent}% | Selesai data: ${city.name.padEnd(25)}\n`
+          `\r✔ [${String(cityCounter).padStart(3, " ")}/${totalCities}] [${progressBar}] ${percent}% | Selesai data: ${city.name.padEnd(25)}\n`,
         );
       } catch (err) {
         console.warn(
@@ -271,7 +284,8 @@ export const AISummary = async () => {
           ? parsedResponse.data
           : [];
 
-    const getWordCount = (text) => (text ? text.trim().split(/\s+/).filter(Boolean).length : 0);
+    const getWordCount = (text) =>
+      text ? text.trim().split(/\s+/).filter(Boolean).length : 0;
 
     console.log("\n=======================================================");
     console.log("📊 Hasil Pembuatan AI Summary & Verifikasi Jumlah Kata");
@@ -283,7 +297,7 @@ export const AISummary = async () => {
       const words = getWordCount(result.summary);
       const statusIcon = words >= 60 && words <= 70 ? "✔" : "⚠️";
       console.log(
-        `${statusIcon} [${String(countIndex).padStart(3, " ")}/${allResults.length}] Kota: ${result.kota.padEnd(25)} | Kata: ${String(words).padStart(2, " ")} | Summary: "${result.summary.slice(0, 50)}..."`
+        `${statusIcon} [${String(countIndex).padStart(3, " ")}/${allResults.length}] Kota: ${result.kota.padEnd(25)} | Kata: ${String(words).padStart(2, " ")} | Summary: "${result.summary.slice(0, 50)}..."`,
       );
 
       // Simpan/Upsert ke database MongoDB

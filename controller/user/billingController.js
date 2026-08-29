@@ -81,7 +81,6 @@ export const initiatePayment = async (userId, planId) => {
 
   await logActivity(userId, `Menunggu pembayaran paket: ${plan.name}`);
 
-
   return {
     transaction,
     payment: {

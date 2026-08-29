@@ -89,17 +89,31 @@ export const loadBobotData = () => {
  */
 export const matchGroupKey = (label) => {
   const norm = normalizeGroupName(label);
-  if (norm.includes("tembakau") || (norm.includes("makanan") && norm.includes("minuman") && !norm.includes("restoran"))) return "makanan";
+  if (
+    norm.includes("tembakau") ||
+    (norm.includes("makanan") &&
+      norm.includes("minuman") &&
+      !norm.includes("restoran"))
+  )
+    return "makanan";
   if (norm.includes("pakaian") || norm.includes("alaskaki")) return "pakaian";
-  if (norm.includes("perumahan") || norm.includes("bahanbakar")) return "perumahan";
-  if (norm.includes("perlengkapan") || norm.includes("pemeliharaan")) return "perlengkapan";
+  if (norm.includes("perumahan") || norm.includes("bahanbakar"))
+    return "perumahan";
+  if (norm.includes("perlengkapan") || norm.includes("pemeliharaan"))
+    return "perlengkapan";
   if (norm.includes("kesehatan")) return "kesehatan";
   if (norm.includes("transportasi")) return "transportasi";
-  if (norm.includes("informasi") || norm.includes("komunikasi")) return "informasi";
+  if (norm.includes("informasi") || norm.includes("komunikasi"))
+    return "informasi";
   if (norm.includes("rekreasi") || norm.includes("olahraga")) return "rekreasi";
   if (norm.includes("pendidikan")) return "pendidikan";
-  if (norm.includes("restoran") || (norm.includes("penyediaan") && norm.includes("makanan"))) return "restoran";
-  if (norm.includes("perawatan") || norm.includes("jasalainnya")) return "perawatan";
+  if (
+    norm.includes("restoran") ||
+    (norm.includes("penyediaan") && norm.includes("makanan"))
+  )
+    return "restoran";
+  if (norm.includes("perawatan") || norm.includes("jasalainnya"))
+    return "perawatan";
   return null;
 };
 
@@ -119,7 +133,10 @@ const formatCommodityList = (items) => {
 /**
  * Fungsi utama memproses data BPS dan menyusun dictionary placeholder
  */
-export const processIdmlVariables = async (targetCityInput = "", customDataInput = null) => {
+export const processIdmlVariables = async (
+  targetCityInput = "",
+  customDataInput = null,
+) => {
   let targetCity = "";
   let customData = customDataInput;
 
@@ -164,12 +181,17 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
   ]);
 
   // Gunakan data dari tabel halaman analisis (editedData / parsedData) jika tersedia
-  const editedData = customData?.editedData || (customData?.inflasiData ? customData : null);
-  const parsedData = customData?.parsedData || (Array.isArray(customData) ? customData : null);
+  const editedData =
+    customData?.editedData || (customData?.inflasiData ? customData : null);
+  const parsedData =
+    customData?.parsedData || (Array.isArray(customData) ? customData : null);
 
-  const komoditasMomData = editedData?.komoditasData?.mom || fetchedKomoditasMom;
-  const komoditasYoyData = editedData?.komoditasData?.yoy || fetchedKomoditasYoy;
-  const komoditasYtdData = editedData?.komoditasData?.ytd || fetchedKomoditasYtd;
+  const komoditasMomData =
+    editedData?.komoditasData?.mom || fetchedKomoditasMom;
+  const komoditasYoyData =
+    editedData?.komoditasData?.yoy || fetchedKomoditasYoy;
+  const komoditasYtdData =
+    editedData?.komoditasData?.ytd || fetchedKomoditasYtd;
   const ihkData = editedData?.ihkData || fetchedIhk;
   const inflasiMoMData = editedData?.inflasiData?.mom || fetchedInflasiMoM;
   const inflasiYtdData = editedData?.inflasiData?.ytd || fetchedInflasiYtd;
@@ -179,10 +201,15 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
   const currentYear = now.getFullYear();
 
   let monthIndex = 5; // Default Juni (index 5)
-  if (inflasiMoMData && Array.isArray(inflasiMoMData.data) && inflasiMoMData.data.length > 0) {
+  if (
+    inflasiMoMData &&
+    Array.isArray(inflasiMoMData.data) &&
+    inflasiMoMData.data.length > 0
+  ) {
     const lastItem = inflasiMoMData.data[inflasiMoMData.data.length - 1];
     const keyStr = String(lastItem.key);
-    const mNum = parseInt(keyStr.slice(-1), 10) || parseInt(keyStr.slice(-2), 10);
+    const mNum =
+      parseInt(keyStr.slice(-1), 10) || parseInt(keyStr.slice(-2), 10);
     if (mNum >= 1 && mNum <= 12) monthIndex = mNum - 1;
   }
 
@@ -211,29 +238,55 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
 
   // Nilai inflasi & IHK umum 3 Periode (Now, PrevYear, Prev2Year)
   const umumMoMVal = parseFloat(inflasiMoMData?.dashboard?.now ?? 0.29);
-  const umumMoMValPrevYear = getValueForMonth(inflasiMoMData?.prevYear, monthIndex);
-  const umumMoMValPrev2Year = getValueForMonth(inflasiMoMData?.prev2Year, monthIndex);
+  const umumMoMValPrevYear = getValueForMonth(
+    inflasiMoMData?.prevYear,
+    monthIndex,
+  );
+  const umumMoMValPrev2Year = getValueForMonth(
+    inflasiMoMData?.prev2Year,
+    monthIndex,
+  );
 
   const umumYtdVal = parseFloat(inflasiYtdData?.dashboard?.now ?? 1.91);
-  const umumYtdValPrevYear = getValueForMonth(inflasiYtdData?.prevYear, monthIndex);
-  const umumYtdValPrev2Year = getValueForMonth(inflasiYtdData?.prev2Year, monthIndex);
+  const umumYtdValPrevYear = getValueForMonth(
+    inflasiYtdData?.prevYear,
+    monthIndex,
+  );
+  const umumYtdValPrev2Year = getValueForMonth(
+    inflasiYtdData?.prev2Year,
+    monthIndex,
+  );
 
   const umumYoYVal = parseFloat(inflasiYoyData?.dashboard?.now ?? 3.07);
-  const umumYoYValPrevYear = getValueForMonth(inflasiYoyData?.prevYear, monthIndex);
-  const umumYoYValPrev2Year = getValueForMonth(inflasiYoyData?.prev2Year, monthIndex);
+  const umumYoYValPrevYear = getValueForMonth(
+    inflasiYoyData?.prevYear,
+    monthIndex,
+  );
+  const umumYoYValPrev2Year = getValueForMonth(
+    inflasiYoyData?.prev2Year,
+    monthIndex,
+  );
 
   const umumIhkBerjalanVal = parseFloat(ihkData?.dashboard?.now ?? 110.73);
   const umumIhkPrevYearVal = getValueForMonth(ihkData?.prevYear, monthIndex);
   const umumIhkPrev2YearVal = getValueForMonth(ihkData?.prev2Year, monthIndex);
   const umumIhkSebelumnyaVal = parseFloat(ihkData?.dashboard?.then ?? 110.41);
-  const umumIhkPembandingVal = Number((umumIhkBerjalanVal / (1 + umumYoYVal / 100)).toFixed(2));
+  const umumIhkPembandingVal = Number(
+    (umumIhkBerjalanVal / (1 + umumYoYVal / 100)).toFixed(2),
+  );
 
   const bobotTotalUtama = 100.0;
-  const umumAndilMtmVal = Number(((bobotTotalUtama * umumMoMVal) / 100).toFixed(2));
-  const umumAndilYoyVal = Number(((bobotTotalUtama * umumYoYVal) / 100).toFixed(2));
+  const umumAndilMtmVal = Number(
+    ((bobotTotalUtama * umumMoMVal) / 100).toFixed(2),
+  );
+  const umumAndilYoyVal = Number(
+    ((bobotTotalUtama * umumYoYVal) / 100).toFixed(2),
+  );
 
-  const statusKenaikanAtauPenurunan = umumMoMVal >= 0 ? "kenaikan harga" : "penurunan harga";
-  const arahPerkembanganHarga = umumMoMVal >= 0 ? "kenaikan harga" : "penurunan harga";
+  const statusKenaikanAtauPenurunan =
+    umumMoMVal >= 0 ? "kenaikan harga" : "penurunan harga";
+  const arahPerkembanganHarga =
+    umumMoMVal >= 0 ? "kenaikan harga" : "penurunan harga";
   const arahPerubahanIhk = umumYoYVal >= 0 ? "kenaikan" : "penurunan";
 
   // Map variabel dasar
@@ -363,7 +416,9 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
           }
           groupProcessedData[k][valField] = parseFloat(item.value) || 0.0;
           if (subField) {
-            groupProcessedData[k][subField] = Array.isArray(item.sub) ? item.sub : [];
+            groupProcessedData[k][subField] = Array.isArray(item.sub)
+              ? item.sub
+              : [];
           }
         }
       });
@@ -375,13 +430,37 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
   fillGroupData(komoditasYoyData?.hierarki, "yoyNow", "subYoy");
   fillGroupData(komoditasYtdData?.hierarki, "ytdNow", "subYtd");
 
-  fillGroupData(komoditasMomData?.prevYear || komoditasMomData?.prevYearList, "momPrevYear", null);
-  fillGroupData(komoditasYoyData?.prevYear || komoditasYoyData?.prevYearList, "yoyPrevYear", null);
-  fillGroupData(komoditasYtdData?.prevYear || komoditasYtdData?.prevYearList, "ytdPrevYear", null);
+  fillGroupData(
+    komoditasMomData?.prevYear || komoditasMomData?.prevYearList,
+    "momPrevYear",
+    null,
+  );
+  fillGroupData(
+    komoditasYoyData?.prevYear || komoditasYoyData?.prevYearList,
+    "yoyPrevYear",
+    null,
+  );
+  fillGroupData(
+    komoditasYtdData?.prevYear || komoditasYtdData?.prevYearList,
+    "ytdPrevYear",
+    null,
+  );
 
-  fillGroupData(komoditasMomData?.prev2Year || komoditasMomData?.prev2YearList, "momPrev2Year", null);
-  fillGroupData(komoditasYoyData?.prev2Year || komoditasYoyData?.prev2YearList, "yoyPrev2Year", null);
-  fillGroupData(komoditasYtdData?.prev2Year || komoditasYtdData?.prev2YearList, "ytdPrev2Year", null);
+  fillGroupData(
+    komoditasMomData?.prev2Year || komoditasMomData?.prev2YearList,
+    "momPrev2Year",
+    null,
+  );
+  fillGroupData(
+    komoditasYoyData?.prev2Year || komoditasYoyData?.prev2YearList,
+    "yoyPrev2Year",
+    null,
+  );
+  fillGroupData(
+    komoditasYtdData?.prev2Year || komoditasYtdData?.prev2YearList,
+    "ytdPrev2Year",
+    null,
+  );
 
   // Synchronize backward-compatible group values & compute andil/IHK
   groupKeys.forEach((k) => {
@@ -394,8 +473,12 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
     data.andilYoy = Number(((data.bobot * data.yoy) / 100).toFixed(2));
 
     const ihkNowGroup = Number((umumIhkBerjalanVal + data.mom).toFixed(2));
-    const ihkPrevMonthGroup = Number((ihkNowGroup / (1 + data.mom / 100)).toFixed(2));
-    const ihkPrevYearGroup = Number((ihkNowGroup / (1 + data.yoy / 100)).toFixed(2));
+    const ihkPrevMonthGroup = Number(
+      (ihkNowGroup / (1 + data.mom / 100)).toFixed(2),
+    );
+    const ihkPrevYearGroup = Number(
+      (ihkNowGroup / (1 + data.yoy / 100)).toFixed(2),
+    );
 
     data.ihkBerjalan = ihkNowGroup;
     data.ihkSebelumnya = ihkPrevMonthGroup;
@@ -428,52 +511,102 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
   // Placeholder spesifik teks paragraf per kelompok
   variables["kelompokMakanan"] = "makanan, minuman, dan tembakau";
   variables["indeksMakananYoy"] = toIndoNum(groupProcessedData["makanan"].yoy);
-  variables["andilMakananYoy"] = toIndoNum(groupProcessedData["makanan"].andilYoy);
+  variables["andilMakananYoy"] = toIndoNum(
+    groupProcessedData["makanan"].andilYoy,
+  );
 
   variables["kelompokPakaian"] = "pakaian dan alas kaki";
-  variables["penurunanPakaianYoy"] = toIndoNum(Math.abs(groupProcessedData["pakaian"].yoy));
-  variables["andilDeflasiPakaianYoy"] = toIndoNum(Math.abs(groupProcessedData["pakaian"].andilYoy));
+  variables["penurunanPakaianYoy"] = toIndoNum(
+    Math.abs(groupProcessedData["pakaian"].yoy),
+  );
+  variables["andilDeflasiPakaianYoy"] = toIndoNum(
+    Math.abs(groupProcessedData["pakaian"].andilYoy),
+  );
 
-  variables["kelompokPerumahan"] = "perumahan, air, listrik, dan bahan bakar rumah tangga";
-  variables["kelompokPerumahanLainnya"] = "perumahan, air, listrik, dan bahan bakar rumah tangga";
-  variables["indeksPerumahanYoy"] = toIndoNum(groupProcessedData["perumahan"].yoy);
-  variables["andilPerumahanYoy"] = toIndoNum(groupProcessedData["perumahan"].andilYoy);
+  variables["kelompokPerumahan"] =
+    "perumahan, air, listrik, dan bahan bakar rumah tangga";
+  variables["kelompokPerumahanLainnya"] =
+    "perumahan, air, listrik, dan bahan bakar rumah tangga";
+  variables["indeksPerumahanYoy"] = toIndoNum(
+    groupProcessedData["perumahan"].yoy,
+  );
+  variables["andilPerumahanYoy"] = toIndoNum(
+    groupProcessedData["perumahan"].andilYoy,
+  );
 
-  variables["kelompokPerlengkapanRumahTangga"] = "perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga";
-  variables["penurunanPerlengkapanRumahTanggaYoy"] = toIndoNum(Math.abs(groupProcessedData["perlengkapan"].yoy));
-  variables["andilDeflasiPerlengkapanRumahTanggaYoy"] = toIndoNum(Math.abs(groupProcessedData["perlengkapan"].andilYoy));
+  variables["kelompokPerlengkapanRumahTangga"] =
+    "perlengkapan, peralatan, dan pemeliharaan rutin rumah tangga";
+  variables["penurunanPerlengkapanRumahTanggaYoy"] = toIndoNum(
+    Math.abs(groupProcessedData["perlengkapan"].yoy),
+  );
+  variables["andilDeflasiPerlengkapanRumahTanggaYoy"] = toIndoNum(
+    Math.abs(groupProcessedData["perlengkapan"].andilYoy),
+  );
 
   variables["kelompokKesehatan"] = "kesehatan";
-  variables["indeksKesehatanYoy"] = toIndoNum(groupProcessedData["kesehatan"].yoy);
-  variables["andilKesehatanYoy"] = toIndoNum(groupProcessedData["kesehatan"].andilYoy);
+  variables["indeksKesehatanYoy"] = toIndoNum(
+    groupProcessedData["kesehatan"].yoy,
+  );
+  variables["andilKesehatanYoy"] = toIndoNum(
+    groupProcessedData["kesehatan"].andilYoy,
+  );
 
   variables["kelompokTransportasi"] = "transportasi";
-  variables["indeksTransportasiYoy"] = toIndoNum(groupProcessedData["transportasi"].yoy);
-  variables["andilTransportasiYoy"] = toIndoNum(groupProcessedData["transportasi"].andilYoy);
+  variables["indeksTransportasiYoy"] = toIndoNum(
+    groupProcessedData["transportasi"].yoy,
+  );
+  variables["andilTransportasiYoy"] = toIndoNum(
+    groupProcessedData["transportasi"].andilYoy,
+  );
 
-  variables["kelompokInformasiKomunikasi"] = "informasi, komunikasi, dan jasa keuangan";
-  variables["penurunanInformasiKomunikasiYoy"] = toIndoNum(Math.abs(groupProcessedData["informasi"].yoy));
-  variables["andilDeflasiInformasiKomunikasiYoy"] = toIndoNum(Math.abs(groupProcessedData["informasi"].andilYoy));
+  variables["kelompokInformasiKomunikasi"] =
+    "informasi, komunikasi, dan jasa keuangan";
+  variables["penurunanInformasiKomunikasiYoy"] = toIndoNum(
+    Math.abs(groupProcessedData["informasi"].yoy),
+  );
+  variables["andilDeflasiInformasiKomunikasiYoy"] = toIndoNum(
+    Math.abs(groupProcessedData["informasi"].andilYoy),
+  );
 
   variables["kelompokRekreasi"] = "rekreasi, olahraga, dan budaya";
-  variables["indeksRekreasiYoy"] = toIndoNum(groupProcessedData["rekreasi"].yoy);
-  variables["andilRekreasiYoy"] = toIndoNum(groupProcessedData["rekreasi"].andilYoy);
+  variables["indeksRekreasiYoy"] = toIndoNum(
+    groupProcessedData["rekreasi"].yoy,
+  );
+  variables["andilRekreasiYoy"] = toIndoNum(
+    groupProcessedData["rekreasi"].andilYoy,
+  );
 
   variables["kelompokPendidikan"] = "pendidikan";
-  variables["penurunanPendidikanYoy"] = toIndoNum(Math.abs(groupProcessedData["pendidikan"].yoy));
-  variables["andilDeflasiPendidikanYoy"] = toIndoNum(Math.abs(groupProcessedData["pendidikan"].andilYoy));
+  variables["penurunanPendidikanYoy"] = toIndoNum(
+    Math.abs(groupProcessedData["pendidikan"].yoy),
+  );
+  variables["andilDeflasiPendidikanYoy"] = toIndoNum(
+    Math.abs(groupProcessedData["pendidikan"].andilYoy),
+  );
 
   variables["kelompokRestoran"] = "penyediaan makanan dan minuman/restoran";
-  variables["indeksRestoranYoy"] = toIndoNum(groupProcessedData["restoran"].yoy);
-  variables["andilRestoranYoy"] = toIndoNum(groupProcessedData["restoran"].andilYoy);
+  variables["indeksRestoranYoy"] = toIndoNum(
+    groupProcessedData["restoran"].yoy,
+  );
+  variables["andilRestoranYoy"] = toIndoNum(
+    groupProcessedData["restoran"].andilYoy,
+  );
 
   variables["kelompokPerawatanPribadi"] = "perawatan pribadi dan jasa lainnya";
-  variables["indeksPerawatanPribadiYoy"] = toIndoNum(groupProcessedData["perawatan"].yoy);
-  variables["andilPerawatanPribadiYoy"] = toIndoNum(groupProcessedData["perawatan"].andilYoy);
+  variables["indeksPerawatanPribadiYoy"] = toIndoNum(
+    groupProcessedData["perawatan"].yoy,
+  );
+  variables["andilPerawatanPribadiYoy"] = toIndoNum(
+    groupProcessedData["perawatan"].andilYoy,
+  );
 
   // Komoditas pendorong & penghambat
   const topMom = komoditasMomData?.top5Mom || komoditasMomData?.topMom || [];
-  const topYoy = komoditasYoyData?.top5Yoy || komoditasYoyData?.topYoy || komoditasMomData?.top5Yoy || [];
+  const topYoy =
+    komoditasYoyData?.top5Yoy ||
+    komoditasYoyData?.topYoy ||
+    komoditasMomData?.top5Yoy ||
+    [];
 
   const inflasiMtmItems = topMom.filter((i) => (parseFloat(i.value) || 0) > 0);
   const deflasiMtmItems = topMom.filter((i) => (parseFloat(i.value) || 0) < 0);
@@ -481,16 +614,32 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
   const deflasiYoyItems = topYoy.filter((i) => (parseFloat(i.value) || 0) < 0);
 
   variables["komoditasInflasiMtm"] = formatCommodityList(
-    inflasiMtmItems.length > 0 ? inflasiMtmItems : [{ name: "beras" }, { name: "telur ayam ras" }, { name: "cabai rawit" }]
+    inflasiMtmItems.length > 0
+      ? inflasiMtmItems
+      : [
+          { name: "beras" },
+          { name: "telur ayam ras" },
+          { name: "cabai rawit" },
+        ],
   );
   variables["komoditasDeflasiMtm"] = formatCommodityList(
-    deflasiMtmItems.length > 0 ? deflasiMtmItems : [{ name: "bawang merah" }, { name: "daging ayam ras" }]
+    deflasiMtmItems.length > 0
+      ? deflasiMtmItems
+      : [{ name: "bawang merah" }, { name: "daging ayam ras" }],
   );
   variables["komoditasInflasiYoy"] = formatCommodityList(
-    inflasiYoyItems.length > 0 ? inflasiYoyItems : [{ name: "beras" }, { name: "daging ayam ras" }, { name: "emas perhiasan" }]
+    inflasiYoyItems.length > 0
+      ? inflasiYoyItems
+      : [
+          { name: "beras" },
+          { name: "daging ayam ras" },
+          { name: "emas perhiasan" },
+        ],
   );
   variables["komoditasDeflasiYoy"] = formatCommodityList(
-    deflasiYoyItems.length > 0 ? deflasiYoyItems : [{ name: "bawang merah" }, { name: "minyak goreng" }]
+    deflasiYoyItems.length > 0
+      ? deflasiYoyItems
+      : [{ name: "bawang merah" }, { name: "minyak goreng" }],
   );
 
   // Values bulanan nyata 3 tahun (Story_u15d2.xml)
@@ -538,18 +687,24 @@ export const processIdmlVariables = async (targetCityInput = "", customDataInput
       },
       komoditasMom: {
         now: komoditasMomData?.hierarki || [],
-        prevYear: komoditasMomData?.prevYear || komoditasMomData?.prevYearList || [],
-        prev2Year: komoditasMomData?.prev2Year || komoditasMomData?.prev2YearList || [],
+        prevYear:
+          komoditasMomData?.prevYear || komoditasMomData?.prevYearList || [],
+        prev2Year:
+          komoditasMomData?.prev2Year || komoditasMomData?.prev2YearList || [],
       },
       komoditasYoy: {
         now: komoditasYoyData?.hierarki || [],
-        prevYear: komoditasYoyData?.prevYear || komoditasYoyData?.prevYearList || [],
-        prev2Year: komoditasYoyData?.prev2Year || komoditasYoyData?.prev2YearList || [],
+        prevYear:
+          komoditasYoyData?.prevYear || komoditasYoyData?.prevYearList || [],
+        prev2Year:
+          komoditasYoyData?.prev2Year || komoditasYoyData?.prev2YearList || [],
       },
       komoditasYtd: {
         now: komoditasYtdData?.hierarki || [],
-        prevYear: komoditasYtdData?.prevYear || komoditasYtdData?.prevYearList || [],
-        prev2Year: komoditasYtdData?.prev2Year || komoditasYtdData?.prev2YearList || [],
+        prevYear:
+          komoditasYtdData?.prevYear || komoditasYtdData?.prevYearList || [],
+        prev2Year:
+          komoditasYtdData?.prev2Year || komoditasYtdData?.prev2YearList || [],
       },
       komoditasMomData,
       komoditasYoyData,

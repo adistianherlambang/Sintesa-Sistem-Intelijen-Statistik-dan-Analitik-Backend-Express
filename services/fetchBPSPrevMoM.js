@@ -115,9 +115,14 @@ const fetchSingleUrl = async (url, label) => {
         `\nLINK : ${url}\nRESPONSE STATUS : ${data?.status || "-"}\nAVAILABILITY : ${data?.["data-availability"] || "-"}\nVAR : ${data?.var?.[0]?.val || "-"}\n`,
       );
 
-      if (data?.["data-availability"] && data["data-availability"] !== "available") {
+      if (
+        data?.["data-availability"] &&
+        data["data-availability"] !== "available"
+      ) {
         clearInterval(spinner);
-        console.log(`⚠ Data not available for ${url} (status: ${data["data-availability"]})`);
+        console.log(
+          `⚠ Data not available for ${url} (status: ${data["data-availability"]})`,
+        );
         stopLoading(`Not available ${label}`);
         return null;
       }
@@ -152,8 +157,8 @@ export const fetchBPSPrevMoM = async () => {
     const rawConfig = JSON.parse(configFile);
     const rawUrls = Array.isArray(rawConfig)
       ? rawConfig.flatMap((item) =>
-        typeof item === "string" ? item : item.content || [],
-      )
+          typeof item === "string" ? item : item.content || [],
+        )
       : [];
     const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
     const yearPrevYear = getYearPrevYear();
@@ -181,10 +186,16 @@ export const fetchBPSPrevMoM = async () => {
       );
 
       const updateData = {};
-      if (dataPrevYear?.["data-availability"] === "available" && dataPrevYear?.datacontent) {
+      if (
+        dataPrevYear?.["data-availability"] === "available" &&
+        dataPrevYear?.datacontent
+      ) {
         updateData.prevYear = dataPrevYear.datacontent;
       }
-      if (dataPrev2Year?.["data-availability"] === "available" && dataPrev2Year?.datacontent) {
+      if (
+        dataPrev2Year?.["data-availability"] === "available" &&
+        dataPrev2Year?.datacontent
+      ) {
         updateData.prev2Year = dataPrev2Year.datacontent;
       }
 
@@ -195,7 +206,8 @@ export const fetchBPSPrevMoM = async () => {
         continue;
       }
 
-      const varVal = dataPrevYear?.var?.[0]?.val || dataPrev2Year?.var?.[0]?.val;
+      const varVal =
+        dataPrevYear?.var?.[0]?.val || dataPrev2Year?.var?.[0]?.val;
 
       if (varVal) {
         const updated = await APIDataBPS.findOneAndUpdate(
@@ -230,4 +242,4 @@ export const fetchBPSPrevMoM = async () => {
   }
 };
 
-fetchBPSPrevMoM()
+// fetchBPSPrevMoM()

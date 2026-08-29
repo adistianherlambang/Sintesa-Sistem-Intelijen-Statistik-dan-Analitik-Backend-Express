@@ -19,14 +19,14 @@ router.get(
     const items = await Infografis.find({ userId: req.user._id })
       .sort({ updatedAt: -1 })
       .lean();
-    
+
     const formatted = items.map((item) => ({
       ...item,
       id: item._id, // frontend expects project.id
     }));
-    
+
     res.json(formatted);
-  })
+  }),
 );
 
 // 2. GET SINGLE INFOGRAFIS BY ID
@@ -47,7 +47,7 @@ router.get(
       ...item,
       id: item._id,
     });
-  })
+  }),
 );
 
 // 3. CREATE NEW INFOGRAFIS
@@ -74,7 +74,7 @@ router.post(
         id: newInfografis._id,
       },
     });
-  })
+  }),
 );
 
 // 4. UPDATE EXISTING INFOGRAFIS BY ID
@@ -87,11 +87,13 @@ router.put(
     const updated = await Infografis.findOneAndUpdate(
       { _id: req.params.id, userId: req.user._id },
       { pages, preview, canvasSize },
-      { new: true }
+      { new: true },
     ).lean();
 
     if (!updated) {
-      return res.status(404).json({ message: "Infografis tidak ditemukan atau akses ditolak" });
+      return res
+        .status(404)
+        .json({ message: "Infografis tidak ditemukan atau akses ditolak" });
     }
     await logActivity(req.user._id, "Memperbarui data infografis");
 
@@ -102,7 +104,7 @@ router.put(
         id: updated._id,
       },
     });
-  })
+  }),
 );
 
 // 5. DELETE INFOGRAFIS BY ID
@@ -116,12 +118,14 @@ router.delete(
     });
 
     if (!deleted) {
-      return res.status(404).json({ message: "Infografis tidak ditemukan atau akses ditolak" });
+      return res
+        .status(404)
+        .json({ message: "Infografis tidak ditemukan atau akses ditolak" });
     }
     await logActivity(req.user._id, "Menghapus infografis");
 
     res.json({ message: "Infografis berhasil dihapus" });
-  })
+  }),
 );
 
 export default router;

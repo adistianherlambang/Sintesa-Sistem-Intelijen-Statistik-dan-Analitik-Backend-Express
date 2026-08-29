@@ -95,8 +95,8 @@ export const fetchBPS = async () => {
     const rawConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
     const rawUrls = Array.isArray(rawConfig)
       ? rawConfig.flatMap((item) =>
-        typeof item === "string" ? item : item.content || [],
-      )
+          typeof item === "string" ? item : item.content || [],
+        )
       : [];
     const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
 
@@ -145,7 +145,10 @@ export const fetchBPS = async () => {
             throw new Error("Empty response");
           }
 
-          if (data?.["data-availability"] && data["data-availability"] !== "available") {
+          if (
+            data?.["data-availability"] &&
+            data["data-availability"] !== "available"
+          ) {
             clearInterval(spinner);
             console.log(
               `\n⚠ Skip URL ${index + 1}/${urls.length}: Data tidak tersedia (data-availability: ${data["data-availability"]})`,
@@ -274,4 +277,4 @@ export const fetchBPS = async () => {
 };
 
 // Eksekusi otomatis
-fetchBPS();
+// fetchBPS();

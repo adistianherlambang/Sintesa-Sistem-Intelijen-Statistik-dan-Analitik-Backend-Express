@@ -26,6 +26,19 @@ import {
   getKomoditasInfografisByKota,
 } from "../../controller/dashboard/komoditasController.js";
 import {
+  getPdrbByKota,
+  getAllPdrb,
+  getAllPdrbByVar,
+  getPdrbPengeluaranAdhkByKota,
+  getAllPdrbPengeluaranAdhk,
+  getPdrbPengeluaranAdhbByKota,
+  getAllPdrbPengeluaranAdhb,
+  getPdrbLapanganUsahaAdhkByKota,
+  getAllPdrbLapanganUsahaAdhk,
+  getPdrbLapanganUsahaAdhbByKota,
+  getAllPdrbLapanganUsahaAdhb,
+} from "../../controller/dashboard/PdrbController.js";
+import {
   testBPSAPI,
   getAllDashboard,
 } from "../../controller/dashboard/dashboardController.js";
@@ -276,6 +289,183 @@ router.post("/komoditas-infografis", async (req, res) => {
   try {
     const { kota } = req.body;
     const result = await getKomoditasInfografisByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// ============= PDRB ROUTES =============
+// 1. PDRB Pengeluaran ADHK (Var 2773)
+router.post("/pdrb/pengeluaran-adhk", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPdrbPengeluaranAdhkByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb/pengeluaran-adhk", async (req, res) => {
+  try {
+    const result = await getAllPdrbPengeluaranAdhk();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/pdrb/pengeluaran/adhk", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPdrbPengeluaranAdhkByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb/pengeluaran/adhk", async (req, res) => {
+  try {
+    const result = await getAllPdrbPengeluaranAdhk();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// 2. PDRB Pengeluaran ADHB (Var 2774)
+router.post("/pdrb/pengeluaran-adhb", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPdrbPengeluaranAdhbByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb/pengeluaran-adhb", async (req, res) => {
+  try {
+    const result = await getAllPdrbPengeluaranAdhb();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/pdrb/pengeluaran/adhb", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPdrbPengeluaranAdhbByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb/pengeluaran/adhb", async (req, res) => {
+  try {
+    const result = await getAllPdrbPengeluaranAdhb();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// 3. PDRB Lapangan Usaha ADHK (Var 2775)
+router.post("/pdrb/lapangan-usaha-adhk", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPdrbLapanganUsahaAdhkByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb/lapangan-usaha-adhk", async (req, res) => {
+  try {
+    const result = await getAllPdrbLapanganUsahaAdhk();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/pdrb/lapangan-usaha/adhk", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPdrbLapanganUsahaAdhkByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb/lapangan-usaha/adhk", async (req, res) => {
+  try {
+    const result = await getAllPdrbLapanganUsahaAdhk();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// 4. PDRB Lapangan Usaha ADHB (Var 2776)
+router.post("/pdrb/lapangan-usaha-adhb", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPdrbLapanganUsahaAdhbByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb/lapangan-usaha-adhb", async (req, res) => {
+  try {
+    const result = await getAllPdrbLapanganUsahaAdhb();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post("/pdrb/lapangan-usaha/adhb", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPdrbLapanganUsahaAdhbByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb/lapangan-usaha/adhb", async (req, res) => {
+  try {
+    const result = await getAllPdrbLapanganUsahaAdhb();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// General /pdrb POST & GET
+router.post("/pdrb", async (req, res) => {
+  try {
+    const { kota, varVal } = req.body;
+    const result = await getPdrbByKota(kota, varVal || 2773);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/pdrb", async (req, res) => {
+  try {
+    const result = await getAllPdrb();
     res.json(result);
   } catch (err) {
     handleError(res, err);

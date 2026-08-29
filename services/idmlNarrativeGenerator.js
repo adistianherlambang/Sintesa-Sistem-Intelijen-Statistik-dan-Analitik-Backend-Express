@@ -10,14 +10,18 @@ export const generateIdmlNarratives = async (rawData, variables) => {
   const apiKey = process.env.GEMINI_API_KEY;
   const narrativeVars = {};
 
-  const { targetCity, currentMonth, currentYear, hargaBI, groupProcessedData } = rawData;
+  const { targetCity, currentMonth, currentYear, hargaBI, groupProcessedData } =
+    rawData;
 
   // 1. Keterangan Andil Inflasi/Deflasi MoM untuk kelompok makanan
   const makananData = groupProcessedData?.makanan || {};
   const makananAndilMtm = makananData.andilMtm || 0;
-  const hargaBiText = Array.isArray(hargaBI) && hargaBI.length > 0
-    ? hargaBI.map((h) => `${h.nama || h.komoditas}: Rp ${h.harga || h.value}`).join(", ")
-    : "beras, telur ayam ras, cabai rawit, bawang merah";
+  const hargaBiText =
+    Array.isArray(hargaBI) && hargaBI.length > 0
+      ? hargaBI
+          .map((h) => `${h.nama || h.komoditas}: Rp ${h.harga || h.value}`)
+          .join(", ")
+      : "beras, telur ayam ras, cabai rawit, bawang merah";
 
   // Prompt generator jika API KEY tersedia
   if (apiKey) {
@@ -57,31 +61,40 @@ HANYA RESPON DENGAN RAW JSON VALID TANPA MARKDOWN WRAPPER.
         },
       });
 
-      const responseText = response.data.candidates[0].content.parts[0].text.trim();
+      const responseText =
+        response.data.candidates[0].content.parts[0].text.trim();
       const parsed = JSON.parse(responseText);
 
       if (parsed.keteranganAndilInflasiMtm) {
-        narrativeVars["keteranganAndilInflasiMtm"] = parsed.keteranganAndilInflasiMtm;
+        narrativeVars["keteranganAndilInflasiMtm"] =
+          parsed.keteranganAndilInflasiMtm;
       }
       if (parsed.keteranganSubkelompokStabil) {
-        narrativeVars["keteranganSubkelompokStabil"] = parsed.keteranganSubkelompokStabil;
+        narrativeVars["keteranganSubkelompokStabil"] =
+          parsed.keteranganSubkelompokStabil;
       }
     } catch (err) {
-      console.warn("⚠ Generasi narasi Gemini gagal, menggunakan fallback narasi terstandarisasi BPS:", err.message);
+      console.warn(
+        "⚠ Generasi narasi Gemini gagal, menggunakan fallback narasi terstandarisasi BPS:",
+        err.message,
+      );
     }
   }
 
   // Fallback / default BPS formal narratives (<= 20 kata) jika Gemini tidak aktif/error
   if (!narrativeVars["keteranganAndilInflasiMtm"]) {
     if (makananAndilMtm >= 0) {
-      narrativeVars["keteranganAndilInflasiMtm"] = `memberikan andil inflasi m-to-m sebesar ${variables.makananAndilMtm || "0,05"} persen dipicu oleh ${variables.komoditasInflasiMtm || "beras dan telur ayam"}`;
+      narrativeVars["keteranganAndilInflasiMtm"] =
+        `memberikan andil inflasi m-to-m sebesar ${variables.makananAndilMtm || "0,05"} persen dipicu oleh ${variables.komoditasInflasiMtm || "beras dan telur ayam"}`;
     } else {
-      narrativeVars["keteranganAndilInflasiMtm"] = `memberikan andil deflasi m-to-m sebesar ${variables.makananAndilMtm || "0,05"} persen akibat penurunan harga ${variables.komoditasDeflasiMtm || "bawang merah"}`;
+      narrativeVars["keteranganAndilInflasiMtm"] =
+        `memberikan andil deflasi m-to-m sebesar ${variables.makananAndilMtm || "0,05"} persen akibat penurunan harga ${variables.komoditasDeflasiMtm || "bawang merah"}`;
     }
   }
 
   if (!narrativeVars["keteranganSubkelompokStabil"]) {
-    narrativeVars["keteranganSubkelompokStabil"] = "terpantau stabil tanpa perubahan indeks yang signifikan";
+    narrativeVars["keteranganSubkelompokStabil"] =
+      "terpantau stabil tanpa perubahan indeks yang signifikan";
   }
 
   // Subkelompok tambahan fallbacks

@@ -37,8 +37,16 @@ export const getInflasiByKota = async (kota) => {
   const regionVal = region.val.toString();
 
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 1);
-  const resultPrevYear = buildFilteredKeyValue(doc.prevYear || {}, regionVal, 1);
-  const resultPrev2Year = buildFilteredKeyValue(doc.prev2Year || {}, regionVal, 1);
+  const resultPrevYear = buildFilteredKeyValue(
+    doc.prevYear || {},
+    regionVal,
+    1,
+  );
+  const resultPrev2Year = buildFilteredKeyValue(
+    doc.prev2Year || {},
+    regionVal,
+    1,
+  );
 
   const sortedPrevYear = [...resultPrevYear].sort(
     (a, b) => Number(a.key) - Number(b.key),
@@ -82,11 +90,22 @@ export const getInflasiInfografisByKota = async (kota) => {
   const regionVal = region.val.toString();
 
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 1);
-  const resultPrevYear = buildFilteredKeyValue(doc.prevYear || {}, regionVal, 1);
-  const resultPrev2Year = buildFilteredKeyValue(doc.prev2Year || {}, regionVal, 1);
+  const resultPrevYear = buildFilteredKeyValue(
+    doc.prevYear || {},
+    regionVal,
+    1,
+  );
+  const resultPrev2Year = buildFilteredKeyValue(
+    doc.prev2Year || {},
+    regionVal,
+    1,
+  );
 
   const parseInflasiKey = (key, regVal) => {
-    const yearCode = parseInt(key.slice(regVal.length + 2, regVal.length + 5), 10);
+    const yearCode = parseInt(
+      key.slice(regVal.length + 2, regVal.length + 5),
+      10,
+    );
     const monthCode = parseInt(key.slice(regVal.length + 5), 10);
     const year = 1900 + yearCode;
     return { year, month: monthCode };
@@ -95,8 +114,18 @@ export const getInflasiInfografisByKota = async (kota) => {
   const getShortMonthYearLabel = (key) => {
     const { year, month } = parseInflasiKey(key, regionVal);
     const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
-      "Jul", "Agu", "Sep", "Okt", "Nov", "Des"
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "Mei",
+      "Jun",
+      "Jul",
+      "Agu",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Des",
     ];
     const shortMonth = monthNames[month - 1] || "";
     const shortYear = String(year).slice(-2);
@@ -139,7 +168,7 @@ export const getInflasiInfografisByKota = async (kota) => {
     let cumulativeMultiplier = 1;
     sortedMonths.forEach((item) => {
       const val = parseFloat(item.value) || 0;
-      cumulativeMultiplier *= (1 + val / 100);
+      cumulativeMultiplier *= 1 + val / 100;
       const ytdValue = (cumulativeMultiplier - 1) * 100;
       ytdResult.push({
         key: item.key,
@@ -158,7 +187,9 @@ export const getInflasiInfografisByKota = async (kota) => {
   });
 
   // Load data IHK untuk menghitung PrevYear secara dinamis
-  const docIhk = await APIDataBPS.findOne({ "var.val": 2245 }).select("vervar datacontent prevYear").lean();
+  const docIhk = await APIDataBPS.findOne({ "var.val": 2245 })
+    .select("vervar datacontent prevYear")
+    .lean();
 
   const getDynamicYoyValue = (key, regVal) => {
     if (!docIhk) return 0;
@@ -227,8 +258,10 @@ export const getInflasiInfografisByKota = async (kota) => {
   const then = sorted.length > 1 ? sorted[sorted.length - 2].value : 0;
   const compare = now - then;
 
-  const ytdLatest = sortedYtd.length > 0 ? sortedYtd[sortedYtd.length - 1].value : 0;
-  const yoyLatest = yoyResult.length > 0 ? yoyResult[yoyResult.length - 1].value : 0;
+  const ytdLatest =
+    sortedYtd.length > 0 ? sortedYtd[sortedYtd.length - 1].value : 0;
+  const yoyLatest =
+    yoyResult.length > 0 ? yoyResult[yoyResult.length - 1].value : 0;
 
   return {
     kota: region.label,
@@ -297,12 +330,15 @@ export const getInflasiYoyByKota = async (kota) => {
   // Dapatkan vervar (jika tidak ada di doc 2249, gunakan vervar dari IHK/inflasi)
   let vervar = doc.vervar && doc.vervar.length > 0 ? doc.vervar : null;
   if (!vervar) {
-    const docIhk = await APIDataBPS.findOne({ "var.val": 2245 }).select("vervar").lean();
+    const docIhk = await APIDataBPS.findOne({ "var.val": 2245 })
+      .select("vervar")
+      .lean();
     vervar = docIhk?.vervar || [];
   }
 
-  const inflasiVar =
-    (doc.var && Array.isArray(doc.var) && doc.var.find((item) => item.val === 2249)) ||
+  const inflasiVar = (doc.var &&
+    Array.isArray(doc.var) &&
+    doc.var.find((item) => item.val === 2249)) ||
     doc.var?.[0] || { val: 2249, label: "Inflasi Year-on-Year" };
 
   const region =
@@ -316,8 +352,16 @@ export const getInflasiYoyByKota = async (kota) => {
   const regionVal = region.val.toString();
 
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
-  const resultPrevYear = buildFilteredKeyValue(doc.prevYear || {}, regionVal, 2);
-  const resultPrev2Year = buildFilteredKeyValue(doc.prev2Year || {}, regionVal, 2);
+  const resultPrevYear = buildFilteredKeyValue(
+    doc.prevYear || {},
+    regionVal,
+    2,
+  );
+  const resultPrev2Year = buildFilteredKeyValue(
+    doc.prev2Year || {},
+    regionVal,
+    2,
+  );
 
   const sortedPrevYear = [...resultPrevYear].sort(
     (a, b) => Number(a.key) - Number(b.key),
@@ -378,12 +422,15 @@ export const getInflasiYtdByKota = async (kota) => {
   // Dapatkan vervar (jika tidak ada di doc 2388, gunakan vervar dari IHK/inflasi)
   let vervar = doc.vervar && doc.vervar.length > 0 ? doc.vervar : null;
   if (!vervar) {
-    const docIhk = await APIDataBPS.findOne({ "var.val": 2245 }).select("vervar").lean();
+    const docIhk = await APIDataBPS.findOne({ "var.val": 2245 })
+      .select("vervar")
+      .lean();
     vervar = docIhk?.vervar || [];
   }
 
-  const inflasiVar =
-    (doc.var && Array.isArray(doc.var) && doc.var.find((item) => item.val === 2388)) ||
+  const inflasiVar = (doc.var &&
+    Array.isArray(doc.var) &&
+    doc.var.find((item) => item.val === 2388)) ||
     doc.var?.[0] || { val: 2388, label: "Inflasi Year-to-Date" };
 
   const region =
@@ -397,8 +444,16 @@ export const getInflasiYtdByKota = async (kota) => {
   const regionVal = region.val.toString();
 
   const result = buildFilteredKeyValue(doc.datacontent, regionVal, 2);
-  const resultPrevYear = buildFilteredKeyValue(doc.prevYear || {}, regionVal, 2);
-  const resultPrev2Year = buildFilteredKeyValue(doc.prev2Year || {}, regionVal, 2);
+  const resultPrevYear = buildFilteredKeyValue(
+    doc.prevYear || {},
+    regionVal,
+    2,
+  );
+  const resultPrev2Year = buildFilteredKeyValue(
+    doc.prev2Year || {},
+    regionVal,
+    2,
+  );
 
   const sortedPrevYear = [...resultPrevYear].sort(
     (a, b) => Number(a.key) - Number(b.key),

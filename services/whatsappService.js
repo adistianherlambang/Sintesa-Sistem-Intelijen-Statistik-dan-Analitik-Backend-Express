@@ -11,7 +11,6 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import { logActivity } from "../controller/user/activityController.js";
 
-
 import { OpenAI } from "openai";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -48,7 +47,9 @@ export const checkAndResetDailyStats = async (session) => {
     session.repliedCountToday = 0;
     session.lastResetDate = todayStr;
     await session.save();
-    console.log(`[WhatsApp Bot] Daily stats reset for user ${session.userId} to date: ${todayStr}`);
+    console.log(
+      `[WhatsApp Bot] Daily stats reset for user ${session.userId} to date: ${todayStr}`,
+    );
   }
 };
 
@@ -56,13 +57,21 @@ export const checkAndResetDailyStats = async (session) => {
  * Safely delete the local session credentials folder
  */
 const deleteSessionFolder = (userId) => {
-  const sessionPath = path.resolve(__dirname, `../../.wwebjs_auth/session-${userId}`);
+  const sessionPath = path.resolve(
+    __dirname,
+    `../../.wwebjs_auth/session-${userId}`,
+  );
   if (fs.existsSync(sessionPath)) {
     try {
       fs.rmSync(sessionPath, { recursive: true, force: true });
-      console.log(`[WhatsApp Bot] Cleaned up local auth folder for user ${userId}: ${sessionPath}`);
+      console.log(
+        `[WhatsApp Bot] Cleaned up local auth folder for user ${userId}: ${sessionPath}`,
+      );
     } catch (err) {
-      console.error(`[WhatsApp Bot] Failed to delete auth folder for user ${userId}:`, err.message);
+      console.error(
+        `[WhatsApp Bot] Failed to delete auth folder for user ${userId}:`,
+        err.message,
+      );
     }
   }
 };
@@ -122,7 +131,9 @@ const isSessionResting = (userId) => {
   const now = Date.now();
   if (tracker.nextAvailableTime && now < tracker.nextAvailableTime) {
     const remainingMin = Math.round((tracker.nextAvailableTime - now) / 60000);
-    console.log(`[WhatsApp Bot] Session for user ${userId} is currently resting. Remaining: ${remainingMin} minutes.`);
+    console.log(
+      `[WhatsApp Bot] Session for user ${userId} is currently resting. Remaining: ${remainingMin} minutes.`,
+    );
     return true;
   }
   return false;
@@ -143,17 +154,21 @@ const trackSessionMessage = (userId) => {
   tracker.messagesSinceLastRest += 1;
 
   // Choose a random message threshold between 15 and 25 messages if not already set
-  const threshold = tracker.threshold || (Math.floor(Math.random() * (25 - 15 + 1)) + 15);
+  const threshold =
+    tracker.threshold || Math.floor(Math.random() * (25 - 15 + 1)) + 15;
   tracker.threshold = threshold;
 
   if (tracker.messagesSinceLastRest >= threshold) {
     // Rest duration between 15 and 30 minutes
-    const restDurationMs = (Math.floor(Math.random() * (30 - 15 + 1)) + 15) * 60 * 1000;
+    const restDurationMs =
+      (Math.floor(Math.random() * (30 - 15 + 1)) + 15) * 60 * 1000;
     tracker.nextAvailableTime = Date.now() + restDurationMs;
     tracker.messagesSinceLastRest = 0;
     // Set a new random threshold for the next block
     tracker.threshold = Math.floor(Math.random() * (25 - 15 + 1)) + 15;
-    console.log(`[WhatsApp Bot] Session for user ${userId} triggered rest period for ${restDurationMs / 60000} minutes after ${threshold} messages.`);
+    console.log(
+      `[WhatsApp Bot] Session for user ${userId} triggered rest period for ${restDurationMs / 60000} minutes after ${threshold} messages.`,
+    );
   }
 };
 
@@ -207,11 +222,16 @@ export const initializeWhatsAppClient = async (userId) => {
       return existingClient;
     }
 
-    console.log(`Stale WhatsApp client found in memory for user ${userId}. Destroying it before re-initializing.`);
+    console.log(
+      `Stale WhatsApp client found in memory for user ${userId}. Destroying it before re-initializing.`,
+    );
     try {
       await existingClient.destroy();
     } catch (destroyErr) {
-      console.warn(`Error destroying stale client for user ${userId}:`, destroyErr.message);
+      console.warn(
+        `Error destroying stale client for user ${userId}:`,
+        destroyErr.message,
+      );
     }
     activeClients.delete(userId.toString());
   }
@@ -363,7 +383,9 @@ export const initializeWhatsAppClient = async (userId) => {
     const nowTime = Date.now();
     const msgTimeMs = msg.timestamp * 1000;
     if (nowTime - msgTimeMs > 60000) {
-      console.log(`[WhatsApp Bot] Message from ${msg.from} is too old (${Math.round((nowTime - msgTimeMs)/1000)}s ago). Skipping reply.`);
+      console.log(
+        `[WhatsApp Bot] Message from ${msg.from} is too old (${Math.round((nowTime - msgTimeMs) / 1000)}s ago). Skipping reply.`,
+      );
       return;
     }
 
@@ -400,7 +422,9 @@ export const initializeWhatsAppClient = async (userId) => {
 
       // Check frequency limit per contact (Rule 13)
       if (!canSendMessage(userId, msg.from)) {
-        console.log(`[WhatsApp Bot] Frequency limit (max 4 per hour) exceeded for contact ${msg.from}. Skipping reply.`);
+        console.log(
+          `[WhatsApp Bot] Frequency limit (max 4 per hour) exceeded for contact ${msg.from}. Skipping reply.`,
+        );
         return;
       }
 
@@ -414,16 +438,21 @@ export const initializeWhatsAppClient = async (userId) => {
       let hasRepliedBefore = false;
       try {
         const historyMsgs = await chat.fetchMessages({ limit: 10 });
-        hasRepliedBefore = historyMsgs.some(m => m.fromMe);
+        hasRepliedBefore = historyMsgs.some((m) => m.fromMe);
         if (historyMsgs.length > 0) {
           const lastMsg = historyMsgs[historyMsgs.length - 1];
           if (lastMsg.fromMe) {
-            console.log(`[WhatsApp Bot] Last message in chat with ${msg.from} was sent by us. Skipping reply to avoid consecutive messages.`);
+            console.log(
+              `[WhatsApp Bot] Last message in chat with ${msg.from} was sent by us. Skipping reply to avoid consecutive messages.`,
+            );
             return;
           }
         }
       } catch (historyErr) {
-        console.warn(`[WhatsApp Bot] Failed to fetch message history for ${msg.from}:`, historyErr.message);
+        console.warn(
+          `[WhatsApp Bot] Failed to fetch message history for ${msg.from}:`,
+          historyErr.message,
+        );
       }
 
       // 2. Subscription package and limit check
@@ -520,7 +549,9 @@ export const initializeWhatsAppClient = async (userId) => {
           );
 
           if (!geminiApiKey) {
-            console.error("GEMINI_API_KEY not configured in env variables and Mistral failed.");
+            console.error(
+              "GEMINI_API_KEY not configured in env variables and Mistral failed.",
+            );
             replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
           } else {
             try {
@@ -602,11 +633,15 @@ export const initializeWhatsAppClient = async (userId) => {
         nowBeforeDelay.getMonth() === msgTime.getMonth() &&
         nowBeforeDelay.getFullYear() === msgTime.getFullYear()
       ) {
-        const msUntilNextMinute = (60 - nowBeforeDelay.getSeconds()) * 1000 - nowBeforeDelay.getMilliseconds();
+        const msUntilNextMinute =
+          (60 - nowBeforeDelay.getSeconds()) * 1000 -
+          nowBeforeDelay.getMilliseconds();
         // Add dynamic typing delay to make it natural and not at :00 seconds
         const extraDelay = Math.floor(Math.random() * 10000) + 5000; // 5-15 seconds
         const totalDelay = msUntilNextMinute + extraDelay;
-        console.log(`[WhatsApp Bot] Message received in the same minute. Delaying reply by ${totalDelay / 1000}s to reply in the next minute.`);
+        console.log(
+          `[WhatsApp Bot] Message received in the same minute. Delaying reply by ${totalDelay / 1000}s to reply in the next minute.`,
+        );
         await new Promise((resolve) => setTimeout(resolve, totalDelay));
       }
 
@@ -619,18 +654,25 @@ export const initializeWhatsAppClient = async (userId) => {
         if (finalHistory.length > 0) {
           const lastMsg = finalHistory[finalHistory.length - 1];
           if (lastMsg.fromMe) {
-            console.log(`[WhatsApp Bot] Aborting reply to ${msg.from} because the last message in chat is already from us.`);
+            console.log(
+              `[WhatsApp Bot] Aborting reply to ${msg.from} because the last message in chat is already from us.`,
+            );
             return;
           }
           if (lastMsg.id._serialized !== msg.id._serialized) {
-            console.log(`[WhatsApp Bot] Aborting reply to ${msg.from} because a newer message has been received.`);
+            console.log(
+              `[WhatsApp Bot] Aborting reply to ${msg.from} because a newer message has been received.`,
+            );
             return;
           }
         }
 
         // 2. Pre-typing delay: simulate reading the message before starting to type (1-3 seconds)
-        const preTypingDelay = Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
-        console.log(`[WhatsApp Bot] Pre-typing delay: ${preTypingDelay}ms before starting to type...`);
+        const preTypingDelay =
+          Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
+        console.log(
+          `[WhatsApp Bot] Pre-typing delay: ${preTypingDelay}ms before starting to type...`,
+        );
         await new Promise((resolve) => setTimeout(resolve, preTypingDelay));
 
         // 3. Start typing indicator
@@ -651,7 +693,9 @@ export const initializeWhatsAppClient = async (userId) => {
           delayMs = Math.floor(Math.random() * (15000 - 8000 + 1)) + 8000;
         }
 
-        console.log(`[WhatsApp Bot] Simulating typing status for ${delayMs}ms (message length: ${charCount} chars)...`);
+        console.log(
+          `[WhatsApp Bot] Simulating typing status for ${delayMs}ms (message length: ${charCount} chars)...`,
+        );
         await new Promise((resolve) => setTimeout(resolve, delayMs));
 
         // 5. Stop typing indicator
@@ -659,7 +703,9 @@ export const initializeWhatsAppClient = async (userId) => {
         typingStateActive = false;
 
         // 6. Send the reply
-        console.log(`[WhatsApp Bot] Sending reply message back to: ${msg.from}`);
+        console.log(
+          `[WhatsApp Bot] Sending reply message back to: ${msg.from}`,
+        );
         await client.sendMessage(msg.from, replyText);
         console.log(`[WhatsApp Bot] Reply successfully sent to: ${msg.from}`);
 
@@ -667,13 +713,19 @@ export const initializeWhatsAppClient = async (userId) => {
         recordSentMessage(userId, msg.from);
         trackSessionMessage(userId);
       } catch (sendErr) {
-        console.error(`[WhatsApp Bot] Error during typing simulation or message sending:`, sendErr.message);
+        console.error(
+          `[WhatsApp Bot] Error during typing simulation or message sending:`,
+          sendErr.message,
+        );
       } finally {
         if (typingStateActive) {
           try {
             await chat.clearState();
           } catch (clearErr) {
-            console.warn(`[WhatsApp Bot] Failed to clear typing state:`, clearErr.message);
+            console.warn(
+              `[WhatsApp Bot] Failed to clear typing state:`,
+              clearErr.message,
+            );
           }
         }
       }

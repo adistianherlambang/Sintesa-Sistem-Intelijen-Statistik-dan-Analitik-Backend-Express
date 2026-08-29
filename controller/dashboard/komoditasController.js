@@ -1,6 +1,11 @@
 import APIDataBPS from "../../db/models/APIDataBPS.js";
 import varKelompokIHK from "../../json/verKelompokIHK.json" with { type: "json" };
-import { sort, getDateInfo, findRegionByDataset, findUnifiedCity } from "./helpers.js";
+import {
+  sort,
+  getDateInfo,
+  findRegionByDataset,
+  findUnifiedCity,
+} from "./helpers.js";
 
 /**
  * Helper: Process komoditas data untuk satu item
@@ -13,7 +18,7 @@ const processKomoditasItem = async (
   prevYear,
   prev2Year,
   varKeyField = "var",
-  fallbackRegionVal = null
+  fallbackRegionVal = null,
 ) => {
   const targetVar = komoditasItem[varKeyField] || komoditasItem.var;
   const doc = await APIDataBPS.findOne({
@@ -256,7 +261,9 @@ const processKomoditasItem = async (
     prev2YearItem = {
       label: komoditasItem.nama,
       value: mainDataPrev2Year ? mainDataPrev2Year.value : 0,
-      bulan: mainDataPrev2Year ? Number(mainDataPrev2Year.bulan) : Number(month),
+      bulan: mainDataPrev2Year
+        ? Number(mainDataPrev2Year.bulan)
+        : Number(month),
       data: sort(dataPrev2Year),
       sub: subPrev2Year,
     };
@@ -289,7 +296,7 @@ const getHargaBIForKota = async (searchName) => {
 
     if (biDoc && Array.isArray(biDoc.HargaBI)) {
       const matchedBI = biDoc.HargaBI.find(
-        (item) => Number(item.kotaId) === Number(city.BIKota.id)
+        (item) => Number(item.kotaId) === Number(city.BIKota.id),
       );
       if (matchedBI && matchedBI.data) {
         hargaBI = matchedBI.data.map((item) => ({
@@ -322,7 +329,11 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
     .select("vervar")
     .lean();
 
-  if (!sampleDoc || !Array.isArray(sampleDoc.vervar) || sampleDoc.vervar.length === 0) {
+  if (
+    !sampleDoc ||
+    !Array.isArray(sampleDoc.vervar) ||
+    sampleDoc.vervar.length === 0
+  ) {
     sampleDoc = await APIDataBPS.findOne({
       "var.val": varKelompokIHK[0].var,
     })
@@ -330,7 +341,11 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
       .lean();
   }
 
-  if (!sampleDoc || !Array.isArray(sampleDoc.vervar) || sampleDoc.vervar.length === 0) {
+  if (
+    !sampleDoc ||
+    !Array.isArray(sampleDoc.vervar) ||
+    sampleDoc.vervar.length === 0
+  ) {
     throw new Error("data komoditas tidak ditemukan");
   }
 
@@ -357,7 +372,7 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
       prevYear,
       prev2Year,
       varKeyField,
-      regionVal
+      regionVal,
     );
 
     if (result) {
@@ -432,12 +447,13 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
       "Makanan, Minuman dan Tembakau": "Makanan",
       "Pakaian dan Alas Kaki": "Pakaian",
       "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga": "Perumahan",
-      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga": "Peralatan RT",
-      "Kesehatan": "Kesehatan",
+      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga":
+        "Peralatan RT",
+      Kesehatan: "Kesehatan",
       "Informasi, Komunikasi dan Jasa Keuangan": "Komunikasi",
-      "Transportasi": "Transportasi",
+      Transportasi: "Transportasi",
       "Rekreasi, Olahraga dan Budaya": "Rekreasi",
-      "Pendidikan": "Pendidikan",
+      Pendidikan: "Pendidikan",
       "Penyediaan Makanan dan Minuman / Restoran": "Restoran",
       "Perawatan Pribadi dan Jasa Lainnya": "Perawatan",
     };
@@ -471,9 +487,7 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
       });
     }
   });
-  const topSubMom = allSubMom
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 5);
+  const topSubMom = allSubMom.sort((a, b) => b.value - a.value).slice(0, 5);
 
   const allSubYoy = [];
   prevYearList.forEach((group) => {
@@ -487,13 +501,11 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
       });
     }
   });
-  const topSubYoy = allSubYoy
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 5);
+  const topSubYoy = allSubYoy.sort((a, b) => b.value - a.value).slice(0, 5);
 
   const hargaBI = await getHargaBIForKota(resolvedKota);
   const makananInfografisItem = hierarki.find(
-    (item) => item.label && item.label.includes("Makanan")
+    (item) => item.label && item.label.includes("Makanan"),
   );
   if (makananInfografisItem) {
     makananInfografisItem.hargaBI = hargaBI;
@@ -530,7 +542,10 @@ export const getKomoditasYtdByKota = async (kota) => {
   return getKomoditasByKota(kota, "ytd");
 };
 
-export const getKomoditasInfografisByKota = async (kota, varKeyField = "var") => {
+export const getKomoditasInfografisByKota = async (
+  kota,
+  varKeyField = "var",
+) => {
   if (!kota) {
     throw new Error("kota wajib diisi");
   }
@@ -542,7 +557,11 @@ export const getKomoditasInfografisByKota = async (kota, varKeyField = "var") =>
     .select("vervar")
     .lean();
 
-  if (!sampleDoc || !Array.isArray(sampleDoc.vervar) || sampleDoc.vervar.length === 0) {
+  if (
+    !sampleDoc ||
+    !Array.isArray(sampleDoc.vervar) ||
+    sampleDoc.vervar.length === 0
+  ) {
     sampleDoc = await APIDataBPS.findOne({
       "var.val": varKelompokIHK[0].var,
     })
@@ -550,7 +569,11 @@ export const getKomoditasInfografisByKota = async (kota, varKeyField = "var") =>
       .lean();
   }
 
-  if (!sampleDoc || !Array.isArray(sampleDoc.vervar) || sampleDoc.vervar.length === 0) {
+  if (
+    !sampleDoc ||
+    !Array.isArray(sampleDoc.vervar) ||
+    sampleDoc.vervar.length === 0
+  ) {
     throw new Error("data komoditas tidak ditemukan");
   }
 
@@ -577,7 +600,7 @@ export const getKomoditasInfografisByKota = async (kota, varKeyField = "var") =>
       prevYear,
       prev2Year,
       varKeyField,
-      regionVal
+      regionVal,
     );
 
     if (result) {
@@ -652,12 +675,13 @@ export const getKomoditasInfografisByKota = async (kota, varKeyField = "var") =>
       "Makanan, Minuman dan Tembakau": "Makanan",
       "Pakaian dan Alas Kaki": "Pakaian",
       "Perumahan, Air, Listrik dan Bahan Bakar Rumah Tangga": "Perumahan",
-      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga": "Peralatan RT",
-      "Kesehatan": "Kesehatan",
+      "Perlengkapan, Peralatan dan Pemeliharaan Rutin Rumah Tangga":
+        "Peralatan RT",
+      Kesehatan: "Kesehatan",
       "Informasi, Komunikasi dan Jasa Keuangan": "Komunikasi",
-      "Transportasi": "Transportasi",
+      Transportasi: "Transportasi",
       "Rekreasi, Olahraga dan Budaya": "Rekreasi",
-      "Pendidikan": "Pendidikan",
+      Pendidikan: "Pendidikan",
       "Penyediaan Makanan dan Minuman / Restoran": "Restoran",
       "Perawatan Pribadi dan Jasa Lainnya": "Perawatan",
     };
@@ -681,7 +705,7 @@ export const getKomoditasInfografisByKota = async (kota, varKeyField = "var") =>
 
   const hargaBI = await getHargaBIForKota(resolvedKota);
   const makananItem = hierarki.find(
-    (item) => item.label && item.label.includes("Makanan")
+    (item) => item.label && item.label.includes("Makanan"),
   );
   if (makananItem) {
     makananItem.hargaBI = hargaBI;

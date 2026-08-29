@@ -35,8 +35,10 @@ import AISummaryModel from "../db/models/AISummary.js";
 import { connectDB } from "../db/mongo.js";
 
 const toIndo = (val, decimals = 2) => {
-  if (val === undefined || val === null || val === "" || val === "N/A") return "0,00";
-  const num = typeof val === "number" ? val : parseFloat(String(val).replace(",", "."));
+  if (val === undefined || val === null || val === "" || val === "N/A")
+    return "0,00";
+  const num =
+    typeof val === "number" ? val : parseFloat(String(val).replace(",", "."));
   if (isNaN(num)) return "0,00";
   return num.toFixed(decimals).replace(".", ",");
 };
@@ -79,9 +81,15 @@ export const AISummary = async () => {
     const bulan = bulanList[month] || "Juni";
     const tahun = String(year);
 
-    console.log("\n==========================================================================");
-    console.log("🚀 Memulai AISummary Generator (Template Literal Tanpa LLM - Hemat Token)");
-    console.log("==========================================================================\n");
+    console.log(
+      "\n==========================================================================",
+    );
+    console.log(
+      "🚀 Memulai AISummary Generator (Template Literal Tanpa LLM - Hemat Token)",
+    );
+    console.log(
+      "==========================================================================\n",
+    );
 
     const totalCities = kotaConfig.length;
     let cityCounter = 0;
@@ -95,7 +103,8 @@ export const AISummary = async () => {
       const percent = Math.round((cityCounter / totalCities) * 100);
       const barLength = 20;
       const filledLength = Math.round((barLength * cityCounter) / totalCities);
-      const progressBar = "█".repeat(filledLength) + "░".repeat(barLength - filledLength);
+      const progressBar =
+        "█".repeat(filledLength) + "░".repeat(barLength - filledLength);
 
       try {
         let inflasi_mom = 0;
@@ -103,11 +112,12 @@ export const AISummary = async () => {
         let inflasi_ytd = 0;
 
         if (namaKotaInflasi) {
-          const [dataInflasiMoM, dataInflasiYoY, dataInflasiYtd] = await Promise.all([
-            getInflasiByKota(namaKotaInflasi).catch(() => null),
-            getInflasiYoyByKota(namaKotaInflasi).catch(() => null),
-            getInflasiYtdByKota(namaKotaInflasi).catch(() => null),
-          ]);
+          const [dataInflasiMoM, dataInflasiYoY, dataInflasiYtd] =
+            await Promise.all([
+              getInflasiByKota(namaKotaInflasi).catch(() => null),
+              getInflasiYoyByKota(namaKotaInflasi).catch(() => null),
+              getInflasiYtdByKota(namaKotaInflasi).catch(() => null),
+            ]);
 
           inflasi_mom = dataInflasiMoM?.dashboard?.now ?? 0;
           inflasi_yoy = dataInflasiYoY?.dashboard?.now ?? 0;
@@ -124,7 +134,12 @@ export const AISummary = async () => {
         let komoditas_ytd_nilai = 0;
 
         if (namaKotaIhk) {
-          const [dataIhkMom, dataKomoditasMoM, dataKomoditasYoY, dataKomoditasYtd] = await Promise.all([
+          const [
+            dataIhkMom,
+            dataKomoditasMoM,
+            dataKomoditasYoY,
+            dataKomoditasYtd,
+          ] = await Promise.all([
             getIhkByKota(namaKotaIhk).catch(() => null),
             getKomoditasByKota(namaKotaIhk).catch(() => null),
             getKomoditasYoyByKota(namaKotaIhk).catch(() => null),
@@ -151,11 +166,17 @@ export const AISummary = async () => {
         const ihk_trend = compareIHK >= 0 ? "naik" : "turun";
         const wilayah = city.name.replace(/^(KOTA|KABUPATEN|KAB)\s+/i, "");
 
-        const numMom = typeof inflasi_mom === "number" ? inflasi_mom : parseFloat(String(inflasi_mom).replace(",", "."));
+        const numMom =
+          typeof inflasi_mom === "number"
+            ? inflasi_mom
+            : parseFloat(String(inflasi_mom).replace(",", "."));
 
         const summaryText = `Pada ${bulan} ${tahun}, Kota ${wilayah} mencatat Indeks Harga Konsumen (IHK) sebesar ${toIndo(ihk)}, yang ${ihk_trend === "naik" ? "mengalami kenaikan" : "mengalami penurunan"} dibandingkan periode sebelumnya. Pada periode yang sama, inflasi bulanan (M to M) sebesar ${toIndo(inflasi_mom)}%, yang ${numMom > 0 ? "mengalami kenaikan" : numMom < 0 ? "mengalami penurunan" : "relatif stabil"} dibandingkan bulan sebelumnya. Secara tahunan, inflasi (Y on Y) tercatat sebesar ${toIndo(inflasi_yoy)}%, sedangkan inflasi tahun kalender (Y to D) mencapai ${toIndo(inflasi_ytd)}%. Inflasi M to M terutama dipengaruhi oleh komoditas ${komoditas_mom} yang mencatat inflasi sebesar ${toIndo(komoditas_mom_nilai)}%. Sementara itu, inflasi Y on Y terutama didorong oleh ${komoditas_yoy} dengan inflasi sebesar ${toIndo(komoditas_yoy_nilai)}%, sedangkan inflasi Y to D terutama dipengaruhi oleh ${komoditas_ytd} yang mencatat inflasi sebesar ${toIndo(komoditas_ytd_nilai)}%. Perkembangan tersebut mencerminkan dinamika harga barang dan jasa di Kota ${wilayah} selama ${bulan} ${tahun}, dengan tekanan inflasi yang berasal dari komoditas utama pada masing masing periode pengukuran serta perubahan Indeks Harga Konsumen yang menggambarkan kondisi harga konsumen secara umum.`;
 
-        const wordCount = summaryText.trim().split(/\s+/).filter(Boolean).length;
+        const wordCount = summaryText
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean).length;
 
         allResults.push({
           kota: city.name,
@@ -174,16 +195,16 @@ export const AISummary = async () => {
         );
 
         process.stdout.write(
-          `\r✔ [${String(cityCounter).padStart(3, " ")}/${totalCities}] [${progressBar}] ${percent}% | ${city.name.padEnd(25)} | (${wordCount} kata)\n`
+          `\r✔ [${String(cityCounter).padStart(3, " ")}/${totalCities}] [${progressBar}] ${percent}% | ${city.name.padEnd(25)} | (${wordCount} kata)\n`,
         );
       } catch (err) {
-        console.warn(
-          `\n⚠ Error pada wilayah "${city.name}": ${err.message}`,
-        );
+        console.warn(`\n⚠ Error pada wilayah "${city.name}": ${err.message}`);
       }
     }
 
-    console.log(`✔ Selesai membuat & menyimpan AISummary untuk ${allResults.length} wilayah.`);
+    console.log(
+      `✔ Selesai membuat & menyimpan AISummary untuk ${allResults.length} wilayah.`,
+    );
 
     // Menulis file airesult.json selevel dengan file ini setelah loop selesai
     const outputPath = path.join(__dirname, "airesult.json");

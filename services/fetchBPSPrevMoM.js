@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import fsSync from "fs";
 import path from "path";
 import dotenv from "dotenv";
 import cloudscraper from "cloudscraper";
@@ -14,6 +15,7 @@ dotenv.config({ path: path.join(__dirname, "../.env") });
 
 const configPath = path.join(__dirname, "../json/fetchBPS.json");
 const resultPath = path.join(__dirname, "../result.txt");
+const debugFolderPath = path.join(__dirname, "../debug_output/fetchPrev");
 const FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 
 let spinner;
@@ -48,6 +50,34 @@ const getYearPrev2Year = () => {
 
 const writeLog = async (text) => {
   await fs.appendFile(resultPath, text);
+};
+
+const saveDebugJSON = async (data, label) => {
+  try {
+    if (!data) return;
+    if (!fsSync.existsSync(debugFolderPath)) {
+      fsSync.mkdirSync(debugFolderPath, { recursive: true });
+    }
+
+    let fileNameVal = "unknown";
+    if (data && data.var) {
+      if (Array.isArray(data.var) && data.var[0] && data.var[0].val) {
+        fileNameVal = data.var[0].val;
+      } else if (data.var.val) {
+        fileNameVal = data.var.val;
+      }
+    }
+
+    const cleanLabel = String(label).replace(/[^a-zA-Z0-9-_]/g, "_");
+    const cleanFileName = String(fileNameVal).replace(/[^a-zA-Z0-9-_]/g, "_");
+    const fileName = `${cleanLabel}_${cleanFileName}.json`;
+    const filePath = path.join(debugFolderPath, fileName);
+
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
+    console.log(`📂 [DEBUG] Saved to ${filePath}`);
+  } catch (error) {
+    console.log(`✖ [DEBUG] Failed to save debug file: ${error.message}`);
+  }
 };
 
 // --- CORE FETCH LOGIC FOR A SINGLE URL & YEAR ---
@@ -93,6 +123,7 @@ const fetchSingleUrl = async (url, label) => {
       }
 
       stopLoading(`Success ${label}`);
+      await saveDebugJSON(data, label);
       return data;
     } catch (err) {
       clearInterval(spinner);
@@ -121,8 +152,8 @@ export const fetchBPSPrevMoM = async () => {
     const rawConfig = JSON.parse(configFile);
     const rawUrls = Array.isArray(rawConfig)
       ? rawConfig.flatMap((item) =>
-          typeof item === "string" ? item : item.content || [],
-        )
+        typeof item === "string" ? item : item.content || [],
+      )
       : [];
     const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
     const yearPrevYear = getYearPrevYear();
@@ -199,4 +230,4 @@ export const fetchBPSPrevMoM = async () => {
   }
 };
 
-// fetchBPSPrevMoM()
+fetchBPSPrevMoM()

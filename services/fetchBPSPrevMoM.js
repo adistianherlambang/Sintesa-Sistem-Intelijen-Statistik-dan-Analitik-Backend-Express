@@ -85,6 +85,13 @@ const fetchSingleUrl = async (url, label) => {
         `\nLINK : ${url}\nRESPONSE STATUS : ${data?.status || "-"}\nAVAILABILITY : ${data?.["data-availability"] || "-"}\nVAR : ${data?.var?.[0]?.val || "-"}\n`,
       );
 
+      if (data?.["data-availability"] && data["data-availability"] !== "available") {
+        clearInterval(spinner);
+        console.log(`⚠ Data not available for ${url} (status: ${data["data-availability"]})`);
+        stopLoading(`Not available ${label}`);
+        return null;
+      }
+
       stopLoading(`Success ${label}`);
       return data;
     } catch (err) {
@@ -142,16 +149,28 @@ export const fetchBPSPrevMoM = async () => {
         `Prev2Year ${humanIndex}/${urls.length}`,
       );
 
+      const updateData = {};
+      if (dataPrevYear?.["data-availability"] === "available" && dataPrevYear?.datacontent) {
+        updateData.prevYear = dataPrevYear.datacontent;
+      }
+      if (dataPrev2Year?.["data-availability"] === "available" && dataPrev2Year?.datacontent) {
+        updateData.prev2Year = dataPrev2Year.datacontent;
+      }
+
+      if (Object.keys(updateData).length === 0) {
+        console.log(
+          `⚠ Skip item ${humanIndex}/${urls.length}: Data prevYear & prev2Year tidak tersedia (not available)`,
+        );
+        continue;
+      }
+
       const varVal = dataPrevYear?.var?.[0]?.val || dataPrev2Year?.var?.[0]?.val;
 
       if (varVal) {
         const updated = await APIDataBPS.findOneAndUpdate(
           { "var.val": varVal },
           {
-            $set: {
-              prevYear: dataPrevYear?.datacontent || {},
-              prev2Year: dataPrev2Year?.datacontent || {},
-            },
+            $set: updateData,
             $unset: {
               prevMom: "",
               prevMoM: "",

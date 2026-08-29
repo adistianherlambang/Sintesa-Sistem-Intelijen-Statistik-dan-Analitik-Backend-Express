@@ -145,6 +145,16 @@ export const fetchBPS = async () => {
             throw new Error("Empty response");
           }
 
+          if (data?.["data-availability"] && data["data-availability"] !== "available") {
+            clearInterval(spinner);
+            console.log(
+              `\n⚠ Skip URL ${index + 1}/${urls.length}: Data tidak tersedia (data-availability: ${data["data-availability"]})`,
+            );
+            stopLoading(`Not available ${index + 1}/${urls.length}`);
+            success = false;
+            break;
+          }
+
           console.log(`\n=== FETCH ${index + 1} SUCCESS ===`);
           console.log(`Status API BPS: ${data.status || "OK"}`);
 

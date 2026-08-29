@@ -77,9 +77,10 @@ export const fetchBPS = async () => {
     // READ CONFIG
     // =======================
 
+    const bpsKey = process.env.API_BPS ? process.env.API_BPS.trim() : "";
     const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
 
-    const urls = config;
+    const urls = config.map((url) => url.replaceAll("${API_BPS}", bpsKey));
 
     console.log("✔ Config loaded");
 

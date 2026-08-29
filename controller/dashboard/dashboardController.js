@@ -6,8 +6,9 @@ import APIDataBPS from "../../db/models/APIDataBPS.js";
  * @throws Error jika fetch gagal
  */
 export const testBPSAPI = async () => {
+  const bpsKey = process.env.API_BPS ? process.env.API_BPS.trim() : "";
   const response = await fetch(
-    "https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/1/th/126/key/6140cf4d3d3cc537fe36176ad6ad09d2/",
+    `https://webapi.bps.go.id/v1/api/list/model/data/lang/ind/domain/0000/var/1/th/126/key/${bpsKey}/`,
   );
 
   if (!response.ok) {

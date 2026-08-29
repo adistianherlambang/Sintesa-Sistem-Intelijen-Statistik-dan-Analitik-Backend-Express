@@ -106,8 +106,13 @@ export const fetchBPSPrevMoM = async () => {
       console.log("✔ MongoDB connected");
     }
 
+    const bpsKey = process.env.API_BPS ? process.env.API_BPS.trim() : "";
+    if (!bpsKey) {
+      throw new Error("API_BPS tidak ditemukan di environment variables!");
+    }
     const configFile = await fs.readFile(configPath, "utf-8");
-    const urls = JSON.parse(configFile);
+    const rawUrls = JSON.parse(configFile);
+    const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
     const yearPrevYear = getYearPrevYear();
     const yearPrev2Year = getYearPrev2Year();
 

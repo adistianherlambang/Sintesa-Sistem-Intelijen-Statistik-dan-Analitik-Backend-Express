@@ -39,6 +39,19 @@ import {
   getAllPdrbLapanganUsahaAdhb,
 } from "../../controller/dashboard/PdrbController.js";
 import {
+  getDemografiByKota,
+  getAllDemografi,
+  getAllDemografiByVar,
+  getPendudukTotalByKota,
+  getAllPendudukTotal,
+  getPendudukLakiLakiByKota,
+  getAllPendudukLakiLaki,
+  getPendudukPerempuanByKota,
+  getAllPendudukPerempuan,
+  getPendudukMiskinByKota,
+  getAllPendudukMiskin,
+} from "../../controller/dashboard/demografiController.js";
+import {
   testBPSAPI,
   getAllDashboard,
   getAllApiVariables,
@@ -467,6 +480,107 @@ router.post("/pdrb", async (req, res) => {
 router.get("/pdrb", async (req, res) => {
   try {
     const result = await getAllPdrb();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// ============= DEMOGRAFI ROUTES =============
+// 1. Penduduk Total (2790)
+router.post("/demografi/penduduk", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPendudukTotalByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/demografi/penduduk", async (req, res) => {
+  try {
+    const result = await getAllPendudukTotal();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// 2. Penduduk Laki-Laki (2791)
+router.post("/demografi/penduduk-laki-laki", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPendudukLakiLakiByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/demografi/penduduk-laki-laki", async (req, res) => {
+  try {
+    const result = await getAllPendudukLakiLaki();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// 3. Penduduk Perempuan (2792)
+router.post("/demografi/penduduk-perempuan", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPendudukPerempuanByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/demografi/penduduk-perempuan", async (req, res) => {
+  try {
+    const result = await getAllPendudukPerempuan();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// 4. Penduduk Miskin (621)
+router.post("/demografi/kemiskinan", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getPendudukMiskinByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/demografi/kemiskinan", async (req, res) => {
+  try {
+    const result = await getAllPendudukMiskin();
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+// General /demografi POST & GET
+router.post("/demografi", async (req, res) => {
+  try {
+    const { kota, varVal } = req.body;
+    const result = await getDemografiByKota(kota, varVal || 2790);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.get("/demografi", async (req, res) => {
+  try {
+    const result = await getAllDemografi();
     res.json(result);
   } catch (err) {
     handleError(res, err);

@@ -565,7 +565,7 @@ const buildIdmlFromExtract = (variables, rawData = {}) => {
 
 export const generateAndSaveBRS = async (req, res) => {
   try {
-    const { city, kota, editedData, parsedData } = req.body;
+    const { city, kota, title, analysisTitle, editedData, parsedData } = req.body;
     const userId = req.user._id;
 
     const targetCity = kota || city || "Kota Malang";
@@ -576,7 +576,7 @@ export const generateAndSaveBRS = async (req, res) => {
       { editedData, parsedData },
     );
 
-    // 2. Hasilkan narasi keterangan BPS dari AI (Gemini LLM)
+    // 2. Hasikan narasi keterangan BPS dari AI (Gemini LLM)
     const narrativeVars = await generateIdmlNarratives(rawData, baseVars);
 
     // 3. Gabungkan seluruh variabel ke dictionary utama
@@ -586,6 +586,10 @@ export const generateAndSaveBRS = async (req, res) => {
     };
 
     const periodText = `${variables.bulan} ${variables.tahun}`;
+    const reportTitle =
+      title ||
+      analysisTitle ||
+      `Laporan BRS IHK ${targetCity} - ${periodText}`;
 
     // 4. Build IDML buffer dari idmlExtract
     const outputBuffer = buildIdmlFromExtract(variables, rawData);
@@ -607,7 +611,7 @@ export const generateAndSaveBRS = async (req, res) => {
     // 6. Save record to AnalysisHistory
     const history = new AnalysisHistory({
       userId,
-      title: `Laporan BRS IHK ${targetCity} - ${periodText}`,
+      title: reportTitle,
       periode: periodText,
       analysisFile: idmlFilename,
     });
@@ -615,7 +619,7 @@ export const generateAndSaveBRS = async (req, res) => {
 
     await logActivity(
       userId,
-      `Melakukan analisis BRS: Laporan BRS IHK ${targetCity} - ${periodText}`,
+      `Melakukan analisis BRS: ${reportTitle}`,
     );
 
     res.json({

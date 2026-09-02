@@ -66,9 +66,30 @@ import {
 import { authMiddleware } from "../../controller/user/authMiddleware.js";
 import ForecastResult from "../../db/models/ForecastResult.js";
 
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotenv.config();
 
 const router = e.Router();
+
+router.get("/bobot", (req, res) => {
+  try {
+    const bobotPath = path.resolve(__dirname, "../../json/bobot.json");
+    if (fs.existsSync(bobotPath)) {
+      const content = JSON.parse(fs.readFileSync(bobotPath, "utf8"));
+      return res.json(content);
+    }
+    return res.status(404).json({ message: "File bobot.json tidak ditemukan" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 
 /**
  * ============= ERROR HANDLING =============

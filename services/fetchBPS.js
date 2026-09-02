@@ -95,8 +95,8 @@ export const fetchBPS = async () => {
     const rawConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
     const rawUrls = Array.isArray(rawConfig)
       ? rawConfig.flatMap((item) =>
-          typeof item === "string" ? item : item.content || [],
-        )
+        typeof item === "string" ? item : item.content || [],
+      )
       : [];
     const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
 

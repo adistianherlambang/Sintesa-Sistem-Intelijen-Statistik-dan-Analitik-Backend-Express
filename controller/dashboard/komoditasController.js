@@ -43,8 +43,6 @@ const processKomoditasItem = async (
     return null;
   }
 
-  const result = [];
-  const sub = {};
   const data = {};
   const subData = {};
 
@@ -53,141 +51,120 @@ const processKomoditasItem = async (
     for (const key in doc.datacontent) {
       const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
       const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
-      const keyMonth = key.slice(regionVal.length + 11);
 
-      if (
-        key.startsWith(regionVal) &&
-        key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-        Number(keyMonth) === Number(month) &&
-        Number(keyYear) === Number(year)
-      ) {
-        result.push({
-          key,
-          value: doc.datacontent[key],
-          bulan: keyMonth,
-        });
-      }
-
-      for (const kelompok of varKelompokIHK) {
-        if (
-          key.startsWith(regionVal) &&
-          turvar === String(kelompok.turvar) &&
-          Number(keyYear) === Number(year)
-        ) {
+      if (key.startsWith(regionVal) && Number(keyYear) === Number(year)) {
+        if (turvar === String(komoditasItem.turvar)) {
           data[key] = doc.datacontent[key];
         }
 
-        for (const item of kelompok.sub) {
-          if (
-            key.startsWith(regionVal) &&
-            turvar === String(item.val) &&
-            Number(keyYear) === Number(year)
-          ) {
+        for (const item of komoditasItem.sub || []) {
+          if (turvar === String(item.val)) {
             if (!subData[item.val]) subData[item.val] = {};
             subData[item.val][key] = doc.datacontent[key];
-          }
-
-          if (
-            key.startsWith(regionVal) &&
-            turvar === String(item.val) &&
-            Number(keyYear) === Number(year) &&
-            Number(keyMonth) === Number(month)
-          ) {
-            sub[item.val] = {
-              label: item.label,
-              value: doc.datacontent[key],
-              bulan: Number(keyMonth),
-              data: sort(subData)[item.val],
-            };
           }
         }
       }
     }
   }
 
-  const sortedResult = sort(result);
+  const sortedData = sort(data);
+  const dataEntries = Object.entries(sortedData);
   const mainData =
-    sortedResult && sortedResult.length > 0 ? sortedResult[0] : null;
+    dataEntries.length > 0 ? dataEntries[dataEntries.length - 1] : null;
+
+  const mainValue = mainData ? mainData[1] : 0;
+  const mainBulan = mainData
+    ? Number(mainData[0].slice(regionVal.length + 11))
+    : Number(month);
+
+  const sub = {};
+  for (const item of komoditasItem.sub || []) {
+    const sortedSubData = sort(subData[item.val] || {});
+    const subEntries = Object.entries(sortedSubData);
+    const mainSubData =
+      subEntries.length > 0 ? subEntries[subEntries.length - 1] : null;
+
+    sub[item.val] = {
+      label: item.label,
+      value: mainSubData ? mainSubData[1] : 0,
+      bulan: mainSubData
+        ? Number(mainSubData[0].slice(regionVal.length + 11))
+        : Number(month),
+      data: sortedSubData,
+    };
+  }
 
   const hierarki = {
     label: komoditasItem.nama,
-    value: mainData ? mainData.value : 0,
-    bulan: mainData ? Number(mainData.bulan) : Number(month),
-    data: sort(data),
+    value: mainValue,
+    bulan: mainBulan,
+    data: sortedData,
     sub,
   };
 
   // Process prevYear data
   let prevYearItem = null;
   if (doc.prevYear) {
-    const resultPrevYear = [];
-    const subPrevYear = {};
     const dataPrevYear = {};
     const subDataPrevYear = {};
 
     for (const key in doc.prevYear) {
       const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
       const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
-      const keyMonth = key.slice(regionVal.length + 11);
 
       if (
         key.startsWith(regionVal) &&
-        key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-        Number(keyMonth) === Number(month) &&
         Number(keyYear) === Number(prevYear)
       ) {
-        resultPrevYear.push({
-          key,
-          value: doc.prevYear[key],
-          bulan: keyMonth,
-        });
-      }
-
-      for (const kelompok of varKelompokIHK) {
-        if (
-          key.startsWith(regionVal) &&
-          turvar === String(kelompok.turvar) &&
-          Number(keyYear) === Number(prevYear)
-        ) {
+        if (turvar === String(komoditasItem.turvar)) {
           dataPrevYear[key] = doc.prevYear[key];
         }
 
-        for (const item of kelompok.sub) {
-          if (
-            key.startsWith(regionVal) &&
-            turvar === String(item.val) &&
-            Number(keyYear) === Number(prevYear)
-          ) {
+        for (const item of komoditasItem.sub || []) {
+          if (turvar === String(item.val)) {
             if (!subDataPrevYear[item.val]) subDataPrevYear[item.val] = {};
             subDataPrevYear[item.val][key] = doc.prevYear[key];
-          }
-
-          if (
-            key.startsWith(regionVal) &&
-            turvar === String(item.val) &&
-            Number(keyYear) === Number(prevYear) &&
-            Number(keyMonth) === Number(month)
-          ) {
-            subPrevYear[item.val] = {
-              label: item.label,
-              value: doc.prevYear[key],
-              bulan: Number(keyMonth),
-              data: sort(subDataPrevYear)[item.val],
-            };
           }
         }
       }
     }
 
-    const sortedPrevYear = sort(resultPrevYear);
+    const sortedDataPrevYear = sort(dataPrevYear);
+    const dataEntriesPrevYear = Object.entries(sortedDataPrevYear);
     const mainDataPrevYear =
-      sortedPrevYear && sortedPrevYear.length > 0 ? sortedPrevYear[0] : null;
+      dataEntriesPrevYear.length > 0
+        ? dataEntriesPrevYear[dataEntriesPrevYear.length - 1]
+        : null;
+
+    const prevYearValue = mainDataPrevYear ? mainDataPrevYear[1] : 0;
+    const prevYearBulan = mainDataPrevYear
+      ? Number(mainDataPrevYear[0].slice(regionVal.length + 11))
+      : Number(month);
+
+    const subPrevYear = {};
+    for (const item of komoditasItem.sub || []) {
+      const sortedSubDataPrev = sort(subDataPrevYear[item.val] || {});
+      const subEntriesPrev = Object.entries(sortedSubDataPrev);
+      const mainSubDataPrev =
+        subEntriesPrev.length > 0
+          ? subEntriesPrev[subEntriesPrev.length - 1]
+          : null;
+
+      subPrevYear[item.val] = {
+        label: item.label,
+        value: mainSubDataPrev ? mainSubDataPrev[1] : 0,
+        bulan: mainSubDataPrev
+          ? Number(mainSubDataPrev[0].slice(regionVal.length + 11))
+          : Number(month),
+        data: sortedSubDataPrev,
+      };
+    }
 
     prevYearItem = {
       label: komoditasItem.nama,
-      value: mainDataPrevYear ? mainDataPrevYear.value : 0,
-      bulan: mainDataPrevYear ? Number(mainDataPrevYear.bulan) : Number(month),
-      data: sort(dataPrevYear),
+      value: prevYearValue,
+      bulan: prevYearBulan,
+      data: sortedDataPrevYear,
       sub: subPrevYear,
     };
   }
@@ -195,76 +172,66 @@ const processKomoditasItem = async (
   // Process prev2Year data
   let prev2YearItem = null;
   if (doc.prev2Year) {
-    const resultPrev2Year = [];
-    const subPrev2Year = {};
     const dataPrev2Year = {};
     const subDataPrev2Year = {};
 
     for (const key in doc.prev2Year) {
       const turvar = key.slice(regionVal.length + 4, regionVal.length + 8);
       const keyYear = key.slice(regionVal.length + 8, regionVal.length + 11);
-      const keyMonth = key.slice(regionVal.length + 11);
 
       if (
         key.startsWith(regionVal) &&
-        key.slice(regionVal.length, regionVal.length + 1) === "2" &&
-        Number(keyMonth) === Number(month) &&
         Number(keyYear) === Number(prev2Year)
       ) {
-        resultPrev2Year.push({
-          key,
-          value: doc.prev2Year[key],
-          bulan: keyMonth,
-        });
-      }
-
-      for (const kelompok of varKelompokIHK) {
-        if (
-          key.startsWith(regionVal) &&
-          turvar === String(kelompok.turvar) &&
-          Number(keyYear) === Number(prev2Year)
-        ) {
+        if (turvar === String(komoditasItem.turvar)) {
           dataPrev2Year[key] = doc.prev2Year[key];
         }
 
-        for (const item of kelompok.sub) {
-          if (
-            key.startsWith(regionVal) &&
-            turvar === String(item.val) &&
-            Number(keyYear) === Number(prev2Year)
-          ) {
+        for (const item of komoditasItem.sub || []) {
+          if (turvar === String(item.val)) {
             if (!subDataPrev2Year[item.val]) subDataPrev2Year[item.val] = {};
             subDataPrev2Year[item.val][key] = doc.prev2Year[key];
-          }
-
-          if (
-            key.startsWith(regionVal) &&
-            turvar === String(item.val) &&
-            Number(keyYear) === Number(prev2Year) &&
-            Number(keyMonth) === Number(month)
-          ) {
-            subPrev2Year[item.val] = {
-              label: item.label,
-              value: doc.prev2Year[key],
-              bulan: Number(keyMonth),
-              data: sort(subDataPrev2Year)[item.val],
-            };
           }
         }
       }
     }
 
-    const sortedPrev2Year = sort(resultPrev2Year);
+    const sortedDataPrev2Year = sort(dataPrev2Year);
+    const dataEntriesPrev2Year = Object.entries(sortedDataPrev2Year);
     const mainDataPrev2Year =
-      sortedPrev2Year && sortedPrev2Year.length > 0 ? sortedPrev2Year[0] : null;
+      dataEntriesPrev2Year.length > 0
+        ? dataEntriesPrev2Year[dataEntriesPrev2Year.length - 1]
+        : null;
+
+    const prev2YearValue = mainDataPrev2Year ? mainDataPrev2Year[1] : 0;
+    const prev2YearBulan = mainDataPrev2Year
+      ? Number(mainDataPrev2Year[0].slice(regionVal.length + 11))
+      : Number(month);
+
+    const subPrev2Year = {};
+    for (const item of komoditasItem.sub || []) {
+      const sortedSubDataPrev2 = sort(subDataPrev2Year[item.val] || {});
+      const subEntriesPrev2 = Object.entries(sortedSubDataPrev2);
+      const mainSubDataPrev2 =
+        subEntriesPrev2.length > 0
+          ? subEntriesPrev2[subEntriesPrev2.length - 1]
+          : null;
+
+      subPrev2Year[item.val] = {
+        label: item.label,
+        value: mainSubDataPrev2 ? mainSubDataPrev2[1] : 0,
+        bulan: mainSubDataPrev2
+          ? Number(mainSubDataPrev2[0].slice(regionVal.length + 11))
+          : Number(month),
+        data: sortedSubDataPrev2,
+      };
+    }
 
     prev2YearItem = {
       label: komoditasItem.nama,
-      value: mainDataPrev2Year ? mainDataPrev2Year.value : 0,
-      bulan: mainDataPrev2Year
-        ? Number(mainDataPrev2Year.bulan)
-        : Number(month),
-      data: sort(dataPrev2Year),
+      value: prev2YearValue,
+      bulan: prev2YearBulan,
+      data: sortedDataPrev2Year,
       sub: subPrev2Year,
     };
   }
@@ -542,6 +509,14 @@ export const getKomoditasYtdByKota = async (kota) => {
   return getKomoditasByKota(kota, "ytd");
 };
 
+export const getKomoditasIhkByKota = async (kota) => {
+  return getKomoditasByKota(kota, "ihk");
+};
+
+export const getKomoditasIhkInfografisByKota = async (kota) => {
+  return getKomoditasInfografisByKota(kota, "ihk");
+};
+
 export const getKomoditasInfografisByKota = async (
   kota,
   varKeyField = "var",
@@ -753,4 +728,8 @@ export const getAllKomoditasYoy = async () => {
 
 export const getAllKomoditasYtd = async () => {
   return getAllKomoditas("ytd");
+};
+
+export const getAllKomoditasIhk = async () => {
+  return getAllKomoditas("ihk");
 };

@@ -20,10 +20,13 @@ import {
   getKomoditasByKota,
   getKomoditasYoyByKota,
   getKomoditasYtdByKota,
+  getKomoditasIhkByKota,
   getAllKomoditas,
   getAllKomoditasYoy,
   getAllKomoditasYtd,
+  getAllKomoditasIhk,
   getKomoditasInfografisByKota,
+  getKomoditasIhkInfografisByKota,
 } from "../../controller/dashboard/komoditasController.js";
 import {
   getPdrbByKota,
@@ -262,8 +265,8 @@ router.get("/ihk", async (req, res) => {
   }
 });
 
-// ============= KOMODITAS ROUTES =============
-router.get("/komoditas", async (req, res) => {
+// ============= INFLASI KOMODITAS ROUTES =============
+router.get(["/inflasi/komoditas", "/komoditas"], async (req, res) => {
   try {
     const result = await getAllKomoditas();
     res.json(result);
@@ -272,7 +275,7 @@ router.get("/komoditas", async (req, res) => {
   }
 });
 
-router.post("/komoditas", async (req, res) => {
+router.post(["/inflasi/komoditas", "/komoditas"], async (req, res) => {
   try {
     const { kota } = req.body;
     const result = await getKomoditasByKota(kota);
@@ -282,7 +285,7 @@ router.post("/komoditas", async (req, res) => {
   }
 });
 
-router.get("/komoditas/yoy", async (req, res) => {
+router.get(["/inflasi/komoditas/yoy", "/komoditas/yoy"], async (req, res) => {
   try {
     const result = await getAllKomoditasYoy();
     res.json(result);
@@ -291,7 +294,7 @@ router.get("/komoditas/yoy", async (req, res) => {
   }
 });
 
-router.post("/komoditas/yoy", async (req, res) => {
+router.post(["/inflasi/komoditas/yoy", "/komoditas/yoy"], async (req, res) => {
   try {
     const { kota } = req.body;
     const result = await getKomoditasYoyByKota(kota);
@@ -301,7 +304,7 @@ router.post("/komoditas/yoy", async (req, res) => {
   }
 });
 
-router.get("/komoditas/ytd", async (req, res) => {
+router.get(["/inflasi/komoditas/ytd", "/komoditas/ytd"], async (req, res) => {
   try {
     const result = await getAllKomoditasYtd();
     res.json(result);
@@ -310,7 +313,7 @@ router.get("/komoditas/ytd", async (req, res) => {
   }
 });
 
-router.post("/komoditas/ytd", async (req, res) => {
+router.post(["/inflasi/komoditas/ytd", "/komoditas/ytd"], async (req, res) => {
   try {
     const { kota } = req.body;
     const result = await getKomoditasYtdByKota(kota);
@@ -320,15 +323,55 @@ router.post("/komoditas/ytd", async (req, res) => {
   }
 });
 
-router.post("/komoditas-infografis", async (req, res) => {
+router.post(
+  [
+    "/inflasi/komoditas-infografis",
+    "/inflasi/komoditas/infografis",
+    "/komoditas-infografis",
+  ],
+  async (req, res) => {
+    try {
+      const { kota } = req.body;
+      const result = await getKomoditasInfografisByKota(kota);
+      res.json(result);
+    } catch (err) {
+      handleError(res, err);
+    }
+  },
+);
+
+// ============= IHK KOMODITAS ROUTES =============
+router.get("/ihk/komoditas", async (req, res) => {
   try {
-    const { kota } = req.body;
-    const result = await getKomoditasInfografisByKota(kota);
+    const result = await getAllKomoditasIhk();
     res.json(result);
   } catch (err) {
     handleError(res, err);
   }
 });
+
+router.post("/ihk/komoditas", async (req, res) => {
+  try {
+    const { kota } = req.body;
+    const result = await getKomoditasIhkByKota(kota);
+    res.json(result);
+  } catch (err) {
+    handleError(res, err);
+  }
+});
+
+router.post(
+  ["/ihk/komoditas-infografis", "/ihk/komoditas/infografis"],
+  async (req, res) => {
+    try {
+      const { kota } = req.body;
+      const result = await getKomoditasIhkInfografisByKota(kota);
+      res.json(result);
+    } catch (err) {
+      handleError(res, err);
+    }
+  },
+);
 
 // ============= PDRB ROUTES =============
 // 1. PDRB Pengeluaran ADHK (Var 2773)

@@ -37,19 +37,38 @@ Endpoint utama mengembalikan data inflasi, IHK, komoditas, dan dokumentasi statu
 - Menampilkan dokumen BPS lengkap untuk `var.val = 2245`
 - Response: `{ doc }`
 
-### GET `/dashboard/komoditas`
+### GET `/dashboard/inflasi/komoditas` (alias: `/dashboard/komoditas`)
 
-- Mengambil dokumen BPS untuk `var.val = 2223`
+- Mengambil dokumen BPS untuk `var.val = 2223` (Inflasi MoM Komoditas Makanan, dkk)
 - Response: dokumen langsung dari database
 
-### POST `/dashboard/komoditas`
+### POST `/dashboard/inflasi/komoditas` (alias: `/dashboard/komoditas`)
 
 - Body JSON: `{ "kota": "Nama Kota" }`
-- Menggunakan daftar `varKelompokIHK` untuk membangun:
+- Menggunakan daftar `varKelompokIHK` (var: 2223 - 2233) untuk membangun:
   - `hierarki`
-  - `yoy`
+  - `prevYear` / `yoy`
+  - `prev2Year`
   - `biggest`
-- Response berisi struktur data komoditas dan YoY untuk kota yang dipilih
+  - `topmom`, `topyoy`, `topsubmom`, `topsubyoy`
+- Response berisi struktur data inflasi komoditas untuk kota yang dipilih
+
+### POST `/dashboard/inflasi/komoditas/yoy` (alias: `/dashboard/komoditas/yoy`)
+- Mengambil data inflasi komoditas YoY (var: 2250 - 2260)
+
+### POST `/dashboard/inflasi/komoditas/ytd` (alias: `/dashboard/komoditas/ytd`)
+- Mengambil data inflasi komoditas YtD (var: 2234 - 2244)
+
+### GET `/dashboard/ihk/komoditas`
+
+- Mengambil dokumen BPS untuk `var.val = 2212` (IHK Komoditas Makanan, dkk)
+- Response: dokumen langsung dari database
+
+### POST `/dashboard/ihk/komoditas`
+
+- Body JSON: `{ "kota": "Nama Kota" }`
+- Menggunakan daftar `varKelompokIHK` (ihk: 2212 - 2222) untuk membangun struktur IHK per kelompok komoditas dan sub-komoditas
+- Response berisi struktur data hierarki IHK komoditas untuk kota yang dipilih
 
 ### POST `/dashboard/testapi`
 

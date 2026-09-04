@@ -224,20 +224,10 @@ export const callUnifiedLLM = async ({
     return await callGemma({ message: inputMessage, model, systemPrompt });
   }
 
-  // Jika provider === "auto": urutan prioritas: Cloudflare Gemma -> Gemini -> Mistral
+  // Jika provider === "auto": urutan prioritas: Gemini -> Mistral -> Cloudflare Gemma
   const errors = [];
 
-  // Coba Cloudflare Gemma terlebih dahulu (kuota free tinggi & stabil)
-  if (process.env.CLOUDFLARE_ACCOUNT_ID && process.env.CLOUDFLARE_API_TOKEN && !responseMimeType) {
-    try {
-      return await callGemma({ message: inputMessage, model, systemPrompt });
-    } catch (err) {
-      console.warn("[UnifiedLLM] Cloudflare Gemma gagal, mencoba Gemini:", err.message);
-      errors.push(`Gemma: ${err.message}`);
-    }
-  }
-
-  // Coba Gemini
+  // 1. Coba Gemini terlebih dahulu
   if (process.env.GEMINI_API_KEY) {
     try {
       return await callGemini({ message: inputMessage, model, temperature, systemPrompt, responseMimeType });
@@ -247,13 +237,23 @@ export const callUnifiedLLM = async ({
     }
   }
 
-  // Coba Mistral
+  // 2. Coba Mistral
   if (process.env.MISTRAL_API_KEY && !responseMimeType) {
     try {
       return await callMistral({ message: inputMessage, model, temperature, systemPrompt });
     } catch (err) {
-      console.warn("[UnifiedLLM] Mistral gagal:", err.message);
+      console.warn("[UnifiedLLM] Mistral gagal, mencoba Cloudflare Gemma:", err.message);
       errors.push(`Mistral: ${err.message}`);
+    }
+  }
+
+  // 3. Coba Cloudflare Gemma
+  if (process.env.CLOUDFLARE_ACCOUNT_ID && process.env.CLOUDFLARE_API_TOKEN && !responseMimeType) {
+    try {
+      return await callGemma({ message: inputMessage, model, systemPrompt });
+    } catch (err) {
+      console.warn("[UnifiedLLM] Cloudflare Gemma gagal:", err.message);
+      errors.push(`Gemma: ${err.message}`);
     }
   }
 

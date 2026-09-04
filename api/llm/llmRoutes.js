@@ -148,11 +148,12 @@ export const callGemma = async ({
 }) => {
   const inputMessage = message || prompt;
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
-  const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+  const apiToken =
+    process.env.CLOUDFLARE_API_TOKEN || process.env.CLOUDFLARE_AUTH_TOKEN;
 
   if (!accountId || !apiToken) {
     throw new Error(
-      "CLOUDFLARE_ACCOUNT_ID atau CLOUDFLARE_API_TOKEN belum dikonfigurasi di environment variables.",
+      "CLOUDFLARE_ACCOUNT_ID atau CLOUDFLARE_API_TOKEN / CLOUDFLARE_AUTH_TOKEN belum dikonfigurasi di environment variables.",
     );
   }
 
@@ -188,7 +189,7 @@ export const callGemma = async ({
 
   return {
     ok: true,
-    llm: "cloudflare-gemma",
+    llm: model.includes("2b") ? "cloudflare-gemma-2b" : "cloudflare-gemma-7b",
     model,
     message: reply,
     reply,
@@ -198,6 +199,7 @@ export const callGemma = async ({
 
 /**
  * 4. UNIFIED LLM INFERENCE (Dengan Otomatis Fallback Antar Model)
+ * Urutan: Gemini -> Mistral -> Cloudflare Gemma 7B -> Cloudflare Gemma 2B
  */
 export const callUnifiedLLM = async ({
   message,
@@ -220,11 +222,14 @@ export const callUnifiedLLM = async ({
   if (provider === "gemini") {
     return await callGemini({ message: inputMessage, model, temperature, systemPrompt, responseMimeType });
   }
-  if (provider === "gemma" || provider === "cloudflare") {
-    return await callGemma({ message: inputMessage, model, systemPrompt });
+  if (provider === "gemma" || provider === "cloudflare" || provider === "gemma-7b") {
+    return await callGemma({ message: inputMessage, model: model || "@cf/google/gemma-7b-it-lora", systemPrompt });
+  }
+  if (provider === "gemma-2b") {
+    return await callGemma({ message: inputMessage, model: model || "@cf/google/gemma-2b-it-lora", systemPrompt });
   }
 
-  // Jika provider === "auto": urutan prioritas: Gemini -> Mistral -> Cloudflare Gemma
+  // Jika provider === "auto": urutan prioritas: Gemini -> Mistral -> Cloudflare Gemma 7B -> Cloudflare Gemma 2B
   const errors = [];
 
   // 1. Coba Gemini terlebih dahulu
@@ -242,18 +247,39 @@ export const callUnifiedLLM = async ({
     try {
       return await callMistral({ message: inputMessage, model, temperature, systemPrompt });
     } catch (err) {
-      console.warn("[UnifiedLLM] Mistral gagal, mencoba Cloudflare Gemma:", err.message);
+      console.warn("[UnifiedLLM] Mistral gagal, mencoba Cloudflare Gemma 7B:", err.message);
       errors.push(`Mistral: ${err.message}`);
     }
   }
 
-  // 3. Coba Cloudflare Gemma
-  if (process.env.CLOUDFLARE_ACCOUNT_ID && process.env.CLOUDFLARE_API_TOKEN && !responseMimeType) {
+  const cfToken =
+    process.env.CLOUDFLARE_API_TOKEN || process.env.CLOUDFLARE_AUTH_TOKEN;
+
+  // 3. Coba Cloudflare Gemma 7B
+  if (process.env.CLOUDFLARE_ACCOUNT_ID && cfToken && !responseMimeType) {
     try {
-      return await callGemma({ message: inputMessage, model, systemPrompt });
+      return await callGemma({
+        message: inputMessage,
+        model: model || "@cf/google/gemma-7b-it-lora",
+        systemPrompt,
+      });
     } catch (err) {
-      console.warn("[UnifiedLLM] Cloudflare Gemma gagal:", err.message);
-      errors.push(`Gemma: ${err.message}`);
+      console.warn("[UnifiedLLM] Cloudflare Gemma 7B gagal, mencoba Gemma 2B:", err.message);
+      errors.push(`Gemma-7B: ${err.message}`);
+    }
+  }
+
+  // 4. Opsi Terakhir: Cloudflare Gemma 2B
+  if (process.env.CLOUDFLARE_ACCOUNT_ID && cfToken && !responseMimeType) {
+    try {
+      return await callGemma({
+        message: inputMessage,
+        model: "@cf/google/gemma-2b-it-lora",
+        systemPrompt,
+      });
+    } catch (err) {
+      console.warn("[UnifiedLLM] Cloudflare Gemma 2B gagal:", err.message);
+      errors.push(`Gemma-2B: ${err.message}`);
     }
   }
 
@@ -300,11 +326,12 @@ router.post("/gemini", async (req, res) => {
 });
 
 /**
- * POST /api/llm/gemma & POST /api/llm/cloudflare
+ * POST /api/llm/gemma, /api/llm/gemma-7b, /api/llm/gemma-2b, /api/llm/cloudflare
  */
-const handleCloudflareRoute = async (req, res) => {
+const handleCloudflareRoute = async (req, res, defaultModel) => {
   try {
-    const result = await callGemma(req.body);
+    const payload = defaultModel ? { model: defaultModel, ...req.body } : req.body;
+    const result = await callGemma(payload);
     res.json(result);
   } catch (error) {
     console.error("[LLM Cloudflare Gemma Error]:", error);
@@ -319,8 +346,10 @@ const handleCloudflareRoute = async (req, res) => {
   }
 };
 
-router.post("/gemma", handleCloudflareRoute);
-router.post("/cloudflare", handleCloudflareRoute);
+router.post("/gemma", (req, res) => handleCloudflareRoute(req, res));
+router.post("/cloudflare", (req, res) => handleCloudflareRoute(req, res));
+router.post("/gemma-7b", (req, res) => handleCloudflareRoute(req, res, "@cf/google/gemma-7b-it-lora"));
+router.post("/gemma-2b", (req, res) => handleCloudflareRoute(req, res, "@cf/google/gemma-2b-it-lora"));
 
 /**
  * POST /api/llm/generate & POST /api/llm/

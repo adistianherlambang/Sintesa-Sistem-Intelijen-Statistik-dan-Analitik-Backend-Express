@@ -143,7 +143,29 @@ router.post("/forecast/save", async (req, res) => {
 router.get("/forecast/:kota", async (req, res) => {
   try {
     const { kota } = req.params;
-    const doc = await ForecastResult.findOne({ kota });
+    if (!kota) {
+      return res.status(400).json({ message: "Nama kota wajib diisi." });
+    }
+
+    const trimmedKota = kota.trim();
+    // 1. Exact match
+    let doc = await ForecastResult.findOne({ kota: trimmedKota });
+
+    // 2. Case-insensitive exact match
+    if (!doc) {
+      doc = await ForecastResult.findOne({
+        kota: { $regex: new RegExp(`^${trimmedKota.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`, "i") },
+      });
+    }
+
+    // 3. Normalized match (strip KOTA / KAB / KABUPATEN prefixes)
+    if (!doc) {
+      const cleanKota = trimmedKota.replace(/^(KOTA|KABUPATEN|KAB\.?)\s+/i, "").trim();
+      doc = await ForecastResult.findOne({
+        kota: { $regex: new RegExp(cleanKota.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i") },
+      });
+    }
+
     if (!doc) {
       return res
         .status(404)

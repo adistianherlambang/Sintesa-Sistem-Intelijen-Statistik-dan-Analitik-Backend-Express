@@ -4,9 +4,13 @@ import { authMiddleware } from "../../controller/user/authMiddleware.js";
 import {
   registerUser,
   loginUser,
+  validateRegistrationData,
+  validateLoginCredentials,
+  completeLoginSession,
   updateUserProfile,
   updateUserPassword,
 } from "../../controller/user/userController.js";
+import { sendOtp, verifyOtp } from "../../services/otpService.js";
 import {
   logActivity,
   getUserActivities,
@@ -36,6 +40,149 @@ const asyncRoute = (fn) => (req, res, next) => {
 };
 
 // ================= AUTHENTICATION =================
+
+// 1. Sign In (Login) OTP Flow
+router.post(
+  "/login/initiate",
+  asyncRoute(async (req, res) => {
+    const { email, password } = req.body;
+    // Validate credentials first
+    const user = await validateLoginCredentials(email, password);
+    // Send OTP
+    const challenge = await sendOtp({ email: user.email, purpose: "login" });
+
+    res.json({
+      message: "Kode OTP telah dikirimkan ke email Anda",
+      requireOtp: true,
+      otpId: challenge.id,
+      email: user.email,
+      expiresAt: challenge.expiresAt,
+      isDevFallback: challenge.isDevFallback,
+      devCode: challenge.devCode,
+    });
+  }),
+);
+
+router.post(
+  "/login/verify-otp",
+  asyncRoute(async (req, res) => {
+    const { email, otpId, code } = req.body;
+    if (!email || !otpId || !code) {
+      return res.status(400).json({ message: "Email, ID OTP, dan kode wajib diisi" });
+    }
+
+    const verification = await verifyOtp({
+      email,
+      purpose: "login",
+      id: otpId,
+      code,
+    });
+
+    if (!verification.valid) {
+      const msg =
+        verification.reason === "wrong_code"
+          ? "Kode OTP yang Anda masukkan salah"
+          : "Kode OTP tidak valid atau telah kedaluwarsa";
+      return res.status(400).json({ message: msg, reason: verification.reason });
+    }
+
+    // Complete login session
+    const result = await completeLoginSession(email);
+    await logActivity(result.user._id, "Masuk ke sistem via verifikasi OTP");
+    res.json({ message: "Login berhasil", ...result });
+  }),
+);
+
+router.post(
+  "/login/resend-otp",
+  asyncRoute(async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Email wajib diisi" });
+    }
+
+    const challenge = await sendOtp({ email, purpose: "login" });
+    res.json({
+      message: "Kode OTP baru telah dikirim",
+      otpId: challenge.id,
+      expiresAt: challenge.expiresAt,
+      isDevFallback: challenge.isDevFallback,
+      devCode: challenge.devCode,
+    });
+  }),
+);
+
+// 2. Sign Up (Register) OTP Flow
+router.post(
+  "/register/initiate",
+  asyncRoute(async (req, res) => {
+    const { email, password, name, kota } = req.body;
+    // Validate registration fields and availability first
+    await validateRegistrationData(email, password, name, kota);
+    // Send OTP
+    const challenge = await sendOtp({ email, purpose: "signup" });
+
+    res.json({
+      message: "Kode OTP verifikasi telah dikirimkan ke email Anda",
+      requireOtp: true,
+      otpId: challenge.id,
+      email: email.toLowerCase().trim(),
+      expiresAt: challenge.expiresAt,
+      isDevFallback: challenge.isDevFallback,
+      devCode: challenge.devCode,
+    });
+  }),
+);
+
+router.post(
+  "/register/verify-otp",
+  asyncRoute(async (req, res) => {
+    const { email, password, name, kota, otpId, code } = req.body;
+    if (!email || !otpId || !code) {
+      return res.status(400).json({ message: "Email, ID OTP, dan kode wajib diisi" });
+    }
+
+    const verification = await verifyOtp({
+      email,
+      purpose: "signup",
+      id: otpId,
+      code,
+    });
+
+    if (!verification.valid) {
+      const msg =
+        verification.reason === "wrong_code"
+          ? "Kode OTP yang Anda masukkan salah"
+          : "Kode OTP tidak valid atau telah kedaluwarsa";
+      return res.status(400).json({ message: msg, reason: verification.reason });
+    }
+
+    // Register user permanently
+    const user = await registerUser(email, password, name, kota);
+    res.status(201).json({ message: "Registrasi berhasil diverifikasi", user });
+  }),
+);
+
+router.post(
+  "/register/resend-otp",
+  asyncRoute(async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Email wajib diisi" });
+    }
+
+    const challenge = await sendOtp({ email, purpose: "signup" });
+    res.json({
+      message: "Kode OTP verifikasi baru telah dikirim",
+      otpId: challenge.id,
+      expiresAt: challenge.expiresAt,
+      isDevFallback: challenge.isDevFallback,
+      devCode: challenge.devCode,
+    });
+  }),
+);
+
+// Fallback legacy endpoints
 router.post(
   "/register",
   asyncRoute(async (req, res) => {

@@ -22,6 +22,72 @@ const verifyPassword = (password, storedPassword) => {
 };
 
 /**
+ * Validate registration parameters before sending OTP
+ */
+export const validateRegistrationData = async (email, password, name, cityChoice) => {
+  if (!email || !password || !cityChoice) {
+    throw new Error("Email, password, dan kota wajib diisi");
+  }
+
+  const existingUser = await User.findOne({ email: email.toLowerCase() });
+  if (existingUser) {
+    throw new Error("Email sudah terdaftar");
+  }
+
+  const city = findUnifiedCity(cityChoice);
+  if (!city) {
+    throw new Error("Kota tidak ditemukan atau tidak valid");
+  }
+
+  const existingCityClaim = await User.findOne({ "location.id": city.id });
+  if (existingCityClaim) {
+    throw new Error("Wilayah ini sudah diklaim oleh instansi/user lain");
+  }
+
+  return { email: email.toLowerCase(), city, name };
+};
+
+/**
+ * Validate login credentials before sending OTP
+ */
+export const validateLoginCredentials = async (email, password) => {
+  if (!email || !password) {
+    throw new Error("Email dan password wajib diisi");
+  }
+
+  const user = await User.findOne({ email: email.toLowerCase() });
+  if (!user || !verifyPassword(password, user.password)) {
+    throw new Error("Email atau password salah");
+  }
+
+  const userObj = user.toObject();
+  delete userObj.password;
+  return userObj;
+};
+
+/**
+ * Finalize login session after OTP verification
+ */
+export const completeLoginSession = async (email) => {
+  const user = await User.findOne({ email: email.toLowerCase() });
+  if (!user) {
+    throw new Error("User tidak ditemukan");
+  }
+
+  const token = crypto.randomBytes(32).toString("hex");
+  user.token = token;
+  user.lastLogin = new Date();
+  await user.save();
+
+  const userObj = user.toObject();
+  delete userObj.password;
+  return {
+    user: userObj,
+    token: token,
+  };
+};
+
+/**
  * Register a new user with email, password, name, and cityChoice
  */
 export const registerUser = async (email, password, name, cityChoice) => {

@@ -11,6 +11,7 @@ import { getKomoditasByKota } from "./komoditasController.js";
 import { processIdmlVariables } from "../../services/idmlDataProcessor.js";
 import { generateIdmlNarratives } from "../../services/idmlNarrativeGenerator.js";
 import { processStoryUcc5Contextually } from "../../scripts/processIdmlTemplate.js";
+import { callUnifiedLLM } from "../../api/llm/llmRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -96,52 +97,40 @@ export const parseAndVerifyDataset = async (req, res) => {
       headerRow.some((c) => String(c).toLowerCase().includes("komoditas")) &&
       headerRow.some((c) => String(c).toLowerCase().includes("ihk"));
 
-    // Check with Gemini API if key exists
+    // Check dataset format via llmRoutes
     let isValid = "tidak";
-    const apiKey = process.env.GEMINI_API_KEY;
-
-    if (apiKey) {
-      try {
-        const prompt = `
-        Analyze this spreadsheet meta-information and preview rows to determine if it contains valid IHK (Consumer Price Index) or inflation data.
-        
-        Sheet Names: ${JSON.stringify(workbook.SheetNames)}
-        Column Headers: ${JSON.stringify(headerRow)}
-        Data Preview (First 5 rows):
-        ${JSON.stringify(rows.slice(0, 6))}
-        
-        If this dataset contains valid BPS IHK/inflation data for commodity groups that can be processed by our system (e.g. matching BPS commodity layout with columns for IHK/Inflation), respond with a JSON object:
-        {
-          "valid": "ya"
-        }
-        Otherwise, respond with:
-        {
-          "valid": "tidak"
-        }
-        Do not include any wrapper or explanation, just valid raw JSON.
-        `;
-
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-        const response = await axios.post(geminiUrl, {
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            responseMimeType: "application/json",
-          },
-        });
-        const resultText =
-          response.data.candidates[0].content.parts[0].text.trim();
-        const resultJson = JSON.parse(resultText);
-        isValid = resultJson.valid === "ya" ? "ya" : "tidak";
-      } catch (geminiErr) {
-        console.warn(
-          "⚠ Gemini validation failed, falling back to header structural check:",
-          geminiErr.message,
-        );
-        isValid = isBpsFormat ? "ya" : "tidak";
+    try {
+      const prompt = `
+      Analyze this spreadsheet meta-information and preview rows to determine if it contains valid IHK (Consumer Price Index) or inflation data.
+      
+      Sheet Names: ${JSON.stringify(workbook.SheetNames)}
+      Column Headers: ${JSON.stringify(headerRow)}
+      Data Preview (First 5 rows):
+      ${JSON.stringify(rows.slice(0, 6))}
+      
+      If this dataset contains valid BPS IHK/inflation data for commodity groups that can be processed by our system (e.g. matching BPS commodity layout with columns for IHK/Inflation), respond with a JSON object:
+      {
+        "valid": "ya"
       }
-    } else {
-      console.log(
-        "No GEMINI_API_KEY found, performing structural check instead.",
+      Otherwise, respond with:
+      {
+        "valid": "tidak"
+      }
+      Do not include any wrapper or explanation, just valid raw JSON.
+      `;
+
+      const aiRes = await callUnifiedLLM({
+        prompt,
+        responseMimeType: "application/json",
+      });
+      const resultText = (aiRes.reply || aiRes.message || "").trim();
+      const cleanJson = resultText.replace(/^```json/i, "").replace(/```$/i, "").trim();
+      const resultJson = JSON.parse(cleanJson);
+      isValid = resultJson.valid === "ya" ? "ya" : "tidak";
+    } catch (llmErr) {
+      console.warn(
+        "⚠ LLM validation via llmRoutes failed, falling back to header structural check:",
+        llmErr.message,
       );
       isValid = isBpsFormat ? "ya" : "tidak";
     }
@@ -391,21 +380,6 @@ export const generateSummary = async (req, res) => {
       komoditasPendorong,
       divisionData,
     } = req.body;
-    const apiKey = process.env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      return res.json(
-        getDefaultSummary(
-          city,
-          periode,
-          inflasiMoM,
-          inflasiYoY,
-          ihkNow,
-          komoditasPendorong,
-        ),
-      );
-    }
-
     try {
       const prompt = `
       Analyze this BPS (Statistics Indonesia) inflation and Consumer Price Index (IHK) dataset context for the city of ${city} during ${periode}.
@@ -445,27 +419,24 @@ export const generateSummary = async (req, res) => {
       Do not include any markdown markup or wrappers. Just return valid raw JSON.
       `;
 
-      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-      const response = await axios.post(geminiUrl, {
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          responseMimeType: "application/json",
-        },
+      const aiRes = await callUnifiedLLM({
+        prompt,
+        responseMimeType: "application/json",
       });
 
-      const responseText =
-        response.data.candidates[0].content.parts[0].text.trim();
-      const resultJson = JSON.parse(responseText);
+      const responseText = (aiRes.reply || aiRes.message || "").trim();
+      const cleanJson = responseText.replace(/^```json/i, "").replace(/```$/i, "").trim();
+      const resultJson = JSON.parse(cleanJson);
 
       if (resultJson && Array.isArray(resultJson.sections)) {
         return res.json(resultJson);
       } else {
-        throw new Error("Invalid format from Gemini response");
+        throw new Error("Invalid format from LLM response");
       }
-    } catch (geminiErr) {
+    } catch (llmErr) {
       console.warn(
-        "⚠ Gemini summary generation failed, falling back to default summary:",
-        geminiErr.message,
+        "⚠ LLM summary generation via llmRoutes failed, falling back to default summary:",
+        llmErr.message,
       );
       return res.json(
         getDefaultSummary(

@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "fs"; // Ditambahkan untuk menulis file
 import { fileURLToPath } from "url"; // Ditambahkan untuk mendapatkan path file saat ini
-import { OpenAI } from "openai";
+import { callUnifiedLLM } from "../api/llm/llmRoutes.js";
 
 // Mendapatkan direktori dari file saat ini untuk memastikan airesult.json selevel
 const __filename = fileURLToPath(import.meta.url);
@@ -216,62 +216,19 @@ export const AISummary = async () => {
 
     let aiText = "";
     try {
-      console.log("🤖 Mengirim prompt summary ke Mistral AI...");
-      const client = new OpenAI({
-        apiKey: process.env.MISTRAL_API_KEY,
-        baseURL: "https://api.mistral.ai/v1",
+      console.log("🤖 Mengirim prompt summary ke engine AI via llmRoutes...");
+      const aiResult = await callUnifiedLLM({
+        prompt,
+        responseMimeType: "application/json",
       });
-      const response = await client.chat.completions.create({
-        model: "mistral-small-latest",
-        response_format: { type: "json_object" },
-        messages: [
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-      });
-      aiText = response.choices[0].message.content;
-      console.log("✔ Summary berhasil didapatkan dari Mistral AI.");
-    } catch (mistralErr) {
-      console.warn(
-        "⚠ Gagal menggunakan Mistral AI, beralih ke Gemini sebagai fallback:",
-        mistralErr.message,
+      aiText = aiResult.reply || aiResult.message || "";
+      console.log(`✔ Summary berhasil didapatkan via [${aiResult.llm}].`);
+    } catch (llmErr) {
+      console.error(
+        "❌ Gagal total mendapatkan summary via llmRoutes:",
+        llmErr.message,
       );
-      try {
-        console.log("🤖 Mengirim prompt summary ke Gemini...");
-        const res = await axios.post(
-          "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
-          {
-            contents: [
-              {
-                parts: [
-                  {
-                    text: prompt,
-                  },
-                ],
-              },
-            ],
-            generationConfig: {
-              responseMimeType: "application/json",
-            },
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "X-goog-api-key": process.env.GEMINI_API_KEY,
-            },
-          },
-        );
-        aiText = res.data.candidates[0].content.parts[0].text;
-        console.log("✔ Summary berhasil didapatkan dari Gemini.");
-      } catch (geminiErr) {
-        console.error(
-          "❌ Gagal total mendapatkan summary dari Mistral dan Gemini:",
-          geminiErr.message,
-        );
-        throw geminiErr;
-      }
+      throw llmErr;
     }
 
     const parsedResponse = JSON.parse(aiText);

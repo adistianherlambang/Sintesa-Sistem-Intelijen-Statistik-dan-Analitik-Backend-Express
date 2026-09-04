@@ -1,143 +1,345 @@
 import express from "express";
 import axios from "axios";
 import { OpenAI } from "openai";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 const router = express.Router();
 
 /**
+ * 1. INFERENCE MISTRAL AI
+ */
+export const callMistral = async ({
+  message,
+  prompt,
+  model = "mistral-small-latest",
+  temperature = 0.7,
+  systemPrompt,
+}) => {
+  const inputMessage = message || prompt;
+  const apiKey = process.env.MISTRAL_API_KEY;
+
+  if (!apiKey) {
+    throw new Error(
+      "MISTRAL_API_KEY belum dikonfigurasi di environment variables.",
+    );
+  }
+
+  if (!inputMessage) {
+    throw new Error("Parameter 'message' (atau 'prompt') wajib diisi.");
+  }
+
+  const client = new OpenAI({
+    apiKey: apiKey,
+    baseURL: "https://api.mistral.ai/v1",
+  });
+
+  const messages = [];
+  if (systemPrompt) {
+    messages.push({ role: "system", content: systemPrompt });
+  }
+  messages.push({ role: "user", content: inputMessage });
+
+  const completion = await client.chat.completions.create({
+    model,
+    temperature: Number(temperature),
+    messages,
+  });
+
+  const reply = completion.choices?.[0]?.message?.content || "";
+
+  return {
+    ok: true,
+    llm: "mistral",
+    model,
+    message: reply,
+    reply,
+    usage: completion.usage,
+  };
+};
+
+/**
+ * 2. INFERENCE GOOGLE GEMINI
+ */
+export const callGemini = async ({
+  message,
+  prompt,
+  model = "gemini-1.5-flash",
+  temperature = 0.7,
+  systemPrompt,
+  responseMimeType,
+}) => {
+  const inputMessage = message || prompt;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error(
+      "GEMINI_API_KEY belum dikonfigurasi di environment variables.",
+    );
+  }
+
+  if (!inputMessage) {
+    throw new Error("Parameter 'message' (atau 'prompt') wajib diisi.");
+  }
+
+  const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+  const contents = [];
+  if (systemPrompt) {
+    contents.push({
+      role: "user",
+      parts: [{ text: `[System Instruction]: ${systemPrompt}` }],
+    });
+    contents.push({
+      role: "model",
+      parts: [{ text: "Dimengerti, saya siap mengikuti instruksi tersebut." }],
+    });
+  }
+  contents.push({
+    role: "user",
+    parts: [{ text: inputMessage }],
+  });
+
+  const generationConfig = {
+    temperature: Number(temperature),
+  };
+  if (responseMimeType) {
+    generationConfig.responseMimeType = responseMimeType;
+  }
+
+  const response = await axios.post(
+    geminiUrl,
+    {
+      contents,
+      generationConfig,
+    },
+    {
+      headers: { "Content-Type": "application/json" },
+      timeout: 25000,
+    },
+  );
+
+  const candidates = response.data?.candidates;
+  const reply = candidates?.[0]?.content?.parts?.[0]?.text || "";
+
+  return {
+    ok: true,
+    llm: "gemini",
+    model,
+    message: reply,
+    reply,
+    usageMetadata: response.data?.usageMetadata,
+  };
+};
+
+/**
+ * 3. INFERENCE CLOUDFLARE WORKERS AI (GOOGLE GEMMA)
+ */
+export const callGemma = async ({
+  message,
+  prompt,
+  model = "@cf/google/gemma-7b-it-lora",
+  systemPrompt = "You are a friendly assistant",
+}) => {
+  const inputMessage = message || prompt;
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+
+  if (!accountId || !apiToken) {
+    throw new Error(
+      "CLOUDFLARE_ACCOUNT_ID atau CLOUDFLARE_API_TOKEN belum dikonfigurasi di environment variables.",
+    );
+  }
+
+  if (!inputMessage) {
+    throw new Error("Parameter 'message' (atau 'prompt') wajib diisi.");
+  }
+
+  const messages = [];
+  if (systemPrompt) {
+    messages.push({ role: "system", content: systemPrompt });
+  }
+  messages.push({ role: "user", content: inputMessage });
+
+  const cfUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/run/${model}`;
+
+  const response = await axios.post(
+    cfUrl,
+    { messages },
+    {
+      headers: {
+        Authorization: `Bearer ${apiToken}`,
+        "Content-Type": "application/json",
+      },
+      timeout: 30000,
+    },
+  );
+
+  const rawResult = response.data?.result;
+  const reply =
+    typeof rawResult === "string"
+      ? rawResult
+      : rawResult?.response || JSON.stringify(rawResult);
+
+  return {
+    ok: true,
+    llm: "cloudflare-gemma",
+    model,
+    message: reply,
+    reply,
+    raw: response.data,
+  };
+};
+
+/**
+ * 4. UNIFIED LLM INFERENCE (Dengan Otomatis Fallback Antar Model)
+ */
+export const callUnifiedLLM = async ({
+  message,
+  prompt,
+  provider = "auto",
+  model,
+  temperature = 0.7,
+  systemPrompt,
+  responseMimeType,
+}) => {
+  const inputMessage = message || prompt;
+  if (!inputMessage) {
+    throw new Error("Parameter 'message' (atau 'prompt') wajib diisi.");
+  }
+
+  // Jika spesifik provider dipilih:
+  if (provider === "mistral") {
+    return await callMistral({ message: inputMessage, model, temperature, systemPrompt });
+  }
+  if (provider === "gemini") {
+    return await callGemini({ message: inputMessage, model, temperature, systemPrompt, responseMimeType });
+  }
+  if (provider === "gemma" || provider === "cloudflare") {
+    return await callGemma({ message: inputMessage, model, systemPrompt });
+  }
+
+  // Jika provider === "auto": urutan prioritas: Cloudflare Gemma -> Gemini -> Mistral
+  const errors = [];
+
+  // Coba Cloudflare Gemma terlebih dahulu (kuota free tinggi & stabil)
+  if (process.env.CLOUDFLARE_ACCOUNT_ID && process.env.CLOUDFLARE_API_TOKEN && !responseMimeType) {
+    try {
+      return await callGemma({ message: inputMessage, model, systemPrompt });
+    } catch (err) {
+      console.warn("[UnifiedLLM] Cloudflare Gemma gagal, mencoba Gemini:", err.message);
+      errors.push(`Gemma: ${err.message}`);
+    }
+  }
+
+  // Coba Gemini
+  if (process.env.GEMINI_API_KEY) {
+    try {
+      return await callGemini({ message: inputMessage, model, temperature, systemPrompt, responseMimeType });
+    } catch (err) {
+      console.warn("[UnifiedLLM] Gemini gagal, mencoba Mistral:", err.message);
+      errors.push(`Gemini: ${err.message}`);
+    }
+  }
+
+  // Coba Mistral
+  if (process.env.MISTRAL_API_KEY && !responseMimeType) {
+    try {
+      return await callMistral({ message: inputMessage, model, temperature, systemPrompt });
+    } catch (err) {
+      console.warn("[UnifiedLLM] Mistral gagal:", err.message);
+      errors.push(`Mistral: ${err.message}`);
+    }
+  }
+
+  throw new Error(`Semua provider LLM gagal atau belum terkonfigurasi. Error: ${errors.join(" | ")}`);
+};
+
+// ==========================================
+// ROUTER HTTP HANDLERS
+// ==========================================
+
+/**
  * POST /api/llm/mistral
- * Endpoint untuk inferensi Mistral AI
- * Request Body: { "message": string, "model"?: string, "temperature"?: number, "systemPrompt"?: string }
  */
 router.post("/mistral", async (req, res) => {
   try {
-    const { message, prompt, model = "mistral-small-latest", temperature = 0.7, systemPrompt } = req.body;
-    const inputMessage = message || prompt;
-    const apiKey = process.env.MISTRAL_API_KEY;
-
-    if (!apiKey) {
-      return res.status(500).json({
-        ok: false,
-        error: "MISTRAL_API_KEY belum dikonfigurasi di environment variables."
-      });
-    }
-
-    if (!inputMessage) {
-      return res.status(400).json({
-        ok: false,
-        error: "Field 'message' pada request body wajib diisi."
-      });
-    }
-
-    const client = new OpenAI({
-      apiKey: apiKey,
-      baseURL: "https://api.mistral.ai/v1"
-    });
-
-    const messages = [];
-    if (systemPrompt) {
-      messages.push({ role: "system", content: systemPrompt });
-    }
-    messages.push({ role: "user", content: inputMessage });
-
-    const completion = await client.chat.completions.create({
-      model,
-      temperature: Number(temperature),
-      messages
-    });
-
-    const reply = completion.choices?.[0]?.message?.content || "";
-
-    res.json({
-      ok: true,
-      llm: "mistral",
-      model,
-      message: reply,
-      usage: completion.usage
-    });
+    const result = await callMistral(req.body);
+    res.json(result);
   } catch (error) {
-    console.error("[LLM Mistral API Error]:", error.message);
-    res.status(500).json({
+    console.error("[LLM Mistral API Error]:", error);
+    const status = error.status || error.response?.status || 500;
+    res.status(status).json({
       ok: false,
-      error: error.response?.data?.message || error.message
+      error: error.error?.message || error.response?.data?.message || error.message,
+      details: error.response?.data || error.error || null,
     });
   }
 });
 
 /**
  * POST /api/llm/gemini
- * Endpoint untuk inferensi Google Gemini
- * Request Body: { "message": string, "model"?: string, "temperature"?: number, "systemPrompt"?: string }
  */
 router.post("/gemini", async (req, res) => {
   try {
-    const { message, prompt, model = "gemini-1.5-flash", temperature = 0.7, systemPrompt } = req.body;
-    const inputMessage = message || prompt;
-    const apiKey = process.env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      return res.status(500).json({
-        ok: false,
-        error: "GEMINI_API_KEY belum dikonfigurasi di environment variables."
-      });
-    }
-
-    if (!inputMessage) {
-      return res.status(400).json({
-        ok: false,
-        error: "Field 'message' pada request body wajib diisi."
-      });
-    }
-
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-
-    const contents = [];
-    if (systemPrompt) {
-      contents.push({
-        role: "user",
-        parts: [{ text: `[System Instruction]: ${systemPrompt}` }]
-      });
-      contents.push({
-        role: "model",
-        parts: [{ text: "Dimengerti, saya siap mengikuti instruksi tersebut." }]
-      });
-    }
-    contents.push({
-      role: "user",
-      parts: [{ text: inputMessage }]
-    });
-
-    const response = await axios.post(
-      geminiUrl,
-      {
-        contents,
-        generationConfig: {
-          temperature: Number(temperature)
-        }
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-        timeout: 20000
-      }
-    );
-
-    const candidates = response.data?.candidates;
-    const reply = candidates?.[0]?.content?.parts?.[0]?.text || "";
-
-    res.json({
-      ok: true,
-      llm: "gemini",
-      model,
-      message: reply,
-      usageMetadata: response.data?.usageMetadata
-    });
+    const result = await callGemini(req.body);
+    res.json(result);
   } catch (error) {
-    console.error("[LLM Gemini API Error]:", error.message);
-    res.status(500).json({
+    console.error("[LLM Gemini API Error]:", error);
+    const status = error.response?.status || 500;
+    res.status(status).json({
       ok: false,
-      error: error.response?.data?.error?.message || error.message
+      error: error.response?.data?.error?.message || error.message,
     });
   }
 });
+
+/**
+ * POST /api/llm/gemma & POST /api/llm/cloudflare
+ */
+const handleCloudflareRoute = async (req, res) => {
+  try {
+    const result = await callGemma(req.body);
+    res.json(result);
+  } catch (error) {
+    console.error("[LLM Cloudflare Gemma Error]:", error);
+    const status = error.response?.status || 500;
+    res.status(status).json({
+      ok: false,
+      error:
+        error.response?.data?.errors?.[0]?.message ||
+        error.response?.data?.message ||
+        error.message,
+    });
+  }
+};
+
+router.post("/gemma", handleCloudflareRoute);
+router.post("/cloudflare", handleCloudflareRoute);
+
+/**
+ * POST /api/llm/generate & POST /api/llm/
+ * Endpoint cerdas: otomatis memilih provider aktif dengan fallback
+ */
+const handleUnifiedRoute = async (req, res) => {
+  try {
+    const result = await callUnifiedLLM(req.body);
+    res.json(result);
+  } catch (error) {
+    console.error("[LLM Unified Route Error]:", error);
+    res.status(500).json({
+      ok: false,
+      error: error.message,
+    });
+  }
+};
+
+router.post("/generate", handleUnifiedRoute);
+router.post("/", handleUnifiedRoute);
 
 export default router;

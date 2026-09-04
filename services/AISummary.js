@@ -1,10 +1,8 @@
-import axios from "axios";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
 import fs from "fs"; // Ditambahkan untuk menulis file
 import { fileURLToPath } from "url"; // Ditambahkan untuk mendapatkan path file saat ini
-import { OpenAI } from "openai";
 
 // Mendapatkan direktori dari file saat ini untuk memastikan airesult.json selevel
 const __filename = fileURLToPath(import.meta.url);

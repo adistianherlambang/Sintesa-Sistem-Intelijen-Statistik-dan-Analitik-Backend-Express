@@ -1,21 +1,14 @@
-import { OpenAI } from "openai";
+import { callUnifiedLLM } from "./api/llm/llmRoutes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const client = new OpenAI({
-  apiKey: process.env.MISTRAL_API_KEY,
-  baseURL: "https://api.mistral.ai/v1",
+console.log("Menguji inferensi LLM via llmRoutes...");
+const response = await callUnifiedLLM({
+  message: "halo! test llm via llmRoutes tulis 50 kata",
+  provider: "auto",
 });
 
-const response = await client.chat.completions.create({
-  model: "mistral-small-latest",
-  messages: [
-    {
-      role: "user",
-      content: "halo! test mistral tulis 200 kata",
-    },
-  ],
-});
+console.log("\n[Hasil Balasan via llmRoutes - Model:", response.llm, "]:\n");
+console.log(response.message || response.reply);
 
-console.log(response.choices[0].message.content);

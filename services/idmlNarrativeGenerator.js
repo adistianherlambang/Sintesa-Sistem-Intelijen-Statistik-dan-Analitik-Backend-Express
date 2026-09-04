@@ -1,13 +1,13 @@
 import axios from "axios";
+import { callUnifiedLLM } from "../api/llm/llmRoutes.js";
 
 /**
- * Generasi narasi keterangan menggunakan Gemini LLM
+ * Generasi narasi keterangan menggunakan LLM via llmRoutes
  * @param {Object} rawData - Data mentah statistik (IHK, Inflasi, Komoditas, HargaBI, dsb)
  * @param {Object} variables - Dictionary variabel yang sudah terisi angka
  * @returns {Object} Dictionary variabel narasi keterangan yang sudah terisi
  */
 export const generateIdmlNarratives = async (rawData, variables) => {
-  const apiKey = process.env.GEMINI_API_KEY;
   const narrativeVars = {};
 
   const { targetCity, currentMonth, currentYear, hargaBI, groupProcessedData } =
@@ -23,10 +23,9 @@ export const generateIdmlNarratives = async (rawData, variables) => {
           .join(", ")
       : "beras, telur ayam ras, cabai rawit, bawang merah";
 
-  // Prompt generator jika API KEY tersedia
-  if (apiKey) {
-    try {
-      const prompt = `
+  // Prompt generator via llmRoutes
+  try {
+    const prompt = `
 Anda adalah penyusun Berita Resmi Statistik (BRS) BPS yang sangat teliti.
 Tugas Anda adalah menghasilkan narasi pendek (keterangan) untuk publikasi statistik BPS Kota ${targetCity} periode ${currentMonth} ${currentYear}.
 
@@ -53,32 +52,28 @@ Hasilkan JSON dengan format persis:
 HANYA RESPON DENGAN RAW JSON VALID TANPA MARKDOWN WRAPPER.
 `;
 
-      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-      const response = await axios.post(geminiUrl, {
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          responseMimeType: "application/json",
-        },
-      });
+    const aiRes = await callUnifiedLLM({
+      prompt,
+      responseMimeType: "application/json",
+    });
 
-      const responseText =
-        response.data.candidates[0].content.parts[0].text.trim();
-      const parsed = JSON.parse(responseText);
+    const responseText = (aiRes.reply || aiRes.message || "").trim();
+    const cleanJson = responseText.replace(/^```json/i, "").replace(/```$/i, "").trim();
+    const parsed = JSON.parse(cleanJson);
 
-      if (parsed.keteranganAndilInflasiMtm) {
-        narrativeVars["keteranganAndilInflasiMtm"] =
-          parsed.keteranganAndilInflasiMtm;
-      }
-      if (parsed.keteranganSubkelompokStabil) {
-        narrativeVars["keteranganSubkelompokStabil"] =
-          parsed.keteranganSubkelompokStabil;
-      }
-    } catch (err) {
-      console.warn(
-        "⚠ Generasi narasi Gemini gagal, menggunakan fallback narasi terstandarisasi BPS:",
-        err.message,
-      );
+    if (parsed.keteranganAndilInflasiMtm) {
+      narrativeVars["keteranganAndilInflasiMtm"] =
+        parsed.keteranganAndilInflasiMtm;
     }
+    if (parsed.keteranganSubkelompokStabil) {
+      narrativeVars["keteranganSubkelompokStabil"] =
+        parsed.keteranganSubkelompokStabil;
+    }
+  } catch (err) {
+    console.warn(
+      "⚠ Generasi narasi via llmRoutes gagal, menggunakan fallback narasi terstandarisasi BPS:",
+      err.message,
+    );
   }
 
   // Fallback / default BPS formal narratives (<= 20 kata) jika Gemini tidak aktif/error

@@ -11,19 +11,13 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import { logActivity } from "../controller/user/activityController.js";
 
-import { OpenAI } from "openai";
+import { callUnifiedLLM } from "../api/llm/llmRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config({
   path: path.resolve(__dirname, "../.env"),
-});
-
-// Initialize OpenAI client for Mistral API once at module scope
-const openai = new OpenAI({
-  apiKey: process.env.MISTRAL_API_KEY,
-  baseURL: "https://api.mistral.ai/v1",
 });
 
 /**
@@ -523,99 +517,25 @@ export const initializeWhatsAppClient = async (userId) => {
           systemPrompt += `\n\n[PENTING] Ini adalah pesan pertama dari pelanggan ini. Jawaban Anda HARUS singkat, jelas, langsung menjawab intinya, tidak mengandung promosi, tidak berisi link/tautan apapun, dan maksimal 40 kata.`;
         }
 
-        const geminiApiKey = process.env.GEMINI_API_KEY;
         try {
           console.log(
-            `[WhatsApp Bot] Sending prompt to Mistral API for ${msg.from}...`,
+            `[WhatsApp Bot] Processing AI reply for ${msg.from} via llmRoutes...`,
           );
-          const response = await openai.chat.completions.create({
-            model: "mistral-small-latest",
-            max_tokens: 150,
-            messages: [
-              {
-                role: "user",
-                content: systemPrompt,
-              },
-            ],
+          const aiResult = await callUnifiedLLM({
+            message: systemPrompt,
+            provider: "auto",
           });
-          replyText = response.choices[0].message.content.trim();
+          replyText = (aiResult.reply || aiResult.message || "").trim();
           console.log(
-            `[WhatsApp Bot] Mistral reply successfully generated for ${msg.from}: "${replyText}"`,
+            `[WhatsApp Bot] AI reply successfully generated via [${aiResult.llm}] for ${msg.from}: "${replyText}"`,
           );
-        } catch (mistralErr) {
-          console.warn(
-            `[WhatsApp Bot] ⚠ Gagal menggunakan Mistral untuk ${msg.from}, beralih ke Gemini sebagai fallback:`,
-            mistralErr.message,
+        } catch (aiErr) {
+          console.error(
+            `[WhatsApp Bot] AI generation error via llmRoutes for ${msg.from}:`,
+            aiErr.message,
           );
-
-          if (!geminiApiKey) {
-            console.error(
-              "GEMINI_API_KEY not configured in env variables and Mistral failed.",
-            );
-            replyText = "Maaf, sistem asisten AI sedang tidak aktif saat ini.";
-          } else {
-            try {
-              console.log(
-                `[WhatsApp Bot] Sending prompt to Gemini API for ${msg.from} (with auto-retry support)...`,
-              );
-
-              const maxAttempts = 3;
-              let success = false;
-
-              for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-                try {
-                  if (attempt > 1) {
-                    console.log(
-                      `Retrying Gemini API call (attempt ${attempt}/${maxAttempts})...`,
-                    );
-                  }
-                  const res = await axios.post(
-                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
-                    {
-                      contents: [
-                        {
-                          parts: [{ text: systemPrompt }],
-                        },
-                      ],
-                      generationConfig: {
-                        maxOutputTokens: 150,
-                      },
-                    },
-                    {
-                      headers: {
-                        "Content-Type": "application/json",
-                        "X-goog-api-key": geminiApiKey,
-                      },
-                    },
-                  );
-
-                  replyText =
-                    res.data.candidates[0].content.parts[0].text.trim();
-                  console.log(
-                    `[WhatsApp Bot] Gemini reply successfully generated on attempt ${attempt} for ${msg.from}: "${replyText}"`,
-                  );
-                  success = true;
-                  break;
-                } catch (attemptErr) {
-                  console.warn(
-                    `[WhatsApp Bot] Gemini API attempt ${attempt} failed for ${msg.from}: ${attemptErr.response?.data?.error?.message || attemptErr.message}`,
-                  );
-                  if (attempt === maxAttempts) {
-                    throw attemptErr;
-                  }
-                  // Wait 1.5 seconds before retrying
-                  await new Promise((resolve) => setTimeout(resolve, 1500));
-                }
-              }
-            } catch (aiErr) {
-              console.error(
-                `[WhatsApp Bot] Gemini API final error after all attempts for ${msg.from}:`,
-                aiErr.message,
-              );
-              replyText =
-                "Maaf, asisten AI mengalami kegagalan sistem saat memproses pesan Anda.";
-            }
-          }
+          replyText =
+            "Maaf, asisten AI mengalami kendala teknis saat memproses pesan Anda.";
         }
       }
 

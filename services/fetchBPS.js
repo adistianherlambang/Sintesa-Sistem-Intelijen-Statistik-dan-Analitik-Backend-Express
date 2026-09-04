@@ -37,24 +37,33 @@ const stopLoading = (text = "Done") => {
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// Fungsi untuk menyimpan file JSON hasil debug per link secara lokal
-const saveDebugJSON = (data, index) => {
+const getVarCode = (url, data) => {
+  if (url) {
+    const match = String(url).match(/\/var\/([^\/]+)/);
+    if (match && match[1]) {
+      return match[1];
+    }
+  }
+  if (data && data.var) {
+    if (Array.isArray(data.var) && data.var[0] && data.var[0].val) {
+      return data.var[0].val;
+    } else if (data.var.val) {
+      return data.var.val;
+    }
+  }
+  return "unknown";
+};
+
+// Fungsi untuk menyimpan file JSON hasil debug per link secara lokal (override file lama berdasar kode var)
+const saveDebugJSON = (data, url) => {
   try {
     if (!fs.existsSync(debugFolderPath)) {
       fs.mkdirSync(debugFolderPath, { recursive: true });
     }
 
-    let fileNameVal = "unknown";
-    if (data && data.var) {
-      if (Array.isArray(data.var) && data.var[0] && data.var[0].val) {
-        fileNameVal = data.var[0].val;
-      } else if (data.var.val) {
-        fileNameVal = data.var.val;
-      }
-    }
-
-    const cleanFileName = String(fileNameVal).replace(/[^a-zA-Z0-9-_]/g, "_");
-    const fileName = `${index + 1}_${cleanFileName}.json`;
+    const varCode = getVarCode(url, data);
+    const cleanFileName = String(varCode).replace(/[^a-zA-Z0-9-_]/g, "_");
+    const fileName = `${cleanFileName}.json`;
     const filePath = path.join(debugFolderPath, fileName);
 
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
@@ -98,7 +107,9 @@ export const fetchBPS = async () => {
         typeof item === "string" ? item : item.content || [],
       )
       : [];
-    const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
+    const urls = rawUrls
+      .filter((url) => typeof url === "string" && url.trim().length > 0)
+      .map((url) => url.replaceAll("${API_BPS}", bpsKey));
 
     console.log("✔ Config loaded");
     console.log(`Total URL: ${urls.length}\n`);
@@ -163,7 +174,7 @@ export const fetchBPS = async () => {
 
           stopLoading(`Success ${index + 1}/${urls.length}`);
 
-          saveDebugJSON(data, index);
+          saveDebugJSON(data, url);
           results.push(data);
 
           success = true;

@@ -52,28 +52,55 @@ const writeLog = async (text) => {
   await fs.appendFile(resultPath, text);
 };
 
-const saveDebugJSON = async (data, label) => {
+const getVarCode = (url, data) => {
+  if (url) {
+    const match = String(url).match(/\/var\/([^\/]+)/);
+    if (match && match[1]) {
+      return match[1];
+    }
+  }
+  if (data && data.var) {
+    if (Array.isArray(data.var) && data.var[0] && data.var[0].val) {
+      return data.var[0].val;
+    } else if (data.var.val) {
+      return data.var.val;
+    }
+  }
+  return "unknown";
+};
+
+const saveDebugJSON = async (data, url, label = "") => {
   try {
     if (!data) return;
     if (!fsSync.existsSync(debugFolderPath)) {
       fsSync.mkdirSync(debugFolderPath, { recursive: true });
     }
 
-    let fileNameVal = "unknown";
-    if (data && data.var) {
-      if (Array.isArray(data.var) && data.var[0] && data.var[0].val) {
-        fileNameVal = data.var[0].val;
-      } else if (data.var.val) {
-        fileNameVal = data.var.val;
-      }
-    }
-
-    const cleanLabel = String(label).replace(/[^a-zA-Z0-9-_]/g, "_");
-    const cleanFileName = String(fileNameVal).replace(/[^a-zA-Z0-9-_]/g, "_");
-    const fileName = `${cleanLabel}_${cleanFileName}.json`;
+    const varCode = getVarCode(url, data);
+    const cleanFileName = String(varCode).replace(/[^a-zA-Z0-9-_]/g, "_");
+    const fileName = `${cleanFileName}.json`;
     const filePath = path.join(debugFolderPath, fileName);
 
-    await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
+    let contentToSave = data;
+    const labelLower = String(label).toLowerCase();
+    if (labelLower.includes("prev2year") || labelLower.includes("prevyear")) {
+      const fieldKey = labelLower.includes("prev2year")
+        ? "prev2Year"
+        : "prevYear";
+      let existing = {};
+      if (fsSync.existsSync(filePath)) {
+        try {
+          const raw = await fs.readFile(filePath, "utf-8");
+          existing = JSON.parse(raw);
+        } catch {
+          existing = {};
+        }
+      }
+      existing[fieldKey] = data;
+      contentToSave = existing;
+    }
+
+    await fs.writeFile(filePath, JSON.stringify(contentToSave, null, 2), "utf-8");
     console.log(`📂 [DEBUG] Saved to ${filePath}`);
   } catch (error) {
     console.log(`✖ [DEBUG] Failed to save debug file: ${error.message}`);
@@ -128,7 +155,7 @@ const fetchSingleUrl = async (url, label) => {
       }
 
       stopLoading(`Success ${label}`);
-      await saveDebugJSON(data, label);
+      await saveDebugJSON(data, url, label);
       return data;
     } catch (err) {
       clearInterval(spinner);
@@ -157,10 +184,12 @@ export const fetchBPSPrevMoM = async () => {
     const rawConfig = JSON.parse(configFile);
     const rawUrls = Array.isArray(rawConfig)
       ? rawConfig.flatMap((item) =>
-          typeof item === "string" ? item : item.content || [],
-        )
+        typeof item === "string" ? item : item.content || [],
+      )
       : [];
-    const urls = rawUrls.map((url) => url.replaceAll("${API_BPS}", bpsKey));
+    const urls = rawUrls
+      .filter((url) => typeof url === "string" && url.trim().length > 0)
+      .map((url) => url.replaceAll("${API_BPS}", bpsKey));
     const yearPrevYear = getYearPrevYear();
     const yearPrev2Year = getYearPrev2Year();
 

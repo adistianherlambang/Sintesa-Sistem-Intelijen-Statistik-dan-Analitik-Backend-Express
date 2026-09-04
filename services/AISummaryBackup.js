@@ -218,8 +218,7 @@ export const AISummary = async () => {
     try {
       console.log("🤖 Mengirim prompt summary ke Mistral AI...");
       const client = new OpenAI({
-        apiKey:
-          process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
+        apiKey: process.env.MISTRAL_API_KEY,
         baseURL: "https://api.mistral.ai/v1",
       });
       const response = await client.chat.completions.create({

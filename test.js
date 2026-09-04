@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const client = new OpenAI({
-  apiKey: "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
+  apiKey: process.env.MISTRAL_API_KEY,
   baseURL: "https://api.mistral.ai/v1",
 });
 

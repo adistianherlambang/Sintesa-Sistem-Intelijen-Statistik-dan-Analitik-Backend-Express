@@ -22,7 +22,7 @@ dotenv.config({
 
 // Initialize OpenAI client for Mistral API once at module scope
 const openai = new OpenAI({
-  apiKey: process.env.MISTRAL_API_KEY || "OCPWoSOISDgB3I19HovoNoqCJhKHMlLh",
+  apiKey: process.env.MISTRAL_API_KEY,
   baseURL: "https://api.mistral.ai/v1",
 });
 

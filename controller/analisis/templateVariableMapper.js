@@ -39,13 +39,17 @@ const COMMODITY_NAMES = {
   perawatan: "Perawatan Pribadi dan Jasa Lainnya"
 };
 
+export const TEMPLATE_INFLASI_IHK_PATH = path.resolve(__dirname, "../../template/inflasiIHK/inflasiIHK.json");
+
 /**
- * Load default template schema from template.json as fallback
+ * Load default template schema from inflasiIHK.json
  */
-function loadTemplateSchema() {
+export function loadInflasiIhkTemplate() {
   const possiblePaths = [
-    path.resolve(__dirname, "../../../templat/inflasi&ihk/template.json"),
-    path.resolve(__dirname, "../../../../templat/inflasi&ihk/template.json"),
+    TEMPLATE_INFLASI_IHK_PATH,
+    path.resolve(process.cwd(), "template/inflasiIHK/inflasiIHK.json"),
+    path.resolve(process.cwd(), "backend/template/inflasiIHK/inflasiIHK.json"),
+    path.resolve(__dirname, "../../../template/inflasiIHK/inflasiIHK.json"),
   ];
 
   for (const p of possiblePaths) {
@@ -54,11 +58,73 @@ function loadTemplateSchema() {
         const raw = fs.readFileSync(p, "utf8");
         return JSON.parse(raw);
       } catch (e) {
-        console.warn("[loadTemplateSchema] Error reading", p, e.message);
+        console.warn("[loadInflasiIhkTemplate] Error reading", p, e.message);
       }
     }
   }
   return null;
+}
+
+/**
+ * Interpolasi string template literal dengan kamus variabel
+ */
+export function interpolateString(str, vars = {}) {
+  if (typeof str !== "string") return str;
+  return str.replace(/\$\{([^}]+)\}/g, (match, key) => {
+    const trimmed = key.trim();
+    if (vars[trimmed] !== undefined && vars[trimmed] !== null) {
+      return String(vars[trimmed]);
+    }
+    return match;
+  });
+}
+
+/**
+ * Render objek/array template literal secara rekursif
+ * Mendukung context scoping untuk subkelompok pengeluaran (namaKelompok)
+ */
+export function renderTemplateObject(obj, vars = {}) {
+  if (typeof obj === "string") {
+    return interpolateString(obj, vars);
+  }
+  if (Array.isArray(obj)) {
+    return obj.map((item) => renderTemplateObject(item, vars));
+  }
+  if (obj && typeof obj === "object" && obj !== null) {
+    let scopedVars = vars;
+    if (obj.title && typeof obj.title.desc === "string" && obj.title.desc.trim() !== "") {
+      scopedVars = {
+        ...vars,
+        namaKelompok: obj.title.desc.trim(),
+      };
+    }
+    const res = {};
+    for (const [k, v] of Object.entries(obj)) {
+      res[k] = renderTemplateObject(v, scopedVars);
+    }
+    return res;
+  }
+  return obj;
+}
+
+/**
+ * Render inflasiIHK.json sebagai template literal terisi penuh
+ */
+export function renderInflasiIhkTemplate(dataset = {}, customVars = {}) {
+  const template = loadInflasiIhkTemplate();
+  const varMap = buildVariableMapFromDataset(dataset, customVars);
+  if (!template) {
+    return { template: null, varMap };
+  }
+  const rendered = renderTemplateObject(template, varMap);
+  return {
+    template: rendered,
+    varMap,
+  };
+}
+
+function loadTemplateSchema() {
+  return loadInflasiIhkTemplate();
 }
 
 /**
@@ -409,6 +475,28 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
   varMap["andilDeflasiInformasiKomunikasiYoy"] = Math.abs(parseFloat(varMap["informasiAndilMtm"] || "-0.01")).toFixed(2);
   varMap["penurunanPendidikanYoy"] = Math.abs(parseFloat(varMap["pendidikanYoy"] || "-0.28")).toFixed(2);
   varMap["andilDeflasiPendidikanYoy"] = Math.abs(parseFloat(varMap["pendidikanAndilMtm"] || "-0.01")).toFixed(2);
+
+  // Additional aliases required by inflasiIHK.json template literal
+  varMap["noTable"] = "1";
+  varMap["bulanSebelumnya"] = prevMonthName;
+  varMap["tahunSebelumnya"] = String(currentYear - 1);
+  varMap["umumIhkPembanding"] = varMap["ihkTahunSebelumnya"] || varMap["ihkPembanding"] || "103.45";
+  varMap["indeksPerawatanPribadiYoy"] = varMap["perawatanPribadiJasaLainnyaYoy"] || varMap["perawatanYoy"] || "3.76";
+  varMap["andilPerawatanPribadiYoy"] = varMap["perawatanAndilYoy"] || "0.22";
+  varMap["indeksMakananYoy"] = varMap["makananYoy"] || "3.12";
+  varMap["indeksPerumahanYoy"] = varMap["perumahanYoy"] || "1.55";
+  varMap["indeksKesehatanYoy"] = varMap["kesehatanYoy"] || "2.38";
+  varMap["indeksTransportasiYoy"] = varMap["transportasiYoy"] || "1.96";
+  varMap["indeksRekreasiYoy"] = varMap["rekreasiYoy"] || "1.55";
+  varMap["indeksRestoranYoy"] = varMap["restoranYoy"] || "2.94";
+  varMap["andilMakananYoy"] = varMap["makananAndilYoy"] || "0.85";
+  varMap["andilPerumahanYoy"] = varMap["perumahanAndilYoy"] || "0.28";
+  varMap["andilKesehatanYoy"] = varMap["kesehatanAndilYoy"] || "0.08";
+  varMap["andilTransportasiYoy"] = varMap["transportasiAndilYoy"] || "0.24";
+  varMap["andilRekreasiYoy"] = varMap["rekreasiAndilYoy"] || "0.05";
+  varMap["andilRestoranYoy"] = varMap["restoranAndilYoy"] || "0.32";
+  varMap["subkelompokInflasiTertinggi"] = varMap["subkelompokInflasiSatu"] || "Makanan";
+  varMap["subkelompokInflasiTerendah"] = varMap["subkelompokInflasiDua"] || "Minuman";
 
   // 5. Table 2: 3-Year Inflation Trend
   const mtm1 = edited.inflasiData?.mom?.prev2Year?.[monthIdx]?.value || "0.20";

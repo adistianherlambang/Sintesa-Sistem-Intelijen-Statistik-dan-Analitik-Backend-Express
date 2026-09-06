@@ -6,7 +6,11 @@ import {
   downloadAnalysisDocx,
   downloadAnalysisPdf,
 } from "../../controller/analisis/wordAnalysisController.js";
-import { handleGenerateNarasiKelompok } from "../../controller/analisis/narasiKelompokController.js";
+import {
+  handleGenerateNarasiKelompok,
+  handleGetTemplateInflasiIhk,
+  handleRenderTemplateInflasiIhk,
+} from "../../controller/analisis/narasiKelompokController.js";
 import { authMiddleware } from "../../controller/user/authMiddleware.js";
 
 const router = express.Router();
@@ -18,6 +22,14 @@ const router = express.Router();
  */
 router.post("/inflasi-ihk", handleGetInflasiIhk);
 router.get("/inflasi-ihk", handleGetInflasiIhk);
+
+/**
+ * Route untuk skema dan rendering template literal inflasiIHK.json
+ * GET  /api/analisis/template/inflasi-ihk         -> Mengembalikan skema mentah inflasiIHK.json
+ * POST /api/analisis/template/inflasi-ihk/render  -> Me-render inflasiIHK.json dengan variabel & data terisi
+ */
+router.get("/template/inflasi-ihk", handleGetTemplateInflasiIhk);
+router.post("/template/inflasi-ihk/render", handleRenderTemplateInflasiIhk);
 
 /**
  * Route untuk generasi narasi andil M-to-M kelompok pengeluaran via LLM (UnifiedLLM/Gemini)

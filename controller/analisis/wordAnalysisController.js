@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import AdmZip from "adm-zip";
 import AnalysisHistory from "../../db/models/AnalysisHistory.js";
 import { logActivity } from "../user/activityController.js";
-import { buildVariableMapFromDataset } from "./templateVariableMapper.js";
+import { buildVariableMapFromDataset, renderInflasiIhkTemplate } from "./templateVariableMapper.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -91,6 +91,8 @@ export const generateWordBrs = async (req, res) => {
 
     zip.writeZip(outPath);
 
+    const renderedTemplateData = renderInflasiIhkTemplate(activeDataset, variables);
+
     return res.json({
       success: true,
       filename: outFilename,
@@ -98,6 +100,7 @@ export const generateWordBrs = async (req, res) => {
       fullUrl: `${req.protocol}://${req.get("host")}/analysis-files/${outFilename}`,
       variablesCount: Object.keys(varMap).length,
       variables: varMap,
+      renderedTemplate: renderedTemplateData?.template || null,
     });
   } catch (err) {
     console.error("[generateWordBrs] Error:", err.message);

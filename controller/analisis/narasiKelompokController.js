@@ -1,4 +1,10 @@
 import { callUnifiedLLM } from "../../api/llm/llmRoutes.js";
+import {
+  loadInflasiIhkTemplate,
+  renderTemplateObject,
+  interpolateString,
+  buildVariableMapFromDataset,
+} from "./templateVariableMapper.js";
 
 /**
  * Fallback formal narasi khas BPS (~50 kata, 1 paragraf) untuk setiap kelompok pengeluaran
@@ -41,16 +47,56 @@ export const getGroupKeyFromTitle = (titleDesc = "") => {
  * @param {Array|Object} inputData - Objek atau array objek { title: { desc }, desc }
  * @returns {Promise<Array|Object>} - Hasil terisi { title: { desc }, desc: "1 paragraf ~50 kata" }
  */
-export const generateNarasiAndilMtmWithLLM = async (inputData) => {
-  const isSingle = !Array.isArray(inputData);
-  const items = isSingle ? [inputData] : inputData;
+/**
+ * Ambil daftar subkelompok langsung dari template inflasiIHK.json
+ */
+export const getTemplateSubGroupsFromInflasiJson = () => {
+  const tpl = loadInflasiIhkTemplate();
+  const subItems = tpl?.content?.[0]?.sub || [];
+  return subItems;
+};
 
-  if (!items || items.length === 0) {
+/**
+ * Fungsi core untuk generate narasi kelompok menggunakan callUnifiedLLM
+ * Menggunakan inflasiIHK.json sebagai template literal sumber jika inputData tidak diberikan.
+ * @param {Array|Object|null} inputData - Objek atau array objek { title: { desc }, desc }
+ * @param {Object} [dataset] - Dataset konteks untuk interpolasi variabel awal
+ * @param {Object} [customVars] - Variabel tambahan opsional
+ * @returns {Promise<Array|Object>} - Hasil terisi { title: { desc }, desc: "1 paragraf ~50 kata" }
+ */
+export const generateNarasiAndilMtmWithLLM = async (inputData = null, dataset = null, customVars = {}) => {
+  let items = inputData;
+
+  // Jika inputData kosong atau minta template, muat dari template/inflasiIHK/inflasiIHK.json
+  if (!items || (Array.isArray(items) && items.length === 0) || items.useTemplate) {
+    items = getTemplateSubGroupsFromInflasiJson();
+  }
+
+  const isSingle = !Array.isArray(items);
+  const rawItems = isSingle ? [items] : items;
+
+  if (!rawItems || rawItems.length === 0) {
     return isSingle ? null : [];
   }
 
+  // Jika ada dataset, interpolasi variabel konteks ${...} terlebih dahulu
+  let activeVarMap = {};
+  if (dataset) {
+    activeVarMap = buildVariableMapFromDataset(dataset, customVars);
+  }
+
+  const processedItems = rawItems.map((item) => {
+    const rawDesc = item?.desc || "";
+    const resolvedDesc = dataset ? interpolateString(rawDesc, activeVarMap) : rawDesc;
+    return {
+      title: item?.title || { desc: "" },
+      desc: resolvedDesc,
+      rawDesc,
+    };
+  });
+
   // Siapkan konteks ringkas untuk LLM
-  const promptContext = items.map((item, idx) => {
+  const promptContext = processedItems.map((item, idx) => {
     const titleText = item?.title?.desc || `Kelompok ${idx + 1}`;
     const descText = item?.desc || "";
     return `--- KELOMPOK ${idx + 1} ---\nNama: ${titleText}\nKonteks Data: ${descText}`;
@@ -70,7 +116,7 @@ KETENTUAN KETAT OUTPUT:
 4. Sebutkan komoditas/subkelompok pendorong yang relevan secara logis dengan kelompok pengeluaran tersebut.
 5. Format return WAJIB JSON array murni tanpa pembungkus markdown apapun, dengan struktur persis:
 [
-  ${items.map(it => `{ "title": { "desc": "${it?.title?.desc || ""}" }, "desc": "<1 paragraf sekitar 50 kata narasi BPS>" }`).join(",\n  ")}
+  ${processedItems.map(it => `{ "title": { "desc": "${it?.title?.desc || ""}" }, "desc": "<1 paragraf sekitar 50 kata narasi BPS>" }`).join(",\n  ")}
 ]
 HANYA KELUARKAN RAW JSON VALID TANPA PENJELASAN LAIN.
 
@@ -100,7 +146,7 @@ ${promptContext}
   }
 
   // Gabungkan dengan fallback jika LLM gagal atau hasil tidak lengkap
-  const finalResults = items.map((item, idx) => {
+  const finalResults = processedItems.map((item, idx) => {
     const titleText = item?.title?.desc || "";
     const groupKey = getGroupKeyFromTitle(titleText);
     const aiMatch = parsedResults?.find(
@@ -121,6 +167,7 @@ ${promptContext}
         desc: titleText,
       },
       desc: descText,
+      groupKey,
     };
   });
 
@@ -128,20 +175,85 @@ ${promptContext}
 };
 
 /**
- * Express handler: POST /api/analisis/keterangan-andil-mtm
- * Mendukung input single object atau array of objects
+ * Express handler: POST /api/analisis/keterangan-andil-mtm & POST /api/analisis/generate-narasi-kelompok
+ * Mendukung input items spesifik atau otomatis mengambil dari template inflasiIHK.json
  */
 export const handleGenerateNarasiKelompok = async (req, res) => {
   try {
-    const input = req.body?.items || req.body?.data || req.body;
-    if (!input || (Array.isArray(input) && input.length === 0)) {
-      return res.status(400).json({ message: "Payload JSON input wajib diisi." });
-    }
+    const input = req.body?.items || req.body?.data || (req.body?.useTemplate ? null : req.body);
+    const dataset = req.body?.dataset || req.body?.uploadedDataset || null;
+    const customVars = req.body?.variables || req.body?.customVars || {};
 
-    const output = await generateNarasiAndilMtmWithLLM(input);
+    const output = await generateNarasiAndilMtmWithLLM(input, dataset, customVars);
     return res.json(output);
   } catch (err) {
     console.error("[handleGenerateNarasiKelompok] Error:", err.message);
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+/**
+ * Express handler: GET /api/analisis/template/inflasi-ihk
+ * Mengembalikan file mentah skema template literal inflasiIHK.json
+ */
+export const handleGetTemplateInflasiIhk = async (req, res) => {
+  try {
+    const template = loadInflasiIhkTemplate();
+    if (!template) {
+      return res.status(404).json({ message: "File template inflasiIHK.json tidak ditemukan." });
+    }
+    return res.json(template);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+/**
+ * Express handler: POST /api/analisis/template/inflasi-ihk/render
+ * Me-render inflasiIHK.json sebagai template literal dengan variabel terisi penuh
+ */
+export const handleRenderTemplateInflasiIhk = async (req, res) => {
+  try {
+    const dataset = req.body?.dataset || req.body?.uploadedDataset || {};
+    const customVars = req.body?.variables || req.body?.customVars || {};
+    const generateAi = req.body?.generateAiNarratives === true;
+
+    // Jika diminta generate AI narasi kelompok m-to-m
+    if (generateAi) {
+      try {
+        const narratives = await generateNarasiAndilMtmWithLLM(null, dataset, customVars);
+        if (Array.isArray(narratives)) {
+          narratives.forEach((n) => {
+            const gk = n.groupKey;
+            if (gk === "pakaian") customVars["keteranganAndilInflasiMtmPakaian"] = n.desc;
+            if (gk === "perumahan") customVars["keteranganAndilInflasiMtmPerumahan"] = n.desc;
+            if (gk === "transportasi") customVars["keteranganAndilInflasiMtmTransportasi"] = n.desc;
+            if (gk === "rekreasi") customVars["keteranganAndilInflasiMtmRekreasi"] = n.desc;
+            if (gk === "pendidikan") customVars["keteranganAndilInflasiMtmPendidikan"] = n.desc;
+            if (gk === "restoran") customVars["keteranganAndilInflasiMtmRestoran"] = n.desc;
+            if (gk === "perawatan") customVars["keteranganAndilInflasiMtmPerawatan"] = n.desc;
+          });
+        }
+      } catch (aiErr) {
+        console.warn("[handleRenderTemplateInflasiIhk] AI Narrative warning:", aiErr.message);
+      }
+    }
+
+    const template = loadInflasiIhkTemplate();
+    if (!template) {
+      return res.status(404).json({ message: "File template inflasiIHK.json tidak ditemukan." });
+    }
+
+    const varMap = buildVariableMapFromDataset(dataset, customVars);
+    const rendered = renderTemplateObject(template, varMap);
+
+    return res.json({
+      success: true,
+      template: rendered,
+      varMap,
+    });
+  } catch (err) {
+    console.error("[handleRenderTemplateInflasiIhk] Error:", err.message);
     return res.status(500).json({ message: err.message });
   }
 };

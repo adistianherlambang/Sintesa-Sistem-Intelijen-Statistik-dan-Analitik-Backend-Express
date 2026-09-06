@@ -87,9 +87,18 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
       }
     }
   }
-  // Default to CURRENT REAL MONTH ("bulan ini"), NOT hardcoded 10 or 0
+  // If still not determined, try to extract from first valid data row in parsedData
   if (isNaN(monthIdx) || monthIdx < 0 || monthIdx > 11) {
-    monthIdx = now.getMonth();
+    if (rows && rows.length > 1 && rows[1] && rows[1][1]) {
+      const mVal = Number(rows[1][1]);
+      if (!isNaN(mVal) && mVal >= 1 && mVal <= 12) {
+        monthIdx = mVal - 1;
+      }
+    }
+  }
+  // Default fallback if dataset completely empty
+  if (isNaN(monthIdx) || monthIdx < 0 || monthIdx > 11) {
+    monthIdx = 0; // Default to Januari as earliest data month
   }
 
   const monthName = MONTH_NAMES[monthIdx] || "Januari";
@@ -112,6 +121,11 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
   }
 
   // 2. Cover & Header metadata
+  const title = context.title || customVars.title || customVars.judul || "Berita Resmi Statistik";
+  varMap["judul"] = title;
+  varMap["Judul"] = title;
+  varMap["JUDUL"] = title.toUpperCase();
+  varMap["title"] = title;
   varMap["namaKota"] = cleanCity;
   varMap["NAMA KOTA"] = cleanCity.toUpperCase();
   varMap["wilayah"] = cleanCity;

@@ -61,26 +61,27 @@ export const generateWordBrs = async (req, res) => {
     };
     const varMap = buildVariableMapFromDataset(activeDataset, variables);
 
-    // 2. Open BERITA.docx and read document.xml
+    // 2. Open BERITA.docx and process all XML files (document.xml, footers, headers)
     const zip = new AdmZip(templatePath);
-    let docXml = zip.readAsText("word/document.xml");
+    const entries = zip.getEntries();
 
-    // 3. Substitute all ${key} tokens using exact string replacement
-    for (const [k, v] of Object.entries(varMap)) {
-      if (v !== undefined && v !== null) {
-        const token = "${" + k + "}";
-        docXml = docXml.split(token).join(String(v));
+    for (const entry of entries) {
+      if (entry.entryName.startsWith("word/") && entry.entryName.endsWith(".xml")) {
+        let xmlContent = entry.getData().toString("utf8");
+        if (xmlContent.includes("${")) {
+          for (const [k, v] of Object.entries(varMap)) {
+            if (v !== undefined && v !== null) {
+              const token = "${" + k + "}";
+              xmlContent = xmlContent.split(token).join(String(v));
+            }
+          }
+          const faxText = varMap["noFax"] ? `Fax: ${varMap["noFax"]}` : "";
+          xmlContent = xmlContent.replace(/\$\{fax\b[^}]*\}/g, faxText);
+          xmlContent = xmlContent.replace(/\$\{[^}]+\}/g, "");
+          zip.updateFile(entry.entryName, Buffer.from(xmlContent, "utf8"));
+        }
       }
     }
-
-    // Handle special fax placeholder if present
-    const faxText = varMap["noFax"] ? `Fax: ${varMap["noFax"]}` : "";
-    docXml = docXml.replace(/\$\{fax\b[^}]*\}/g, faxText);
-
-    // Clean up any remaining unresolved placeholders so no ${...} tags leak to user
-    docXml = docXml.replace(/\$\{[^}]+\}/g, "");
-
-    zip.updateFile("word/document.xml", Buffer.from(docXml, "utf8"));
 
     const cleanCity = String(varMap["namaKota"] || city).replace(/^(KOTA|KABUPATEN|KAB\.?)\s+/i, "");
     const cleanPeriod = String(varMap["bulanTahun"] || periode);

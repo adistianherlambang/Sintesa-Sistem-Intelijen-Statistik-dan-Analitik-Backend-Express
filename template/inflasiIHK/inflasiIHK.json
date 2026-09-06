@@ -1,0 +1,192 @@
+{
+  "summary": "Pada ${bulan} ${tahun} terjadi inflasi year-on-year (y-on-y) sebesar ${inflasiYoy} persen dengan Indeks Harga Konsumen (IHK) sebesar ${ihk}. Inflasi y-on-y terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok makanan, minuman, dan tembakau sebesar ${makananMinumanTembakauYoy} persen; kelompok perumahan, air, listrik, dan bahan bakar rumah tangga sebesar ${perumahanAirListrikBahanBakarYoy} persen; kelompok kesehatan sebesar ${kesehatanYoy} persen; kelompok transportasi sebesar ${transportasiYoy} persen; kelompok rekreasi, olahraga, dan budaya sebesar ${rekreasiOlahragaBudayaYoy} persen; kelompok penyediaan makanan dan minuman/restoran sebesar ${restoranYoy} persen; dan kelompok perawatan pribadi dan jasa lainnya sebesar ${perawatanPribadiJasaLainnyaYoy} persen. Sementara kelompok yang mengalami penurunan indeks, yaitu kelompok pakaian dan alas kaki sebesar ${pakaianAlasKakiYoy} persen; kelompok perlengkapan, peralatan dan pemeliharaan rutin rumah tangga sebesar ${perlengkapanRumahTanggaYoy} persen; kelompok informasi, komunikasi, dan jasa keuangan sebesar ${informasiKomunikasiJasaKeuanganYoy} persen; dan kelompok pendidikan sebesar ${pendidikanYoy} persen. Tingkat inflasi month-to-month (m-to-m) ${bulan} ${tahun} sebesar ${inflasiMtm} persen dan tingkat inflasi year-to-date (y-to-d) ${bulan} ${tahun} sebesar ${inflasiYtd} persen.",
+  "content": [
+    {
+      "title": {
+        "desc": "Indeks Harga Konsumen/Inflasi Menurut Kelompok",
+        "style": "ordered list 1 font size 14px bold color #f68839"
+      },
+      "desc": [
+        {
+          "desc": "Perkembangan harga berbagai komoditas pada ${bulan} ${tahun} secara umum menunjukkan adanya ${arahPerkembanganHarga}. Berdasarkan hasil pemantauan ${instansi}, pada ${bulan} ${tahun} terjadi inflasi y-on-y sebesar ${inflasiYoy} persen, atau terjadi ${arahPerubahanIhk} Indeks Harga Konsumen (IHK) dari ${ihkTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${ihkSaatIni} pada ${bulan} ${tahun}.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel ${noTable} IHK dan Tingkat Inflasi Month-to-Month (M-to-M), Year-to-Date (Y-to-D), dan Year-on-Year (Y-on-Y) ${wilayah} Menurut Kelompok Pengeluaran (2022=100), ${bulan} ${tahun}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#f68839",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#ffd684"
+              },
+              "rowColors": [
+                "#fff5e6",
+                "#fff0d3"
+              ]
+            },
+            "markdown": "| Kelompok Pengeluaran | IHK ${periodePembanding} | IHK ${periodeSebelumnya} | IHK ${periodeBerjalan} | Tingkat Inflasi Y-to-D ${periodeBerjalan} (%) | Tingkat Inflasi Y-on-Y ${periodeBerjalan} (%) | Andil Inflasi M-to-M ${periodeBerjalan} (%) | Andil Inflasi Y-on-Y ${periodeBerjalan} (%) |\n|---|---:|---:|---:|---:|---:|---:|---:|\n| (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) |\n| Umum (Headline) | ${umumIhkPembanding} | ${umumIhkSebelumnya} | ${umumIhkBerjalan} | ${umumYtd} | ${umumYoy} | ${umumAndilMtm} | ${umumAndilYoy} |\n| Makanan, Minuman, dan Tembakau | ${makananIhkPembanding} | ${makananIhkSebelumnya} | ${makananIhkBerjalan} | ${makananYtd} | ${makananYoy} | ${makananAndilMtm} | ${makananAndilYoy} |\n| Pakaian dan Alas Kaki | ${pakaianIhkPembanding} | ${pakaianIhkSebelumnya} | ${pakaianIhkBerjalan} | ${pakaianYtd} | ${pakaianYoy} | ${pakaianAndilMtm} | ${pakaianAndilYoy} |\n| Perumahan, Air, Listrik, dan Bahan Bakar Rumah Tangga | ${perumahanIhkPembanding} | ${perumahanIhkSebelumnya} | ${perumahanIhkBerjalan} | ${perumahanYtd} | ${perumahanYoy} | ${perumahanAndilMtm} | ${perumahanAndilYoy} |\n| Perlengkapan, Peralatan, dan Pemeliharaan Rutin Rumah Tangga | ${perlengkapanIhkPembanding} | ${perlengkapanIhkSebelumnya} | ${perlengkapanIhkBerjalan} | ${perlengkapanYtd} | ${perlengkapanYoy} | ${perlengkapanAndilMtm} | ${perlengkapanAndilYoy} |\n| Kesehatan | ${kesehatanIhkPembanding} | ${kesehatanIhkSebelumnya} | ${kesehatanIhkBerjalan} | ${kesehatanYtd} | ${kesehatanYoy} | ${kesehatanAndilMtm} | ${kesehatanAndilYoy} |\n| Transportasi | ${transportasiIhkPembanding} | ${transportasiIhkSebelumnya} | ${transportasiIhkBerjalan} | ${transportasiYtd} | ${transportasiYoy} | ${transportasiAndilMtm} | ${transportasiAndilYoy} |\n| Informasi, Komunikasi, dan Jasa Keuangan | ${informasiIhkPembanding} | ${informasiIhkSebelumnya} | ${informasiIhkBerjalan} | ${informasiYtd} | ${informasiYoy} | ${informasiAndilMtm} | ${informasiAndilYoy} |\n| Rekreasi, Olahraga, dan Budaya | ${rekreasiIhkPembanding} | ${rekreasiIhkSebelumnya} | ${rekreasiIhkBerjalan} | ${rekreasiYtd} | ${rekreasiYoy} | ${rekreasiAndilMtm} | ${rekreasiAndilYoy} |\n| Pendidikan | ${pendidikanIhkPembanding} | ${pendidikanIhkSebelumnya} | ${pendidikanIhkBerjalan} | ${pendidikanYtd} | ${pendidikanYoy} | ${pendidikanAndilMtm} | ${pendidikanAndilYoy} |\n| Penyediaan Makanan dan Minuman/Restoran | ${restoranIhkPembanding} | ${restoranIhkSebelumnya} | ${restoranIhkBerjalan} | ${restoranYtd} | ${restoranYoy} | ${restoranAndilMtm} | ${restoranAndilYoy} |\n| Perawatan Pribadi dan Jasa Lainnya | ${perawatanIhkPembanding} | ${perawatanIhkSebelumnya} | ${perawatanIhkBerjalan} | ${perawatanYtd} | ${perawatanYoy} | ${perawatanAndilMtm} | ${perawatanAndilYoy} |",
+            "footnote": {
+              "fontSize": "8pt",
+              "text": "Catatan:\n1 Persentase perubahan IHK ${bulan} ${tahun} terhadap IHK ${bulanSebelumnya} ${tahun}.\n2 Persentase perubahan IHK ${bulan} ${tahun} terhadap IHK Desember ${tahunSebelumnya}.\n3 Persentase perubahan IHK ${bulan} ${tahun} terhadap IHK ${bulan} ${tahunSebelumnya}.\n~0: Data sangat kecil/mendekati nol"
+            }
+          }
+        },
+        {
+          "desc": "Inflasi y-on-y terjadi karena adanya kenaikan harga yang ditunjukkan oleh naiknya sebagian besar indeks kelompok pengeluaran, yaitu: kelompok ${kelompokMakanan} sebesar ${indeksMakananYoy} persen; kelompok ${kelompokPerumahan} sebesar ${indeksPerumahanYoy} persen; kelompok ${kelompokKesehatan} sebesar ${indeksKesehatanYoy} persen; kelompok ${kelompokTransportasi} sebesar ${indeksTransportasiYoy} persen; kelompok ${kelompokRekreasi} sebesar ${indeksRekreasiYoy} persen; kelompok ${kelompokRestoran} sebesar ${indeksRestoranYoy} persen; dan kelompok ${kelompokPerawatanPribadi} sebesar ${indeksPerawatanPribadiYoy} persen. Sementara kelompok pengeluaran yang mengalami penurunan indeks, yaitu: kelompok ${kelompokPakaian} sebesar ${penurunanPakaianYoy} persen; kelompok ${kelompokPerlengkapanRumahTangga} sebesar ${penurunanPerlengkapanRumahTanggaYoy} persen; kelompok ${kelompokInformasiKomunikasi} sebesar ${penurunanInformasiKomunikasiYoy} persen; dan kelompok ${kelompokPendidikan} sebesar ${penurunanPendidikanYoy} persen.\nKomoditas yang dominan memberikan andil/sumbangan inflasi y-on-y pada ${bulan} ${tahun}, antara lain: ${komoditasInflasiYoy}. Sedangkan komoditas yang memberikan andil/sumbangan deflasi y-on-y, antara lain: ${komoditasDeflasiYoy}.\nSementara komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m pada ${bulan} ${tahun}, antara lain: ${komoditasInflasiMtm}. Sementara komoditas yang memberikan andil/sumbangan deflasi m-to-m, antara lain: ${komoditasDeflasiMtm}.\nPada ${bulan} ${tahun}, kelompok pengeluaran yang memberikan andil/sumbangan inflasi y-on-y, yaitu: kelompok ${kelompokMakanan} sebesar ${andilMakananYoy} persen; kelompok ${kelompokPerumahanLainnya} sebesar ${andilPerumahanYoy} persen; kelompok ${kelompokKesehatan} sebesar ${andilKesehatanYoy} persen; kelompok ${kelompokTransportasi} sebesar ${andilTransportasiYoy} persen; kelompok ${kelompokRekreasi} sebesar ${andilRekreasiYoy} persen; kelompok ${kelompokRestoran} sebesar ${andilRestoranYoy} persen; dan kelompok ${kelompokPerawatanPribadi} sebesar ${andilPerawatanPribadiYoy} persen. Sedangkan kelompok pengeluaran yang memberikan andil/sumbangan deflasi y-on-y, yaitu: kelompok ${kelompokPakaian} sebesar ${andilDeflasiPakaianYoy} persen; kelompok ${kelompokPerlengkapanRumahTangga} sebesar ${andilDeflasiPerlengkapanRumahTanggaYoy} persen; kelompok ${kelompokInformasiKomunikasi} sebesar ${andilDeflasiInformasiKomunikasiYoy} persen; dan kelompok ${kelompokPendidikan} sebesar ${andilDeflasiPendidikanYoy} persen."
+        }
+      ],
+      "sub": [
+        {
+          "title": {
+            "desc": "Makanan, Minuman, dan Tembakau",
+            "style": "ordered list 1.1 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} mengalami inflasi y-on-y sebesar ${inflasiYoy} persen atau terjadi kenaikan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nSubkelompok yang mengalami inflasi y-on-y tertinggi, yaitu subkelompok ${subkelompokInflasiTertinggi} sebesar ${inflasiSubkelompokTertinggi} persen dan terendah yaitu subkelompok ${subkelompokInflasiTerendah} sebesar ${inflasiSubkelompokTerendah} persen.\nSementara kelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi y-on-y sebesar ${andilInflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: ${komoditasInflasiYoy}. Sedangkan komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: ${komoditasDeflasiYoy}.\nSementara kelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi m-to-m sebesar ${andilInflasiMtm} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: ${komoditasInflasiMtm}. Sedangkan komoditas yang dominan memberikan andil/sumbangan deflasi m-to-m, yaitu: ${komoditasDeflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Pakaian dan Alas Kaki",
+            "style": "ordered list 1.2 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} mengalami deflasi y-on-y sebesar ${deflasiYoy} persen atau terjadi penurunan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}. Subkelompok yang mengalami inflasi y-on-y pada kelompok ${namaKelompok}, yaitu subkelompok ${subkelompokInflasi} sebesar ${inflasiSubkelompokYoy} persen sedangkan subkelompok yang mengalami deflasi y-on-y, yaitu subkelompok ${subkelompokDeflasi} sebesar ${deflasiSubkelompokYoy} persen.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi y-on-y sebesar ${andilDeflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: ${komoditasDeflasiYoy}. Sementara kelompok ${namaKelompok} pada ${bulan} ${tahun} ${keteranganAndilInflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Perumahan, Air, Listrik, dan Bahan Bakar Rumah Tangga",
+            "style": "ordered list 1.3 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} mengalami inflasi y-on-y sebesar ${inflasiYoy} persen atau terjadi kenaikan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nSubkelompok yang mengalami inflasi y-on-y yaitu subkelompok ${subkelompokInflasiSatu} sebesar ${inflasiSubkelompokSatuYoy} persen; serta subkelompok ${subkelompokInflasiDua} sebesar ${inflasiSubkelompokDuaYoy} persen. Sedangkan yang mengalami deflasi y-on-y yaitu subkelompok ${subkelompokDeflasi} sebesar ${deflasiSubkelompokYoy} persen. Sementara subkelompok ${subkelompokStabil} terpantau stabil dan tidak mengalami perubahan indeks harga.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi y-on-y sebesar ${andilInflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: ${komoditasInflasiYoy}.\nSementara kelompok ${namaKelompok} pada ${bulan} ${tahun} ${keteranganAndilInflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Perlengkapan, Peralatan, dan Pemeliharaan Rutin Rumah Tangga",
+            "style": "ordered list 1.4 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} mengalami deflasi y-on-y sebesar ${deflasiYoy} persen atau terjadi penurunan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nSubkelompok yang mengalami deflasi y-on-y terdalam, yaitu subkelompok ${subkelompokDeflasiSatu} sebesar ${deflasiSubkelompokSatuYoy} persen; subkelompok ${subkelompokDeflasiDua} sebesar ${deflasiSubkelompokDuaYoy} persen; dan subkelompok ${subkelompokDeflasiTiga} sebesar ${deflasiSubkelompokTigaYoy} persen. Sedangkan subkelompok yang mengalami inflasi tertinggi yaitu: subkelompok ${subkelompokInflasiSatu} sebesar ${inflasiSubkelompokSatuYoy} persen; subkelompok ${subkelompokInflasiDua} sebesar ${inflasiSubkelompokDuaYoy} persen; dan subkelompok ${subkelompokInflasiTiga} sebesar ${inflasiSubkelompokTigaYoy} persen.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi y-on-y sebesar ${andilDeflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu ${komoditasDeflasiYoy}. Sedangkan komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu ${komoditasInflasiYoy}.\nSementara kelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi m-to-m sebesar ${andilDeflasiMtm} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi m-to-m, yaitu: ${komoditasDeflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Kesehatan",
+            "style": "ordered list 1.5 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} mengalami inflasi y-on-y sebesar ${inflasiYoy} persen atau terjadi kenaikan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nSubkelompok yang mengalami inflasi y-on-y tertinggi, yaitu subkelompok ${subkelompokInflasiSatu} sebesar ${inflasiSubkelompokSatuYoy} persen; dan subkelompok ${subkelompokInflasiDua} sebesar ${inflasiSubkelompokDuaYoy} persen. Sementara subkelompok ${subkelompokStabil} terpantau stabil dan tidak mengalami perubahan indeks harga.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi y-on-y sebesar ${andilInflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: ${komoditasInflasiYoy}.\nSementara kelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi m-to-m sebesar ${andilInflasiMtm} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: ${komoditasInflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Transportasi",
+            "style": "ordered list 1.6 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} mengalami inflasi y-on-y sebesar ${inflasiYoy} persen atau terjadi kenaikan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nDari ${jumlahSubkelompok} subkelompok pada kelompok ${namaKelompok}, ${jumlahSubkelompokInflasi} subkelompok mengalami inflasi y-on-y, ${jumlahSubkelompokStabil} subkelompok tidak memberikan andil/sumbangan yang signifikan terhadap inflasi/deflasi y-on-y. Subkelompok yang mengalami inflasi y-on-y, yaitu subkelompok ${subkelompokInflasiSatu} sebesar ${inflasiSubkelompokSatuYoy} persen; subkelompok ${subkelompokInflasiDua} sebesar ${inflasiSubkelompokDuaYoy} persen; dan subkelompok ${subkelompokInflasiTiga} sebesar ${inflasiSubkelompokTigaYoy} persen. Sedangkan subkelompok yang tidak mengalami perubahan inflasi y-on-y, yaitu subkelompok ${subkelompokStabil}.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi y-on-y sebesar ${andilInflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: ${komoditasInflasiYoy}.\nSementara kelompok ${namaKelompok} pada ${bulan} ${tahun} ${keteranganAndilInflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Informasi, Komunikasi, dan Jasa Keuangan",
+            "style": "ordered list 1.7 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} di ${wilayah} mengalami deflasi y-on-y sebesar ${deflasiYoy} persen atau terjadi penurunan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nSubkelompok yang mengalami deflasi y-on-y terdalam yaitu: subkelompok ${subkelompokDeflasi} sebesar ${deflasiSubkelompokYoy} persen. Sedangkan subkelompok yang mengalami inflasi y-on-y, yaitu subkelompok ${subkelompokInflasi} sebesar ${inflasiSubkelompokYoy} persen. Sementara subkelompok yang tidak mengalami perubahan inflasi y-on-y, yaitu: ${subkelompokStabil}.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan deflasi y-on-y sebesar ${andilDeflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan deflasi y-on-y, yaitu: ${komoditasDeflasiYoy}.\nSementara  kelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi m-to-m sebesar ${andilInflasiMtm} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi m-to-m, yaitu: ${komoditasInflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Rekreasi, Olahraga, dan Budaya",
+            "style": "ordered list 1.8 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} di ${wilayah} mengalami inflasi y-on-y sebesar ${inflasiYoy} persen atau terjadi kenaikan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nSubkelompok yang mengalami inflasi y-on-y, yaitu: subkelompok ${subkelompokInflasiSatu} sebesar ${inflasiSubkelompokSatuYoy} persen dan subkelompok ${subkelompokInflasiDua} sebesar ${inflasiSubkelompokDuaYoy} persen. Sementara subkelompok ${subkelompokStabil} tidak mengalami perubahan.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi y-on-y sebesar ${andilInflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: ${komoditasInflasiYoy}. Sementara kelompok ${namaKelompok} pada ${bulan} ${tahun} ${keteranganAndilInflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Pendidikan",
+            "style": "ordered list 1.9 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} di ${wilayah} mengalami inflasi y-on-y sebesar ${inflasiYoy} persen atau terjadi kenaikan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nSubkelompok yang mengalami inflasi y-on-y, yaitu: subkelompok ${subkelompokInflasiSatu} sebesar ${inflasiSubkelompokSatuYoy} persen dan subkelompok ${subkelompokInflasiDua} sebesar ${inflasiSubkelompokDuaYoy} persen. Sementara subkelompok ${subkelompokStabil} tidak mengalami perubahan.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi y-on-y sebesar ${andilInflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: ${komoditasInflasiYoy}. Sementara kelompok ${namaKelompok} pada ${bulan} ${tahun} ${keteranganAndilInflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Penyediaan Makanan dan Minuman/Restoran",
+            "style": "ordered list 1.10 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} di ${wilayah} mengalami inflasi y-on-y sebesar ${inflasiYoy} persen atau terjadi kenaikan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nKelompok ${namaKelompok} terdiri dari ${jumlahSubkelompok} subkelompok, yaitu subkelompok ${namaSubkelompok} yang mengalami inflasi y-on-y sebesar ${inflasiSubkelompokYoy} persen.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi y-on-y sebesar ${andilInflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: ${komoditasInflasiYoy}.\nSementara kelompok ${namaKelompok} pada ${bulan} ${tahun} ${keteranganAndilInflasiMtm}."
+        },
+        {
+          "title": {
+            "desc": "Perawatan Pribadi dan Jasa Lainnya",
+            "style": "ordered list 1.11 color #f68839"
+          },
+          "desc": "Kelompok ${namaKelompok} pada ${bulan} ${tahun} di ${wilayah} mengalami inflasi y-on-y sebesar ${inflasiYoy} persen atau terjadi kenaikan indeks dari ${indeksTahunSebelumnya} pada ${bulanTahunSebelumnya} menjadi ${indeksSaatIni} pada ${bulan} ${tahun}.\nKelompok ${namaKelompok} terdiri dari ${jumlahSubkelompok} subkelompok, yaitu subkelompok ${namaSubkelompok} yang mengalami inflasi y-on-y sebesar ${inflasiSubkelompokYoy} persen.\nKelompok ${namaKelompok} pada ${bulan} ${tahun} memberikan andil/sumbangan inflasi y-on-y sebesar ${andilInflasiYoy} persen. Komoditas yang dominan memberikan andil/sumbangan inflasi y-on-y, yaitu: ${komoditasInflasiYoy}.\nSementara kelompok ${namaKelompok} pada ${bulan} ${tahun} ${keteranganAndilInflasiMtm}."
+        }
+      ]
+    },
+    {
+      "title": {
+        "desc": "Perbandingan Inflasi Antar Tahun",
+        "style": "ordered list 2 font size 14px bold color #f68839"
+      },
+      "desc": [
+        {
+          "desc": "Pada ${bulanTahun}, tingkat inflasi y-on-y ${namaWilayah} sebesar ${inflasiYoY} persen dan tingkat inflasi y-to-d sebesar ${inflasiYtD} persen. Tingkat inflasi y-on-y untuk ${bulanTahunSebelumnya1} dan ${bulanTahunSebelumnya2} masing-masing sebesar ${inflasiYoYSebelumnya1} persen dan ${inflasiYoYSebelumnya2} persen. Tingkat inflasi y-to-d ${bulanTahunSebelumnya1} dan ${bulanTahunSebelumnya2} masing-masing sebesar ${inflasiYtDSebelumnya1} persen dan ${inflasiYtDSebelumnya2} persen.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tingkat Inflasi Month-to-Month (M-to-M), Year-to-Date (Y-to-D), dan Year-on-Year (Y-on-Y) bulan ${bulan} ${namaWilayah} (persen), ${tahunAwal}–${tahunAkhir}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#f68839",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#ffd684"
+              },
+              "rowColors": [
+                "#fff5e6",
+                "#fff0d3"
+              ]
+            },
+            "markdown": "| Tingkat Inflasi | ${tahun1} | ${tahun2} | ${tahun3} |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Month-to-Month (M-to-M) | ${mtmTahun1} | ${mtmTahun2} | ${mtmTahun3} |\n| Year-to-Date (Y-to-D) | ${ytdTahun1} | ${ytdTahun2} | ${ytdTahun3} |\n| Year-on-Year (Y-on-Y) | ${yoyTahun1} | ${yoyTahun2} | ${yoyTahun3} |"
+          }
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "title": {
+            "desc": "Penjelasan Teknis",
+            "style": "bg color #FEE3CE width 100% font size 18"
+          },
+          "desc": "SBH 2022 dilaksanakan di 150 kabupaten/kota, yang terdiri dari 38 ibukota provinsi dan 112 kabupaten/kota. Dari 150 kabupaten/kota tersebut, 90 kota merupakan lanjutan kabupaten/kota SBH 2018 yang mencakup wilayah urban dan 60 kabupaten merupakan kabupaten tambahan yang mencakup wilayah urban dan rural. Survei ini dilaksanakan di daerah perkotaan dan pedesaan dengan total sampel sebanyak 240.000 rumah tangga. Paket komoditas hasil SBH 2022 Kota Metro berjumlah 271 komoditas.\nPengelompokan komoditas didasarkan pada Classification of Individual Consumption According to Purpose (COICOP) 2018. Secara nasional pengelompokan komoditas terdiri dari 11 kelompok dan 43 subkelompok. Adapun untuk level Kabupaten/Kota/Provinsi pengelompokan komoditas terdiri dari 11 kelompok dan dapat bervariasi jumlah subkelompoknya.\nPerubahan metodologi IHK (2022=100) dalam pemutakhiran Diagram Timbang dan penghitungan Indeks Harga Konsumen mengacu pada Manual standar internasional, yaitu Consumer Price Index Manual: Theory and Practice (2004),  Practical Guide to Producing Consumer Price Indices (2009), Classification of Individual Consumption According to Purpose/ COICOP (2018), Consumer Price Index Manual: Concepts and Methods (2020).\nSBH 2022 juga menangkap informasi pengeluaran rumah tangga melalui transaksi pasar online, sehingga pada penghitungan IHK 2022=100 dilakukan pencacahan beberapa komoditas tertentu melalui pasar online (marketplace). Sebagai permulaan, pencacahan pasar online ini dilakukan di 5 kota besar (DKI Jakarta, Kota Bogor, Kota Depok, Kota Tangerang, Kota Metro) dengan cakupan 6 komoditas (baju muslim wanita, telepon seluler, parfum, sepatu olahraga pria, sepatu wanita, sepatu pria) yang berdasarkan hasil SBH 2022 memiliki bobot pasar online terbesar.\nPada IHK 2022=100, BPS kembali menyempurnakan penghitungan IHK dengan mengakomodasi bobot jenis pasar dalam penghitungan rata-rata harga di setiap komoditas. Selain itu, jika sebelumnya diseminasi IHK hanya dilakukan di level Nasional dan Kabupaten/Kota, IHK dengan tahun dasar 2022=100 akan didiseminasikan juga di level Provinsi (38 Provinsi)."
+        },
+        {
+          "title": {
+            "desc": "Perubahan Tahun Dasar",
+            "style": "bg color #FEE3CE width 100% font size 18"
+          },
+          "desc": "Adanya pergantian tahun dasar yang baru menyebabkan diskontinuitas indeks harga antara periode berjalan dengan periode sebelumnya. Tabel 3 menyajikan IHK ${wilayah} pada Januari ${tahunAwal} sampai dengan ${bulan} ${tahunAkhir} menurut tahun dasar 2022=100.",
+          "table": {
+            "judul": "Tabel ${noTable} IHK ${wilayah} Menurut Bulan (2022=100), ${tahunAwal}–${tahunAkhir}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#f68839",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#ffd684"
+              },
+              "rowColors": [
+                "#fff5e6",
+                "#fff0d3"
+              ]
+            },
+            "markdown": "| Periode | ${tahun1} | ${tahun2} | ${tahun3} |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Januari | ${januariTahun1} | ${januariTahun2} | ${januariTahun3} |\n| Februari | ${februariTahun1} | ${februariTahun2} | ${februariTahun3} |\n| Maret | ${maretTahun1} | ${maretTahun2} | ${maretTahun3} |\n| April | ${aprilTahun1} | ${aprilTahun2} | ${aprilTahun3} |\n| Mei | ${meiTahun1} | ${meiTahun2} | ${meiTahun3} |\n| Juni | ${juniTahun1} | ${juniTahun2} | ${juniTahun3} |\n| Juli | ${juliTahun1} | ${juliTahun2} | ${juliTahun3} |\n| Agustus | ${agustusTahun1} | ${agustusTahun2} | ${agustusTahun3} |\n| September | ${septemberTahun1} | ${septemberTahun2} | ${septemberTahun3} |\n| Oktober | ${oktoberTahun1} | ${oktoberTahun2} | ${oktoberTahun3} |\n| November | ${novemberTahun1} | ${novemberTahun2} | ${novemberTahun3} |\n| Desember | ${desemberTahun1} | ${desemberTahun2} | ${desemberTahun3} |"
+          }
+        }
+      ],
+      "style": "column 2"
+    }
+  ]
+}

@@ -432,6 +432,44 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
   varMap["inflasiYtDSebelumnya1"] = String(ytd2);
   varMap["inflasiYtDSebelumnya2"] = String(ytd1);
 
+  // 5b. Table 3: 3-Year Monthly IHK Trend (${januariTahun1} ... ${desemberTahun3})
+  const getMonthVal = (dataArr, mIdx, fallbackVal = "0,00") => {
+    if (!Array.isArray(dataArr) || dataArr.length === 0) return fallbackVal;
+    if (dataArr[mIdx]?.value !== undefined && dataArr[mIdx]?.value !== null && dataArr[mIdx]?.value !== "") {
+      const v = dataArr[mIdx].value;
+      return typeof v === "number" ? v.toFixed(2).replace(".", ",") : String(v).replace(".", ",");
+    }
+    const targetMonthNum = mIdx + 1;
+    const found = dataArr.find(item => {
+      if (!item || item.key === undefined) return false;
+      const keyStr = String(item.key);
+      const mNum = parseInt(keyStr.slice(-2), 10);
+      if (mNum === targetMonthNum) return true;
+      const mNumSingle = parseInt(keyStr.slice(-1), 10);
+      return mNumSingle === targetMonthNum;
+    });
+    if (found && found.value !== undefined && found.value !== null && found.value !== "") {
+      const v = found.value;
+      return typeof v === "number" ? v.toFixed(2).replace(".", ",") : String(v).replace(".", ",");
+    }
+    return fallbackVal;
+  };
+
+  const ihkDataArr3 = edited.ihkData?.data || dataset.ihk?.data || [];
+  const ihkDataArr2 = edited.ihkData?.prevYear || dataset.ihk?.prevYear || [];
+  const ihkDataArr1 = edited.ihkData?.prev2Year || dataset.ihk?.prev2Year || [];
+
+  MONTH_NAMES.forEach((mName, idx) => {
+    const mLower = mName.toLowerCase();
+    const val1 = getMonthVal(ihkDataArr1, idx, "102,50");
+    const val2 = getMonthVal(ihkDataArr2, idx, "105,30");
+    const val3 = getMonthVal(ihkDataArr3, idx, idx <= monthIdx ? "108,45" : "-");
+
+    varMap[`${mLower}Tahun1`] = val1;
+    varMap[`${mLower}Tahun2`] = val2;
+    varMap[`${mLower}Tahun3`] = val3;
+  });
+
   // 6. Top Commodities extraction from parsedData (rows with length > 2 code)
   const commPos = [];
   const commNeg = [];

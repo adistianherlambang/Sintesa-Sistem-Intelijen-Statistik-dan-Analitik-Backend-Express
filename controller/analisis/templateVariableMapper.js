@@ -79,9 +79,25 @@ export function interpolateString(str, vars = {}) {
   });
 }
 
+export function getGroupKeyFromTitle(titleDesc = "") {
+  const norm = String(titleDesc || "").toLowerCase();
+  if (norm.includes("pakaian") || norm.includes("alas kaki")) return "pakaian";
+  if (norm.includes("perumahan") || norm.includes("listrik") || norm.includes("bahan bakar")) return "perumahan";
+  if (norm.includes("transportasi")) return "transportasi";
+  if (norm.includes("rekreasi") || norm.includes("olahraga") || norm.includes("budaya")) return "rekreasi";
+  if (norm.includes("pendidikan")) return "pendidikan";
+  if (norm.includes("restoran") || (norm.includes("makanan") && norm.includes("minuman") && norm.includes("penyediaan"))) return "restoran";
+  if (norm.includes("perawatan") || norm.includes("pribadi")) return "perawatan";
+  if (norm.includes("makanan") || norm.includes("tembakau")) return "makanan";
+  if (norm.includes("perlengkapan") || norm.includes("peralatan")) return "perlengkapan";
+  if (norm.includes("kesehatan")) return "kesehatan";
+  if (norm.includes("informasi") || norm.includes("komunikasi")) return "informasi";
+  return null;
+}
+
 /**
  * Render objek/array template literal secara rekursif
- * Mendukung context scoping untuk subkelompok pengeluaran (namaKelompok)
+ * Mendukung context scoping untuk subkelompok pengeluaran (namaKelompok, inflasi, andil, ihk)
  */
 export function renderTemplateObject(obj, vars = {}) {
   if (typeof obj === "string") {
@@ -91,12 +107,43 @@ export function renderTemplateObject(obj, vars = {}) {
     return obj.map((item) => renderTemplateObject(item, vars));
   }
   if (obj && typeof obj === "object" && obj !== null) {
-    let scopedVars = vars;
+    let scopedVars = { ...vars };
     if (obj.title && typeof obj.title.desc === "string" && obj.title.desc.trim() !== "") {
-      scopedVars = {
-        ...vars,
-        namaKelompok: obj.title.desc.trim(),
-      };
+      const titleDesc = obj.title.desc.trim();
+      scopedVars.namaKelompok = titleDesc;
+
+      const groupKey = getGroupKeyFromTitle(titleDesc);
+      if (groupKey) {
+        const prefix = groupKey;
+        if (vars[`${prefix}Yoy`] !== undefined) {
+          scopedVars.inflasiYoy = vars[`${prefix}Yoy`];
+          scopedVars.deflasiYoy = Math.abs(parseFloat(vars[`${prefix}Yoy`]) || 0).toFixed(2);
+        }
+        if (vars[`${prefix}Mtm`] !== undefined) {
+          scopedVars.inflasiMtm = vars[`${prefix}Mtm`];
+          scopedVars.deflasiMtm = Math.abs(parseFloat(vars[`${prefix}Mtm`]) || 0).toFixed(2);
+        }
+        if (vars[`${prefix}AndilMtm`] !== undefined) {
+          scopedVars.andilInflasiMtm = vars[`${prefix}AndilMtm`];
+          scopedVars.andilDeflasiMtm = Math.abs(parseFloat(vars[`${prefix}AndilMtm`]) || 0).toFixed(2);
+        }
+        if (vars[`${prefix}AndilYoy`] !== undefined) {
+          scopedVars.andilInflasiYoy = vars[`${prefix}AndilYoy`];
+          scopedVars.andilDeflasiYoy = Math.abs(parseFloat(vars[`${prefix}AndilYoy`]) || 0).toFixed(2);
+        }
+        if (vars[`${prefix}IhkBerjalan`] !== undefined) {
+          scopedVars.indeksSaatIni = vars[`${prefix}IhkBerjalan`];
+          scopedVars.ihkSaatIni = vars[`${prefix}IhkBerjalan`];
+        }
+        if (vars[`${prefix}IhkPembanding`] !== undefined) {
+          scopedVars.indeksTahunSebelumnya = vars[`${prefix}IhkPembanding`];
+          scopedVars.ihkTahunSebelumnya = vars[`${prefix}IhkPembanding`];
+        }
+        if (vars[`${prefix}IhkSebelumnya`] !== undefined) {
+          scopedVars.indeksBulanSebelumnya = vars[`${prefix}IhkSebelumnya`];
+          scopedVars.ihkBulanSebelumnya = vars[`${prefix}IhkSebelumnya`];
+        }
+      }
     }
     const res = {};
     for (const [k, v] of Object.entries(obj)) {
@@ -307,23 +354,60 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
     }
   });
 
-  // Extract hierarki lists if available in editedData
-  const yoyHierarki = edited.komoditasData?.yoy?.hierarki || [];
-  const ytdHierarki = edited.komoditasData?.ytd?.hierarki || [];
-  const momHierarki = edited.komoditasData?.mom?.hierarki || [];
-  const ihkHierarki = edited.komoditasIhkData?.hierarki || [];
+  // Extract hierarki lists from editedData or dataset directly
+  const yoyHierarki =
+    edited.komoditasData?.yoy?.hierarki ||
+    dataset.komoditasInflasi?.yoy?.hierarki ||
+    dataset.komoditasData?.yoy?.hierarki ||
+    [];
+  const ytdHierarki =
+    edited.komoditasData?.ytd?.hierarki ||
+    dataset.komoditasInflasi?.ytd?.hierarki ||
+    dataset.komoditasData?.ytd?.hierarki ||
+    [];
+  const momHierarki =
+    edited.komoditasData?.mom?.hierarki ||
+    dataset.komoditasInflasi?.mom?.hierarki ||
+    dataset.komoditasData?.mom?.hierarki ||
+    [];
+  const ihkHierarki =
+    edited.komoditasIhkData?.hierarki ||
+    dataset.komoditasIHK?.hierarki ||
+    dataset.komoditasIhkData?.hierarki ||
+    [];
+  const ihkPrevYearHierarki =
+    edited.komoditasIhkData?.prevYear ||
+    dataset.komoditasIHK?.prevYear ||
+    edited.komoditasIhkData?.prevYearList ||
+    dataset.komoditasIHK?.prevYearList ||
+    [];
 
   const getHierarkiVal = (item, mIdx) => {
-    if (!item?.data) return undefined;
-    const mName = MONTH_NAMES[mIdx];
-    if (item.data[mName] !== undefined && item.data[mName] !== "") return item.data[mName];
-    if (item.data[String(mIdx)] !== undefined && item.data[String(mIdx)] !== "") return item.data[String(mIdx)];
-    if (item.data[String(mIdx + 1)] !== undefined && item.data[String(mIdx + 1)] !== "") return item.data[String(mIdx + 1)];
-    const m2 = String(mIdx + 1).padStart(2, "0");
-    const keys = Object.keys(item.data);
-    const found = keys.find(k => k.endsWith(m2) || k.endsWith(String(mIdx + 1)));
-    if (found && item.data[found] !== undefined && item.data[found] !== "") return item.data[found];
-    if (keys[mIdx] !== undefined && item.data[keys[mIdx]] !== undefined && item.data[keys[mIdx]] !== "") return item.data[keys[mIdx]];
+    if (!item) return undefined;
+    const targetBulan = mIdx + 1;
+    // Jika item memiliki value langsung dan bulan cocok (atau tanpa data per bulan)
+    if (item.value !== undefined && item.value !== null && item.value !== "") {
+      const itemBulan = Number(item.bulan);
+      if (!item.data || isNaN(itemBulan) || itemBulan === targetBulan) {
+        return item.value;
+      }
+    }
+    // Cek item.data jika tersedia
+    if (item.data && typeof item.data === "object") {
+      const mName = MONTH_NAMES[mIdx];
+      if (item.data[mName] !== undefined && item.data[mName] !== "") return item.data[mName];
+      if (item.data[String(mIdx)] !== undefined && item.data[String(mIdx)] !== "") return item.data[String(mIdx)];
+      if (item.data[String(mIdx + 1)] !== undefined && item.data[String(mIdx + 1)] !== "") return item.data[String(mIdx + 1)];
+      const m2 = String(mIdx + 1).padStart(2, "0");
+      const keys = Object.keys(item.data);
+      const found = keys.find(k => k.endsWith(m2) || k.endsWith(String(mIdx + 1)));
+      if (found && item.data[found] !== undefined && item.data[found] !== "") return item.data[found];
+      if (keys[mIdx] !== undefined && item.data[keys[mIdx]] !== undefined && item.data[keys[mIdx]] !== "") return item.data[keys[mIdx]];
+    }
+    // Fallback ke item.value jika ada
+    if (item.value !== undefined && item.value !== null && item.value !== "") {
+      return item.value;
+    }
     return undefined;
   };
 
@@ -332,7 +416,7 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
     const groupName = COMMODITY_NAMES[prefix] || prefix;
     const normGroupName = normalizeLabel(groupName);
 
-    // Look up directly from edited hierarki arrays as fallback
+    // Look up directly from hierarki arrays
     const matchedYoy = yoyHierarki.find(item => {
       const n = normalizeLabel(item.label);
       return n.includes(normGroupName) || normGroupName.includes(n) || n.slice(0, 8) === normGroupName.slice(0, 8);
@@ -349,72 +433,103 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
       const n = normalizeLabel(item.label);
       return n.includes(normGroupName) || normGroupName.includes(n) || n.slice(0, 8) === normGroupName.slice(0, 8);
     });
+    const matchedIhkPrevYear = ihkPrevYearHierarki.find(item => {
+      const n = normalizeLabel(item.label);
+      return n.includes(normGroupName) || normGroupName.includes(n) || n.slice(0, 8) === normGroupName.slice(0, 8);
+    });
 
     const valYoyHierarki = getHierarkiVal(matchedYoy, monthIdx);
     const valYtdHierarki = getHierarkiVal(matchedYtd, monthIdx);
     const valMomHierarki = getHierarkiVal(matchedMom, monthIdx);
     const valIhkHierarki = getHierarkiVal(matchedIhk, monthIdx);
     const valPrevIhkHierarki = monthIdx > 0 ? getHierarkiVal(matchedIhk, monthIdx - 1) : undefined;
+    const valIhkPrevYear = matchedIhkPrevYear?.value !== undefined ? matchedIhkPrevYear.value : getHierarkiVal(matchedIhkPrevYear, monthIdx);
 
-    // Resolve IHK Berjalan: Prioritize Step 3 row[8]
+    // Resolve IHK Berjalan: Prioritize matchedIhk.value / valIhkHierarki / Step 3 row[8]
     let gIhkBerjalan = "107.00";
-    if (row?.[8] !== undefined && String(row[8]).trim() !== "") {
-      gIhkBerjalan = String(row[8]);
-    } else if (valIhkHierarki !== undefined && valIhkHierarki !== null) {
+    if (matchedIhk?.value !== undefined && matchedIhk?.value !== null && matchedIhk?.value !== "") {
+      gIhkBerjalan = String(matchedIhk.value);
+    } else if (valIhkHierarki !== undefined && valIhkHierarki !== null && valIhkHierarki !== "") {
       gIhkBerjalan = String(valIhkHierarki);
+    } else if (row?.[8] !== undefined && String(row[8]).trim() !== "") {
+      gIhkBerjalan = String(row[8]);
     } else if (varMap[`${prefix}IhkBerjalan`]) {
       gIhkBerjalan = varMap[`${prefix}IhkBerjalan`];
     }
 
-    // Resolve IHK Sebelumnya: Prioritize Step 3 row[7]
+    // Resolve IHK Sebelumnya: Prioritize valPrevIhkHierarki / Step 3 row[7]
     let gIhkSebelum = "105.00";
-    if (row?.[7] !== undefined && String(row[7]).trim() !== "") {
-      gIhkSebelum = String(row[7]);
-    } else if (valPrevIhkHierarki !== undefined && valPrevIhkHierarki !== null) {
+    if (valPrevIhkHierarki !== undefined && valPrevIhkHierarki !== null && valPrevIhkHierarki !== "") {
       gIhkSebelum = String(valPrevIhkHierarki);
+    } else if (row?.[7] !== undefined && String(row[7]).trim() !== "") {
+      gIhkSebelum = String(row[7]);
     } else if (varMap[`${prefix}IhkSebelumnya`]) {
       gIhkSebelum = varMap[`${prefix}IhkSebelumnya`];
     }
 
-    // Resolve Inflasi MoM: Prioritize Step 3 row[9]
-    let gMtm = "0.20";
-    if (row?.[9] !== undefined && String(row[9]).trim() !== "") {
-      gMtm = String(row[9]);
-    } else if (valMomHierarki !== undefined && valMomHierarki !== null) {
+    // Resolve IHK Pembanding (Agustus 2025): Prioritize komoditasIHK.prevYear (this month)
+    let gIhkPembanding = "103.45";
+    if (valIhkPrevYear !== undefined && valIhkPrevYear !== null && valIhkPrevYear !== "") {
+      gIhkPembanding = String(valIhkPrevYear);
+    } else if (varMap[`${prefix}IhkPembanding`]) {
+      gIhkPembanding = varMap[`${prefix}IhkPembanding`];
+    } else {
+      gIhkPembanding = (parseFloat(gIhkBerjalan) * 0.97).toFixed(2);
+    }
+
+    // Resolve Inflasi MoM: Prioritaskan langsung komoditasInflasi.mom.hierarki.value sesuai API
+    let gMtm = "0.00";
+    if (matchedMom?.value !== undefined && matchedMom?.value !== null && matchedMom?.value !== "") {
+      gMtm = String(matchedMom.value);
+    } else if (valMomHierarki !== undefined && valMomHierarki !== null && valMomHierarki !== "") {
       gMtm = String(valMomHierarki);
+    } else if (row?.[9] !== undefined && String(row[9]).trim() !== "") {
+      gMtm = String(row[9]);
     } else if (varMap[`${prefix}AndilMtm`]) {
       gMtm = varMap[`${prefix}AndilMtm`];
     }
 
-    // Resolve Inflasi YtD: Prioritize Step 3 row[10]
+    // Resolve Inflasi YtD
     let gYtd = "1.50";
-    if (row?.[10] !== undefined && String(row[10]).trim() !== "") {
-      gYtd = String(row[10]);
-    } else if (valYtdHierarki !== undefined && valYtdHierarki !== null) {
+    if (matchedYtd?.value !== undefined && matchedYtd?.value !== null && matchedYtd?.value !== "") {
+      gYtd = String(matchedYtd.value);
+    } else if (valYtdHierarki !== undefined && valYtdHierarki !== null && valYtdHierarki !== "") {
       gYtd = String(valYtdHierarki);
+    } else if (row?.[10] !== undefined && String(row[10]).trim() !== "") {
+      gYtd = String(row[10]);
     } else if (varMap[`${prefix}Ytd`]) {
       gYtd = varMap[`${prefix}Ytd`];
     }
 
-    // Resolve Inflasi YoY: Prioritize Step 3 row[11]
+    // Resolve Inflasi YoY
     let gYoy = "2.50";
-    if (row?.[11] !== undefined && String(row[11]).trim() !== "") {
-      gYoy = String(row[11]);
-    } else if (valYoyHierarki !== undefined && valYoyHierarki !== null) {
+    if (matchedYoy?.value !== undefined && matchedYoy?.value !== null && matchedYoy?.value !== "") {
+      gYoy = String(matchedYoy.value);
+    } else if (valYoyHierarki !== undefined && valYoyHierarki !== null && valYoyHierarki !== "") {
       gYoy = String(valYoyHierarki);
+    } else if (row?.[11] !== undefined && String(row[11]).trim() !== "") {
+      gYoy = String(row[11]);
     } else if (varMap[`${prefix}Yoy`]) {
       gYoy = varMap[`${prefix}Yoy`];
     }
 
-    // Resolve Andil
-    const gWeight = row?.[6] ? parseFloat(row[6]) : (100 / 11);
+    // Resolve Bobot & Andil
+    let gWeight = 100 / 11;
+    if (dataset.bobot && Array.isArray(dataset.bobot)) {
+      const bItem = dataset.bobot.find(b => {
+        const bl = normalizeLabel(b.label || b.nama);
+        return bl.includes(normGroupName) || normGroupName.includes(bl);
+      });
+      if (bItem && bItem.value) gWeight = parseFloat(bItem.value);
+    } else if (row?.[6]) {
+      gWeight = parseFloat(row[6]);
+    }
+
     let gAndilMtm = ((gWeight * (parseFloat(gMtm) || 0)) / 100).toFixed(2);
-    if (row?.[12] !== undefined && String(row[12]).trim() !== "") {
+    if (row?.[12] !== undefined && String(row[12]).trim() !== "" && row[12] !== "0.00" && !matchedMom?.value) {
       gAndilMtm = String(row[12]);
     }
     const gAndilYoy = ((gWeight * (parseFloat(gYoy) || 0)) / 100).toFixed(2);
-
-    const gIhkPembanding = varMap[`${prefix}IhkPembanding`] || (parseFloat(gIhkBerjalan) * 0.97).toFixed(2);
 
     // Table 1 values
     varMap[`${prefix}IhkPembanding`] = gIhkPembanding;
@@ -422,6 +537,7 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
     varMap[`${prefix}IhkBerjalan`] = gIhkBerjalan;
     varMap[`${prefix}Ytd`] = gYtd;
     varMap[`${prefix}Yoy`] = gYoy;
+    varMap[`${prefix}Mtm`] = gMtm;
     varMap[`${prefix}AndilMtm`] = gAndilMtm;
     varMap[`${prefix}AndilYoy`] = gAndilYoy;
 

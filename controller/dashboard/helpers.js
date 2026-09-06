@@ -117,10 +117,13 @@ export const buildResponseWithDashboard = (
  */
 export const getDateInfo = () => {
   const date = new Date();
-  const month = String(date.getMonth() - 1);
-  const year = "1" + String(date.getFullYear()).slice(2, 4);
-  const prevYear = year - 1;
-  const prev2Year = year - 2;
+  const m = date.getMonth(); // 0-11 (Jan=0, Sep=8)
+  const releaseMonth = m === 0 ? 12 : m;
+  const month = String(releaseMonth);
+  const releaseYear = m === 0 ? date.getFullYear() - 1 : date.getFullYear();
+  const year = "1" + String(releaseYear).slice(2, 4);
+  const prevYear = Number(year) - 1;
+  const prev2Year = Number(year) - 2;
 
   return { month, year, prevYear, prev2Year };
 };

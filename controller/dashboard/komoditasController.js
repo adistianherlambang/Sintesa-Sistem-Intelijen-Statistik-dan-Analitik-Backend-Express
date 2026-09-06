@@ -67,10 +67,16 @@ const processKomoditasItem = async (
     }
   }
 
+  const targetMonthNum = Number(month);
+
   const sortedData = sort(data);
   const dataEntries = Object.entries(sortedData);
+  const matchedData = dataEntries.find(
+    ([k]) => Number(k.slice(regionVal.length + 11)) === targetMonthNum,
+  );
   const mainData =
-    dataEntries.length > 0 ? dataEntries[dataEntries.length - 1] : null;
+    matchedData ||
+    (dataEntries.length > 0 ? dataEntries[dataEntries.length - 1] : null);
 
   const mainValue = mainData ? mainData[1] : 0;
   const mainBulan = mainData
@@ -81,8 +87,12 @@ const processKomoditasItem = async (
   for (const item of komoditasItem.sub || []) {
     const sortedSubData = sort(subData[item.val] || {});
     const subEntries = Object.entries(sortedSubData);
+    const matchedSubData = subEntries.find(
+      ([k]) => Number(k.slice(regionVal.length + 11)) === targetMonthNum,
+    );
     const mainSubData =
-      subEntries.length > 0 ? subEntries[subEntries.length - 1] : null;
+      matchedSubData ||
+      (subEntries.length > 0 ? subEntries[subEntries.length - 1] : null);
 
     sub[item.val] = {
       label: item.label,
@@ -102,7 +112,7 @@ const processKomoditasItem = async (
     sub,
   };
 
-  // Process prevYear data
+  // Process prevYear data (mencari bulan yang diminta/this month, bukan latest month)
   let prevYearItem = null;
   if (doc.prevYear) {
     const dataPrevYear = {};
@@ -131,10 +141,14 @@ const processKomoditasItem = async (
 
     const sortedDataPrevYear = sort(dataPrevYear);
     const dataEntriesPrevYear = Object.entries(sortedDataPrevYear);
+    const matchedPrevYear = dataEntriesPrevYear.find(
+      ([k]) => Number(k.slice(regionVal.length + 11)) === targetMonthNum,
+    );
     const mainDataPrevYear =
-      dataEntriesPrevYear.length > 0
+      matchedPrevYear ||
+      (dataEntriesPrevYear.length > 0
         ? dataEntriesPrevYear[dataEntriesPrevYear.length - 1]
-        : null;
+        : null);
 
     const prevYearValue = mainDataPrevYear ? mainDataPrevYear[1] : 0;
     const prevYearBulan = mainDataPrevYear
@@ -145,10 +159,14 @@ const processKomoditasItem = async (
     for (const item of komoditasItem.sub || []) {
       const sortedSubDataPrev = sort(subDataPrevYear[item.val] || {});
       const subEntriesPrev = Object.entries(sortedSubDataPrev);
+      const matchedSubDataPrev = subEntriesPrev.find(
+        ([k]) => Number(k.slice(regionVal.length + 11)) === targetMonthNum,
+      );
       const mainSubDataPrev =
-        subEntriesPrev.length > 0
+        matchedSubDataPrev ||
+        (subEntriesPrev.length > 0
           ? subEntriesPrev[subEntriesPrev.length - 1]
-          : null;
+          : null);
 
       subPrevYear[item.val] = {
         label: item.label,
@@ -169,7 +187,7 @@ const processKomoditasItem = async (
     };
   }
 
-  // Process prev2Year data
+  // Process prev2Year data (mencari bulan yang diminta/this month, bukan latest month)
   let prev2YearItem = null;
   if (doc.prev2Year) {
     const dataPrev2Year = {};
@@ -198,10 +216,14 @@ const processKomoditasItem = async (
 
     const sortedDataPrev2Year = sort(dataPrev2Year);
     const dataEntriesPrev2Year = Object.entries(sortedDataPrev2Year);
+    const matchedPrev2Year = dataEntriesPrev2Year.find(
+      ([k]) => Number(k.slice(regionVal.length + 11)) === targetMonthNum,
+    );
     const mainDataPrev2Year =
-      dataEntriesPrev2Year.length > 0
+      matchedPrev2Year ||
+      (dataEntriesPrev2Year.length > 0
         ? dataEntriesPrev2Year[dataEntriesPrev2Year.length - 1]
-        : null;
+        : null);
 
     const prev2YearValue = mainDataPrev2Year ? mainDataPrev2Year[1] : 0;
     const prev2YearBulan = mainDataPrev2Year
@@ -212,10 +234,14 @@ const processKomoditasItem = async (
     for (const item of komoditasItem.sub || []) {
       const sortedSubDataPrev2 = sort(subDataPrev2Year[item.val] || {});
       const subEntriesPrev2 = Object.entries(sortedSubDataPrev2);
+      const matchedSubDataPrev2 = subEntriesPrev2.find(
+        ([k]) => Number(k.slice(regionVal.length + 11)) === targetMonthNum,
+      );
       const mainSubDataPrev2 =
-        subEntriesPrev2.length > 0
+        matchedSubDataPrev2 ||
+        (subEntriesPrev2.length > 0
           ? subEntriesPrev2[subEntriesPrev2.length - 1]
-          : null;
+          : null);
 
       subPrev2Year[item.val] = {
         label: item.label,
@@ -284,7 +310,12 @@ const getHargaBIForKota = async (searchName) => {
  * @returns {Object} Data komoditas dengan hierarki, prevYear, dan prev2Year
  * @throws Error jika kota tidak diisi
  */
-export const getKomoditasByKota = async (kota, varKeyField = "var") => {
+export const getKomoditasByKota = async (
+  kota,
+  varKeyField = "var",
+  targetMonth = null,
+  targetYear = null,
+) => {
   if (!kota) {
     throw new Error("kota wajib diisi");
   }
@@ -324,7 +355,13 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
   const resolvedKota = region.label;
   const regionVal = region.val.toString();
 
-  const { month, year, prevYear, prev2Year } = getDateInfo();
+  const dateInfo = getDateInfo();
+  const month = targetMonth ? String(targetMonth) : dateInfo.month;
+  const year = targetYear
+    ? "1" + String(targetYear).slice(-2)
+    : dateInfo.year;
+  const prevYear = Number(year) - 1;
+  const prev2Year = Number(year) - 2;
   let hierarki = [];
   let prevYearList = [];
   let prev2YearList = [];
@@ -501,25 +538,27 @@ export const getKomoditasByKota = async (kota, varKeyField = "var") => {
   };
 };
 
-export const getKomoditasYoyByKota = async (kota) => {
-  return getKomoditasByKota(kota, "yoy");
+export const getKomoditasYoyByKota = async (kota, targetMonth = null, targetYear = null) => {
+  return getKomoditasByKota(kota, "yoy", targetMonth, targetYear);
 };
 
-export const getKomoditasYtdByKota = async (kota) => {
-  return getKomoditasByKota(kota, "ytd");
+export const getKomoditasYtdByKota = async (kota, targetMonth = null, targetYear = null) => {
+  return getKomoditasByKota(kota, "ytd", targetMonth, targetYear);
 };
 
-export const getKomoditasIhkByKota = async (kota) => {
-  return getKomoditasByKota(kota, "ihk");
+export const getKomoditasIhkByKota = async (kota, targetMonth = null, targetYear = null) => {
+  return getKomoditasByKota(kota, "ihk", targetMonth, targetYear);
 };
 
-export const getKomoditasIhkInfografisByKota = async (kota) => {
-  return getKomoditasInfografisByKota(kota, "ihk");
+export const getKomoditasIhkInfografisByKota = async (kota, targetMonth = null, targetYear = null) => {
+  return getKomoditasInfografisByKota(kota, "ihk", targetMonth, targetYear);
 };
 
 export const getKomoditasInfografisByKota = async (
   kota,
   varKeyField = "var",
+  targetMonth = null,
+  targetYear = null,
 ) => {
   if (!kota) {
     throw new Error("kota wajib diisi");
@@ -560,7 +599,13 @@ export const getKomoditasInfografisByKota = async (
   const resolvedKota = region.label;
   const regionVal = region.val.toString();
 
-  const { month, year, prevYear, prev2Year } = getDateInfo();
+  const dateInfo = getDateInfo();
+  const month = targetMonth ? String(targetMonth) : dateInfo.month;
+  const year = targetYear
+    ? "1" + String(targetYear).slice(-2)
+    : dateInfo.year;
+  const prevYear = Number(year) - 1;
+  const prev2Year = Number(year) - 2;
   let hierarki = [];
   let prevYearList = [];
   let prev2YearList = [];

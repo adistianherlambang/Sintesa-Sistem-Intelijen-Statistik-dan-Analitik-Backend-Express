@@ -90,11 +90,11 @@ app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-// Serve Word Editor Engine (prefer frontend/public/word-editor, then wordnew/frontend/dist)
+// Serve Word Editor Engine directly from frontend/src/word/engine
 const WORDNEW_DIST_CANDIDATES = [
+  path.resolve(__dirname, "../frontend/src/word/engine"),
   path.resolve(__dirname, "../frontend/public/word-editor"),
   path.resolve(__dirname, "../wordnew/frontend/dist"),
-  path.resolve(__dirname, "../../test/wordnew/frontend/dist"),
 ];
 const WORDNEW_DIST = WORDNEW_DIST_CANDIDATES.find((p) => fs.existsSync(p));
 if (WORDNEW_DIST) {

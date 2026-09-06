@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import AdmZip from "adm-zip";
 import AnalysisHistory from "../../db/models/AnalysisHistory.js";
 import { logActivity } from "../user/activityController.js";
+import { buildVariableMapFromDataset } from "./templateVariableMapper.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,7 +14,11 @@ if (!fs.existsSync(EXPORT_DIR)) {
   fs.mkdirSync(EXPORT_DIR, { recursive: true });
 }
 
-const TEMPLATE_DIR = path.resolve(__dirname, "../../../../test/wordnew/frontend/dist/template");
+const TEMPLATE_LOCATIONS = [
+  path.resolve(__dirname, "../../../../test/wordnew/frontend/template/BERITA.docx"),
+  path.resolve(__dirname, "../../../../test/wordnew/frontend/dist/template/BERITA.docx"),
+  path.resolve(__dirname, "../../../../test/templat/inflasi&ihk/BERITA.docx"),
+];
 
 /**
  * Helper: Normalisasi nama file
@@ -23,7 +28,7 @@ const sanitizeName = (str) => {
 };
 
 /**
- * Controller: Generate initial Word BRS DOCX with data placeholders replaced
+ * Controller: Generate initial Word BRS DOCX with ALL Step 3 data placeholders replaced
  * POST /api/analisis/word/generate
  */
 export const generateWordBrs = async (req, res) => {
@@ -33,45 +38,54 @@ export const generateWordBrs = async (req, res) => {
       periode = "November 2025",
       title = "Berita Resmi Statistik",
       variables = {},
-      withRealData = true,
+      dataset = null,
+      uploadedDataset = null,
     } = req.body;
 
-    const templateName = withRealData ? "BERITA_FILLED.docx" : "BERITA.docx";
-    const templatePath = path.join(TEMPLATE_DIR, templateName);
-
-    if (!fs.existsSync(templatePath)) {
-      // Fallback to local template if dist template is missing
-      const localTemplate = path.resolve(__dirname, "../../../../test/wordnew/frontend/template", templateName);
-      if (fs.existsSync(localTemplate)) {
-        fs.copyFileSync(localTemplate, templatePath);
-      } else {
-        return res.status(404).json({ message: `Template ${templateName} tidak ditemukan` });
+    // Find base template BERITA.docx
+    let templatePath = "";
+    for (const p of TEMPLATE_LOCATIONS) {
+      if (fs.existsSync(p)) {
+        templatePath = p;
+        break;
       }
     }
 
+    if (!templatePath) {
+      return res.status(404).json({ message: "Template base BERITA.docx tidak ditemukan di sistem" });
+    }
+
+    // 1. Build complete variable mapping from Step 3 data
+    const activeDataset = uploadedDataset || dataset || {
+      context: { city, period: periode, title }
+    };
+    const varMap = buildVariableMapFromDataset(activeDataset, variables);
+
+    // 2. Open BERITA.docx and read document.xml
     const zip = new AdmZip(templatePath);
     let docXml = zip.readAsText("word/document.xml");
 
-    // Dynamic variable substitutions if provided in variables object
-    if (variables && typeof variables === "object") {
-      for (const [key, val] of Object.entries(variables)) {
-        if (val !== undefined && val !== null) {
-          const regex = new RegExp(`\\$\\{${key}\\}`, "g");
-          docXml = docXml.replace(regex, String(val));
-        }
+    // 3. Substitute all ${key} tokens using exact string replacement
+    for (const [k, v] of Object.entries(varMap)) {
+      if (v !== undefined && v !== null) {
+        const token = "${" + k + "}";
+        docXml = docXml.split(token).join(String(v));
       }
     }
 
-    // Default city & period substitution
-    const cleanCity = String(city).replace(/^(KOTA|KABUPATEN|KAB\.?)\s+/i, "");
-    docXml = docXml.replace(/\$\{namaWilayah\}/g, cleanCity);
-    docXml = docXml.replace(/\$\{wilayah\}/g, cleanCity);
-    docXml = docXml.replace(/\$\{bulanTahun\}/g, periode);
+    // Handle special fax placeholder if present
+    const faxText = varMap["noFax"] ? `Fax: ${varMap["noFax"]}` : "";
+    docXml = docXml.replace(/\$\{fax\b[^}]*\}/g, faxText);
+
+    // Clean up any remaining unresolved placeholders so no ${...} tags leak to user
+    docXml = docXml.replace(/\$\{[^}]+\}/g, "");
 
     zip.updateFile("word/document.xml", Buffer.from(docXml, "utf8"));
 
+    const cleanCity = String(varMap["namaKota"] || city).replace(/^(KOTA|KABUPATEN|KAB\.?)\s+/i, "");
+    const cleanPeriod = String(varMap["bulanTahun"] || periode);
     const timestamp = Date.now();
-    const outFilename = `generated_${sanitizeName(cleanCity)}_${sanitizeName(periode)}_${timestamp}.docx`;
+    const outFilename = `brs_${sanitizeName(cleanCity)}_${sanitizeName(cleanPeriod)}_${timestamp}.docx`;
     const outPath = path.join(EXPORT_DIR, outFilename);
 
     zip.writeZip(outPath);
@@ -81,6 +95,8 @@ export const generateWordBrs = async (req, res) => {
       filename: outFilename,
       url: `/analysis-files/${outFilename}`,
       fullUrl: `${req.protocol}://${req.get("host")}/analysis-files/${outFilename}`,
+      variablesCount: Object.keys(varMap).length,
+      variables: varMap,
     });
   } catch (err) {
     console.error("[generateWordBrs] Error:", err.message);

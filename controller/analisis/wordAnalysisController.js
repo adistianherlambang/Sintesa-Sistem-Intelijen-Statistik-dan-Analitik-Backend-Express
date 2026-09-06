@@ -15,6 +15,8 @@ if (!fs.existsSync(EXPORT_DIR)) {
 }
 
 const TEMPLATE_LOCATIONS = [
+  path.resolve(__dirname, "../../frontend/public/word-editor/template/BERITA.docx"),
+  path.resolve(__dirname, "../../../frontend/public/word-editor/template/BERITA.docx"),
   path.resolve(__dirname, "../../../../test/wordnew/frontend/template/BERITA.docx"),
   path.resolve(__dirname, "../../../../test/wordnew/frontend/dist/template/BERITA.docx"),
   path.resolve(__dirname, "../../../../test/templat/inflasi&ihk/BERITA.docx"),

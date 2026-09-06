@@ -7,12 +7,14 @@ import userRoutes from "./users/userRoutes.js";
 import botRoutes from "./users/botRoutes.js";
 import infografisRoutes from "./users/infografisRoutes.js";
 import llmRoutes from "./llm/llmRoutes.js";
+import analisisRoutes from "./analisis/analisisRoutes.js";
 
 import kota from "../json/kota.json" with { type: "json" };
 
 const router = e.Router();
 
 router.use("/dashboard/overview", overview);
+router.use("/analisis", analisisRoutes);
 router.use("/users", userRoutes);
 router.use("/users/bot", botRoutes);
 router.use("/users/infografis", infografisRoutes);

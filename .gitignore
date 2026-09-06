@@ -3,3 +3,4 @@
 .wwebjs_auth/
 .wwebjs_cache/
 export/analysis_files/
+debug_output/

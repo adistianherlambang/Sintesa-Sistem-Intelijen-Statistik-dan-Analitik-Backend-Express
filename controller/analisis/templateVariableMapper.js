@@ -190,6 +190,8 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
   varMap["umumAndilMtm"] = headlineMtm;
   varMap["umumAndilYoy"] = headlineYoy;
 
+  const normalizeLabel = (str) => String(str || "").toLowerCase().replace(/,/g, "").replace(/\s+/g, " ").trim();
+
   // 4. Map the 11 Expenditure Groups (Table 1 & Text details)
   const groupRows = {};
   rows.forEach(r => {
@@ -199,16 +201,100 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
     }
   });
 
+  // Extract hierarki lists if available in editedData
+  const yoyHierarki = edited.komoditasData?.yoy?.hierarki || [];
+  const ytdHierarki = edited.komoditasData?.ytd?.hierarki || [];
+  const momHierarki = edited.komoditasData?.mom?.hierarki || [];
+  const ihkHierarki = edited.komoditasIhkData?.hierarki || [];
+
   for (const [code, prefix] of Object.entries(COMMODITY_GROUP_MAP)) {
     const row = groupRows[prefix];
     const groupName = COMMODITY_NAMES[prefix] || prefix;
+    const normGroupName = normalizeLabel(groupName);
 
-    const gIhkSebelum = row?.[7] ? String(row[7]) : varMap[`${prefix}IhkSebelumnya`] || "105.00";
-    const gIhkBerjalan = row?.[8] ? String(row[8]) : varMap[`${prefix}IhkBerjalan`] || "107.00";
-    const gMtm = row?.[9] ? String(row[9]) : varMap[`${prefix}AndilMtm`] || "0.20";
-    const gYtd = row?.[10] ? String(row[10]) : varMap[`${prefix}Ytd`] || "1.50";
-    const gYoy = row?.[11] ? String(row[11]) : varMap[`${prefix}Yoy`] || "2.50";
-    const gAndil = row?.[12] ? String(row[12]) : varMap[`${prefix}AndilYoy`] || gMtm;
+    // Look up directly from edited hierarki arrays as first-class source
+    const matchedYoy = yoyHierarki.find(item => {
+      const n = normalizeLabel(item.label);
+      return n.includes(normGroupName) || normGroupName.includes(n) || n.slice(0, 8) === normGroupName.slice(0, 8);
+    });
+    const matchedYtd = ytdHierarki.find(item => {
+      const n = normalizeLabel(item.label);
+      return n.includes(normGroupName) || normGroupName.includes(n) || n.slice(0, 8) === normGroupName.slice(0, 8);
+    });
+    const matchedMom = momHierarki.find(item => {
+      const n = normalizeLabel(item.label);
+      return n.includes(normGroupName) || normGroupName.includes(n) || n.slice(0, 8) === normGroupName.slice(0, 8);
+    });
+    const matchedIhk = ihkHierarki.find(item => {
+      const n = normalizeLabel(item.label);
+      return n.includes(normGroupName) || normGroupName.includes(n) || n.slice(0, 8) === normGroupName.slice(0, 8);
+    });
+
+    const valYoyHierarki = matchedYoy?.data ? Object.values(matchedYoy.data)[monthIdx] : undefined;
+    const valYtdHierarki = matchedYtd?.data ? Object.values(matchedYtd.data)[monthIdx] : undefined;
+    const valMomHierarki = matchedMom?.data ? Object.values(matchedMom.data)[monthIdx] : undefined;
+    const valIhkHierarki = matchedIhk?.data ? Object.values(matchedIhk.data)[monthIdx] : undefined;
+    const valPrevIhkHierarki = (matchedIhk?.data && monthIdx > 0) ? Object.values(matchedIhk.data)[monthIdx - 1] : undefined;
+
+    // Resolve IHK Berjalan
+    let gIhkBerjalan = "107.00";
+    if (valIhkHierarki !== undefined && valIhkHierarki !== null) {
+      gIhkBerjalan = String(valIhkHierarki);
+    } else if (row?.[8] !== undefined && String(row[8]).trim() !== "") {
+      gIhkBerjalan = String(row[8]);
+    } else if (varMap[`${prefix}IhkBerjalan`]) {
+      gIhkBerjalan = varMap[`${prefix}IhkBerjalan`];
+    }
+
+    // Resolve IHK Sebelumnya
+    let gIhkSebelum = "105.00";
+    if (valPrevIhkHierarki !== undefined && valPrevIhkHierarki !== null) {
+      gIhkSebelum = String(valPrevIhkHierarki);
+    } else if (row?.[7] !== undefined && String(row[7]).trim() !== "") {
+      gIhkSebelum = String(row[7]);
+    } else if (varMap[`${prefix}IhkSebelumnya`]) {
+      gIhkSebelum = varMap[`${prefix}IhkSebelumnya`];
+    }
+
+    // Resolve Inflasi MoM
+    let gMtm = "0.20";
+    if (valMomHierarki !== undefined && valMomHierarki !== null) {
+      gMtm = String(valMomHierarki);
+    } else if (row?.[9] !== undefined && String(row[9]).trim() !== "") {
+      gMtm = String(row[9]);
+    } else if (varMap[`${prefix}AndilMtm`]) {
+      gMtm = varMap[`${prefix}AndilMtm`];
+    }
+
+    // Resolve Inflasi YtD
+    let gYtd = "1.50";
+    if (valYtdHierarki !== undefined && valYtdHierarki !== null) {
+      gYtd = String(valYtdHierarki);
+    } else if (row?.[10] !== undefined && String(row[10]).trim() !== "" && String(row[10]) !== "0") {
+      gYtd = String(row[10]);
+    } else if (row?.[10] !== undefined && String(row[10]).trim() !== "") {
+      gYtd = String(row[10]);
+    } else if (varMap[`${prefix}Ytd`]) {
+      gYtd = varMap[`${prefix}Ytd`];
+    }
+
+    // Resolve Inflasi YoY
+    let gYoy = "2.50";
+    if (valYoyHierarki !== undefined && valYoyHierarki !== null) {
+      gYoy = String(valYoyHierarki);
+    } else if (row?.[11] !== undefined && String(row[11]).trim() !== "" && String(row[11]) !== "0") {
+      gYoy = String(row[11]);
+    } else if (row?.[11] !== undefined && String(row[11]).trim() !== "") {
+      gYoy = String(row[11]);
+    } else if (varMap[`${prefix}Yoy`]) {
+      gYoy = varMap[`${prefix}Yoy`];
+    }
+
+    // Resolve Andil
+    const gWeight = row?.[6] ? parseFloat(row[6]) : (100 / 11);
+    const gAndilMtm = ((gWeight * (parseFloat(gMtm) || 0)) / 100).toFixed(2);
+    const gAndilYoy = ((gWeight * (parseFloat(gYoy) || 0)) / 100).toFixed(2);
+
     const gIhkPembanding = varMap[`${prefix}IhkPembanding`] || (parseFloat(gIhkBerjalan) * 0.97).toFixed(2);
 
     // Table 1 values
@@ -217,8 +303,8 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
     varMap[`${prefix}IhkBerjalan`] = gIhkBerjalan;
     varMap[`${prefix}Ytd`] = gYtd;
     varMap[`${prefix}Yoy`] = gYoy;
-    varMap[`${prefix}AndilMtm`] = gMtm;
-    varMap[`${prefix}AndilYoy`] = gAndil;
+    varMap[`${prefix}AndilMtm`] = gAndilMtm;
+    varMap[`${prefix}AndilYoy`] = gAndilYoy;
 
     // Narrative names & indicators
     const capPrefix = prefix.charAt(0).toUpperCase() + prefix.slice(1);
@@ -227,11 +313,11 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
     const numVal = parseFloat(gYoy) || 0;
     const absVal = Math.abs(numVal).toFixed(2);
     varMap[`indeks${capPrefix}Yoy`] = absVal;
-    varMap[`andil${capPrefix}Yoy`] = Math.abs(parseFloat(gAndil) || 0).toFixed(2);
+    varMap[`andil${capPrefix}Yoy`] = Math.abs(parseFloat(gAndilYoy) || 0).toFixed(2);
 
     if (numVal < 0) {
       varMap[`penurunan${capPrefix}Yoy`] = absVal;
-      varMap[`andilDeflasi${capPrefix}Yoy`] = Math.abs(parseFloat(gAndil) || 0).toFixed(2);
+      varMap[`andilDeflasi${capPrefix}Yoy`] = Math.abs(parseFloat(gAndilYoy) || 0).toFixed(2);
     }
   }
 

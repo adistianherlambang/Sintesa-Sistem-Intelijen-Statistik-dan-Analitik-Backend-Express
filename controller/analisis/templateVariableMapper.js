@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { DEFAULT_FALLBACK_NARASI } from "./narasiKelompokController.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -509,6 +510,13 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
   varMap["jumlahSubkelompokInflasi"] = "2";
   varMap["jumlahSubkelompokStabil"] = "1";
   varMap["keteranganAndilInflasiMtm"] = "memberikan andil inflasi m-to-m yang relatif stabil";
+  varMap["keteranganAndilInflasiMtmPakaian"] = DEFAULT_FALLBACK_NARASI.pakaian;
+  varMap["keteranganAndilInflasiMtmPerumahan"] = DEFAULT_FALLBACK_NARASI.perumahan;
+  varMap["keteranganAndilInflasiMtmTransportasi"] = DEFAULT_FALLBACK_NARASI.transportasi;
+  varMap["keteranganAndilInflasiMtmRekreasi"] = DEFAULT_FALLBACK_NARASI.rekreasi;
+  varMap["keteranganAndilInflasiMtmPendidikan"] = DEFAULT_FALLBACK_NARASI.pendidikan;
+  varMap["keteranganAndilInflasiMtmRestoran"] = DEFAULT_FALLBACK_NARASI.restoran;
+  varMap["keteranganAndilInflasiMtmPerawatan"] = DEFAULT_FALLBACK_NARASI.perawatan;
   varMap["keteranganSubkelompokStabil"] = "terpantau stabil dan tidak mengalami perubahan indeks harga";
   varMap["subkelompokInflasi"] = "Makanan";
   varMap["subkelompokDeflasi"] = "Minuman Tidak Beralkohol";

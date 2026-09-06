@@ -382,18 +382,64 @@ const getBillingHistory = async () => {
 
 ### Endpoint Agregat: `POST /api/analisis/inflasi-ihk` atau `GET /api/analisis/inflasi-ihk`
 
-Mengambil seluruh data analisis inflasi dan IHK untuk kota tertentu dalam satu request (tidak perlu memanggil satu per satu):
-- **Inflasi Umum**: MoM, YoY, YtD
-- **IHK Umum**: IHK sekarang, IHK tahun lalu, IHK 2 tahun lalu
-- **Komoditas Inflasi**: MoM, YoY, YtD
-- **Komoditas IHK**: Indeks harga konsumen tingkat komoditas
-- **Peramalan (Forecast)**: Hasil forecasting ANN jika tersedia
-- **Bobot Komoditas**: Data pembobotan komoditas dari `bobot.json`
+Mengambil seluruh data analisis inflasi dan IHK untuk kota tertentu dalam satu request dengan format respon terstandarisasi:
 
+#### Format JSON Response:
+```json
+{
+  "kota": "KOTA METRO",
+  "inflasi": {
+    "mom": {
+      "data": [],
+      "prevYear": [],
+      "prev2Year": []
+    },
+    "yoy": {
+      "data": [],
+      "prevYear": [],
+      "prev2Year": []
+    },
+    "ytd": {
+      "data": [],
+      "prevYear": [],
+      "prev2Year": []
+    }
+  },
+  "ihk": {
+    "data": [],
+    "prevYear": [],
+    "prev2Year": []
+  },
+  "komoditasInflasi": {
+    "mom": {
+      "hierarki": [],
+      "prevYear": [],
+      "prev2Year": []
+    },
+    "yoy": {
+      "hierarki": [],
+      "prevYear": [],
+      "prev2Year": []
+    },
+    "ytd": {
+      "hierarki": [],
+      "prevYear": [],
+      "prev2Year": []
+    }
+  },
+  "komoditasIHK": {
+    "hierarki": [],
+    "prevYear": [],
+    "prev2Year": []
+  },
+  "bobot": []
+}
+```
+
+#### Contoh Pemanggilan (React.js):
 ```javascript
 import api from "./client";
 
-// Contoh pemanggilan
 const fetchInflasiIhkAnalisis = async (namaKota) => {
   try {
     const response = await api.post("/analisis/inflasi-ihk", {
@@ -401,12 +447,12 @@ const fetchInflasiIhkAnalisis = async (namaKota) => {
     });
 
     const {
-      inflasi,       // { mom: {...}, yoy: {...}, ytd: {...} }
-      ihk,           // { data: [...], prevYear: [...], ... }
-      komoditas,     // { mom: {...}, yoy: {...}, ytd: {...} }
-      komoditasIhk,  // { hierarki: [...], prevYearList: [...], ... }
-      forecast,      // { forecast: [...], ... } atau null
-      bobot,         // { tahun: 2022, bobot: [...] }
+      kota,
+      inflasi,          // { mom: { data, prevYear, prev2Year }, yoy: {...}, ytd: {...} }
+      ihk,              // { data, prevYear, prev2Year }
+      komoditasInflasi, // { mom: { hierarki, prevYear, prev2Year }, yoy: {...}, ytd: {...} }
+      komoditasIHK,     // { hierarki, prevYear, prev2Year }
+      bobot,            // [ { kelompok, bobot, ... }, ... ]
     } = response.data;
 
     return response.data;
@@ -415,4 +461,5 @@ const fetchInflasiIhkAnalisis = async (namaKota) => {
   }
 };
 ```
+
 

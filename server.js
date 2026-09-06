@@ -4,6 +4,12 @@ import axios from "axios";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import https from "https";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 //api
 import api from "./api/api.js";
@@ -83,6 +89,20 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+// Serve Word Editor Engine (from test/wordnew/frontend/dist)
+const WORDNEW_DIST = path.resolve(__dirname, "../../test/wordnew/frontend/dist");
+if (fs.existsSync(WORDNEW_DIST)) {
+  app.use("/word-editor", express.static(WORDNEW_DIST));
+  console.log(`[Server] Word Editor Engine mounted at /word-editor from ${WORDNEW_DIST}`);
+}
+
+// Serve exported analysis files
+const EXPORT_DIR = path.resolve(__dirname, "export/analysis_files");
+if (!fs.existsSync(EXPORT_DIR)) {
+  fs.mkdirSync(EXPORT_DIR, { recursive: true });
+}
+app.use("/analysis-files", express.static(EXPORT_DIR));
 
 app.use("/api", api);
 

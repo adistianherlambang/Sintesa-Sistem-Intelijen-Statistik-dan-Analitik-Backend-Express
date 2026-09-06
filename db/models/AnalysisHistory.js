@@ -16,8 +16,16 @@ const AnalysisHistorySchema = new mongoose.Schema(
       required: true,
     },
     analysisFile: {
-      type: String, // Filename or identifier of the IDML file saved in filesystem
-      required: true,
+      type: String, // Filename or identifier of the file (DOCX/IDML) saved in filesystem
+      default: "",
+    },
+    docxFile: {
+      type: String, // Filename of the DOCX file in export/analysis_files
+      default: "",
+    },
+    pdfFile: {
+      type: String, // Filename of the PDF file in export/analysis_files
+      default: "",
     },
   },
   {

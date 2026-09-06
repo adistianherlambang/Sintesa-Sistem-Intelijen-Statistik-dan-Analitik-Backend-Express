@@ -60,7 +60,7 @@ export const getUserAnalysisHistory = async (userId) => {
 /**
  * Resolve and verify file path for download
  */
-export const getAnalysisFilePath = async (userId, historyId) => {
+export const getAnalysisFilePath = async (userId, historyId, format = "auto") => {
   if (!userId || !historyId) {
     throw new Error("userId dan historyId wajib diisi");
   }
@@ -75,57 +75,61 @@ export const getAnalysisFilePath = async (userId, historyId) => {
     throw new Error("Akses ditolak. Riwayat analisis bukan milik Anda.");
   }
 
-  let filePath = path.join(EXPORT_DIR, history.analysisFile);
-  if (!fs.existsSync(filePath)) {
-    // Fallback: search for any file belonging to the user for the same report/period
-    const match = history.analysisFile.match(/^([a-f0-9]+)_(\d+)_(.+)$/i);
-    if (match) {
-      const suffix = match[3]; // e.g. "brs_KOTA_METRO_Mei_2026.idml"
-      if (fs.existsSync(EXPORT_DIR)) {
-        const files = fs.readdirSync(EXPORT_DIR);
-        const fallbackFile = files.find(
-          (f) => f.startsWith(userId.toString()) && f.endsWith(suffix),
-        );
-        if (fallbackFile) {
-          const fallbackPath = path.join(EXPORT_DIR, fallbackFile);
-          try {
-            fs.copyFileSync(fallbackPath, filePath);
-            console.log(
-              `[Download Fallback] Restored missing file ${history.analysisFile} using fallback ${fallbackFile}`,
-            );
+  let targetFilename = "";
+  let ext = "docx";
 
-            // Also check and copy corresponding PDF if it exists
-            const fallbackPdfFile = fallbackFile.replace(/\.idml$/, ".pdf");
-            const targetPdfFile = history.analysisFile.replace(
-              /\.idml$/,
-              ".pdf",
-            );
-            const fallbackPdfPath = path.join(EXPORT_DIR, fallbackPdfFile);
-            const targetPdfPath = path.join(EXPORT_DIR, targetPdfFile);
-            if (fs.existsSync(fallbackPdfPath)) {
-              fs.copyFileSync(fallbackPdfPath, targetPdfPath);
-              console.log(
-                `[Download Fallback] Restored missing PDF file ${targetPdfFile} using fallback ${fallbackPdfFile}`,
-              );
-            }
-          } catch (err) {
-            console.error(
-              `[Download Fallback] Failed to copy fallback file:`,
-              err.message,
-            );
-            filePath = fallbackPath;
-          }
-        }
-      }
+  if (format === "pdf") {
+    ext = "pdf";
+    targetFilename =
+      history.pdfFile ||
+      (history.docxFile
+        ? history.docxFile.replace(/\.[^.]+$/, ".pdf")
+        : history.analysisFile
+          ? history.analysisFile.replace(/\.[^.]+$/, ".pdf")
+          : "");
+  } else if (format === "docx") {
+    ext = "docx";
+    targetFilename =
+      history.docxFile ||
+      (history.analysisFile && history.analysisFile.endsWith(".docx")
+        ? history.analysisFile
+        : history.analysisFile
+          ? history.analysisFile.replace(/\.[^.]+$/, ".docx")
+          : "");
+  } else {
+    // auto: prefer docx, then analysisFile
+    if (history.docxFile) {
+      targetFilename = history.docxFile;
+      ext = "docx";
+    } else if (history.analysisFile) {
+      targetFilename = history.analysisFile;
+      ext = path.extname(history.analysisFile).slice(1) || "docx";
+    }
+  }
+
+  let filePath = path.join(EXPORT_DIR, targetFilename);
+
+  // Fallback check
+  if (!fs.existsSync(filePath)) {
+    if (
+      history.analysisFile &&
+      fs.existsSync(path.join(EXPORT_DIR, history.analysisFile))
+    ) {
+      filePath = path.join(EXPORT_DIR, history.analysisFile);
+      ext = path.extname(history.analysisFile).slice(1) || ext;
     }
   }
 
   if (!fs.existsSync(filePath)) {
-    throw new Error("File IDML tidak ditemukan di server");
+    throw new Error(`File ${ext.toUpperCase()} tidak ditemukan di server`);
   }
 
+  const safeTitle = (history.title || "Laporan_Analisis").replace(
+    /[^a-zA-Z0-9.\-_]/g,
+    "_",
+  );
   return {
     filePath,
-    filename: history.title.replace(/[^a-zA-Z0-9]/g, "_") + ".idml",
+    filename: `${safeTitle}.${ext}`,
   };
 };

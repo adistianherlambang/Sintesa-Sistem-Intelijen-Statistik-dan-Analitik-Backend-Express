@@ -305,11 +305,35 @@ router.get(
   authMiddleware,
   asyncRoute(async (req, res) => {
     const { id } = req.params;
-    const { filePath, filename } = await getAnalysisFilePath(req.user._id, id);
+    const format = req.query.format || "docx";
+    const { filePath, filename } = await getAnalysisFilePath(
+      req.user._id,
+      id,
+      format,
+    );
 
     await logActivity(
       req.user._id,
-      `Mengunduh file analisis IDML untuk riwayat ID: ${id}`,
+      `Mengunduh file analisis (${format.toUpperCase()}) untuk riwayat ID: ${id}`,
+    );
+    res.download(filePath, filename);
+  }),
+);
+
+router.get(
+  "/analysis/:id/download/docx",
+  authMiddleware,
+  asyncRoute(async (req, res) => {
+    const { id } = req.params;
+    const { filePath, filename } = await getAnalysisFilePath(
+      req.user._id,
+      id,
+      "docx",
+    );
+
+    await logActivity(
+      req.user._id,
+      `Mengunduh file analisis DOCX untuk riwayat ID: ${id}`,
     );
     res.download(filePath, filename);
   }),
@@ -320,18 +344,17 @@ router.get(
   authMiddleware,
   asyncRoute(async (req, res) => {
     const { id } = req.params;
-    const { filePath, filename } = await getAnalysisFilePath(req.user._id, id);
-    const pdfFilePath = filePath.replace(/\.idml$/, ".pdf");
-    const pdfFilename = filename.replace(/\.idml$/, ".pdf");
+    const { filePath, filename } = await getAnalysisFilePath(
+      req.user._id,
+      id,
+      "pdf",
+    );
 
-    if (!fs.existsSync(pdfFilePath)) {
-      return res
-        .status(404)
-        .json({ message: "File PDF tidak ditemukan di server" });
-    }
-
-    await logActivity(req.user._id, `Mengunduh file analisis`);
-    res.download(pdfFilePath, pdfFilename);
+    await logActivity(
+      req.user._id,
+      `Mengunduh file analisis PDF untuk riwayat ID: ${id}`,
+    );
+    res.download(filePath, filename);
   }),
 );
 

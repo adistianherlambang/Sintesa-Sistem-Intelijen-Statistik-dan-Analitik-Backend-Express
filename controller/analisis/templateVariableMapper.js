@@ -43,8 +43,8 @@ const COMMODITY_NAMES = {
  */
 function loadTemplateSchema() {
   const possiblePaths = [
-    path.resolve(__dirname, "../../../../test/templat/inflasi&ihk/template.json"),
-    path.resolve(__dirname, "../../../../test/wordnew/frontend/template/template.json"),
+    path.resolve(__dirname, "../../../templat/inflasi&ihk/template.json"),
+    path.resolve(__dirname, "../../../../templat/inflasi&ihk/template.json"),
   ];
 
   for (const p of possiblePaths) {

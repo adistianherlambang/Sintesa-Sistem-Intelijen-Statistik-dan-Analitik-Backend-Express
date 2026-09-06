@@ -340,6 +340,7 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
   varMap["umumIhkBerjalan"] = headlineIhk;
   varMap["umumYtd"] = headlineYtd;
   varMap["umumYoy"] = headlineYoy;
+  varMap["umumMtm"] = headlineMtm;
   varMap["umumAndilMtm"] = headlineMtm;
   varMap["umumAndilYoy"] = headlineYoy;
 

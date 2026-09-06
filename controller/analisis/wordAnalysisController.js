@@ -4,7 +4,12 @@ import { fileURLToPath } from "url";
 import AdmZip from "adm-zip";
 import AnalysisHistory from "../../db/models/AnalysisHistory.js";
 import { logActivity } from "../user/activityController.js";
-import { buildVariableMapFromDataset, renderInflasiIhkTemplate } from "./templateVariableMapper.js";
+import {
+  buildVariableMapFromDataset,
+  renderInflasiIhkTemplate,
+  loadInflasiIhkTemplate,
+  renderTemplateObject
+} from "./templateVariableMapper.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,71 +33,218 @@ const sanitizeName = (str) => {
 };
 
 /**
- * Generate XML baris tabel 3 (IHK Bulanan 3 Tahun) sesuai inflasiIHK.json
+ * Helper: Hitung lebar kolom dinamis agar pas 100% margin (totalWidth dxa)
  */
-function buildTable3RowsXml() {
-  const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-  const mLower = ["januari", "februari", "maret", "april", "mei", "juni", "juli", "agustus", "september", "oktober", "november", "desember"];
+function calculateColumnWidths(headers, totalWidth = 9638) {
+  const n = headers.length;
+  if (n <= 1) return [totalWidth];
+  if (n === 4 && totalWidth === 9638) return [4500, 1700, 1700, 1738];
+  if (n === 4 && totalWidth === 4600) return [1600, 1000, 1000, 1000];
+  if (n === 8 && totalWidth === 9638) return [2500, 1000, 1000, 1000, 1000, 1000, 1050, 1088];
+  if (n === 9 && totalWidth === 9638) return [2358, 910, 910, 910, 910, 910, 910, 910, 910];
 
-  let rows = "";
-  // Header row - background #f68839 (F68839)
-  rows += '<w:tr><w:trPr><w:cantSplit/></w:trPr>' +
-    '<w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F68839"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="40" w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:color w:val="FFFFFF"/><w:sz w:val="16"/></w:rPr><w:t>Periode</w:t></w:r></w:p></w:tc>' +
-    '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F68839"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="40" w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:color w:val="FFFFFF"/><w:sz w:val="16"/></w:rPr><w:t>${tahun1}</w:t></w:r></w:p></w:tc>' +
-    '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F68839"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="40" w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:color w:val="FFFFFF"/><w:sz w:val="16"/></w:rPr><w:t>${tahun2}</w:t></w:r></w:p></w:tc>' +
-    '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F68839"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="40" w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:color w:val="FFFFFF"/><w:sz w:val="16"/></w:rPr><w:t>${tahun3}</w:t></w:r></w:p></w:tc>' +
-    '</w:tr>' +
-    // Numbering row - background #ffd684 (FFD684)
-    '<w:tr><w:trPr><w:cantSplit/></w:trPr>' +
-    '<w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="FFD684"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:color w:val="475569"/><w:sz w:val="14"/></w:rPr><w:t>(1)</w:t></w:r></w:p></w:tc>' +
-    '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="FFD684"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:color w:val="475569"/><w:sz w:val="14"/></w:rPr><w:t>(2)</w:t></w:r></w:p></w:tc>' +
-    '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="FFD684"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:color w:val="475569"/><w:sz w:val="14"/></w:rPr><w:t>(3)</w:t></w:r></w:p></w:tc>' +
-    '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="FFD684"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:color w:val="475569"/><w:sz w:val="14"/></w:rPr><w:t>(4)</w:t></w:r></w:p></w:tc>' +
-    '</w:tr>';
-
-  // Monthly rows with alternating colors #fff5e6 and #fff0d3
-  months.forEach((m, idx) => {
-    const rowColor = (idx % 2 === 0) ? "FFF5E6" : "FFF0D3";
-    const vp = mLower[idx];
-    rows += '<w:tr><w:trPr><w:cantSplit/></w:trPr>' +
-      '<w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="' + rowColor + '"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/></w:rPr><w:t>' + m + '</w:t></w:r></w:p></w:tc>' +
-      '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="' + rowColor + '"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/></w:rPr><w:t>${' + vp + 'Tahun1}</w:t></w:r></w:p></w:tc>' +
-      '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="' + rowColor + '"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/></w:rPr><w:t>${' + vp + 'Tahun2}</w:t></w:r></w:p></w:tc>' +
-      '<w:tc><w:tcPr><w:tcW w:w="1000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="' + rowColor + '"/><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:spacing w:before="30" w:after="30"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/></w:rPr><w:t>${' + vp + 'Tahun3}</w:t></w:r></w:p></w:tc>' +
-      '</w:tr>';
-  });
-  return rows;
+  const col1Width = n >= 7 ? Math.round(totalWidth * 0.25) : Math.round(totalWidth * 0.45);
+  const remainingWidth = totalWidth - col1Width;
+  const otherWidth = Math.floor(remainingWidth / (n - 1));
+  const widths = [col1Width];
+  let sum = col1Width;
+  for (let i = 1; i < n - 1; i++) {
+    widths.push(otherWidth);
+    sum += otherWidth;
+  }
+  widths.push(totalWidth - sum);
+  return widths;
 }
 
 /**
- * Generate XML Section 2 (2 kolom: Penjelasan Teknis & Perubahan Tahun Dasar + Tabel 3)
+ * Helper: Escape XML special characters
  */
-function buildSection2WordXml() {
-  const table3Rows = buildTable3RowsXml();
-  return '<w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
+function escapeXml(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+/**
+ * Generate XML tabel Word dinamis (<w:tbl>) langsung dari markdown & style di inflasiIHK.json
+ */
+export function buildTableWordXmlFromMarkdown(tableConfig, varMap = {}, totalWidth = 9638) {
+  if (!tableConfig || !tableConfig.markdown) return "";
+
+  let md = tableConfig.markdown;
+  for (const [k, v] of Object.entries(varMap)) {
+    if (v !== undefined && v !== null) {
+      md = md.split("${" + k + "}").join(String(v));
+    }
+  }
+
+  const lines = md.split("\n").map(l => l.trim()).filter(Boolean);
+  if (lines.length === 0) return "";
+
+  const rows = [];
+  for (const line of lines) {
+    if (/^\|[\s\-:|—]+\|$/.test(line)) {
+      continue;
+    }
+    const cells = line.split("|").map(c => c.trim());
+    if (cells.length >= 2 && cells[0] === "" && cells[cells.length - 1] === "") {
+      cells.shift();
+      cells.pop();
+    }
+    rows.push(cells);
+  }
+
+  if (rows.length === 0) return "";
+
+  const headerCells = rows[0];
+  const numCols = headerCells.length;
+  const colWidths = calculateColumnWidths(headerCells, totalWidth);
+
+  const headerBg = (tableConfig.style?.header?.backgroundColor || "F68839").replace("#", "");
+  const numberingBg = (tableConfig.style?.numbering?.backgroundColor || "FFD684").replace("#", "");
+  const rowColors = (tableConfig.style?.rowColors || ["FFF5E6", "FFF0D3"]).map(c => c.replace("#", ""));
+
+  let xml = `<w:tbl>` +
+    `<w:tblPr>` +
+    `<w:tblW w:w="${totalWidth}" w:type="dxa"/>` +
+    `<w:jc w:val="center"/>` +
+    `<w:tblBorders>` +
+    `<w:top w:val="single" w:sz="8" w:space="0" w:color="${headerBg}"/>` +
+    `<w:bottom w:val="single" w:sz="8" w:space="0" w:color="${headerBg}"/>` +
+    `<w:left w:val="none" w:sz="0" w:space="0" w:color="auto"/>` +
+    `<w:right w:val="none" w:sz="0" w:space="0" w:color="auto"/>` +
+    `<w:insideH w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>` +
+    `<w:insideV w:val="none" w:sz="0" w:space="0" w:color="auto"/>` +
+    `</w:tblBorders>` +
+    `<w:tblCellMar>` +
+    `<w:top w:w="80" w:type="dxa"/>` +
+    `<w:bottom w:w="80" w:type="dxa"/>` +
+    `<w:left w:w="100" w:type="dxa"/>` +
+    `<w:right w:w="100" w:type="dxa"/>` +
+    `</w:tblCellMar>` +
+    `</w:tblPr>` +
+    `<w:tblGrid>` +
+    colWidths.map(w => `<w:gridCol w:w="${w}"/>`).join("") +
+    `</w:tblGrid>`;
+
+  // Row 1: Header
+  xml += `<w:tr><w:trPr><w:tblHeader/><w:cantSplit/></w:trPr>`;
+  for (let c = 0; c < numCols; c++) {
+    const w = colWidths[c] || 1000;
+    const text = escapeXml(headerCells[c] || "");
+    xml += `<w:tc>` +
+      `<w:tcPr><w:tcW w:w="${w}" w:type="dxa"/><w:vAlign w:val="center"/><w:shd w:val="clear" w:color="auto" w:fill="${headerBg}"/></w:tcPr>` +
+      `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr>` +
+      `<w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:color w:val="FFFFFF"/><w:sz w:val="16"/><w:szCs w:val="16"/></w:rPr><w:t>${text}</w:t></w:r>` +
+      `</w:p></w:tc>`;
+  }
+  xml += `</w:tr>`;
+
+  // Data rows or Numbering row
+  let dataRowIdx = 0;
+  for (let r = 1; r < rows.length; r++) {
+    const row = rows[r];
+    const isNumbering = row.some(cell => /^\(\d+\)$/.test(cell.trim()));
+
+    if (isNumbering) {
+      xml += `<w:tr><w:trPr><w:tblHeader/><w:cantSplit/></w:trPr>`;
+      for (let c = 0; c < numCols; c++) {
+        const w = colWidths[c] || 1000;
+        const text = escapeXml(row[c] || "");
+        const align = c === 0 ? "center" : "right";
+        xml += `<w:tc>` +
+          `<w:tcPr><w:tcW w:w="${w}" w:type="dxa"/><w:vAlign w:val="center"/><w:shd w:val="clear" w:color="auto" w:fill="${numberingBg}"/></w:tcPr>` +
+          `<w:p><w:pPr><w:jc w:val="${align}"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr>` +
+          `<w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:color w:val="475569"/><w:sz w:val="15"/><w:szCs w:val="15"/></w:rPr><w:t>${text}</w:t></w:r>` +
+          `</w:p></w:tc>`;
+      }
+      xml += `</w:tr>`;
+    } else {
+      const fill = rowColors.length > 0 ? rowColors[dataRowIdx % rowColors.length] : "FFFFFF";
+      dataRowIdx++;
+      const isHeadline = row[0] && row[0].toLowerCase().includes("umum");
+
+      xml += `<w:tr><w:trPr><w:cantSplit/></w:trPr>`;
+      for (let c = 0; c < numCols; c++) {
+        const w = colWidths[c] || 1000;
+        const text = escapeXml(row[c] || "");
+        const align = c === 0 ? "left" : "right";
+        const boldXml = isHeadline ? `<w:b/><w:bCs/>` : "";
+        xml += `<w:tc>` +
+          `<w:tcPr><w:tcW w:w="${w}" w:type="dxa"/><w:vAlign w:val="center"/><w:shd w:val="clear" w:color="auto" w:fill="${fill}"/></w:tcPr>` +
+          `<w:p><w:pPr><w:jc w:val="${align}"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr>` +
+          `<w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/>${boldXml}<w:sz w:val="16"/><w:szCs w:val="16"/><w:color w:val="1E293B"/></w:rPr><w:t>${text}</w:t></w:r>` +
+          `</w:p></w:tc>`;
+      }
+      xml += `</w:tr>`;
+    }
+  }
+
+  xml += `</w:tbl>`;
+  return xml;
+}
+
+/**
+ * Generate XML Section 2 dinamis langsung dari inflasiIHK.json (content[2])
+ */
+export function buildSection2WordXmlFromTemplate(section2Config, varMap = {}) {
+  if (!section2Config) return "";
+
+  const col0 = section2Config.column?.[0] || {};
+  const col1 = section2Config.column?.[1] || {};
+
+  const col0Title = renderTemplateObject(col0.title?.desc || "Penjelasan Teknis", varMap);
+  const col0Desc = renderTemplateObject(col0.desc || "", varMap);
+  const col0Paragraphs = col0Desc.split("\n").map(l => l.trim()).filter(Boolean);
+
+  const col1Title = renderTemplateObject(col1.title?.desc || "Perubahan Tahun Dasar", varMap);
+  const col1Desc = renderTemplateObject(col1.desc || "", varMap);
+  const col1Paragraphs = col1Desc.split("\n").map(l => l.trim()).filter(Boolean);
+
+  const table3Config = col1.table;
+  const table3Title = renderTemplateObject(table3Config?.judul || "Tabel 3", varMap);
+  const table3Xml = buildTableWordXmlFromMarkdown(table3Config, varMap, 4600);
+
+  let xml = '<w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
     '<w:tbl>' +
     '<w:tblPr><w:tblW w:w="9600" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr>' +
     '<w:tr>' +
+    // Left Column
     '<w:tc>' +
     '<w:tcPr><w:tcW w:w="4600" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>' +
-    '<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="FEE3CE"/><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>  Penjelasan Teknis</w:t></w:r></w:p>' +
-    '<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/><w:color w:val="334155"/></w:rPr><w:t>SBH 2022 dilaksanakan di 150 kabupaten/kota, yang terdiri dari 38 ibukota provinsi dan 112 kabupaten/kota. Dari 150 kabupaten/kota tersebut, 90 kota merupakan lanjutan kabupaten/kota SBH 2018 yang mencakup wilayah urban dan 60 kabupaten merupakan kabupaten tambahan yang mencakup wilayah urban dan rural. Survei ini dilaksanakan di daerah perkotaan dan pedesaan dengan total sampel sebanyak 240.000 rumah tangga. Paket komoditas hasil SBH 2022 ${namaKota} berjumlah 271 komoditas.</w:t></w:r></w:p>' +
-    '<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/><w:color w:val="334155"/></w:rPr><w:t>Pengelompokan komoditas didasarkan pada Classification of Individual Consumption According to Purpose (COICOP) 2018. Secara nasional pengelompokan komoditas terdiri dari 11 kelompok dan 43 subkelompok. Adapun untuk level Kabupaten/Kota/Provinsi pengelompokan komoditas terdiri dari 11 kelompok dan dapat bervariasi jumlah subkelompoknya.</w:t></w:r></w:p>' +
-    '<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/><w:color w:val="334155"/></w:rPr><w:t>Perubahan metodologi IHK (2022=100) dalam pemutakhiran Diagram Timbang dan penghitungan Indeks Harga Konsumen mengacu pada Manual standar internasional (CPI Manual 2020).</w:t></w:r></w:p>' +
-    '</w:tc>' +
+    '<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="FEE3CE"/><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>  ' + escapeXml(col0Title) + '</w:t></w:r></w:p>';
+
+  for (const p of col0Paragraphs) {
+    xml += '<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/><w:color w:val="334155"/></w:rPr><w:t>' + escapeXml(p) + '</w:t></w:r></w:p>';
+  }
+
+  xml += '</w:tc>' +
     '<w:tc><w:tcPr><w:tcW w:w="400" w:type="dxa"/></w:tcPr><w:p/></w:tc>' +
+    // Right Column
     '<w:tc>' +
     '<w:tcPr><w:tcW w:w="4600" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>' +
-    '<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="FEE3CE"/><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>  Perubahan Tahun Dasar</w:t></w:r></w:p>' +
-    '<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/><w:color w:val="334155"/></w:rPr><w:t>Adanya pergantian tahun dasar yang baru menyebabkan diskontinuitas indeks harga antara periode berjalan dengan periode sebelumnya. Tabel 3 menyajikan IHK ${wilayah} pada Januari ${tahunAwal} sampai dengan ${bulan} ${tahunAkhir} menurut tahun dasar 2022=100.</w:t></w:r></w:p>' +
-    '<w:p><w:pPr><w:spacing w:before="60" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="15"/><w:color w:val="1E293B"/></w:rPr><w:t>Tabel 3 IHK ${wilayah} Menurut Bulan (2022=100), ${tahunAwal}–${tahunAkhir}</w:t></w:r></w:p>' +
-    '<w:tbl>' +
-    '<w:tblPr><w:tblW w:w="4600" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="E2E8F0"/><w:left w:val="single" w:sz="4" w:space="0" w:color="E2E8F0"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="E2E8F0"/><w:right w:val="single" w:sz="4" w:space="0" w:color="E2E8F0"/><w:insideH w:val="single" w:sz="4" w:space="0" w:color="E2E8F0"/><w:insideV w:val="single" w:sz="4" w:space="0" w:color="E2E8F0"/></w:tblBorders></w:tblPr>' +
-    table3Rows +
-    '</w:tbl>' +
-    '</w:tc>' +
+    '<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="FEE3CE"/><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>  ' + escapeXml(col1Title) + '</w:t></w:r></w:p>';
+
+  for (const p of col1Paragraphs) {
+    xml += '<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/><w:color w:val="334155"/></w:rPr><w:t>' + escapeXml(p) + '</w:t></w:r></w:p>';
+  }
+
+  if (table3Title) {
+    xml += '<w:p><w:pPr><w:spacing w:before="60" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="15"/><w:color w:val="1E293B"/></w:rPr><w:t>' + escapeXml(table3Title) + '</w:t></w:r></w:p>';
+  }
+
+  if (table3Xml) {
+    xml += table3Xml;
+  }
+
+  xml += '</w:tc>' +
     '</w:tr>' +
     '</w:tbl>';
+
+  return xml;
 }
 
 /**
@@ -116,16 +268,6 @@ export function applyInflasiIhkStylingToXml(xmlContent) {
   // 4. Alternating rows: F8FAFC -> FFF0D3
   xml = xml.split("F8FAFC").join("FFF0D3");
   xml = xml.split("f8fafc").join("FFF0D3");
-
-  // 5. Injeksi Section 2 jika belum ada (Penjelasan Teknis & Perubahan Tahun Dasar + Tabel 3)
-  const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
-  if (!xml.includes("Penjelasan Teknis") && xml.includes(contactMarker)) {
-    const contactIdx = xml.lastIndexOf("<w:tbl", xml.indexOf(contactMarker));
-    if (contactIdx !== -1) {
-      const sec2 = buildSection2WordXml();
-      xml = xml.slice(0, contactIdx) + sec2 + xml.slice(contactIdx);
-    }
-  }
 
   return xml;
 }
@@ -164,6 +306,11 @@ export const generateWordBrs = async (req, res) => {
     };
     const varMap = buildVariableMapFromDataset(activeDataset, variables);
 
+    // Load fresh inflasiIHK.json template and rendered values
+    const freshTemplate = loadInflasiIhkTemplate();
+    const renderedTemplateData = renderInflasiIhkTemplate(activeDataset, variables);
+    const rendered = renderedTemplateData?.template || freshTemplate;
+
     // 2. Open BERITA.docx and process all XML files (document.xml, footers, headers)
     const zip = new AdmZip(templatePath);
     const entries = zip.getEntries();
@@ -171,9 +318,102 @@ export const generateWordBrs = async (req, res) => {
     for (const entry of entries) {
       if (entry.entryName.startsWith("word/") && entry.entryName.endsWith(".xml")) {
         let xmlContent = entry.getData().toString("utf8");
-        
-        // Terapkan styling resmi inflasiIHK.json (Orange #f68839, Amber #ffd684, Cream #fff5e6/d3, Peach #fee3ce)
+
         if (entry.entryName === "word/document.xml") {
+          // A. Table 1, Judul, and Footnote dynamically from inflasiIHK.json
+          const table1Config = freshTemplate?.content?.[0]?.desc?.find(d => d.table)?.table;
+          if (table1Config) {
+            const tbl1Start = xmlContent.indexOf("<w:tbl");
+            if (tbl1Start !== -1) {
+              const tbl1End = xmlContent.indexOf("</w:tbl>", tbl1Start) + 8;
+
+              const prevPEnd = xmlContent.lastIndexOf("</w:p>", tbl1Start);
+              const beforePrevPEnd = xmlContent.substring(0, prevPEnd);
+              const prevPMatches = [...beforePrevPEnd.matchAll(/<w:p[\s>]/g)];
+              const prevPStart = prevPMatches[prevPMatches.length - 1]?.index;
+
+              const nextPStart = xmlContent.indexOf("<w:p", tbl1End);
+              const nextPEnd = xmlContent.indexOf("</w:p>", nextPStart) + 6;
+
+              const renderedTbl1Judul = renderTemplateObject(table1Config.judul, varMap);
+              const newTbl1JudulP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="160" w:after="80" w:line="260" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(renderedTbl1Judul)}</w:t></w:r></w:p>`;
+
+              const renderedFootnote = renderTemplateObject(table1Config.footnote?.text || "", varMap);
+              const newFootnoteP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:spacing w:before="60" w:after="80" w:line="220" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="14"/><w:szCs w:val="14"/><w:color w:val="64748B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="14"/><w:szCs w:val="14"/><w:color w:val="64748B"/></w:rPr><w:t>${escapeXml(renderedFootnote)}</w:t></w:r></w:p>`;
+
+              const table1Xml = buildTableWordXmlFromMarkdown(table1Config, varMap, 9638);
+              if (prevPStart !== undefined && nextPEnd !== -1) {
+                xmlContent = xmlContent.slice(0, prevPStart) + newTbl1JudulP + table1Xml + newFootnoteP + xmlContent.slice(nextPEnd);
+              }
+            }
+          }
+
+          // B. Sub-groups 1.1 to 1.11 dynamically from inflasiIHK.json
+          const subGroups = rendered?.content?.[0]?.sub;
+          if (Array.isArray(subGroups) && subGroups.length > 0) {
+            const delimiters = [
+              ...subGroups.map(s => s.title?.desc?.trim() || ""),
+              "Perbandingan Inflasi Antar Tahun"
+            ];
+            let searchPos = 70000;
+            for (let i = 0; i < subGroups.length; i++) {
+              const currentTitle = delimiters[i];
+              const nextTitle = delimiters[i + 1];
+              if (!currentTitle || !nextTitle) continue;
+
+              const currentIdx = xmlContent.indexOf(currentTitle, searchPos);
+              if (currentIdx === -1) continue;
+              const currentPEnd = xmlContent.indexOf("</w:p>", currentIdx) + 6;
+
+              const nextIdx = xmlContent.indexOf(nextTitle, currentPEnd);
+              if (nextIdx === -1) continue;
+              const beforeNext = xmlContent.substring(0, nextIdx);
+              const pMatches = [...beforeNext.matchAll(/<w:p[\s>]/g)];
+              if (pMatches.length === 0) continue;
+              const nextPStart = pMatches[pMatches.length - 1].index;
+
+              const lines = (subGroups[i].desc || "").split("\n").map(l => l.trim()).filter(Boolean);
+              let newPXml = "";
+              for (const line of lines) {
+                newPXml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="both"/><w:spacing w:before="80" w:after="100" w:line="260" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(line)}</w:t></w:r></w:p>`;
+              }
+
+              xmlContent = xmlContent.slice(0, currentPEnd) + newPXml + xmlContent.slice(nextPStart);
+              searchPos = currentPEnd + newPXml.length;
+            }
+          }
+
+          // C. Table 2 & Judul dynamically from inflasiIHK.json
+          const table2Config = freshTemplate?.content?.[1]?.desc?.find(d => d.table)?.table;
+          if (table2Config) {
+            const tbl2Start = xmlContent.indexOf("<w:tbl", 100000);
+            if (tbl2Start !== -1) {
+              const tbl2End = xmlContent.indexOf("</w:tbl>", tbl2Start) + 8;
+              const t2PrevPEnd = xmlContent.lastIndexOf("</w:p>", tbl2Start);
+              const beforeT2PrevPEnd = xmlContent.substring(0, t2PrevPEnd);
+              const t2PMatches = [...beforeT2PrevPEnd.matchAll(/<w:p[\s>]/g)];
+              const t2PrevPStart = t2PMatches[t2PMatches.length - 1]?.index;
+
+              const renderedTbl2Judul = renderTemplateObject(table2Config.judul, varMap);
+              const newTbl2JudulP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="160" w:after="80" w:line="260" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(renderedTbl2Judul)}</w:t></w:r></w:p>`;
+              const table2Xml = buildTableWordXmlFromMarkdown(table2Config, varMap, 9638);
+              if (t2PrevPStart !== undefined && tbl2End !== -1) {
+                xmlContent = xmlContent.slice(0, t2PrevPStart) + newTbl2JudulP + table2Xml + xmlContent.slice(tbl2End);
+              }
+            }
+          }
+
+          // D. Section 2 dynamically from inflasiIHK.json
+          const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
+          if (!xmlContent.includes("Penjelasan Teknis") && xmlContent.includes(contactMarker)) {
+            const contactIdx = xmlContent.lastIndexOf("<w:tbl", xmlContent.indexOf(contactMarker));
+            if (contactIdx !== -1) {
+              const sec2Xml = buildSection2WordXmlFromTemplate(freshTemplate?.content?.[2], varMap);
+              xmlContent = xmlContent.slice(0, contactIdx) + sec2Xml + xmlContent.slice(contactIdx);
+            }
+          }
+
+          // E. Terapkan styling resmi inflasiIHK.json (Orange #f68839, Amber #ffd684, Cream #fff5e6/d3, Peach #fee3ce)
           xmlContent = applyInflasiIhkStylingToXml(xmlContent);
         }
 
@@ -201,8 +441,6 @@ export const generateWordBrs = async (req, res) => {
     const outPath = path.join(EXPORT_DIR, outFilename);
 
     zip.writeZip(outPath);
-
-    const renderedTemplateData = renderInflasiIhkTemplate(activeDataset, variables);
 
     return res.json({
       success: true,

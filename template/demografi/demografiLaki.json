@@ -96,12 +96,6 @@
       ]
     },
     {
-      "img": {
-        "id": "Chart BRS",
-        "width": "100%"
-      }
-    },
-    {
       "column": [
         {
           "title": {
@@ -168,12 +162,6 @@
           ]
         },
         "markdown": "| Periode Proyeksi | Proyeksi Penduduk Laki-Laki (jiwa) | Proyeksi Laju Pertumbuhan (%) | Pangsa Terhadap Total (%) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| ${forecastPeriode1} | ${forecastVal1} | ${forecastLaju1} | ${forecastShare1} |\n| ${forecastPeriode2} | ${forecastVal2} | ${forecastLaju2} | ${forecastShare2} |\n| ${forecastPeriode3} | ${forecastVal3} | ${forecastLaju3} | ${forecastShare3} |"
-      }
-    },
-    {
-      "img": {
-        "id": "Infografis",
-        "width": "100%"
       }
     },
     {

@@ -110,12 +110,6 @@
       ]
     },
     {
-      "img": {
-        "id": "Chart BRS",
-        "width": "100%"
-      }
-    },
-    {
       "column": [
         {
           "title": {
@@ -182,12 +176,6 @@
           ]
         },
         "markdown": "| Periode Proyeksi | Proyeksi Pertumbuhan PDRB ADHK (%) | Proyeksi Konsumsi Rumah Tangga (%) | Proyeksi PMTB (%) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| ${forecastPeriode1} | ${forecastVal1} | ${forecastRt1} | ${forecastPmtb1} |\n| ${forecastPeriode2} | ${forecastVal2} | ${forecastRt2} | ${forecastPmtb2} |\n| ${forecastPeriode3} | ${forecastVal3} | ${forecastRt3} | ${forecastPmtb3} |"
-      }
-    },
-    {
-      "img": {
-        "id": "Infografis",
-        "width": "100%"
       }
     },
     {

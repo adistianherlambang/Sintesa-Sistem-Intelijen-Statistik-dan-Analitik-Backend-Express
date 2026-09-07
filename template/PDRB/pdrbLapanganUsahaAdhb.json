@@ -96,12 +96,6 @@
       ]
     },
     {
-      "img": {
-        "id": "Chart BRS",
-        "width": "100%"
-      }
-    },
-    {
       "column": [
         {
           "title": {
@@ -168,12 +162,6 @@
           ]
         },
         "markdown": "| Periode Proyeksi | Proyeksi Total PDRB (Milyar Rp) | Proyeksi Sektor Utama 1 (Milyar Rp) | Proyeksi Sektor Utama 2 (Milyar Rp) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| ${forecastPeriode1} | ${forecastVal1} | ${forecastSektor1Val1} | ${forecastSektor2Val1} |\n| ${forecastPeriode2} | ${forecastVal2} | ${forecastSektor1Val2} | ${forecastSektor2Val2} |\n| ${forecastPeriode3} | ${forecastVal3} | ${forecastSektor1Val3} | ${forecastSektor2Val3} |"
-      }
-    },
-    {
-      "img": {
-        "id": "Infografis",
-        "width": "100%"
       }
     },
     {

@@ -702,8 +702,9 @@ export const generateWordBrs = async (req, res) => {
             // A. Content 0 (Tabel 1, intro, sub-kelompok) & Content 1 (Tabel 2, intro) murni dari template indikator aktif
             const content0And1Xml = buildContent0And1WordXml(freshTemplate, rendered, varMap);
 
-            // B. Chart BRS
-            const chartBrsXml = chartBrsBuffer
+            // B. Chart BRS (hanya jika didefinisikan dalam template indikator aktif)
+            const hasChartConfig = freshTemplate?.content?.some(c => c.img?.id === "Chart BRS" || c.img?.id?.toLowerCase()?.includes("chart"));
+            const chartBrsXml = (chartBrsBuffer && hasChartConfig)
               ? buildInlineImageWordXml("rIdChartBrs", "Chart BRS", 5715000, 3160687, 999902)
               : "";
             const nextSectionBreakXml = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="816" w:left="1134" w:header="709" w:footer="709" w:gutter="0"/><w:cols w:space="708"/><w:docGrid w:linePitch="360"/></w:sectPr></w:pPr></w:p>`;
@@ -722,8 +723,9 @@ export const generateWordBrs = async (req, res) => {
               }
             }
 
-            // E. Infografis
-            const infografisXml = infografisBuffer
+            // E. Infografis (hanya jika didefinisikan dalam template indikator aktif)
+            const hasInfografisConfig = freshTemplate?.content?.some(c => c.img?.id === "Infografis" || c.img?.id?.toLowerCase()?.includes("infografis"));
+            const infografisXml = (infografisBuffer && hasInfografisConfig)
               ? `<w:p><w:r><w:br w:type="page"/></w:r></w:p>` +
                 buildInlineImageWordXml("rIdInfografis", "Infografis", 5715000, 8096250, 999901)
               : "";

@@ -96,12 +96,6 @@
       ]
     },
     {
-      "img": {
-        "id": "Chart BRS",
-        "width": "100%"
-      }
-    },
-    {
       "column": [
         {
           "title": {
@@ -168,12 +162,6 @@
           ]
         },
         "markdown": "| Periode Proyeksi | Proyeksi Persentase Kemiskinan (%) | Proyeksi Jumlah Penduduk Miskin (ribu jiwa) | Proyeksi Garis Kemiskinan (Rp/kapita/bulan) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| ${forecastPeriode1} | ${forecastVal1} | ${forecastMiskin1} | ${forecastGk1} |\n| ${forecastPeriode2} | ${forecastVal2} | ${forecastMiskin2} | ${forecastGk2} |\n| ${forecastPeriode3} | ${forecastVal3} | ${forecastMiskin3} | ${forecastGk3} |"
-      }
-    },
-    {
-      "img": {
-        "id": "Infografis",
-        "width": "100%"
       }
     },
     {

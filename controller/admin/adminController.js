@@ -1,8 +1,11 @@
+import mongoose from "mongoose";
 import User from "../../db/models/User.js";
 import Subscription from "../../db/models/Subscription.js";
 import BillingTransaction from "../../db/models/BillingTransaction.js";
 import SystemConfig from "../../db/models/SystemConfig.js";
 import PackagePlan from "../../db/models/PackagePlan.js";
+import AnalysisHistory from "../../db/models/AnalysisHistory.js";
+import Infografis from "../../db/models/Infografis.js";
 import { logActivity } from "../user/activityController.js";
 
 // Default plans seed
@@ -76,6 +79,18 @@ const getOrCreateSystemConfig = async () => {
 };
 
 /**
+ * Helper to find a user by _id or userId (UUID string)
+ */
+const findUserByIdOrUUID = async (idOrUUID) => {
+  if (!idOrUUID) return null;
+  if (mongoose.isValidObjectId(idOrUUID)) {
+    const user = await User.findById(idOrUUID);
+    if (user) return user;
+  }
+  return await User.findOne({ userId: idOrUUID });
+};
+
+/**
  * GET /api/admin/stats
  * Dashboard metrics for Administrator
  */
@@ -92,13 +107,19 @@ export const getAdminStats = async (req, res) => {
     const pendingSubscriptions = await Subscription.countDocuments({ status: "pending" });
 
     // Calculate total paid revenue
-    const paidTransactions = await BillingTransaction.find({ status: "paid" });
-    const totalRevenue = paidTransactions.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+    const paidTransactions = await BillingTransaction.find({
+      status: { $in: ["paid", "settlement", "success"] },
+    });
+    const totalRevenue = paidTransactions.reduce(
+      (acc, curr) => acc + (curr.amount || curr.finalAmount || 0),
+      0
+    );
 
-    // Recent 5 transactions
+    // Recent transactions with user populated
     const recentTransactions = await BillingTransaction.find()
+      .populate("userId", "email profile location")
       .sort({ createdAt: -1 })
-      .limit(5)
+      .limit(10)
       .lean();
 
     // Features active count
@@ -106,21 +127,31 @@ export const getAdminStats = async (req, res) => {
     const totalFeatures = Object.keys(featObj).length;
     const activeFeatures = Object.values(featObj).filter((f) => f?.enabled).length;
 
+    // Dataset & Analysis counters
+    const totalAnalyses = await AnalysisHistory.countDocuments();
+    const totalInfografis = await Infografis.countDocuments();
+
+    const statsData = {
+      totalUsers,
+      adminUsers,
+      regularUsers,
+      activeSubscribers: activeSubscriptions,
+      activeSubscriptions,
+      pendingSubscriptions,
+      totalRevenue,
+      totalAnalyses,
+      totalInfografis,
+      recentTransactions,
+      features: {
+        total: totalFeatures,
+        active: activeFeatures,
+      },
+    };
+
     return res.json({
       success: true,
-      stats: {
-        totalUsers,
-        adminUsers,
-        regularUsers,
-        activeSubscriptions,
-        pendingSubscriptions,
-        totalRevenue,
-        recentTransactions,
-        features: {
-          total: totalFeatures,
-          active: activeFeatures,
-        },
-      },
+      stats: statsData,
+      data: statsData,
     });
   } catch (err) {
     console.error("[getAdminStats] Error:", err.message);
@@ -160,27 +191,55 @@ export const getUsersList = async (req, res) => {
       .limit(l)
       .lean();
 
-    // Enrich users with active subscription details
-    const userIds = users.map((u) => u.userId);
+    // Enrich users with active subscription details matching User._id
+    const validObjectIds = users
+      .map((u) => u._id)
+      .filter((id) => mongoose.isValidObjectId(id));
+
     const subscriptions = await Subscription.find({
-      userId: { $in: userIds },
+      userId: { $in: validObjectIds },
       status: "active",
     }).lean();
 
     const subMap = {};
     for (const sub of subscriptions) {
-      subMap[sub.userId] = sub;
+      if (sub.userId) {
+        subMap[sub.userId.toString()] = sub;
+      }
     }
 
-    const enrichedUsers = users.map((u) => ({
-      ...u,
-      role: u.role || "user",
-      subscription: subMap[u.userId] || null,
-    }));
+    const enrichedUsers = users.map((u) => {
+      const sub = u._id ? subMap[u._id.toString()] : null;
+      return {
+        ...u,
+        role: u.role || "user",
+        subscription: sub
+          ? {
+              plan: sub.subscriptionId,
+              status: sub.status,
+              quota: {
+                word: sub.quota,
+                pdf: sub.quota,
+              },
+              startedAt: sub.startedAt,
+              expiredAt: sub.expiredAt,
+            }
+          : null,
+      };
+    });
+
+    const responsePayload = {
+      users: enrichedUsers,
+      total,
+      page: p,
+      limit: l,
+      totalPages: Math.ceil(total / l),
+    };
 
     return res.json({
       success: true,
       users: enrichedUsers,
+      data: responsePayload,
       pagination: {
         total,
         page: p,
@@ -207,29 +266,37 @@ export const updateUserRole = async (req, res) => {
       return res.status(400).json({ message: "Role tidak valid. Harus 'user' atau 'admin'." });
     }
 
-    // Safety check: Prevent admin from demoting themselves if they are the only admin
-    if (req.user?.userId === userId && role === "user") {
-      const adminCount = await User.countDocuments({ role: "admin" });
-      if (adminCount <= 1) {
-        return res.status(400).json({ message: "Tidak dapat mengubah role akun sendiri karena Anda adalah satu-satunya admin." });
-      }
-    }
-
-    const user = await User.findOne({ userId });
+    const user = await findUserByIdOrUUID(userId);
     if (!user) {
       return res.status(404).json({ message: "Pengguna tidak ditemukan." });
+    }
+
+    // Safety check: Prevent admin from demoting themselves if they are the only admin
+    const callerId = req.user?._id?.toString();
+    const targetId = user._id?.toString();
+    if (callerId === targetId && role === "user") {
+      const adminCount = await User.countDocuments({ role: "admin" });
+      if (adminCount <= 1) {
+        return res.status(400).json({
+          message: "Tidak dapat mengubah role akun sendiri karena Anda adalah satu-satunya admin.",
+        });
+      }
     }
 
     const oldRole = user.role || "user";
     user.role = role;
     await user.save();
 
-    await logActivity(req.user._id, `Mengubah role pengguna ${user.email} dari ${oldRole} menjadi ${role}`);
+    await logActivity(
+      req.user._id,
+      `Mengubah role pengguna ${user.email} dari ${oldRole} menjadi ${role}`
+    );
 
     return res.json({
       success: true,
       message: `Role pengguna ${user.email} berhasil diperbarui menjadi ${role}.`,
       user: {
+        _id: user._id,
         userId: user.userId,
         email: user.email,
         role: user.role,
@@ -248,43 +315,60 @@ export const updateUserRole = async (req, res) => {
 export const updateUserSubscription = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { status, quota, durationDays, planId } = req.body;
+    const { status, quota, durationDays, planId, plan } = req.body;
 
-    const user = await User.findOne({ userId });
+    const user = await findUserByIdOrUUID(userId);
     if (!user) {
       return res.status(404).json({ message: "Pengguna tidak ditemukan." });
     }
 
-    let sub = await Subscription.findOne({ userId, status: "active" });
+    const finalPlanId = planId || plan || "wa_analisis_yearly";
+    const quotaVal =
+      typeof quota === "object"
+        ? (quota.word ?? quota.pdf ?? 30)
+        : (parseInt(quota, 10) || 30);
+
+    let sub = await Subscription.findOne({
+      $or: [
+        { userId: user._id },
+        ...(user.userId ? [{ userId: user.userId }] : []),
+      ],
+      status: "active",
+    });
+
     if (!sub) {
       const expDate = new Date();
-      expDate.setDate(expDate.getDate() + (parseInt(durationDays, 10) || 30));
+      expDate.setDate(expDate.getDate() + (parseInt(durationDays, 10) || 365));
       sub = new Subscription({
-        userId,
-        subscriptionId: planId || "admin_grant",
+        userId: user._id,
+        subscriptionId: finalPlanId,
         status: status || "active",
         startedAt: new Date(),
         expiredAt: expDate,
-        quota: parseInt(quota, 10) || 30,
+        quota: quotaVal,
       });
     } else {
       if (status) sub.status = status;
-      if (quota !== undefined) sub.quota = parseInt(quota, 10);
+      if (quotaVal !== undefined) sub.quota = quotaVal;
       if (durationDays) {
         const expDate = new Date(sub.startedAt || new Date());
         expDate.setDate(expDate.getDate() + parseInt(durationDays, 10));
         sub.expiredAt = expDate;
       }
-      if (planId) sub.subscriptionId = planId;
+      if (finalPlanId) sub.subscriptionId = finalPlanId;
     }
 
     await sub.save();
-    await logActivity(req.user._id, `Mengatur langganan pengguna ${user.email}: Status ${sub.status}, Kuota ${sub.quota}`);
+    await logActivity(
+      req.user._id,
+      `Mengatur langganan pengguna ${user.email}: Paket ${sub.subscriptionId}, Status ${sub.status}, Kuota ${sub.quota}`
+    );
 
     return res.json({
       success: true,
       message: `Langganan untuk ${user.email} berhasil diperbarui.`,
       subscription: sub,
+      data: sub,
     });
   } catch (err) {
     console.error("[updateUserSubscription] Error:", err.message);
@@ -300,19 +384,25 @@ export const deleteUser = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    if (req.user?.userId === userId) {
-      return res.status(400).json({ message: "Tidak dapat menghapus akun Anda sendiri." });
-    }
-
-    const user = await User.findOne({ userId });
+    const user = await findUserByIdOrUUID(userId);
     if (!user) {
       return res.status(404).json({ message: "Pengguna tidak ditemukan." });
     }
 
+    const callerId = req.user?._id?.toString();
+    const targetId = user._id?.toString();
+    if (callerId === targetId) {
+      return res.status(400).json({ message: "Tidak dapat menghapus akun Anda sendiri." });
+    }
+
     const email = user.email;
-    await User.deleteOne({ userId });
-    await Subscription.deleteMany({ userId });
-    await BillingTransaction.deleteMany({ userId });
+    await User.deleteOne({ _id: user._id });
+    await Subscription.deleteMany({
+      $or: [{ userId: user._id }, ...(user.userId ? [{ userId: user.userId }] : [])],
+    });
+    await BillingTransaction.deleteMany({
+      $or: [{ userId: user._id }, ...(user.userId ? [{ userId: user.userId }] : [])],
+    });
 
     await logActivity(req.user._id, `Menghapus akun pengguna: ${email}`);
 
@@ -348,12 +438,14 @@ export const getPackagesList = async (req, res) => {
 
     const enriched = packages.map((pkg) => ({
       ...pkg,
+      price: pkg.amount,
       activeSubscribers: countMap[pkg.planId] || 0,
     }));
 
     return res.json({
       success: true,
       packages: enriched,
+      data: enriched,
     });
   } catch (err) {
     console.error("[getPackagesList] Error:", err.message);
@@ -368,7 +460,7 @@ export const getPackagesList = async (req, res) => {
 export const updatePackage = async (req, res) => {
   try {
     const { planId } = req.params;
-    const { name, amount, quota, durationDays, isActive, badge, features } = req.body;
+    const { name, amount, price, quota, durationDays, isActive, badge, features } = req.body;
 
     let pkg = await PackagePlan.findOne({ planId });
     if (!pkg) {
@@ -376,20 +468,32 @@ export const updatePackage = async (req, res) => {
     }
 
     if (name) pkg.name = name;
-    if (amount !== undefined) pkg.amount = Number(amount);
-    if (quota !== undefined) pkg.quota = Number(quota);
+    const finalAmount = amount !== undefined ? amount : price;
+    if (finalAmount !== undefined) pkg.amount = Number(finalAmount);
+    if (quota !== undefined) {
+      pkg.quota = typeof quota === "object" ? (quota.word ?? 30) : Number(quota);
+    }
     if (durationDays !== undefined) pkg.durationDays = Number(durationDays);
     if (isActive !== undefined) pkg.isActive = Boolean(isActive);
     if (badge !== undefined) pkg.badge = badge;
     if (Array.isArray(features)) pkg.features = features;
 
     await pkg.save();
-    await logActivity(req.user._id, `Mengubah konfigurasi paket ${pkg.name}: Rp${pkg.amount}, kuota ${pkg.quota}`);
+    await logActivity(
+      req.user._id,
+      `Mengubah konfigurasi paket ${pkg.name}: Rp${pkg.amount}, kuota ${pkg.quota}`
+    );
+
+    const result = {
+      ...pkg.toObject(),
+      price: pkg.amount,
+    };
 
     return res.json({
       success: true,
       message: `Paket ${pkg.name} berhasil diperbarui.`,
-      package: pkg,
+      package: result,
+      data: result,
     });
   } catch (err) {
     console.error("[updatePackage] Error:", err.message);
@@ -404,9 +508,19 @@ export const updatePackage = async (req, res) => {
 export const getFeatures = async (req, res) => {
   try {
     const config = await getOrCreateSystemConfig();
+    const featObj = config.features || {};
+
+    const featureList = Object.entries(featObj).map(([key, val]) => ({
+      featureId: key,
+      name: val.name,
+      description: val.description,
+      enabled: val.enabled,
+    }));
+
     return res.json({
       success: true,
-      features: config.features,
+      features: featureList,
+      data: featureList,
     });
   } catch (err) {
     console.error("[getFeatures] Error:", err.message);
@@ -429,7 +543,8 @@ export const toggleFeature = async (req, res) => {
       return res.status(404).json({ message: `Fitur '${featureId}' tidak dikenali dalam sistem.` });
     }
 
-    const newStatus = enabled !== undefined ? Boolean(enabled) : !config.features[featureId].enabled;
+    const newStatus =
+      enabled !== undefined ? Boolean(enabled) : !config.features[featureId].enabled;
     config.features[featureId].enabled = newStatus;
     config.markModified("features");
     await config.save();
@@ -445,6 +560,7 @@ export const toggleFeature = async (req, res) => {
       message: `Fitur '${featName}' sekarang ${newStatus ? "AKTIF" : "NONAKTIF"}.`,
       feature: config.features[featureId],
       features: config.features,
+      data: config.features[featureId],
     });
   } catch (err) {
     console.error("[toggleFeature] Error:", err.message);

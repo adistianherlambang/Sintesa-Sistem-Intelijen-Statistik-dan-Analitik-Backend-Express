@@ -512,24 +512,48 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // E. Section 2 (column) dynamically from inflasiIHK.json (content[3])
+          // E. Extract Contact Block (Untuk informasi lebih lanjut silakan hubungi..., PST, Alamat BPS)
+          // agar teks kontak ini selalu diposisikan di HALAMAN PALING TERAKHIR dokumen BRS di Step 4.
           const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
-          if (!xmlContent.includes("Penjelasan Teknis") && xmlContent.includes(contactMarker)) {
+          let contactBlockXml = "";
+          if (xmlContent.includes(contactMarker)) {
             const contactIdx = xmlContent.lastIndexOf("<w:tbl", xmlContent.indexOf(contactMarker));
-            if (contactIdx !== -1) {
-              const sec2Config = freshTemplate?.content?.find(c => c.column);
-              const sec2Xml = buildSection2WordXmlFromTemplate(sec2Config, varMap);
-              xmlContent = xmlContent.slice(0, contactIdx) + sec2Xml + xmlContent.slice(contactIdx);
+            const lastSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
+            if (contactIdx !== -1 && lastSectPrIdx !== -1 && lastSectPrIdx > contactIdx) {
+              contactBlockXml = xmlContent.slice(contactIdx, lastSectPrIdx);
+              // Lepaskan blok kontak dari posisi tengah agar tidak bertumpuk sebelum infografis / setelah tabel 3
+              xmlContent = xmlContent.slice(0, contactIdx) + xmlContent.slice(lastSectPrIdx);
             }
           }
 
-          // F. Infografis full-page banner strictly following JSON order (content[4]) - in line with text
+          // F. Section 2 (column: Penjelasan Teknis & Perubahan Tahun Dasar) dinamis jika belum ada
+          if (!xmlContent.includes("Penjelasan Teknis")) {
+            const sec2Config = freshTemplate?.content?.find(c => c.column);
+            if (sec2Config) {
+              const sec2Xml = buildSection2WordXmlFromTemplate(sec2Config, varMap);
+              const curLastSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
+              if (curLastSectPrIdx !== -1) {
+                xmlContent = xmlContent.slice(0, curLastSectPrIdx) + sec2Xml + xmlContent.slice(curLastSectPrIdx);
+              }
+            }
+          }
+
+          // G. Infografis full-page banner strictly following JSON order (content[4]) - in line with text
           if (infografisBuffer && !xmlContent.includes("rIdInfografis")) {
-            const lastSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
-            if (lastSectPrIdx !== -1) {
+            const curLastSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
+            if (curLastSectPrIdx !== -1) {
               const infografisXml = `<w:p><w:r><w:br w:type="page"/></w:r></w:p>` +
                 buildInlineImageWordXml("rIdInfografis", "Infografis", 5715000, 8096250, 999901);
-              xmlContent = xmlContent.slice(0, lastSectPrIdx) + infografisXml + xmlContent.slice(lastSectPrIdx);
+              xmlContent = xmlContent.slice(0, curLastSectPrIdx) + infografisXml + xmlContent.slice(curLastSectPrIdx);
+            }
+          }
+
+          // H. Tempatkan teks kontak BPS di HALAMAN PALING TERAKHIR dengan pemisah page break
+          if (contactBlockXml) {
+            const finalSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
+            if (finalSectPrIdx !== -1) {
+              const pageBreakXml = `<w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:br w:type="page"/></w:r></w:p>`;
+              xmlContent = xmlContent.slice(0, finalSectPrIdx) + pageBreakXml + contactBlockXml + xmlContent.slice(finalSectPrIdx);
             }
           }
 

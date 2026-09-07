@@ -415,6 +415,7 @@ export const generateWordBrs = async (req, res) => {
           const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
           if (!xmlContent.includes("Penjelasan Teknis") && xmlContent.includes(contactMarker)) {
             const contactIdx = xmlContent.lastIndexOf("<w:tbl", xmlContent.indexOf(contactMarker));
+            if (contactIdx !== -1) {
               const sec2Config = freshTemplate?.content?.find(c => c.column);
               const sec2Xml = buildSection2WordXmlFromTemplate(sec2Config, varMap);
               xmlContent = xmlContent.slice(0, contactIdx) + sec2Xml + xmlContent.slice(contactIdx);

@@ -32,3 +32,15 @@ export const authMiddleware = async (req, res, next) => {
       .json({ message: "Terjadi kesalahan pada server saat autentikasi." });
   }
 };
+
+/**
+ * Express middleware to restrict route access exclusively to users with 'admin' role
+ */
+export const adminMiddleware = (req, res, next) => {
+  if (req.user?.role !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "Akses terlarang. Halaman/fitur ini khusus untuk Administrator." });
+  }
+  next();
+};

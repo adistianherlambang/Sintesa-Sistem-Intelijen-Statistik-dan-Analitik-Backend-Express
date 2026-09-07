@@ -8,6 +8,8 @@ import botRoutes from "./users/botRoutes.js";
 import infografisRoutes from "./users/infografisRoutes.js";
 import llmRoutes from "./llm/llmRoutes.js";
 import analisisRoutes from "./analisis/analisisRoutes.js";
+import adminRoutes from "./admin/adminRoutes.js";
+import { getPublicFeatures } from "../controller/admin/adminController.js";
 
 import kota from "../json/kota.json" with { type: "json" };
 
@@ -19,6 +21,8 @@ router.use("/users", userRoutes);
 router.use("/users/bot", botRoutes);
 router.use("/users/infografis", infografisRoutes);
 router.use("/llm", llmRoutes);
+router.use("/admin", adminRoutes);
+router.get("/features/public", getPublicFeatures);
 
 router.get("/kota", async (req, res) => {
   try {

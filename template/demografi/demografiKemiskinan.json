@@ -1,0 +1,118 @@
+{
+  "summary": "Tingkat kemiskinan di ${wilayah} pada periode ${bulan} ${tahun} tercatat sebesar ${persentaseKemiskinan} persen, mengalami ${perubahanKemiskinan} sebesar ${selisihKemiskinan} poin persentase dibandingkan periode yang sama tahun sebelumnya yang sebesar ${persentaseKemiskinanPrev} persen. Jumlah penduduk miskin pada periode ini tercatat sebanyak ${jumlahPendudukMiskin} ribu orang. Garis Kemiskinan (GK) pada periode ${bulan} ${tahun} tercatat sebesar Rp${garisKemiskinan} per kapita per bulan. Sementara itu, Indeks Kedalaman Kemiskinan (P1) berada pada level ${indeksP1} dan Indeks Keparahan Kemiskinan (P2) berada pada level ${indeksP2}.",
+  "content": [
+    {
+      "title": {
+        "desc": "Perkembangan Tingkat dan Indikator Kemiskinan",
+        "style": "ordered list 1 font size 14px bold color #b91c1c"
+      },
+      "desc": [
+        {
+          "desc": "Perkembangan kondisi sosial ekonomi dan penanggulangan kemiskinan di ${wilayah} pada ${bulan} ${tahun} menunjukkan dinamika yang dipengaruhi oleh stabilitas harga kebutuhan pokok serta efektivitas program bantuan sosial. Berdasarkan hasil Survei Sosial Ekonomi Nasional (Susenas) yang diolah ${instansi}, persentase penduduk miskin (Headcount Index / P0) pada ${bulan} ${tahun} tercatat sebesar ${persentaseKemiskinan} persen.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel ${noTable} Indikator Kemiskinan di ${wilayah}, ${tahunSebelumnya}–${tahun}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#b91c1c",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#fecaca"
+              },
+              "rowColors": [
+                "#fef2f2",
+                "#fee2e2"
+              ]
+            },
+            "markdown": "| Indikator Kemiskinan | Periode ${tahunSebelumnya} | Periode ${tahun} | Perubahan | Satuan |\n|—|—:|—:|—:|—:|\n| (1) | (2) | (3) | (4) | (5) |\n| Persentase Penduduk Miskin (P0) | ${persentaseKemiskinanPrev} | ${persentaseKemiskinan} | ${perubahanP0} | Persen |\n| Jumlah Penduduk Miskin | ${jumlahMiskinPrev} | ${jumlahPendudukMiskin} | ${perubahanJumlahMiskin} | Ribu Jiwa |\n| Garis Kemiskinan (GK) | ${gkPrev} | ${garisKemiskinan} | ${perubahanGK} | Rupiah/Kapita/Bln |\n| Indeks Kedalaman Kemiskinan (P1) | ${p1Prev} | ${indeksP1} | ${perubahanP1} | Indeks |\n| Indeks Keparahan Kemiskinan (P2) | ${p2Prev} | ${indeksP2} | ${perubahanP2} | Indeks |",
+            "footnote": {
+              "fontSize": "8pt",
+              "text": "Catatan:\n1 Data bersumber dari hasil Survei Sosial Ekonomi Nasional (Susenas) BPS.\n2 Garis Kemiskinan dihitung berdasarkan konsep Basic Needs Approach (makanan & bukan makanan)."
+            }
+          }
+        },
+        {
+          "desc": "Garis Kemiskinan (GK) pada ${bulan} ${tahun} ditetapkan sebesar Rp${garisKemiskinan} per kapita per bulan. Komoditas makanan masih menyumbang porsi terbesar dalam Garis Kemiskinan Makanan (GKM) dibandingkan Garis Kemiskinan Non-Makanan (GKNM). Penurunan persentase kemiskinan menjadi bukti keberhasilan sinergi intervensi perlindungan sosial dan pengendalian inflasi pangan."
+        }
+      ],
+      "sub": [
+        {
+          "title": {
+            "desc": "Garis Kemiskinan dan Komposisinya",
+            "style": "ordered list 1.1 color #b91c1c"
+          },
+          "desc": "Garis Kemiskinan mencerminkan nilai rupiah pengeluaran minimum yang dibutuhkan seseorang untuk memenuhi kebutuhan pokok makanan setara 2.100 kkal per hari serta kebutuhan pokok bukan makanan. Komoditas beras, rokok kretek filter, dan telur ayam ras memberikan kontribusi terbesar terhadap Garis Kemiskinan Makanan."
+        },
+        {
+          "title": {
+            "desc": "Indeks Kedalaman Kemiskinan (P1)",
+            "style": "ordered list 1.2 color #b91c1c"
+          },
+          "desc": "Indeks Kedalaman Kemiskinan (Poverty Gap Index - P1) pada periode ${bulan} ${tahun} berada pada angka ${indeksP1}, berubah dari ${p1Prev} pada periode ${tahunSebelumnya}. Penurunan nilai P1 mengindikasikan bahwa rata-rata pengeluaran penduduk miskin bergerak semakin mendekati Garis Kemiskinan."
+        },
+        {
+          "title": {
+            "desc": "Indeks Keparahan Kemiskinan (P2)",
+            "style": "ordered list 1.3 color #b91c1c"
+          },
+          "desc": "Indeks Keparahan Kemiskinan (Poverty Severity Index - P2) berada pada level ${indeksP2} dibandingkan ${p2Prev} pada periode sebelumnya. Angka ini memberikan gambaran tentang ketimpangan pengeluaran di antara sesama penduduk miskin."
+        }
+      ]
+    },
+    {
+      "title": {
+        "desc": "Tren Kemiskinan Tiga Tahun Terakhir",
+        "style": "ordered list 2 font size 14px bold color #b91c1c"
+      },
+      "desc": [
+        {
+          "desc": "Perkembangan tingkat kemiskinan di ${wilayah} dalam tiga tahun terakhir menunjukkan tren yang positif dalam upaya pengentasan kemiskinan daerah.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel 2 Perkembangan Persentase Kemiskinan dan Garis Kemiskinan ${wilayah}, ${tahun1}–${tahun3}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#b91c1c",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#fecaca"
+              },
+              "rowColors": [
+                "#fef2f2",
+                "#fee2e2"
+              ]
+            },
+            "markdown": "| Periode Data | Persentase Kemiskinan (%) | Jumlah Miskin (Ribu Jiwa) | Garis Kemiskinan (Rp) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Tahun ${tahun1} | ${p0Tahun1} | ${jumlahTahun1} | ${gkTahun1} |\n| Tahun ${tahun2} | ${p0Tahun2} | ${jumlahTahun2} | ${gkTahun2} |\n| Tahun ${tahun3} | ${p0Tahun3} | ${jumlahTahun3} | ${gkTahun3} |"
+          }
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "title": {
+            "desc": "Metodologi Pengukuran Kemiskinan",
+            "style": "bg color #FEE2E2 width 100% font size 18"
+          },
+          "desc": "Untuk mengukur kemiskinan, BPS menggunakan konsep kemampuan memenuhi kebutuhan dasar (basic needs approach). Dengan pendekatan ini, kemiskinan dipandang sebagai ketidakmampuan dari sisi ekonomi untuk memenuhi kebutuhan dasar makanan dan bukan makanan yang diukur menurut garis kemiskinan."
+        },
+        {
+          "title": {
+            "desc": "Sumber Data Susenas",
+            "style": "bg color #FEE2E2 width 100% font size 18"
+          },
+          "desc": "Sumber data utama yang digunakan untuk menghitung kemiskinan adalah data Survei Sosial Ekonomi Nasional (Susenas) Modul Konsumsi/Pengeluaran yang dilaksanakan setiap tahun."
+        }
+      ],
+      "style": "column 2"
+    }
+  ]
+}

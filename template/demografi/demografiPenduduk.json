@@ -1,0 +1,118 @@
+{
+  "summary": "Berdasarkan hasil pemutakhiran data kependudukan ${instansi}, jumlah penduduk ${wilayah} pada tahun ${tahun} tercatat sebanyak ${jumlahPendudukTotal} jiwa. Dari total populasi tersebut, penduduk usia produktif (15–64 tahun) mendominasi dengan jumlah mencapai ${pendudukUsiaProduktif} jiwa atau sekitar ${persentaseUsiaProduktif} persen dari total penduduk. Kelompok umur 0–14 tahun (anak-anak) berjumlah ${pendudukAnak} jiwa (${persentaseAnak}%), sedangkan kelompok lansia (65 tahun ke atas) tercatat sebanyak ${pendudukLansia} jiwa (${persentaseLansia}%). Angka rasio ketergantungan (dependency ratio) ${wilayah} tercatat sebesar ${rasioKetergantungan} persen.",
+  "content": [
+    {
+      "title": {
+        "desc": "Jumlah dan Distribusi Penduduk Menurut Kelompok Umur",
+        "style": "ordered list 1 font size 14px bold color #0d9488"
+      },
+      "desc": [
+        {
+          "desc": "Struktur kependudukan ${wilayah} pada tahun ${tahun} mencerminkan karakteristik bonus demografi, di mana proporsi penduduk usia produktif jauh lebih tinggi dibandingkan kelompok penduduk non-produktif. Menurut catatan ${instansi}, total jumlah penduduk pada tahun ${tahun} mencapai ${jumlahPendudukTotal} jiwa, meningkat dibandingkan tahun ${tahunSebelumnya} yang tercatat sebanyak ${jumlahPendudukTotalPrev} jiwa dengan laju pertumbuhan penduduk sebesar ${lajuPertumbuhanPenduduk} persen per tahun.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel ${noTable} Jumlah Penduduk ${wilayah} Menurut Kelompok Umur (Jiwa), ${tahunSebelumnya}–${tahun}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#0d9488",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#99f6e4"
+              },
+              "rowColors": [
+                "#f0fdfa",
+                "#ccfbf1"
+              ]
+            },
+            "markdown": "| Kelompok Umur | Penduduk ${tahunSebelumnya} (Jiwa) | Penduduk ${tahun} (Jiwa) | Persentase (%) | Pertumbuhan (%) |\n|—|—:|—:|—:|—:|\n| (1) | (2) | (3) | (4) | (5) |\n| 0–4 | ${umur0_4Prev} | ${umur0_4} | ${persen0_4} | ${pertumbuhan0_4} |\n| 5–9 | ${umur5_9Prev} | ${umur5_9} | ${persen5_9} | ${pertumbuhan5_9} |\n| 10–14 | ${umur10_14Prev} | ${umur10_14} | ${persen10_14} | ${pertumbuhan10_14} |\n| 15–19 | ${umur15_19Prev} | ${umur15_19} | ${persen15_19} | ${pertumbuhan15_19} |\n| 20–24 | ${umur20_24Prev} | ${umur20_24} | ${persen20_24} | ${pertumbuhan20_24} |\n| 25–29 | ${umur25_29Prev} | ${umur25_29} | ${persen25_29} | ${pertumbuhan25_29} |\n| 30–34 | ${umur30_34Prev} | ${umur30_34} | ${persen30_34} | ${pertumbuhan30_34} |\n| 35–39 | ${umur35_39Prev} | ${umur35_39} | ${persen35_39} | ${pertumbuhan35_39} |\n| 40–44 | ${umur40_44Prev} | ${umur40_44} | ${persen40_44} | ${pertumbuhan40_44} |\n| 45–49 | ${umur45_49Prev} | ${umur45_49} | ${persen45_49} | ${pertumbuhan45_49} |\n| 50–54 | ${umur50_54Prev} | ${umur50_54} | ${persen50_54} | ${pertumbuhan50_54} |\n| 55–59 | ${umur55_59Prev} | ${umur55_59} | ${persen55_59} | ${pertumbuhan55_59} |\n| 60–64 | ${umur60_64Prev} | ${umur60_64} | ${persen60_64} | ${pertumbuhan60_64} |\n| 65–69 | ${umur65_69Prev} | ${umur65_69} | ${persen65_69} | ${pertumbuhan65_69} |\n| 70–74 | ${umur70_74Prev} | ${umur70_74} | ${persen70_74} | ${pertumbuhan70_74} |\n| 75+ | ${umur75Prev} | ${umur75} | ${persen75} | ${pertumbuhan75} |\n| Total Penduduk | ${jumlahPendudukTotalPrev} | ${jumlahPendudukTotal} | 100.00 | ${lajuPertumbuhanPenduduk} |",
+            "footnote": {
+              "fontSize": "8pt",
+              "text": "Catatan:\n1 Data penduduk bersumber dari Proyeksi Penduduk Interim BPS / Sensus Penduduk.\n2 Persentase dihitung terhadap total penduduk ${wilayah}."
+            }
+          }
+        },
+        {
+          "desc": "Berdasarkan komposisi umur, kelompok umur produktif (15–64 tahun) mencapai ${pendudukUsiaProduktif} jiwa atau ${persentaseUsiaProduktif} persen. Besarnya proporsi usia produktif ini mengindikasikan ketersediaan pasokan tenaga kerja yang memadai bagi percepatan pembangunan ekonomi lokal."
+        }
+      ],
+      "sub": [
+        {
+          "title": {
+            "desc": "Penduduk Usia Muda (0–14 Tahun)",
+            "style": "ordered list 1.1 color #0d9488"
+          },
+          "desc": "Jumlah penduduk usia belum produktif (0–14 tahun) tercatat sebanyak ${pendudukAnak} jiwa atau ${persentaseAnak} persen dari total populasi. Kelompok ini menjadi sasaran strategis program pemenuhan gizi, pencegahan stunting, serta layanan pendidikan dasar."
+        },
+        {
+          "title": {
+            "desc": "Penduduk Usia Produktif (15–64 Tahun)",
+            "style": "ordered list 1.2 color #0d9488"
+          },
+          "desc": "Jumlah penduduk usia kerja produktif (15–64 tahun) mencapai ${pendudukUsiaProduktif} jiwa (${persentaseUsiaProduktif}%). Kondisi ini memberikan peluang bonus demografi yang optimal jika didukung dengan penciptaan lapangan kerja yang inklusif."
+        },
+        {
+          "title": {
+            "desc": "Penduduk Usia Lanjut (65+ Tahun)",
+            "style": "ordered list 1.3 color #0d9488"
+          },
+          "desc": "Jumlah penduduk lanjut usia (65 tahun ke atas) tercatat sebesar ${pendudukLansia} jiwa (${persentaseLansia}%), menunjukkan kecenderungan penuaan penduduk (aging population) yang memerlukan penguatan sistem perlindungan sosial dan jaminan kesehatan."
+        }
+      ]
+    },
+    {
+      "title": {
+        "desc": "Tren Pertumbuhan Penduduk Tiga Tahun Terakhir",
+        "style": "ordered list 2 font size 14px bold color #0d9488"
+      },
+      "desc": [
+        {
+          "desc": "Jumlah penduduk ${wilayah} terus mengalami peningkatan dalam kurun waktu tiga tahun terakhir seiring dinamika fertilitas dan mobilitas migrasi penduduk.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel 2 Perkembangan Jumlah Penduduk dan Rasio Ketergantungan ${wilayah}, ${tahun1}–${tahun3}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#0d9488",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#99f6e4"
+              },
+              "rowColors": [
+                "#f0fdfa",
+                "#ccfbf1"
+              ]
+            },
+            "markdown": "| Indikator Demografi | ${tahun1} | ${tahun2} | ${tahun3} |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Total Penduduk (Jiwa) | ${totalPendudukTahun1} | ${totalPendudukTahun2} | ${totalPendudukTahun3} |\n| Usia Produktif (15-64) | ${produktifTahun1} | ${produktifTahun2} | ${produktifTahun3} |\n| Rasio Ketergantungan (%) | ${rasioTahun1} | ${rasioTahun2} | ${rasioTahun3} |\n| Pertumbuhan Penduduk (%) | ${lajuTahun1} | ${lajuTahun2} | ${lajuTahun3} |"
+          }
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "title": {
+            "desc": "Penjelasan Teknis Demografi Penduduk",
+            "style": "bg color #CCFBF1 width 100% font size 18"
+          },
+          "desc": "Statistik kependudukan bersumber dari Sensus Penduduk (SP), Survei Penduduk Antar Sensus (SUPAS), serta Proyeksi Penduduk Interim yang disusun oleh BPS. Pengelompokan umur menggunakan rentang 5 tahunan (five-year age groups) sesuai kaidah standar demografi PBB."
+        },
+        {
+          "title": {
+            "desc": "Rasio Ketergantungan (Dependency Ratio)",
+            "style": "bg color #CCFBF1 width 100% font size 18"
+          },
+          "desc": "Rasio ketergantungan dihitung dari perbandingan antara jumlah penduduk usia non-produktif (umur 0–14 tahun dan 65 tahun ke atas) terhadap jumlah penduduk usia produktif (umur 15–64 tahun) dikalikan 100. Nilai rasio menunjukkan beban yang ditanggung oleh setiap 100 orang penduduk produktif."
+        }
+      ],
+      "style": "column 2"
+    }
+  ]
+}

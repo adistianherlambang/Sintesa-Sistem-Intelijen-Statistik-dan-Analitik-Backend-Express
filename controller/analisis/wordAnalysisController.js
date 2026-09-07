@@ -8,6 +8,8 @@ import {
   buildVariableMapFromDataset,
   renderInflasiIhkTemplate,
   loadInflasiIhkTemplate,
+  loadTemplateByIndicator,
+  renderTemplateByIndicator,
   renderTemplateObject
 } from "./templateVariableMapper.js";
 
@@ -248,26 +250,31 @@ export function buildSection2WordXmlFromTemplate(section2Config, varMap = {}) {
 }
 
 /**
- * Terapkan styling resmi dari inflasiIHK.json pada document.xml
+ * Terapkan styling resmi dari template JSON pada document.xml
  */
-export function applyInflasiIhkStylingToXml(xmlContent) {
+export function applyInflasiIhkStylingToXml(xmlContent, templateConfig = null) {
   let xml = xmlContent;
 
-  // 1. Header tabel: Ganti biru (2B6CB0) dengan Orange BPS (F68839)
-  xml = xml.split("2B6CB0").join("F68839");
-  xml = xml.split("2b6cb0").join("F68839");
+  const tableStyle = templateConfig?.content?.[0]?.desc?.find(d => d.table)?.table?.style;
+  const headerColor = (tableStyle?.header?.backgroundColor || "F68839").replace("#", "").toUpperCase();
+  const numberingColor = (tableStyle?.numbering?.backgroundColor || "FFD684").replace("#", "").toUpperCase();
+  const rowColor = (tableStyle?.rowColors?.[1] || "FFF0D3").replace("#", "").toUpperCase();
 
-  // 2. Heading title: Ganti biru tua (1E3A8A) dengan Orange BPS (F68839)
-  xml = xml.split("1E3A8A").join("F68839");
-  xml = xml.split("1e3a8a").join("F68839");
+  // 1. Header tabel: Ganti biru (2B6CB0) dengan warna tema template
+  xml = xml.split("2B6CB0").join(headerColor);
+  xml = xml.split("2b6cb0").join(headerColor);
 
-  // 3. Numbering cell: Ganti abu (E2E8F0) dengan Amber (FFD684)
-  xml = xml.split("E2E8F0").join("FFD684");
-  xml = xml.split("e2e8f0").join("FFD684");
+  // 2. Heading title: Ganti biru tua (1E3A8A) dengan warna tema template
+  xml = xml.split("1E3A8A").join(headerColor);
+  xml = xml.split("1e3a8a").join(headerColor);
 
-  // 4. Alternating rows: F8FAFC -> FFF0D3
-  xml = xml.split("F8FAFC").join("FFF0D3");
-  xml = xml.split("f8fafc").join("FFF0D3");
+  // 3. Numbering cell: Ganti abu (E2E8F0) dengan warna numbering template
+  xml = xml.split("E2E8F0").join(numberingColor);
+  xml = xml.split("e2e8f0").join(numberingColor);
+
+  // 4. Alternating rows: F8FAFC -> warna row template
+  xml = xml.split("F8FAFC").join(rowColor);
+  xml = xml.split("f8fafc").join(rowColor);
 
   return xml;
 }
@@ -304,11 +311,12 @@ export const generateWordBrs = async (req, res) => {
     const activeDataset = uploadedDataset || dataset || {
       context: { city, period: periode, title }
     };
+    const activeIndicator = activeDataset?.context?.indicator || activeDataset?.context?.selectedIndicator || activeDataset?.fileInfo?.selectedIndicator || "komoditas";
     const varMap = buildVariableMapFromDataset(activeDataset, variables);
 
-    // Load fresh inflasiIHK.json template and rendered values
-    const freshTemplate = loadInflasiIhkTemplate();
-    const renderedTemplateData = renderInflasiIhkTemplate(activeDataset, variables);
+    // Load fresh indicator-specific template and rendered values
+    const freshTemplate = loadTemplateByIndicator(activeIndicator);
+    const renderedTemplateData = renderTemplateByIndicator(activeDataset, variables, activeIndicator);
     const rendered = renderedTemplateData?.template || freshTemplate;
 
     // 2. Open BERITA.docx and process all XML files (document.xml, footers, headers)
@@ -413,8 +421,8 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // E. Terapkan styling resmi inflasiIHK.json (Orange #f68839, Amber #ffd684, Cream #fff5e6/d3, Peach #fee3ce)
-          xmlContent = applyInflasiIhkStylingToXml(xmlContent);
+          // E. Terapkan styling resmi dari template JSON indikator
+          xmlContent = applyInflasiIhkStylingToXml(xmlContent, freshTemplate);
         }
 
         if (xmlContent.includes("${")) {

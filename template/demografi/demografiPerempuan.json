@@ -1,0 +1,118 @@
+{
+  "summary": "Jumlah penduduk perempuan di ${wilayah} pada tahun ${tahun} tercatat sebanyak ${jumlahPendudukPerempuan} jiwa atau sebesar ${persentasePerempuan}% dari keseluruhan penduduk. Penduduk perempuan usia produktif (15–64 tahun) mendominasi struktur dengan total ${perempuanProduktif} jiwa (${persentasePerempuanProduktif}%). Penduduk perempuan kelompok umur 0–14 tahun berjumlah ${perempuanAnak} jiwa (${persentasePerempuanAnak}%), sedangkan lansia perempuan (65 tahun ke atas) tercatat sebesar ${perempuanLansia} jiwa (${persentasePerempuanLansia}%).",
+  "content": [
+    {
+      "title": {
+        "desc": "Jumlah Penduduk Perempuan Menurut Kelompok Umur",
+        "style": "ordered list 1 font size 14px bold color #db2777"
+      },
+      "desc": [
+        {
+          "desc": "Struktur kependudukan perempuan di ${wilayah} pada tahun ${tahun} mencerminkan peran sentral perempuan dalam ketahanan keluarga dan partisipasi sosial ekonomi. Menurut laporan ${instansi}, jumlah penduduk perempuan pada tahun ${tahun} tercatat mencapai ${jumlahPendudukPerempuan} jiwa, meningkat dibandingkan tahun ${tahunSebelumnya} yang berjumlah ${jumlahPendudukPerempuanPrev} jiwa.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel ${noTable} Jumlah Penduduk Perempuan ${wilayah} Menurut Kelompok Umur (Jiwa), ${tahunSebelumnya}–${tahun}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#db2777",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#fbcfe8"
+              },
+              "rowColors": [
+                "#fdf2f8",
+                "#fce7f3"
+              ]
+            },
+            "markdown": "| Kelompok Umur | Perempuan ${tahunSebelumnya} (Jiwa) | Perempuan ${tahun} (Jiwa) | Persentase (%) | Pertumbuhan (%) |\n|—|—:|—:|—:|—:|\n| (1) | (2) | (3) | (4) | (5) |\n| 0–4 | ${perempuan0_4Prev} | ${perempuan0_4} | ${persenPerempuan0_4} | ${pertumbuhanPerempuan0_4} |\n| 5–9 | ${perempuan5_9Prev} | ${perempuan5_9} | ${persenPerempuan5_9} | ${pertumbuhanPerempuan5_9} |\n| 10–14 | ${perempuan10_14Prev} | ${perempuan10_14} | ${persenPerempuan10_14} | ${pertumbuhanPerempuan10_14} |\n| 15–19 | ${perempuan15_19Prev} | ${perempuan15_19} | ${persenPerempuan15_19} | ${pertumbuhanPerempuan15_19} |\n| 20–24 | ${perempuan20_24Prev} | ${perempuan20_24} | ${persenPerempuan20_24} | ${pertumbuhanPerempuan20_24} |\n| 25–29 | ${perempuan25_29Prev} | ${perempuan25_29} | ${persenPerempuan25_29} | ${pertumbuhanPerempuan25_29} |\n| 30–34 | ${perempuan30_34Prev} | ${perempuan30_34} | ${persenPerempuan30_34} | ${pertumbuhanPerempuan30_34} |\n| 35–39 | ${perempuan35_39Prev} | ${perempuan35_39} | ${persenPerempuan35_39} | ${pertumbuhanPerempuan35_39} |\n| 40–44 | ${perempuan40_44Prev} | ${perempuan40_44} | ${persenPerempuan40_44} | ${pertumbuhanPerempuan40_44} |\n| 45–49 | ${perempuan45_49Prev} | ${perempuan45_49} | ${persenPerempuan45_49} | ${pertumbuhanPerempuan45_49} |\n| 50–54 | ${perempuan50_54Prev} | ${perempuan50_54} | ${persenPerempuan50_54} | ${pertumbuhanPerempuan50_54} |\n| 55–59 | ${perempuan55_59Prev} | ${perempuan55_59} | ${persenPerempuan55_59} | ${pertumbuhanPerempuan55_59} |\n| 60–64 | ${perempuan60_64Prev} | ${perempuan60_64} | ${persenPerempuan60_64} | ${pertumbuhanPerempuan60_64} |\n| 65–69 | ${perempuan65_69Prev} | ${perempuan65_69} | ${persenPerempuan65_69} | ${pertumbuhanPerempuan65_69} |\n| 70–74 | ${perempuan70_74Prev} | ${perempuan70_74} | ${persenPerempuan70_74} | ${pertumbuhanPerempuan70_74} |\n| 75+ | ${perempuan75Prev} | ${perempuan75} | ${persenPerempuan75} | ${pertumbuhanPerempuan75} |\n| Total Penduduk Perempuan | ${jumlahPendudukPerempuanPrev} | ${jumlahPendudukPerempuan} | 100.00 | ${lajuPertumbuhanPerempuan} |",
+            "footnote": {
+              "fontSize": "8pt",
+              "text": "Catatan:\n1 Data bersumber dari Proyeksi Penduduk Interim BPS.\n2 Persentase dihitung terhadap total penduduk perempuan."
+            }
+          }
+        },
+        {
+          "desc": "Proporsi perempuan usia produktif (15–64 tahun) di ${wilayah} tercatat sebesar ${persentasePerempuanProduktif} persen. Tingginya populasi perempuan usia kerja ini membuka peluang peningkatan Tingkat Partisipasi Angkatan Kerja (TPAK) perempuan dan pemberdayaan ekonomi perempuan."
+        }
+      ],
+      "sub": [
+        {
+          "title": {
+            "desc": "Perempuan Usia Anak (0–14 Tahun)",
+            "style": "ordered list 1.1 color #db2777"
+          },
+          "desc": "Jumlah penduduk perempuan umur 0–14 tahun tercatat sebesar ${perempuanAnak} jiwa (${persentasePerempuanAnak}%), menjadi sasaran prioritas peningkatan derajat kesehatan anak dan pencegahan perkawinan anak."
+        },
+        {
+          "title": {
+            "desc": "Perempuan Usia Produktif (15–64 Tahun)",
+            "style": "ordered list 1.2 color #db2777"
+          },
+          "desc": "Penduduk perempuan usia kerja produktif berjumlah ${perempuanProduktif} jiwa (${persentasePerempuanProduktif}%), yang memiliki potensi besar dalam kewirausahaan dan ekonomi kreatif daerah."
+        },
+        {
+          "title": {
+            "desc": "Perempuan Lanjut Usia (65+ Tahun)",
+            "style": "ordered list 1.3 color #db2777"
+          },
+          "desc": "Jumlah lansia perempuan mencapai ${perempuanLansia} jiwa (${persentasePerempuanLansia}%). Angka harapan hidup perempuan yang umumnya lebih tinggi dibanding laki-laki mendorong pentingnya penyediaan fasilitas ramah lansia perempuan."
+        }
+      ]
+    },
+    {
+      "title": {
+        "desc": "Perbandingan Penduduk Perempuan Antar Tahun",
+        "style": "ordered list 2 font size 14px bold color #db2777"
+      },
+      "desc": [
+        {
+          "desc": "Dinamika jumlah penduduk perempuan di ${wilayah} dalam tiga tahun terakhir.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel 2 Perkembangan Jumlah Penduduk Perempuan ${wilayah} (Jiwa), ${tahun1}–${tahun3}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#db2777",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#fbcfe8"
+              },
+              "rowColors": [
+                "#fdf2f8",
+                "#fce7f3"
+              ]
+            },
+            "markdown": "| Kelompok Umur Utama | ${tahun1} | ${tahun2} | ${tahun3} |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Anak-Anak (0-14) | ${perempuanAnakTahun1} | ${perempuanAnakTahun2} | ${perempuanAnakTahun3} |\n| Usia Produktif (15-64) | ${perempuanProduktifTahun1} | ${perempuanProduktifTahun2} | ${perempuanProduktifTahun3} |\n| Lanjut Usia (65+) | ${perempuanLansiaTahun1} | ${perempuanLansiaTahun2} | ${perempuanLansiaTahun3} |\n| Total Penduduk Perempuan | ${totalPerempuanTahun1} | ${totalPerempuanTahun2} | ${totalPerempuanTahun3} |"
+          }
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "title": {
+            "desc": "Penjelasan Teknis Penduduk Perempuan",
+            "style": "bg color #FCE7F3 width 100% font size 18"
+          },
+          "desc": "Data penduduk perempuan menurut kelompok umur digunakan untuk perencanaan pembangunan berbasis gender (gender responsive planning), pemantauan Indeks Pembangunan Gender (IPG), dan Indeks Pemberdayaan Gender (IDG)."
+        },
+        {
+          "title": {
+            "desc": "Angka Harapan Hidup Perempuan",
+            "style": "bg color #FCE7F3 width 100% font size 18"
+          },
+          "desc": "Secara biologis dan demografis, perempuan umumnya memiliki angka harapan hidup saat lahir yang lebih tinggi dibandingkan laki-laki, yang berimplikasi pada proporsi lansia perempuan yang lebih besar pada piramida usia tua."
+        }
+      ],
+      "style": "column 2"
+    }
+  ]
+}

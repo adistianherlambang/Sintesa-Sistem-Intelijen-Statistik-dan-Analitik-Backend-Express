@@ -1,0 +1,118 @@
+{
+  "summary": "Perekonomian ${wilayah} tahun ${tahun} berdasarkan Produk Domestik Regional Bruto (PDRB) atas dasar harga berlaku (ADHB) menurut lapangan usaha mencapai Rp${totalPdrbAdhb} Milyar, tumbuh secara nominal sebesar ${pertumbuhanNominal}%. Sektor yang memberikan kontribusi nominal terbesar terhadap total PDRB adalah Sektor Perdagangan Besar dan Eceran (${distribusiPerdagangan}%), Sektor Pertanian, Kehutanan dan Perikanan (${distribusiPertanian}%), dan Sektor Konstruksi (${distribusiKonstruksi}%).",
+  "content": [
+    {
+      "title": {
+        "desc": "PDRB ADHB Menurut Lapangan Usaha",
+        "style": "ordered list 1 font size 14px bold color #0284c7"
+      },
+      "desc": [
+        {
+          "desc": "Nilai output barang dan jasa atas dasar harga berlaku menurut 17 kategori lapangan usaha di ${wilayah} pada tahun ${tahun} mencerminkan kapasitas ekonomi daerah secara nominal. Berdasarkan hasil pencatatan ${instansi}, total PDRB harga berlaku mencapai Rp${totalPdrbAdhb} Milyar, meningkat dari Rp${totalPdrbAdhbPrev} Milyar pada tahun ${tahunSebelumnya} atau naik sebesar ${pertumbuhanNominal} persen.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel ${noTable} PDRB Atas Dasar Harga Berlaku Menurut 17 Kategori Lapangan Usaha di ${wilayah} (Milyar Rupiah), ${tahunSebelumnya}–${tahun}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#0284c7",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#bae6fd"
+              },
+              "rowColors": [
+                "#f0f9ff",
+                "#e0f2fe"
+              ]
+            },
+            "markdown": "| Kategori Lapangan Usaha | Nilai PDRB ${tahunSebelumnya} (Milyar Rp) | Nilai PDRB ${tahun} (Milyar Rp) | Distribusi Persentase (%) | Pertumbuhan Nominal (%) |\n|—|—:|—:|—:|—:|\n| (1) | (2) | (3) | (4) | (5) |\n| A. Pertanian, Kehutanan dan Perikanan | ${sektorAPrev} | ${sektorA} | ${distribusiA} | ${pertumbuhanA} |\n| B. Pertambangan dan Penggalian | ${sektorBPrev} | ${sektorB} | ${distribusiB} | ${pertumbuhanB} |\n| C. Industri Pengolahan | ${sektorCPrev} | ${sektorC} | ${distribusiC} | ${pertumbuhanC} |\n| D. Pengadaan Listrik dan Gas | ${sektorDPrev} | ${sektorD} | ${distribusiD} | ${pertumbuhanD} |\n| E. Pengadaan Air, Sampah dan Daur Ulang | ${sektorEPrev} | ${sektorE} | ${distribusiE} | ${pertumbuhanE} |\n| F. Konstruksi | ${sektorFPrev} | ${sektorF} | ${distribusiF} | ${pertumbuhanF} |\n| G. Perdagangan Besar dan Eceran; Reparasi | ${sektorGPrev} | ${sektorG} | ${distribusiG} | ${pertumbuhanG} |\n| H. Transportasi dan Pergudangan | ${sektorHPrev} | ${sektorH} | ${distribusiH} | ${pertumbuhanH} |\n| I. Penyediaan Akomodasi dan Makan Minum | ${sektorIPrev} | ${sektorI} | ${distribusiI} | ${pertumbuhanI} |\n| J. Informasi dan Komunikasi | ${sektorJPrev} | ${sektorJ} | ${distribusiJ} | ${pertumbuhanJ} |\n| K. Jasa Keuangan dan Asuransi | ${sektorKPrev} | ${sektorK} | ${distribusiK} | ${pertumbuhanK} |\n| L. Real Estate | ${sektorLPrev} | ${sektorL} | ${distribusiL} | ${pertumbuhanL} |\n| M,N. Jasa Perusahaan | ${sektorMNPrev} | ${sektorMN} | ${distribusiMN} | ${pertumbuhanMN} |\n| O. Administrasi Pemerintahan dan Pertahanan | ${sektorOPrev} | ${sektorO} | ${distribusiO} | ${pertumbuhanO} |\n| P. Jasa Pendidikan | ${sektorPPrev} | ${sektorP} | ${distribusiP} | ${pertumbuhanP} |\n| Q. Jasa Kesehatan dan Kegiatan Sosial | ${sektorQPrev} | ${sektorQ} | ${distribusiQ} | ${pertumbuhanQ} |\n| R,S,T,U. Jasa Lainnya | ${sektorRSTUPrev} | ${sektorRSTU} | ${distribusiRSTU} | ${pertumbuhanRSTU} |\n| Produk Domestik Regional Bruto (PDRB) | ${totalPdrbAdhbPrev} | ${totalPdrbAdhb} | 100.00 | ${pertumbuhanNominal} |",
+            "footnote": {
+              "fontSize": "8pt",
+              "text": "Catatan:\n1 Klasifikasi lapangan usaha mengacu pada KBLI 2008 / SNA 2008.\n2 Nilai disajikan dalam Milyar Rupiah atas dasar harga berlaku.\n3 Angka sementara dan dapat direvisi."
+            }
+          }
+        },
+        {
+          "desc": "Secara struktural, nilai PDRB nominal ${wilayah} didorong oleh Sektor Perdagangan Besar dan Eceran dengan porsi ${distribusiG} persen, diikuti Sektor Pertanian (${distribusiA} persen), dan Sektor Konstruksi (${distribusiF} persen)."
+        }
+      ],
+      "sub": [
+        {
+          "title": {
+            "desc": "Sektor Perdagangan Besar dan Eceran",
+            "style": "ordered list 1.1 color #0284c7"
+          },
+          "desc": "Sektor Perdagangan Besar dan Eceran mencatatkan nilai nominal sebesar Rp${sektorG} Milyar pada tahun ${tahun}, naik dari Rp${sektorGPrev} Milyar pada tahun ${tahunSebelumnya} atau tumbuh sebesar ${pertumbuhanG} persen."
+        },
+        {
+          "title": {
+            "desc": "Sektor Pertanian, Kehutanan dan Perikanan",
+            "style": "ordered list 1.2 color #0284c7"
+          },
+          "desc": "Nilai nominal Sektor Pertanian mencapai Rp${sektorA} Milyar pada tahun ${tahun}, meningkat ${pertumbuhanA} persen dari realisasi tahun sebelumnya sebesar Rp${sektorAPrev} Milyar."
+        },
+        {
+          "title": {
+            "desc": "Sektor Konstruksi dan Sektor Lainnya",
+            "style": "ordered list 1.3 color #0284c7"
+          },
+          "desc": "Sektor Konstruksi membukukan nilai Rp${sektorF} Milyar, sedangkan Industri Pengolahan mencapai Rp${sektorC} Milyar, dengan masing-masing pertumbuhan nominal sebesar ${pertumbuhanF} persen dan ${pertumbuhanC} persen."
+        }
+      ]
+    },
+    {
+      "title": {
+        "desc": "Perbandingan Nominal Sektoral",
+        "style": "ordered list 2 font size 14px bold color #0284c7"
+      },
+      "desc": [
+        {
+          "desc": "Perkembangan nilai nominal sektor-sektor unggulan PDRB ${wilayah} selama tiga tahun terakhir.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel 2 Perkembangan Nilai Sektor Utama PDRB ADHB ${wilayah} (Milyar Rupiah), ${tahun1}–${tahun3}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#0284c7",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#bae6fd"
+              },
+              "rowColors": [
+                "#f0f9ff",
+                "#e0f2fe"
+              ]
+            },
+            "markdown": "| Lapangan Usaha Unggulan | ${tahun1} | ${tahun2} | ${tahun3} |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Perdagangan Besar dan Eceran | ${nominalGTahun1} | ${nominalGTahun2} | ${nominalGTahun3} |\n| Pertanian, Kehutanan, Perikanan | ${nominalATahun1} | ${nominalATahun2} | ${nominalATahun3} |\n| Konstruksi | ${nominalFTahun1} | ${nominalFTahun2} | ${nominalFTahun3} |\n| Total Nilai PDRB ADHB | ${pdrbNominalTahun1} | ${pdrbNominalTahun2} | ${pdrbNominalTahun3} |"
+          }
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "title": {
+            "desc": "Penjelasan Teknis PDRB ADHB Lapangan Usaha",
+            "style": "bg color #E0F2FE width 100% font size 18"
+          },
+          "desc": "PDRB atas dasar harga berlaku menurut lapangan usaha menyajikan nilai output dan nilai tambah bruto pada harga transaksi yang berlaku di pasar pada tahun berkenaan. Indikator ini mencerminkan besaran moneter agregat dari seluruh sektor usaha perekonomian daerah."
+        },
+        {
+          "title": {
+            "desc": "Kegunaan Data",
+            "style": "bg color #E0F2FE width 100% font size 18"
+          },
+          "desc": "Data PDRB ADHB digunakan untuk menentukan alokasi fiskal daerah, menghitung indikator produktivitas tenaga kerja nominal, serta menganalisis kontribusi pendapatan sektoral terhadap pendapatan regional."
+        }
+      ],
+      "style": "column 2"
+    }
+  ]
+}

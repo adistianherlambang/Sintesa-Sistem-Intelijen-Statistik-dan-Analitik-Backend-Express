@@ -1,0 +1,118 @@
+{
+  "summary": "Perekonomian ${wilayah} tahun ${tahun} berdasarkan Produk Domestik Regional Bruto (PDRB) atas dasar harga konstan 2010 (ADHK) menurut lapangan usaha mencapai Rp${totalPdrbAdhk} Milyar, mencatatkan laju pertumbuhan sebesar ${pertumbuhanEkonomi}% dibandingkan tahun sebelumnya. Lapangan usaha yang memberikan kontribusi terbesar terhadap perekonomian daerah adalah Sektor Perdagangan Besar dan Eceran (${distribusiPerdagangan}%), Sektor Pertanian, Kehutanan dan Perikanan (${distribusiPertanian}%), dan Sektor Konstruksi (${distribusiKonstruksi}%). Pertumbuhan ekonomi tertinggi dicapai oleh sektor ${sektorPertumbuhanTertinggi} dengan laju pertumbuhan sebesar ${pertumbuhanSektorTertinggi}%.",
+  "content": [
+    {
+      "title": {
+        "desc": "PDRB ADHK Menurut Lapangan Usaha",
+        "style": "ordered list 1 font size 14px bold color #7c3aed"
+      },
+      "desc": [
+        {
+          "desc": "Kinerja produksi barang dan jasa di ${wilayah} pada tahun ${tahun} menunjukkan pertumbuhan yang berdaya tahan. Menurut data yang dirilis ${instansi}, total PDRB atas dasar harga konstan 2010 mencapai Rp${totalPdrbAdhk} Milyar, bertambah dari Rp${totalPdrbAdhkPrev} Milyar pada tahun ${tahunSebelumnya} atau tumbuh sebesar ${pertumbuhanEkonomi} persen.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel ${noTable} PDRB Atas Dasar Harga Konstan Menurut 17 Kategori Lapangan Usaha di ${wilayah} (Milyar Rupiah), ${tahunSebelumnya}–${tahun}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#7c3aed",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#ddd6fe"
+              },
+              "rowColors": [
+                "#f5f3ff",
+                "#ede9fe"
+              ]
+            },
+            "markdown": "| Kategori Lapangan Usaha | Nilai PDRB ${tahunSebelumnya} (Milyar Rp) | Nilai PDRB ${tahun} (Milyar Rp) | Distribusi Persentase (%) | Laju Pertumbuhan (%) |\n|—|—:|—:|—:|—:|\n| (1) | (2) | (3) | (4) | (5) |\n| A. Pertanian, Kehutanan dan Perikanan | ${sektorAPrev} | ${sektorA} | ${distribusiA} | ${pertumbuhanA} |\n| B. Pertambangan dan Penggalian | ${sektorBPrev} | ${sektorB} | ${distribusiB} | ${pertumbuhanB} |\n| C. Industri Pengolahan | ${sektorCPrev} | ${sektorC} | ${distribusiC} | ${pertumbuhanC} |\n| D. Pengadaan Listrik dan Gas | ${sektorDPrev} | ${sektorD} | ${distribusiD} | ${pertumbuhanD} |\n| E. Pengadaan Air, Sampah dan Daur Ulang | ${sektorEPrev} | ${sektorE} | ${distribusiE} | ${pertumbuhanE} |\n| F. Konstruksi | ${sektorFPrev} | ${sektorF} | ${distribusiF} | ${pertumbuhanF} |\n| G. Perdagangan Besar dan Eceran; Reparasi | ${sektorGPrev} | ${sektorG} | ${distribusiG} | ${pertumbuhanG} |\n| H. Transportasi dan Pergudangan | ${sektorHPrev} | ${sektorH} | ${distribusiH} | ${pertumbuhanH} |\n| I. Penyediaan Akomodasi dan Makan Minum | ${sektorIPrev} | ${sektorI} | ${distribusiI} | ${pertumbuhanI} |\n| J. Informasi dan Komunikasi | ${sektorJPrev} | ${sektorJ} | ${distribusiJ} | ${pertumbuhanJ} |\n| K. Jasa Keuangan dan Asuransi | ${sektorKPrev} | ${sektorK} | ${distribusiK} | ${pertumbuhanK} |\n| L. Real Estate | ${sektorLPrev} | ${sektorL} | ${distribusiL} | ${pertumbuhanL} |\n| M,N. Jasa Perusahaan | ${sektorMNPrev} | ${sektorMN} | ${distribusiMN} | ${pertumbuhanMN} |\n| O. Administrasi Pemerintahan dan Pertahanan | ${sektorOPrev} | ${sektorO} | ${distribusiO} | ${pertumbuhanO} |\n| P. Jasa Pendidikan | ${sektorPPrev} | ${sektorP} | ${distribusiP} | ${pertumbuhanP} |\n| Q. Jasa Kesehatan dan Kegiatan Sosial | ${sektorQPrev} | ${sektorQ} | ${distribusiQ} | ${pertumbuhanQ} |\n| R,S,T,U. Jasa Lainnya | ${sektorRSTUPrev} | ${sektorRSTU} | ${distribusiRSTU} | ${pertumbuhanRSTU} |\n| Produk Domestik Regional Bruto (PDRB) | ${totalPdrbAdhkPrev} | ${totalPdrbAdhk} | 100.00 | ${pertumbuhanEkonomi} |",
+            "footnote": {
+              "fontSize": "8pt",
+              "text": "Catatan:\n1 Klasifikasi lapangan usaha mengacu pada KBLI 2008 / SNA 2008.\n2 Nilai disajikan dalam Milyar Rupiah atas dasar harga konstan 2010.\n3 Angka sementara dan dapat direvisi."
+            }
+          }
+        },
+        {
+          "desc": "Struktur perekonomian ${wilayah} menurut lapangan usaha pada tahun ${tahun} didominasi oleh tiga lapangan usaha utama, yaitu Sektor Perdagangan Besar dan Eceran dengan kontribusi sebesar ${distribusiG} persen, disusul Sektor Pertanian (${distribusiA} persen), dan Sektor Konstruksi (${distribusiF} persen). Ketiga sektor ini menyerap tenaga kerja terbanyak dan menjadi motor penggerak aktivitas ekonomi daerah."
+        }
+      ],
+      "sub": [
+        {
+          "title": {
+            "desc": "Sektor Perdagangan Besar dan Eceran",
+            "style": "ordered list 1.1 color #7c3aed"
+          },
+          "desc": "Sektor Perdagangan Besar dan Eceran serta Reparasi Mobil dan Sepeda Motor mencatatkan nilai tambah riil sebesar Rp${sektorG} Milyar pada tahun ${tahun}, tumbuh ${pertumbuhanG} persen dari Rp${sektorGPrev} Milyar pada tahun ${tahunSebelumnya}. Pertumbuhan didorong oleh tingginya mobilitas belanja dan distribusi barang konsumsi."
+        },
+        {
+          "title": {
+            "desc": "Sektor Pertanian, Kehutanan dan Perikanan",
+            "style": "ordered list 1.2 color #7c3aed"
+          },
+          "desc": "Sektor Pertanian membukukan nilai tambah sebesar Rp${sektorA} Milyar pada tahun ${tahun}, dengan pertumbuhan ${pertumbuhanA} persen dibandingkan tahun ${tahunSebelumnya} yang tercatat Rp${sektorAPrev} Milyar, didukung oleh stabilitas panen tanaman pangan dan hortikultura."
+        },
+        {
+          "title": {
+            "desc": "Sektor Konstruksi dan Industri Pengolahan",
+            "style": "ordered list 1.3 color #7c3aed"
+          },
+          "desc": "Sektor Konstruksi dan Industri Pengolahan masing-masing mencapai nilai Rp${sektorF} Milyar dan Rp${sektorC} Milyar, dengan pertumbuhan masing-masing sebesar ${pertumbuhanF} persen dan ${pertumbuhanC} persen sejalan dengan aktivitas pembangunan infrastruktur daerah."
+        }
+      ]
+    },
+    {
+      "title": {
+        "desc": "Perbandingan Pertumbuhan Sektoral",
+        "style": "ordered list 2 font size 14px bold color #7c3aed"
+      },
+      "desc": [
+        {
+          "desc": "Perkembangan laju pertumbuhan sektoral PDRB ${wilayah} dalam tiga tahun terakhir menunjukkan tren perbaikan di sebagian besar sektor ekonomi.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel 2 Laju Pertumbuhan Sektor Utama PDRB ADHK ${wilayah} (persen), ${tahun1}–${tahun3}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#7c3aed",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#ddd6fe"
+              },
+              "rowColors": [
+                "#f5f3ff",
+                "#ede9fe"
+              ]
+            },
+            "markdown": "| Lapangan Usaha Unggulan | ${tahun1} | ${tahun2} | ${tahun3} |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Perdagangan Besar dan Eceran | ${pertumbuhanGTahun1} | ${pertumbuhanGTahun2} | ${pertumbuhanGTahun3} |\n| Pertanian, Kehutanan, Perikanan | ${pertumbuhanATahun1} | ${pertumbuhanATahun2} | ${pertumbuhanATahun3} |\n| Konstruksi | ${pertumbuhanFTahun1} | ${pertumbuhanFTahun2} | ${pertumbuhanFTahun3} |\n| Total Pertumbuhan PDRB | ${pertumbuhanTahun1} | ${pertumbuhanTahun2} | ${pertumbuhanTahun3} |"
+          }
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "title": {
+            "desc": "Penjelasan Teknis PDRB Lapangan Usaha",
+            "style": "bg color #EDE9FE width 100% font size 18"
+          },
+          "desc": "PDRB menurut lapangan usaha menyajikan nilai tambah bruto yang dihasilkan oleh unit-unit produksi pada 17 kategori kegiatan ekonomi di suatu wilayah dalam periode tertentu. Nilai tambah bruto dihitung dari selisih antara nilai output (produksi) dengan biaya antara (intermediate cost) pada harga konstan 2010."
+        },
+        {
+          "title": {
+            "desc": "Klasifikasi Lapangan Usaha (KBLI)",
+            "style": "bg color #EDE9FE width 100% font size 18"
+          },
+          "desc": "Pengelompokan 17 kategori lapangan usaha didasarkan pada Klasifikasi Baku Lapangan Usaha Indonesia (KBLI) 2008 yang selaras dengan International Standard Industrial Classification of All Economic Activities (ISIC) Rev. 4."
+        }
+      ],
+      "style": "column 2"
+    }
+  ]
+}

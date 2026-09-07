@@ -1,0 +1,132 @@
+{
+  "summary": "Perekonomian ${wilayah} tahun ${tahun} yang diukur berdasarkan Produk Domestik Regional Bruto (PDRB) atas dasar harga konstan 2010 (ADHK) mencapai Rp${totalPdrbAdhk} Milyar, tumbuh sebesar ${pertumbuhanEkonomi}% dibandingkan tahun sebelumnya. Dari sisi pengeluaran, Pengeluaran Konsumsi Rumah Tangga (PK-RT) merupakan komponen terbesar dengan nilai mencapai Rp${konsumsiRt} Milyar atau berkontribusi sebesar ${distribusiRt}% dari total PDRB. Komponen Pembentukan Modal Tetap Bruto (PMTB) menyumbang Rp${pmtb} Milyar (${distribusiPmtb}%), sedangkan Pengeluaran Konsumsi Pemerintah mencapai Rp${konsumsiPemerintah} Milyar (${distribusiPemerintah}%). Komponen lainnya yaitu Konsumsi LNPRT sebesar Rp${konsumsiLnprt} Milyar, Perubahan Inventori sebesar Rp${inventori} Milyar, dan Net Ekspor Antardaerah sebesar Rp${netEkspor} Milyar.",
+  "content": [
+    {
+      "title": {
+        "desc": "PDRB ADHK Menurut Pengeluaran",
+        "style": "ordered list 1 font size 14px bold color #1e40af"
+      },
+      "desc": [
+        {
+          "desc": "Perkembangan ekonomi riil ${wilayah} tahun ${tahun} menunjukkan kinerja pertumbuhan yang positif. Berdasarkan hasil penghitungan Produk Domestik Regional Bruto (PDRB) atas dasar harga konstan 2010 (ADHK) oleh ${instansi}, total PDRB pengeluaran pada tahun ${tahun} tercatat sebesar Rp${totalPdrbAdhk} Milyar, meningkat dari Rp${totalPdrbAdhkPrev} Milyar pada tahun ${tahunSebelumnya} atau mencatat laju pertumbuhan sebesar ${pertumbuhanEkonomi} persen.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel ${noTable} PDRB Atas Dasar Harga Konstan Menurut Komponen Pengeluaran di ${wilayah} (Milyar Rupiah), ${tahunSebelumnya}–${tahun}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#1e40af",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#bfdbfe"
+              },
+              "rowColors": [
+                "#eff6ff",
+                "#dbeafe"
+              ]
+            },
+            "markdown": "| Komponen Pengeluaran | Nilai PDRB ${tahunSebelumnya} (Milyar Rp) | Nilai PDRB ${tahun} (Milyar Rp) | Distribusi Persentase (%) | Laju Pertumbuhan (%) |\n|—|—:|—:|—:|—:|\n| (1) | (2) | (3) | (4) | (5) |\n| 1. Pengeluaran Konsumsi Rumah Tangga | ${konsumsiRtPrev} | ${konsumsiRt} | ${distribusiRt} | ${pertumbuhanRt} |\n| 2. Pengeluaran Konsumsi LNPRT | ${konsumsiLnprtPrev} | ${konsumsiLnprt} | ${distribusiLnprt} | ${pertumbuhanLnprt} |\n| 3. Pengeluaran Konsumsi Pemerintah | ${konsumsiPemerintahPrev} | ${konsumsiPemerintah} | ${distribusiPemerintah} | ${pertumbuhanPemerintah} |\n| 4. Pembentukan Modal Tetap Bruto (PMTB) | ${pmtbPrev} | ${pmtb} | ${distribusiPmtb} | ${pertumbuhanPmtb} |\n| 5. Perubahan Inventori | ${inventoriPrev} | ${inventori} | ${distribusiInventori} | ${pertumbuhanInventori} |\n| 6. Net Ekspor Antardaerah | ${netEksporPrev} | ${netEkspor} | ${distribusiNetEkspor} | ${pertumbuhanNetEkspor} |\n| Produk Domestik Regional Bruto (PDRB) | ${totalPdrbAdhkPrev} | ${totalPdrbAdhk} | 100.00 | ${pertumbuhanEkonomi} |",
+            "footnote": {
+              "fontSize": "8pt",
+              "text": "Catatan:\n1 Nilai PDRB disajikan dalam Milyar Rupiah atas dasar harga konstan 2010.\n2 Distribusi persentase dihitung terhadap total PDRB pengeluaran.\n3 Angka bersifat sementara dan dapat mengalami revisi berkala oleh BPS."
+            }
+          }
+        },
+        {
+          "desc": "Struktur PDRB pengeluaran ${wilayah} pada tahun ${tahun} masih didominasi oleh Pengeluaran Konsumsi Rumah Tangga dengan andil sebesar ${distribusiRt} persen, disusul oleh Pembentukan Modal Tetap Bruto (PMTB) sebesar ${distribusiPmtb} persen, dan Pengeluaran Konsumsi Pemerintah sebesar ${distribusiPemerintah} persen. Komponen Konsumsi LNPRT, Perubahan Inventori, dan Net Ekspor berturut-turut menyumbang ${distribusiLnprt} persen, ${distribusiInventori} persen, dan ${distribusiNetEkspor} persen terhadap total perekonomian daerah."
+        }
+      ],
+      "sub": [
+        {
+          "title": {
+            "desc": "Pengeluaran Konsumsi Rumah Tangga",
+            "style": "ordered list 1.1 color #1e40af"
+          },
+          "desc": "Komponen Pengeluaran Konsumsi Rumah Tangga (PK-RT) pada tahun ${tahun} tercatat sebesar Rp${konsumsiRt} Milyar, mengalami pertumbuhan sebesar ${pertumbuhanRt} persen dari Rp${konsumsiRtPrev} Milyar pada tahun ${tahunSebelumnya}. Peningkatan konsumsi rumah tangga ditopang oleh terjaganya daya beli masyarakat serta stabilitas pasokan barang kebutuhan pokok."
+        },
+        {
+          "title": {
+            "desc": "Pengeluaran Konsumsi LNPRT",
+            "style": "ordered list 1.2 color #1e40af"
+          },
+          "desc": "Pengeluaran Konsumsi Lembaga Non-Profit yang Melayani Rumah Tangga (PK-LNPRT) pada tahun ${tahun} mencapai Rp${konsumsiLnprt} Milyar, dengan pertumbuhan sebesar ${pertumbuhanLnprt} persen dibandingkan tahun ${tahunSebelumnya} yang tercatat sebesar Rp${konsumsiLnprtPrev} Milyar."
+        },
+        {
+          "title": {
+            "desc": "Pengeluaran Konsumsi Pemerintah",
+            "style": "ordered list 1.3 color #1e40af"
+          },
+          "desc": "Pengeluaran Konsumsi Pemerintah (PK-P) tahun ${tahun} terealisasi sebesar Rp${konsumsiPemerintah} Milyar atau mencatat pertumbuhan ${pertumbuhanPemerintah} persen dibandingkan realisasi tahun ${tahunSebelumnya} sebesar Rp${konsumsiPemerintahPrev} Milyar, sejalan dengan penyerapan anggaran belanja pegawai dan barang jasa pemerintah daerah."
+        },
+        {
+          "title": {
+            "desc": "Pembentukan Modal Tetap Bruto (PMTB)",
+            "style": "ordered list 1.4 color #1e40af"
+          },
+          "desc": "Komponen Pembentukan Modal Tetap Bruto (PMTB) atau investasi fisik pada tahun ${tahun} mencapai Rp${pmtb} Milyar, tumbuh ${pertumbuhanPmtb} persen dari Rp${pmtbPrev} Milyar pada tahun ${tahunSebelumnya}. Kenaikan ini merefleksikan perbaikan pembangunan infrastruktur fisik dan pengadaan mesin serta alat modal di ${wilayah}."
+        },
+        {
+          "title": {
+            "desc": "Perubahan Inventori dan Net Ekspor",
+            "style": "ordered list 1.5 color #1e40af"
+          },
+          "desc": "Komponen Perubahan Inventori tahun ${tahun} tercatat sebesar Rp${inventori} Milyar, sedangkan Net Ekspor Antardaerah (selisih ekspor dan impor antardaerah) mencapai Rp${netEkspor} Milyar, dengan masing-masing pertumbuhan sebesar ${pertumbuhanInventori} persen dan ${pertumbuhanNetEkspor} persen."
+        }
+      ]
+    },
+    {
+      "title": {
+        "desc": "Pertumbuhan PDRB Antar Periode",
+        "style": "ordered list 2 font size 14px bold color #1e40af"
+      },
+      "desc": [
+        {
+          "desc": "Dalam kurun waktu tiga tahun terakhir, laju pertumbuhan ekonomi ${wilayah} atas dasar harga konstan bergerak dinamis. Pada tahun ${tahun3} tercatat pertumbuhan sebesar ${pertumbuhanTahun3} persen, setelah pada tahun ${tahun2} dan ${tahun1} masing-masing tumbuh sebesar ${pertumbuhanTahun2} persen dan ${pertumbuhanTahun1} persen.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel 2 Laju Pertumbuhan PDRB Pengeluaran ADHK ${wilayah} (persen), ${tahun1}–${tahun3}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#1e40af",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#bfdbfe"
+              },
+              "rowColors": [
+                "#eff6ff",
+                "#dbeafe"
+              ]
+            },
+            "markdown": "| Indikator Pertumbuhan | ${tahun1} | ${tahun2} | ${tahun3} |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Konsumsi Rumah Tangga | ${pertumbuhanRtTahun1} | ${pertumbuhanRtTahun2} | ${pertumbuhanRtTahun3} |\n| Konsumsi Pemerintah | ${pertumbuhanPemerintahTahun1} | ${pertumbuhanPemerintahTahun2} | ${pertumbuhanPemerintahTahun3} |\n| Pembentukan Modal Tetap Bruto | ${pertumbuhanPmtbTahun1} | ${pertumbuhanPmtbTahun2} | ${pertumbuhanPmtbTahun3} |\n| Total PDRB ADHK | ${pertumbuhanTahun1} | ${pertumbuhanTahun2} | ${pertumbuhanTahun3} |"
+          }
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "title": {
+            "desc": "Penjelasan Teknis PDRB ADHK",
+            "style": "bg color #DBEAFE width 100% font size 18"
+          },
+          "desc": "Produk Domestik Regional Bruto (PDRB) atas dasar harga konstan 2010 menggambarkan nilai tambah barang dan jasa yang dihitung menggunakan harga pada tahun dasar (2010). PDRB riil ini digunakan untuk mengukur laju pertumbuhan ekonomi dan perubahan struktur perekonomian secara riil tanpa dipengaruhi oleh fluktuasi inflasi harga.\nPDRB menurut pengeluaran merinci penggunaan barang dan jasa akhir yang diproduksi dalam wilayah domestik ke dalam pos pengeluaran konsumsi rumah tangga, konsumsi lembaga non-profit, konsumsi pemerintah, pembentukan modal tetap bruto, perubahan inventori, serta net ekspor."
+        },
+        {
+          "title": {
+            "desc": "Sumber Data & Metodologi",
+            "style": "bg color #DBEAFE width 100% font size 18"
+          },
+          "desc": "Penyusunan PDRB Pengeluaran mengacu pada standar System of National Accounts (SNA) 2008 yang diterbitkan oleh Perserikatan Bangsa-Bangsa (PBB). Data bersumber dari Survei Sosial Ekonomi Nasional (Susenas), laporan realisasi APBD pemerintah daerah, statistik investasi, dan catatan transaksi perdagangan antardaerah yang diolah oleh Badan Pusat Statistik (BPS)."
+        }
+      ],
+      "style": "column 2"
+    }
+  ]
+}

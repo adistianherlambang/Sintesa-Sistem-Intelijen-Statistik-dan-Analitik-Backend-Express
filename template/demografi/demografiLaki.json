@@ -1,0 +1,118 @@
+{
+  "summary": "Jumlah penduduk laki-laki di ${wilayah} pada tahun ${tahun} tercatat sebanyak ${jumlahPendudukLaki} jiwa atau berkontribusi sebesar ${persentaseLaki}% dari total populasi daerah. Penduduk laki-laki usia produktif (15–64 tahun) mendominasi dengan jumlah mencapai ${lakiProduktif} jiwa (${persentaseLakiProduktif}%). Kelompok umur 0–14 tahun berjumlah ${lakiAnak} jiwa (${persentaseLakiAnak}%), sedangkan kelompok umur 65 tahun ke atas tercatat sebanyak ${lakiLansia} jiwa (${persentaseLakiLansia}%).",
+  "content": [
+    {
+      "title": {
+        "desc": "Jumlah Penduduk Laki-Laki Menurut Kelompok Umur",
+        "style": "ordered list 1 font size 14px bold color #2563eb"
+      },
+      "desc": [
+        {
+          "desc": "Struktur penduduk laki-laki di ${wilayah} pada tahun ${tahun} memperlihatkan piramida penduduk yang sehat dan berorientasi produktif. Berdasarkan data ${instansi}, total penduduk laki-laki mencapai ${jumlahPendudukLaki} jiwa, mengalami peningkatan dibandingkan tahun ${tahunSebelumnya} yang tercatat sebanyak ${jumlahPendudukLakiPrev} jiwa.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel ${noTable} Jumlah Penduduk Laki-Laki ${wilayah} Menurut Kelompok Umur (Jiwa), ${tahunSebelumnya}–${tahun}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#2563eb",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#bfdbfe"
+              },
+              "rowColors": [
+                "#eff6ff",
+                "#dbeafe"
+              ]
+            },
+            "markdown": "| Kelompok Umur | Laki-Laki ${tahunSebelumnya} (Jiwa) | Laki-Laki ${tahun} (Jiwa) | Persentase (%) | Pertumbuhan (%) |\n|—|—:|—:|—:|—:|\n| (1) | (2) | (3) | (4) | (5) |\n| 0–4 | ${laki0_4Prev} | ${laki0_4} | ${persenLaki0_4} | ${pertumbuhanLaki0_4} |\n| 5–9 | ${laki5_9Prev} | ${laki5_9} | ${persenLaki5_9} | ${pertumbuhanLaki5_9} |\n| 10–14 | ${laki10_14Prev} | ${laki10_14} | ${persenLaki10_14} | ${pertumbuhanLaki10_14} |\n| 15–19 | ${laki15_19Prev} | ${laki15_19} | ${persenLaki15_19} | ${pertumbuhanLaki15_19} |\n| 20–24 | ${laki20_24Prev} | ${laki20_24} | ${persenLaki20_24} | ${pertumbuhanLaki20_24} |\n| 25–29 | ${laki25_29Prev} | ${laki25_29} | ${persenLaki25_29} | ${pertumbuhanLaki25_29} |\n| 30–34 | ${laki30_34Prev} | ${laki30_34} | ${persenLaki30_34} | ${pertumbuhanLaki30_34} |\n| 35–39 | ${laki35_39Prev} | ${laki35_39} | ${persenLaki35_39} | ${pertumbuhanLaki35_39} |\n| 40–44 | ${laki40_44Prev} | ${laki40_44} | ${persenLaki40_44} | ${pertumbuhanLaki40_44} |\n| 45–49 | ${laki45_49Prev} | ${laki45_49} | ${persenLaki45_49} | ${pertumbuhanLaki45_49} |\n| 50–54 | ${laki50_54Prev} | ${laki50_54} | ${persenLaki50_54} | ${pertumbuhanLaki50_54} |\n| 55–59 | ${laki55_59Prev} | ${laki55_59} | ${persenLaki55_59} | ${pertumbuhanLaki55_59} |\n| 60–64 | ${laki60_64Prev} | ${laki60_64} | ${persenLaki60_64} | ${pertumbuhanLaki60_64} |\n| 65–69 | ${laki65_69Prev} | ${laki65_69} | ${persenLaki65_69} | ${pertumbuhanLaki65_69} |\n| 70–74 | ${laki70_74Prev} | ${laki70_74} | ${persenLaki70_74} | ${pertumbuhanLaki70_74} |\n| 75+ | ${laki75Prev} | ${laki75} | ${persenLaki75} | ${pertumbuhanLaki75} |\n| Total Penduduk Laki-Laki | ${jumlahPendudukLakiPrev} | ${jumlahPendudukLaki} | 100.00 | ${lajuPertumbuhanLaki} |",
+            "footnote": {
+              "fontSize": "8pt",
+              "text": "Catatan:\n1 Data bersumber dari Proyeksi Penduduk Interim BPS.\n2 Persentase dihitung terhadap total penduduk laki-laki."
+            }
+          }
+        },
+        {
+          "desc": "Proporsi laki-laki usia produktif (15–64 tahun) mencapai ${persentaseLakiProduktif} persen dari total penduduk laki-laki di ${wilayah}. Angka partisipasi angkatan kerja laki-laki yang tinggi menjadi pilar penting ketahanan ekonomi keluarga."
+        }
+      ],
+      "sub": [
+        {
+          "title": {
+            "desc": "Laki-Laki Usia Anak (0–14 Tahun)",
+            "style": "ordered list 1.1 color #2563eb"
+          },
+          "desc": "Jumlah penduduk laki-laki umur 0–14 tahun tercatat sebesar ${lakiAnak} jiwa (${persentaseLakiAnak}%), menjadi basis generasi penerus yang membutuhkan pemenuhan akses pendidikan dan kesehatan."
+        },
+        {
+          "title": {
+            "desc": "Laki-Laki Usia Produktif (15–64 Tahun)",
+            "style": "ordered list 1.2 color #2563eb"
+          },
+          "desc": "Penduduk laki-laki usia produktif tercatat sebanyak ${lakiProduktif} jiwa (${persentaseLakiProduktif}%), merupakan motor utama angkatan kerja di sektor formal maupun informal."
+        },
+        {
+          "title": {
+            "desc": "Laki-Laki Lanjut Usia (65+ Tahun)",
+            "style": "ordered list 1.3 color #2563eb"
+          },
+          "desc": "Jumlah lansia laki-laki tercatat sebanyak ${lakiLansia} jiwa (${persentaseLakiLansia}%), yang membutuhkan perhatian terkait jaminan pensiun dan layanan kesehatan geriatri."
+        }
+      ]
+    },
+    {
+      "title": {
+        "desc": "Perbandingan Penduduk Laki-Laki Antar Tahun",
+        "style": "ordered list 2 font size 14px bold color #2563eb"
+      },
+      "desc": [
+        {
+          "desc": "Tren perkembangan jumlah penduduk laki-laki di ${wilayah} dalam tiga tahun terakhir.",
+          "style": "font size 12px regular"
+        },
+        {
+          "table": {
+            "judul": "Tabel 2 Perkembangan Jumlah Penduduk Laki-Laki ${wilayah} (Jiwa), ${tahun1}–${tahun3}",
+            "style": {
+              "fontSize": "8pt",
+              "header": {
+                "backgroundColor": "#2563eb",
+                "fontWeight": "bold"
+              },
+              "numbering": {
+                "backgroundColor": "#bfdbfe"
+              },
+              "rowColors": [
+                "#eff6ff",
+                "#dbeafe"
+              ]
+            },
+            "markdown": "| Kelompok Umur Utama | ${tahun1} | ${tahun2} | ${tahun3} |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| Anak-Anak (0-14) | ${lakiAnakTahun1} | ${lakiAnakTahun2} | ${lakiAnakTahun3} |\n| Usia Produktif (15-64) | ${lakiProduktifTahun1} | ${lakiProduktifTahun2} | ${lakiProduktifTahun3} |\n| Lanjut Usia (65+) | ${lakiLansiaTahun1} | ${lakiLansiaTahun2} | ${lakiLansiaTahun3} |\n| Total Penduduk Laki-Laki | ${totalLakiTahun1} | ${totalLakiTahun2} | ${totalLakiTahun3} |"
+          }
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "title": {
+            "desc": "Penjelasan Teknis Penduduk Laki-Laki",
+            "style": "bg color #DBEAFE width 100% font size 18"
+          },
+          "desc": "Data penduduk laki-laki menurut kelompok umur menyajikan rincian demografis jenis kelamin pria dalam suatu wilayah. Data ini sangat penting untuk perencanaan tenaga kerja, program kesehatan reproduksi pria, dan analisis rasio jenis kelamin (sex ratio)."
+        },
+        {
+          "title": {
+            "desc": "Sex Ratio (Rasio Jenis Kelamin)",
+            "style": "bg color #DBEAFE width 100% font size 18"
+          },
+          "desc": "Rasio jenis kelamin adalah perbandingan banyaknya penduduk laki-laki per 100 penduduk perempuan di wilayah yang sama pada periode waktu tertentu."
+        }
+      ],
+      "style": "column 2"
+    }
+  ]
+}

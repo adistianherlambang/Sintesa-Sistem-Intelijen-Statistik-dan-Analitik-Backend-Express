@@ -8,6 +8,7 @@ import {
 } from "../../controller/analisis/wordAnalysisController.js";
 import {
   handleGenerateNarasiKelompok,
+  handleGenerateNarasiForecast,
   handleGetTemplateInflasiIhk,
   handleRenderTemplateInflasiIhk,
 } from "../../controller/analisis/narasiKelompokController.js";
@@ -32,12 +33,14 @@ router.get("/template/inflasi-ihk", handleGetTemplateInflasiIhk);
 router.post("/template/inflasi-ihk/render", handleRenderTemplateInflasiIhk);
 
 /**
- * Route untuk generasi narasi andil M-to-M kelompok pengeluaran via LLM (UnifiedLLM/Gemini)
+ * Route untuk generasi narasi andil M-to-M kelompok pengeluaran dan forecast via LLM
  * POST /api/analisis/keterangan-andil-mtm
  * POST /api/analisis/generate-narasi-kelompok
+ * POST /api/analisis/generate-narasi-forecast
  */
 router.post("/keterangan-andil-mtm", handleGenerateNarasiKelompok);
 router.post("/generate-narasi-kelompok", handleGenerateNarasiKelompok);
+router.post("/generate-narasi-forecast", handleGenerateNarasiForecast);
 
 /**
  * Routes untuk MS Word Editor BRS (Word Engine)

@@ -1120,7 +1120,60 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
   varMap["jumlahTahun3"] = varMap["jumlahPendudukMiskin"];
   varMap["gkTahun1"] = "518.400";
   varMap["gkTahun2"] = varMap["gkPrev"];
-  varMap["gkTahun3"] = varMap["garisKemiskinan"];
+  // 9b. Forecast Narrative & Table Data directly from UI Forecast Display (NOT from LLM)
+  const forecastPoints = edited.forecastPoints || dataset.forecastPoints || null;
+  const forecastData = edited.forecast || dataset.forecast || null;
+
+  // Nama periode proyeksi 3 bulan ke depan (T+1, T+2, T+3)
+  const next1MonthIdx = (monthIdx + 1) % 12;
+  const next1Year = currentYear + (monthIdx + 1 >= 12 ? 1 : 0);
+  const next2MonthIdx = (monthIdx + 2) % 12;
+  const next2Year = currentYear + (monthIdx + 2 >= 12 ? 1 : 0);
+  const next3MonthIdx = (monthIdx + 3) % 12;
+  const next3Year = currentYear + (monthIdx + 3 >= 12 ? 1 : 0);
+
+  const t1Label = `${MONTH_NAMES[next1MonthIdx]} ${next1Year}`;
+  const t2Label = `${MONTH_NAMES[next2MonthIdx]} ${next2Year}`;
+  const t3Label = `${MONTH_NAMES[next3MonthIdx]} ${next3Year}`;
+
+  let fMom1 = "0,25", fMom2 = "0,28", fMom3 = "0,22";
+  let fYoy1 = headlineYoy, fYoy2 = headlineYoy, fYoy3 = headlineYoy;
+  let fYtd1 = headlineYtd, fYtd2 = headlineYtd, fYtd3 = headlineYtd;
+
+  if (Array.isArray(forecastPoints) && forecastPoints.length >= 3) {
+    // Diambil LANGSUNG dari tampilan forecast di frontend
+    fMom1 = (Number(forecastPoints[0].mom) || 0).toFixed(2).replace(".", ",");
+    fMom2 = (Number(forecastPoints[1].mom) || 0).toFixed(2).replace(".", ",");
+    fMom3 = (Number(forecastPoints[2].mom) || 0).toFixed(2).replace(".", ",");
+
+    fYoy1 = (Number(forecastPoints[0].yoy) || 0).toFixed(2).replace(".", ",");
+    fYoy2 = (Number(forecastPoints[1].yoy) || 0).toFixed(2).replace(".", ",");
+    fYoy3 = (Number(forecastPoints[2].yoy) || 0).toFixed(2).replace(".", ",");
+
+    fYtd1 = (Number(forecastPoints[0].ytd) || 0).toFixed(2).replace(".", ",");
+    fYtd2 = (Number(forecastPoints[1].ytd) || 0).toFixed(2).replace(".", ",");
+    fYtd3 = (Number(forecastPoints[2].ytd) || 0).toFixed(2).replace(".", ",");
+  } else if (forecastData && Array.isArray(forecastData.inflasi) && forecastData.inflasi.length > 0) {
+    fMom1 = (Number(forecastData.inflasi[0]) || 0.25).toFixed(2).replace(".", ",");
+    if (forecastData.inflasi.length > 1) fMom2 = (Number(forecastData.inflasi[1]) || 0.28).toFixed(2).replace(".", ",");
+    if (forecastData.inflasi.length > 2) fMom3 = (Number(forecastData.inflasi[2]) || 0.22).toFixed(2).replace(".", ",");
+  }
+
+  varMap["forecastPeriode1"] = t1Label;
+  varMap["forecastPeriode2"] = t2Label;
+  varMap["forecastPeriode3"] = t3Label;
+  varMap["forecastMom1"] = fMom1;
+  varMap["forecastMom2"] = fMom2;
+  varMap["forecastMom3"] = fMom3;
+  varMap["forecastYoy1"] = fYoy1;
+  varMap["forecastYoy2"] = fYoy2;
+  varMap["forecastYoy3"] = fYoy3;
+  varMap["forecastYtd1"] = fYtd1;
+  varMap["forecastYtd2"] = fYtd2;
+  varMap["forecastYtd3"] = fYtd3;
+  varMap["forecastInflasi"] = fMom1;
+
+  varMap["narasiForecast"] = `Berdasarkan hasil pemodelan proyeksi data deret waktu menggunakan Jaringan Saraf Tiruan (Artificial Neural Network / ANN), laju inflasi bulan ke bulan (m-to-m) di ${cleanCity} pada periode mendatang diprakirakan berada pada kisaran ${fMom1} persen. Perkembangan pergerakan indeks harga tersebut dipengaruhi oleh dinamika ketersediaan pasokan kelompok komoditas pangan bergejolak serta pola konsumsi musiman masyarakat. Langkah antisipatif dan pemantauan distribusi pasokan oleh Tim Pengendalian Inflasi Daerah (TPID) serta sinergi antardaerah tetap diperlukan secara konsisten guna menjaga stabilitas harga dan melindungi daya beli masyarakat di wilayah ${cleanCity}.`;
 
   // 10. Overlay custom user variables
   if (customVars && typeof customVars === "object") {

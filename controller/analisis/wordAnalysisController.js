@@ -12,6 +12,7 @@ import {
   renderTemplateByIndicator,
   renderTemplateObject
 } from "./templateVariableMapper.js";
+import { generateForecastNarasiWithLLM } from "./narasiKelompokController.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -218,6 +219,32 @@ export function buildTableWordXmlFromMarkdown(tableConfig, varMap = {}, totalWid
 }
 
 /**
+ * Helper: Parse template style string for Word OpenXML
+ * Contoh: "bg color #FEE3CE width 100% font size 18"
+ */
+export function parseWordStyle(styleStr, defaultPt = 10) {
+  const str = String(styleStr || "");
+  let fontSizePt = defaultPt;
+  let bgFill = "FEE3CE";
+
+  const fontMatch = str.match(/font\s*size\s*(\d+)/i);
+  if (fontMatch) {
+    fontSizePt = parseInt(fontMatch[1], 10);
+  }
+
+  const bgMatch = str.match(/bg\s*color\s*#?([0-9a-fA-F]{6})/i) || str.match(/bgcolor\s*#?([0-9a-fA-F]{6})/i);
+  if (bgMatch) {
+    bgFill = bgMatch[1].toUpperCase();
+  }
+
+  return {
+    fontSizePt,
+    fontSizeHalfPt: fontSizePt * 2, // OpenXML Word menggunakan half-points (1 pt = 2 half-points)
+    bgFill
+  };
+}
+
+/**
  * Generate XML Section 2 dinamis langsung dari inflasiIHK.json (content[2])
  */
 export function buildSection2WordXmlFromTemplate(section2Config, varMap = {}) {
@@ -225,6 +252,10 @@ export function buildSection2WordXmlFromTemplate(section2Config, varMap = {}) {
 
   const col0 = section2Config.column?.[0] || {};
   const col1 = section2Config.column?.[1] || {};
+
+  // Parse styling dari template JSON: "bg color #FEE3CE width 100% font size 18" -> 18pt = 36 half-points
+  const col0Style = parseWordStyle(col0.title?.style, 18);
+  const col1Style = parseWordStyle(col1.title?.style, 18);
 
   const col0Title = renderTemplateObject(col0.title?.desc || "Penjelasan Teknis", varMap);
   const col0Desc = renderTemplateObject(col0.desc || "", varMap);
@@ -238,6 +269,9 @@ export function buildSection2WordXmlFromTemplate(section2Config, varMap = {}) {
   const table3Title = renderTemplateObject(table3Config?.judul || "Tabel 3", varMap);
   const table3Xml = buildTableWordXmlFromMarkdown(table3Config, varMap, 4600);
 
+  // Font size default 10 pt = 20 half-points jika tidak diberikan styling
+  const defaultBodyHalfPt = 20;
+
   let xml = '<w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
     '<w:tbl>' +
     '<w:tblPr><w:tblW w:w="9600" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr>' +
@@ -245,10 +279,10 @@ export function buildSection2WordXmlFromTemplate(section2Config, varMap = {}) {
     // Left Column
     '<w:tc>' +
     '<w:tcPr><w:tcW w:w="4600" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>' +
-    '<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="FEE3CE"/><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>  ' + escapeXml(col0Title) + '</w:t></w:r></w:p>';
+    `<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="${col0Style.bgFill}"/><w:spacing w:before="80" w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${col0Style.fontSizeHalfPt}"/><w:szCs w:val="${col0Style.fontSizeHalfPt}"/><w:color w:val="1E293B"/></w:rPr><w:t>  ` + escapeXml(col0Title) + `</w:t></w:r></w:p>`;
 
   for (const p of col0Paragraphs) {
-    xml += '<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/><w:color w:val="334155"/></w:rPr><w:t>' + escapeXml(p) + '</w:t></w:r></w:p>';
+    xml += `<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="60" w:after="60" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="${defaultBodyHalfPt}"/><w:szCs w:val="${defaultBodyHalfPt}"/><w:color w:val="334155"/></w:rPr><w:t>` + escapeXml(p) + `</w:t></w:r></w:p>`;
   }
 
   xml += '</w:tc>' +
@@ -256,14 +290,14 @@ export function buildSection2WordXmlFromTemplate(section2Config, varMap = {}) {
     // Right Column
     '<w:tc>' +
     '<w:tcPr><w:tcW w:w="4600" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>' +
-    '<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="FEE3CE"/><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>  ' + escapeXml(col1Title) + '</w:t></w:r></w:p>';
+    `<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="${col1Style.bgFill}"/><w:spacing w:before="80" w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${col1Style.fontSizeHalfPt}"/><w:szCs w:val="${col1Style.fontSizeHalfPt}"/><w:color w:val="1E293B"/></w:rPr><w:t>  ` + escapeXml(col1Title) + `</w:t></w:r></w:p>`;
 
   for (const p of col1Paragraphs) {
-    xml += '<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="40" w:after="40" w:line="220" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="15"/><w:color w:val="334155"/></w:rPr><w:t>' + escapeXml(p) + '</w:t></w:r></w:p>';
+    xml += `<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="60" w:after="60" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="${defaultBodyHalfPt}"/><w:szCs w:val="${defaultBodyHalfPt}"/><w:color w:val="334155"/></w:rPr><w:t>` + escapeXml(p) + `</w:t></w:r></w:p>`;
   }
 
   if (table3Title) {
-    xml += '<w:p><w:pPr><w:spacing w:before="60" w:after="20"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:sz w:val="15"/><w:color w:val="1E293B"/></w:rPr><w:t>' + escapeXml(table3Title) + '</w:t></w:r></w:p>';
+    xml += `<w:p><w:pPr><w:spacing w:before="80" w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${defaultBodyHalfPt}"/><w:szCs w:val="${defaultBodyHalfPt}"/><w:color w:val="1E293B"/></w:rPr><w:t>` + escapeXml(table3Title) + `</w:t></w:r></w:p>`;
   }
 
   if (table3Xml) {
@@ -273,6 +307,42 @@ export function buildSection2WordXmlFromTemplate(section2Config, varMap = {}) {
   xml += '</w:tc>' +
     '</w:tr>' +
     '</w:tbl>';
+
+  return xml;
+}
+
+/**
+ * Generate XML Section Forecast/Proyeksi Word dinamis langsung dari inflasiIHK.json
+ */
+export function buildForecastWordXmlFromTemplate(forecastConfig, varMap = {}) {
+  if (!forecastConfig) return "";
+
+  const titleConfig = forecastConfig.title || {};
+  const style = parseWordStyle(titleConfig.style, 18);
+  const titleText = renderTemplateObject(titleConfig.desc || "Proyeksi dan Prakiraan Inflasi", varMap);
+  const descText = renderTemplateObject(forecastConfig.desc || varMap["narasiForecast"] || "", varMap);
+  const paragraphs = descText.split("\n").map(l => l.trim()).filter(Boolean);
+  const defaultBodyHalfPt = 20; // font 10 pt = 20 half-points
+
+  let xml = '<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
+  xml += `<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="${style.bgFill}"/><w:spacing w:before="120" w:after="80"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${style.fontSizeHalfPt}"/><w:szCs w:val="${style.fontSizeHalfPt}"/><w:color w:val="1E293B"/></w:rPr><w:t>  ` + escapeXml(titleText) + `</w:t></w:r></w:p>`;
+
+  for (const p of paragraphs) {
+    xml += `<w:p><w:pPr><w:jc w:val="both"/><w:spacing w:before="60" w:after="80" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="${defaultBodyHalfPt}"/><w:szCs w:val="${defaultBodyHalfPt}"/><w:color w:val="334155"/></w:rPr><w:t>` + escapeXml(p) + `</w:t></w:r></w:p>`;
+  }
+
+  // Render tabel data forecast langsung dari tampilan/model forecast (bukan dari LLM)
+  const forecastTableConfig = forecastConfig.table;
+  if (forecastTableConfig) {
+    const tableTitle = renderTemplateObject(forecastTableConfig.judul || "Tabel Proyeksi Tingkat Inflasi", varMap);
+    if (tableTitle) {
+      xml += `<w:p><w:pPr><w:spacing w:before="120" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${defaultBodyHalfPt}"/><w:szCs w:val="${defaultBodyHalfPt}"/><w:color w:val="1E293B"/></w:rPr><w:t>` + escapeXml(tableTitle) + `</w:t></w:r></w:p>`;
+    }
+    const tableXml = buildTableWordXmlFromMarkdown(forecastTableConfig, varMap, 9638);
+    if (tableXml) {
+      xml += tableXml;
+    }
+  }
 
   return xml;
 }
@@ -341,6 +411,37 @@ export const generateWordBrs = async (req, res) => {
     };
     const activeIndicator = activeDataset?.context?.indicator || activeDataset?.context?.selectedIndicator || activeDataset?.fileInfo?.selectedIndicator || "komoditas";
     const varMap = buildVariableMapFromDataset(activeDataset, variables);
+
+    // Evaluasi apakah forecast ON atau OFF
+    const isForecastOn = req.body?.forecastEnabled === true || 
+                         req.body?.isForecastOn === true ||
+                         req.body?.forecastingEnabled === true ||
+                         activeDataset?.context?.forecastingEnabled === true ||
+                         activeDataset?.context?.isForecastOn === true ||
+                         activeDataset?.editedData?.forecastingEnabled === true ||
+                         (req.body?.forecastEnabled !== false && 
+                          req.body?.forecastingEnabled !== false &&
+                          activeDataset?.context?.forecastingEnabled !== false && 
+                          activeDataset?.editedData?.forecastingEnabled !== false && 
+                          Boolean(activeDataset?.editedData?.forecast || activeDataset?.forecast));
+
+    // Jika forecast ON dan narasi belum disediakan khusus oleh user, generate via LLM
+    if (isForecastOn && !variables?.narasiForecast && !variables?.["narasiForecastManual"]) {
+      try {
+        const forecastData = activeDataset?.editedData?.forecast || activeDataset?.forecast || null;
+        const llmNarrative = await generateForecastNarasiWithLLM({
+          city: varMap["namaKota"] || city,
+          period: varMap["bulanTahun"] || periode,
+          forecastData,
+          varMap,
+        });
+        if (llmNarrative) {
+          varMap["narasiForecast"] = llmNarrative;
+        }
+      } catch (err) {
+        console.warn("[generateWordBrs] Warning generating forecast narrative with LLM:", err.message);
+      }
+    }
 
     // Load fresh indicator-specific template and rendered values
     const freshTemplate = loadTemplateByIndicator(activeIndicator);
@@ -494,66 +595,73 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // D. Chart BRS image strictly following JSON order (content[2]) - in line with text
+          // D. Rekonstruksi Dokumen Mengikuti Urutan inflasiIHK.json:
+          // 1. Chart BRS
+          // 2. Baris 160-196: Penjelasan Teknis & Perubahan Tahun Dasar (Tabel 3)
+          // 3. Baris 197-202: Infografis full-page banner
+          // 4. Halaman Paling Terakhir: Informasi Kontak BPS (telepon, email, PST, alamat BPS)
+
+          // Ekstrak blok kontak dari template asli dan bungkus sebagai tabel mandiri
+          const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
+          let standaloneContactXml = "";
+          if (xmlContent.includes(contactMarker)) {
+            const contactMarkerPos = xmlContent.indexOf(contactMarker);
+            const contactGridIdx = xmlContent.lastIndexOf("<w:tblGrid", contactMarkerPos);
+            const contactTblEnd = xmlContent.indexOf("</w:tbl>", contactMarkerPos) + 8;
+            const lastSectPr = xmlContent.lastIndexOf("<w:sectPr");
+            if (contactGridIdx !== -1 && contactTblEnd !== -1 && lastSectPr !== -1 && lastSectPr > contactTblEnd) {
+              const contactTableInside = xmlContent.substring(contactGridIdx, contactTblEnd - 8);
+              const afterContactTable = xmlContent.substring(contactTblEnd, lastSectPr);
+              standaloneContactXml = `<w:p><w:r><w:br w:type="page"/></w:r></w:p>` +
+                `<w:tbl><w:tblPr><w:tblW w:w="8073" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr>` +
+                contactTableInside +
+                `</w:tbl>` +
+                afterContactTable;
+            }
+          }
+
+          // Cari batas akhir Tabel 2 (di mana Chart BRS, Section 2, Infografis, dan Kontak akan disambungkan)
           const tbl2SearchMatch = xmlContent.slice(100000).match(/<w:tbl[\s>]/);
           if (tbl2SearchMatch) {
             const tbl2Start = 100000 + tbl2SearchMatch.index;
             const tbl2End = xmlContent.indexOf("</w:tbl>", tbl2Start) + 8;
-            const nextTblMatch = xmlContent.slice(tbl2End).match(/<w:tbl[\s>]/);
-            if (nextTblMatch) {
-              const nextTblStart = tbl2End + nextTblMatch.index;
+            const lastSectPr = xmlContent.lastIndexOf("<w:sectPr");
+
+            if (tbl2End !== -1 && lastSectPr !== -1 && lastSectPr > tbl2End) {
+              // 1. Chart BRS
               const chartBrsXml = chartBrsBuffer
                 ? buildInlineImageWordXml("rIdChartBrs", "Chart BRS", 5715000, 3160687, 999902)
                 : "";
               const nextSectionBreakXml = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="816" w:left="1134" w:header="709" w:footer="709" w:gutter="0"/><w:cols w:space="708"/><w:docGrid w:linePitch="360"/></w:sectPr></w:pPr></w:p>`;
 
-              // Replace the gap between Table 2 and Penjelasan Teknis with Chart BRS + clean Section Break
-              xmlContent = xmlContent.slice(0, tbl2End) + chartBrsXml + nextSectionBreakXml + xmlContent.slice(nextTblStart);
-            }
-          }
-
-          // E. Extract Contact Block (Untuk informasi lebih lanjut silakan hubungi..., PST, Alamat BPS)
-          // agar teks kontak ini selalu diposisikan di HALAMAN PALING TERAKHIR dokumen BRS di Step 4.
-          const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
-          let contactBlockXml = "";
-          if (xmlContent.includes(contactMarker)) {
-            const contactIdx = xmlContent.lastIndexOf("<w:tbl", xmlContent.indexOf(contactMarker));
-            const lastSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
-            if (contactIdx !== -1 && lastSectPrIdx !== -1 && lastSectPrIdx > contactIdx) {
-              contactBlockXml = xmlContent.slice(contactIdx, lastSectPrIdx);
-              // Lepaskan blok kontak dari posisi tengah agar tidak bertumpuk sebelum infografis / setelah tabel 3
-              xmlContent = xmlContent.slice(0, contactIdx) + xmlContent.slice(lastSectPrIdx);
-            }
-          }
-
-          // F. Section 2 (column: Penjelasan Teknis & Perubahan Tahun Dasar) dinamis jika belum ada
-          if (!xmlContent.includes("Penjelasan Teknis")) {
-            const sec2Config = freshTemplate?.content?.find(c => c.column);
-            if (sec2Config) {
+              // 2. Section 2: Penjelasan Teknis & Perubahan Tahun Dasar (Tabel 3) (baris 160-196 inflasiIHK.json)
+              const sec2Config = freshTemplate?.content?.find(c => c.column);
               const sec2Xml = buildSection2WordXmlFromTemplate(sec2Config, varMap);
-              const curLastSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
-              if (curLastSectPrIdx !== -1) {
-                xmlContent = xmlContent.slice(0, curLastSectPrIdx) + sec2Xml + xmlContent.slice(curLastSectPrIdx);
+
+              // 2b. Section Forecast Inflasi (Hanya disertakan jika isForecastOn === true)
+              let forecastXml = "";
+              if (isForecastOn) {
+                const forecastConfig = freshTemplate?.content?.find(c => c.forecast || c.type === 'forecast' || (c.title?.desc && /proyeksi|forecast/i.test(c.title.desc)))?.forecast ||
+                                       freshTemplate?.content?.find(c => c.forecast || c.type === 'forecast' || (c.title?.desc && /proyeksi|forecast/i.test(c.title.desc)));
+                if (forecastConfig) {
+                  forecastXml = buildForecastWordXmlFromTemplate(forecastConfig, varMap);
+                }
               }
-            }
-          }
 
-          // G. Infografis full-page banner strictly following JSON order (content[4]) - in line with text
-          if (infografisBuffer && !xmlContent.includes("rIdInfografis")) {
-            const curLastSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
-            if (curLastSectPrIdx !== -1) {
-              const infografisXml = `<w:p><w:r><w:br w:type="page"/></w:r></w:p>` +
-                buildInlineImageWordXml("rIdInfografis", "Infografis", 5715000, 8096250, 999901);
-              xmlContent = xmlContent.slice(0, curLastSectPrIdx) + infografisXml + xmlContent.slice(curLastSectPrIdx);
-            }
-          }
+              // 3. Infografis (baris 197-202 inflasiIHK.json)
+              const infografisXml = infografisBuffer
+                ? `<w:p><w:r><w:br w:type="page"/></w:r></w:p>` +
+                  buildInlineImageWordXml("rIdInfografis", "Infografis", 5715000, 8096250, 999901)
+                : "";
 
-          // H. Tempatkan teks kontak BPS di HALAMAN PALING TERAKHIR dengan pemisah page break
-          if (contactBlockXml) {
-            const finalSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
-            if (finalSectPrIdx !== -1) {
-              const pageBreakXml = `<w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:br w:type="page"/></w:r></w:p>`;
-              xmlContent = xmlContent.slice(0, finalSectPrIdx) + pageBreakXml + contactBlockXml + xmlContent.slice(finalSectPrIdx);
+              // 4. Rekonstruksi dokumen dengan susunan yang bersih dan valid:
+              xmlContent = xmlContent.slice(0, tbl2End) +
+                chartBrsXml + nextSectionBreakXml +
+                sec2Xml +
+                forecastXml +
+                infografisXml +
+                standaloneContactXml +
+                xmlContent.slice(lastSectPr);
             }
           }
 

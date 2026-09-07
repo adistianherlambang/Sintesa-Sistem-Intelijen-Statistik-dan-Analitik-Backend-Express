@@ -312,7 +312,7 @@ KETENTUAN KETAT BAHASA DAN PENULISAN:
    - "data deret waktu" atau "runtun waktu"
    - "Jaringan Saraf Tiruan (ANN)"
    - "kelompok komoditas pangan bergejolak"
-3. Tulis narasi dalam 1 hingga 2 paragraf padat (sekitar 70 - 110 kata).
+3. Teks narasi WAJIB DITULIS TEPAT DALAM 1 PARAGRAF TUNGGAL yang padat, mengalir, dan komprehensif (sekitar 70 - 100 kata). DILARANG KERAS membaginya menjadi 2 paragraf atau lebih, dan DILARANG menyisipkan baris baru (newline / enter).
 4. Jelaskan angka proyeksi laju inflasi m-to-m periode berikutnya (${forecastValStr} persen), kecenderungan arah pergerakan harga, pengaruh musiman komoditas pangan bergejolak, serta pentingnya koordinasi Tim Pengendalian Inflasi Daerah (TPID) dalam menjaga kestabilan harga dan daya beli masyarakat.
 5. HANYA keluarkan teks narasi murni tanpa pengantar/penutup percakapan, tanpa tanda kutip di awal/akhir, dan tanpa format markdown berlebih.
 `;
@@ -325,6 +325,8 @@ KETENTUAN KETAT BAHASA DAN PENULISAN:
 
     let reply = (aiRes.reply || aiRes.message || "").trim();
     reply = reply.replace(/^["']|["']$/g, "").trim();
+    // Pastikan hasil benar-benar 1 paragraf tunggal tanpa line break / newline
+    reply = reply.replace(/\r?\n+/g, " ").replace(/\s+/g, " ").trim();
 
     if (reply && reply.length > 40) {
       return reply;

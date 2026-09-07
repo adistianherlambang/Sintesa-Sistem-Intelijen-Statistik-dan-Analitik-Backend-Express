@@ -321,6 +321,59 @@ export const generateWordBrs = async (req, res) => {
 
     // 2. Open BERITA.docx and process all XML files (document.xml, footers, headers)
     const zip = new AdmZip(templatePath);
+    // Process client banner images if provided
+    const clientImages = req.body?.images || req.body?.banners || uploadedDataset?.images || uploadedDataset?.banners || {};
+    let chartBrsBuffer = null;
+    let infografisBuffer = null;
+
+    for (const [imgId, base64Data] of Object.entries(clientImages)) {
+      if (typeof base64Data === "string" && base64Data.includes("base64,")) {
+        const base64Clean = base64Data.split("base64,")[1];
+        const buf = Buffer.from(base64Clean, "base64");
+        if (imgId === "Chart BRS" || imgId.toLowerCase().includes("chart")) {
+          chartBrsBuffer = buf;
+        } else if (imgId === "Infografis" || imgId.toLowerCase().includes("infografis")) {
+          infografisBuffer = buf;
+        }
+      }
+    }
+
+    if (chartBrsBuffer) {
+      zip.addFile("word/media/image_chart_brs.png", chartBrsBuffer);
+    }
+    if (infografisBuffer) {
+      zip.addFile("word/media/image_infografis.png", infografisBuffer);
+    }
+
+    if (chartBrsBuffer || infografisBuffer) {
+      // 1. Ensure [Content_Types].xml supports PNG
+      const ctEntry = zip.getEntry("[Content_Types].xml");
+      if (ctEntry) {
+        let ctXml = ctEntry.getData().toString("utf8");
+        if (!ctXml.includes('Extension="png"')) {
+          ctXml = ctXml.replace("</Types>", '<Default Extension="png" ContentType="image/png"/></Types>');
+          zip.updateFile("[Content_Types].xml", Buffer.from(ctXml, "utf8"));
+        }
+      }
+
+      // 2. Add relationships to word/_rels/document.xml.rels
+      const relsEntry = zip.getEntry("word/_rels/document.xml.rels");
+      if (relsEntry) {
+        let relsXml = relsEntry.getData().toString("utf8");
+        let newRels = "";
+        if (chartBrsBuffer && !relsXml.includes('Id="rIdChartBrs"')) {
+          newRels += '<Relationship Id="rIdChartBrs" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image_chart_brs.png"/>';
+        }
+        if (infografisBuffer && !relsXml.includes('Id="rIdInfografis"')) {
+          newRels += '<Relationship Id="rIdInfografis" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image_infografis.png"/>';
+        }
+        if (newRels) {
+          relsXml = relsXml.replace("</Relationships>", `${newRels}</Relationships>`);
+          zip.updateFile("word/_rels/document.xml.rels", Buffer.from(relsXml, "utf8"));
+        }
+      }
+    }
+
     const entries = zip.getEntries();
 
     for (const entry of entries) {
@@ -411,7 +464,12 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // D. Section 2 dynamically from inflasiIHK.json
+          // D. Link Chart BRS image if provided
+          if (chartBrsBuffer) {
+            xmlContent = xmlContent.replace(/r:embed="rId16"/g, 'r:embed="rIdChartBrs"');
+          }
+
+          // E. Section 2 (column) dynamically from inflasiIHK.json
           const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
           if (!xmlContent.includes("Penjelasan Teknis") && xmlContent.includes(contactMarker)) {
             const contactIdx = xmlContent.lastIndexOf("<w:tbl", xmlContent.indexOf(contactMarker));
@@ -422,7 +480,13 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // E. Terapkan styling resmi dari template JSON indikator
+          // F. Append Infografis full-page banner if provided
+          if (infografisBuffer && !xmlContent.includes("rIdInfografis")) {
+            const infografisXml = `<w:p><w:r><w:br w:type="page"/></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="5715000" cy="8096250"/><wp:docPr id="999901" name="Infografis"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="999901" name="Infografis"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rIdInfografis"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="5715000" cy="8096250"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`;
+            xmlContent = xmlContent.replace("</w:body>", infografisXml + "</w:body>");
+          }
+
+          // G. Terapkan styling resmi dari template JSON indikator
           xmlContent = applyInflasiIhkStylingToXml(xmlContent, freshTemplate);
         }
 
@@ -443,25 +507,6 @@ export const generateWordBrs = async (req, res) => {
       }
     }
 
-    // F. Handle banner/img replacement if provided in req.body.images or uploadedDataset.images
-    const clientImages = req.body?.images || req.body?.banners || uploadedDataset?.images || uploadedDataset?.banners || {};
-    for (const [imgId, base64Data] of Object.entries(clientImages)) {
-      if (typeof base64Data === "string" && base64Data.includes("base64,")) {
-        const base64Clean = base64Data.split("base64,")[1];
-        const imgBuffer = Buffer.from(base64Clean, "base64");
-        if (imgId === "Chart BRS" || imgId.toLowerCase().includes("chart")) {
-          const chartEntry = entries.find(e => e.entryName === "word/media/image10.emf" || e.entryName === "word/media/image10.png");
-          if (chartEntry) {
-            zip.updateFile(chartEntry.entryName, imgBuffer);
-          }
-        } else if (imgId === "Infografis" || imgId.toLowerCase().includes("infografis")) {
-          const infoEntry = entries.find(e => e.entryName === "word/media/image4.emf" || e.entryName === "word/media/image4.png");
-          if (infoEntry) {
-            zip.updateFile(infoEntry.entryName, imgBuffer);
-          }
-        }
-      }
-    }
 
     const cleanCity = String(varMap["namaKota"] || city).replace(/^(KOTA|KABUPATEN|KAB\.?)\s+/i, "");
     const cleanPeriod = String(varMap["bulanTahun"] || periode);

@@ -36,6 +36,27 @@ const sanitizeName = (str) => {
 };
 
 /**
+ * Helper: Cari posisi awal tag XML pembuka secara presisi (contoh: <w:p> atau <w:p ...>)
+ */
+export function findLastTagStart(str, tagName, beforePos) {
+  for (let i = beforePos; i >= 0; i--) {
+    if (str.startsWith(`<${tagName} `, i) || str.startsWith(`<${tagName}>`, i)) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Helper: Cari posisi akhir tag XML penutup secara presisi (contoh: </w:p>)
+ */
+export function findNextTagEnd(str, tagName, fromPos) {
+  const closingTag = `</${tagName}>`;
+  const idx = str.indexOf(closingTag, fromPos);
+  return idx !== -1 ? idx + closingTag.length : -1;
+}
+
+/**
  * Helper: Hitung lebar kolom dinamis agar pas 100% margin (totalWidth dxa)
  */
 function calculateColumnWidths(headers, totalWidth = 9638) {
@@ -652,25 +673,29 @@ export const generateWordBrs = async (req, res) => {
             const bannerTitle = `${bannerTitleBase} ${varMap["namaKota"] || "Kota Metro"} Tahun ${varMap["tahun"] || ""}`;
             const idxCoverBanner = xmlContent.indexOf("inflasi Year-on-Year");
             if (idxCoverBanner !== -1) {
-              const pBannerStart = xmlContent.lastIndexOf("<w:p", idxCoverBanner);
-              const pBannerEnd = xmlContent.indexOf("</w:p>", idxCoverBanner) + 6;
-              const newBannerP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr><w:ind w:left="1560" w:hanging="284"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr><w:t>${escapeXml(bannerTitle)}</w:t></w:r></w:p>`;
-              xmlContent = xmlContent.slice(0, pBannerStart) + newBannerP + xmlContent.slice(pBannerEnd);
+              const pBannerStart = findLastTagStart(xmlContent, "w:p", idxCoverBanner);
+              const pBannerEnd = findNextTagEnd(xmlContent, "w:p", idxCoverBanner);
+              if (pBannerStart !== -1 && pBannerEnd !== -1) {
+                const newBannerP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr><w:ind w:left="1560" w:hanging="284"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr><w:t>${escapeXml(bannerTitle)}</w:t></w:r></w:p>`;
+                xmlContent = xmlContent.slice(0, pBannerStart) + newBannerP + xmlContent.slice(pBannerEnd);
+              }
             }
 
             const idxCoverSummary = xmlContent.indexOf("Pada ${bulan} ${tahun} terjadi inflasi");
             if (idxCoverSummary !== -1) {
-              const pSummStart = xmlContent.lastIndexOf("<w:p", idxCoverSummary);
+              const pSummStart = findLastTagStart(xmlContent, "w:p", idxCoverSummary);
               const nextSectPr = xmlContent.indexOf("<w:sectPr", pSummStart);
-              const pSectPrStart = xmlContent.lastIndexOf("<w:p", nextSectPr);
-              const newSummXml = buildSummaryWordXml(freshTemplate?.summary, varMap);
-              xmlContent = xmlContent.slice(0, pSummStart) + newSummXml + xmlContent.slice(pSectPrStart);
+              const pSectPrStart = findLastTagStart(xmlContent, "w:p", nextSectPr);
+              if (pSummStart !== -1 && pSectPrStart !== -1) {
+                const newSummXml = buildSummaryWordXml(freshTemplate?.summary, varMap);
+                xmlContent = xmlContent.slice(0, pSummStart) + newSummXml + xmlContent.slice(pSectPrStart);
+              }
             }
           }
 
           // 3. Rekonstruksi Dokumen Bagian Tengah (${content}) Mengikuti Skema Indikator Terpilih
           const idxTitle0 = xmlContent.indexOf("Indeks Harga Konsumen/Inflasi Menurut Kelompok");
-          const pTitle0Start = idxTitle0 !== -1 ? xmlContent.lastIndexOf("<w:p", idxTitle0) : -1;
+          const pTitle0Start = idxTitle0 !== -1 ? findLastTagStart(xmlContent, "w:p", idxTitle0) : -1;
           const lastSectPr = xmlContent.lastIndexOf("<w:sectPr");
 
           if (pTitle0Start !== -1 && lastSectPr !== -1 && lastSectPr > pTitle0Start) {

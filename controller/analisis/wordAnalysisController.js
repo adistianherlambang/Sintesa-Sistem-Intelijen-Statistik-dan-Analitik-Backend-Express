@@ -71,6 +71,34 @@ function escapeXml(str) {
 }
 
 /**
+ * Helper: Safely remove paragraphs containing a specific target string without regex overflow
+ */
+function removeParagraphsContaining(str, target) {
+  let result = str;
+  let pos = 0;
+  while ((pos = result.indexOf(target, pos)) !== -1) {
+    const sub = result.substring(0, pos);
+    const matches = [...sub.matchAll(/<w:p[\s>]/g)];
+    const pStart = matches.length > 0 ? matches[matches.length - 1].index : -1;
+    const pEnd = result.indexOf("</w:p>", pos);
+    if (pStart !== -1 && pEnd !== -1) {
+      result = result.slice(0, pStart) + result.slice(pEnd + 6);
+      pos = pStart;
+    } else {
+      pos += target.length;
+    }
+  }
+  return result;
+}
+
+/**
+ * Helper: Generate In-Line with Text XML for Word image (<wp:inline>)
+ */
+export function buildInlineImageWordXml(rId, name, cx, cy, docPrId = 999901) {
+  return `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${cx}" cy="${cy}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="${docPrId}" name="${escapeXml(name)}"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="${docPrId}" name="${escapeXml(name)}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="${rId}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`;
+}
+
+/**
  * Generate XML tabel Word dinamis (<w:tbl>) langsung dari markdown & style di inflasiIHK.json
  */
 export function buildTableWordXmlFromMarkdown(tableConfig, varMap = {}, totalWidth = 9638) {
@@ -327,12 +355,13 @@ export const generateWordBrs = async (req, res) => {
     let infografisBuffer = null;
 
     for (const [imgId, base64Data] of Object.entries(clientImages)) {
-      if (typeof base64Data === "string" && base64Data.includes("base64,")) {
-        const base64Clean = base64Data.split("base64,")[1];
+      if (typeof base64Data === "string" && base64Data.length > 50) {
+        const base64Clean = base64Data.includes("base64,") ? base64Data.split("base64,")[1] : base64Data;
         const buf = Buffer.from(base64Clean, "base64");
-        if (imgId === "Chart BRS" || imgId.toLowerCase().includes("chart")) {
+        const lowerId = String(imgId).toLowerCase();
+        if (imgId === "Chart BRS" || lowerId.includes("chart")) {
           chartBrsBuffer = buf;
-        } else if (imgId === "Infografis" || imgId.toLowerCase().includes("infografis")) {
+        } else if (imgId === "Infografis" || lowerId.includes("infografis")) {
           infografisBuffer = buf;
         }
       }
@@ -381,11 +410,12 @@ export const generateWordBrs = async (req, res) => {
         let xmlContent = entry.getData().toString("utf8");
 
         if (entry.entryName === "word/document.xml") {
-          // A. Table 1, Judul, and Footnote dynamically from inflasiIHK.json
+          // A. Table 1, Judul, and Footnote dynamically from inflasiIHK.json (content[0])
           const table1Config = freshTemplate?.content?.[0]?.desc?.find(d => d.table)?.table;
           if (table1Config) {
-            const tbl1Start = xmlContent.indexOf("<w:tbl");
-            if (tbl1Start !== -1) {
+            const tbl1Match = xmlContent.match(/<w:tbl[\s>]/);
+            if (tbl1Match) {
+              const tbl1Start = tbl1Match.index;
               const tbl1End = xmlContent.indexOf("</w:tbl>", tbl1Start) + 8;
 
               const prevPEnd = xmlContent.lastIndexOf("</w:p>", tbl1Start);
@@ -444,7 +474,7 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // C. Table 2 & Judul dynamically from inflasiIHK.json
+          // C. Table 2 & Judul dynamically from inflasiIHK.json (content[1])
           const table2Config = freshTemplate?.content?.[1]?.desc?.find(d => d.table)?.table;
           if (table2Config) {
             const tbl2Start = xmlContent.indexOf("<w:tbl", 100000);
@@ -464,12 +494,25 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // D. Link Chart BRS image if provided
-          if (chartBrsBuffer) {
-            xmlContent = xmlContent.replace(/r:embed="rId16"/g, 'r:embed="rIdChartBrs"');
+          // D. Chart BRS image strictly following JSON order (content[2]) - in line with text
+          const tbl2SearchMatch = xmlContent.slice(100000).match(/<w:tbl[\s>]/);
+          if (tbl2SearchMatch) {
+            const tbl2Start = 100000 + tbl2SearchMatch.index;
+            const tbl2End = xmlContent.indexOf("</w:tbl>", tbl2Start) + 8;
+            const nextTblMatch = xmlContent.slice(tbl2End).match(/<w:tbl[\s>]/);
+            if (nextTblMatch) {
+              const nextTblStart = tbl2End + nextTblMatch.index;
+              const chartBrsXml = chartBrsBuffer
+                ? buildInlineImageWordXml("rIdChartBrs", "Chart BRS", 5715000, 3160687, 999902)
+                : "";
+              const nextSectionBreakXml = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="816" w:left="1134" w:header="709" w:footer="709" w:gutter="0"/><w:cols w:space="708"/><w:docGrid w:linePitch="360"/></w:sectPr></w:pPr></w:p>`;
+
+              // Replace the gap between Table 2 and Penjelasan Teknis with Chart BRS + clean Section Break
+              xmlContent = xmlContent.slice(0, tbl2End) + chartBrsXml + nextSectionBreakXml + xmlContent.slice(nextTblStart);
+            }
           }
 
-          // E. Section 2 (column) dynamically from inflasiIHK.json
+          // E. Section 2 (column) dynamically from inflasiIHK.json (content[3])
           const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
           if (!xmlContent.includes("Penjelasan Teknis") && xmlContent.includes(contactMarker)) {
             const contactIdx = xmlContent.lastIndexOf("<w:tbl", xmlContent.indexOf(contactMarker));
@@ -480,10 +523,14 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // F. Append Infografis full-page banner if provided
+          // F. Infografis full-page banner strictly following JSON order (content[4]) - in line with text
           if (infografisBuffer && !xmlContent.includes("rIdInfografis")) {
-            const infografisXml = `<w:p><w:r><w:br w:type="page"/></w:r></w:p><w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="60" w:after="60"/></w:pPr><w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="5715000" cy="8096250"/><wp:docPr id="999901" name="Infografis"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="999901" name="Infografis"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rIdInfografis"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="5715000" cy="8096250"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`;
-            xmlContent = xmlContent.replace("</w:body>", infografisXml + "</w:body>");
+            const lastSectPrIdx = xmlContent.lastIndexOf("<w:sectPr");
+            if (lastSectPrIdx !== -1) {
+              const infografisXml = `<w:p><w:r><w:br w:type="page"/></w:r></w:p>` +
+                buildInlineImageWordXml("rIdInfografis", "Infografis", 5715000, 8096250, 999901);
+              xmlContent = xmlContent.slice(0, lastSectPrIdx) + infografisXml + xmlContent.slice(lastSectPrIdx);
+            }
           }
 
           // G. Terapkan styling resmi dari template JSON indikator

@@ -548,6 +548,11 @@ export const generateWordBrs = async (req, res) => {
     };
     const activeIndicator = req.body?.indicator || req.body?.selectedIndicator || activeDataset?.context?.indicator || activeDataset?.context?.selectedIndicator || activeDataset?.fileInfo?.selectedIndicator || "komoditas";
     const varMap = buildVariableMapFromDataset(activeDataset, variables);
+    const activeTitle = req.body?.title || activeDataset?.context?.title || title || "Berita Resmi Statistik";
+    varMap["judul"] = activeTitle;
+    varMap["Judul"] = activeTitle;
+    varMap["JUDUL"] = String(activeTitle).toUpperCase();
+    varMap["title"] = activeTitle;
 
     // Evaluasi apakah forecast ON atau OFF
     const isForecastOn = req.body?.forecastEnabled === true || 
@@ -744,6 +749,12 @@ export const generateWordBrs = async (req, res) => {
 
           // G. Terapkan styling resmi dari template JSON indikator
           xmlContent = applyInflasiIhkStylingToXml(xmlContent, freshTemplate);
+        }
+
+        // Ganti judul cover utama (di template base tertulis literal <w:t>JUDUL</w:t>)
+        if (xmlContent.includes("JUDUL")) {
+          const mainTitle = String(varMap["JUDUL"] || varMap["judul"] || varMap["title"] || activeTitle).toUpperCase();
+          xmlContent = xmlContent.replace(/<w:t[^>]*>JUDUL<\/w:t>/g, `<w:t>${escapeXml(mainTitle)}</w:t>`);
         }
 
         if (xmlContent.includes("${")) {

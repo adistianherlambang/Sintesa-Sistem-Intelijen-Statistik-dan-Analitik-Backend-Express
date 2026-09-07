@@ -72,7 +72,61 @@ const ensurePackagePlansSeeded = async () => {
 const getOrCreateSystemConfig = async () => {
   let config = await SystemConfig.findOne({ key: "app_features" });
   if (!config) {
-    config = new SystemConfig({ key: "app_features" });
+    config = new SystemConfig({
+      key: "app_features",
+      features: {
+        analisis: {
+          id: "analisis",
+          name: "Workspace Analisis",
+          tab: "workspace",
+          description: "Kontrol akses halaman dan tombol tab Analisis & Histori Laporan BRS bagi role user",
+          enabled: true,
+        },
+        bot: {
+          id: "bot",
+          name: "Bot WhatsApp",
+          tab: "bot",
+          description: "Kontrol akses halaman dan tombol tab Sambungkan Akun & Bot Knowledge bagi role user",
+          enabled: true,
+        },
+        infografis: {
+          id: "infografis",
+          name: "Infografis",
+          tab: "infografis",
+          description: "Kontrol akses halaman dan tombol tab Buat Infografis & Histori Grafis bagi role user",
+          enabled: true,
+        },
+      },
+    });
+    await config.save();
+  } else {
+    // Migrate or guarantee strictly the 3 tabbed features
+    const required = {
+      analisis: {
+        id: "analisis",
+        name: "Workspace Analisis",
+        tab: "workspace",
+        description: "Kontrol akses halaman dan tombol tab Analisis & Histori Laporan BRS bagi role user",
+        enabled: config.features?.analisis?.enabled ?? true,
+      },
+      bot: {
+        id: "bot",
+        name: "Bot WhatsApp",
+        tab: "bot",
+        description: "Kontrol akses halaman dan tombol tab Sambungkan Akun & Bot Knowledge bagi role user",
+        enabled: config.features?.bot?.enabled ?? (config.features?.whatsappBot?.enabled ?? true),
+      },
+      infografis: {
+        id: "infografis",
+        name: "Infografis",
+        tab: "infografis",
+        description: "Kontrol akses halaman dan tombol tab Buat Infografis & Histori Grafis bagi role user",
+        enabled: config.features?.infografis?.enabled ?? true,
+      },
+    };
+
+    config.features = required;
+    config.markModified("features");
     await config.save();
   }
   return config;
@@ -569,6 +623,91 @@ export const toggleFeature = async (req, res) => {
 };
 
 /**
+ * POST /api/admin/packages
+ * Create a new package plan
+ */
+export const createPackage = async (req, res) => {
+  try {
+    const { planId, name, amount, price, quota, durationDays, isActive, badge, features } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ message: "Nama paket wajib diisi." });
+    }
+
+    const finalPlanId =
+      planId?.trim() ||
+      name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "") + `_${Date.now()}`;
+
+    const existing = await PackagePlan.findOne({ planId: finalPlanId });
+    if (existing) {
+      return res.status(400).json({ message: `ID Paket "${finalPlanId}" sudah digunakan.` });
+    }
+
+    const finalAmount = amount !== undefined ? Number(amount) : (price !== undefined ? Number(price) : 0);
+
+    const newPkg = new PackagePlan({
+      planId: finalPlanId,
+      name: name.trim(),
+      category: "Paket Kustom",
+      amount: finalAmount,
+      quota: quota !== undefined ? Number(quota) : 30,
+      durationDays: durationDays !== undefined ? Number(durationDays) : 30,
+      isActive: isActive !== false,
+      badge: badge || "",
+      features: Array.isArray(features) ? features : [],
+    });
+
+    await newPkg.save();
+    await logActivity(req.user._id, `Membuat paket langganan baru: ${newPkg.name}`);
+
+    const result = {
+      ...newPkg.toObject(),
+      price: newPkg.amount,
+      activeSubscribers: 0,
+    };
+
+    return res.status(201).json({
+      success: true,
+      message: `Paket "${newPkg.name}" berhasil dibuat.`,
+      package: result,
+      data: result,
+    });
+  } catch (err) {
+    console.error("[createPackage] Error:", err.message);
+    return res.status(500).json({ message: "Gagal membuat paket baru: " + err.message });
+  }
+};
+
+/**
+ * DELETE /api/admin/packages/:planId
+ * Delete a package plan
+ */
+export const deletePackage = async (req, res) => {
+  try {
+    const { planId } = req.params;
+
+    const deleted = await PackagePlan.findOneAndDelete({ planId });
+    if (!deleted) {
+      return res.status(404).json({ message: "Paket langganan tidak ditemukan." });
+    }
+
+    await logActivity(req.user._id, `Menghapus paket langganan: ${deleted.name} (${deleted.planId})`);
+
+    return res.json({
+      success: true,
+      message: `Paket "${deleted.name}" berhasil dihapus.`,
+      deletedPlanId: planId,
+    });
+  } catch (err) {
+    console.error("[deletePackage] Error:", err.message);
+    return res.status(500).json({ message: "Gagal menghapus paket: " + err.message });
+  }
+};
+
+/**
  * GET /api/features/public
  * Public endpoint to fetch active feature flags
  */
@@ -587,11 +726,9 @@ export const getPublicFeatures = async (req, res) => {
     return res.json({
       success: true,
       features: {
-        aiForecasting: true,
-        whatsappBot: true,
-        wordExport: true,
+        analisis: true,
+        bot: true,
         infografis: true,
-        userRegistration: true,
       },
     });
   }

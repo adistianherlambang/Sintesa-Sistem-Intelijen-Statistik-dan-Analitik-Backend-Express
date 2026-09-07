@@ -7,7 +7,9 @@ import {
   updateUserSubscription,
   deleteUser,
   getPackagesList,
+  createPackage,
   updatePackage,
+  deletePackage,
   getFeatures,
   toggleFeature,
 } from "../../controller/admin/adminController.js";
@@ -28,7 +30,9 @@ router.delete("/users/:userId", deleteUser);
 
 // 3. Monitor Paket & Harga
 router.get("/packages", getPackagesList);
+router.post("/packages", createPackage);
 router.put("/packages/:planId", updatePackage);
+router.delete("/packages/:planId", deletePackage);
 
 // 4. Manajemen Fitur (Feature Flags)
 router.get("/features", getFeatures);

@@ -92,11 +92,6 @@ export const completeLoginSession = async (email) => {
  * Register a new user with email, password, name, and cityChoice
  */
 export const registerUser = async (email, password, name, cityChoice) => {
-  const config = await SystemConfig.findOne({ key: "app_features" });
-  if (config && config.features?.userRegistration && config.features.userRegistration.enabled === false) {
-    throw new Error("Pendaftaran akun pengguna baru sedang dinonaktifkan oleh administrator.");
-  }
-
   if (!email || !password || !cityChoice) {
     throw new Error("Email, password, dan kota wajib diisi");
   }

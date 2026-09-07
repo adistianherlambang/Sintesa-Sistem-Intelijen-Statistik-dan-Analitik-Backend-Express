@@ -711,6 +711,42 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
   const ihkDataArr2 = edited.ihkData?.prevYear || dataset.ihk?.prevYear || [];
   const ihkDataArr1 = edited.ihkData?.prev2Year || dataset.ihk?.prev2Year || [];
 
+  // Sinkronkan tahun dari data aktual IHK (sama dengan yang dipakai infografis Banner.jsx)
+  // Label format: "Jan 24", "Feb 25", dll. → ekstrak 2-digit year → 2000 + yy
+  const extractYearFromArr = (arr) => {
+    if (!arr || arr.length === 0) return null;
+    for (const item of arr) {
+      const lbl = item?.label || "";
+      const match = lbl.match(/\b(\d{2})\s*$/);
+      if (match) return 2000 + parseInt(match[1], 10);
+    }
+    return null;
+  };
+
+  const actualYear3 = extractYearFromArr(ihkDataArr3);
+  const actualYear2 = extractYearFromArr(ihkDataArr2);
+  const actualYear1 = extractYearFromArr(ihkDataArr1);
+
+  if (actualYear3) {
+    varMap["tahunAkhir"] = String(actualYear3);
+    varMap["tahun3"] = String(actualYear3);
+    varMap["tahun"] = String(actualYear3);
+    varMap["TAHUN"] = String(actualYear3);
+    varMap["bulanTahun"] = `${monthName} ${actualYear3}`;
+    varMap["bulanTahunSebelumnya"] = `${monthName} ${actualYear3 - 1}`;
+    varMap["bulanTahunSebelumnya1"] = `${monthName} ${actualYear3 - 1}`;
+    varMap["bulanTahunSebelumnya2"] = `${monthName} ${actualYear3 - 2}`;
+    varMap["periodeBerjalan"] = `${monthName} ${actualYear3}`;
+    varMap["periodePembanding"] = `${monthName} ${actualYear3 - 1}`;
+  }
+  if (actualYear2) {
+    varMap["tahun2"] = String(actualYear2);
+  }
+  if (actualYear1) {
+    varMap["tahunAwal"] = String(actualYear1);
+    varMap["tahun1"] = String(actualYear1);
+  }
+
   MONTH_NAMES.forEach((mName, idx) => {
     const mLower = mName.toLowerCase();
     const val1 = getMonthVal(ihkDataArr1, idx, "102,50");

@@ -110,6 +110,12 @@
       ]
     },
     {
+      "img": {
+        "id": "Chart BRS",
+        "width": "100%"
+      }
+    },
+    {
       "column": [
         {
           "title": {
@@ -127,6 +133,12 @@
         }
       ],
       "style": "column 2"
+    },
+    {
+      "img": {
+        "id": "Infografis",
+        "width": "100%"
+      }
     }
   ]
 }

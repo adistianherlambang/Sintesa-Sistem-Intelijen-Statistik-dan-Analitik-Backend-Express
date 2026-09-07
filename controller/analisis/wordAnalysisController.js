@@ -415,8 +415,8 @@ export const generateWordBrs = async (req, res) => {
           const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
           if (!xmlContent.includes("Penjelasan Teknis") && xmlContent.includes(contactMarker)) {
             const contactIdx = xmlContent.lastIndexOf("<w:tbl", xmlContent.indexOf(contactMarker));
-            if (contactIdx !== -1) {
-              const sec2Xml = buildSection2WordXmlFromTemplate(freshTemplate?.content?.[2], varMap);
+              const sec2Config = freshTemplate?.content?.find(c => c.column);
+              const sec2Xml = buildSection2WordXmlFromTemplate(sec2Config, varMap);
               xmlContent = xmlContent.slice(0, contactIdx) + sec2Xml + xmlContent.slice(contactIdx);
             }
           }
@@ -438,6 +438,26 @@ export const generateWordBrs = async (req, res) => {
           zip.updateFile(entry.entryName, Buffer.from(xmlContent, "utf8"));
         } else if (entry.entryName === "word/document.xml") {
           zip.updateFile(entry.entryName, Buffer.from(xmlContent, "utf8"));
+        }
+      }
+    }
+
+    // F. Handle banner/img replacement if provided in req.body.images or uploadedDataset.images
+    const clientImages = req.body?.images || req.body?.banners || uploadedDataset?.images || uploadedDataset?.banners || {};
+    for (const [imgId, base64Data] of Object.entries(clientImages)) {
+      if (typeof base64Data === "string" && base64Data.includes("base64,")) {
+        const base64Clean = base64Data.split("base64,")[1];
+        const imgBuffer = Buffer.from(base64Clean, "base64");
+        if (imgId === "Chart BRS" || imgId.toLowerCase().includes("chart")) {
+          const chartEntry = entries.find(e => e.entryName === "word/media/image10.emf" || e.entryName === "word/media/image10.png");
+          if (chartEntry) {
+            zip.updateFile(chartEntry.entryName, imgBuffer);
+          }
+        } else if (imgId === "Infografis" || imgId.toLowerCase().includes("infografis")) {
+          const infoEntry = entries.find(e => e.entryName === "word/media/image4.emf" || e.entryName === "word/media/image4.png");
+          if (infoEntry) {
+            zip.updateFile(infoEntry.entryName, imgBuffer);
+          }
         }
       }
     }

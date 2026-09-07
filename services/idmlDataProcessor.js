@@ -643,12 +643,12 @@ export const processIdmlVariables = async (
   );
 
   // Values bulanan nyata 3 tahun (Story_u15d2.xml)
-  // Menggunakan ihkData (IHK index) agar konsisten dengan judul tabel "IHK Menurut Bulan"
+  // Menggunakan inflasiYoyData agar selaras dengan grafik Banner.jsx (misal 2024 = 1.99)
   monthNamesShort.forEach((mShort, idx) => {
     const keyPrefix = mShort.toLowerCase();
-    const valTahun1 = getValueForMonth(ihkData?.prev2Year, idx);
-    const valTahun2 = getValueForMonth(ihkData?.prevYear, idx);
-    const valTahun3 = getValueForMonth(ihkData?.data, idx);
+    const valTahun1 = getValueForMonth(inflasiYoyData?.prev2Year, idx);
+    const valTahun2 = getValueForMonth(inflasiYoyData?.prevYear, idx);
+    const valTahun3 = getValueForMonth(inflasiYoyData?.data, idx);
 
     variables[`${keyPrefix}Tahun1`] = toIndoNum(valTahun1);
     variables[`${keyPrefix}Tahun2`] = toIndoNum(valTahun2);

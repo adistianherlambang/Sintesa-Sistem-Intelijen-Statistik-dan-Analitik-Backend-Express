@@ -707,18 +707,44 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
     return fallbackVal;
   };
 
-  const ihkDataArr3 = edited.ihkData?.data || dataset.ihk?.data || [];
-  const ihkDataArr2 = edited.ihkData?.prevYear || dataset.ihk?.prevYear || [];
-  const ihkDataArr1 = edited.ihkData?.prev2Year || dataset.ihk?.prev2Year || [];
+  // Prioritaskan data yang sama persis dengan infografis / grafik Banner.jsx (inflasi YoY)
+  // sesuai permintaan agar tabel "Tabel ${noTable} IHK Menurut Bulan" selaras dengan gambar (contoh 2024 = 1.99)
+  const ihkDataArr3 =
+    edited.inflasiData?.yoy?.data ||
+    dataset.inflasi?.yoy?.data ||
+    edited.ihkData?.data ||
+    dataset.ihk?.data ||
+    [];
+  const ihkDataArr2 =
+    edited.inflasiData?.yoy?.prevYear ||
+    dataset.inflasi?.yoy?.prevYear ||
+    edited.ihkData?.prevYear ||
+    dataset.ihk?.prevYear ||
+    [];
+  const ihkDataArr1 =
+    edited.inflasiData?.yoy?.prev2Year ||
+    dataset.inflasi?.yoy?.prev2Year ||
+    edited.ihkData?.prev2Year ||
+    dataset.ihk?.prev2Year ||
+    [];
 
-  // Sinkronkan tahun dari data aktual IHK (sama dengan yang dipakai infografis Banner.jsx)
+  // Sinkronkan tahun dari data aktual (sama dengan yang dipakai infografis Banner.jsx)
   // Label format: "Jan 24", "Feb 25", dll. → ekstrak 2-digit year → 2000 + yy
+  // Key format: BPS key dengan 2-digit year sebelum bulan
   const extractYearFromArr = (arr) => {
     if (!arr || arr.length === 0) return null;
     for (const item of arr) {
       const lbl = item?.label || "";
       const match = lbl.match(/\b(\d{2})\s*$/);
       if (match) return 2000 + parseInt(match[1], 10);
+      if (item?.key) {
+        const k = String(item.key);
+        const keyMatch = k.match(/\d{4}\d{2}(\d{2})\d{1,2}$/);
+        if (keyMatch) {
+          const yy = parseInt(keyMatch[1], 10);
+          if (yy >= 20 && yy <= 40) return 2000 + yy;
+        }
+      }
     }
     return null;
   };
@@ -749,9 +775,9 @@ export function buildVariableMapFromDataset(dataset = {}, customVars = {}) {
 
   MONTH_NAMES.forEach((mName, idx) => {
     const mLower = mName.toLowerCase();
-    const val1 = getMonthVal(ihkDataArr1, idx, "102,50");
-    const val2 = getMonthVal(ihkDataArr2, idx, "105,30");
-    const val3 = getMonthVal(ihkDataArr3, idx, idx <= monthIdx ? "108,45" : "-");
+    const val1 = getMonthVal(ihkDataArr1, idx, "-");
+    const val2 = getMonthVal(ihkDataArr2, idx, "-");
+    const val3 = idx <= monthIdx ? getMonthVal(ihkDataArr3, idx, "-") : "-";
 
     varMap[`${mLower}Tahun1`] = val1;
     varMap[`${mLower}Tahun2`] = val2;

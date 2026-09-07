@@ -140,13 +140,49 @@
           "desc": "Proyeksi Pertumbuhan PDRB Pengeluaran ADHB",
           "style": "bg color #D1FAE5 width 100% font size 18"
         },
-        "desc": "${narasiForecast}"
+        "desc": "${narasiForecast}",
+        "table": {
+          "judul": "Tabel Proyeksi Nominal PDRB Pengeluaran ADHB ${namaWilayah} Tiga Periode Mendatang (Milyar Rupiah)",
+          "style": {
+            "fontSize": "8pt",
+            "header": {
+              "backgroundColor": "#1e40af",
+              "fontWeight": "bold"
+            },
+            "numbering": {
+              "backgroundColor": "#bfdbfe"
+            },
+            "rowColors": [
+              "#eff6ff",
+              "#dbeafe"
+            ]
+          },
+          "markdown": "| Periode Proyeksi | Proyeksi Total PDRB ADHB (Milyar Rp) | Proyeksi Konsumsi Rumah Tangga (Milyar Rp) | Proyeksi PMTB (Milyar Rp) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| ${forecastPeriode1} | ${forecastVal1} | ${forecastRt1} | ${forecastPmtb1} |\n| ${forecastPeriode2} | ${forecastVal2} | ${forecastRt2} | ${forecastPmtb2} |\n| ${forecastPeriode3} | ${forecastVal3} | ${forecastRt3} | ${forecastPmtb3} |"
+        }
       },
       "title": {
         "desc": "Proyeksi Pertumbuhan PDRB Pengeluaran ADHB",
         "style": "bg color #D1FAE5 width 100% font size 18"
       },
-      "desc": "${narasiForecast}"
+      "desc": "${narasiForecast}",
+      "table": {
+        "judul": "Tabel Proyeksi Nominal PDRB Pengeluaran ADHB ${namaWilayah} Tiga Periode Mendatang (Milyar Rupiah)",
+        "style": {
+          "fontSize": "8pt",
+          "header": {
+            "backgroundColor": "#1e40af",
+            "fontWeight": "bold"
+          },
+          "numbering": {
+            "backgroundColor": "#bfdbfe"
+          },
+          "rowColors": [
+            "#eff6ff",
+            "#dbeafe"
+          ]
+        },
+        "markdown": "| Periode Proyeksi | Proyeksi Total PDRB ADHB (Milyar Rp) | Proyeksi Konsumsi Rumah Tangga (Milyar Rp) | Proyeksi PMTB (Milyar Rp) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| ${forecastPeriode1} | ${forecastVal1} | ${forecastRt1} | ${forecastPmtb1} |\n| ${forecastPeriode2} | ${forecastVal2} | ${forecastRt2} | ${forecastPmtb2} |\n| ${forecastPeriode3} | ${forecastVal3} | ${forecastRt3} | ${forecastPmtb3} |"
+      }
     },
     {
       "img": {
@@ -157,9 +193,9 @@
     {
       "contact": {
         "title": "Untuk informasi lebih lanjut silakan hubungi:",
-        "desc": "Untuk informasi lebih lanjut silakan hubungi:\n\tKonten Berita Resmi Statistik dilindungi oleh Undang-Undang, hak cipta melekat pada Badan Pusat Statistik. Dilarang mereproduksi dan/atau menggandakan sebagian atau seluruh isi buku ini untuk tujuan komersial tanpa izin tertulis dari Badan Pusat Statistik.\n\tLorem Ipsum\nKepala BPS Metro\n\n       (0725) 41170\n       bps1872@bps.go.id\n\t\t\nUntuk layanan perpustakaan, penjualan data mikro, publikasi elektronik, publikasi cetakan, dan peta digital wilayah kerja statistik sesuai peraturan yang berlaku maupun konsultasi statistik dapat menghubungi Pelayanan Statistik Terpadu (PST) di pst.bps.go.id\n\t\n\n\n\n\nBADAN PUSAT STATISTIKMETRO\nJl. AH Nasution No. 112 Kota Metro, Lampung 34111\nTelp: (0725) 41170 Fax: (0725) 41170\nHomepage: metrokota.bps.go.id E-mail: bps1872@bps.go.id"
+        "desc": "Untuk informasi lebih lanjut silakan hubungi:\n\tKonten Berita Resmi Statistik dilindungi oleh Undang-Undang, hak cipta melekat pada Badan Pusat Statistik. Dilarang mereproduksi dan/atau menggandakan sebagian atau seluruh isi buku ini untuk tujuan komersial tanpa izin tertulis dari Badan Pusat Statistik.\n\tLorem Ipsum\nKepala BPS Metro\n\n       (0725) 41170\n       bps1872@bps.go.id\n\t\t\nUntuk layanan perpustakaan, penjualan data mikro, publikasi elektronik, publikasi cetakan, dan peta digital wilayah kerja statistik sesuai peraturan yang berlaku maupun konsultasi statistik dapat menghubungi Pelayanan Statistik Terpadu (PST) di pst.bps.go.id\n\t\n\n\n\n\nBADAN PUSAT STATISTIK\nMETRO\nJl. AH Nasution No. 112 Kota Metro, Lampung 34111\nTelp: (0725) 41170 Fax: (0725) 41170\nHomepage: metrokota.bps.go.id E-mail: bps1872@bps.go.id"
       }
     }
   ],
-  "contact": "Untuk informasi lebih lanjut silakan hubungi:\n\tKonten Berita Resmi Statistik dilindungi oleh Undang-Undang, hak cipta melekat pada Badan Pusat Statistik. Dilarang mereproduksi dan/atau menggandakan sebagian atau seluruh isi buku ini untuk tujuan komersial tanpa izin tertulis dari Badan Pusat Statistik.\n\tLorem Ipsum\nKepala BPS Metro\n\n       (0725) 41170\n       bps1872@bps.go.id\n\t\t\nUntuk layanan perpustakaan, penjualan data mikro, publikasi elektronik, publikasi cetakan, dan peta digital wilayah kerja statistik sesuai peraturan yang berlaku maupun konsultasi statistik dapat menghubungi Pelayanan Statistik Terpadu (PST) di pst.bps.go.id\n\t\n\n\n\n\nBADAN PUSAT STATISTIKMETRO\nJl. AH Nasution No. 112 Kota Metro, Lampung 34111\nTelp: (0725) 41170 Fax: (0725) 41170\nHomepage: metrokota.bps.go.id E-mail: bps1872@bps.go.id"
+  "contact": "Untuk informasi lebih lanjut silakan hubungi:\n\tKonten Berita Resmi Statistik dilindungi oleh Undang-Undang, hak cipta melekat pada Badan Pusat Statistik. Dilarang mereproduksi dan/atau menggandakan sebagian atau seluruh isi buku ini untuk tujuan komersial tanpa izin tertulis dari Badan Pusat Statistik.\n\tLorem Ipsum\nKepala BPS Metro\n\n       (0725) 41170\n       bps1872@bps.go.id\n\t\t\nUntuk layanan perpustakaan, penjualan data mikro, publikasi elektronik, publikasi cetakan, dan peta digital wilayah kerja statistik sesuai peraturan yang berlaku maupun konsultasi statistik dapat menghubungi Pelayanan Statistik Terpadu (PST) di pst.bps.go.id\n\t\n\n\n\n\nBADAN PUSAT STATISTIK\nMETRO\nJl. AH Nasution No. 112 Kota Metro, Lampung 34111\nTelp: (0725) 41170 Fax: (0725) 41170\nHomepage: metrokota.bps.go.id E-mail: bps1872@bps.go.id"
 }

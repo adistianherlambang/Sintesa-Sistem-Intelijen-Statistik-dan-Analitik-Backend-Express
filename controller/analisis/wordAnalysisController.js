@@ -222,10 +222,11 @@ export function buildTableWordXmlFromMarkdown(tableConfig, varMap = {}, totalWid
  * Helper: Parse template style string for Word OpenXML
  * Contoh: "bg color #FEE3CE width 100% font size 18"
  */
-export function parseWordStyle(styleStr, defaultPt = 10) {
+export function parseWordStyle(styleStr, defaultPt = 10, defaultTextHex = "1E293B") {
   const str = String(styleStr || "");
   let fontSizePt = defaultPt;
   let bgFill = "FEE3CE";
+  let textColor = defaultTextHex;
 
   const fontMatch = str.match(/font\s*size\s*(\d+)/i);
   if (fontMatch) {
@@ -237,11 +238,126 @@ export function parseWordStyle(styleStr, defaultPt = 10) {
     bgFill = bgMatch[1].toUpperCase();
   }
 
+  const colorMatch = str.match(/(?:^|\s)color\s*#?([0-9a-fA-F]{6})/i);
+  if (colorMatch) {
+    textColor = colorMatch[1].toUpperCase();
+  }
+
   return {
     fontSizePt,
     fontSizeHalfPt: fontSizePt * 2, // OpenXML Word menggunakan half-points (1 pt = 2 half-points)
-    bgFill
+    bgFill,
+    textColor
   };
+}
+
+export const INDICATOR_BANNER_TITLES = {
+  "komoditas": null,
+  "pdrb-pengeluaran-adhk": "Perkembangan Produk Domestik Regional Bruto (PDRB) Pengeluaran ADHK",
+  "pdrb-pengeluaran-adhb": "Perkembangan Produk Domestik Regional Bruto (PDRB) Pengeluaran ADHB",
+  "pdrb-lapangan-usaha-adhk": "Perkembangan PDRB Menurut Lapangan Usaha ADHK",
+  "pdrb-lapangan-usaha-adhb": "Perkembangan PDRB Menurut Lapangan Usaha ADHB",
+  "demografi-penduduk": "Perkembangan Profil dan Distribusi Penduduk",
+  "demografi-laki": "Perkembangan Jumlah Penduduk Laki-Laki",
+  "demografi-perempuan": "Perkembangan Jumlah Penduduk Perempuan",
+  "demografi-kemiskinan": "Perkembangan Profil dan Indikator Kemiskinan"
+};
+
+/**
+ * Generate XML Cover Summary dari template summary indikator aktif
+ */
+export function buildSummaryWordXml(summaryText, varMap = {}) {
+  const rendered = renderTemplateObject(summaryText || "", varMap);
+  const paragraphs = rendered.split("\n").map(p => p.trim()).filter(Boolean);
+  let xml = "";
+  for (const p of paragraphs) {
+    xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr><w:ind w:left="284" w:hanging="284"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr><w:t>${escapeXml(p)}</w:t></w:r></w:p>`;
+  }
+  return xml;
+}
+
+/**
+ * Generate XML Content 0 & Content 1 Word dinamis murni dari skema template indikator aktif
+ */
+export function buildContent0And1WordXml(templateConfig, renderedConfig, varMap = {}) {
+  const content0 = templateConfig?.content?.[0] || {};
+  const content1 = templateConfig?.content?.[1] || {};
+  const rendered0 = renderedConfig?.content?.[0] || content0;
+  const rendered1 = renderedConfig?.content?.[1] || content1;
+
+  const style0 = parseWordStyle(content0.title?.style, 14, "1E3A8A");
+  const title0Color = (templateConfig?.content?.[0]?.desc?.find(d => d.table)?.table?.style?.header?.backgroundColor || style0.textColor).replace("#", "");
+
+  let xml = "";
+
+  // 1. Content 0 Title
+  const title0Text = renderTemplateObject(content0.title?.desc || "Indikator Utama", varMap);
+  xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="180" w:after="80" w:line="260" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${Math.max(style0.fontSizeHalfPt, 28)}"/><w:szCs w:val="${Math.max(style0.fontSizeHalfPt, 28)}"/><w:color w:val="${title0Color}"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${Math.max(style0.fontSizeHalfPt, 28)}"/><w:szCs w:val="${Math.max(style0.fontSizeHalfPt, 28)}"/><w:color w:val="${title0Color}"/></w:rPr><w:t>${escapeXml(title0Text)}</w:t></w:r></w:p>`;
+
+  // 2. Content 0 Intro paragraphs & Table 1
+  const desc0Items = rendered0.desc || content0.desc || [];
+  for (const item of desc0Items) {
+    if (item.desc) {
+      const renderedDesc = renderTemplateObject(item.desc, varMap);
+      const paragraphs = renderedDesc.split("\n").map(l => l.trim()).filter(Boolean);
+      for (const p of paragraphs) {
+        xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="both"/><w:spacing w:before="60" w:after="60" w:line="240" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(p)}</w:t></w:r></w:p>`;
+      }
+    } else if (item.table) {
+      const tblConfig = item.table;
+      const renderedTblJudul = renderTemplateObject(tblConfig.judul, varMap);
+      if (renderedTblJudul) {
+        xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="140" w:after="60" w:line="260" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(renderedTblJudul)}</w:t></w:r></w:p>`;
+      }
+      xml += buildTableWordXmlFromMarkdown(tblConfig, varMap, 9638);
+      const renderedFootnote = renderTemplateObject(tblConfig.footnote?.text || "", varMap);
+      if (renderedFootnote) {
+        xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:spacing w:before="60" w:after="80" w:line="220" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="14"/><w:szCs w:val="14"/><w:color w:val="64748B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="14"/><w:szCs w:val="14"/><w:color w:val="64748B"/></w:rPr><w:t>${escapeXml(renderedFootnote)}</w:t></w:r></w:p>`;
+      }
+    }
+  }
+
+  // 3. Content 0 Sub-groups
+  const subItems = rendered0.sub || content0.sub || [];
+  for (const sub of subItems) {
+    const subTitle = renderTemplateObject(sub.title?.desc || "", varMap);
+    if (subTitle) {
+      xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="120" w:after="40" w:line="240" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="${title0Color}"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="${title0Color}"/></w:rPr><w:t>${escapeXml(subTitle)}</w:t></w:r></w:p>`;
+    }
+    const subDesc = renderTemplateObject(sub.desc || "", varMap);
+    const paragraphs = subDesc.split("\n").map(l => l.trim()).filter(Boolean);
+    for (const p of paragraphs) {
+      xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="both"/><w:spacing w:before="40" w:after="80" w:line="240" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(p)}</w:t></w:r></w:p>`;
+    }
+  }
+
+  // 4. Content 1 Title
+  const style1 = parseWordStyle(content1.title?.style, 14, title0Color);
+  const title1Text = renderTemplateObject(content1.title?.desc || "", varMap);
+  if (title1Text) {
+    xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="180" w:after="80" w:line="260" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${Math.max(style1.fontSizeHalfPt, 28)}"/><w:szCs w:val="${Math.max(style1.fontSizeHalfPt, 28)}"/><w:color w:val="${title0Color}"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="${Math.max(style1.fontSizeHalfPt, 28)}"/><w:szCs w:val="${Math.max(style1.fontSizeHalfPt, 28)}"/><w:color w:val="${title0Color}"/></w:rPr><w:t>${escapeXml(title1Text)}</w:t></w:r></w:p>`;
+  }
+
+  // 5. Content 1 Intro paragraphs & Table 2
+  const desc1Items = rendered1.desc || content1.desc || [];
+  for (const item of desc1Items) {
+    if (item.desc) {
+      const renderedDesc = renderTemplateObject(item.desc, varMap);
+      const paragraphs = renderedDesc.split("\n").map(l => l.trim()).filter(Boolean);
+      for (const p of paragraphs) {
+        xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="both"/><w:spacing w:before="60" w:after="60" w:line="240" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(p)}</w:t></w:r></w:p>`;
+      }
+    } else if (item.table) {
+      const tblConfig = item.table;
+      const renderedTblJudul = renderTemplateObject(tblConfig.judul, varMap);
+      if (renderedTblJudul) {
+        xml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="140" w:after="60" w:line="260" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(renderedTblJudul)}</w:t></w:r></w:p>`;
+      }
+      xml += buildTableWordXmlFromMarkdown(tblConfig, varMap, 9638);
+    }
+  }
+
+  return xml;
 }
 
 /**
@@ -409,7 +525,7 @@ export const generateWordBrs = async (req, res) => {
     const activeDataset = uploadedDataset || dataset || {
       context: { city, period: periode, title }
     };
-    const activeIndicator = activeDataset?.context?.indicator || activeDataset?.context?.selectedIndicator || activeDataset?.fileInfo?.selectedIndicator || "komoditas";
+    const activeIndicator = req.body?.indicator || req.body?.selectedIndicator || activeDataset?.context?.indicator || activeDataset?.context?.selectedIndicator || activeDataset?.fileInfo?.selectedIndicator || "komoditas";
     const varMap = buildVariableMapFromDataset(activeDataset, variables);
 
     // Evaluasi apakah forecast ON atau OFF
@@ -511,97 +627,7 @@ export const generateWordBrs = async (req, res) => {
         let xmlContent = entry.getData().toString("utf8");
 
         if (entry.entryName === "word/document.xml") {
-          // A. Table 1, Judul, and Footnote dynamically from inflasiIHK.json (content[0])
-          const table1Config = freshTemplate?.content?.[0]?.desc?.find(d => d.table)?.table;
-          if (table1Config) {
-            const tbl1Match = xmlContent.match(/<w:tbl[\s>]/);
-            if (tbl1Match) {
-              const tbl1Start = tbl1Match.index;
-              const tbl1End = xmlContent.indexOf("</w:tbl>", tbl1Start) + 8;
-
-              const prevPEnd = xmlContent.lastIndexOf("</w:p>", tbl1Start);
-              const beforePrevPEnd = xmlContent.substring(0, prevPEnd);
-              const prevPMatches = [...beforePrevPEnd.matchAll(/<w:p[\s>]/g)];
-              const prevPStart = prevPMatches[prevPMatches.length - 1]?.index;
-
-              const nextPStart = xmlContent.indexOf("<w:p", tbl1End);
-              const nextPEnd = xmlContent.indexOf("</w:p>", nextPStart) + 6;
-
-              const renderedTbl1Judul = renderTemplateObject(table1Config.judul, varMap);
-              const newTbl1JudulP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="160" w:after="80" w:line="260" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(renderedTbl1Judul)}</w:t></w:r></w:p>`;
-
-              const renderedFootnote = renderTemplateObject(table1Config.footnote?.text || "", varMap);
-              const newFootnoteP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:spacing w:before="60" w:after="80" w:line="220" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="14"/><w:szCs w:val="14"/><w:color w:val="64748B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="14"/><w:szCs w:val="14"/><w:color w:val="64748B"/></w:rPr><w:t>${escapeXml(renderedFootnote)}</w:t></w:r></w:p>`;
-
-              const table1Xml = buildTableWordXmlFromMarkdown(table1Config, varMap, 9638);
-              if (prevPStart !== undefined && nextPEnd !== -1) {
-                xmlContent = xmlContent.slice(0, prevPStart) + newTbl1JudulP + table1Xml + newFootnoteP + xmlContent.slice(nextPEnd);
-              }
-            }
-          }
-
-          // B. Sub-groups 1.1 to 1.11 dynamically from inflasiIHK.json
-          const subGroups = rendered?.content?.[0]?.sub;
-          if (Array.isArray(subGroups) && subGroups.length > 0) {
-            const delimiters = [
-              ...subGroups.map(s => s.title?.desc?.trim() || ""),
-              "Perbandingan Inflasi Antar Tahun"
-            ];
-            let searchPos = 70000;
-            for (let i = 0; i < subGroups.length; i++) {
-              const currentTitle = delimiters[i];
-              const nextTitle = delimiters[i + 1];
-              if (!currentTitle || !nextTitle) continue;
-
-              const currentIdx = xmlContent.indexOf(currentTitle, searchPos);
-              if (currentIdx === -1) continue;
-              const currentPEnd = xmlContent.indexOf("</w:p>", currentIdx) + 6;
-
-              const nextIdx = xmlContent.indexOf(nextTitle, currentPEnd);
-              if (nextIdx === -1) continue;
-              const beforeNext = xmlContent.substring(0, nextIdx);
-              const pMatches = [...beforeNext.matchAll(/<w:p[\s>]/g)];
-              if (pMatches.length === 0) continue;
-              const nextPStart = pMatches[pMatches.length - 1].index;
-
-              const lines = (subGroups[i].desc || "").split("\n").map(l => l.trim()).filter(Boolean);
-              let newPXml = "";
-              for (const line of lines) {
-                newPXml += `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="both"/><w:spacing w:before="80" w:after="100" w:line="260" w:lineRule="auto"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(line)}</w:t></w:r></w:p>`;
-              }
-
-              xmlContent = xmlContent.slice(0, currentPEnd) + newPXml + xmlContent.slice(nextPStart);
-              searchPos = currentPEnd + newPXml.length;
-            }
-          }
-
-          // C. Table 2 & Judul dynamically from inflasiIHK.json (content[1])
-          const table2Config = freshTemplate?.content?.[1]?.desc?.find(d => d.table)?.table;
-          if (table2Config) {
-            const tbl2Start = xmlContent.indexOf("<w:tbl", 100000);
-            if (tbl2Start !== -1) {
-              const tbl2End = xmlContent.indexOf("</w:tbl>", tbl2Start) + 8;
-              const t2PrevPEnd = xmlContent.lastIndexOf("</w:p>", tbl2Start);
-              const beforeT2PrevPEnd = xmlContent.substring(0, t2PrevPEnd);
-              const t2PMatches = [...beforeT2PrevPEnd.matchAll(/<w:p[\s>]/g)];
-              const t2PrevPStart = t2PMatches[t2PMatches.length - 1]?.index;
-
-              const renderedTbl2Judul = renderTemplateObject(table2Config.judul, varMap);
-              const newTbl2JudulP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:jc w:val="left"/><w:spacing w:before="160" w:after="80" w:line="260" w:lineRule="auto"/><w:keepNext/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/><w:b/><w:bCs/><w:sz w:val="18"/><w:szCs w:val="18"/><w:color w:val="1E293B"/></w:rPr><w:t>${escapeXml(renderedTbl2Judul)}</w:t></w:r></w:p>`;
-              const table2Xml = buildTableWordXmlFromMarkdown(table2Config, varMap, 9638);
-              if (t2PrevPStart !== undefined && tbl2End !== -1) {
-                xmlContent = xmlContent.slice(0, t2PrevPStart) + newTbl2JudulP + table2Xml + xmlContent.slice(tbl2End);
-              }
-            }
-          }
-
-          // D. Rekonstruksi Dokumen Mengikuti Urutan inflasiIHK.json:
-          // 1. Chart BRS
-          // 2. Baris 160-196: Penjelasan Teknis & Perubahan Tahun Dasar (Tabel 3)
-          // 3. Baris 197-202: Infografis full-page banner
-          // 4. Halaman Paling Terakhir: Informasi Kontak BPS (telepon, email, PST, alamat BPS)
-
-          // Ekstrak blok kontak dari template asli dan bungkus sebagai tabel mandiri
+          // 1. Ekstrak blok kontak resmi dari template base sebagai tabel mandiri pada halaman terakhir
           const contactMarker = "Konten Berita Resmi Statistik dilindungi oleh Undang-Undang";
           let standaloneContactXml = "";
           if (xmlContent.includes(contactMarker)) {
@@ -620,49 +646,73 @@ export const generateWordBrs = async (req, res) => {
             }
           }
 
-          // Cari batas akhir Tabel 2 (di mana Chart BRS, Section 2, Infografis, dan Kontak akan disambungkan)
-          const tbl2SearchMatch = xmlContent.slice(100000).match(/<w:tbl[\s>]/);
-          if (tbl2SearchMatch) {
-            const tbl2Start = 100000 + tbl2SearchMatch.index;
-            const tbl2End = xmlContent.indexOf("</w:tbl>", tbl2Start) + 8;
-            const lastSectPr = xmlContent.lastIndexOf("<w:sectPr");
-
-            if (tbl2End !== -1 && lastSectPr !== -1 && lastSectPr > tbl2End) {
-              // 1. Chart BRS
-              const chartBrsXml = chartBrsBuffer
-                ? buildInlineImageWordXml("rIdChartBrs", "Chart BRS", 5715000, 3160687, 999902)
-                : "";
-              const nextSectionBreakXml = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="816" w:left="1134" w:header="709" w:footer="709" w:gutter="0"/><w:cols w:space="708"/><w:docGrid w:linePitch="360"/></w:sectPr></w:pPr></w:p>`;
-
-              // 2. Section 2: Penjelasan Teknis & Perubahan Tahun Dasar (Tabel 3) (baris 160-196 inflasiIHK.json)
-              const sec2Config = freshTemplate?.content?.find(c => c.column);
-              const sec2Xml = buildSection2WordXmlFromTemplate(sec2Config, varMap);
-
-              // 2b. Section Forecast Inflasi (Hanya disertakan jika isForecastOn === true)
-              let forecastXml = "";
-              if (isForecastOn) {
-                const forecastConfig = freshTemplate?.content?.find(c => c.forecast || c.type === 'forecast' || (c.title?.desc && /proyeksi|forecast/i.test(c.title.desc)))?.forecast ||
-                                       freshTemplate?.content?.find(c => c.forecast || c.type === 'forecast' || (c.title?.desc && /proyeksi|forecast/i.test(c.title.desc)));
-                if (forecastConfig) {
-                  forecastXml = buildForecastWordXmlFromTemplate(forecastConfig, varMap);
-                }
-              }
-
-              // 3. Infografis (baris 197-202 inflasiIHK.json)
-              const infografisXml = infografisBuffer
-                ? `<w:p><w:r><w:br w:type="page"/></w:r></w:p>` +
-                  buildInlineImageWordXml("rIdInfografis", "Infografis", 5715000, 8096250, 999901)
-                : "";
-
-              // 4. Rekonstruksi dokumen dengan susunan yang bersih dan valid:
-              xmlContent = xmlContent.slice(0, tbl2End) +
-                chartBrsXml + nextSectionBreakXml +
-                sec2Xml +
-                forecastXml +
-                infografisXml +
-                standaloneContactXml +
-                xmlContent.slice(lastSectPr);
+          // 2. Cover Banner & Cover Summary: Jangan biarkan teks inflasi bocor ke indikator lain!
+          if (activeIndicator !== "komoditas") {
+            const bannerTitleBase = INDICATOR_BANNER_TITLES[activeIndicator] || freshTemplate?.content?.[0]?.title?.desc || "Laporan BRS";
+            const bannerTitle = `${bannerTitleBase} ${varMap["namaKota"] || "Kota Metro"} Tahun ${varMap["tahun"] || ""}`;
+            const idxCoverBanner = xmlContent.indexOf("inflasi Year-on-Year");
+            if (idxCoverBanner !== -1) {
+              const pBannerStart = xmlContent.lastIndexOf("<w:p", idxCoverBanner);
+              const pBannerEnd = xmlContent.indexOf("</w:p>", idxCoverBanner) + 6;
+              const newBannerP = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr><w:ind w:left="1560" w:hanging="284"/><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Raleway" w:hAnsi="Raleway"/></w:rPr><w:t>${escapeXml(bannerTitle)}</w:t></w:r></w:p>`;
+              xmlContent = xmlContent.slice(0, pBannerStart) + newBannerP + xmlContent.slice(pBannerEnd);
             }
+
+            const idxCoverSummary = xmlContent.indexOf("Pada ${bulan} ${tahun} terjadi inflasi");
+            if (idxCoverSummary !== -1) {
+              const pSummStart = xmlContent.lastIndexOf("<w:p", idxCoverSummary);
+              const nextSectPr = xmlContent.indexOf("<w:sectPr", pSummStart);
+              const pSectPrStart = xmlContent.lastIndexOf("<w:p", nextSectPr);
+              const newSummXml = buildSummaryWordXml(freshTemplate?.summary, varMap);
+              xmlContent = xmlContent.slice(0, pSummStart) + newSummXml + xmlContent.slice(pSectPrStart);
+            }
+          }
+
+          // 3. Rekonstruksi Dokumen Bagian Tengah (${content}) Mengikuti Skema Indikator Terpilih
+          const idxTitle0 = xmlContent.indexOf("Indeks Harga Konsumen/Inflasi Menurut Kelompok");
+          const pTitle0Start = idxTitle0 !== -1 ? xmlContent.lastIndexOf("<w:p", idxTitle0) : -1;
+          const lastSectPr = xmlContent.lastIndexOf("<w:sectPr");
+
+          if (pTitle0Start !== -1 && lastSectPr !== -1 && lastSectPr > pTitle0Start) {
+            // A. Content 0 (Tabel 1, intro, sub-kelompok) & Content 1 (Tabel 2, intro) murni dari template indikator aktif
+            const content0And1Xml = buildContent0And1WordXml(freshTemplate, rendered, varMap);
+
+            // B. Chart BRS
+            const chartBrsXml = chartBrsBuffer
+              ? buildInlineImageWordXml("rIdChartBrs", "Chart BRS", 5715000, 3160687, 999902)
+              : "";
+            const nextSectionBreakXml = `<w:p><w:pPr><w:pStyle w:val="p1"/><w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="816" w:left="1134" w:header="709" w:footer="709" w:gutter="0"/><w:cols w:space="708"/><w:docGrid w:linePitch="360"/></w:sectPr></w:pPr></w:p>`;
+
+            // C. Penjelasan Teknis & Perubahan Tahun Dasar / Sumber Data
+            const sec2Config = freshTemplate?.content?.find(c => c.column);
+            const sec2Xml = buildSection2WordXmlFromTemplate(sec2Config, varMap);
+
+            // D. Forecast (jika aktif)
+            let forecastXml = "";
+            if (isForecastOn) {
+              const forecastConfig = freshTemplate?.content?.find(c => c.forecast || c.type === 'forecast' || (c.title?.desc && /proyeksi|forecast/i.test(c.title.desc)))?.forecast ||
+                                     freshTemplate?.content?.find(c => c.forecast || c.type === 'forecast' || (c.title?.desc && /proyeksi|forecast/i.test(c.title.desc)));
+              if (forecastConfig) {
+                forecastXml = buildForecastWordXmlFromTemplate(forecastConfig, varMap);
+              }
+            }
+
+            // E. Infografis
+            const infografisXml = infografisBuffer
+              ? `<w:p><w:r><w:br w:type="page"/></w:r></w:p>` +
+                buildInlineImageWordXml("rIdInfografis", "Infografis", 5715000, 8096250, 999901)
+              : "";
+
+            // F. Satukan seluruh dokumen dengan susunan yang bersih dan terstruktur rapi:
+            xmlContent = xmlContent.slice(0, pTitle0Start) +
+              content0And1Xml +
+              chartBrsXml +
+              nextSectionBreakXml +
+              sec2Xml +
+              forecastXml +
+              infografisXml +
+              standaloneContactXml +
+              xmlContent.slice(lastSectPr);
           }
 
           // G. Terapkan styling resmi dari template JSON indikator
@@ -699,7 +749,7 @@ export const generateWordBrs = async (req, res) => {
       success: true,
       filename: outFilename,
       url: `/analysis-files/${outFilename}`,
-      fullUrl: `${req.protocol}://${req.get("host")}/analysis-files/${outFilename}`,
+      fullUrl: `${req.protocol || "http"}://${(req.get ? req.get("host") : null) || "localhost:5000"}/analysis-files/${outFilename}`,
       variablesCount: Object.keys(varMap).length,
       variables: varMap,
       renderedTemplate: renderedTemplateData?.template || null,

@@ -126,13 +126,49 @@
           "desc": "Proyeksi Pertumbuhan PDRB Lapangan Usaha ADHK",
           "style": "bg color #EDE9FE width 100% font size 18"
         },
-        "desc": "${narasiForecast}"
+        "desc": "${narasiForecast}",
+        "table": {
+          "judul": "Tabel Proyeksi Pertumbuhan PDRB Lapangan Usaha ADHK ${namaWilayah} Tiga Periode Mendatang (persen)",
+          "style": {
+            "fontSize": "8pt",
+            "header": {
+              "backgroundColor": "#047857",
+              "fontWeight": "bold"
+            },
+            "numbering": {
+              "backgroundColor": "#a7f3d0"
+            },
+            "rowColors": [
+              "#ecfdf5",
+              "#d1fae5"
+            ]
+          },
+          "markdown": "| Periode Proyeksi | Proyeksi Pertumbuhan Ekonomi (%) | Proyeksi Sektor Utama 1 (%) | Proyeksi Sektor Utama 2 (%) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| ${forecastPeriode1} | ${forecastVal1} | ${forecastSektor1Val1} | ${forecastSektor2Val1} |\n| ${forecastPeriode2} | ${forecastVal2} | ${forecastSektor1Val2} | ${forecastSektor2Val2} |\n| ${forecastPeriode3} | ${forecastVal3} | ${forecastSektor1Val3} | ${forecastSektor2Val3} |"
+        }
       },
       "title": {
         "desc": "Proyeksi Pertumbuhan PDRB Lapangan Usaha ADHK",
         "style": "bg color #EDE9FE width 100% font size 18"
       },
-      "desc": "${narasiForecast}"
+      "desc": "${narasiForecast}",
+      "table": {
+        "judul": "Tabel Proyeksi Pertumbuhan PDRB Lapangan Usaha ADHK ${namaWilayah} Tiga Periode Mendatang (persen)",
+        "style": {
+          "fontSize": "8pt",
+          "header": {
+            "backgroundColor": "#047857",
+            "fontWeight": "bold"
+          },
+          "numbering": {
+            "backgroundColor": "#a7f3d0"
+          },
+          "rowColors": [
+            "#ecfdf5",
+            "#d1fae5"
+          ]
+        },
+        "markdown": "| Periode Proyeksi | Proyeksi Pertumbuhan Ekonomi (%) | Proyeksi Sektor Utama 1 (%) | Proyeksi Sektor Utama 2 (%) |\n|---|---:|---:|---:|\n| (1) | (2) | (3) | (4) |\n| ${forecastPeriode1} | ${forecastVal1} | ${forecastSektor1Val1} | ${forecastSektor2Val1} |\n| ${forecastPeriode2} | ${forecastVal2} | ${forecastSektor1Val2} | ${forecastSektor2Val2} |\n| ${forecastPeriode3} | ${forecastVal3} | ${forecastSektor1Val3} | ${forecastSektor2Val3} |"
+      }
     },
     {
       "img": {
@@ -143,9 +179,9 @@
     {
       "contact": {
         "title": "Untuk informasi lebih lanjut silakan hubungi:",
-        "desc": "Untuk informasi lebih lanjut silakan hubungi:\n\tKonten Berita Resmi Statistik dilindungi oleh Undang-Undang, hak cipta melekat pada Badan Pusat Statistik. Dilarang mereproduksi dan/atau menggandakan sebagian atau seluruh isi buku ini untuk tujuan komersial tanpa izin tertulis dari Badan Pusat Statistik.\n\tLorem Ipsum\nKepala BPS Metro\n\n       (0725) 41170\n       bps1872@bps.go.id\n\t\t\nUntuk layanan perpustakaan, penjualan data mikro, publikasi elektronik, publikasi cetakan, dan peta digital wilayah kerja statistik sesuai peraturan yang berlaku maupun konsultasi statistik dapat menghubungi Pelayanan Statistik Terpadu (PST) di pst.bps.go.id\n\t\n\n\n\n\nBADAN PUSAT STATISTIKMETRO\nJl. AH Nasution No. 112 Kota Metro, Lampung 34111\nTelp: (0725) 41170 Fax: (0725) 41170\nHomepage: metrokota.bps.go.id E-mail: bps1872@bps.go.id"
+        "desc": "Untuk informasi lebih lanjut silakan hubungi:\n\tKonten Berita Resmi Statistik dilindungi oleh Undang-Undang, hak cipta melekat pada Badan Pusat Statistik. Dilarang mereproduksi dan/atau menggandakan sebagian atau seluruh isi buku ini untuk tujuan komersial tanpa izin tertulis dari Badan Pusat Statistik.\n\tLorem Ipsum\nKepala BPS Metro\n\n       (0725) 41170\n       bps1872@bps.go.id\n\t\t\nUntuk layanan perpustakaan, penjualan data mikro, publikasi elektronik, publikasi cetakan, dan peta digital wilayah kerja statistik sesuai peraturan yang berlaku maupun konsultasi statistik dapat menghubungi Pelayanan Statistik Terpadu (PST) di pst.bps.go.id\n\t\n\n\n\n\nBADAN PUSAT STATISTIK\nMETRO\nJl. AH Nasution No. 112 Kota Metro, Lampung 34111\nTelp: (0725) 41170 Fax: (0725) 41170\nHomepage: metrokota.bps.go.id E-mail: bps1872@bps.go.id"
       }
     }
   ],
-  "contact": "Untuk informasi lebih lanjut silakan hubungi:\n\tKonten Berita Resmi Statistik dilindungi oleh Undang-Undang, hak cipta melekat pada Badan Pusat Statistik. Dilarang mereproduksi dan/atau menggandakan sebagian atau seluruh isi buku ini untuk tujuan komersial tanpa izin tertulis dari Badan Pusat Statistik.\n\tLorem Ipsum\nKepala BPS Metro\n\n       (0725) 41170\n       bps1872@bps.go.id\n\t\t\nUntuk layanan perpustakaan, penjualan data mikro, publikasi elektronik, publikasi cetakan, dan peta digital wilayah kerja statistik sesuai peraturan yang berlaku maupun konsultasi statistik dapat menghubungi Pelayanan Statistik Terpadu (PST) di pst.bps.go.id\n\t\n\n\n\n\nBADAN PUSAT STATISTIKMETRO\nJl. AH Nasution No. 112 Kota Metro, Lampung 34111\nTelp: (0725) 41170 Fax: (0725) 41170\nHomepage: metrokota.bps.go.id E-mail: bps1872@bps.go.id"
+  "contact": "Untuk informasi lebih lanjut silakan hubungi:\n\tKonten Berita Resmi Statistik dilindungi oleh Undang-Undang, hak cipta melekat pada Badan Pusat Statistik. Dilarang mereproduksi dan/atau menggandakan sebagian atau seluruh isi buku ini untuk tujuan komersial tanpa izin tertulis dari Badan Pusat Statistik.\n\tLorem Ipsum\nKepala BPS Metro\n\n       (0725) 41170\n       bps1872@bps.go.id\n\t\t\nUntuk layanan perpustakaan, penjualan data mikro, publikasi elektronik, publikasi cetakan, dan peta digital wilayah kerja statistik sesuai peraturan yang berlaku maupun konsultasi statistik dapat menghubungi Pelayanan Statistik Terpadu (PST) di pst.bps.go.id\n\t\n\n\n\n\nBADAN PUSAT STATISTIK\nMETRO\nJl. AH Nasution No. 112 Kota Metro, Lampung 34111\nTelp: (0725) 41170 Fax: (0725) 41170\nHomepage: metrokota.bps.go.id E-mail: bps1872@bps.go.id"
 }

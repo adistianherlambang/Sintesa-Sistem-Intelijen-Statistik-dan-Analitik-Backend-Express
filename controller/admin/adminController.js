@@ -334,6 +334,60 @@ function formatUptime(seconds) {
 }
 
 /**
+ * Helper: Aggregate current server utility payload
+ */
+const getServerUsagePayload = () => ({
+  cpu: getCpuUsage(),
+  memory: getMemoryUsage(),
+  storage: getStorageUsage(),
+  uptime: {
+    seconds: Math.floor(os.uptime()),
+    formatted: formatUptime(os.uptime()),
+  },
+  platform: os.platform() === "darwin" ? `macOS (${os.arch()})` : os.platform() === "win32" ? "Windows" : `Linux (${os.arch()})`,
+  nodeVersion: process.version,
+  timestamp: Date.now(),
+});
+
+/**
+ * GET /api/admin/server-usage
+ * Lightweight real-time server utility metrics (0 database queries)
+ */
+export const getServerUsageMetrics = async (req, res) => {
+  try {
+    const serverUsage = getServerUsagePayload();
+    return res.json({ success: true, serverUsage });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+/**
+ * GET /api/admin/server-usage/stream
+ * Server-Sent Events (SSE) stream for real-time live monitoring
+ */
+export const streamServerUsageMetrics = (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+  res.flushHeaders?.();
+
+  const sendUpdate = () => {
+    try {
+      const serverUsage = getServerUsagePayload();
+      res.write(`data: ${JSON.stringify(serverUsage)}\n\n`);
+    } catch (e) {}
+  };
+
+  sendUpdate();
+  const timer = setInterval(sendUpdate, 2000);
+
+  req.on("close", () => {
+    clearInterval(timer);
+  });
+};
+
+/**
  * GET /api/admin/stats
  * Dashboard metrics for Administrator
  */
@@ -413,17 +467,7 @@ export const getAdminStats = async (req, res) => {
     });
 
     // Server Usage Metrics (CPU, Memory, Storage)
-    const serverUsage = {
-      cpu: getCpuUsage(),
-      memory: getMemoryUsage(),
-      storage: getStorageUsage(),
-      uptime: {
-        seconds: Math.floor(os.uptime()),
-        formatted: formatUptime(os.uptime()),
-      },
-      platform: os.platform() === "darwin" ? `macOS (${os.arch()})` : os.platform() === "win32" ? "Windows" : `Linux (${os.arch()})`,
-      nodeVersion: process.version,
-    };
+    const serverUsage = getServerUsagePayload();
 
     const statsData = {
       totalUsers,
@@ -625,10 +669,7 @@ export const updateUserSubscription = async (req, res) => {
         : (parseInt(quota, 10) || 30);
 
     let sub = await Subscription.findOne({
-      $or: [
-        { userId: user._id },
-        ...(user.userId ? [{ userId: user.userId }] : []),
-      ],
+      userId: user._id,
       status: "active",
     });
 
@@ -693,12 +734,8 @@ export const deleteUser = async (req, res) => {
 
     const email = user.email;
     await User.deleteOne({ _id: user._id });
-    await Subscription.deleteMany({
-      $or: [{ userId: user._id }, ...(user.userId ? [{ userId: user.userId }] : [])],
-    });
-    await BillingTransaction.deleteMany({
-      $or: [{ userId: user._id }, ...(user.userId ? [{ userId: user.userId }] : [])],
-    });
+    await Subscription.deleteMany({ userId: user._id });
+    await BillingTransaction.deleteMany({ userId: user._id });
 
     await logActivity(req.user._id, `Menghapus akun pengguna: ${email}`);
 

@@ -1,4 +1,16 @@
+import mongoose from "mongoose";
 import Subscription from "../../db/models/Subscription.js";
+import User from "../../db/models/User.js";
+
+/**
+ * Helper to resolve user _id (ObjectId) even if UUID string is provided
+ */
+const resolveObjectId = async (idOrUUID) => {
+  if (!idOrUUID) return null;
+  if (mongoose.isValidObjectId(idOrUUID)) return idOrUUID;
+  const user = await User.findOne({ userId: idOrUUID }).lean();
+  return user ? user._id : idOrUUID;
+};
 
 /**
  * Create or update a subscription for a user
@@ -13,18 +25,20 @@ export const createOrUpdateSubscription = async (
     throw new Error("userId dan planId wajib diisi");
   }
 
+  const targetUserId = await resolveObjectId(userId);
+
   const startedAt = new Date();
   const expiredAt = new Date();
   expiredAt.setDate(startedAt.getDate() + durationDays);
 
   // Deactivate any existing active subscriptions first
   await Subscription.updateMany(
-    { userId, status: "active" },
+    { userId: targetUserId, status: "active" },
     { $set: { status: "expired" } },
   );
 
   const subscription = new Subscription({
-    userId,
+    userId: targetUserId,
     subscriptionId: planId,
     status: "active",
     startedAt,
@@ -44,7 +58,8 @@ export const getSubscriptionStatus = async (userId) => {
     throw new Error("userId wajib diisi");
   }
 
-  const subscription = await Subscription.findOne({ userId, status: "active" });
+  const targetUserId = await resolveObjectId(userId);
+  const subscription = await Subscription.findOne({ userId: targetUserId, status: "active" });
   if (!subscription) {
     return { status: "none", message: "Tidak memiliki langganan aktif" };
   }
@@ -63,7 +78,8 @@ export const getSubscriptionStatus = async (userId) => {
  * Consume quota for a user activity
  */
 export const consumeSubscriptionQuota = async (userId) => {
-  const sub = await Subscription.findOne({ userId, status: "active" });
+  const targetUserId = await resolveObjectId(userId);
+  const sub = await Subscription.findOne({ userId: targetUserId, status: "active" });
   if (!sub) {
     throw new Error("Tidak memiliki langganan aktif");
   }

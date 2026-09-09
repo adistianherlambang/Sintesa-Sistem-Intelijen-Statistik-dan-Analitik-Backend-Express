@@ -2,6 +2,8 @@ import express from "express";
 import { authMiddleware, adminMiddleware } from "../../controller/user/authMiddleware.js";
 import {
   getAdminStats,
+  getServerUsageMetrics,
+  streamServerUsageMetrics,
   getUsersList,
   updateUserRole,
   updateUserSubscription,
@@ -21,6 +23,8 @@ router.use(authMiddleware, adminMiddleware);
 
 // 1. Dashboard metrics
 router.get("/stats", getAdminStats);
+router.get("/server-usage", getServerUsageMetrics);
+router.get("/server-usage/stream", streamServerUsageMetrics);
 
 // 2. Manage Users
 router.get("/users", getUsersList);

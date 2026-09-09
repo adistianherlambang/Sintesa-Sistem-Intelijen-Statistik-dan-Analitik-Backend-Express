@@ -6,13 +6,20 @@ import User from "../../db/models/User.js";
 export const authMiddleware = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    let token = null;
+
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
+    } else if (req.query?.token) {
+      token = req.query.token;
+    }
+
+    if (!token) {
       return res
         .status(401)
         .json({ message: "Akses ditolak. Token tidak disediakan." });
     }
 
-    const token = authHeader.split(" ")[1];
     const user = await User.findOne({ token }).lean();
 
     if (!user) {

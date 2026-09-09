@@ -1,5 +1,6 @@
 import os from "os";
 import fs from "fs";
+import { execSync } from "child_process";
 import mongoose from "mongoose";
 import User from "../../db/models/User.js";
 import Subscription from "../../db/models/Subscription.js";
@@ -146,34 +147,131 @@ const findUserByIdOrUUID = async (idOrUUID) => {
   return await User.findOne({ userId: idOrUUID });
 };
 
+// Background CPU measurement to provide accurate real-time delta sampling matching Activity Monitor
+let lastCpuSnapshot = null;
+let currentCpuPercent = 0;
+
+function takeCpuSnapshot() {
+  const cpus = os.cpus() || [];
+  let idle = 0;
+  let total = 0;
+  for (const cpu of cpus) {
+    for (const type in cpu.times) {
+      total += cpu.times[type];
+    }
+    idle += cpu.times.idle;
+  }
+  return { idle, total, time: Date.now() };
+}
+
+// Initial snapshot
+lastCpuSnapshot = takeCpuSnapshot();
+
+// Periodically measure CPU delta every 2 seconds (matching Activity Monitor sample rate)
+setInterval(() => {
+  try {
+    const current = takeCpuSnapshot();
+    if (lastCpuSnapshot) {
+      const deltaIdle = current.idle - lastCpuSnapshot.idle;
+      const deltaTotal = current.total - lastCpuSnapshot.total;
+      if (deltaTotal > 0) {
+        const percent = ((deltaTotal - deltaIdle) / deltaTotal) * 100;
+        currentCpuPercent = Math.min(100, Math.max(0, Math.round(percent * 10) / 10));
+      }
+    }
+    lastCpuSnapshot = current;
+  } catch (err) {}
+}, 2000).unref();
+
 /**
- * Helper: Calculate CPU usage percentage across cores
+ * Helper: Calculate CPU usage percentage across cores (Real-time delta matching Activity Monitor)
  */
 function getCpuUsage() {
   const cpus = os.cpus() || [];
-  let totalUser = 0, totalSys = 0, totalIdle = 0, total = 0;
-  for (const cpu of cpus) {
-    const { user, nice = 0, sys, idle, irq = 0 } = cpu.times;
-    totalUser += user;
-    totalSys += sys;
-    totalIdle += idle;
-    total += user + nice + sys + idle + irq;
+  const loadAvg = (os.loadavg() || []).map((v) => Math.round(v * 100) / 100);
+
+  let usagePercent = currentCpuPercent;
+  if (!usagePercent && loadAvg.length > 0 && cpus.length > 0) {
+    usagePercent = Math.min(100, Math.max(0, Math.round((loadAvg[0] / cpus.length) * 100 * 10) / 10));
   }
-  const active = total - totalIdle;
-  const percent = total > 0 ? (active / total) * 100 : 0;
+
   return {
-    usagePercent: Math.min(100, Math.max(0, Math.round(percent * 10) / 10)),
+    usagePercent,
     cores: cpus.length,
     model: cpus[0]?.model || "Multi-Core CPU",
-    loadAvg: (os.loadavg() || []).map((v) => Math.round(v * 100) / 100),
+    loadAvg,
   };
 }
 
 /**
- * Helper: Calculate Memory (RAM) usage
+ * Helper: Calculate Memory (RAM) usage (Aligned with macOS Activity Monitor and Linux MemAvailable)
  */
 function getMemoryUsage() {
   const totalBytes = os.totalmem();
+
+  // macOS (Darwin): Use Mach VM statistics matching Activity Monitor (App + Wired + Compressed)
+  if (os.platform() === "darwin") {
+    try {
+      const out = execSync("vm_stat", { timeout: 1000 }).toString();
+      const pageSizeMatch = out.match(/page size of (\d+) bytes/);
+      const pageSize = pageSizeMatch ? parseInt(pageSizeMatch[1], 10) : 16384;
+
+      const getVal = (key) => {
+        const m = out.match(new RegExp(key + ":\\s+(\\d+)"));
+        return m ? parseInt(m[1], 10) : 0;
+      };
+
+      const wired = getVal("Pages wired down");
+      const purgeable = getVal("Pages purgeable");
+      const anonymous = getVal("Anonymous pages");
+      const compressor = getVal("Pages occupied by compressor");
+
+      // macOS Activity Monitor standard formula:
+      // Memory Used = (Anonymous - Purgeable) + Wired + Compressed
+      const appMem = Math.max(0, anonymous - purgeable) * pageSize;
+      const wiredMem = wired * pageSize;
+      const compressedMem = compressor * pageSize;
+      const usedBytes = Math.min(totalBytes, appMem + wiredMem + compressedMem);
+      const freeBytes = Math.max(0, totalBytes - usedBytes);
+      const usagePercent = Math.round(((usedBytes / totalBytes) * 100) * 10) / 10;
+
+      return {
+        totalBytes,
+        usedBytes,
+        freeBytes,
+        totalFormatted: (totalBytes / (1024 ** 3)).toFixed(1) + " GB",
+        usedFormatted: (usedBytes / (1024 ** 3)).toFixed(1) + " GB",
+        freeFormatted: (freeBytes / (1024 ** 3)).toFixed(1) + " GB",
+        usagePercent,
+      };
+    } catch (err) {
+      console.warn("[getMemoryUsage macOS] Error:", err.message);
+    }
+  }
+
+  // Linux: Use MemAvailable from /proc/meminfo which accounts for buffers and cache
+  if (os.platform() === "linux") {
+    try {
+      const meminfo = fs.readFileSync("/proc/meminfo", "utf8");
+      const availMatch = meminfo.match(/MemAvailable:\s+(\d+)\s+kB/);
+      if (availMatch) {
+        const availBytes = parseInt(availMatch[1], 10) * 1024;
+        const usedBytes = Math.max(0, totalBytes - availBytes);
+        const usagePercent = Math.round(((usedBytes / totalBytes) * 100) * 10) / 10;
+        return {
+          totalBytes,
+          usedBytes,
+          freeBytes: availBytes,
+          totalFormatted: (totalBytes / (1024 ** 3)).toFixed(1) + " GB",
+          usedFormatted: (usedBytes / (1024 ** 3)).toFixed(1) + " GB",
+          freeFormatted: (availBytes / (1024 ** 3)).toFixed(1) + " GB",
+          usagePercent,
+        };
+      }
+    } catch (err) {}
+  }
+
+  // Fallback (Windows or if vm_stat fails)
   const freeBytes = os.freemem();
   const usedBytes = totalBytes - freeBytes;
   const usagePercent = Math.round(((usedBytes / totalBytes) * 100) * 10) / 10;

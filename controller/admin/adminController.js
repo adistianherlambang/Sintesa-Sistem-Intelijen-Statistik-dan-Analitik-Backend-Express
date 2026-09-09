@@ -10,6 +10,7 @@ import PackagePlan from "../../db/models/PackagePlan.js";
 import AnalysisHistory from "../../db/models/AnalysisHistory.js";
 import Infografis from "../../db/models/Infografis.js";
 import { logActivity } from "../user/activityController.js";
+import { getLLMTokenStats } from "../../services/tokenTracker.js";
 
 // Default plans seed
 const DEFAULT_PLANS = [
@@ -469,6 +470,9 @@ export const getAdminStats = async (req, res) => {
     // Server Usage Metrics (CPU, Memory, Storage)
     const serverUsage = getServerUsagePayload();
 
+    // LLM Token Usage metrics per model
+    const llmUsage = await getLLMTokenStats();
+
     const statsData = {
       totalUsers,
       adminUsers,
@@ -479,6 +483,7 @@ export const getAdminStats = async (req, res) => {
       totalRevenue,
       revenueTrend,
       serverUsage,
+      llmUsage,
       totalAnalyses,
       totalInfografis,
       recentTransactions,
@@ -496,6 +501,19 @@ export const getAdminStats = async (req, res) => {
   } catch (err) {
     console.error("[getAdminStats] Error:", err.message);
     return res.status(500).json({ message: "Gagal memuat statistik admin: " + err.message });
+  }
+};
+
+/**
+ * GET /api/admin/llm-usage
+ * Standalone endpoint to get LLM token usage
+ */
+export const getLLMUsageStats = async (req, res) => {
+  try {
+    const stats = await getLLMTokenStats();
+    return res.json({ success: true, data: stats, stats });
+  } catch (err) {
+    return res.status(500).json({ message: "Gagal memuat token usage LLM: " + err.message });
   }
 };
 

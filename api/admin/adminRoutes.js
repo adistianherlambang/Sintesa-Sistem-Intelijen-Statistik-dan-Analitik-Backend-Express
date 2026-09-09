@@ -4,6 +4,7 @@ import {
   getAdminStats,
   getServerUsageMetrics,
   streamServerUsageMetrics,
+  getLLMUsageStats,
   getUsersList,
   updateUserRole,
   updateUserSubscription,
@@ -25,6 +26,7 @@ router.use(authMiddleware, adminMiddleware);
 router.get("/stats", getAdminStats);
 router.get("/server-usage", getServerUsageMetrics);
 router.get("/server-usage/stream", streamServerUsageMetrics);
+router.get("/llm-usage", getLLMUsageStats);
 
 // 2. Manage Users
 router.get("/users", getUsersList);

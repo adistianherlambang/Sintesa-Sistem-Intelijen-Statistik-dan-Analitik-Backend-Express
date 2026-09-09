@@ -4,6 +4,7 @@ import { OpenAI } from "openai";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import { recordTokenUsage } from "../../services/tokenTracker.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -52,6 +53,18 @@ export const callMistral = async ({
   });
 
   const reply = completion.choices?.[0]?.message?.content || "";
+
+  // Record token usage for Mistral
+  const inputTokens = completion.usage?.prompt_tokens || 0;
+  const outputTokens = completion.usage?.completion_tokens || 0;
+  recordTokenUsage({
+    model,
+    provider: "mistral",
+    inputTokens,
+    outputTokens,
+    inputText: (systemPrompt || "") + " " + inputMessage,
+    outputText: reply,
+  });
 
   return {
     ok: true,
@@ -127,6 +140,19 @@ export const callGemini = async ({
   const candidates = response.data?.candidates;
   const reply = candidates?.[0]?.content?.parts?.[0]?.text || "";
 
+  // Record token usage for Google Gemini
+  const usage = response.data?.usageMetadata;
+  const inputTokens = usage?.promptTokenCount || 0;
+  const outputTokens = usage?.candidatesTokenCount || 0;
+  recordTokenUsage({
+    model,
+    provider: "gemini",
+    inputTokens,
+    outputTokens,
+    inputText: (systemPrompt || "") + " " + inputMessage,
+    outputText: reply,
+  });
+
   return {
     ok: true,
     llm: "gemini",
@@ -191,6 +217,19 @@ export const callGemma = async ({
   if (model.includes("mistral")) llmName = "cloudflare-mistral-7b";
   else if (model.includes("2b")) llmName = "cloudflare-gemma-2b";
   else if (model.includes("7b")) llmName = "cloudflare-gemma-7b";
+
+  // Record token usage for Cloudflare Workers AI
+  const usage = response.data?.result?.usage || response.data?.usage;
+  const inputTokens = usage?.prompt_tokens || 0;
+  const outputTokens = usage?.completion_tokens || 0;
+  recordTokenUsage({
+    model,
+    provider: "cloudflare",
+    inputTokens,
+    outputTokens,
+    inputText: (systemPrompt || "") + " " + inputMessage,
+    outputText: reply,
+  });
 
   return {
     ok: true,

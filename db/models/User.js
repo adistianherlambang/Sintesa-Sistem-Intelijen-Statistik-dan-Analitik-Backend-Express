@@ -10,10 +10,22 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: [true, "Email wajib diisi"],
       unique: true,
       lowercase: true,
       trim: true,
+      validate: {
+        validator: function (v) {
+          if (!v || typeof v !== "string") return false;
+          const trimmed = v.trim();
+          if (trimmed.length > 254) return false;
+          const emailRegex =
+            /^[a-zA-Z0-9_%+-]+(\.[a-zA-Z0-9_%+-]+)*@[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
+          return emailRegex.test(trimmed);
+        },
+        message: (props) =>
+          `Format email "${props.value}" tidak valid. Harap gunakan format email yang benar (contoh: nama@domain.com)`,
+      },
     },
     password: {
       type: String,

@@ -23,11 +23,27 @@ const verifyPassword = (password, storedPassword) => {
 };
 
 /**
+ * Helper: Validate email format using RFC 5322 compatible regex
+ */
+export const isValidEmail = (email) => {
+  if (!email || typeof email !== "string") return false;
+  const trimmed = email.trim();
+  if (trimmed.length > 254) return false;
+  const emailRegex =
+    /^[a-zA-Z0-9_%+-]+(\.[a-zA-Z0-9_%+-]+)*@[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(trimmed);
+};
+
+/**
  * Validate registration parameters before sending OTP
  */
 export const validateRegistrationData = async (email, password, name, cityChoice) => {
   if (!email || !password || !cityChoice) {
     throw new Error("Email, password, dan kota wajib diisi");
+  }
+
+  if (!isValidEmail(email)) {
+    throw new Error("Format email tidak valid. Harap gunakan format email yang benar (contoh: nama@domain.com)");
   }
 
   const existingUser = await User.findOne({ email: email.toLowerCase() });
@@ -94,6 +110,10 @@ export const completeLoginSession = async (email) => {
 export const registerUser = async (email, password, name, cityChoice) => {
   if (!email || !password || !cityChoice) {
     throw new Error("Email, password, dan kota wajib diisi");
+  }
+
+  if (!isValidEmail(email)) {
+    throw new Error("Format email tidak valid. Harap gunakan format email yang benar (contoh: nama@domain.com)");
   }
 
   const existingUser = await User.findOne({ email: email.toLowerCase() });

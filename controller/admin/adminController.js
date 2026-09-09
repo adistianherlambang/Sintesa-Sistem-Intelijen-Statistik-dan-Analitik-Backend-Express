@@ -15,13 +15,24 @@ import { getLLMTokenStats } from "../../services/tokenTracker.js";
 // Default plans seed
 const DEFAULT_PLANS = [
   {
+    planId: "free_user",
+    name: "Pengguna Gratis (Free Tier)",
+    category: "Free Tier",
+    amount: 0,
+    quota: 0,
+    durationDays: 0,
+    features: [],
+    badge: "Gratis",
+    isActive: true,
+  },
+  {
     planId: "wa_only_monthly",
     name: "Bot WhatsApp Only (Bulanan)",
     category: "WhatsApp Bot",
     amount: 50000,
     quota: 30,
     durationDays: 30,
-    features: ["Auto-response Data Statistik", "Integrasi Nomor WhatsApp Resmi", "30 Kuota Interaksi / Hari"],
+    features: ["bot"],
     badge: "Populer",
     isActive: true,
   },
@@ -32,7 +43,7 @@ const DEFAULT_PLANS = [
     amount: 500000,
     quota: 365,
     durationDays: 365,
-    features: ["Auto-response Data Statistik", "Integrasi Nomor WhatsApp Resmi", "365 Kuota Interaksi / Hari", "Hemat 17%"],
+    features: ["bot"],
     badge: "Hemat",
     isActive: true,
   },
@@ -43,7 +54,7 @@ const DEFAULT_PLANS = [
     amount: 60000,
     quota: 10,
     durationDays: 30,
-    features: ["Fitur Bot WhatsApp Lengkap", "Generator Berita Resmi Statistik (BRS)", "AI Forecasting & Proyeksi Inflasi", "10 Kuota Ekspor BRS"],
+    features: ["bot", "analisis"],
     badge: "Rekomendasi",
     isActive: true,
   },
@@ -54,19 +65,72 @@ const DEFAULT_PLANS = [
     amount: 600000,
     quota: 10,
     durationDays: 365,
-    features: ["Fitur Bot WhatsApp Lengkap", "Generator Berita Resmi Statistik (BRS)", "AI Forecasting & Proyeksi Inflasi", "Prioritas Dukungan Teknis", "Hemat 17%"],
+    features: ["bot", "analisis", "infografis"],
     badge: "Terbaik",
     isActive: true,
   },
 ];
 
 /**
- * Seed initial package plans if none exist
+ * Seed initial package plans if none exist & migrate legacy descriptive features
  */
 const ensurePackagePlansSeeded = async () => {
   const count = await PackagePlan.countDocuments();
   if (count === 0) {
     await PackagePlan.insertMany(DEFAULT_PLANS);
+    return;
+  }
+
+  // Ensure free_user plan exists
+  let freePlan = await PackagePlan.findOne({ planId: "free_user" });
+  if (!freePlan) {
+    await PackagePlan.create({
+      planId: "free_user",
+      name: "Pengguna Gratis (Free Tier)",
+      category: "Free Tier",
+      amount: 0,
+      quota: 0,
+      durationDays: 0,
+      features: [],
+      badge: "Gratis",
+      isActive: true,
+    });
+  }
+
+  // Migrate any existing plans that contain marketing text strings instead of feature IDs
+  const allPlans = await PackagePlan.find();
+  for (const p of allPlans) {
+    let modified = false;
+    const currentFeats = Array.isArray(p.features) ? p.features : [];
+    const hasLegacyStrings = currentFeats.some(
+      (f) => !["analisis", "bot", "infografis"].includes(f)
+    );
+
+    if (hasLegacyStrings || (p.planId !== "free_user" && currentFeats.length === 0)) {
+      let newFeats = [];
+      if (p.planId === "free_user") {
+        newFeats = currentFeats.filter((f) =>
+          ["analisis", "bot", "infografis"].includes(f)
+        );
+      } else if (p.planId.startsWith("wa_only")) {
+        newFeats = ["bot"];
+      } else if (p.planId === "wa_analisis_yearly") {
+        newFeats = ["bot", "analisis", "infografis"];
+      } else if (p.planId.startsWith("wa_analisis")) {
+        newFeats = ["bot", "analisis"];
+      } else {
+        const textBlob = (currentFeats.join(" ") + " " + (p.name || "")).toLowerCase();
+        if (textBlob.includes("bot") || textBlob.includes("whatsapp")) newFeats.push("bot");
+        if (textBlob.includes("analisis") || textBlob.includes("brs")) newFeats.push("analisis");
+        if (textBlob.includes("infografis") || textBlob.includes("grafis")) newFeats.push("infografis");
+      }
+      p.features = [...new Set(newFeats)];
+      modified = true;
+    }
+
+    if (modified) {
+      await p.save();
+    }
   }
 };
 
@@ -986,6 +1050,12 @@ export const deletePackage = async (req, res) => {
   try {
     const { planId } = req.params;
 
+    if (planId === "free_user") {
+      return res.status(400).json({
+        message: "Paket Pengguna Gratis (Free Tier) adalah paket bawaan sistem dan tidak dapat dihapus.",
+      });
+    }
+
     const deleted = await PackagePlan.findOneAndDelete({ planId });
     if (!deleted) {
       return res.status(404).json({ message: "Paket langganan tidak ditemukan." });
@@ -1006,26 +1076,115 @@ export const deletePackage = async (req, res) => {
 
 /**
  * GET /api/features/public
- * Public endpoint to fetch active feature flags
+ * Public endpoint to fetch active feature flags (evaluating system toggles & user subscription/plan)
  */
 export const getPublicFeatures = async (req, res) => {
   try {
     const config = await getOrCreateSystemConfig();
-    const publicMap = {};
-    for (const [key, val] of Object.entries(config.features || {})) {
-      publicMap[key] = Boolean(val?.enabled);
+    const systemFeatures = config.features || {};
+
+    const systemEnabled = {
+      analisis: Boolean(systemFeatures.analisis?.enabled),
+      bot: Boolean(systemFeatures.bot?.enabled),
+      infografis: Boolean(systemFeatures.infografis?.enabled),
+    };
+
+    // Check user authentication from Authorization header
+    let user = null;
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      const token = authHeader.split(" ")[1];
+      if (token) {
+        user = await User.findOne({ token }).lean();
+      }
     }
+
+    // Admins bypass subscription restrictions (subject only to system kill switches)
+    if (user?.role === "admin") {
+      return res.json({
+        success: true,
+        role: "admin",
+        isSubscribed: true,
+        isFreeUser: false,
+        planId: "admin",
+        features: systemEnabled,
+        reasons: {
+          analisis: systemEnabled.analisis ? null : "system_disabled",
+          bot: systemEnabled.bot ? null : "system_disabled",
+          infografis: systemEnabled.infografis ? null : "system_disabled",
+        },
+      });
+    }
+
+    await ensurePackagePlansSeeded();
+
+    let allowedFeatures = [];
+    let isSubscribed = false;
+    let planId = "free_user";
+
+    if (user) {
+      // Find active, unexpired subscription
+      const sub = await Subscription.findOne({
+        userId: user._id,
+        status: "active",
+      }).lean();
+
+      if (sub && new Date(sub.expiredAt) > new Date()) {
+        isSubscribed = true;
+        planId = sub.subscriptionId;
+        const plan = await PackagePlan.findOne({ planId: sub.subscriptionId }).lean();
+        if (plan && Array.isArray(plan.features)) {
+          allowedFeatures = plan.features;
+        }
+      }
+    }
+
+    // If not subscribed (Free User or Guest)
+    if (!isSubscribed) {
+      const freePlan = await PackagePlan.findOne({ planId: "free_user" }).lean();
+      allowedFeatures = freePlan?.features || [];
+    }
+
+    const effectiveFeatures = {
+      analisis: systemEnabled.analisis && allowedFeatures.includes("analisis"),
+      bot: systemEnabled.bot && allowedFeatures.includes("bot"),
+      infografis: systemEnabled.infografis && allowedFeatures.includes("infografis"),
+    };
+
+    const reasons = {
+      analisis: !systemEnabled.analisis
+        ? "system_disabled"
+        : (!allowedFeatures.includes("analisis") ? "subscription_required" : null),
+      bot: !systemEnabled.bot
+        ? "system_disabled"
+        : (!allowedFeatures.includes("bot") ? "subscription_required" : null),
+      infografis: !systemEnabled.infografis
+        ? "system_disabled"
+        : (!allowedFeatures.includes("infografis") ? "subscription_required" : null),
+    };
+
     return res.json({
       success: true,
-      features: publicMap,
+      role: user ? (user.role || "user") : "guest",
+      isSubscribed,
+      isFreeUser: !isSubscribed,
+      planId,
+      features: effectiveFeatures,
+      reasons,
     });
   } catch (err) {
+    console.error("[getPublicFeatures] Error:", err.message);
     return res.json({
       success: true,
       features: {
-        analisis: true,
-        bot: true,
-        infografis: true,
+        analisis: false,
+        bot: false,
+        infografis: false,
+      },
+      reasons: {
+        analisis: "subscription_required",
+        bot: "subscription_required",
+        infografis: "subscription_required",
       },
     });
   }

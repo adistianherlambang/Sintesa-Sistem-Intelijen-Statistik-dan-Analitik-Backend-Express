@@ -1,6 +1,6 @@
 import express from "express";
 import Infografis from "../../db/models/Infografis.js";
-import { authMiddleware } from "../../controller/user/authMiddleware.js";
+import { authMiddleware, requireFeature } from "../../controller/user/authMiddleware.js";
 import { logActivity } from "../../controller/user/activityController.js";
 
 const router = express.Router();
@@ -15,6 +15,7 @@ const asyncRoute = (fn) => (req, res, next) => {
 router.get(
   "/",
   authMiddleware,
+  requireFeature("infografis"),
   asyncRoute(async (req, res) => {
     const items = await Infografis.find({ userId: req.user._id })
       .sort({ updatedAt: -1 })
@@ -33,6 +34,7 @@ router.get(
 router.get(
   "/:id",
   authMiddleware,
+  requireFeature("infografis"),
   asyncRoute(async (req, res) => {
     const item = await Infografis.findOne({
       _id: req.params.id,
@@ -54,6 +56,7 @@ router.get(
 router.post(
   "/",
   authMiddleware,
+  requireFeature("infografis"),
   asyncRoute(async (req, res) => {
     const { pages, preview, canvasSize } = req.body;
 
@@ -81,6 +84,7 @@ router.post(
 router.put(
   "/:id",
   authMiddleware,
+  requireFeature("infografis"),
   asyncRoute(async (req, res) => {
     const { pages, preview, canvasSize } = req.body;
 
@@ -111,6 +115,7 @@ router.put(
 router.delete(
   "/:id",
   authMiddleware,
+  requireFeature("infografis"),
   asyncRoute(async (req, res) => {
     const deleted = await Infografis.findOneAndDelete({
       _id: req.params.id,

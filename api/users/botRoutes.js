@@ -1,5 +1,5 @@
 import express from "express";
-import { authMiddleware } from "../../controller/user/authMiddleware.js";
+import { authMiddleware, requireFeature } from "../../controller/user/authMiddleware.js";
 import {
   initializeWhatsAppClient,
   destroyWhatsAppClient,
@@ -25,6 +25,7 @@ const asyncRoute = (fn) => (req, res, next) => {
 router.get(
   "/session",
   authMiddleware,
+  requireFeature("bot"),
   asyncRoute(async (req, res) => {
     let session = await WhatsAppSession.findOne({ userId: req.user._id });
     if (!session) {
@@ -42,6 +43,7 @@ router.get(
 router.post(
   "/session/connect",
   authMiddleware,
+  requireFeature("bot"),
   asyncRoute(async (req, res) => {
     await initializeWhatsAppClient(req.user._id);
     await logActivity(req.user._id, "Membuka sesi koneksi WhatsApp");
@@ -53,6 +55,7 @@ router.post(
 router.post(
   "/session/disconnect",
   authMiddleware,
+  requireFeature("bot"),
   asyncRoute(async (req, res) => {
     await destroyWhatsAppClient(req.user._id);
     await logActivity(req.user._id, "Memutus koneksi WhatsApp");

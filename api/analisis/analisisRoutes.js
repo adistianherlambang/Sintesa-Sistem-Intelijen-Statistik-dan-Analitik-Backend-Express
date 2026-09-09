@@ -12,7 +12,7 @@ import {
   handleGetTemplateInflasiIhk,
   handleRenderTemplateInflasiIhk,
 } from "../../controller/analisis/narasiKelompokController.js";
-import { authMiddleware } from "../../controller/user/authMiddleware.js";
+import { authMiddleware, requireFeature } from "../../controller/user/authMiddleware.js";
 
 const router = express.Router();
 
@@ -45,9 +45,9 @@ router.post("/generate-narasi-forecast", handleGenerateNarasiForecast);
 /**
  * Routes untuk MS Word Editor BRS (Word Engine)
  */
-router.post("/word/generate", generateWordBrs);
-router.post("/word/save", authMiddleware, saveWordAnalysis);
-router.get("/word/:id/download/docx", authMiddleware, downloadAnalysisDocx);
-router.get("/word/:id/download/pdf", authMiddleware, downloadAnalysisPdf);
+router.post("/word/generate", authMiddleware, requireFeature("analisis"), generateWordBrs);
+router.post("/word/save", authMiddleware, requireFeature("analisis"), saveWordAnalysis);
+router.get("/word/:id/download/docx", authMiddleware, requireFeature("analisis"), downloadAnalysisDocx);
+router.get("/word/:id/download/pdf", authMiddleware, requireFeature("analisis"), downloadAnalysisPdf);
 
 export default router;

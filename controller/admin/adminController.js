@@ -591,8 +591,9 @@ export const getUsersList = async (req, res) => {
     const p = Math.max(1, parseInt(page, 10));
     const l = Math.max(1, parseInt(limit, 10));
 
-    const query = {};
-    if (role && ["admin", "user"].includes(role)) {
+    // Exclude users with role 'admin' from User Management
+    const query = { role: { $ne: "admin" } };
+    if (role && role !== "admin") {
       query.role = role;
     }
     if (search) {
@@ -838,7 +839,8 @@ export const deleteUser = async (req, res) => {
 export const getPackagesList = async (req, res) => {
   try {
     await ensurePackagePlansSeeded();
-    const packages = await PackagePlan.find().sort({ amount: 1 }).lean();
+    // Exclude internal free_user tier from the package list
+    const packages = await PackagePlan.find({ planId: { $ne: "free_user" } }).sort({ amount: 1 }).lean();
 
     // Count active subscribers for each package plan
     const counts = await Subscription.aggregate([

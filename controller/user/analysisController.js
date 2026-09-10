@@ -109,14 +109,21 @@ export const getAnalysisFilePath = async (userId, historyId, format = "auto") =>
 
   let filePath = path.join(EXPORT_DIR, targetFilename);
 
-  // Fallback check
+  // Fallback check: only fallback to analysisFile if format is auto or extension matches
   if (!fs.existsSync(filePath)) {
     if (
+      format === "auto" &&
       history.analysisFile &&
       fs.existsSync(path.join(EXPORT_DIR, history.analysisFile))
     ) {
       filePath = path.join(EXPORT_DIR, history.analysisFile);
       ext = path.extname(history.analysisFile).slice(1) || ext;
+    } else if (
+      history.analysisFile &&
+      path.extname(history.analysisFile).slice(1).toLowerCase() === ext.toLowerCase() &&
+      fs.existsSync(path.join(EXPORT_DIR, history.analysisFile))
+    ) {
+      filePath = path.join(EXPORT_DIR, history.analysisFile);
     }
   }
 

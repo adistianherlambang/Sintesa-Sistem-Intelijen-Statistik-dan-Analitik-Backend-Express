@@ -6,6 +6,7 @@ import cloudscraper from "cloudscraper";
 import mongoose from "mongoose";
 import { fileURLToPath } from "url";
 import APIDataBPS from "../db/models/APIDataBPS.js";
+import { connectDB } from "../db/mongo.js";
 
 // --- INITIATION & CONFIG ---
 const __filename = fileURLToPath(import.meta.url);
@@ -172,8 +173,7 @@ const fetchSingleUrl = async (url, label) => {
 export const fetchBPSPrevMoM = async () => {
   try {
     if (mongoose.connection.readyState === 0) {
-      await mongoose.connect(process.env.MONGO_URL);
-      console.log("✔ MongoDB connected");
+      await connectDB();
     }
 
     const bpsKey = process.env.API_BPS ? process.env.API_BPS.trim() : "";

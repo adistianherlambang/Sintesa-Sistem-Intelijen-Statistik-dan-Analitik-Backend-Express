@@ -6,6 +6,7 @@ import cloudscraper from "cloudscraper";
 import { fileURLToPath } from "url";
 
 import APIDataBPS from "../db/models/APIDataBPS.js";
+import { connectDB } from "../db/mongo.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -76,18 +77,11 @@ const saveDebugJSON = (data, url) => {
 export const fetchBPS = async () => {
   try {
     // 1. Validasi Environment dan Koneksi MongoDB
-    const mongoURI = process.env.MONGO_URL;
-    if (!mongoURI) {
-      throw new Error(
-        `MONGO_URL tidak ditemukan! Pastikan file .env ada di: ${rootEnvPath}`,
-      );
+    if (mongoose.connection.readyState === 0) {
+      console.log("⏳ Connecting to MongoDB...");
+      await connectDB();
+      console.log("🚀 Connected to MongoDB successfully\n");
     }
-
-    console.log("⏳ Connecting to MongoDB...");
-    await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 5000,
-    });
-    console.log("🚀 Connected to MongoDB successfully\n");
 
     // 2. Load Configuration URLs
     if (!fs.existsSync(configPath)) {

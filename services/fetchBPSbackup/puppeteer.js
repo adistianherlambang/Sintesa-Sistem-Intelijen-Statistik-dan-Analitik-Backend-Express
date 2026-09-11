@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 
 // models
 import APIDataBPS from "../../db/models/APIDataBPS.js";
+import { connectDB } from "../../db/mongo.js";
 
 dotenv.config({
   path: path.resolve("../.env"),
@@ -18,11 +19,7 @@ dotenv.config({
 // MONGODB
 // =======================
 
-const MongooseURL = process.env.MONGO_URL;
-
-await mongoose.connect(MongooseURL);
-
-console.log("✔ MongoDB connected");
+await connectDB();
 
 // =======================
 // PATH

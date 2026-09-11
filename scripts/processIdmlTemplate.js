@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import AdmZip from "adm-zip";
 import mongoose from "mongoose";
+import { connectDB } from "../db/mongo.js";
 import {
   processIdmlVariables,
   toIndoNum,
@@ -262,12 +263,7 @@ export const runIdmlTemplateFiller = async (targetCity = "") => {
   );
 
   if (mongoose.connection.readyState === 0) {
-    const mongoUrl =
-      process.env.MONGO_URL ||
-      process.env.MONGO_URI ||
-      "mongodb://localhost:27017/sintesa";
-    console.log(`🔌 Menghubungkan ke MongoDB: ${mongoUrl}...`);
-    await mongoose.connect(mongoUrl);
+    await connectDB();
   }
 
   const IDML_DIR = path.resolve(__dirname, "../idmlExtract");

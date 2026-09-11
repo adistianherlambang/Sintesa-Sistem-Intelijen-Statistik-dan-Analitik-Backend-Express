@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 
 import APIDataBPS from "../db/models/APIDataBPS.js";
+import { connectDB } from "../db/mongo.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,16 +16,7 @@ dotenv.config({ path: envPath });
 
 const exportToJson = async () => {
   try {
-    console.log("Env Path:", envPath);
-    console.log("Mongo URL:", process.env.MONGO_URL);
-
-    if (!process.env.MONGO_URL) {
-      throw new Error("MONGO_URL tidak ditemukan di .env");
-    }
-
-    await mongoose.connect(process.env.MONGO_URL);
-
-    console.log("✔ Connected to MongoDB");
+    await connectDB();
 
     const total = await APIDataBPS.countDocuments();
 

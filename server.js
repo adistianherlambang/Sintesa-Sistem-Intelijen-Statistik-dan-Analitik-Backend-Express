@@ -24,11 +24,13 @@ import {
 } from "./services/whatsappService.js";
 import WhatsAppSession from "./db/models/WhatsAppSession.js";
 
+//db
+import { connectDB } from "./db/mongo.js";
+
 dotenv.config();
 
 //konek MONGODB
-await mongoose.connect(process.env.MONGO_URL);
-console.log("Mongodb Connected");
+await connectDB();
 
 // Handle exit events cleanly to destroy WhatsApp puppeteer browser instances
 const handleExit = async (signal) => {

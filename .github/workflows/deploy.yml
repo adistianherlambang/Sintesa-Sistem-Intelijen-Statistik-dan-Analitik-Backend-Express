@@ -1,0 +1,21 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy Backend
+        run: |
+          rsync -a --delete --exclude='.env' ./ /var/www/sintesa/backend/
+          cd /var/www/sintesa/backend
+          npm ci --omit=dev
+          sudo systemctl restart sintesa-backend

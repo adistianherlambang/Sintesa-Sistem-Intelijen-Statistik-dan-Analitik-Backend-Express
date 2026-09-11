@@ -88,7 +88,27 @@ const reconnectActiveSessions = async () => {
 await reconnectActiveSessions();
 
 const app = express();
-app.use(cors());
+
+// CORS configuration supporting credentials, all methods, and preflight
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like curl, mobile) or any client origin dynamically
+      callback(null, true);
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Origin",
+    ],
+    optionsSuccessStatus: 200,
+  })
+);
+
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 

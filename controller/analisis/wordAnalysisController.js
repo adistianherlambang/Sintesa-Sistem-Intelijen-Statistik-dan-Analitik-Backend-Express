@@ -783,11 +783,15 @@ export const generateWordBrs = async (req, res) => {
 
     zip.writeZip(outPath);
 
+    const proto = req.headers["x-forwarded-proto"] || req.protocol || "http";
+    const host = req.headers["x-forwarded-host"] || (req.get ? req.get("host") : null) || "localhost:5000";
+    const fullUrl = `${proto}://${host}/analysis-files/${outFilename}`;
+
     return res.json({
       success: true,
       filename: outFilename,
       url: `/analysis-files/${outFilename}`,
-      fullUrl: `${req.protocol || "http"}://${(req.get ? req.get("host") : null) || "localhost:5000"}/analysis-files/${outFilename}`,
+      fullUrl: fullUrl,
       variablesCount: Object.keys(varMap).length,
       variables: varMap,
       renderedTemplate: renderedTemplateData?.template || null,
